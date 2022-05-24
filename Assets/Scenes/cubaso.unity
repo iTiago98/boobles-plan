@@ -253,6 +253,7 @@ GameObject:
   - component: {fileID: 1265590423}
   - component: {fileID: 1265590422}
   - component: {fileID: 1265590421}
+  - component: {fileID: 1265590425}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -338,3 +339,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265590425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265590420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactDistance: 0
+  _dialogue: {fileID: 11400000, guid: eb9e23031c1785e40886b309cc4e289c, type: 2}
+  _options:
+  - _optionText: "\xBFNo hace demasiado ruido la m\xE1quina?"
+    _trueFlags: 
+    _falseFlags: 
+    _onSelectOption:
+      m_PersistentCalls:
+        m_Calls: []
+  - _optionText: "As\xED en pareados parece que hables canturreando."
+    _trueFlags: 
+    _falseFlags: 02000000
+    _onSelectOption:
+      m_PersistentCalls:
+        m_Calls: []
+  - _optionText: "\xBFPero c\xF3mo ha podido olvidarse de todas letras de esas canciones?"
+    _trueFlags: 02000000
+    _falseFlags: 
+    _onSelectOption:
+      m_PersistentCalls:
+        m_Calls: []
