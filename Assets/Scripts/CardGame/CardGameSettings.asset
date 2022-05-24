@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e59a3782029ab6b4fb177cb69d7ff1cb, type: 3}
+  m_Name: CardGameSettings
+  m_EditorClassIdentifier: 
+  initialCardNumber: 5
+  initialEloquence: 15
+  initialManaCounter: 1
+  maxManaCounter: 5
+  movePositionZ: -0.813
