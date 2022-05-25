@@ -20,16 +20,22 @@ MonoBehaviour:
   - _content: "\xA1Qu\xE9 rom\xE1ntico!"
     _speaker: Nela
   - _content: "Siempre me recuerda que \xE9ramos el mejor grupo de karaoket\xF3n
-      hispano-latino. Dice que ten\xEDamos hasta un grupo de bailarines que eran
-      los mejores. \xA1Eran como mis hermanos! Pero les perdimos la pista en cuanto
-      empec\xE9 a trabajar aqu\xED. Ya sabe, la rutina rompe muchas relaciones."
+      hispano-latino."
+    _speaker: Ana
+  - _content: "Dice que ten\xEDamos hasta un grupo de bailarines que eran los mejores.
+      \xA1Eran como mis hermanos!"
+    _speaker: Ana
+  - _content: "Pero les perdimos la pista en cuanto empec\xE9 a trabajar aqu\xED.
+      Ya sabe, la rutina rompe muchas relaciones."
     _speaker: Ana
   - _content: No me creo que por el trabajo se pierdan amistades tan importantes.
     _speaker: Nela
   - _content: "Yo es que no s\xE9 lo que pudo pasar, s\xF3lo s\xE9 que este maldito
       hilo musical me sienta siempre muy mal.\r"
     _speaker: Ana
-  - _content: "No te preocupes, como directora de recursos humanos, mi deber es hacer
-      que los trabajadores se sientan lo mejor posible en el espacio de trabajo.
-      Ver\xE9 lo que puedo hacer."
+  - _content: "No te preocupes, porque resulta que est\xE1s hablando con la nueva
+      directora de recursos humanos."
+    _speaker: Nela
+  - _content: "Mi deber es hacer que los trabajadores se sientan lo mejor posible
+      en el espacio de trabajo. Ver\xE9 lo que puedo hacer."
     _speaker: Nela

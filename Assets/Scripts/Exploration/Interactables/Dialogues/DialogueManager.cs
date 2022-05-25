@@ -79,7 +79,7 @@ namespace Booble.Interactables.Dialogues
             else if (_options.Count > 0)
             {
                 _optionsBox.SetActive(true);
-                InitializeOptions();
+                InitializeAllOptions();
             }
             else
             {
@@ -108,7 +108,7 @@ namespace Booble.Interactables.Dialogues
             if (_options.Count > 0)
             {
                 _optionsBox.SetActive(true);
-                InitializeOptions();
+                InitializeAllOptions();
             }
         }
 
@@ -146,33 +146,55 @@ namespace Booble.Interactables.Dialogues
             }
         }
 
-        private void InitializeOptions()
+        private void InitializeAllOptions()
         {
             foreach (Transform t in _optionsBox.transform)
             {
                 t.gameObject.SetActive(false);
             }
 
+            InitializeEndDialogueOption();
+
             for (int i = 0; i < _options.Count; i++)
             {
-                Option option = _options[i];
-                if (!option.FlagsSatisfied())
+                if (!_options[i].FlagsSatisfied())
                     continue;
 
-                Transform optionT = _optionsBox.transform.GetChild(i);
-                Button optionButton = optionT.GetComponent<Button>();
-
-                optionT.gameObject.SetActive(true);
-                optionT.GetChild(0).GetComponent<TextMeshProUGUI>().text = option.Text;
-                optionButton.onClick.RemoveAllListeners();
-                optionButton.onClick.AddListener(() =>
-                {
-                    _dialogueBox.SetActive(false);
-                    _optionsBox.SetActive(false);
-                    _dialogueRunning = false;
-                    option.OnSelect.Invoke();
-                });
+                InitializeOption(_options[i], _optionsBox.transform.GetChild(i+1));
             }
+        }
+
+        private void InitializeEndDialogueOption()
+        {
+            Transform optionT = _optionsBox.transform.GetChild(0);
+            Button optionButton = optionT.GetComponent<Button>();
+
+            optionT.gameObject.SetActive(true);
+            optionT.GetChild(0).GetComponent<TextMeshProUGUI>().text = "* (En otro momento).";
+            optionButton.onClick.RemoveAllListeners();
+            optionButton.onClick.AddListener(() =>
+            {
+                _dialogueBox.SetActive(false);
+                _optionsBox.SetActive(false);
+                _dialogueRunning = false;
+                EndDialogue();
+            });
+        }
+
+        private void InitializeOption(Option option, Transform optionT)
+        {
+            Button optionButton = optionT.GetComponent<Button>();
+
+            optionT.gameObject.SetActive(true);
+            optionT.GetChild(0).GetComponent<TextMeshProUGUI>().text = option.Text;
+            optionButton.onClick.RemoveAllListeners();
+            optionButton.onClick.AddListener(() =>
+            {
+                _dialogueBox.SetActive(false);
+                _optionsBox.SetActive(false);
+                _dialogueRunning = false;
+                option.OnSelect.Invoke();
+            });
         }
     }
 }

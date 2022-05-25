@@ -47,15 +47,6 @@ namespace Booble.Flags
 			}
 		}
 
-        [ContextMenu("Reset Flags")]
-		public void ResetFlags()
-		{
-			foreach (Flag flag in _flags.List)
-			{
-				flag.FlagState = Flag.State.False;
-			}
-		}
-
 		[ContextMenu("Delete flag.dat file")]
 		public void DeleteSaveFile()
         {

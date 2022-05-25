@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
+using Booble.Flags;
 
 namespace Booble.Interactables
 {
@@ -19,8 +20,9 @@ namespace Booble.Interactables
         {
             DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-            DialogueManager.Instance.OnEndDialogue.AddListener(() => { EndInteraction(); });
+            DialogueManager.Instance.OnEndDialogue.AddListener(() => EndInteraction());
             DialogueManager.Instance.DisplayLastSentence();
+            DialogueManager.Instance.StopAllCoroutines();
         }
 
         public static void EndInteraction()
@@ -30,12 +32,18 @@ namespace Booble.Interactables
         }
 
         [SerializeField] private float _interactDistance;
-        [SerializeField] private Dialogue _dialogue;
+        [SerializeField] private Dialogue _introDialogue;
+        [SerializeField] private Dialogue _continueDialogue;
+        [SerializeField] private Flag.Reference _introFlag;
         [SerializeField] private List<DialogueManager.Option> _options;
+
+        private Dialogue _dialogue;
+        private bool _isIntroFlagSet;
 
         private Player.Controller _player;
         private UI.Cursor _cursor;
         private DialogueManager _diagManager;
+        private FlagManager _flagManager;
 
         private bool _mouseOverThisInteractable;
 
@@ -46,6 +54,20 @@ namespace Booble.Interactables
             _player = Player.Controller.Instance;
             _cursor = UI.Cursor.Instance;
             _diagManager = DialogueManager.Instance;
+            _flagManager = FlagManager.Instance;
+        }
+
+        private void Start()
+        {
+            if (_flagManager.GetFlag(_introFlag))
+            {
+                _dialogue = _continueDialogue;
+                _isIntroFlagSet = true;
+            }
+            else
+            {
+                _dialogue = _introDialogue;
+            }
         }
 
         private void OnMouseEnter()
@@ -78,14 +100,23 @@ namespace Booble.Interactables
             if (_xDistanceToPlayer <= _interactDistance)
             {
                 _interactionOnGoing = true;
-                _returnDialogue = _dialogue;
-                _returnOptions = _options;
 
                 _player.StopMovement();
                 _cursor.ShowActionText(false);
                 _diagManager.StartDialogue(_dialogue, _options);
+
+                _returnOptions = _options;
+                if (!_isIntroFlagSet)
+                {
+                    _flagManager.SetFlag(_introFlag);
+                    _isIntroFlagSet = true;
+                    _dialogue = _continueDialogue;
+
+                }
+                
+                _returnDialogue = _dialogue;
                 _diagManager.OnEndDialogue.RemoveAllListeners();
-                _diagManager.OnEndDialogue.AddListener(() => { EndInteraction(); });
+                _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
             }
             else
             {

@@ -18,6 +18,7 @@ MonoBehaviour:
   - _content: "Pero si ni siquiera puedes o\xEDr el hilo musical del Lounge, que
       parece muy relajante."
     _speaker: Nela
-  - _content: "\xA1\xBFRelajante?! Si tiene menos ritmo que el cad\xE1ver de un contable.
-      Disculpe las formas, pero es que intento no perder mi vena bachatable."
+  - _content: "\xA1\xBFRelajante?! Si tiene menos ritmo que el cad\xE1ver de un contable."
+    _speaker: Ana
+  - _content: Disculpe las formas, pero es que intento no perder mi vena bachatable.
     _speaker: Ana

@@ -11,8 +11,8 @@ namespace Booble.UI
 	{
 		private enum CursorText { None, Approach, Interact }
 
-		private static string _approachString = "Approach";
-		private static string _interactString = "Interact";
+		private static string _approachString = "Acercarse";
+		private static string _interactString = "Interactuar";
 
 		[SerializeField] private RectTransform _cursorT;
 
