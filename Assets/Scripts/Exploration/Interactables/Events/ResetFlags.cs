@@ -14,7 +14,7 @@ namespace Booble.Interactables.Events
 
         protected override void OnDialogueEnd()
         {
-            Flags.FlagManager.Instance.InitializeFlags();
+            Flags.FlagManager.Instance.ResetFlags();
             _fadeScreen.DOFade(1, _fadeDuration)
                 .OnComplete(() =>
                 {

@@ -12,19 +12,13 @@ namespace Booble.Flags
         {
             None,
             AnaIntro,
-            AnaPareados
+            AnaPareados,
+            ArcadioIntro
         }
 
-        [SerializeField] private string _flagName;
         [SerializeField] private Reference _flagReference;
         [SerializeField] private State _flagState;
         
-        public string FlagName
-        {
-            get { return _flagName; }
-            set { _flagName = value; }
-        }
-
         public State FlagState
         {
             get { return _flagState; }
@@ -35,6 +29,12 @@ namespace Booble.Flags
         {
             get { return _flagReference; }
             set { _flagReference = value; }
+        }
+
+        public Flag(Reference reference)
+        {
+            _flagReference = reference;
+            _flagState = State.False;
         }
     }
 }

@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Ana - Olvidar
   m_EditorClassIdentifier: 
   _sentences:
-  - _content: 
-    _speaker: 
   - _content: "No s\xE9, ni siquiera me acordar\xEDa de que las olvid\xE9, si no
       fuera porque mi Josito que me ama me las canta cada noche para llevarme a la
       cama."
