@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
 using Booble.Flags;
+using Booble.Characters;
 
 namespace Booble.Interactables
 {
@@ -13,16 +14,17 @@ namespace Booble.Interactables
 
         private static Dialogue _returnDialogue;
         private static List<DialogueManager.Option> _returnOptions;
+        private static List<AnimatorIdentifier> _returnAnimIdentifiers;
         private static bool _mouseOverInteractable;
         private static bool _interactionOnGoing;
 
         public static void ReturnToDialogue()
         {
-            DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions);
+            DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions, _returnAnimIdentifiers);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
             DialogueManager.Instance.OnEndDialogue.AddListener(() => EndInteraction());
             DialogueManager.Instance.DisplayLastSentence();
-            DialogueManager.Instance.StopAllCoroutines();
+            
         }
 
         public static void EndInteraction()
@@ -31,11 +33,23 @@ namespace Booble.Interactables
             _mouseOverInteractable = false;
         }
 
+        [System.Serializable]
+        public class AnimatorIdentifier
+        {
+            public CharacterList.Name Identifier => _identifier;
+            public Animator Animator => _animator;
+
+            [SerializeField] private string _name;
+            [SerializeField] private CharacterList.Name _identifier;
+            [SerializeField] private Animator _animator;
+        }
+
         [SerializeField] private float _interactDistance;
         [SerializeField] private Dialogue _introDialogue;
         [SerializeField] private Dialogue _continueDialogue;
         [SerializeField] private Flag.Reference _introFlag;
         [SerializeField] private List<DialogueManager.Option> _options;
+        [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
 
         private Dialogue _dialogue;
         private bool _isIntroFlagSet;
@@ -103,15 +117,15 @@ namespace Booble.Interactables
 
                 _player.StopMovement();
                 _cursor.ShowActionText(false);
-                _diagManager.StartDialogue(_dialogue, _options);
+                _diagManager.StartDialogue(_dialogue, _options, _animatorIdentifiers);
 
                 _returnOptions = _options;
+                _returnAnimIdentifiers = _animatorIdentifiers;
                 if (!_isIntroFlagSet)
                 {
                     _flagManager.SetFlag(_introFlag);
                     _isIntroFlagSet = true;
                     _dialogue = _continueDialogue;
-
                 }
                 
                 _returnDialogue = _dialogue;

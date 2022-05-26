@@ -6,6 +6,9 @@ using UnityEngine.Events;
 using TMPro;
 using Santi.Utils;
 using Booble.Flags;
+using static Booble.Interactables.Interactable;
+using static Booble.Characters.CharacterList;
+using System;
 
 namespace Booble.Interactables.Dialogues
 {
@@ -35,12 +38,15 @@ namespace Booble.Interactables.Dialogues
         [SerializeField] private float _characterDelay;
         [SerializeField] private AudioSource _characterSoundAS;
         [SerializeField] private GameObject _dialogueBox;
+        [SerializeField] private Image _closeUp;
         [SerializeField] private TextMeshProUGUI _dialogueText;
         [SerializeField] private GameObject _optionsBox;
 
         private Dialogue _currentDialogue;
         private List<Option> _options;
+        private List<AnimatorIdentifier> _animIdentifiers;
         private string _currentSentence;
+        private Character _currentCharacter;
         private bool _dialogueRunning;
         private bool _typing;
         private bool _staggered;
@@ -50,18 +56,19 @@ namespace Booble.Interactables.Dialogues
             OnEndDialogue = new UnityEvent();
         }
 
-        public void StartDialogue(Dialogue dialogue)
+        public void StartDialogue(Dialogue dialogue, List<AnimatorIdentifier> animIdentifiers)
         {
-            StartDialogue(dialogue, null);
+            StartDialogue(dialogue, null, animIdentifiers);
         }
 
-        public void StartDialogue(Dialogue dialogue, List<Option> options)
+        public void StartDialogue(Dialogue dialogue, List<Option> options, List<AnimatorIdentifier> animIdentifiers)
         {
             _staggered = false;
 
             _dialogueRunning = true;
             _currentDialogue = dialogue;
             _options = options ??= new List<Option>();
+            _animIdentifiers = animIdentifiers;
             if (!dialogue.Empty)
             {
                 _dialogueBox.SetActive(true);
@@ -71,8 +78,9 @@ namespace Booble.Interactables.Dialogues
 
         public void DisplayNextSentence(bool firstSentence = false)
         {
-            if (_currentDialogue.GetNextSentence(out _currentSentence, firstSentence))
+            if (_currentDialogue.GetNextSentence(out _currentSentence, out _currentCharacter, firstSentence))
             {
+                _closeUp.sprite = _currentCharacter.CloseUp;
                 StopAllCoroutines();
                 StartCoroutine(TypeSentence(_currentSentence));
             }
@@ -104,12 +112,15 @@ namespace Booble.Interactables.Dialogues
 
         public void DisplayLastSentence()
         {
+            StopAllCoroutines();
             _dialogueText.text = _currentDialogue.GetLastSentence();
             if (_options.Count > 0)
             {
                 _optionsBox.SetActive(true);
                 InitializeAllOptions();
             }
+
+            _typing = false;
         }
 
         public void EndDialogue()
@@ -121,6 +132,12 @@ namespace Booble.Interactables.Dialogues
         }
 
         private void Update()
+        {
+            AnimationUpdate();
+            InputUpdate();
+        }
+
+        private void InputUpdate()
         {
             if (!_staggered)
             {
@@ -143,6 +160,17 @@ namespace Booble.Interactables.Dialogues
             else
             {
                 DisplayNextSentence();
+            }
+        }
+
+        private void AnimationUpdate()
+        {
+            if (_animIdentifiers == null)
+                return;
+
+            foreach (AnimatorIdentifier ai in _animIdentifiers)
+            {
+                ai.Animator.SetBool("Speaking", _typing && ai.Identifier == _currentCharacter.Identifier);
             }
         }
 

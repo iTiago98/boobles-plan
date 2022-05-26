@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
+using static Booble.Interactables.Interactable;
 
 namespace Booble.Interactables.Events
 {
@@ -12,7 +13,7 @@ namespace Booble.Interactables.Events
         private enum EndType { Nothing, Return, Close }
         
         [SerializeField] private Dialogue _dialogue;
-        [SerializeField] private List<DialogueManager.Option> _options;
+        [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
         [SerializeField] private EndType _onEnd;
 
 		private DialogueManager _diagManager;
@@ -24,7 +25,7 @@ namespace Booble.Interactables.Events
 
         public void StartInteraction()
         {
-            _diagManager.StartDialogue(_dialogue, _options);
+            _diagManager.StartDialogue(_dialogue, _animatorIdentifiers);
             _diagManager.OnEndDialogue.RemoveAllListeners();
             _diagManager.OnEndDialogue.AddListener(() => OnDialogueEnd());
             switch(_onEnd)

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
   m_Name: Ana - Continue
   m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "Por m\xED, continuamos con la pl\xE1tica. Que de arreglar esto, me
       va a dar ci\xE1tica."
-    _speaker: Ana
+    _closeUp: 1
