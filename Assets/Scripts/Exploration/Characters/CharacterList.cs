@@ -8,8 +8,10 @@ namespace Booble.Characters
 	{
 		public enum Name
         {
+			None,
 			Nela,
-			Ana
+			Ana,
+			Citriano
         }
 		
 		[System.Serializable]

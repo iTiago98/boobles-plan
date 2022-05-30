@@ -16,13 +16,13 @@ MonoBehaviour:
   _sentences:
   - _content: "\xBFLe est\xE1 dando mucha guerra la m\xE1quina expendedora? \xA1Cuidado
       con las chocolatinas!"
-    _closeUp: 0
+    _closeUp: 1
   - _content: "Jaja, est\xE1n muy pelusonas desde que salieron los bollos con chocolate
       inyectado en chocolate, \xA1los odian a muelte! Menudo disparate."
-    _closeUp: 1
+    _closeUp: 2
   - _content: "Normal, \xA1vienen dopados ya de casa! Por cierto, soy Daniela, pero
       todos me llaman Nela."
-    _closeUp: 0
+    _closeUp: 1
   - _content: "Yo me llamo Ana, es un nombre elegante, tanto pa' tr\xE1s como pa'
       lante, jeje."
-    _closeUp: 1
+    _closeUp: 2

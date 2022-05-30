@@ -13,11 +13,17 @@ namespace Booble.Flags
 		public static string DataDirectory { get { return "Data"; } }
 		public static string FlagFilePath { get { return DataDirectory+"/flags.dat"; } }
 
+		[SerializeField] private bool _deleteSaveFileOnAwake;
+
 		private FlagList _flags;
 
         private void Awake()
         {
-            if(File.Exists(FlagFilePath))
+#if UNITY_EDITOR
+			if (_deleteSaveFileOnAwake) DeleteSaveFile();
+#endif
+
+			if(File.Exists(FlagFilePath))
             {
 				LoadFlags();
             }
@@ -55,12 +61,12 @@ namespace Booble.Flags
 
 		public bool GetFlag(Flag.Reference flagRef)
         {
-			return (_flags.List.Find(f => f.FlagReference == flagRef).FlagState) == Flag.State.True;
+			return (_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState) == Flag.State.True;
         }
 
 		public void SetFlag(Flag.Reference flagRef)
         {
-			_flags.List.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.True;
+			_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.True;
 			SaveFlags();
         }
 
@@ -72,7 +78,7 @@ namespace Booble.Flags
 			{
 				foreach (Flag.Reference reference in trueFlags)
 				{
-					result = result && (_flags.List.Find(flag => flag.FlagReference == reference).FlagState == Flag.State.True);
+					result = result && (_flags.Flags.Find(flag => flag.FlagReference == reference).FlagState == Flag.State.True);
 				}
 			}
 
@@ -80,7 +86,7 @@ namespace Booble.Flags
 			{
 				foreach (Flag.Reference reference in falseFlags)
 				{
-					result = result && (_flags.List.Find(flag => flag.FlagReference == reference).FlagState == Flag.State.False);
+					result = result && (_flags.Flags.Find(flag => flag.FlagReference == reference).FlagState == Flag.State.False);
 				}
 			}
 

@@ -15,9 +15,9 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "Es que soy muy bachatera, pero no me acuerdo de casi ninguna canci\xF3n."
-    _closeUp: 1
+    _closeUp: 2
   - _content: " Mi novio siempre me dice que as\xED lo enamor\xE9, que le cantaba
       to' las canciones de bachata y reguet\xF3n."
-    _closeUp: 1
+    _closeUp: 2
   - _content: "Oh, \xA1Qu\xE9 bonito!"
-    _closeUp: 0
+    _closeUp: 1

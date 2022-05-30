@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Citriano - Pintadas
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "A lo que usted llama pintadas, son mis preciados c\xE1lculos matem\xE1ticos. "
+    _closeUp: 3
+  - _content: "\xBFC\xE1lculos matem\xE1ticos?"
+    _closeUp: 1
+  - _content: "As\xED es, he discernido a la perfecci\xF3n las condiciones id\xF3neas
+      para conseguir que la m\xE1quina se encuentre en la temperatura ideal."
+    _closeUp: 3
+  - _content: Bien calentita, para poder extraer de esas naranjas la mayor cantidad
+      de vitaminas posible.
+    _closeUp: 3

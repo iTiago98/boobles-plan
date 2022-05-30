@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Citriano - Esperando
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Obviamente! Una semana llevo intentando obtener las vitaminas
+      que necesito. \xA1Podr\xEDa morir de escorbuto!"
+    _closeUp: 3
+  - _content: Pero si el escorbuto es una enfermedad que fue erradicada hace siglos...
+    _closeUp: 1
+  - _content: "No sabe usted nada, ya me empiezo a notar arrugado y oxidado. \xA1Y
+      porque no quiero hablar de mi estre\xF1imiento sin conocernos!"
+    _closeUp: 3
+  - _content: "Pero que sepa que llevo cuatro d\xEDas sin evacuar."
+    _closeUp: 3
+  - _content: "Dios m\xEDo... \xBFse encuentra usted bien?"
+    _closeUp: 1
+  - _content: "Me encontrar\xEDa perfectamente si esta condenada m\xE1quina me diera
+      mi preciada vitamina C. "
+    _closeUp: 3
+  - _content: Desde que la pusieron no he conseguido obtener una sola gota de zumo,
+      y eso que me he gastado ya la mitad de mi sueldo en ella.
+    _closeUp: 3

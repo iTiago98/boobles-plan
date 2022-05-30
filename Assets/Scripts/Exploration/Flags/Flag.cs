@@ -8,12 +8,15 @@ namespace Booble.Flags
     public class Flag
     {
         public enum State { Undefined, True, False }
+        
         public enum Reference
         {
             None,
             AnaIntro,
             AnaPareados,
-            ArcadioIntro
+            ArcadioIntro,
+            CitrianoIntro,
+            CitrianoEsperando
         }
 
         [SerializeField] private Reference _flagReference;
