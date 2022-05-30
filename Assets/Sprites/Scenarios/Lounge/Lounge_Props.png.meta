@@ -1,0 +1,714 @@
+fileFormatVersion: 2
+guid: 6502f90adc4f82942a5f8636e54c4911
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lounge_Props_0
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 2030
+        width: 398
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13eb41b93e841cc43aadc89cd6065b47
+      internalID: 434408972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_1
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 1973
+        width: 119
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5d26a7c72acee34cb537b59066b1ac0
+      internalID: -1353419447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_2
+      rect:
+        serializedVersion: 2
+        x: 695
+        y: 1636
+        width: 185
+        height: 459
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a617d97705eb1dd4db7656ef000c2cef
+      internalID: 1596928075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_3
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 1844
+        width: 152
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a85fbb671e4961944bc50895b4e5f8b7
+      internalID: -502580516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_4
+      rect:
+        serializedVersion: 2
+        x: 1103
+        y: 1703
+        width: 278
+        height: 434
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 497f4afca1cafab4fa6791eb3595af86
+      internalID: 366094406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_7
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 1730
+        width: 440
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef68cd0bda6155c4284857388e1d7d57
+      internalID: 1799188225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_8
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 1787
+        width: 131
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38d9e6dea3c2d9e4ca69c2fffc048666
+      internalID: -849953506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_9
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 1442
+        width: 177
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7345910590584649bc381011d789c94
+      internalID: 2018124174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_10
+      rect:
+        serializedVersion: 2
+        x: 1409
+        y: 1673
+        width: 714
+        height: 406
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf565cc3be6aa4949b5e95cfc5e21b0b
+      internalID: -1317353850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_11
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 1418
+        width: 527
+        height: 230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f03600c6e6eb9294a90d6dc8f13f89d4
+      internalID: -1195031896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_12
+      rect:
+        serializedVersion: 2
+        x: 629
+        y: 1520
+        width: 69
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf80f19288975324ca8a3166149f4418
+      internalID: 1927455673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_14
+      rect:
+        serializedVersion: 2
+        x: 1137
+        y: 1442
+        width: 467
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fbd8ad4e0fbda740b862d00e61da108
+      internalID: 36543642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_15
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 1431
+        width: 477
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b741cab01bc4692499975d15d0873c74
+      internalID: -1436636434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_18
+      rect:
+        serializedVersion: 2
+        x: 2156
+        y: 1517
+        width: 4
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59bf35a8c8598a14da3dc052cfbbcdc0
+      internalID: 333903416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_19
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 1085
+        width: 398
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e0cf7b2f7f64a645a94c53a1ade7c49
+      internalID: -1886118750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_22
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 1199
+        width: 344
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dd7e8d59120f4f4cbf6ee42ef51d9e4
+      internalID: -604411154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_23
+      rect:
+        serializedVersion: 2
+        x: 1196
+        y: 1061
+        width: 950
+        height: 305
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d392cf3091e2ca6448309fcddf46eab0
+      internalID: 1380005577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_25
+      rect:
+        serializedVersion: 2
+        x: 623
+        y: 1067
+        width: 398
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4387ccc0fab465408992e25233389b7
+      internalID: 1585843120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_27
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 584
+        width: 173
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e5f87787ea25fc449e8512c633b2c2b
+      internalID: -1896509842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_29
+      rect:
+        serializedVersion: 2
+        x: 1799
+        y: 473
+        width: 290
+        height: 467
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57916f12b8bf46e47b5d087c4461dc5f
+      internalID: 834936453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_30
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 377
+        width: 423
+        height: 564
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b299ea74f406f84aba00023d6ad86c0
+      internalID: 460116059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_31
+      rect:
+        serializedVersion: 2
+        x: 986
+        y: 659
+        width: 563
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f795bbf21c8b8f94080ede103a056a7b
+      internalID: -1281941215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_34
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 161
+        width: 563
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb00c64d3e513964ab83bcd1bb123d7b
+      internalID: 1042592324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_35
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 254
+        width: 323
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 687d7f18e3256dc409c6de49f90a1629
+      internalID: -1790302017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_36
+      rect:
+        serializedVersion: 2
+        x: 1493
+        y: 197
+        width: 479
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b112e85d188abb44eb2e4e3a74ba2d8c
+      internalID: -1096458145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lounge_Props_37
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 10
+        width: 1626
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23206389450db5f4695d64b155ea134f
+      internalID: -341676347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Lounge_Props_37: -341676347
+      Lounge_Props_14: 36543642
+      Lounge_Props_17: -1862937742
+      Lounge_Props_20: -1332208376
+      Lounge_Props_25: 1585843120
+      Lounge_Props_8: -849953506
+      Lounge_Props_0: 434408972
+      Lounge_Props_19: -1886118750
+      Lounge_Props_39: -184694956
+      Lounge_Props_30: 460116059
+      Lounge_Props_42: 1356705393
+      Lounge_Props_28: -1411682359
+      Lounge_Props_11: -1195031896
+      Lounge_Props_29: 834936453
+      Lounge_Props_36: -1096458145
+      Lounge_Props_16: 1032181284
+      Lounge_Props_38: -452850771
+      Lounge_Props_31: -1281941215
+      Lounge_Props_27: -1896509842
+      Lounge_Props_44: -1919252011
+      Lounge_Props_4: 366094406
+      Lounge_Props_26: -1466457086
+      Lounge_Props_9: 2018124174
+      Lounge_Props_10: -1317353850
+      Lounge_Props_15: -1436636434
+      Lounge_Props_7: 1799188225
+      Lounge_Props_3: -502580516
+      Lounge_Props_18: 333903416
+      Lounge_Props_40: -573439620
+      Lounge_Props_32: -1289677374
+      Lounge_Props_21: 2081266957
+      Lounge_Props_22: -604411154
+      Lounge_Props_5: -131318886
+      Lounge_Props_41: 1227071576
+      Lounge_Props_23: 1380005577
+      Lounge_Props_35: -1790302017
+      Lounge_Props_2: 1596928075
+      Lounge_Props_43: 2083811477
+      Lounge_Props_1: -1353419447
+      Lounge_Props_13: -17173529
+      Lounge_Props_12: 1927455673
+      Lounge_Props_34: 1042592324
+      Lounge_Props_6: 2000040792
+      Lounge_Props_33: 2089472808
+      Lounge_Props_24: -795304551
+      Lounge_Props_45: -1101528181
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
