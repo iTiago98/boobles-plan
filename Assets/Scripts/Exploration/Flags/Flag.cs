@@ -16,7 +16,12 @@ namespace Booble.Flags
             AnaPareados,
             ArcadioIntro,
             CitrianoIntro,
-            CitrianoEsperando
+            CitrianoEsperando,
+            DennisIntro,
+            DennisEsperando,
+            PinPonBrosMoneda,
+            PinPonBrosIntro,
+            MonedaPinPonBrosObtenida
         }
 
         [SerializeField] private Reference _flagReference;

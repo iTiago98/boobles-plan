@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Booble.Characters
 {
-	[CreateAssetMenu(fileName = "NewCharacter", menuName = "Scriptables/Character")]
+	[CreateAssetMenu(fileName = "NewCharacterList", menuName = "Scriptables/CharacterList")]
 	public class CharacterList : ScriptableObject
 	{
 		public enum Name
@@ -11,7 +11,8 @@ namespace Booble.Characters
 			None,
 			Nela,
 			Ana,
-			Citriano
+			Citriano,
+			Dennis
         }
 		
 		[System.Serializable]

@@ -8,6 +8,8 @@ namespace Booble.Player
 {
 	public class Controller : Singleton<Controller>
 	{
+        public bool Arrived { get; private set; }
+
 		[SerializeField] private KeyCode _moveKey;
 		[SerializeField] private float _moveSpeed;
         [SerializeField] private Transform _wayPointsParent;
@@ -49,6 +51,7 @@ namespace Booble.Player
             if (Mathf.Abs(transform.position.x - _destination) < 0.1f || _wpList.IsPlayerInLimit(transform.position.x, _direction))
             {
                 _anim.SetBool("IsWalking", false);
+                Arrived = true;
                 return;
             }
 
@@ -85,6 +88,8 @@ namespace Booble.Player
                 _wpList.SetCurrentWayPoint(transform.position.x, _direction);
                 transform.rotation = Quaternion.Euler(0, 180, 0);
             }
+
+            Arrived = false;
         }
 
         public void StopMovement()
