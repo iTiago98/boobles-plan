@@ -80,13 +80,13 @@ namespace Booble.Player
             {
                 _direction = WayPointList.Direction.Right;
                 _wpList.SetCurrentWayPoint(transform.position.x, _direction);
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             else if (_destination < transform.position.x)
             {
                 _direction = WayPointList.Direction.Left;
                 _wpList.SetCurrentWayPoint(transform.position.x, _direction);
-                transform.rotation = Quaternion.Euler(0, 180, 0);
+                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
             Arrived = false;
