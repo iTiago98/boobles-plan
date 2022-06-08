@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DataModel
+namespace CardGame.Cards.DataModel
 {
     [CreateAssetMenu(fileName = "CardsData", menuName = "DataObjects/CardsData")]
     public class CardsDataContainer : ScriptableObject

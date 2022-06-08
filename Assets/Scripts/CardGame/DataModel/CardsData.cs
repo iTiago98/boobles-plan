@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DataModel
+namespace CardGame.Cards.DataModel
 {
     [Serializable]
     public class CardsData

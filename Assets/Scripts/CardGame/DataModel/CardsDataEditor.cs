@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace DataModel
+namespace CardGame.Cards.DataModel
 {
     [CustomEditor(typeof(CardsDataContainer))]
     public class CardsDataEditor : Editor
@@ -14,22 +14,31 @@ namespace DataModel
         List<CardsData> cards;
         List<bool> showContent;
 
+        private const string cardSeparator = "%";
+        private const string attributeSeparator = "/";
+
         private void OnEnable()
         {
             cardsData = serializedObject.FindProperty("cards");
             cardsDataContainer = (CardsDataContainer)cardsData.serializedObject.targetObject;
             cards = cardsDataContainer.cards;
             showContent = new List<bool>();
-            for (int i = 0; i < cards.Count; i++)
+            for (int i = 0; i < cards?.Count; i++)
             {
                 showContent.Add(true);
-                //cards[i].sprite = GetSpriteFromName(cardsDataContainer.resourcesPath, cards[i].name);
             }
         }
 
         private Sprite GetSpriteFromName(string rootPath, string name)
         {
             return Resources.Load<Sprite>(rootPath + "/" + name);
+        }
+
+        private void SaveScriptableObject()
+        {
+            EditorUtility.SetDirty(cardsDataContainer);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
         }
 
         public override void OnInspectorGUI()
@@ -61,6 +70,10 @@ namespace DataModel
                     {
                         card.strength = EditorGUILayout.IntField("Strength: ", card.strength);
                         card.defense = EditorGUILayout.IntField("Defense: ", card.defense);
+                    } else
+                    {
+                        card.strength = 0;
+                        card.defense = 0;
                     }
 
                     GUI.enabled = false;
@@ -104,6 +117,11 @@ namespace DataModel
 
                     GUILayout.BeginHorizontal();
                     GUILayout.Space(50f);
+                    if (GUILayout.Button("Copy card"))
+                    {
+                        CleanClipBoard();
+                        CopyCard(card);
+                    }
                     if (GUILayout.Button("Duplicate card"))
                     {
                         cards.Insert(i, card);
@@ -133,6 +151,11 @@ namespace DataModel
                 showContent.Add(true);
             }
 
+            if (GUILayout.Button("Paste card(s)"))
+            {
+                PasteCards();
+            }
+
             if (GUILayout.Button("Expand all"))
             {
                 for (int i = 0; i < cards.Count; i++)
@@ -148,6 +171,98 @@ namespace DataModel
                     showContent[i] = false;
                 }
             }
+
+            if (GUILayout.Button("Copy all"))
+            {
+                CopyAllCards();
+            }
+
+            if (GUILayout.Button("Remove all"))
+            {
+                cards.Clear();
+                showContent.Clear();
+            }
+
+            if (GUILayout.Button("Save object"))
+            {
+                SaveScriptableObject();
+            }
+        }
+
+        private void CleanClipBoard()
+        {
+            GUIUtility.systemCopyBuffer = "";
+        }
+
+        private void CopyAllCards()
+        {
+            CleanClipBoard();
+            foreach (CardsData card in cards)
+            {
+                CopyCard(card);
+            }
+        }
+
+        private void CopyCard(CardsData card)
+        {
+            GUIUtility.systemCopyBuffer += card.name
+                + attributeSeparator + card.cost
+                + attributeSeparator + card.type
+                + attributeSeparator + card.strength
+                + attributeSeparator + card.defense
+                + cardSeparator;
+        }
+
+        private void PasteCards()
+        {
+            string content = GUIUtility.systemCopyBuffer;
+
+            while (content.Contains(cardSeparator))
+            {
+                string data = GetNextData(ref content, cardSeparator);
+                PasteCard(data);
+            }
+        }
+
+        private void PasteCard(string data)
+        {
+            CardsData card = new CardsData();
+
+            card.name = GetNextData(ref data, attributeSeparator);
+            card.cost = int.Parse(GetNextData(ref data, attributeSeparator));
+            card.type = GetCardType(GetNextData(ref data, attributeSeparator));
+            card.strength = int.Parse(GetNextData(ref data, attributeSeparator));
+            card.defense = int.Parse(GetNextData(ref data, attributeSeparator));
+
+            cards.Add(card);
+            showContent.Add(true);
+        }
+
+        private string GetNextData(ref string data, string separator)
+        {
+            if (data.Contains(separator))
+            {
+                int index = data.IndexOf(separator);
+
+                string s = data.Substring(0, index);
+                data = data.Substring(index + 1, data.Length - index - 1);
+                return s;
+            }
+            else
+            {
+                return data;
+            }
+        }
+
+        private CardType GetCardType(string type)
+        {
+            switch (type)
+            {
+                case "ARGUMENT": return CardType.ARGUMENT;
+                case "ACTION": return CardType.ACTION;
+                case "FIELD": return CardType.FIELD;
+            }
+            return CardType.ARGUMENT;
         }
     }
 

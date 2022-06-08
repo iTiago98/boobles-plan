@@ -1,40 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using CardGame.Cards;
+using CardGame.Cards.DataModel;
+using CardGame.Managers;
 using UnityEngine;
+using DG.Tweening;
 
-public class CardZone : CardContainer, IClickable
+namespace CardGame.Level
 {
-    public Transform cardsPosition;
-
-    private bool _clickable;
-
-    bool IClickable.clickable { get => _clickable; set => _clickable = value; }
-    GameObject IClickable.gameObject { get => gameObject; set => Debug.Log(""); }
-
-    public void OnMouseLeftClickDown(MouseController mouseController)
+    public class CardZone : CardContainer, IClickable
     {
+        public Transform cardsPosition;
 
-    }
+        private bool _isEmpty => numCards == 0;
+        private bool _clickable;
 
-    public void OnMouseLeftClickUp(MouseController mouseController)
-    {
-        Card card = mouseController.holding;
-        if (card != null)
+        bool IClickable.clickable { get => _clickable; set => _clickable = value; }
+        GameObject IClickable.gameObject { get => gameObject; set => Debug.Log(""); }
+
+        #region IClickable methods
+        public void OnMouseLeftClickDown(MouseController mouseController)
         {
-            // If there's already a card 
-            if (numCards != 0)
-            {
-                // Send card back to previous container
-                card.OnMouseLeftClickUp(mouseController);
-            }
-            else
+
+        }
+
+        public void OnMouseLeftClickUp(MouseController mouseController)
+        {
+            Card card = mouseController.holding;
+            if (card != null)
             {
                 // If the player has enough mana
-                if (card.manaCost <= TurnManager.Instance.currentPlayer.currentMana)
+                if (EnoughMana(card))
                 {
-                    mouseController.holding = null;
-                    AddCard(card);
+                    switch (card.type)
+                    {
+                        case CardType.ARGUMENT: CheckArgument(card, mouseController); break;
+                        case CardType.ACTION: CheckAction(card, mouseController); break;
+                        case CardType.FIELD: CheckField(card, mouseController); break;
+                    }
                 }
                 else
                 {
@@ -44,30 +45,78 @@ public class CardZone : CardContainer, IClickable
                 }
             }
         }
-    }
 
-    public void AddCard(Card card)
-    {
-        base.AddCard(card, cardsPosition);
+        public void OnMouseHoverEnter()
+        {
+        }
 
-        TurnManager.Instance.currentPlayer.MinusMana(card.manaCost);
-        TurnManager.Instance.UpdateUI();
-    }
+        public void OnMouseHoverExit()
+        {
+        }
 
-    public Card GetCard()
-    {
-        return (cards.Count > 0) ? cards[0].GetComponent<Card>() : null;
-    }
+        public void OnMouseRightClick()
+        {
+        }
 
-    public void OnMouseHoverEnter()
-    {
-    }
+        #endregion
 
-    public void OnMouseHoverExit()
-    {
-    }
+        private void CheckArgument(Card card, MouseController mouseController)
+        {
+            if (_isEmpty)
+            {
+                // Add card to container
+                mouseController.SetHolding(null);
+                AddCard(card);
+            }
+            else
+            {
+                // Send card back to previous container
+                card.OnMouseLeftClickUp(mouseController);
+            }
+        }
 
-    public void OnMouseRightClick()
-    {
+        private void CheckAction(Card card, MouseController mouseController)
+        {
+            // If effect not appliable
+            if (card.hasEffect && !card.effect.IsAppliable())
+            {
+                card.OnMouseLeftClickUp(mouseController);
+            }
+
+            // Move card to board waiting spot
+            Transform dest = Board.Instance.waitingSpot;
+            card.moveWithMouse = false;
+            card.transform.DOMove(dest.position, 1f);
+
+            mouseController.SetHolding(null);
+
+            // If the effect has no target, we apply the effect and destroy the card
+            if (card.hasEffect && card.effect.NoTarget())
+            {
+                card.effect.Apply(null);
+                mouseController.CheckMask(null);
+                card.Destroy();
+            }
+        }
+
+        private void CheckField(Card card, MouseController mouseController)
+        {
+
+        }
+
+        public void AddCard(Card card)
+        {
+            AddCard(card, cardsPosition);
+        }
+
+        public Card GetCard()
+        {
+            return (cards.Count > 0) ? cards[0].GetComponent<Card>() : null;
+        }
+
+        private bool EnoughMana(Card card)
+        {
+            return card.manaCost <= TurnManager.Instance.currentPlayer.currentMana;
+        }
     }
 }
