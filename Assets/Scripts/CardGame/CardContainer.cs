@@ -2,65 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using CardGame.Cards;
 
-public class CardContainer : MonoBehaviour
+namespace CardGame.Level
 {
-    public float cardSeparationX;
-    public float cardSeparationZ;
-    public float animationTime;
-
-    public int numCards => (cards == null) ? 0 : cards.Count;
-
-    public List<GameObject> cards { private set; get; }
-
-    private void Awake()
+    public class CardContainer : MonoBehaviour
     {
-        cards = new List<GameObject>();
-    }
+        public float cardSeparationX;
+        public float cardSeparationZ;
+        public float animationTime;
 
-    public void AddCard(Card card, Transform parent)
-    {
-        card.transform.parent = transform;
-        card.moveWithMouse = false;
-        card.container = this;
+        public int numCards => (cards == null) ? 0 : cards.Count;
 
-        cards.Add(card.gameObject);
-        UpdateCardsPosition();
-    }
+        public List<GameObject> cards { private set; get; }
 
-    public void RemoveCard(GameObject card)
-    {
-        cards.Remove(card);
-        UpdateCardsPosition();
-    }
-
-    private void UpdateCardsPosition()
-    {
-        float posX = CalculateInitialPosition();
-        float posZ = 0f;
-
-        Sequence sequence = DOTween.Sequence();
-
-        for (int i = 0; i < cards.Count; i++)
+        private void Awake()
         {
-            posX += cardSeparationX;
-            //posZ += cardSeparationZ;
-
-            MoveCard(sequence, cards[i], new Vector3(posX, 0, posZ));
+            cards = new List<GameObject>();
         }
 
-        sequence.Play();
-    }
+        public void AddCard(Card card, Transform parent)
+        {
+            card.transform.parent = transform;
+            card.moveWithMouse = false;
+            card.container = this;
 
-    private void MoveCard(Sequence seq, GameObject card, Vector3 pos)
-    {
-        seq.Join(card.transform.DOLocalMove(pos, animationTime));
-        seq.Join(card.transform.DORotate(transform.rotation.eulerAngles, animationTime));
-    }
+            cards.Add(card.gameObject);
+            UpdateCardsPosition();
+        }
 
-    private float CalculateInitialPosition()
-    {
-        return -(cardSeparationX * (numCards - 1) / 2) - cardSeparationX;
-    }
+        public void RemoveCard(GameObject card)
+        {
+            cards.Remove(card);
+            UpdateCardsPosition();
+        }
 
+        private void UpdateCardsPosition()
+        {
+            float posX = CalculateInitialPosition();
+            float posZ = 0f;
+
+            Sequence sequence = DOTween.Sequence();
+
+            for (int i = 0; i < cards.Count; i++)
+            {
+                posX += cardSeparationX;
+                //posZ += cardSeparationZ;
+
+                MoveCard(sequence, cards[i], new Vector3(posX, 0, posZ));
+            }
+
+            sequence.Play();
+        }
+
+        private void MoveCard(Sequence seq, GameObject card, Vector3 pos)
+        {
+            seq.Join(card.transform.DOLocalMove(pos, animationTime));
+            seq.Join(card.transform.DORotate(transform.rotation.eulerAngles, animationTime));
+        }
+
+        private float CalculateInitialPosition()
+        {
+            return -(cardSeparationX * (numCards - 1) / 2) - cardSeparationX;
+        }
+
+    }
 }

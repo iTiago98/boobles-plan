@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "CardGameSettings", menuName = "DataObjects/CardGameSettings")]
-public class CardGameSettings : ScriptableObject
+namespace CardGame
 {
-    #region Public variables
+    [CreateAssetMenu(fileName = "CardGameSettings", menuName = "DataObjects/CardGameSettings")]
+    public class CardGameSettings : ScriptableObject
+    {
+        public int initialCardNumber;
+        public int initialEloquence;
+        public int initialManaCounter;
+        public int maxManaCounter;
 
-    public int initialCardNumber;
-    public int initialEloquence;
-    public int initialManaCounter;
-    public int maxManaCounter;
-
-    public float movePositionZ;
-
-    #endregion
+        public float movePositionZ;
+    }
 }

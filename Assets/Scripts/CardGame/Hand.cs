@@ -3,43 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using CardGame.Managers;
+using CardGame.Cards;
 
-public class Hand : CardContainer, IClickable
+namespace CardGame.Level
 {
-    private bool _clickable;
-
-    bool IClickable.clickable { get => _clickable; set => _clickable = value; }
-    GameObject IClickable.gameObject { get => gameObject; set => Debug.Log(""); }
-
-    public void OnMouseLeftClickDown(MouseController mouseController)
+    public class Hand : CardContainer
     {
-        
-    }
-
-    public void OnMouseLeftClickUp(MouseController mouseController)
-    {
-        Card card = mouseController.holding;
-        if (card != null)
+        public void AddCard(Card card)
         {
-            AddCard(card);
-            mouseController.holding = null;
+            AddCard(card, transform);
         }
-    }
 
-    public void AddCard(Card card)
-    {
-        base.AddCard(card, transform);
-    }
-
-    void IClickable.OnMouseHoverEnter()
-    {
-    }
-
-    void IClickable.OnMouseHoverExit()
-    {
-    }
-
-    void IClickable.OnMouseRightClick()
-    {
+        public void DiscardCards(int cardNumber)
+        {
+            System.Random random = new System.Random();
+            for (int i = 0; i < cardNumber; i++)
+            {
+                int index = random.Next(0, numCards);
+                RemoveCard(cards[index]);
+            }
+        }
     }
 }

@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MyButton : MonoBehaviour
+namespace CardGame.Utils
 {
-    public Text text;
-
-    private Button _button;
-
-    private void Awake()
+    public class MyButton : MonoBehaviour
     {
-        _button = GetComponent<Button>();
-    }
+        public Text text;
 
-    public void SetText(string s)
-    {
-        text.text = s;
-    }
+        private Button _button;
 
-    public void SetInteractable(bool b)
-    {
-        _button.interactable = b;
+        private void Awake()
+        {
+            _button = GetComponent<Button>();
+        }
+
+        public void SetText(string s)
+        {
+            text.text = s;
+        }
+
+        public void SetInteractable(bool b)
+        {
+            _button.interactable = b;
+        }
     }
 }

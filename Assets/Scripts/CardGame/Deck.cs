@@ -1,35 +1,68 @@
-using DataModel;
+using CardGame.Cards;
+using CardGame.Cards.DataModel;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deck : MonoBehaviour
+namespace CardGame.Level
 {
-    [SerializeField] private GameObject cardPrefab;
-    private Hand _hand;
-    private List<CardsData> _deckCards;
-
-    public void Initialize(Hand hand, List<CardsData> deckCards)
+    public class Deck : MonoBehaviour
     {
-        _hand = hand;
-        _deckCards = new List<CardsData>(deckCards);
-    }
+        [SerializeField] private GameObject cardPrefab;
+        private Hand _hand;
+        private List<CardsData> _deckCards;
 
-    public void DrawCards(int numCards)
-    {
-        for (int i = 0; i < numCards; i++)
+        public void Initialize(Hand hand, List<CardsData> deckCards)
         {
-            // Instantiate card
-            GameObject cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
-
-            // Take data from scriptable
-            int index = Random.Range(0, _deckCards.Count);
-            CardsData data = _deckCards[index];
-            _deckCards.RemoveAt(index);
-
-            // Add card to hand
-            Card card = cardObj.GetComponent<Card>();
-            card.Initialize(_hand, data);
-            _hand.AddCard(card);
+            _hand = hand;
+            CopyCardsList(deckCards);
         }
+
+        public void DrawCards(int numCards)
+        {
+            for (int i = 0; i < numCards; i++)
+            {
+                // Instantiate card
+                GameObject cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+
+                // Take data from scriptable
+                int index = Random.Range(0, _deckCards.Count);
+                CardsData data = _deckCards[index];
+                _deckCards.RemoveAt(index);
+
+                // Add card to hand
+                Card card = cardObj.GetComponent<Card>();
+                card.Initialize(_hand, data);
+                _hand.AddCard(card);
+            }
+        }
+
+        private void CopyCardsList(List<CardsData> cards)
+        {
+            _deckCards = new List<CardsData>();
+            foreach (CardsData data in cards)
+            {
+                CardsData temp = new CardsData();
+                temp.name = data.name;
+                temp.sprite = data.sprite;
+                temp.cost = data.cost;
+                temp.strength = data.strength;
+                temp.defense = data.defense;
+                temp.type = data.type;
+                temp.effects = data.effects;
+
+                _deckCards.Add(temp);
+            }
+        }
+
+        //public string name;
+        //public Sprite sprite;
+
+        //public int cost;
+        //public int strength;
+        //public int defense;
+
+        //public CardType type;
+
+        //public List<CardEffect> effects = new List<CardEffect>();
     }
 }

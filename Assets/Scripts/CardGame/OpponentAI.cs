@@ -1,63 +1,71 @@
+using CardGame.Cards;
+using CardGame.Cards.DataModel;
+using CardGame.Level;
+using CardGame.Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpponentAI : MonoBehaviour
+namespace CardGame.AI
 {
-    private Contender _contender;
-
-    public void Initialize(Contender contender)
+    public class OpponentAI : MonoBehaviour
     {
-        _contender = contender;
-    }
+        private Contender _contender;
 
-    private void Update()
-    {
-        Play();
-
-    }
-
-    private void Play()
-    {
-        CardZone emptyCardZone = EmptyCardZone();
-        if (_contender.currentMana > 0 && emptyCardZone)
+        public void Initialize(Contender contender)
         {
-            foreach (GameObject cardObj in _contender.hand.cards)
-            {
-                Card card = cardObj.GetComponent<Card>();
+            _contender = contender;
+        }
 
-                if (card.manaCost <= _contender.currentMana)
+        private void Update()
+        {
+            Play();
+        }
+
+        private void Play()
+        {
+            CardZone emptyCardZone = EmptyCardZone();
+            if (_contender.currentMana > 0 && emptyCardZone)
+            {
+                foreach (GameObject cardObj in _contender.hand.cards)
                 {
-                    PlayCard(card, emptyCardZone);
-                    break;
+                    Card card = cardObj.GetComponent<Card>();
+
+                    if (card.manaCost <= _contender.currentMana && card.type == CardType.ARGUMENT)
+                    {
+                        PlayCard(card, emptyCardZone);
+                        break;
+                    }
                 }
             }
+            else
+            {
+                SkipTurn();
+            }
         }
-        else
+
+        private void PlayCard(Card card, CardZone emptyCardZone)
         {
-            SkipTurn();
+            card.RemoveFromContainer();
+            emptyCardZone.AddCard(card);
+            _contender.MinusMana(card.manaCost);
+            TurnManager.Instance.UpdateUIStats();
         }
-    }
 
-    private void PlayCard(Card card, CardZone emptyCardZone)
-    {
-        card.RemoveFromContainer();
-        emptyCardZone.AddCard(card);
-    }
-
-    private CardZone EmptyCardZone()
-    {
-        foreach (CardZone cardZone in _contender.cardZones)
+        private CardZone EmptyCardZone()
         {
-            if (cardZone.GetCard() == null) return cardZone;
+            foreach (CardZone cardZone in _contender.cardZones)
+            {
+                if (cardZone.GetCard() == null) return cardZone;
+            }
+
+            return null;
         }
 
-        return null;
-    }
-
-    private void SkipTurn()
-    {
-        TurnManager.Instance.FinishTurn();
+        private void SkipTurn()
+        {
+            TurnManager.Instance.FinishTurn();
+        }
     }
 }
