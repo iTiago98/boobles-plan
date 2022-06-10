@@ -8,6 +8,8 @@ namespace Booble.Player
 {
 	public class Controller : Singleton<Controller>
 	{
+        private const float MAX_ERROR = 0.1f;
+
         public bool Arrived { get; private set; }
 
 		[SerializeField] private KeyCode _moveKey;
@@ -23,6 +25,7 @@ namespace Booble.Player
 
         private void Awake()
         {
+            Arrived = true;
             _wpList = new WayPointList(_wayPointsParent);
             _cam = Camera.main;
             _anim = GetComponent<Animator>();
@@ -33,6 +36,7 @@ namespace Booble.Player
         {
             InputUpdate();
             MoveUpdate();
+            AnimUpdate();
         }
 
         private void InputUpdate()
@@ -48,21 +52,29 @@ namespace Booble.Player
 
         private void MoveUpdate()
         {
-            if (Mathf.Abs(transform.position.x - _destination) < 0.1f || _wpList.IsPlayerInLimit(transform.position.x, _direction))
+            if(!Arrived && _wpList.IsPlayerInLimit(transform.position.x, _direction))
             {
-                _anim.SetBool("IsWalking", false);
+                _destination = transform.position.x;
+            }
+
+            if (Mathf.Abs(transform.position.x - _destination) < MAX_ERROR /*|| _wpList.IsPlayerInLimit(transform.position.x, _direction)*/)
+            {
                 Arrived = true;
                 return;
             }
 
             transform.Translate((_wpList.CurrentWayPoint - transform.position).normalized * _moveSpeed * Time.deltaTime, Space.World);
 
-            if((_wpList.CurrentWayPoint - transform.position).magnitude < 0.1f)
+            if((_wpList.CurrentWayPoint - transform.position).magnitude < MAX_ERROR)
             {
                 _wpList.SetNextWayPointAsCurrent(_direction);
             }
+        }
 
-            _anim.SetBool("IsWalking", true);
+        private void AnimUpdate()
+        {
+            _anim.SetBool("WalkingLeft", transform.position.x > _destination + MAX_ERROR);
+            _anim.SetBool("WalkingRight", transform.position.x < _destination - MAX_ERROR);
         }
 
         public void SetDestination(float destination, float stopDistance = 0)
@@ -80,13 +92,11 @@ namespace Booble.Player
             {
                 _direction = WayPointList.Direction.Right;
                 _wpList.SetCurrentWayPoint(transform.position.x, _direction);
-                transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             else if (_destination < transform.position.x)
             {
                 _direction = WayPointList.Direction.Left;
                 _wpList.SetCurrentWayPoint(transform.position.x, _direction);
-                transform.rotation = Quaternion.Euler(0, 0, 0);
             }
 
             Arrived = false;
