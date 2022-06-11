@@ -605,8 +605,8 @@ GameObject:
   - component: {fileID: 344632825}
   - component: {fileID: 344632824}
   - component: {fileID: 344632823}
-  - component: {fileID: 344632822}
   - component: {fileID: 344632821}
+  - component: {fileID: 344632826}
   m_Layer: 0
   m_Name: Citriano
   m_TagString: Untagged
@@ -634,22 +634,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!58 &344632822
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344632820}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &344632823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,7 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactDistance: 1
+  _interactDistance: 1.5
   _introDialogue: {fileID: 11400000, guid: 1ca2082b17bba4f4b990d95775aea3df, type: 2}
   _continueDialogue: {fileID: 11400000, guid: d4cb838c9c24aeb4b85302ed3514f156, type: 2}
   _introFlag: 4
@@ -782,7 +766,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 97d17e338046cc240a2e4cc3a2c6c2bc, type: 3}
+  m_Sprite: {fileID: -1571186768, guid: dde7830b0c7525c4a9baf4e9263d89dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -811,6 +795,22 @@ Transform:
   m_Father: {fileID: 1078849020}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &344632826
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 344632820}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.02}
+  m_Size: {x: 0.7994964, y: 4.04}
+  m_Direction: 0
 --- !u!1 &354629195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,7 +1129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375799379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 13.67, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1489,7 +1489,7 @@ MonoBehaviour:
     Dialogue Text'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88c4a86cbd19c484b8759fa457d05673, type: 2}
-  m_sharedMaterial: {fileID: -4513346114708893929, guid: 88c4a86cbd19c484b8759fa457d05673, type: 2}
+  m_sharedMaterial: {fileID: -2605380336036183669, guid: 88c4a86cbd19c484b8759fa457d05673, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1924,7 +1924,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 335, y: -119}
+  m_AnchoredPosition: {x: 369, y: -106}
   m_SizeDelta: {x: 559.629, y: 626.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790529719
@@ -2312,7 +2312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactDistance: 1
+  _interactDistance: 1.5
   _introDialogue: {fileID: 11400000, guid: da3fdb83cfbd84a4d87bbba6d311afe6, type: 2}
   _continueDialogue: {fileID: 11400000, guid: 69563f377bbfa8a40a87813f89c86cc5, type: 2}
   _introFlag: 6
@@ -2603,8 +2603,8 @@ GameObject:
   - component: {fileID: 1174065277}
   - component: {fileID: 1174065276}
   - component: {fileID: 1174065278}
-  - component: {fileID: 1174065279}
   - component: {fileID: 1174065280}
+  - component: {fileID: 1174065281}
   m_Layer: 0
   m_Name: Ana
   m_TagString: Untagged
@@ -2653,7 +2653,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 97d17e338046cc240a2e4cc3a2c6c2bc, type: 3}
+  m_Sprite: {fileID: 1786552913, guid: 86a8a40c144dbef4989e1ac284382819, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2672,7 +2672,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174065275}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.31, y: -3.28, z: 0}
+  m_LocalPosition: {x: 9.31, y: -3.63, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2695,7 +2695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactDistance: 1
+  _interactDistance: 1.5
   _introDialogue: {fileID: 11400000, guid: eb9e23031c1785e40886b309cc4e289c, type: 2}
   _continueDialogue: {fileID: 11400000, guid: c8b4208b9e6d45647823b1ba0f3173a8, type: 2}
   _introFlag: 1
@@ -2792,22 +2792,6 @@ MonoBehaviour:
   - _name: Ana
     _identifier: 2
     _animator: {fileID: 1174065280}
---- !u!58 &1174065279
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174065275}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!95 &1174065280
 Animator:
   serializedVersion: 4
@@ -2828,6 +2812,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &1174065281
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174065275}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.076584816, y: 1.8285652}
+  m_Size: {x: 0.7412014, y: 3.6571305}
+  m_Direction: 0
 --- !u!1 &1263455673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3536,6 +3536,37 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1671171114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1671171115}
+  m_Layer: 0
+  m_Name: Waypoint (11)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1671171115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671171114}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.67, y: -3.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1978971479}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1683167927
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,7 +4099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921504876}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15, y: -3.71, z: 0}
+  m_LocalPosition: {x: 13.67, y: -3.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4149,6 +4180,7 @@ Transform:
   - {fileID: 1279426789}
   - {fileID: 921346722}
   - {fileID: 900625210}
+  - {fileID: 1671171115}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

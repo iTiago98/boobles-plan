@@ -15,13 +15,13 @@ MonoBehaviour:
   _characters:
   - _name: Nela
     _identifier: 1
-    _closeUp: {fileID: 21300000, guid: c8e4a912acac96342b6199dad2e881d9, type: 3}
+    _closeUp: {fileID: 21300000, guid: 4bf4f7d636408a44e977f5f52f491fb7, type: 3}
   - _name: Ana
     _identifier: 2
-    _closeUp: {fileID: 21300000, guid: 97d17e338046cc240a2e4cc3a2c6c2bc, type: 3}
+    _closeUp: {fileID: 21300000, guid: c95e9197384ecd840874a022c7805ca6, type: 3}
   - _name: Citriano
     _identifier: 3
-    _closeUp: {fileID: 21300000, guid: 97d17e338046cc240a2e4cc3a2c6c2bc, type: 3}
+    _closeUp: {fileID: 21300000, guid: 3fc430d560fff6f468c089e837ba6dd9, type: 3}
   - _name: Dennis
     _identifier: 4
     _closeUp: {fileID: 21300000, guid: 97d17e338046cc240a2e4cc3a2c6c2bc, type: 3}
