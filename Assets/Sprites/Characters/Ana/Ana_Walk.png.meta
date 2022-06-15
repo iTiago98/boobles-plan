@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 838ea406be496fd409fdf35c4aa92863
+guid: 5378f8cf7fbe7a34faf539be6f50c17a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -52,7 +52,7 @@ TextureImporter:
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Queca400_0
+      name: Ana_Walk_0
       rect:
         serializedVersion: 2
         x: 132
-        y: 64
+        y: 642
         width: 116
-        height: 388
+        height: 360
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,43 +118,134 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0235ba5a3af2e2247b58d02f5142b18c
-      internalID: -182497595
+      spriteID: 1fc97d0f9ad7bb34487701dc57111141
+      internalID: -1725791243
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: -26, y: 166}
-      - {x: -54, y: 162}
-      - {x: -62, y: 88}
-      - {x: -62, y: -69}
-      - {x: -24, y: -226}
-      - {x: 12, y: -226}
-      - {x: 58, y: -101}
-      - {x: 58, y: 122}
-      - {x: 44, y: 166}
-    - - {x: 23, y: 29}
-      - {x: 25, y: 33}
-      - {x: 25, y: 37}
-      - {x: 29, y: 40}
-      - {x: 30, y: 46}
-      - {x: 32, y: 32}
-      - {x: 35, y: 29}
-      - {x: 35, y: 14}
-      - {x: 25, y: 14}
-      - {x: 22, y: 10}
+    - serializedVersion: 2
+      name: Ana_Walk_1
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 640
+        width: 144
+        height: 368
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e57616d54ee599e4b92ec88296d767cf
+      internalID: 1354007108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ana_Walk_2
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 640
+        width: 216
+        height: 360
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8f15bf54398dc642b4383275b84bb02
+      internalID: 1169370076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ana_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 156
+        width: 112
+        height: 356
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10dd15b4a92d25f4881430020a308a50
+      internalID: -1644012569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ana_Walk_4
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 144
+        width: 136
+        height: 372
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0fb55f930421bb4eb2d0d7e70a358bb
+      internalID: -1672227952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ana_Walk_5
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 144
+        width: 204
+        height: 364
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b289820e25a0cd4ea3ce983c28e7d8b
+      internalID: -887035076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Queca400_0: -182497595
+      Ana_Walk_1: 1354007108
+      Ana_Walk_0: -1725791243
+      Ana_Walk_3: -1644012569
+      Ana_Walk_5: -887035076
+      Ana_Walk_2: 1169370076
+      Ana_Walk_4: -1672227952
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

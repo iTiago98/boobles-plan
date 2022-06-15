@@ -21,7 +21,16 @@ namespace Booble.Flags
             DennisEsperando,
             PinPonBrosMoneda,
             PinPonBrosIntro,
-            MonedaPinPonBrosObtenida
+            MonedaPinPonBrosObtenida,
+            AnaZumos,
+            MonedaSofasObtenida,
+            MonedaMaquinaCafesObtenida,
+            MonedaMaquinaZumosObtenida,
+            MonedaPinPonBrosEntregada,
+            MonedaSofasEntregada,
+            MonedaMaquinaCafesEntregada,
+            MonedaMaquinaZumoGastada,
+            ArcadioPartida
         }
 
         [SerializeField] private Reference _flagReference;

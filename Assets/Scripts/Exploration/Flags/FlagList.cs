@@ -15,6 +15,15 @@ namespace Booble.Flags
         private Flag _pinPonBrosMoneda;
         private Flag _pinPonBrosIntro;
         private Flag _monedaPinPonBrosObtenida;
+        private Flag _anaZumos;
+        private Flag _monedaSofasObtenida;
+        private Flag _monedaMaquinaCafesObtenida;
+        private Flag _monedaMaquinaZumosObtenida;
+        private Flag _monedaPinPonBrosEntregada;
+        private Flag _monedaSofasEntregada;
+        private Flag _monedaMaquinaCafesEntregada;
+        private Flag _monedaMaquinaZumoGastada;
+        private Flag _arcadioPartida;
 
         public List<Flag> Flags
         {
@@ -32,6 +41,15 @@ namespace Booble.Flags
                 list.Add(_pinPonBrosMoneda);
                 list.Add(_pinPonBrosIntro);
                 list.Add(_monedaPinPonBrosObtenida);
+                list.Add(_anaZumos);
+                list.Add(_monedaSofasObtenida);
+                list.Add(_monedaMaquinaCafesObtenida);
+                list.Add(_monedaMaquinaZumosObtenida);
+                list.Add(_monedaPinPonBrosEntregada);
+                list.Add(_monedaSofasEntregada);
+                list.Add(_monedaMaquinaCafesEntregada);
+                list.Add(_monedaMaquinaZumoGastada);
+                list.Add(_arcadioPartida);
 
                 return list;
             }
@@ -49,6 +67,15 @@ namespace Booble.Flags
             _pinPonBrosMoneda = new Flag(Flag.Reference.PinPonBrosMoneda);
             _pinPonBrosIntro = new Flag(Flag.Reference.PinPonBrosIntro);
             _monedaPinPonBrosObtenida = new Flag(Flag.Reference.MonedaPinPonBrosObtenida);
+            _anaZumos = new Flag(Flag.Reference.AnaZumos);
+            _monedaSofasObtenida = new Flag(Flag.Reference.MonedaSofasObtenida);
+            _monedaMaquinaCafesObtenida = new Flag(Flag.Reference.MonedaMaquinaCafesObtenida);
+            _monedaMaquinaZumosObtenida = new Flag(Flag.Reference.MonedaMaquinaZumosObtenida);
+            _monedaPinPonBrosEntregada = new Flag(Flag.Reference.MonedaPinPonBrosEntregada);
+            _monedaSofasEntregada = new Flag(Flag.Reference.MonedaSofasEntregada);
+            _monedaMaquinaCafesEntregada = new Flag(Flag.Reference.MonedaMaquinaCafesEntregada);
+            _monedaMaquinaZumoGastada = new Flag(Flag.Reference.MonedaMaquinaZumoGastada);
+            _arcadioPartida = new Flag(Flag.Reference.ArcadioPartida);
         }
     }
 }
