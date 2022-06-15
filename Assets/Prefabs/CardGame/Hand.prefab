@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f1fa2a10e2d6343b2989aa7416ac28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSeparationX: 1.7
+  cardSeparationX: 2
   cardSeparationZ: 0.01
   animationTime: 0.5

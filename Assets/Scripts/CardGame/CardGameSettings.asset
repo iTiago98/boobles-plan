@@ -16,4 +16,8 @@ MonoBehaviour:
   initialEloquence: 15
   initialManaCounter: 1
   maxManaCounter: 5
-  movePositionZ: -0.813
+  hoverPosY: 0.4
+  movePositionZ: -1.2
+  defaultScale: 0.5
+  moveScale: 0.6
+  hitScale: 0.6

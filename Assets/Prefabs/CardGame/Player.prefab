@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   role: 0
-  deckCards: {fileID: 11400000, guid: 3cf9ac4b7dc765d459dd723bed2977e2, type: 2}
+  deckCards: {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
+  maxMana: 0
 --- !u!1 &8052343457199921778
 GameObject:
   m_ObjectHideFlags: 0

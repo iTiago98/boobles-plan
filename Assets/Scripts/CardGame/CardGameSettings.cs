@@ -9,11 +9,21 @@ namespace CardGame
     [CreateAssetMenu(fileName = "CardGameSettings", menuName = "DataObjects/CardGameSettings")]
     public class CardGameSettings : ScriptableObject
     {
+        [Header("Stats")]
         public int initialCardNumber;
         public int initialEloquence;
         public int initialManaCounter;
         public int maxManaCounter;
 
+        [Header("Hover card")]
+        public float hoverPosY;
+
+        [Header("Move card with mouse")]
         public float movePositionZ;
+        public float defaultScale;
+        public float moveScale;
+
+        [Header("Hit animation")]
+        public float hitScale;
     }
 }
