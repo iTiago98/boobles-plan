@@ -317,7 +317,7 @@ namespace CardGame.Cards
                     Contender contender = (Contender)target;
                     contender.ReceiveDamage(strength);
                 }
-                TurnManager.Instance.UpdateUIStats();
+                UIManager.Instance.UpdateUIStats();
             });
             // Back
             hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));

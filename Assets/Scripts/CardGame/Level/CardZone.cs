@@ -69,7 +69,7 @@ namespace CardGame.Level
                 AddCard(card);
 
                 TurnManager.Instance.currentPlayer.MinusMana(card.manaCost);
-                TurnManager.Instance.UpdateUIStats();
+                UIManager.Instance.UpdateUIStats();
             }
             else
             {

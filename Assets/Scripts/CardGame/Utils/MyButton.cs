@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ namespace CardGame.Utils
 {
     public class MyButton : MonoBehaviour
     {
-        public Text text;
+        public TextMeshProUGUI text;
 
         private Button _button;
 

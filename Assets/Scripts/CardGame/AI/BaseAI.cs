@@ -30,7 +30,7 @@ namespace CardGame.AI
             card.RemoveFromContainer();
             emptyCardZone.AddCard(card);
             _contender.MinusMana(card.manaCost);
-            TurnManager.Instance.UpdateUIStats();
+            UIManager.Instance.UpdateUIStats();
         }
 
         protected CardZone RandomEmptyCardZone()

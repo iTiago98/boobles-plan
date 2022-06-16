@@ -30,17 +30,6 @@ namespace CardGame.Managers
 
         public BaseAI opponentAI;
 
-        #region UI
-
-        [Header("UI")]
-        public Text playerStats;
-        public Text opponentStats;
-        public TextMeshProUGUI interviewEnd;
-        public MyButton endTurnButton;
-        public EloquenceBar eloquenceBar;
-
-        #endregion
-
         #region Tweens
 
         public Sequence finishRoundSequence;
@@ -52,22 +41,12 @@ namespace CardGame.Managers
         public Contender otherPlayer => (_turn == Turn.PLAYER) ? opponent : player;
 
         private Turn _turn;
-
-        private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
-        private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
-        private const string CLASH_BUTTON_TEXT = "Combate";
-
-        private const string INTERVIEW_WIN_TEXT = "Has ganado";
-        private const string INTERVIEW_LOSE_TEXT = "Has perdido";
+        private bool _gameStarted;
+        public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
 
         private void Awake()
         {
             Instance = this;
-        }
-
-        private void Start()
-        {
-            StartGame();
         }
 
         private void Update()
@@ -81,13 +60,14 @@ namespace CardGame.Managers
 
         #region Turn flow 
 
-        private void StartGame()
+        public void StartGame()
         {
             InitializeDecks();
             InitializeContenders();
             SetTurn(Turn.OPPONENT);
             DrawCards(settings.initialCardNumber);
-            CheckEndTurnButtonState();
+            UIManager.Instance.CheckEndTurnButtonState(_turn);
+            gameStarted = true;
         }
 
         private void StartRound()
@@ -135,41 +115,7 @@ namespace CardGame.Managers
             {
                 SetTurn(Turn.OPPONENT);
             }
-            CheckEndTurnButtonState();
-        }
-
-        #endregion
-
-        #region UI
-
-        public void UpdateUIStats()
-        {
-            playerStats.text = "Health: " + player.eloquence + "\nMana: " + player.currentMana + "/" + player.currentMaxMana;
-            opponentStats.text = "Health: " + opponent.eloquence + "\nMana: " + opponent.currentMana + "/" + opponent.currentMaxMana;
-        }
-
-        public void SetEndButtonInteractable(bool interactable)
-        {
-            endTurnButton.SetInteractable(interactable);
-        }
-
-        public void CheckEndTurnButtonState()
-        {
-            switch (_turn)
-            {
-                case Turn.PLAYER:
-                    endTurnButton.SetInteractable(true);
-                    endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
-                    break;
-                case Turn.OPPONENT:
-                    endTurnButton.SetInteractable(false);
-                    endTurnButton.SetText(OPPONENT_TURN_BUTTON_TEXT);
-                    break;
-                case Turn.CLASH:
-                    endTurnButton.SetInteractable(false);
-                    endTurnButton.SetText(CLASH_BUTTON_TEXT);
-                    break;
-            }
+            UIManager.Instance.CheckEndTurnButtonState(_turn);
         }
 
         #endregion
@@ -190,7 +136,7 @@ namespace CardGame.Managers
 
             opponentAI.Initialize(opponent);
 
-            UpdateUIStats();
+            UIManager.Instance.UpdateUIStats();
         }
 
         private void InitializeDecks()
@@ -207,7 +153,7 @@ namespace CardGame.Managers
         {
             player.FillMana();
             opponent.FillMana();
-            UpdateUIStats();
+            UIManager.Instance.UpdateUIStats();
         }
 
         private void Clash()
@@ -258,12 +204,12 @@ namespace CardGame.Managers
 
         private void OnInterviewWin()
         {
-            interviewEnd.text = INTERVIEW_WIN_TEXT;
+            UIManager.Instance.SetInterviewWinText(true);
         }
 
         private void OnInterviewLose()
         {
-            interviewEnd.text = INTERVIEW_LOSE_TEXT;
+            UIManager.Instance.SetInterviewWinText(false);
         }
     }
 }
