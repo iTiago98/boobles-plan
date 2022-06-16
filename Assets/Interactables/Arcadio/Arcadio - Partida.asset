@@ -28,7 +28,7 @@ MonoBehaviour:
   - _content: "\xBFC\xF3mo?"
     _closeUp: 1
   - _content: "\xA1No me distraigas ahora mismo! \xA1Que esta parte es muy dif\xEDcil!
-      T\xFA ver\xE1s que por tu culpa voy a ..."
+      T\xFA ver\xE1s que por tu culpa voy a |Lose|..."
     _closeUp: 5
   - _content: ......................................................................
     _closeUp: 5

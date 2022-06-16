@@ -638,7 +638,7 @@ Animator:
   m_GameObject: {fileID: 344632820}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fac11a454ad0b2641bd9a3e767963a04, type: 2}
+  m_Controller: {fileID: 9100000, guid: d57be9e14dbc6494294f1cd1b488e4ee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4386,7 +4386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactDistance: 1
+  _interactDistance: 2
   _introDialogue: {fileID: 11400000, guid: da151e6faf50144408bbbcbda036547f, type: 2}
   _continueDialogue: {fileID: 11400000, guid: ae265d6b0610c294194434d12ab85e24, type: 2}
   _introFlag: 3
@@ -5623,10 +5623,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3024370856374206735, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5919503859718828589, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
