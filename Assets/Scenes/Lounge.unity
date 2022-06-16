@@ -5670,6 +5670,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2879023253206700012, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 3024370856374206734, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
       propertyPath: m_Name
       value: Props_Loungue
