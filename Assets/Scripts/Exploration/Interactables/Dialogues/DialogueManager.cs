@@ -14,6 +14,8 @@ namespace Booble.Interactables.Dialogues
 {
     public class DialogueManager : Singleton<DialogueManager>
     {
+        private const char SEPARATOR = '|';
+
         [System.Serializable]
         public class Option
         {
@@ -100,8 +102,28 @@ namespace Booble.Interactables.Dialogues
             _typing = true;
             _dialogueText.text = "";
 
-            foreach (char letter in sentence.ToCharArray())
+            char[] s = sentence.ToCharArray();
+            for(int i = 0; i < s.Length; i++)
             {
+                char letter = s[i];
+
+                if(letter == SEPARATOR)
+                {
+                    var ai = _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier);
+                    ai.Animator.SetTrigger(ExtractTrigger(s, ref i));
+                    letter = s[i];
+                    // string trigger = "";
+                    // letter = s[++i];
+                    // while(letter != SEPARATOR)
+                    // {
+                    //     trigger += letter;
+                    //     letter = s[++i];
+                    // }
+
+                    // _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier).Animator.SetTrigger(trigger);
+                    // letter = s[++i];
+                }
+                
                 _dialogueText.text += letter;
                 _characterSoundAS.Play();
                 yield return new WaitForSecondsRealtime(_characterDelay);
@@ -110,10 +132,26 @@ namespace Booble.Interactables.Dialogues
             _typing = false;
         }
 
+        private string ExtractTrigger(char[] s, ref int i)
+        {
+            string trigger = "";
+
+            char letter = s[++i];
+            while(letter != SEPARATOR)
+            {
+                trigger += letter;
+                letter = s[++i];
+            }
+            i++;
+
+            return trigger;
+        }
+
         public void DisplayLastSentence()
         {
             StopAllCoroutines();
-            _dialogueText.text = _currentDialogue.GetLastSentence();
+            _dialogueText.text = _currentDialogue.GetLastSentence(out _currentCharacter);
+            _closeUp.sprite = _currentCharacter.CloseUp;
             if (_options.Count > 0)
             {
                 _optionsBox.SetActive(true);
@@ -153,8 +191,22 @@ namespace Booble.Interactables.Dialogues
 
             if (_typing)
             {
-                _dialogueText.text = _currentSentence;
                 StopAllCoroutines();
+
+                _dialogueText.text = "";
+                char[] s = _currentSentence.ToCharArray();
+                for(int i = 0; i < s.Length; i++)
+                {
+                    char letter = s[i];
+                    if(letter == SEPARATOR)
+                    {
+                        var ai = _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier);
+                        ai.Animator.SetTrigger(ExtractTrigger(s, ref i));
+                        letter = s[i];
+                    }
+                    _dialogueText.text += letter;
+                }
+                
                 _typing = false;
             }
             else

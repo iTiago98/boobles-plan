@@ -60,9 +60,10 @@ namespace Booble.Interactables.Dialogues
             }
 		}
 
-		public string GetLastSentence()
+		public string GetLastSentence(out CharacterList.Character character)
         {
 			_currentIndex = _sentences.Count - 1;
+			character = _characters.GetCharacter(_sentences[_currentIndex].CloseUp);
 			return _sentences[_currentIndex].Content;
         }
 	}
