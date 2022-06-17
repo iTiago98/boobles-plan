@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardGame.Managers.TurnManager;
 
 namespace CardGame.Level
 {
@@ -33,17 +34,17 @@ namespace CardGame.Level
             opponentDeck.Initialize(opponentHand, opponentCards);
         }
 
-        public void DrawCards(int cardNumber, Contender contender)
+        public void DrawCards(int cardNumber, Turn turn)
         {
-            switch (contender?.role)
+            switch (turn)
             {
-                case Contender.Role.PLAYER:
+                case Turn.PLAYER:
                     playerDeck.DrawCards(cardNumber);
                     break;
-                case Contender.Role.OPPONENT:
+                case Turn.OPPONENT:
                     opponentDeck.DrawCards(cardNumber);
                     break;
-                default:
+                case Turn.START:
                     playerDeck.DrawCards(cardNumber);
                     opponentDeck.DrawCards(cardNumber);
                     break;
@@ -53,6 +54,17 @@ namespace CardGame.Level
         public void DiscardCards(int cardNumber, Contender contender)
         {
             GetHand(contender).DiscardCards(cardNumber);
+        }
+
+        public bool EmptyCardZone(Contender contender)
+        {
+            List<CardZone> cardZone = GetCardZone(contender);
+            foreach (CardZone zone in cardZone)
+            {
+                if (zone.numCards > 0) return false;
+            }
+
+            return true;
         }
 
         public List<Card> CardsOnTable(Contender contender)
@@ -67,7 +79,19 @@ namespace CardGame.Level
             return temp;
         }
 
-        public bool NumCardsOnTable(Contender contender)
+        public int NumCardsOnTable(Contender contender)
+        {
+            List<CardZone> cardZone = GetCardZone(contender);
+
+            int num = 0;
+            foreach (CardZone zone in cardZone)
+            {
+                if (zone.numCards > 0) num++;
+            }
+            return num;
+        }
+
+        public bool AreCardsOnTable(Contender contender)
         {
             List<CardZone> cardZone = GetCardZone(contender);
             foreach (CardZone zone in cardZone)
@@ -86,6 +110,33 @@ namespace CardGame.Level
         private List<CardZone> GetCardZone(Contender contender)
         {
             return (contender.role == Contender.Role.PLAYER) ? playerCardZone : opponentCardZone;
+        }
+
+        public void DestroyAll()
+        {
+            foreach (CardZone cardZone in playerCardZone) cardZone.GetCard()?.Destroy();
+            foreach (CardZone cardZone in opponentCardZone) cardZone.GetCard()?.Destroy();
+        }
+
+        public int MaxCardNumber()
+        {
+            return playerCardZone.Count;
+        }
+
+        public void HighlightTargets(List<Card> possibleTargets)
+        {
+            List<CardZone> temp = new List<CardZone>();
+            temp.AddRange(playerCardZone);
+            temp.AddRange(opponentCardZone);
+
+            foreach (CardZone cardZone in temp)
+            {
+                Card card = cardZone.GetCard();
+                if (card != null)
+                {
+                    card.highlight.SetActive(possibleTargets.Contains(card));
+                }
+            }
         }
     }
 }

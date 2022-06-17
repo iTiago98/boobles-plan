@@ -24,7 +24,7 @@ namespace CardGame.Level
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
-            Card card = mouseController.holding;
+            Card card = mouseController.holdingCard;
             if (card != null)
             {
                 // If the player has enough mana
@@ -64,12 +64,8 @@ namespace CardGame.Level
         {
             if (_isEmpty)
             {
-                // Add card to container
                 mouseController.SetHolding(null);
-                AddCard(card);
-
-                TurnManager.Instance.currentPlayer.MinusMana(card.manaCost);
-                UIManager.Instance.UpdateUIStats();
+                card.Play(this);
             }
             else
             {
@@ -81,32 +77,14 @@ namespace CardGame.Level
         private void CheckAction(Card card, MouseController mouseController)
         {
             // If effect not appliable
-            //if (card.hasEffect && !card.effect.IsAppliable())
-            //{
+            if (card.hasEffect && !card.effect.IsAppliable())
+            {
+                //Debug.Log("Effect not appliable");
                 card.OnMouseLeftClickUp(mouseController);
-            //}
+                return;
+            }
 
-            //TurnManager.Instance.currentPlayer.MinusMana(card.manaCost);
-            //TurnManager.Instance.UpdateUIStats();
-
-            // Move card to board waiting spot
-            /*Transform dest = Board.Instance.waitingSpot;
-            card.SetMoveWithMouse(false);
-            card.transform.DOMove(dest.position, 1f);
-
-            mouseController.SetHolding(null);*/
-
-            // If the effect has no target, we apply the effect and destroy the card
-            //if (card.hasEffect && card.effect.GetTarget() == "")
-            //{
-            //    card.effect.Apply(null);
-            //    mouseController.CheckMask(null);
-            //    card.Destroy();
-            //}
-            //else
-            //{
-            //    TurnManager.Instance.SetEndButtonInteractable(false);
-            //}
+            card.Play(null);
         }
 
         private void CheckField(Card card, MouseController mouseController)

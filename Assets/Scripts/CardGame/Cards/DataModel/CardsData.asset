@@ -21,7 +21,8 @@ MonoBehaviour:
     defense: 1
     type: 0
     effects:
-    - subType: 6
+    - type: 3
+      subType: 6
       applyTime: 3
       intParameter1: 0
       intParameter2: 0
@@ -34,7 +35,8 @@ MonoBehaviour:
     defense: 1
     type: 0
     effects:
-    - subType: 6
+    - type: 3
+      subType: 6
       applyTime: 3
       intParameter1: 0
       intParameter2: 0
@@ -83,13 +85,14 @@ MonoBehaviour:
     type: 0
     effects: []
   - name: Y por ende...
-    sprite: {fileID: 21300000, guid: 133e46585984fba4db017c2407021ac3, type: 3}
+    sprite: {fileID: 21300000, guid: 777fad0485f38054ea59f05bdf03e881, type: 3}
     cost: 3
     strength: 3
     defense: 2
     type: 0
     effects:
-    - subType: 15
+    - type: 4
+      subType: 15
       applyTime: 2
       intParameter1: 1
       intParameter2: 0
@@ -102,7 +105,8 @@ MonoBehaviour:
     defense: 4
     type: 0
     effects:
-    - subType: 16
+    - type: 4
+      subType: 16
       applyTime: 2
       intParameter1: 1
       intParameter2: 0
@@ -122,63 +126,106 @@ MonoBehaviour:
     defense: 2
     type: 0
     effects:
-    - subType: 9
+    - type: 3
+      subType: 9
       applyTime: 2
       intParameter1: 1
       intParameter2: 0
       boolParameter: 0
       gObjParameter: {fileID: 0}
   - name: Ganar tiempo con una falacia
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: dd7a9357188c225429b0a5fa2cf0d56b, type: 3}
     cost: 1
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 4
+      subType: 17
+      applyTime: 2
+      intParameter1: 0
+      intParameter2: 0
+      boolParameter: 1
+      gObjParameter: {fileID: 0}
   - name: Cambiar la perspectiva
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: cac3efdd9d4ee0d498958fb182821a73, type: 3}
     cost: 1
     strength: 0
     defense: 0
     type: 1
     effects: []
   - name: Aportar pruebas
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 82892e2d1abf22340aa911873e5d3aae, type: 3}
     cost: 2
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 3
+      subType: 9
+      applyTime: 2
+      intParameter1: 2
+      intParameter2: 2
+      boolParameter: 1
+      gObjParameter: {fileID: 0}
   - name: Revisar los documentos
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: cce61675674fa544892b47d91a66e917, type: 3}
     cost: 2
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 4
+      subType: 15
+      applyTime: 2
+      intParameter1: 2
+      intParameter2: 0
+      boolParameter: 1
+      gObjParameter: {fileID: 0}
   - name: "Tu argumento claritamente es inv\xE1lido"
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: ce844192e9ea58a4e8f2239441e04c79, type: 3}
     cost: 3
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 2
+      subType: 3
+      applyTime: 2
+      intParameter1: 0
+      intParameter2: 0
+      boolParameter: 1
+      gObjParameter: {fileID: 0}
   - name: "Tu argumento claritamente es inv\xE1lido"
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: ce844192e9ea58a4e8f2239441e04c79, type: 3}
     cost: 3
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 2
+      subType: 3
+      applyTime: 2
+      intParameter1: 0
+      intParameter2: 0
+      boolParameter: 1
+      gObjParameter: {fileID: 0}
   - name: "Borr\xF3n y cuenta nueva"
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 59de4d40e48c7394ea94205d025ee09f, type: 3}
     cost: 4
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 2
+      subType: 3
+      applyTime: 2
+      intParameter1: 0
+      intParameter2: 0
+      boolParameter: 0
+      gObjParameter: {fileID: 0}
   - name: Hablar con convencimiento
-    sprite: {fileID: 0}
+    sprite: {fileID: 21300000, guid: 9599c5ac9eb37224c81ded874ce735db, type: 3}
     cost: 4
     strength: 0
     defense: 0

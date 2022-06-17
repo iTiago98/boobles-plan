@@ -17,6 +17,7 @@ namespace CardGame
 
         [Header("Hover card")]
         public float hoverPosY;
+        public float hoverScale;
 
         [Header("Move card with mouse")]
         public float movePositionZ;

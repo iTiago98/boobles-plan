@@ -1,12 +1,15 @@
 using CardGame.Cards;
 using CardGame.Cards.DataModel;
 using CardGame.Cards.DataModel.Effects;
+using CardGame.Level;
+using Santi.Utils;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CardGame.Managers
 {
-    public class MouseController : MonoBehaviour
+    public class MouseController : Singleton<MouseController>
     {
 
         #region Layer Masks
@@ -24,9 +27,9 @@ namespace CardGame.Managers
         #endregion
 
         [HideInInspector]
-        public Card holding = null;
+        public Card holdingCard = null;
 
-        //private Card _applyingEffect;
+        private Card _effectCard;
 
         private IClickable _hovering;
         //private IClickable _closeUp;
@@ -34,7 +37,6 @@ namespace CardGame.Managers
         private void Start()
         {
             _currentMask = selectingLayerMask;
-            //_applyingEffect = null;
         }
 
         void Update()
@@ -105,28 +107,28 @@ namespace CardGame.Managers
 
             if (leftClickDown)
             {
-                if (/*!IsApplyingEffect() && */clickableObject != null && TurnManager.Instance.isPlayerTurn)
+                if (!IsApplyingEffect() && clickableObject != null && TurnManager.Instance.isPlayerTurn)
                 {
                     clickableObject.OnMouseLeftClickDown(this);
                 }
             }
             else if (leftClickUp)
             {
-                /*if (IsApplyingEffect())
+                if (IsApplyingEffect())
                 {
-                    ApplyEffect(clickableObject);
+                    ApplyEffectToTarget(clickableObject);
                 }
                 else
-                {*/
+                {
                     if (clickableObject != null)
                     {
                         clickableObject.OnMouseLeftClickUp(this);
                     }
-                    else if (holding != null)
+                    else if (holdingCard != null)
                     {
-                        holding.OnMouseLeftClickUp(this);
+                        holdingCard.OnMouseLeftClickUp(this);
                     }
-                //}
+                }
             }
             //else if (rightClick)
             //{
@@ -140,73 +142,99 @@ namespace CardGame.Managers
 
         #endregion
 
-        /*private void ApplyEffect(IClickable clickableObject)
-        {
-            //_applyingEffect.effect.Apply((Card)clickableObject);
-            if(_applyingEffect.type == CardType.ACTION) _applyingEffect.Destroy();
-            _applyingEffect = null;
-            CheckMask(null);
-            TurnManager.Instance.SetEndButtonInteractable(true);
-        }*/
+        #region Effects 
 
-        /*private bool IsApplyingEffect()
+        public void SetApplyingEffect(Card card)
         {
-            return _applyingEffect != null;
-        }*/
+            _effectCard = card;
+            SetMask(GetTargetMask(card.effect));
+        }
+
+        private bool IsApplyingEffect()
+        {
+            return _effectCard != null;
+        }
+
+        private void ApplyEffectToTarget(IClickable clickableObject)
+        {
+            _effectCard.effect.Apply(_effectCard, (Card)clickableObject);
+            if (_effectCard.type == CardType.ACTION) _effectCard.Destroy();
+            _effectCard = null;
+            SetMask(selectingLayerMask);
+            UIManager.Instance.SetEndButtonInteractable(true);
+            Board.Instance.HighlightTargets(new List<Card>());
+        }
+
+        #endregion
+
+        #region Layers 
 
         public void SetHolding(Card card)
         {
             CheckMask(card);
-            holding = card;
+            holdingCard = card;
         }
 
         public void CheckMask(Card card)
         {
             if (card == null)
             {
-               /* if (_currentMask == holdingLayerMask)
+                if (_currentMask == holdingLayerMask)
                 {
-                    // From holding to applying effect to ally, enemy or no target
-                    if (holding.hasEffect)
-                    {
-                        _applyingEffect = holding;
-                        SetMask(GetTargetMask(holding.effect));
-                    }
-                    // From holding to selecting
-                    else
-                    {
-                        SetMask(selectingLayerMask);
-                    }
-                }
-                else
-                {*/
+                    // From holding card to selecting
+                    //Debug.Log("selectingMask");
                     SetMask(selectingLayerMask);
-                //}
+                }
             }
-            else
+            else if (_currentMask == selectingLayerMask)
             {
                 // From selecting to holding card
-                if (_currentMask == selectingLayerMask)
-                {
-                    SetMask(holdingLayerMask);
-                }
+                //Debug.Log("holdingMask");
+                SetMask(holdingLayerMask);
             }
         }
 
-        /*private LayerMask GetTargetMask(CardEffect effect)
+        private LayerMask GetTargetMask(CardEffect effect)
         {
-            switch (effect.GetTarget())
+            LayerMask layerMask;
+            switch (effect.targetType)
             {
-                case "": return selectingLayerMask;
-                default: return selectingLayerMask;
-            }
+                case Target.NONE:
+                    //Debug.Log("selectingMask");
+                    layerMask = selectingLayerMask;
+                    break;
 
-            return noTargetLayerMask;
-        }*/
+                case Target.ALLY:
+                    //Debug.Log("allyMask");
+                    layerMask = allyLayerMask;
+                    break;
+
+                case Target.ENEMY:
+                    //Debug.Log("enemyMask");
+                    layerMask = enemyLayerMask;
+                    break;
+
+                case Target.CARD:
+                    //Debug.Log("bothCardsMask");
+                    layerMask = allyLayerMask | enemyLayerMask;
+                    break;
+
+                case Target.CARDZONE:
+
+                default:
+                    //Debug.Log("selectingMask");
+                    layerMask = selectingLayerMask;
+                    break;
+            }
+            return layerMask;
+        }
 
         private void SetMask(LayerMask layerMask)
         {
             _currentMask = layerMask;
         }
+
+        #endregion
+
     }
 }

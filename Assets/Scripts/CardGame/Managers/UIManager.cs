@@ -19,6 +19,7 @@ namespace CardGame.Managers
         public TextMeshProUGUI interviewEnd;
         public MyButton endTurnButton;
         public EloquenceBar eloquenceBar;
+        public TextMeshProUGUI log;
 
         private Contender _player;
         private Contender _opponent;
@@ -50,6 +51,11 @@ namespace CardGame.Managers
 
         public void UpdateUIStats()
         {
+            UpdateUIStats(null);
+        }
+
+        public void UpdateUIStats(TweenCallback callback)
+        {
             Sequence sequence = DOTween.Sequence();
 
             int loops = Mathf.Max(
@@ -73,6 +79,8 @@ namespace CardGame.Managers
                 });
                 sequence.AppendInterval(0.1f);
             }
+
+            if (callback != null) sequence.AppendCallback(callback);
             sequence.Play();
 
             _shownPlayerLife = _player.eloquence;
@@ -109,6 +117,9 @@ namespace CardGame.Managers
         {
             switch (turn)
             {
+                case Turn.START:
+                    endTurnButton.SetInteractable(false);
+                    break;
                 case Turn.PLAYER:
                     endTurnButton.SetInteractable(true);
                     endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
@@ -128,6 +139,11 @@ namespace CardGame.Managers
         {
             if (win) interviewEnd.text = INTERVIEW_WIN_TEXT;
             else interviewEnd.text = INTERVIEW_LOSE_TEXT;
+        }
+
+        public void AddToLog(string text)
+        {
+            log.text += text;
         }
     }
 }

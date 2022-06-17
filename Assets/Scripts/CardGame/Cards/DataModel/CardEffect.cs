@@ -7,47 +7,61 @@ using UnityEngine;
 
 namespace CardGame.Cards.DataModel.Effects
 {
+    #region Enums
+
+    public enum EffectType
+    {
+        NONE, DEFENSIVE, OFFENSIVE, BOOST, TACTICAL
+    }
+
+    public enum SubType
+    {
+        NONE,
+        RESTORE_LIFE, INCREASE_MAX_MANA,
+        DESTROY_CARD, DEAL_DAMAGE, DECREASE_MANA,
+        LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD,
+        CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD
+    }
+
+    public enum DefensiveType
+    {
+        NONE, RESTORE_LIFE, INCREASE_MAX_MANA
+    }
+
+    public enum OffensiveType
+    {
+        NONE, DESTROY_CARD, DEAL_DAMAGE, DECREASE_MANA
+    }
+
+    public enum BoostType
+    {
+        NONE, LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD
+    }
+
+    public enum TacticalType
+    {
+        NONE, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD
+    }
+
+    public enum ApplyTime
+    {
+        NONE, START, ENTER, COMBAT, END
+    }
+
+    public enum Target
+    {
+        NONE, ALLY, ENEMY, CARD, CARDZONE
+    }
+
+    #endregion
+
     [Serializable]
     public class CardEffect
     {
-        public enum Type
-        {
-            NONE, DEFENSIVE, OFFENSIVE, BOOST, TACTICAL
-        }
-        public Type type { get; set; }
+        #region Type
 
-        #region Sub Types
-
-        public enum SubType
-        {
-            NONE,
-            RESTORE_LIFE, INCREASE_MAX_MANA,
-            DESTROY_CARD, DEAL_DAMAGE, DECREASE_MANA,
-            LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD,
-            CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD
-        }
-
+        public EffectType type;
         public SubType subType;
-
-        public enum Defensive
-        {
-            NONE, RESTORE_LIFE, INCREASE_MAX_MANA
-        }
-
-        public enum Offensive
-        {
-            NONE, DESTROY_CARD, DEAL_DAMAGE, DECREASE_MANA
-        }
-
-        public enum Boost
-        {
-            NONE, LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD
-        }
-
-        public enum Tactical
-        {
-            NONE, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD
-        }
 
         public void SetSubTypeFromChild(Enum childSubType)
         {
@@ -56,35 +70,37 @@ namespace CardGame.Cards.DataModel.Effects
 
         #endregion
 
-        public enum ApplyTime
-        {
-            NONE, START, ENTER, COMBAT, END
-        }
-
         public ApplyTime applyTime;
+        public Target targetType;
+
         public int intParameter1;
         public int intParameter2;
-        public bool boolParameter; // Target
+        //public bool boolParameter; // Target
         public GameObject gObjParameter;
 
         #region Apply
 
         public void Apply(Card source, object target)
         {
+            Debug.Log(type + " " + subType + " effect applied");
+
+            if (target != null && target is Card)
+                ((Card)target).highlight.SetActive(false);
+
             switch (type)
             {
-                case Type.NONE:
+                case EffectType.NONE:
                     break;
-                case Type.DEFENSIVE:
+                case EffectType.DEFENSIVE:
                     ApplyDefensiveEffect(source, target);
                     break;
-                case Type.OFFENSIVE:
+                case EffectType.OFFENSIVE:
                     ApplyOffensiveEffect(source, target);
                     break;
-                case Type.BOOST:
+                case EffectType.BOOST:
                     ApplyBoostEffect(source, target);
                     break;
-                case Type.TACTICAL:
+                case EffectType.TACTICAL:
                     ApplyTacticalEffect(source, target);
                     break;
             }
@@ -112,14 +128,15 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.DESTROY_CARD:
-                    if (boolParameter) ((Card)target).Destroy();
+                    if (targetType == Target.ENEMY) ((Card)target).Destroy();
+                    else Board.Instance.DestroyAll();
                     break;
                 case SubType.DEAL_DAMAGE:
-                    if (boolParameter) ((Card)target).ReceiveDamage(intParameter1);
+                    if (targetType == Target.ENEMY) ((Card)target).ReceiveDamage(intParameter1);
                     // else daño a todos
                     break;
                 case SubType.DECREASE_MANA:
-                    TurnManager.Instance.currentPlayer.MinusMana(intParameter1);
+                    TurnManager.Instance.currentPlayer.SubstractMana(intParameter1);
                     break;
             }
         }
@@ -148,7 +165,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.TRAMPLE:
                     break;
                 case SubType.STAT_BOOST:
-                    if (boolParameter) ((Card)target).BoostStats(intParameter1, intParameter2);
+                    if (targetType == Target.ALLY) ((Card)target).BoostStats(intParameter1, intParameter2);
                     else
                     {
                         foreach (Card card in Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer))
@@ -177,7 +194,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.SWAP_CONTENDER:
                     break;
                 case SubType.DRAW_CARD:
-                    Board.Instance.DrawCards(intParameter1, TurnManager.Instance.currentPlayer);
+                    Board.Instance.DrawCards(intParameter1, TurnManager.Instance.turn);
                     break;
                 case SubType.DISCARD_CARD:
                     Board.Instance.DiscardCards(intParameter1, TurnManager.Instance.otherPlayer);
@@ -197,15 +214,15 @@ namespace CardGame.Cards.DataModel.Effects
         {
             switch (type)
             {
-                case Type.NONE:
+                case EffectType.NONE:
                     return false;
-                case Type.DEFENSIVE:
+                case EffectType.DEFENSIVE:
                     return DefensiveIsAppliable();
-                case Type.OFFENSIVE:
+                case EffectType.OFFENSIVE:
                     return OffensiveIsAppliable();
-                case Type.BOOST:
+                case EffectType.BOOST:
                     return BoostIsAppliable();
-                case Type.TACTICAL:
+                case EffectType.TACTICAL:
                     return TacticalIsAppliable();
                 default:
                     return false;
@@ -221,7 +238,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.RESTORE_LIFE:
                 case SubType.INCREASE_MAX_MANA:
                 default:
-                    return false;
+                    return true;
             }
         }
 
@@ -232,7 +249,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     return false;
                 case SubType.DESTROY_CARD:
-                    return Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer);
+                    return Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer) > 0;
                 case SubType.DEAL_DAMAGE:
                 case SubType.DECREASE_MANA:
                 default:
@@ -253,9 +270,8 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.TRAMPLE:
                     break;
                 case SubType.STAT_BOOST:
-                    break;
                 case SubType.ADD_EFFECT:
-                    break;
+                    return Board.Instance.NumCardsOnTable(TurnManager.Instance.currentPlayer) > 0;
                 case SubType.GUARD:
                     break;
             }
@@ -265,6 +281,10 @@ namespace CardGame.Cards.DataModel.Effects
 
         private bool TacticalIsAppliable()
         {
+            int currentNumCardsOnTable = Board.Instance.NumCardsOnTable(TurnManager.Instance.currentPlayer);
+            int otherNumCardsOnTable = Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer);
+            int maxCardNumber = Board.Instance.MaxCardNumber();
+
             switch (subType)
             {
                 case SubType.NONE:
@@ -272,9 +292,13 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DISCARD_CARD:
                     return true;
                 case SubType.CREATE_CARD: // Empty player card zone
+                    return currentNumCardsOnTable < maxCardNumber;
                 case SubType.SWAP_POSITION: // Cards on table (player or opponent)
-                case SubType.SWAP_CONTENDER: // Empty card zone other contender
+                    return currentNumCardsOnTable > 0 || otherNumCardsOnTable > 0;
                 case SubType.RETURN_CARD: // Cards on table (player or opponent)
+                    return otherNumCardsOnTable > 0;
+                case SubType.SWAP_CONTENDER: // Empty card zone other contender
+                    return otherNumCardsOnTable < maxCardNumber;
                 default:
                     return false;
             }
@@ -282,47 +306,36 @@ namespace CardGame.Cards.DataModel.Effects
 
         #endregion
 
-        #region GetTarget
+        #region Target
 
-        public string GetTarget()
+        public bool HasTarget()
         {
-            switch (subType)
+            return targetType != Target.NONE;
+        }
+
+        public List<Card> FindPossibleTargets()
+        {
+            List<Card> possibleTargets = new List<Card>();
+
+            switch (targetType)
             {
-                case SubType.NONE:
-
-                case SubType.RESTORE_LIFE:
-                case SubType.INCREASE_MAX_MANA:
-                case SubType.LIFELINK:
-                case SubType.REBOUND:
-                case SubType.TRAMPLE:
-                case SubType.GUARD:
-                case SubType.DRAW_CARD:
-                case SubType.DISCARD_CARD:
-                case SubType.SWAP_CONTENDER:
-                    return "";
-                case SubType.DESTROY_CARD:
+                case Target.NONE:
                     break;
-                case SubType.DEAL_DAMAGE:
+                case Target.ALLY:
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
                     break;
-                case SubType.DECREASE_MANA:
+                case Target.ENEMY:
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
                     break;
-
-                case SubType.STAT_BOOST:
+                case Target.CARD:
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
                     break;
-                case SubType.ADD_EFFECT:
+                case Target.CARDZONE:
                     break;
-
-                case SubType.CREATE_CARD:
-                    return "CardZone";
-                case SubType.SWAP_POSITION:
-                    return "Card(AllyOrEnemy) and Card/CardZone";
-                case SubType.RETURN_CARD:
-                    return "Card(AllyOrEnemy)";
-                default:
-                    return "";
             }
 
-            return "";
+            return possibleTargets;
         }
 
         #endregion
@@ -340,10 +353,10 @@ namespace CardGame.Cards.DataModel.Effects
                     return "Consigues " + intParameter1 + " cristal extra de maná.";
 
                 case SubType.DESTROY_CARD:
-                    if (boolParameter) return "Destruye la carta objetivo.";
+                    if (targetType == Target.ENEMY) return "Destruye la carta objetivo.";
                     else return "Destruye todas las cartas sobre el campo.";
                 case SubType.DEAL_DAMAGE:
-                    if (boolParameter) return "Inflige " + intParameter1 + "puntos de daño a la carta objetivo.";
+                    if (targetType == Target.ENEMY) return "Inflige " + intParameter1 + "puntos de daño a la carta objetivo.";
                     else return "Inflige " + intParameter1 + "puntos de daño a todas las cartas del oponente.";
                 case SubType.DECREASE_MANA:
                     return "Reduce el maná del oponente en " + intParameter1 + " puntos.";
@@ -355,7 +368,8 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.TRAMPLE:
                     break;
                 case SubType.STAT_BOOST:
-                    return "El objetivo recibe un bonificador de " + intParameter1 + "/" + intParameter2 + ".";
+                    if (targetType == Target.ALLY) return "El objetivo recibe un bonificador de " + intParameter1 + "/" + intParameter2 + ".";
+                    else return "Todas las cartas aliadas obtienen un bonificador de " + intParameter1 + "/" + intParameter2 + ".";
                 case SubType.ADD_EFFECT:
                     break;
                 case SubType.GUARD:

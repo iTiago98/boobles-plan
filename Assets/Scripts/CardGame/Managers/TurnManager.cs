@@ -3,6 +3,7 @@ using CardGame.Cards;
 using CardGame.Level;
 using CardGame.Utils;
 using DG.Tweening;
+using Santi.Utils;
 using System;
 using TMPro;
 using UnityEngine;
@@ -10,14 +11,12 @@ using UnityEngine.UI;
 
 namespace CardGame.Managers
 {
-    public class TurnManager : MonoBehaviour
+    public class TurnManager : Singleton<TurnManager>
     {
-
-        public static TurnManager Instance { private set; get; }
 
         public enum Turn
         {
-            PLAYER, OPPONENT, CLASH
+            START, PLAYER, OPPONENT, CLASH
         }
 
         public CardGameSettings settings;
@@ -40,39 +39,44 @@ namespace CardGame.Managers
         public Contender currentPlayer => (_turn == Turn.PLAYER) ? player : opponent;
         public Contender otherPlayer => (_turn == Turn.PLAYER) ? opponent : player;
 
-        private Turn _turn;
+        private Turn _turn = Turn.START;
+        public Turn turn { get { return _turn; } private set { _turn = value; } }
+
         private bool _gameStarted;
         public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
 
-        private void Awake()
-        {
-            Instance = this;
-        }
-
-        private void Update()
-        {
-            // DEBUG
-            //if (Input.GetKeyDown(KeyCode.T))
-            //{
-            //    FinishTurn();
-            //}
-        }
 
         #region Turn flow 
 
         public void StartGame()
         {
+            // START GAME ANIMATION
+
             InitializeDecks();
             InitializeContenders();
-            SetTurn(Turn.OPPONENT);
             DrawCards(settings.initialCardNumber);
             UIManager.Instance.CheckEndTurnButtonState(_turn);
             gameStarted = true;
+            StartRound();
         }
 
         private void StartRound()
         {
+            // START ROUND ANIMATION 
+
             FillMana();
+            TweenCallback callback = () =>
+            {
+                SetTurn(Turn.OPPONENT);
+                StartTurn();
+            };
+
+            UIManager.Instance.UpdateUIStats(callback);
+        }
+
+        private void StartTurn()
+        {
+            // START TURN ANIMATION
             DrawCards(1);
         }
 
@@ -88,13 +92,12 @@ namespace CardGame.Managers
             {
                 if (!CheckInterviewEnd())
                 {
-                    ChangeTurn();
                     StartRound();
                 }
             });
 
             Clash();
-            //END ROUND ANIMATION
+            // END ROUND ANIMATION
 
             finishRoundSequence.Play();
         }
@@ -105,17 +108,13 @@ namespace CardGame.Managers
             {
                 opponentAI.enabled = false;
                 SetTurn(Turn.PLAYER);
+                StartTurn();
             }
             else if (_turn == Turn.PLAYER)
             {
                 SetTurn(Turn.CLASH);
                 FinishRound();
             }
-            else
-            {
-                SetTurn(Turn.OPPONENT);
-            }
-            UIManager.Instance.CheckEndTurnButtonState(_turn);
         }
 
         #endregion
@@ -136,24 +135,24 @@ namespace CardGame.Managers
 
             opponentAI.Initialize(opponent);
 
-            UIManager.Instance.UpdateUIStats();
+            //UIManager.Instance.UpdateUIStats();
         }
 
         private void InitializeDecks()
         {
+            // TODO Change player.deckCards.cards for DeckManager.Instance.GetPlayerCards()
             board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
         }
 
         private void DrawCards(int cardNumber)
         {
-            board.DrawCards(cardNumber, null);
+            board.DrawCards(cardNumber, _turn);
         }
 
         private void FillMana()
         {
             player.FillMana();
             opponent.FillMana();
-            UIManager.Instance.UpdateUIStats();
         }
 
         private void Clash()
@@ -191,7 +190,10 @@ namespace CardGame.Managers
         private void SetTurn(Turn turn)
         {
             _turn = turn;
-            if (turn == Turn.OPPONENT) opponentAI.enabled = true;
+            if (turn == Turn.OPPONENT)
+                opponentAI.enabled = true;
+            
+            UIManager.Instance.CheckEndTurnButtonState(_turn);
         }
 
         private bool CheckInterviewEnd()

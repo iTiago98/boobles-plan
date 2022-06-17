@@ -25,12 +25,16 @@ namespace CardGame.AI
 
         public abstract void Play();
 
-        protected void PlayCard(Card card, CardZone emptyCardZone)
+        protected void PlayArgument(Card card, CardZone emptyCardZone)
         {
             card.RemoveFromContainer();
-            emptyCardZone.AddCard(card);
-            _contender.MinusMana(card.manaCost);
-            UIManager.Instance.UpdateUIStats();
+            card.Play(emptyCardZone);
+        }
+
+        protected void PlayAction(Card card)
+        {
+            card.RemoveFromContainer();
+            card.Play(null);
         }
 
         protected CardZone RandomEmptyCardZone()
@@ -43,7 +47,7 @@ namespace CardGame.AI
                 int index = random.Next(0, cardZones.Count);
                 if (cardZones[index].GetCard() == null) return cardZones[index];
             }
-            
+
             foreach (CardZone cardZone in cardZones)
             {
                 if (cardZone.GetCard() == null) return cardZone;

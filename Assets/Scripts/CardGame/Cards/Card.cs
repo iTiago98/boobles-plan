@@ -14,14 +14,12 @@ namespace CardGame.Cards
     public class Card : MonoBehaviour, IClickable
     {
         #region Card Data
-
         public int manaCost => _data.cost;
         public int strength => _data.strength;
         public int defense => _data.defense;
         public CardType type => _data.type;
         public List<CardEffect> effects => _data.effects;
         public CardEffect effect => effects[0];
-
         public bool hasEffect => effects.Count > 0;
 
         private CardsData _data;
@@ -39,16 +37,9 @@ namespace CardGame.Cards
 
         public Color altColor;
         public GameObject shadow;
+        public GameObject highlight;
 
         #endregion
-
-        [HideInInspector]
-        public bool moveWithMouse;
-        [HideInInspector]
-        public CardContainer container;
-
-        private Hand _hand;
-        public Contender contender => TurnManager.Instance.GetContenderFromHand(_hand);
 
         #region Close up
 
@@ -64,10 +55,14 @@ namespace CardGame.Cards
         #region Hover
 
         private float _hoverPosY;
+        private float _hoverScale;
 
         #endregion
 
         #region Move with mouse 
+
+        [HideInInspector]
+        public bool moveWithMouse;
 
         private float _movePositionZ;
         private float _defaultScale;
@@ -80,6 +75,12 @@ namespace CardGame.Cards
         private float _hitScale;
 
         #endregion
+
+        [HideInInspector]
+        public CardContainer container;
+        public Contender contender => TurnManager.Instance.GetContenderFromHand(_hand);
+
+        private Hand _hand;
 
         private bool _clickable;
 
@@ -99,6 +100,7 @@ namespace CardGame.Cards
             _clickable = true;
 
             _hoverPosY = TurnManager.Instance.settings.hoverPosY;
+            _hoverScale = TurnManager.Instance.settings.hoverScale;
 
             _movePositionZ = TurnManager.Instance.settings.movePositionZ;
             _defaultScale = TurnManager.Instance.settings.defaultScale;
@@ -133,6 +135,8 @@ namespace CardGame.Cards
                 UpdateStatsUI();
             }
         }
+
+        #region UI
 
         private void UpdateStatsUI()
         {
@@ -169,6 +173,10 @@ namespace CardGame.Cards
             return temp;
         }
 
+        #endregion
+
+        #region Drag
+
         /// <summary>
         /// Maps mouse position in the screen to world coordinates to move the holding card.
         /// </summary>
@@ -178,6 +186,26 @@ namespace CardGame.Cards
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
             transform.position = new Vector3(worldPos.x, worldPos.y, _movePositionZ);
         }
+
+        public void SetMoveWithMouse(bool move)
+        {
+            if (move && !moveWithMouse)
+            {
+                // Increase scale
+                transform.DOScale(_moveScale, 0.2f);
+                shadow.SetActive(true);
+            }
+            else if (!move && moveWithMouse)
+            {
+                // Decrease scale
+                transform.DOScale(_defaultScale, 0.2f);
+                shadow.SetActive(false);
+            }
+
+            moveWithMouse = move;
+        }
+
+        #endregion
 
         //private void CheckCloseUp()
         //{
@@ -202,11 +230,12 @@ namespace CardGame.Cards
         //    _closeUp = !_closeUp;
         //}
 
+
         #region IClickable methods
 
         public void OnMouseLeftClickDown(MouseController mouseController)
         {
-            if (!moveWithMouse && mouseController.holding == null && container == _hand)
+            if (!moveWithMouse && mouseController.holdingCard == null && container == _hand)
             {
                 // Deattach from parent
                 RemoveFromContainer();
@@ -219,11 +248,12 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
-            if (mouseController.holding == this)
+            if (mouseController.holdingCard == this)
             {
                 // Return card to hand
                 _hand.AddCard(this);
                 mouseController.SetHolding(null);
+                SetMoveWithMouse(false);
             }
         }
 
@@ -239,48 +269,105 @@ namespace CardGame.Cards
             if (container == _hand)
             {
                 transform.DOLocalMoveY(_hoverPosY, 0.2f);
+                transform.DOScale(_hoverScale, 0.2f);
             }
         }
 
         public void OnMouseHoverExit()
         {
-            if (container == _hand)
+            if (this != null && gameObject != null && container == _hand && !moveWithMouse)
             {
                 transform.DOLocalMoveY(0f, 0.2f);
+                transform.DOScale(_defaultScale, 0.2f);
             }
+        }
+
+        public void SetClickable(bool clickable)
+        {
+            this._clickable = clickable;
         }
 
         #endregion
 
-        public void RemoveFromContainer()
+        #region Play
+
+        public void Play(CardZone cardZone)
         {
-            if (container != null)
+            // Substract mana
+            contender.SubstractMana(manaCost);
+
+            switch (type)
             {
-                container.RemoveCard(gameObject);
-                transform.parent = null;
+                case CardType.ARGUMENT:
+
+                    // Add to container
+                    cardZone.AddCard(this);
+
+                    // Apply enter effect
+                    if (hasEffect && effect.IsAppliable())
+                    {
+                        effect.Apply(this, null);
+                    }
+
+                    break;
+                case CardType.ACTION:
+
+                    // TODO: Play highlight animation
+
+                    if (effect.HasTarget())
+                    {
+                        List<Card> possibleTargets = effect.FindPossibleTargets();
+
+                        if (contender.role == Contender.Role.PLAYER)
+                        {
+                            MoveToWaitingSpot(true);
+
+                            Board.Instance.HighlightTargets(possibleTargets);
+
+                            MouseController.Instance.SetApplyingEffect(this);
+                            UIManager.Instance.SetEndButtonInteractable(false);
+                        }
+                        else
+                        {
+                            if (possibleTargets.Count > 0)
+                            {
+                                int index = new System.Random().Next(0, possibleTargets.Count);
+                                effect.Apply(this, possibleTargets[index]);
+                                MoveToWaitingSpot(false);
+                                Destroy();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //If the effect has no target, we apply the effect and destroy the card
+                        effect.Apply(this, null);
+                        Destroy();
+                        MouseController.Instance.SetHolding(null);
+                    }
+
+                    break;
+                case CardType.FIELD:
+                    break;
             }
         }
 
-        public void ReturnToHand()
+        private void MoveToWaitingSpot(bool tween)
         {
-            RemoveFromContainer();
-            _hand.AddCard(this);
+            // Move card to board waiting spot
+            Transform dest = Board.Instance.waitingSpot;
+            SetMoveWithMouse(false);
+            if (tween) transform.DOMove(dest.position, 1f);
+            else transform.position = dest.position;
         }
+
+        #endregion
+
+        #region Clash
 
         public Sequence Hit(object target)
         {
             return HitAnimation(target);
-        }
-
-        private void ApplyCombatEffects(object target)
-        {
-            foreach (CardEffect effect in effects)
-            {
-                if (effect.applyTime == CardEffect.ApplyTime.COMBAT)
-                {
-                    //effect.Apply(this, target);
-                }
-            }
         }
 
         private Sequence HitAnimation(object target)
@@ -306,18 +393,17 @@ namespace CardGame.Cards
             hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
             hitSequence.AppendCallback(() =>
             {
-                //ApplyCombatEffects(target);
+                ApplyCombatEffects(target);
                 if (isCard)
                 {
                     Card card = (Card)target;
                     card.ReceiveDamage(strength);
                 }
                 else
-                {    
+                {
                     Contender contender = (Contender)target;
                     contender.ReceiveDamage(strength);
                 }
-                UIManager.Instance.UpdateUIStats();
             });
             // Back
             hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
@@ -334,27 +420,29 @@ namespace CardGame.Cards
         public void ReceiveDamage(int strength)
         {
             _data.defense -= strength;
-            if(_data.defense < 0) _data.defense = 0;
+            if (_data.defense < 0) _data.defense = 0;
             UpdateStatsUI();
         }
 
-        private void CheckDestroy()
+        private void ApplyCombatEffects(object target)
         {
-            if (defense <= 0) Destroy();
+            foreach (CardEffect effect in effects)
+            {
+                if (effect.applyTime == ApplyTime.COMBAT)
+                {
+                    effect.Apply(this, target);
+                }
+            }
         }
 
-        public void BoostStats(int strengthBoost, int defenseBoost)
-        {
-            _data.strength += strengthBoost;
-            _data.defense += defenseBoost;
-            //Update card strength and defense number
-            if (type == CardType.ARGUMENT)
-                UpdateStatsUI();
-        }
+        #endregion
+
+        #region Destroy
 
         public void Destroy()
         {
             //Play destroy animation
+            Debug.Log(name + " destroyed");
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
@@ -366,23 +454,37 @@ namespace CardGame.Cards
             destroySequence.Play();
         }
 
-        public void SetMoveWithMouse(bool move)
+        private void CheckDestroy()
         {
-            if (move && !moveWithMouse)
-            {
-                // Increase scale
-                transform.DOScale(_moveScale, 0.2f);
-                shadow.SetActive(true);
-            }
-            else if (!move && moveWithMouse)
-            {
-                // Decrease scale
-                transform.DOScale(_defaultScale, 0.2f);
-                shadow.SetActive(false);
-            }
-
-            moveWithMouse = move;
+            if (defense <= 0) Destroy();
         }
 
+        #endregion
+
+        public void BoostStats(int strengthBoost, int defenseBoost)
+        {
+            _data.strength += strengthBoost;
+            _data.defense += defenseBoost;
+            //Update card strength and defense number
+            if (type == CardType.ARGUMENT)
+                UpdateStatsUI();
+        }
+
+        public void RemoveFromContainer()
+        {
+            if (container != null)
+            {
+                container.RemoveCard(gameObject);
+                transform.parent = null;
+            }
+        }
+
+        public void ReturnToHand()
+        {
+            RemoveFromContainer();
+            _data.strength = defaultStrength;
+            _data.defense = defaultDefense;
+            _hand.AddCard(this);
+        }
     }
 }

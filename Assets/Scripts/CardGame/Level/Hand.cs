@@ -21,7 +21,7 @@ namespace CardGame.Level
             for (int i = 0; i < cardNumber; i++)
             {
                 int index = random.Next(0, numCards);
-                RemoveCard(cards[index]);
+                cards[index].GetComponent<Card>().Destroy();
             }
         }
     }

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59a3782029ab6b4fb177cb69d7ff1cb, type: 3}
   m_Name: CardGameSettings
   m_EditorClassIdentifier: 
-  initialCardNumber: 5
+  initialCardNumber: 4
   initialEloquence: 15
-  initialManaCounter: 1
+  initialManaCounter: 0
   maxManaCounter: 5
   hoverPosY: 0.4
+  hoverScale: 0.55
   movePositionZ: -1.2
   defaultScale: 0.5
   moveScale: 0.6

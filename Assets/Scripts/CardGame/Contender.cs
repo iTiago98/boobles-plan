@@ -50,7 +50,6 @@ namespace CardGame
                 currentMaxMana++;
             }
             currentMana = currentMaxMana;
-            //Update ui
         }
 
         public void IncreaseMaxMana(int mana)
@@ -58,23 +57,23 @@ namespace CardGame
             _maxMana += mana;
         }
 
-        public void MinusMana(int cost)
+        public void SubstractMana(int cost)
         {
             currentMana -= cost;
-            //Update ui
+            UIManager.Instance.UpdateUIStats();
         }
 
         public void RestoreLife(int life)
         {
             eloquence += life;
-            //Update ui
+            UIManager.Instance.UpdateUIStats();
         }
 
         public void ReceiveDamage(int strength)
         {
             eloquence -= strength;
             if (eloquence < 0) eloquence = 0;
-            //Update ui
+            UIManager.Instance.UpdateUIStats();
         }
     }
 }
