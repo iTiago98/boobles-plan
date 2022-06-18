@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Coin 1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Bueno, no ha sido tan dif\xEDcil, \xBFverdad?"
+    _closeUp: 5
+  - _content: No me tires de la lengua, Arcadio. Y termina ya, que quiero jugar yo.
+    _closeUp: 1
+  - _content: "\xBFAcaso te vas a quedar mirando a ver c\xF3mo juego?"
+    _closeUp: 5
+  - _content: "\xBFHay alg\xFAn problema con eso?"
+    _closeUp: 1
+  - _content: Hombre, pues que me desconcentras...
+    _closeUp: 5
+  - _content: "\xA1Venga ya! Deja de ser tan quejica y juega de una vez. Adem\xE1s
+      antes has dicho que te faltaba nada para pas\xE1rtelo."
+    _closeUp: 1
+  - _content: Bueno... voy, voy|Play|...
+    _closeUp: 5
+  - _content: "\xBFA ver c\xF3mo juegas? \xA1Hala! Buen salto. \xA1Cuidado con el
+      Triceratops!"
+    _closeUp: 1
+  - _content: "Uf... menos mal que est\xE1s con el CTS. Un coche con menos reprise
+      no hubiera podido llegar a tiempo."
+    _closeUp: 1
+  - _content: "\xA1Oye! \xBFPero d\xF3nde vas? \xA1Que por ah\xED no es! \xA1TE VAS
+      A CAER!"
+    _closeUp: 1
+  - _content: '|Lose|. . .'
+    _closeUp: 5
+  - _content: "Te has ca\xEDdo..."
+    _closeUp: 1
+  - _content: "Lo s\xE9."
+    _closeUp: 5
+  - _content: "Y no tenemos m\xE1s monedas..."
+    _closeUp: 1
+  - _content: "Lo s\xE9."
+    _closeUp: 5
+  - _content: Y es verdad que me has dicho antes que te ibas a desconcentrar si me
+      quedaba mirando...
+    _closeUp: 1
+  - _content: "Lo s\xE9."
+    _closeUp: 5
+  - _content: Bueno venga... te busco otra moneda...
+    _closeUp: 1
+  - _content: Vale|Wait|.
+    _closeUp: 5

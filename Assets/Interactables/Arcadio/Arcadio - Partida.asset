@@ -44,7 +44,7 @@ MonoBehaviour:
       encima en los tiempos que corren?"
     _closeUp: 1
   - _content: "Pues ah\xED est\xE1 el problema, esta era la \xFAltima que ten\xEDa.
-      \xA1Y por tu culpa he perdido!"
+      |Wait|\xA1Y por tu culpa he perdido!"
     _closeUp: 5
   - _content: "\xBFC\xF3mo que por mi culpa?"
     _closeUp: 1

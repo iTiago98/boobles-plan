@@ -44,6 +44,12 @@ namespace Booble.Interactables
             [SerializeField] private Animator _animator;
         }
 
+        public Dialogue ContinueDialogue
+        {
+            get { return _continueDialogue; }
+            set { _continueDialogue = value; }
+        }
+
         [SerializeField] private float _interactDistance;
         [SerializeField] private Dialogue _introDialogue;
         [SerializeField] private Dialogue _continueDialogue;

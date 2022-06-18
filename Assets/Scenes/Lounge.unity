@@ -123,6 +123,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &106117787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 106117788}
+  - component: {fileID: 106117789}
+  m_Layer: 0
+  m_Name: Continues
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &106117788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106117787}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794732972}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &106117789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 106117787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49e4c4fa92f42a4cb3420e739cc8079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 1794732975}
+  _flagRefs: 130000000f0000001100000010000000
+  _dialogues:
+  - {fileID: 11400000, guid: c00cb16ea5770a24caa0b4ab974e4bf6, type: 2}
+  - {fileID: 11400000, guid: 7ffbb0041c11f8d4e82e6a4bceb64a61, type: 2}
+  - {fileID: 11400000, guid: 8727ad8d4acd23c4c9121990ad91460e, type: 2}
 --- !u!1 &116931525
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +348,9 @@ MonoBehaviour:
     _identifier: 3
     _animator: {fileID: 344632821}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &208174469
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +509,9 @@ MonoBehaviour:
     _identifier: 1
     _animator: {fileID: 1921504880}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &210925552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +935,9 @@ MonoBehaviour:
     _identifier: 4
     _animator: {fileID: 927801218}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &354629198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2018,6 +2077,9 @@ MonoBehaviour:
     _identifier: 2
     _animator: {fileID: 1174065280}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &790529717
 GameObject:
   m_ObjectHideFlags: 0
@@ -2141,6 +2203,89 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1921504878}
+--- !u!1 &895481876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 895481877}
+  - component: {fileID: 895481878}
+  - component: {fileID: 895481879}
+  m_Layer: 0
+  m_Name: MonedaSofa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &895481877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895481876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794732972}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &895481878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895481876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 555d6507847d1e24798f63d017c83e42, type: 2}
+  _animatorIdentifiers:
+  - _name: Nela
+    _identifier: 1
+    _animator: {fileID: 1921504880}
+  - _name: Arcadio
+    _identifier: 5
+    _animator: {fileID: 1794732973}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1192919498}
+        m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowCoinsDialogue,
+          Assembly-CSharp
+        m_MethodName: StartInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &895481879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895481876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 10000000
 --- !u!1 &900625209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,7 +2746,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &941303667
 MonoBehaviour:
@@ -2624,6 +2769,9 @@ MonoBehaviour:
     _identifier: 5
     _animator: {fileID: 1794732973}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &962803876
 GameObject:
   m_ObjectHideFlags: 0
@@ -3170,6 +3318,65 @@ CapsuleCollider2D:
   m_Offset: {x: -0.087910175, y: 1.8285652}
   m_Size: {x: 1.3074617, y: 3.6571305}
   m_Direction: 0
+--- !u!1 &1192919496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1192919497}
+  - component: {fileID: 1192919498}
+  m_Layer: 0
+  m_Name: ThrowCoinsDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1192919497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192919496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794732972}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1192919498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192919496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d790b4645148944a9e975392aa2f6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue1: {fileID: 11400000, guid: 23c1ba6c111d13545af6018e8a162503, type: 2}
+  _dialogue2: {fileID: 11400000, guid: 87dad8863a3f774409d9c38e131e493b, type: 2}
+  _dialogue3: {fileID: 11400000, guid: 0f7ab2489e3339245a7617611bc1970e, type: 2}
+  _arcCont: {fileID: 106117789}
+  _animatorIdentifiers:
+  - _name: Nela
+    _identifier: 1
+    _animator: {fileID: 1921504880}
+  - _name: Arcadio
+    _identifier: 5
+    _animator: {fileID: 1794732973}
+  _onEnd: 2
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1263455673
 GameObject:
   m_ObjectHideFlags: 0
@@ -3224,6 +3431,9 @@ MonoBehaviour:
     _identifier: 3
     _animator: {fileID: 344632821}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1263455676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3303,7 +3513,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1300038655
 MonoBehaviour:
@@ -3326,6 +3536,9 @@ MonoBehaviour:
     _identifier: 5
     _animator: {fileID: 1794732973}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1304552454
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,6 +3952,9 @@ MonoBehaviour:
     _identifier: 2
     _animator: {fileID: 1174065280}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1488464210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3979,7 +4195,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1633416256
 MonoBehaviour:
@@ -4001,7 +4217,10 @@ MonoBehaviour:
   - _name: Arcadio
     _identifier: 5
     _animator: {fileID: 1794732973}
-  _onEnd: 1
+  _onEnd: 2
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1633416257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4197,6 +4416,9 @@ MonoBehaviour:
     _identifier: 4
     _animator: {fileID: 927801218}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1737888736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4263,6 +4485,9 @@ MonoBehaviour:
     _identifier: 3
     _animator: {fileID: 344632821}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1755683915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4316,6 +4541,9 @@ MonoBehaviour:
     _identifier: 4
     _animator: {fileID: 927801218}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1794732971
 GameObject:
   m_ObjectHideFlags: 0
@@ -4348,9 +4576,14 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 106117788}
   - {fileID: 1633416255}
   - {fileID: 1300038654}
   - {fileID: 941303666}
+  - {fileID: 2103853668}
+  - {fileID: 895481877}
+  - {fileID: 2055909455}
+  - {fileID: 1192919497}
   m_Father: {fileID: 1078849020}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4421,6 +4654,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - _optionText: "\xBFY de d\xF3nde narices voy a sacar yo una moneda hoy en d\xEDa?"
     _trueFlags: 13000000
     _falseFlags: 
@@ -4463,19 +4708,163 @@ MonoBehaviour:
     _falseFlags: 10000000
     _onSelectOption:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 895481878}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 895481879}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - _optionText: (Entregar moneda encontrada en el bolsillo de Pineda).
     _trueFlags: 0a00000013000000
     _falseFlags: 0f000000
     _onSelectOption:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2055909456}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2055909457}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - _optionText: "(Entregar moneda encontrada en la m\xE1quina de caf\xE9)."
     _trueFlags: 0d00000013000000
     _falseFlags: 11000000
     _onSelectOption:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2103853669}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2103853670}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 106117789}
+          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
+          m_MethodName: UpdateContinueDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -5256,6 +5645,92 @@ MonoBehaviour:
     _identifier: 2
     _animator: {fileID: 1174065280}
   _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &2055909454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2055909455}
+  - component: {fileID: 2055909456}
+  - component: {fileID: 2055909457}
+  m_Layer: 0
+  m_Name: MonedaPinPonBros
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2055909455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055909454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794732972}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2055909456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055909454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 13cd494334920154f80ad63549682839, type: 2}
+  _animatorIdentifiers:
+  - _name: Nela
+    _identifier: 1
+    _animator: {fileID: 1921504880}
+  - _name: Arcadio
+    _identifier: 5
+    _animator: {fileID: 1794732973}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1192919498}
+        m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowCoinsDialogue,
+          Assembly-CSharp
+        m_MethodName: StartInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2055909457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055909454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 0f000000
 --- !u!1 &2069022023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5378,6 +5853,89 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2069022023}
   m_CullTransparentMesh: 1
+--- !u!1 &2103853667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2103853668}
+  - component: {fileID: 2103853669}
+  - component: {fileID: 2103853670}
+  m_Layer: 0
+  m_Name: MonedaCafe
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2103853668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103853667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794732972}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103853669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103853667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 0f36ba3f9afb21846b874eef563e2162, type: 2}
+  _animatorIdentifiers:
+  - _name: Nela
+    _identifier: 1
+    _animator: {fileID: 1921504880}
+  - _name: Arcadio
+    _identifier: 5
+    _animator: {fileID: 1794732973}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1192919498}
+        m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowCoinsDialogue,
+          Assembly-CSharp
+        m_MethodName: StartInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2103853670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103853667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 11000000
 --- !u!1 &2126748816
 GameObject:
   m_ObjectHideFlags: 0
