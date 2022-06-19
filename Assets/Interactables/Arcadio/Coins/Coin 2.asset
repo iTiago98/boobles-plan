@@ -14,7 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: 
-    _closeUp: 0
-  - _content: 
-    _closeUp: 0
+  - _content: Bueno, pues procedo entonces a terminar de pasarme el maldito juego.
+    _closeUp: 5
+  - _content: "Si fueras tan amable esta vez de no estar presente mientras lo hago,
+      te lo agradecer\xEDa."
+    _closeUp: 5
+  - _content: Tampoco hace falta que me hables con ese tono tan cortante, Arcadio.
+    _closeUp: 1
+  - _content: Por favor.
+    _closeUp: 5
+  - _content: Bueno... vale, vale... Me voy...
+    _closeUp: 1

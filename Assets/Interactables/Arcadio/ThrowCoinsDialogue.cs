@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
 using static Booble.Interactables.Interactable;
 
-namespace Booble.Interactables.Events
+namespace Booble.Interactables.Arcadio
 {
 	public class ThrowCoinsDialogue : MonoBehaviour
 	{
@@ -15,7 +15,7 @@ namespace Booble.Interactables.Events
         [SerializeField] private Dialogue _dialogue1;
         [SerializeField] private Dialogue _dialogue2;
         [SerializeField] private Dialogue _dialogue3;
-        [SerializeField] private ArcadioContinues _arcCont;
+        [SerializeField] private Continues _arcCont;
         [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
         [SerializeField] private EndType _onEnd;
         [SerializeField] private UnityEvent _callbackEvent;

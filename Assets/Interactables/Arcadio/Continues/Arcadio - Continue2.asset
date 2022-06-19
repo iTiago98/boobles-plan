@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: "(A\xFAn est\xE1 catat\xF3nico... cualquiera dir\xEDa que ha visto
+      a un fantasma)."
+    _closeUp: 1
   - _content: No me puedo creer que haya vuelto a perder por tu culpa...
     _closeUp: 5

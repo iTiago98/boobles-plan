@@ -64,9 +64,16 @@ namespace Booble.Flags
 			return (_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState) == Flag.State.True;
         }
 
-		public void SetFlag(Flag.Reference flagRef)
+		public void SetFlag(Flag.Reference flagRef, bool toTrue = true)
         {
-			_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.True;
+			if(toTrue)
+            {
+				_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.True;
+            }
+			else
+            {
+				_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.False;
+            }
 			SaveFlags();
         }
 

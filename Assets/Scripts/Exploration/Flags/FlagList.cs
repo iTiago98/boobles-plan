@@ -24,6 +24,7 @@ namespace Booble.Flags
         private Flag _monedaMaquinaCafesEntregada;
         private Flag _monedaMaquinaZumoGastada;
         private Flag _arcadioPartida;
+        private Flag _arcadioWaiting;
 
         public List<Flag> Flags
         {
@@ -50,6 +51,7 @@ namespace Booble.Flags
                 list.Add(_monedaMaquinaCafesEntregada);
                 list.Add(_monedaMaquinaZumoGastada);
                 list.Add(_arcadioPartida);
+                list.Add(_arcadioWaiting);
 
                 return list;
             }
@@ -76,6 +78,7 @@ namespace Booble.Flags
             _monedaMaquinaCafesEntregada = new Flag(Flag.Reference.MonedaMaquinaCafesEntregada);
             _monedaMaquinaZumoGastada = new Flag(Flag.Reference.MonedaMaquinaZumoGastada);
             _arcadioPartida = new Flag(Flag.Reference.ArcadioPartida);
+            _arcadioWaiting = new Flag(Flag.Reference.ArcadioWaiting);
         }
     }
 }

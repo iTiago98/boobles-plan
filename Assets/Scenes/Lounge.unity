@@ -172,7 +172,9 @@ MonoBehaviour:
   _dialogues:
   - {fileID: 11400000, guid: c00cb16ea5770a24caa0b4ab974e4bf6, type: 2}
   - {fileID: 11400000, guid: 7ffbb0041c11f8d4e82e6a4bceb64a61, type: 2}
-  - {fileID: 11400000, guid: 8727ad8d4acd23c4c9121990ad91460e, type: 2}
+  - {fileID: 11400000, guid: 6e52b1a08e5437943a3c1bfbe90ea529, type: 2}
+  _waitingFlag: 20
+  _waitingDiag: {fileID: 11400000, guid: 8727ad8d4acd23c4c9121990ad91460e, type: 2}
 --- !u!1 &116931525
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +297,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116931525}
   m_CullTransparentMesh: 1
+--- !u!1 &157322570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 157322571}
+  - component: {fileID: 157322572}
+  - component: {fileID: 157322573}
+  m_Layer: 0
+  m_Name: Moneda
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &157322571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157322570}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1739104412}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &157322572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157322570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: dcd5a3acce93d9548b6a65c4ed91a667, type: 2}
+  _animatorIdentifiers: []
+  _onEnd: 2
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &157322573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157322570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 0c000000
 --- !u!1 &161377152
 GameObject:
   m_ObjectHideFlags: 0
@@ -2945,6 +3011,7 @@ Transform:
   - {fileID: 927801215}
   - {fileID: 1526305637}
   - {fileID: 1794732972}
+  - {fileID: 1739104412}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4432,6 +4499,125 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 07000000
+--- !u!1 &1739104411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1739104412}
+  - component: {fileID: 1739104415}
+  - component: {fileID: 1739104413}
+  - component: {fileID: 1739104414}
+  m_Layer: 0
+  m_Name: Sofa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1739104412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739104411}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.89, y: -3.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 157322571}
+  m_Father: {fileID: 1078849020}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1739104413
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739104411}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &1739104414
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739104411}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.16049828, y: 1.0300773}
+  m_Size: {x: 5.6991544, y: 2.341892}
+  m_Direction: 1
+--- !u!114 &1739104415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739104411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactDistance: 1.5
+  _introDialogue: {fileID: 11400000, guid: c713ff1e9e7cb3240a34e384c6070506, type: 2}
+  _continueDialogue: {fileID: 11400000, guid: d280ed76a687860459d0f44af55ec9c8, type: 2}
+  _introFlag: 9
+  _options:
+  - _optionText: Moneda
+    _trueFlags: 
+    _falseFlags: 0c000000
+    _onSelectOption:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 157322572}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 157322573}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  _animatorIdentifiers: []
 --- !u!1 &1743619687
 GameObject:
   m_ObjectHideFlags: 0
@@ -4584,6 +4770,7 @@ Transform:
   - {fileID: 895481877}
   - {fileID: 2055909455}
   - {fileID: 1192919497}
+  - {fileID: 2121053233}
   m_Father: {fileID: 1078849020}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4626,7 +4813,7 @@ MonoBehaviour:
   _options:
   - _optionText: "\xBFMe dejar\xEDas echarme una partida cuando termines?"
     _trueFlags: 
-    _falseFlags: 13000000
+    _falseFlags: 1300000014000000
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
@@ -4668,7 +4855,7 @@ MonoBehaviour:
           m_CallState: 2
   - _optionText: "\xBFY de d\xF3nde narices voy a sacar yo una moneda hoy en d\xEDa?"
     _trueFlags: 13000000
-    _falseFlags: 
+    _falseFlags: 14000000
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
@@ -4687,7 +4874,7 @@ MonoBehaviour:
   - _optionText: "\xBFEres t\xFA quien est\xE1 impidiendo que Ana la de mantenimiento
       desmonte la m\xE1quina del caf\xE9?"
     _trueFlags: 0b000000
-    _falseFlags: 
+    _falseFlags: 14000000
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
@@ -4705,10 +4892,34 @@ MonoBehaviour:
           m_CallState: 2
   - _optionText: "(Entregar moneda encontrada en el sof\xE1)."
     _trueFlags: 0c00000013000000
-    _falseFlags: 10000000
+    _falseFlags: 1000000014000000
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 895481879}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2121053234}
+          m_TargetAssemblyTypeName: Booble.Interactables.Arcadio.SecondCoin, Assembly-CSharp
+          m_MethodName: CheckIfSecondCoin
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 106117789}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
@@ -4733,18 +4944,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 895481879}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 106117789}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
@@ -4759,10 +4958,34 @@ MonoBehaviour:
           m_CallState: 2
   - _optionText: (Entregar moneda encontrada en el bolsillo de Pineda).
     _trueFlags: 0a00000013000000
-    _falseFlags: 0f000000
+    _falseFlags: 0f00000014000000
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 2055909457}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2121053234}
+          m_TargetAssemblyTypeName: Booble.Interactables.Arcadio.SecondCoin, Assembly-CSharp
+          m_MethodName: CheckIfSecondCoin
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 106117789}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
@@ -4787,18 +5010,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 2055909457}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 106117789}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
@@ -4813,10 +5024,34 @@ MonoBehaviour:
           m_CallState: 2
   - _optionText: "(Entregar moneda encontrada en la m\xE1quina de caf\xE9)."
     _trueFlags: 0d00000013000000
-    _falseFlags: 11000000
+    _falseFlags: 1100000014000000
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: 2103853670}
+          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
+          m_MethodName: StartInteraction
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 2121053234}
+          m_TargetAssemblyTypeName: Booble.Interactables.Arcadio.SecondCoin, Assembly-CSharp
+          m_MethodName: CheckIfSecondCoin
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: 106117789}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
@@ -4831,18 +5066,6 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 2103853669}
           m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2103853670}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
           m_MethodName: StartInteraction
           m_Mode: 1
           m_Arguments:
@@ -5936,6 +6159,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 11000000
+--- !u!1 &2121053232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2121053233}
+  - component: {fileID: 2121053234}
+  m_Layer: 0
+  m_Name: SecondCoin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2121053233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121053232}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1794732972}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2121053234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121053232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b041f1caf98fda40915d047f77f85b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arcadioWaiting: 20
+  _arcCont: {fileID: 106117789}
+  _threshold: 2
+  _anim: {fileID: 1794732973}
 --- !u!1 &2126748816
 GameObject:
   m_ObjectHideFlags: 0

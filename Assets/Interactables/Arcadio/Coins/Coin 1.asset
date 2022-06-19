@@ -55,5 +55,5 @@ MonoBehaviour:
     _closeUp: 5
   - _content: Bueno venga... te busco otra moneda...
     _closeUp: 1
-  - _content: Vale|Wait|.
+  - _content: Vale.
     _closeUp: 5

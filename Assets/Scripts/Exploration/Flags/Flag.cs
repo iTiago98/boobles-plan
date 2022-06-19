@@ -30,7 +30,8 @@ namespace Booble.Flags
             MonedaSofasEntregada,
             MonedaMaquinaCafesEntregada,
             MonedaMaquinaZumoGastada,
-            ArcadioPartida
+            ArcadioPartida,
+            ArcadioWaiting
         }
 
         [SerializeField] private Reference _flagReference;

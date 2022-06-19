@@ -3,15 +3,17 @@ using Booble.Interactables.Dialogues;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Booble.Interactables
+namespace Booble.Interactables.Arcadio
 {
-	public class ArcadioContinues : MonoBehaviour
+	public class Continues : MonoBehaviour
 	{
         public int CoinCount => _coinCount - 1;
 
 		[SerializeField] private Interactable _interactable;
         [SerializeField] private List<Flag.Reference> _flagRefs;
         [SerializeField] private List<Dialogue> _dialogues;
+        [SerializeField] private Flag.Reference _waitingFlag;
+        [SerializeField] private Dialogue _waitingDiag;
 
 		private int _coinCount
         {
@@ -39,7 +41,16 @@ namespace Booble.Interactables
             int cc = _coinCount;
             if (cc > 0)
             {
-                _interactable.ChangeDialogue(_dialogues[cc - 1]);
+                bool b = !FlagManager.Instance.GetFlag(_waitingFlag);
+                Debug.Log(b);
+                if(b)
+                {
+                    _interactable.ChangeDialogue(_dialogues[cc - 1]);
+                }
+                else
+                {
+                    _interactable.ChangeDialogue(_waitingDiag);
+                }
             }
         }
     }
