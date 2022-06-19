@@ -27,10 +27,18 @@ public class MusicManager : Singleton<MusicManager>
 
     public void PlayInterviewMusic()
     {
-        _loungeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        StopLoungeMusic();
 
         _interviewMusicInstance = RuntimeManager.CreateInstance(_interviewMusicReference);
         _interviewMusicInstance.start();
+    }
+
+    private void StopLoungeMusic()
+    {
+        PLAYBACK_STATE playbackState;
+        _loungeMusicInstance.getPlaybackState(out playbackState);
+
+        if (playbackState == PLAYBACK_STATE.PLAYING) _loungeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
 }

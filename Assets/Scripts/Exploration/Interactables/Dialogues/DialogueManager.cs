@@ -39,8 +39,7 @@ namespace Booble.Interactables.Dialogues
 
         [SerializeField] private KeyCode _nextKey;
         [SerializeField] private float _characterDelay;
-        //[SerializeField] private AudioSource _characterSoundAS;
-        [SerializeField] private StudioEventEmitter _characterSoundEmitter;
+        [SerializeField] private EventReference _characterSoundEmitter;
         [SerializeField] private GameObject _dialogueBox;
         [SerializeField] private Image _closeUp;
         [SerializeField] private TextMeshProUGUI _dialogueText;
@@ -127,8 +126,7 @@ namespace Booble.Interactables.Dialogues
                 }
                 
                 _dialogueText.text += letter;
-                //_characterSoundAS.Play();
-                if(!_characterSoundEmitter.IsPlaying()) _characterSoundEmitter.Play();
+                RuntimeManager.PlayOneShot(_characterSoundEmitter);
                 yield return new WaitForSecondsRealtime(_characterDelay);
             }
 

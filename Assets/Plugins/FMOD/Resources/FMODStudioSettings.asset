@@ -417,11 +417,11 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../FMOD/BooblesPlan/BooblesPlan.fspro
-  sourceBankPath: ../../FMOD/BooblesPlan/Build
+  sourceProjectPath: Assets/Audio/FMODProject/BooblesPlan.fspro
+  sourceBankPath: Assets/Audio/FMODProject/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
-  ShowBankRefreshWindow: 1
+  ShowBankRefreshWindow: 0
   AutomaticEventLoading: 1
   BankLoadType: 0
   AutomaticSampleLoading: 0
