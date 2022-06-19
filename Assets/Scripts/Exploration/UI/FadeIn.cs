@@ -15,5 +15,20 @@ namespace Booble.UI
         {
             _fadeScreen.DOFade(1, _fadeDuration).From();
         }
+
+        public void FadeIn2()
+        {
+            _fadeScreen.DOFade(0, _fadeDuration);
+        }
+
+        public void FadeOut()
+        {
+            FadeOut(null);
+        }
+
+        public void FadeOut(TweenCallback callback)
+        {
+            _fadeScreen.DOFade(1, _fadeDuration).OnComplete(callback);
+        }
     }
 }
