@@ -20,13 +20,13 @@ MonoBehaviour:
     Data4: -526562447
   Banks:
   - {fileID: 7300988616431307951}
-  IsStream: 0
+  IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 0
+  Length: 72071
 --- !u!114 &-1038396503030995456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
   Path: ../../FMOD/BooblesPlan/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637912410164020076
+  lastModified: 637912419187594636
   FileSizes:
   - Name: Desktop
     Value: 868
@@ -71,7 +71,7 @@ MonoBehaviour:
   - {fileID: 7300988616431307951}
   StringsBanks:
   - {fileID: -1038396503030995456}
-  cacheTime: 637912410164020076
+  cacheTime: 637912419187594636
   cacheVersion: 131591
 --- !u!114 &16433685153818118
 MonoBehaviour:
@@ -115,10 +115,10 @@ MonoBehaviour:
   Path: ../../FMOD/BooblesPlan/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637912410164010105
+  lastModified: 637912419187584661
   FileSizes:
   - Name: Desktop
-    Value: 3673152
+    Value: 4677408
   Exists: 1
 --- !u!114 &9092716062030628169
 MonoBehaviour:
