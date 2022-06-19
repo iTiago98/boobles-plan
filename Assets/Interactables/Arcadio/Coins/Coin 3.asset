@@ -14,7 +14,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: 
-    _closeUp: 0
-  - _content: 
-    _closeUp: 0
+  - _content: "A ver si esta es la \xFAltima, y por fin te lo pasas. No te preocupes,
+      que me voy para no desconcentrarte."
+    _closeUp: 1
+  - _content: "No. Qu\xE9date."
+    _closeUp: 5
+  - _content: "\xBFQue me quede? Pero si llevas todo el d\xEDa dici\xE9ndome que
+      te pones nervioso si te miran jugar."
+    _closeUp: 1
+  - _content: "Mientras buscabas la moneda, he estado meditando, y he conseguido
+      alcanzar un estado de concentraci\xF3n absoluta."
+    _closeUp: 5
+  - _content: "\xBFPerd\xF3n...?"
+    _closeUp: 1
+  - _content: He consumido una sustancia ancestral de propiedades asombrosas.
+    _closeUp: 5
+  - _content: "(\xBFSe refiere a que se ha tomado un caf\xE9?)"
+    _closeUp: 1
+  - _content: "Ahora me encuentro en un estado de atenci\xF3n mayor al posible en
+      los humanos."
+    _closeUp: 5
+  - _content: El Ultra-instinto.
+    _closeUp: 5
+  - _content: "(\xBFPero este t\xEDo, cuando llega a casa, cu\xE1ntas horas le dedica
+      a ver anime?)"
+    _closeUp: 1
+  - _content: Permanece, y contempla a un ser superior hacer alarde de sus habilidades|Play|.
+    _closeUp: 5
+  - _content: (Vaya flipao...)
+    _closeUp: 1
+  - _content: Hmpf...
+    _closeUp: 5
+  - _content: "\xA1Aagh!"
+    _closeUp: 5
+  - _content: "\xA1Uy!"
+    _closeUp: 5
+  - _content: Boffff...
+    _closeUp: 5
+  - _content: Oye...
+    _closeUp: 1
+  - _content: "\xA1\xBFQu\xE9?!"
+    _closeUp: 5
+  - _content: "\xBFPor qu\xE9 no usas el Megaburst?"
+    _closeUp: 1
+  - _content: "\xBFQu\xE9 narices es un negabus?"
+    _closeUp: 5
+  - _content: "M E G A B U R S T. Cuando te salen chispitas del tubo de escape, puedes
+      apretar izquierda y derecha a la vez, y aporrear el bot\xF3n de disparo."
+    _closeUp: 1
+  - _content: Y todos los enemigos que se encuentren en ese momento en pantalla son
+      derrotados.
+    _closeUp: 1
+  - _content: "\xA1\xBFC\xF3mo?! \xA1\xBFDesde cuando est\xE1 eso en el juego?! \xBFA
+      ver que lo pruebe?"
+    _closeUp: 5
+  - _content: '|Lose|...'
+    _closeUp: 5
+  - _content: '|Wait|Pues es verdad... he derrotado incluso al boss...'
+    _closeUp: 5
+  - _content: "\xBFY para esto he estado yo sufriendo tanto tiempo?"
+    _closeUp: 5
+  - _content: "Si llego a saber esto antes, \xA1me hubiera pasado el juego hace much\xEDsimo!"
+    _closeUp: 5
+  - _content: "Ultra-instinto... anda y aparta de ah\xED, friki, que le toca a una
+      profesional."
+    _closeUp: 1
+  - _content: "Izquierda y derecha a la vez... \xBFpero qui\xE9n en su sano juicio
+      descubre eso?"
+    _closeUp: 5

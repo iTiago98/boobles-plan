@@ -14,11 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "\xBFA\xFAn no has metido la moneda?"
+  - _content: "\xBFYa has terminado?"
     _closeUp: 1
-  - _content: "S\xED... lo he hecho ya..."
+  - _content: No...
     _closeUp: 5
-  - _content: "\xBFY por qu\xE9 no est\xE1s jugando entonces?"
+  - _content: "\xBFY por qu\xE9 no est\xE1s jugando?"
     _closeUp: 1
-  - _content: Porque he vuelto a perder...
+  - _content: Porque he vuelto a perder... se me ha quedado el final boss a uno de
+      vida...
+    _closeUp: 5
+  - _content: "Ahora ser\xE1 tambi\xE9n mi culpa."
+    _closeUp: 1
+  - _content: "No... no... es culpa m\xEDa... pero estaba tan cerca... ESTOY tan
+      cerca..."
+    _closeUp: 5
+  - _content: No puedes hacerme parar de jugar ahora...
+    _closeUp: 5
+  - _content: "Si me das una \xFAltima moneda, estoy seguro de que por fin me lo
+      podr\xE9 pasar."
+    _closeUp: 5
+  - _content: "Por favor... api\xE1date de m\xED..."
     _closeUp: 5

@@ -7,6 +7,7 @@ namespace Booble.Interactables.Arcadio
 	public class SecondCoin : MonoBehaviour
 	{
         [SerializeField] private Flag.Reference _arcadioWaiting;
+        [SerializeField] private Flag.Reference _allCoins;
         [SerializeField] private Continues _arcCont;
         [SerializeField] private float _threshold;
         [SerializeField] private Animator _anim;
@@ -34,10 +35,15 @@ namespace Booble.Interactables.Arcadio
 
         public void CheckIfSecondCoin()
         {
-            if (_arcCont.CoinCount == 2)
+            switch (_arcCont.CoinCount)
             {
-                _waiting = true;
-                FlagManager.Instance.SetFlag(_arcadioWaiting);
+                case 2:
+                    _waiting = true;
+                    FlagManager.Instance.SetFlag(_arcadioWaiting);
+                    break;
+                case 3:
+                    FlagManager.Instance.SetFlag(_allCoins);
+                    break;                
             }
         }
 	}

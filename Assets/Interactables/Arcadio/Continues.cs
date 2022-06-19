@@ -42,7 +42,6 @@ namespace Booble.Interactables.Arcadio
             if (cc > 0)
             {
                 bool b = !FlagManager.Instance.GetFlag(_waitingFlag);
-                Debug.Log(b);
                 if(b)
                 {
                     _interactable.ChangeDialogue(_dialogues[cc - 1]);
