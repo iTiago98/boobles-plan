@@ -13,6 +13,9 @@ namespace CardGame.AI
     {
         protected Contender _contender;
 
+        [SerializeField] private float _waitTime;
+        private float _timer;
+
         public void Initialize(Contender contender)
         {
             _contender = contender;
@@ -20,7 +23,12 @@ namespace CardGame.AI
 
         private void Update()
         {
-            Play();
+            _timer += Time.deltaTime;
+            if (_timer > _waitTime)
+            {
+                _timer = 0;
+                Play();
+            }
         }
 
         public abstract void Play();

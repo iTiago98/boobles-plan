@@ -53,16 +53,5 @@ namespace CardGame.Level
                 _deckCards.Add(temp);
             }
         }
-
-        //public string name;
-        //public Sprite sprite;
-
-        //public int cost;
-        //public int strength;
-        //public int defense;
-
-        //public CardType type;
-
-        //public List<CardEffect> effects = new List<CardEffect>();
     }
 }

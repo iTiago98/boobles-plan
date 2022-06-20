@@ -17,8 +17,9 @@ namespace CardGame.Level
 
         public void DiscardCards(int cardNumber)
         {
+            int number = (cardNumber <= numCards) ? cardNumber : numCards;
             System.Random random = new System.Random();
-            for (int i = 0; i < cardNumber; i++)
+            for (int i = 0; i < number; i++)
             {
                 int index = random.Next(0, numCards);
                 cards[index].GetComponent<Card>().Destroy();

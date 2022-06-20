@@ -35,9 +35,12 @@ namespace CardGame.Cards
         public TextMeshPro strengthText;
         public TextMeshPro defenseText;
 
+        public Sprite cardBack;
         public Color altColor;
         public GameObject shadow;
         public GameObject highlight;
+
+        private bool _cardFront = true;
 
         #endregion
 
@@ -123,7 +126,15 @@ namespace CardGame.Cards
             _data = data;
 
             name = data.name;
-            if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
+
+            if (contender.role == Contender.Role.PLAYER)
+            {
+                if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
+            }
+            else
+            {
+                FlipCard();
+            }
 
             if (nameText != null) nameText.text = data.name;
             if (descriptionText != null) descriptionText.text = GetDescriptionText();
@@ -198,7 +209,7 @@ namespace CardGame.Cards
             else if (!move && moveWithMouse)
             {
                 // Decrease scale
-                transform.DOScale(_defaultScale, 0.2f);
+                //transform.DOScale(_defaultScale, 0.2f);
                 shadow.SetActive(false);
             }
 
@@ -295,56 +306,25 @@ namespace CardGame.Cards
         {
             // Substract mana
             contender.SubstractMana(manaCost);
+            if (contender.role == Contender.Role.OPPONENT) FlipCard();
+            SetMoveWithMouse(false);
 
+            //if (hasEffect) CloseUp(() => PlayCard(cardZone));
+            //else PlayCard(cardZone);
+
+            PlayCard(cardZone);
+        }
+
+        private void PlayCard(CardZone cardZone)
+        {
             switch (type)
             {
                 case CardType.ARGUMENT:
-
-                    // Add to container
-                    cardZone.AddCard(this);
-
-                    // Apply enter effect
-                    if (hasEffect && effect.IsAppliable())
-                    {
-                        effect.Apply(this, null);
-                    }
+                    PlayArgument(cardZone);
 
                     break;
                 case CardType.ACTION:
-
-                    // TODO: Play highlight animation
-
-                    if (effect.HasTarget())
-                    {
-                        List<Card> possibleTargets = effect.FindPossibleTargets();
-
-                        if (contender.role == Contender.Role.PLAYER)
-                        {
-                            MoveToWaitingSpot(true);
-
-                            Board.Instance.HighlightTargets(possibleTargets);
-
-                            MouseController.Instance.SetApplyingEffect(this);
-                            UIManager.Instance.SetEndButtonInteractable(false);
-                        }
-                        else
-                        {
-                            if (possibleTargets.Count > 0)
-                            {
-                                int index = new System.Random().Next(0, possibleTargets.Count);
-                                effect.Apply(this, possibleTargets[index]);
-                                MoveToWaitingSpot(false);
-                                Destroy();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        //If the effect has no target, we apply the effect and destroy the card
-                        effect.Apply(this, null);
-                        Destroy();
-                        MouseController.Instance.SetHolding(null);
-                    }
+                    PlayAction();
 
                     break;
                 case CardType.FIELD:
@@ -352,14 +332,110 @@ namespace CardGame.Cards
             }
         }
 
-        private void MoveToWaitingSpot(bool tween)
+        private void PlayArgument(CardZone cardZone)
+        {
+            // Add to container
+            cardZone.AddCard(this);
+            transform.DOScale(_defaultScale, 0.2f);
+
+            // Apply enter effect
+            if (hasEffect && effect.IsAppliable())
+            {
+                effect.Apply(this, null);
+            }
+        }
+
+        private void PlayAction()
+        {
+            if (effect.HasTarget())
+            {
+                List<Card> possibleTargets = effect.FindPossibleTargets();
+
+                if (contender.role == Contender.Role.PLAYER)
+                {
+                    MoveToWaitingSpot(null);
+
+                    Board.Instance.HighlightTargets(possibleTargets);
+
+                    MouseController.Instance.SetApplyingEffect(this);
+                    UIManager.Instance.SetEndButtonInteractable(false);
+                }
+                else
+                {
+                    if (possibleTargets.Count > 0)
+                    {
+                        int index = new System.Random().Next(0, possibleTargets.Count);
+                        MoveToWaitingSpot(() =>
+                        {
+                            effect.Apply(this, possibleTargets[index]);
+                            Destroy();
+                        });
+                    }
+                }
+            }
+            else
+            {
+                //If the effect has no target, we apply the effect and destroy the card
+                MoveToWaitingSpot(() =>
+                {
+                    effect.Apply(this, null);
+                    Destroy();
+                });
+                MouseController.Instance.SetHolding(null);
+            }
+        }
+
+        private void FlipCard()
+        {
+            if (_cardFront)
+            {
+                _spriteRenderer.sprite = cardBack;
+                nameText.gameObject.SetActive(false);
+                descriptionText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
+                defenseText.gameObject.SetActive(false);
+            }
+            else
+            {
+                _spriteRenderer.sprite = _data.sprite;
+                nameText.gameObject.SetActive(true);
+                descriptionText.gameObject.SetActive(true);
+                strengthText.gameObject.SetActive(true);
+                defenseText.gameObject.SetActive(true);
+            }
+
+            _cardFront = !_cardFront;
+        }
+
+        private void MoveToWaitingSpot(TweenCallback onCompleteCallback)
         {
             // Move card to board waiting spot
             Transform dest = Board.Instance.waitingSpot;
             SetMoveWithMouse(false);
-            if (tween) transform.DOMove(dest.position, 1f);
-            else transform.position = dest.position;
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(transform.DOMove(dest.position, 0.5f));
+            sequence.Join(transform.DOScale(_defaultScale, 0.5f));
+            sequence.AppendInterval(0.5f);
+            sequence.OnComplete(onCompleteCallback);
+
+            sequence.Play();
         }
+
+        //private void CloseUp(TweenCallback onCompleteCallback)
+        //{
+        //    Sequence sequence = DOTween.Sequence();
+        //    Transform dest = Board.Instance.closeUpSpot;
+
+        //    sequence.Append(transform.DOLocalMove(dest.position, 0.2f));
+        //    sequence.Join(transform.DOScale(1, 0.2f));
+        //    sequence.AppendInterval(0.5f);
+        //    //sequence.onComplete += () => transform.position = dest.position;
+        //    sequence.onComplete += onCompleteCallback;
+
+        //    sequence.Play();
+        //}
 
         #endregion
 
@@ -485,6 +561,10 @@ namespace CardGame.Cards
             _data.strength = defaultStrength;
             _data.defense = defaultDefense;
             _hand.AddCard(this);
+            if (contender.role == Contender.Role.OPPONENT) FlipCard();
+            UpdateStatsUI();
         }
+
+
     }
 }
