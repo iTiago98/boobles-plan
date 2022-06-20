@@ -404,6 +404,7 @@ namespace CardGame.Cards
                 defenseText.gameObject.SetActive(true);
             }
 
+            transform.Rotate(new Vector3(0, 0, 180));
             _cardFront = !_cardFront;
         }
 
