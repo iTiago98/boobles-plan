@@ -32,7 +32,6 @@ namespace Booble.UI
 
 		private void Update()
 		{
-			UnityEngine.Cursor.visible = false;
 			_cursorT.anchoredPosition = new Vector2
 			(
 				Input.mousePosition.x.Map(0, Screen.width, -_canvasScaler.referenceResolution.x / 2, _canvasScaler.referenceResolution.x / 2),

@@ -27,6 +27,7 @@ namespace Booble.Flags
         private Flag _arcadioWaiting;
         private Flag _allCoins;
         private Flag _recreativaIntro;
+        private Flag _quecaIntro;
 
         public List<Flag> Flags
         {
@@ -56,6 +57,7 @@ namespace Booble.Flags
                 list.Add(_arcadioWaiting);
                 list.Add(_allCoins);
                 list.Add(_recreativaIntro);
+                list.Add(_quecaIntro);
 
                 return list;
             }
@@ -85,6 +87,7 @@ namespace Booble.Flags
             _arcadioWaiting = new Flag(Flag.Reference.ArcadioWaiting);
             _allCoins = new Flag(Flag.Reference.AllCoins);
             _recreativaIntro = new Flag(Flag.Reference.RecreativaIntro);
+            _quecaIntro = new Flag(Flag.Reference.QuecaIntro);
         }
     }
 }

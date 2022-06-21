@@ -10,16 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: Recreativa - EndPlay
+  m_Name: Queca - Continue
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: '|EndPlay|Pues vaya timo...'
-    _closeUp: 1
-  - _content: ...
-    _closeUp: 1
-  - _content: "Espera... hay algo saliendo del expendedor de la m\xE1quina."
-    _closeUp: 1
-  - _content: "\xA1Una carta! Parece que se llama \"Gran final\". \xBFY para qu\xE9
-      quiero yo esto?"
-    _closeUp: 1
+  - _content: "M\xE1s cositas."
+    _closeUp: 6

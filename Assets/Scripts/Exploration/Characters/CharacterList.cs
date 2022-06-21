@@ -13,7 +13,8 @@ namespace Booble.Characters
 			Ana,
 			Citriano,
 			Dennis,
-			Arcadio
+			Arcadio,
+			Queca
         }
 		
 		[System.Serializable]
