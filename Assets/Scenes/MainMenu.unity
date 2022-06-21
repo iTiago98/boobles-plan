@@ -422,11 +422,11 @@ MonoBehaviour:
     Path: event:/InterviewMusic
   _mainMenuReference:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: 1514793878
+      Data2: 1239756933
+      Data3: -1308863092
+      Data4: -1331080349
+    Path: event:/MainMenuMusic
   _isMainMenu: 1
 --- !u!1 &253252829
 GameObject:
