@@ -75,7 +75,6 @@ namespace CardGame.Cards.DataModel.Effects
 
         public int intParameter1;
         public int intParameter2;
-        //public bool boolParameter; // Target
         public GameObject gObjParameter;
 
         #region Apply
@@ -190,7 +189,52 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.CREATE_CARD:
                     break;
                 case SubType.SWAP_POSITION:
+
+                    List<CardZone> cardZones = null;
+                    int pos = -1;
+
+                    foreach (CardZone cardZone in Board.Instance.playerCardZone)
+                    {
+                        Card card = cardZone.GetCard();
+                        if (card != null && card == (Card)target)
+                        {
+                            cardZones = Board.Instance.playerCardZone;
+                            pos = cardZones.IndexOf(cardZone);
+                        }
+                    }
+
+                    if (cardZones == null)
+                    {
+                        foreach (CardZone cardZone in Board.Instance.opponentCardZone)
+                        {
+                            Card card = cardZone.GetCard();
+                            if (card != null && card == (Card)target)
+                            {
+                                cardZones = Board.Instance.opponentCardZone;
+                                pos = cardZones.IndexOf(cardZone);
+                            }
+                        }
+                    }
+
+                    List<int> possibleCardZones = new List<int>();
+                    if (pos > 0) possibleCardZones.Add(pos - 1);
+                    if (pos < 3) possibleCardZones.Add(pos + 1);
+
+                    int dest = possibleCardZones[UnityEngine.Random.Range(0, possibleCardZones.Count)];
+                    CardZone destCardZone = cardZones[dest];
+                    CardZone originCardZone = cardZones[pos];
+
+                    originCardZone.RemoveCard(originCardZone.GetCard().gameObject);
+                    if(destCardZone.GetCard() != null)
+                    {
+                        Card temp = destCardZone.GetCard();
+                        destCardZone.RemoveCard(temp.gameObject);
+                        originCardZone.AddCard(temp);
+                    }
+                    destCardZone.AddCard((Card)target);
+
                     break;
+
                 case SubType.SWAP_CONTENDER:
                     break;
                 case SubType.DRAW_CARD:

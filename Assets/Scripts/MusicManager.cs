@@ -1,6 +1,7 @@
 using FMOD.Studio;
 using FMODUnity;
 using Santi.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,22 +13,18 @@ public class MusicManager : Singleton<MusicManager>
     [SerializeField] private EventReference _interviewMusicReference;
     [SerializeField] private EventReference _mainMenuReference;
 
-    [SerializeField] private bool _isMainMenu;
-
     private EventInstance _loungeMusicInstance;
     private EventInstance _interviewMusicInstance;
     private EventInstance _mainMenuInstance;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+
     private void Start()
     {
-        if(_isMainMenu)
-        {
-            PlayMainMenuMusic();
-        }
-        else
-        {
-            PlayLoungeMusic();
-        }
+        PlayMainMenuMusic();
     }
 
     public void PlayMainMenuMusic()
@@ -38,6 +35,8 @@ public class MusicManager : Singleton<MusicManager>
 
     public void PlayLoungeMusic()
     {
+        StopMainMenuMusic();
+
         _loungeMusicInstance = RuntimeManager.CreateInstance(_loungeMusicReference);
         _loungeMusicInstance.start();
     }
@@ -50,6 +49,14 @@ public class MusicManager : Singleton<MusicManager>
         _interviewMusicInstance.start();
     }
 
+    private void StopMainMenuMusic()
+    {
+        PLAYBACK_STATE playbackState;
+        _mainMenuInstance.getPlaybackState(out playbackState);
+
+        if (playbackState == PLAYBACK_STATE.PLAYING) _mainMenuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
+
     private void StopLoungeMusic()
     {
         PLAYBACK_STATE playbackState;
@@ -58,4 +65,11 @@ public class MusicManager : Singleton<MusicManager>
         if (playbackState == PLAYBACK_STATE.PLAYING) _loungeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
+    public void StopInterviewMusic()
+    {
+        PLAYBACK_STATE playbackState;
+        _interviewMusicInstance.getPlaybackState(out playbackState);
+
+        if (playbackState == PLAYBACK_STATE.PLAYING) _interviewMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
 }

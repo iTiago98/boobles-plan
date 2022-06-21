@@ -1,9 +1,11 @@
 using CardGame.Utils;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static CardGame.Managers.TurnManager;
 
@@ -18,6 +20,7 @@ namespace CardGame.Managers
         public Text opponentStats;
         public TextMeshProUGUI interviewEnd;
         public MyButton endTurnButton;
+        public MyButton endButton;
         public EloquenceBar eloquenceBar;
         public TextMeshProUGUI log;
 
@@ -96,7 +99,7 @@ namespace CardGame.Managers
             return shownValue;
         }
 
-        public void OnEndButtonClick()
+        public void OnEndTurnButtonClick()
         {
             if (TurnManager.Instance.gameStarted)
             {
@@ -108,7 +111,7 @@ namespace CardGame.Managers
             }
         }
 
-        public void SetEndButtonInteractable(bool interactable)
+        public void SetEndTurnButtonInteractable(bool interactable)
         {
             endTurnButton.SetInteractable(interactable);
         }
@@ -144,6 +147,17 @@ namespace CardGame.Managers
         public void AddToLog(string text)
         {
             log.text += text;
+        }
+
+        public void ShowEndButton(bool show)
+        {
+            endButton.gameObject.SetActive(show);
+        }
+
+        public void OnEndButtonClick()
+        {
+            MusicManager.Instance.StopInterviewMusic();
+            SceneManager.LoadScene(Scenes.MAIN_MENU_SCENE);
         }
     }
 }

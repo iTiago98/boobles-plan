@@ -358,7 +358,7 @@ namespace CardGame.Cards
                     Board.Instance.HighlightTargets(possibleTargets);
 
                     MouseController.Instance.SetApplyingEffect(this);
-                    UIManager.Instance.SetEndButtonInteractable(false);
+                    UIManager.Instance.SetEndTurnButtonInteractable(false);
                 }
                 else
                 {

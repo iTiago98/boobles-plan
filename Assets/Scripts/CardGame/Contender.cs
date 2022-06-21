@@ -72,7 +72,7 @@ namespace CardGame
         public void ReceiveDamage(int strength)
         {
             eloquence -= strength;
-            if (eloquence < 0) eloquence = 0;
+            //if (eloquence < 0) eloquence = 0;
             UIManager.Instance.UpdateUIStats();
         }
     }

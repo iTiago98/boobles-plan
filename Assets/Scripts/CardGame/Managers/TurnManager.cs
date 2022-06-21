@@ -141,7 +141,8 @@ namespace CardGame.Managers
         private void InitializeDecks()
         {
             // TODO Change player.deckCards.cards for DeckManager.Instance.GetPlayerCards()
-            board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
+            board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), opponent.deckCards.cards);
+            //board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
         }
 
         private void DrawCards(int cardNumber)
@@ -192,16 +193,22 @@ namespace CardGame.Managers
             _turn = turn;
             if (turn == Turn.OPPONENT)
                 opponentAI.enabled = true;
-            
+
             UIManager.Instance.CheckEndTurnButtonState(_turn);
         }
 
         private bool CheckInterviewEnd()
         {
-            if (player.eloquence <= 0) OnInterviewLose();
-            else if (opponent.eloquence <= 0) OnInterviewWin();
+            if (player.eloquence <= 0 || opponent.eloquence <= 0)
+            {
+                UIManager.Instance.ShowEndButton(true);
+                MouseController.Instance.enabled = false;
+
+                if (player.eloquence <= 0) OnInterviewLose();
+                else if (opponent.eloquence <= 0) OnInterviewWin();
+                return true;
+            }
             else return false;
-            return true;
         }
 
         private void OnInterviewWin()

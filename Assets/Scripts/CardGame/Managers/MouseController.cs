@@ -161,7 +161,7 @@ namespace CardGame.Managers
             if (_effectCard.type == CardType.ACTION) _effectCard.Destroy();
             _effectCard = null;
             SetMask(selectingLayerMask);
-            UIManager.Instance.SetEndButtonInteractable(true);
+            UIManager.Instance.SetEndTurnButtonInteractable(true);
             Board.Instance.HighlightTargets(new List<Card>());
         }
 

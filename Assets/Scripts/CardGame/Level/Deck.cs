@@ -1,5 +1,6 @@
 using CardGame.Cards;
 using CardGame.Cards.DataModel;
+using CardGame.Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,18 +22,25 @@ namespace CardGame.Level
         {
             for (int i = 0; i < numCards; i++)
             {
-                // Instantiate card
-                GameObject cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+                if (_deckCards.Count == 0)
+                {
+                    TurnManager.Instance.GetContenderFromHand(_hand).ReceiveDamage(1);
+                }
+                else
+                {
+                    // Instantiate card
+                    GameObject cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
 
-                // Take data from scriptable
-                int index = Random.Range(0, _deckCards.Count);
-                CardsData data = _deckCards[index];
-                _deckCards.RemoveAt(index);
+                    // Take data from scriptable
+                    int index = Random.Range(0, _deckCards.Count);
+                    CardsData data = _deckCards[index];
+                    _deckCards.RemoveAt(index);
 
-                // Add card to hand
-                Card card = cardObj.GetComponent<Card>();
-                card.Initialize(_hand, data);
-                _hand.AddCard(card);
+                    // Add card to hand
+                    Card card = cardObj.GetComponent<Card>();
+                    card.Initialize(_hand, data);
+                    _hand.AddCard(card);
+                }
             }
         }
 
