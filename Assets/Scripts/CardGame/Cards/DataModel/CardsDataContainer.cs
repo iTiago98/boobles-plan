@@ -9,6 +9,5 @@ namespace CardGame.Cards.DataModel
     {
         public string resourcesPath;
         public List<CardsData> cards;
-
     }
 }

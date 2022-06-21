@@ -13,9 +13,16 @@ public class DeckManager : Singleton<DeckManager>
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
 
+    private CardsData _granFinal;
+
     private void Start()
     {
         SetPlayerCards();
+    }
+
+    public void AddGranFinal()
+    {
+        AddCard(_granFinal);
     }
 
     public void AddCard(CardsData cardsData)
@@ -57,7 +64,14 @@ public class DeckManager : Singleton<DeckManager>
             temp.type = data.type;
             temp.effects = data.effects;
 
-            dest.Add(temp);
+            if(temp.name == "Gran final")
+            {
+                _granFinal = temp;
+            }
+            else
+            {
+                dest.Add(temp);
+            }
         }
     }
 

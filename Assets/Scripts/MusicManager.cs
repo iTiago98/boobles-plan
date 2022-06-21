@@ -10,13 +10,30 @@ public class MusicManager : Singleton<MusicManager>
 
     [SerializeField] private EventReference _loungeMusicReference;
     [SerializeField] private EventReference _interviewMusicReference;
+    [SerializeField] private EventReference _mainMenuReference;
+
+    [SerializeField] private bool _isMainMenu;
 
     private EventInstance _loungeMusicInstance;
     private EventInstance _interviewMusicInstance;
+    private EventInstance _mainMenuInstance;
 
     private void Start()
     {
-        PlayLoungeMusic();
+        if(_isMainMenu)
+        {
+            PlayMainMenuMusic();
+        }
+        else
+        {
+            PlayLoungeMusic();
+        }
+    }
+
+    public void PlayMainMenuMusic()
+    {
+        _mainMenuInstance = RuntimeManager.CreateInstance(_mainMenuReference);
+        _mainMenuInstance.start();
     }
 
     public void PlayLoungeMusic()
