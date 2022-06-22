@@ -26,6 +26,20 @@ public class SceneLoader : Singleton<SceneLoader>
         });
     }
 
+    public void LoadMainMenuScene()
+    {
+        MusicManager.Instance.StopInterviewMusic();
+        MusicManager.Instance.PlayMainMenuMusic();
+        _fadeScreen.FadeOut(() =>
+        {
+            _explorationCam.gameObject.SetActive(true);
+            _explorationPlayerController.enabled = true;
+
+            var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU_SCENE);
+            async.completed += OnSceneLoaded;
+        });
+    }
+
     private void OnSceneLoaded(AsyncOperation op)
     {
         _fadeScreen.FadeIn2();

@@ -156,8 +156,7 @@ namespace CardGame.Managers
 
         public void OnEndButtonClick()
         {
-            MusicManager.Instance.StopInterviewMusic();
-            SceneManager.LoadScene(Scenes.MAIN_MENU_SCENE);
+            SceneLoader.Instance.LoadMainMenuScene();
         }
     }
 }

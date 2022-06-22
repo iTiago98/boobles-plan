@@ -371,6 +371,13 @@ namespace CardGame.Cards
                             Destroy();
                         });
                     }
+                    else
+                    {
+                        MoveToWaitingSpot(() =>
+                        {
+                            Destroy();
+                        });
+                    }
                 }
             }
             else

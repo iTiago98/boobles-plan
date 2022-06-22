@@ -153,7 +153,14 @@ MonoBehaviour:
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 4
+      subType: 13
+      applyTime: 2
+      targetType: 3
+      intParameter1: 0
+      intParameter2: 0
+      gObjParameter: {fileID: 0}
   - name: Aportar pruebas
     sprite: {fileID: 21300000, guid: 82892e2d1abf22340aa911873e5d3aae, type: 3}
     cost: 2
@@ -224,10 +231,3 @@ MonoBehaviour:
       intParameter1: 0
       intParameter2: 0
       gObjParameter: {fileID: 0}
-  - name: Hablar con convencimiento
-    sprite: {fileID: 21300000, guid: 9599c5ac9eb37224c81ded874ce735db, type: 3}
-    cost: 4
-    strength: 0
-    defense: 0
-    type: 2
-    effects: []
