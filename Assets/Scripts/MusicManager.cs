@@ -6,8 +6,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : Singleton<MusicManager>
+public class MusicManager : MonoBehaviour
 {
+    public static MusicManager Instance { get; private set; }
 
     [SerializeField] private EventReference _loungeMusicReference;
     [SerializeField] private EventReference _interviewMusicReference;
@@ -20,6 +21,15 @@ public class MusicManager : Singleton<MusicManager>
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -35,21 +45,17 @@ public class MusicManager : Singleton<MusicManager>
 
     public void PlayLoungeMusic()
     {
-        StopMainMenuMusic();
-
         _loungeMusicInstance = RuntimeManager.CreateInstance(_loungeMusicReference);
         _loungeMusicInstance.start();
     }
 
     public void PlayInterviewMusic()
     {
-        StopLoungeMusic();
-
         _interviewMusicInstance = RuntimeManager.CreateInstance(_interviewMusicReference);
         _interviewMusicInstance.start();
     }
 
-    private void StopMainMenuMusic()
+    public void StopMainMenuMusic()
     {
         PLAYBACK_STATE playbackState;
         _mainMenuInstance.getPlaybackState(out playbackState);
@@ -57,7 +63,7 @@ public class MusicManager : Singleton<MusicManager>
         if (playbackState == PLAYBACK_STATE.PLAYING) _mainMenuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
 
-    private void StopLoungeMusic()
+    public void StopLoungeMusic()
     {
         PLAYBACK_STATE playbackState;
         _loungeMusicInstance.getPlaybackState(out playbackState);
