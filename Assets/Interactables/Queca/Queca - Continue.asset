@@ -14,5 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "M\xE1s cositas."
+  - _content: "\xBFQu\xE9 tal te est\xE1n cayendo tus compa\xF1eros? Son un poco
+      raritos. De hecho, yo no suelo bajar mucho por aqu\xED..."
+    _closeUp: 6
+  - _content: "\xBFQuieres entonces que vayamos a tu despacho a que te ense\xF1e
+      c\xF3mo funcionan las entrevistas?"
+    _closeUp: 6
+  - _content: "\xBFO prefieres seguir explorando un poco?"
+    _closeUp: 6
+  - _content: "Ten en cuenta que si vamos ahora, despu\xE9s vas a estar demasiado
+      cansada como para seguir explorando."
     _closeUp: 6

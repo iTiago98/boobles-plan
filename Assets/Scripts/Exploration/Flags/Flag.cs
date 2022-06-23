@@ -34,7 +34,12 @@ namespace Booble.Flags
             ArcadioWaiting,
             AllCoins,
             RecreativaIntro,
-            QuecaIntro
+            QuecaIntro,
+            CafeIntro,
+            SofaIntro,
+            MachineFixed,
+            ZumoIntro,
+            GranFinalObtenida
         }
 
         [SerializeField] private Reference _flagReference;

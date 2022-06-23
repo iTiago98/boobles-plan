@@ -11,13 +11,19 @@ namespace Booble.Interactables
 	public class Interactable : MonoBehaviour
 	{
         public static bool BlockActions => _mouseOverInteractable || _interactionOnGoing;
+        public static bool _interactionOnGoing;
 
         private static Dialogue _returnDialogue;
         private static List<DialogueManager.Option> _returnOptions;
         private static List<AnimatorIdentifier> _returnAnimIdentifiers;
         private static bool _mouseOverInteractable;
-        private static bool _interactionOnGoing;
 
+        public static void ManualInteractionActivation()
+        {
+            _interactionOnGoing = true;
+            UI.Cursor.Instance.ShowActionText(false);
+        }
+        
         public static void ReturnToDialogue()
         {
             DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions, _returnAnimIdentifiers);

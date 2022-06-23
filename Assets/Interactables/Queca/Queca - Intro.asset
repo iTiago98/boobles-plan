@@ -14,5 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: Hola
+  - _content: "Bueno, guapi, \xBFqu\xE9 tal est\xE1s? \xBFPreparada para empezar
+      tu nueva vida?"
+    _closeUp: 6
+  - _content: "Como es tu primer d\xEDa en la oficina, te recomiendo que te des una
+      vuelta y vayas conociendo a tus compa\xF1eros."
+    _closeUp: 6
+  - _content: "Muy mal no se te debe de dar hacer amigos, si eres la nueva directora
+      del departamento de Recursos Humanos, \xBFno?"
+    _closeUp: 6
+  - _content: "Cuando ya te hayas cansado de esta panda de panolis, vuelve y habla
+      conmigo. Te ense\xF1ar\xE9 en qu\xE9 va a consistir concretamente tu trabajo."
+    _closeUp: 6
+  - _content: "\xA1No te quedes ah\xED parada! \xA1A explorar!"
     _closeUp: 6

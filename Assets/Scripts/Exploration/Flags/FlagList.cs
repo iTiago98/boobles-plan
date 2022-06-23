@@ -28,6 +28,11 @@ namespace Booble.Flags
         private Flag _allCoins;
         private Flag _recreativaIntro;
         private Flag _quecaIntro;
+        private Flag _cafeIntro;
+        private Flag _sofaIntro;
+        private Flag _fixedMachine;
+        private Flag _zumoIntro;
+        private Flag _granFinalObtenida;
 
         public List<Flag> Flags
         {
@@ -58,6 +63,11 @@ namespace Booble.Flags
                 list.Add(_allCoins);
                 list.Add(_recreativaIntro);
                 list.Add(_quecaIntro);
+                list.Add(_cafeIntro);
+                list.Add(_sofaIntro);
+                list.Add(_fixedMachine);
+                list.Add(_zumoIntro);
+                list.Add(_granFinalObtenida);
 
                 return list;
             }
@@ -88,6 +98,11 @@ namespace Booble.Flags
             _allCoins = new Flag(Flag.Reference.AllCoins);
             _recreativaIntro = new Flag(Flag.Reference.RecreativaIntro);
             _quecaIntro = new Flag(Flag.Reference.QuecaIntro);
+            _cafeIntro = new Flag(Flag.Reference.CafeIntro);
+            _sofaIntro = new Flag(Flag.Reference.SofaIntro);
+            _fixedMachine = new Flag(Flag.Reference.MachineFixed);
+            _zumoIntro = new Flag(Flag.Reference.ZumoIntro);
+            _granFinalObtenida = new Flag(Flag.Reference.GranFinalObtenida);
         }
     }
 }

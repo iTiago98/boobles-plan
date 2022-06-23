@@ -11,11 +11,13 @@ namespace Booble.Interactables.Arcade
     	public void MoveToArcade()
 		{
 			Controller.Instance.transform.position = _toArcade.position;
+			Controller.Instance.StopMovement();
 		}
 
 		public void MoveFromArcade()
 		{
 			Controller.Instance.transform.position = _fromArcade.position;
+			Controller.Instance.StopMovement();
 		}
 	}
 }

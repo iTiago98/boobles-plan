@@ -17,8 +17,10 @@ namespace Booble.Interactables.Arcadio
         [SerializeField] private Dialogue _dialogue2;
         [SerializeField] private Dialogue _dialogue3;
         [SerializeField] private Continues _arcCont;
+        [SerializeField] private Animator _arcadioAnim;
         [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
         [SerializeField] private Collider2D _arcadeCollider;
+        [SerializeField] private Vector3 _finalArcadioPos;
         
 		private DialogueManager _diagManager;
         private Dialogue _dialogue;
@@ -60,11 +62,15 @@ namespace Booble.Interactables.Arcadio
 
         private void WalkToSofa()
         {
+            _arcadioAnim.SetTrigger("Walk");
             _arcadeCollider.enabled = true;
-            transform.parent.DOMoveX(2.5f, 2)
+            transform.parent.DOMove(_finalArcadioPos, 2)
                                 .SetEase(Ease.Linear)
-                                .SetRelative()
-                                .OnComplete(() => Interactable.EndInteraction());
+                                .OnComplete(() =>
+                                {
+                                    _arcadioAnim.SetTrigger("Wait");
+                                    Interactable.EndInteraction();
+                                });
         }
 	}
 }

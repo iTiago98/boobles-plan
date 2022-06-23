@@ -56,7 +56,10 @@ namespace Booble.Flags
 		[ContextMenu("Delete flag.dat file")]
 		public void DeleteSaveFile()
         {
-			File.Delete(FlagFilePath);
+			if(File.Exists(FlagFilePath))
+			{
+				File.Delete(FlagFilePath);
+			}
         }
 
 		public bool GetFlag(Flag.Reference flagRef)
