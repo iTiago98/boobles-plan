@@ -45,7 +45,7 @@ public class SceneLoader : MonoBehaviour
         MusicManager.Instance.PlayLoungeMusic();
         _fadeScreen.FadeOut(() =>
         {
-            var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU_SCENE);
+            var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_SCENE);
             async.completed += OnLoungeSceneLoaded;
         });
     }
