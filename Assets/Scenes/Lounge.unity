@@ -4393,9 +4393,8 @@ MonoBehaviour:
   _continueDialogue: {fileID: 11400000, guid: 0f8ba7ab4aae1a24f9299bb87fd85671, type: 2}
   _introFlag: 23
   _options:
-  - _optionText: "Me he encontrado una carta por ah\xED. Parece que se llama \"Gran
-      Final\". \xBFQu\xE9 hago con ella?"
-    _trueFlags: 1c000000
+  - _optionText: "Ya no tengo nada m\xE1s que hacer aqu\xED."
+    _trueFlags: 
     _falseFlags: 
     _onSelectOption:
       m_PersistentCalls:
@@ -4412,13 +4411,14 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - _optionText: "Ya no tengo nada m\xE1s que hacer aqu\xED."
-    _trueFlags: 
+  - _optionText: "Me he encontrado una carta por ah\xED. Parece que se llama \"Gran
+      Final\". \xBFQu\xE9 hago con ella?"
+    _trueFlags: 1c000000
     _falseFlags: 
     _onSelectOption:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 989612389}
+        - m_Target: {fileID: 1972677689}
           m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
           m_MethodName: StartInteraction
           m_Mode: 1
