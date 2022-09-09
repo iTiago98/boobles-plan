@@ -3,7 +3,7 @@ guid: 6502f90adc4f82942a5f8636e54c4911
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -63,6 +63,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -90,6 +91,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -692,12 +705,12 @@ TextureImporter:
       Lounge_Props_32: -1289677374
       Lounge_Props_21: 2081266957
       Lounge_Props_22: -604411154
+      Lounge_Props_23: 1380005577
       Lounge_Props_5: -131318886
       Lounge_Props_41: 1227071576
-      Lounge_Props_23: 1380005577
-      Lounge_Props_35: -1790302017
-      Lounge_Props_2: 1596928075
       Lounge_Props_43: 2083811477
+      Lounge_Props_2: 1596928075
+      Lounge_Props_35: -1790302017
       Lounge_Props_1: -1353419447
       Lounge_Props_13: -17173529
       Lounge_Props_12: 1927455673

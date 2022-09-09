@@ -30,24 +30,12 @@ namespace Booble.Interactables
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
             DialogueManager.Instance.OnEndDialogue.AddListener(() => EndInteraction());
             DialogueManager.Instance.DisplayLastSentence();
-            
         }
 
         public static void EndInteraction()
         {
             _interactionOnGoing = false;
             _mouseOverInteractable = false;
-        }
-
-        [System.Serializable]
-        public class AnimatorIdentifier
-        {
-            public CharacterList.Name Identifier => _identifier;
-            public Animator Animator => _animator;
-
-            [SerializeField] private string _name;
-            [SerializeField] private CharacterList.Name _identifier;
-            [SerializeField] private Animator _animator;
         }
 
         public Dialogue ContinueDialogue
@@ -174,5 +162,16 @@ namespace Booble.Interactables
         {
             Interactable.EndInteraction();
         }
+    }
+
+    [System.Serializable]
+    public class AnimatorIdentifier
+    {
+        public CharacterList.Name Identifier => _identifier;
+        public Animator Animator => _animator;
+
+        [SerializeField] private string _name;
+        [SerializeField] private CharacterList.Name _identifier;
+        [SerializeField] private Animator _animator;
     }
 }
