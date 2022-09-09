@@ -8,7 +8,7 @@ namespace Booble.Interactables.Arcadio
 	{
         [SerializeField] private Flag.Reference _arcadioWaiting;
         [SerializeField] private Flag.Reference _allCoins;
-        [SerializeField] private Continues _arcCont;
+        //[SerializeField] private Continues _arcCont;
         [SerializeField] private float _threshold;
         [SerializeField] private Animator _anim;
 
@@ -29,22 +29,22 @@ namespace Booble.Interactables.Arcadio
                 _waiting = false;
                 FlagManager.Instance.SetFlag(_arcadioWaiting, false);
                 _anim.SetTrigger("Wait");
-                _arcCont.UpdateContinueDialogue();
+                //_arcCont.UpdateContinueDialogue();
             }
         }
 
-        public void CheckIfSecondCoin()
-        {
-            switch (_arcCont.CoinCount)
-            {
-                case 2:
-                    _waiting = true;
-                    FlagManager.Instance.SetFlag(_arcadioWaiting);
-                    break;
-                case 3:
-                    FlagManager.Instance.SetFlag(_allCoins);
-                    break;                
-            }
-        }
+        //public void CheckIfSecondCoin()
+        //{
+        //    switch (_arcCont.CoinCount)
+        //    {
+        //        case 2:
+        //            _waiting = true;
+        //            FlagManager.Instance.SetFlag(_arcadioWaiting);
+        //            break;
+        //        case 3:
+        //            FlagManager.Instance.SetFlag(_allCoins);
+        //            break;                
+        //    }
+        //}
 	}
 }

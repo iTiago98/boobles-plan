@@ -262,59 +262,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63899386}
   m_CullTransparentMesh: 1
---- !u!1 &106117787
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 106117788}
-  - component: {fileID: 106117789}
-  m_Layer: 0
-  m_Name: Continues
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &106117788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106117787}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1794732972}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &106117789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106117787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d49e4c4fa92f42a4cb3420e739cc8079, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactable: {fileID: 1794732975}
-  _flagRefs: 130000000f0000001100000010000000
-  _dialogues:
-  - {fileID: 11400000, guid: c00cb16ea5770a24caa0b4ab974e4bf6, type: 2}
-  - {fileID: 11400000, guid: 7ffbb0041c11f8d4e82e6a4bceb64a61, type: 2}
-  - {fileID: 11400000, guid: 6e52b1a08e5437943a3c1bfbe90ea529, type: 2}
-  - {fileID: 11400000, guid: bd770500041cc2b4990d9bb3cca5c90b, type: 2}
-  _waitingFlag: 20
-  _waitingDiag: {fileID: 11400000, guid: 8727ad8d4acd23c4c9121990ad91460e, type: 2}
 --- !u!1 &116931525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,9 +1043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1
-  _introDialogue: {fileID: 11400000, guid: 81d0cf472b2e91a4fa1b94d7cf55daee, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: 74cc43f8ab0eb5042beaeba65d172ba9, type: 2}
-  _introFlag: 27
+  _clickDialogues: []
   _options:
   - _optionText: "(Mirar por detr\xE1s de la m\xE1quina.)"
     _trueFlags: 13000000
@@ -1385,9 +1330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _introDialogue: {fileID: 11400000, guid: 1ca2082b17bba4f4b990d95775aea3df, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: d4cb838c9c24aeb4b85302ed3514f156, type: 2}
-  _introFlag: 4
+  _clickDialogues: []
   _options:
   - _optionText: "\xBFPero acaso funciona la m\xE1quina? Parece abandonada y est\xE1
       llena de pintadas."
@@ -3249,7 +3192,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &895481878
 MonoBehaviour:
@@ -3563,9 +3506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _introDialogue: {fileID: 11400000, guid: da3fdb83cfbd84a4d87bbba6d311afe6, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: 69563f377bbfa8a40a87813f89c86cc5, type: 2}
-  _introFlag: 6
+  _clickDialogues: []
   _options:
   - _optionText: Pues esto no puede ser, pienso ocuparme personalmente de que desbloqueen
       la mesa.
@@ -3730,7 +3671,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &941303667
 MonoBehaviour:
@@ -4389,9 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1
-  _introDialogue: {fileID: 11400000, guid: 0f8ba7ab4aae1a24f9299bb87fd85671, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: 0f8ba7ab4aae1a24f9299bb87fd85671, type: 2}
-  _introFlag: 23
+  _clickDialogues: []
   _options:
   - _optionText: "Ya no tengo nada m\xE1s que hacer aqu\xED."
     _trueFlags: 
@@ -4544,9 +4483,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _introDialogue: {fileID: 11400000, guid: eb9e23031c1785e40886b309cc4e289c, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: c8b4208b9e6d45647823b1ba0f3173a8, type: 2}
-  _introFlag: 1
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: eb9e23031c1785e40886b309cc4e289c, type: 2}
+    _trueFlags: 
+    _falseFlags: 01000000
+    _setFlags: 01000000
+  - _dialogue: {fileID: 11400000, guid: c8b4208b9e6d45647823b1ba0f3173a8, type: 2}
+    _trueFlags: 01000000
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: "\xBFPero c\xF3mo ha podido olvidarse de las letras de todas esas
       canciones?"
@@ -4976,7 +4921,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1192919498
 MonoBehaviour:
@@ -4993,7 +4938,9 @@ MonoBehaviour:
   _dialogue1: {fileID: 11400000, guid: 23c1ba6c111d13545af6018e8a162503, type: 2}
   _dialogue2: {fileID: 11400000, guid: 87dad8863a3f774409d9c38e131e493b, type: 2}
   _dialogue3: {fileID: 11400000, guid: 0f7ab2489e3339245a7617611bc1970e, type: 2}
-  _arcCont: {fileID: 106117789}
+  _coin1: 15
+  _coin2: 16
+  _coin3: 17
   _arcadioAnim: {fileID: 1794732973}
   _animatorIdentifiers:
   - _name: Nela
@@ -5034,7 +4981,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1203109178
 MonoBehaviour:
@@ -5196,7 +5143,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1300038655
 MonoBehaviour:
@@ -5252,6 +5199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -5753,9 +5701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 6
-  _introDialogue: {fileID: 11400000, guid: c713ff1e9e7cb3240a34e384c6070506, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: d280ed76a687860459d0f44af55ec9c8, type: 2}
-  _introFlag: 9
+  _clickDialogues: []
   _options:
   - _optionText: (Rebuscar en los bolsillos de Pineda)
     _trueFlags: 08000000
@@ -5878,7 +5824,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1633416256
 MonoBehaviour:
@@ -6214,9 +6160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _introDialogue: {fileID: 11400000, guid: 7378dc792ab3d624f961dc31c616bd25, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: a2feececc7031a54d8d2baa9d386e471, type: 2}
-  _introFlag: 24
+  _clickDialogues: []
   _options:
   - _optionText: "(Mirar por detr\xE1s de la m\xE1quina.)"
     _trueFlags: 13000000
@@ -6522,9 +6466,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _introDialogue: {fileID: 11400000, guid: 2472c3f6ee1bbd24fb20d785a832134a, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: 4f6c3b01287bdf84db1e8566eaec13ed, type: 2}
-  _introFlag: 25
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 2472c3f6ee1bbd24fb20d785a832134a, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: "(Rebuscar entre los cojines del sof\xE1.)"
     _trueFlags: 13000000
@@ -6761,9 +6707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 0.5
-  _introDialogue: {fileID: 11400000, guid: f671774f99525ac49bc28003a7c277d5, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: 722b275bdb982e34abbb668cef45ee08, type: 2}
-  _introFlag: 22
+  _clickDialogues: []
   _options:
   - _optionText: (Meter una moneda.)
     _trueFlags: 12000000
@@ -6880,7 +6824,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2121053233}
-  - {fileID: 106117788}
   - {fileID: 1192919497}
   - {fileID: 1633416255}
   - {fileID: 1300038654}
@@ -6925,9 +6868,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 2
-  _introDialogue: {fileID: 11400000, guid: da151e6faf50144408bbbcbda036547f, type: 2}
-  _continueDialogue: {fileID: 11400000, guid: ae265d6b0610c294194434d12ab85e24, type: 2}
-  _introFlag: 3
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: da151e6faf50144408bbbcbda036547f, type: 2}
+    _trueFlags: 
+    _falseFlags: 03000000
+    _setFlags: 03000000
+  - _dialogue: {fileID: 11400000, guid: ae265d6b0610c294194434d12ab85e24, type: 2}
+    _trueFlags: 03000000
+    _falseFlags: 13000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: c00cb16ea5770a24caa0b4ab974e4bf6, type: 2}
+    _trueFlags: 13000000
+    _falseFlags: 0f0000001000000011000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 7ffbb0041c11f8d4e82e6a4bceb64a61, type: 2}
+    _trueFlags: 0f000000
+    _falseFlags: 1000000011000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 7ffbb0041c11f8d4e82e6a4bceb64a61, type: 2}
+    _trueFlags: 10000000
+    _falseFlags: 0f00000011000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 7ffbb0041c11f8d4e82e6a4bceb64a61, type: 2}
+    _trueFlags: 11000000
+    _falseFlags: 0f00000010000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 8727ad8d4acd23c4c9121990ad91460e, type: 2}
+    _trueFlags: 14000000
+    _falseFlags: 
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 6e52b1a08e5437943a3c1bfbe90ea529, type: 2}
+    _trueFlags: 1100000010000000
+    _falseFlags: 0f000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 6e52b1a08e5437943a3c1bfbe90ea529, type: 2}
+    _trueFlags: 110000000f000000
+    _falseFlags: 10000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: 6e52b1a08e5437943a3c1bfbe90ea529, type: 2}
+    _trueFlags: 100000000f000000
+    _falseFlags: 11000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: bd770500041cc2b4990d9bb3cca5c90b, type: 2}
+    _trueFlags: 100000000f00000011000000
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: "\xBFMe dejar\xEDas echarme una partida cuando termines?"
     _trueFlags: 
@@ -6959,7 +6944,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 106117789}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
           m_Mode: 1
@@ -7038,7 +7023,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 106117789}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
           m_Mode: 1
@@ -7092,7 +7077,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 106117789}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
           m_Mode: 1
@@ -7146,7 +7131,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 106117789}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
           m_MethodName: UpdateContinueDialogue
           m_Mode: 1
@@ -8143,7 +8128,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2055909456
 MonoBehaviour:
@@ -8348,7 +8333,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1794732972}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2103853669
 MonoBehaviour:
@@ -8446,7 +8431,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arcadioWaiting: 20
   _allCoins: 21
-  _arcCont: {fileID: 106117789}
   _threshold: 2
   _anim: {fileID: 1794732973}
 --- !u!1 &2126748816

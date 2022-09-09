@@ -113,16 +113,6 @@ namespace Booble.Interactables.Dialogues
                     var ai = _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier);
                     ai.Animator.SetTrigger(ExtractTrigger(s, ref i));
                     letter = s[i];
-                    // string trigger = "";
-                    // letter = s[++i];
-                    // while(letter != SEPARATOR)
-                    // {
-                    //     trigger += letter;
-                    //     letter = s[++i];
-                    // }
-
-                    // _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier).Animator.SetTrigger(trigger);
-                    // letter = s[++i];
                 }
                 
                 _dialogueText.text += letter;
