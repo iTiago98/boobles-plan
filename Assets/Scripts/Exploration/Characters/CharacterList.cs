@@ -14,7 +14,8 @@ namespace Booble.Characters
 			Citriano,
 			Dennis,
 			Arcadio,
-			Queca
+			Queca,
+			eMilin
         }
 		
 		[System.Serializable]
