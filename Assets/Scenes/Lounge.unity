@@ -1048,63 +1048,11 @@ MonoBehaviour:
   - _optionText: "(Mirar por detr\xE1s de la m\xE1quina.)"
     _trueFlags: 13000000
     _falseFlags: 0d000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 943273817}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 943273816}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: (Revisar el dispensador de devoluciones.)
     _trueFlags: 
     _falseFlags: 0e000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 943273817}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 943273816}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -1336,88 +1284,20 @@ MonoBehaviour:
       llena de pintadas."
     _trueFlags: 
     _falseFlags: 1a000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1743619689}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: La verdad es que tiene usted un aspecto lamentable.
     _trueFlags: 05000000
     _falseFlags: 1a000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 161377154}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFEst\xE1 esperando a su zumo?"
     _trueFlags: 
     _falseFlags: 1a000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1263455675}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1263455676}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "Ya est\xE1 la m\xE1quina arreglada, \xBFno te vas a comprar un
       zumo?"
     _trueFlags: 1a000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 399341036}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -1521,6 +1401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 354629196}
+  - component: {fileID: 354629199}
   - component: {fileID: 354629197}
   - component: {fileID: 354629198}
   m_Layer: 0
@@ -1582,6 +1463,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 08000000
+--- !u!114 &354629199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354629195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &357587697
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,87 +3399,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _clickDialogues: []
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: da3fdb83cfbd84a4d87bbba6d311afe6, type: 2}
+    _trueFlags: 
+    _falseFlags: 06000000
+    _setFlags: 06000000
+  - _dialogue: {fileID: 11400000, guid: 69563f377bbfa8a40a87813f89c86cc5, type: 2}
+    _trueFlags: 06000000
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: Pues esto no puede ser, pienso ocuparme personalmente de que desbloqueen
       la mesa.
     _trueFlags: 07000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 354629197}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 354629198}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 354629199}
   - _optionText: "\xBFLlevas mucho esperando?"
     _trueFlags: 
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1737888735}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1737888736}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 1737888737}
   - _optionText: "\xBFY se puede saber qui\xE9nes son estos personajes?"
     _trueFlags: 
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1755683917}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 1755683918}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -4335,40 +4170,12 @@ MonoBehaviour:
   - _optionText: "Ya no tengo nada m\xE1s que hacer aqu\xED."
     _trueFlags: 
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 989612389}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "Me he encontrado una carta por ah\xED. Parece que se llama \"Gran
       Final\". \xBFQu\xE9 hago con ella?"
     _trueFlags: 1c000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1972677689}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Queca
     _identifier: 6
@@ -4497,178 +4304,32 @@ MonoBehaviour:
       canciones?"
     _trueFlags: 02000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 766181679}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "Hablando as\xED en pareados, parece que est\xE9s todo el rato canturreando."
     _trueFlags: 
     _falseFlags: 02000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1488464209}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1488464210}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFNo hace demasiado ruido la m\xE1quina?"
     _trueFlags: 
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2034659310}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFSabes qu\xE9 le pasa a la m\xE1quina de zumos?"
     _trueFlags: 050000000b000000
     _falseFlags: 15000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 210925551}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 210925552}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFSabes qu\xE9 le pasa a la m\xE1quina de zumos?"
     _trueFlags: 05000000
     _falseFlags: 0b000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 210925551}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 210925552}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "Arcadio ha dejado por fin de jugar, as\xED que la m\xE1quina del
       caf\xE9 ya puedes desmontar."
     _trueFlags: 150000000b000000
     _falseFlags: 1a000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1692923531}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1692923532}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFYa est\xE1 arreglada la m\xE1quina de zumos?"
     _trueFlags: 1a000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 999634107}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -5706,34 +5367,7 @@ MonoBehaviour:
   - _optionText: (Rebuscar en los bolsillos de Pineda)
     _trueFlags: 08000000
     _falseFlags: 0a000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1893814059}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.PinPonBros.GetPinPonBrosCoin,
-            Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1893814060}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -6165,33 +5799,7 @@ MonoBehaviour:
   - _optionText: "(Mirar por detr\xE1s de la m\xE1quina.)"
     _trueFlags: 13000000
     _falseFlags: 0d000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 308238635}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 308238634}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -6321,6 +5929,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1737888734}
+  - component: {fileID: 1737888737}
   - component: {fileID: 1737888735}
   - component: {fileID: 1737888736}
   m_Layer: 0
@@ -6382,6 +5991,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 07000000
+--- !u!114 &1737888737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737888733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1739104411
 GameObject:
   m_ObjectHideFlags: 0
@@ -6475,33 +6096,7 @@ MonoBehaviour:
   - _optionText: "(Rebuscar entre los cojines del sof\xE1.)"
     _trueFlags: 13000000
     _falseFlags: 0c000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 157322572}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 157322573}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -6571,6 +6166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1755683916}
+  - component: {fileID: 1755683918}
   - component: {fileID: 1755683917}
   m_Layer: 0
   m_Name: Personajes
@@ -6618,6 +6214,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1755683918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755683915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1774907198
 GameObject:
   m_ObjectHideFlags: 0
@@ -6712,81 +6320,15 @@ MonoBehaviour:
   - _optionText: (Meter una moneda.)
     _trueFlags: 12000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2000342839}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: (Meter una moneda.)
     _trueFlags: 0e000000
     _falseFlags: 12000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 479277004}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 479277003}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 763311459}
-          m_TargetAssemblyTypeName: DeckManager, Assembly-CSharp
-          m_MethodName: AddGranFinal
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: (Meter una moneda.)
     _trueFlags: 
     _falseFlags: 0e000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2000342839}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -6917,263 +6459,33 @@ MonoBehaviour:
   - _optionText: "\xBFMe dejar\xEDas echarme una partida cuando termines?"
     _trueFlags: 
     _falseFlags: 1300000014000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1633416256}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 1633416257}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
-          m_MethodName: UpdateContinueDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFY de d\xF3nde narices voy a sacar yo una moneda hoy en d\xEDa?"
     _trueFlags: 13000000
     _falseFlags: 1400000015000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1300038655}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "\xBFEres t\xFA quien est\xE1 impidiendo que Ana la de mantenimiento
       desmonte la m\xE1quina del caf\xE9?"
     _trueFlags: 0b000000
     _falseFlags: 1400000015000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 941303667}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "(Entregar moneda encontrada en el sof\xE1)."
     _trueFlags: 0c00000013000000
     _falseFlags: 1000000014000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 895481879}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2121053234}
-          m_TargetAssemblyTypeName: Booble.Interactables.Arcadio.SecondCoin, Assembly-CSharp
-          m_MethodName: CheckIfSecondCoin
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
-          m_MethodName: UpdateContinueDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 895481878}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: (Entregar moneda encontrada en el bolsillo de Pineda).
     _trueFlags: 0a00000013000000
     _falseFlags: 0f00000014000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2055909457}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2121053234}
-          m_TargetAssemblyTypeName: Booble.Interactables.Arcadio.SecondCoin, Assembly-CSharp
-          m_MethodName: CheckIfSecondCoin
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
-          m_MethodName: UpdateContinueDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2055909456}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "(Entregar moneda encontrada en la m\xE1quina de caf\xE9)."
     _trueFlags: 0d00000013000000
     _falseFlags: 1100000014000000
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2103853670}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2121053234}
-          m_TargetAssemblyTypeName: Booble.Interactables.Arcadio.SecondCoin, Assembly-CSharp
-          m_MethodName: CheckIfSecondCoin
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: Booble.Interactables.ArcadioContinues, Assembly-CSharp
-          m_MethodName: UpdateContinueDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 2103853669}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   - _optionText: "Entonces... \xBFle puedo decir ya a Ana que desmonte la m\xE1quina
       del caf\xE9?"
     _trueFlags: 150000000b000000
     _falseFlags: 
-    _onSelectOption:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1203109178}
-          m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-          m_MethodName: StartInteraction
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+    _dialogueOption: {fileID: 0}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1

@@ -14,7 +14,7 @@ namespace Booble.Interactables
         public static bool _interactionOnGoing;
 
         private static Dialogue _returnDialogue;
-        private static List<DialogueManager.Option> _returnOptions;
+        private static List<Option> _returnOptions;
         private static List<AnimatorIdentifier> _returnAnimIdentifiers;
         private static bool _mouseOverInteractable;
 
@@ -38,22 +38,12 @@ namespace Booble.Interactables
             _mouseOverInteractable = false;
         }
 
-        //public Dialogue ContinueDialogue
-        //{
-        //    get { return _continueDialogue; }
-        //    set { _continueDialogue = value; }
-        //}
-
         [SerializeField] private float _interactDistance;
-        //[SerializeField] private Dialogue _introDialogue;
-        //[SerializeField] private Dialogue _continueDialogue;
-        //[SerializeField] private Flag.Reference _introFlag;
         [SerializeField] private List<ClickDialogue> _clickDialogues;
-        [SerializeField] private List<DialogueManager.Option> _options;
+        [SerializeField] private List<Option> _options;
         [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
 
         private Dialogue _dialogue;
-        //private bool _isIntroFlagSet;
 
         private Player.Controller _player;
         private UI.Cursor _cursor;
@@ -71,19 +61,6 @@ namespace Booble.Interactables
             _diagManager = DialogueManager.Instance;
             _flagManager = FlagManager.Instance;
         }
-
-        //private void Start()
-        //{
-        //    if (_flagManager.GetFlag(_introFlag))
-        //    {
-        //        _dialogue = _continueDialogue;
-        //        _isIntroFlagSet = true;
-        //    }
-        //    else
-        //    {
-        //        _dialogue = _introDialogue;
-        //    }
-        //}
 
         private void OnMouseEnter()
         {
@@ -119,12 +96,6 @@ namespace Booble.Interactables
                 _player.StopMovement();
                 _cursor.ShowActionText(false);
 
-                //if (!_isIntroFlagSet)
-                //{
-                //    _flagManager.SetFlag(_introFlag);
-                //    _isIntroFlagSet = true;
-                //    _dialogue = _continueDialogue;
-                //}
                 bool found = false;
                 int i = 0;
                 while(!found && i < _clickDialogues.Count)

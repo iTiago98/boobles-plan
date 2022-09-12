@@ -10,30 +10,13 @@ using static Booble.Interactables.Interactable;
 using static Booble.Characters.CharacterList;
 using System;
 using FMODUnity;
+using Booble.Interactables.Events;
 
 namespace Booble.Interactables.Dialogues
 {
     public class DialogueManager : Singleton<DialogueManager>
     {
         private const char SEPARATOR = '|';
-
-        [System.Serializable]
-        public class Option
-        {
-            public string Text => _optionText;
-            public UnityEvent OnSelect => _onSelectOption;
-
-            [TextArea]
-            [SerializeField] private string _optionText;
-            [SerializeField] private List<Flag.Reference> _trueFlags;
-            [SerializeField] private List<Flag.Reference> _falseFlags;
-            [SerializeField] private UnityEvent _onSelectOption;
-
-            public bool FlagsSatisfied()
-            {
-                return FlagManager.Instance.FlagsSatisfied(_trueFlags, _falseFlags);
-            }
-        }
 
         public UnityEvent OnEndDialogue { get; set; }
 
@@ -264,8 +247,26 @@ namespace Booble.Interactables.Dialogues
                 _dialogueBox.SetActive(false);
                 _optionsBox.SetActive(false);
                 _dialogueRunning = false;
-                option.OnSelect.Invoke();
+                option.DialogueOption.OnSelect();
             });
+        }
+    }
+
+    [System.Serializable]
+    public class Option
+    {
+        public string Text => _optionText;
+        public DialogueOption DialogueOption => _dialogueOption;
+
+        [TextArea]
+        [SerializeField] private string _optionText;
+        [SerializeField] private List<Flag.Reference> _trueFlags;
+        [SerializeField] private List<Flag.Reference> _falseFlags;
+        [SerializeField] private DialogueOption _dialogueOption;
+
+        public bool FlagsSatisfied()
+        {
+            return FlagManager.Instance.FlagsSatisfied(_trueFlags, _falseFlags);
         }
     }
 }
