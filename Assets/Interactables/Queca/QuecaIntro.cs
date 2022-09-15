@@ -15,7 +15,7 @@ namespace Booble.Interactables.Queca
 
 		private void DelayedStart()
 		{
-			_intro.StartInteraction();
+			_intro.Execute();
 		}
 	}
 }

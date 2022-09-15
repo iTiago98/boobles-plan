@@ -69,15 +69,23 @@ namespace Booble.Flags
 
 		public void SetFlag(Flag.Reference flagRef, bool toTrue = true)
         {
+			Flag flag = _flags.Flags.Find(f => f.FlagReference == flagRef);
 			if(toTrue)
             {
-				_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.True;
+				if (flag.FlagState == Flag.State.False)
+                {
+					flag.FlagState = Flag.State.True;
+					SaveFlags();
+                }
             }
 			else
             {
-				_flags.Flags.Find(f => f.FlagReference == flagRef).FlagState = Flag.State.False;
-            }
-			SaveFlags();
+				if (flag.FlagState == Flag.State.True)
+				{
+					flag.FlagState = Flag.State.False;
+					SaveFlags();
+				}
+			}
         }
 
 		public bool FlagsSatisfied(List<Flag.Reference> trueFlags, List<Flag.Reference> falseFlags)

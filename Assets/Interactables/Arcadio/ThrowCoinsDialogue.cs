@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
 using static Booble.Interactables.Interactable;
 using DG.Tweening;
+using Booble.Flags;
 
 namespace Booble.Interactables.Arcadio
 {
@@ -16,7 +17,10 @@ namespace Booble.Interactables.Arcadio
         [SerializeField] private Dialogue _dialogue1;
         [SerializeField] private Dialogue _dialogue2;
         [SerializeField] private Dialogue _dialogue3;
-        [SerializeField] private Continues _arcCont;
+        [SerializeField] private Flag.Reference _coin1;
+        [SerializeField] private Flag.Reference _coin2;
+        [SerializeField] private Flag.Reference _coin3;
+        //[SerializeField] private Continues _arcCont;
         [SerializeField] private Animator _arcadioAnim;
         [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
         [SerializeField] private Collider2D _arcadeCollider;
@@ -32,9 +36,21 @@ namespace Booble.Interactables.Arcadio
 
         public void StartInteraction()
         {
-            int coinCount = _arcCont.CoinCount;
+            int coinCount = 0;
+            if (FlagManager.Instance.GetFlag(_coin1))
+            {
+                coinCount++;
+            }
+            if (FlagManager.Instance.GetFlag(_coin2))
+            {
+                coinCount++;
+            }
+            if (FlagManager.Instance.GetFlag(_coin3))
+            {
+                coinCount++;
+            }
 
-            switch(coinCount)
+            switch (coinCount)
             {
                 case 1:
                     _dialogue = _dialogue1;
