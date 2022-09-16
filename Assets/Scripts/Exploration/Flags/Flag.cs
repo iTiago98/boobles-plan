@@ -7,7 +7,7 @@ namespace Booble.Flags
     [System.Serializable]
     public class Flag
     {
-        public enum State { Undefined, True, False }
+        public enum State { Undefined = -1, True = 1, False = 0 }
         
         public enum Reference
         {
