@@ -18,5 +18,20 @@ namespace CardGame.Cards.DataModel
         public CardType type;
 
         public List<CardEffect> effects = new List<CardEffect>();
+
+        public CardsData()
+        {
+
+        }
+
+        public CardsData(CardsData data)
+        {
+            this.name = data.name;
+            this.sprite = data.sprite;
+            this.cost = data.cost;
+            this.strength = data.strength;
+            this.defense = data.defense;
+            this.type = data.type;
+        }
     } 
 }

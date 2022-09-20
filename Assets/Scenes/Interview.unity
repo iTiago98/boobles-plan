@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   role: 1
-  deckCards: {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
+  deckCards: {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
 --- !u!1 &80148854
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,7 +2024,6 @@ MonoBehaviour:
   - {fileID: 1676802598}
   - {fileID: 7812381}
   waitingSpot: {fileID: 1676804550}
-  closeUpSpot: {fileID: 6063715}
 --- !u!1 &1454520754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2431,6 +2430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit

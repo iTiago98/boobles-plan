@@ -55,6 +55,7 @@ namespace CardGame
         public void IncreaseMaxMana(int mana)
         {
             _maxMana += mana;
+            currentMaxMana += mana;
         }
 
         public void SubstractMana(int cost)

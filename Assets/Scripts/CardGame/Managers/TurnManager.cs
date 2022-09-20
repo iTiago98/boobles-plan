@@ -45,6 +45,9 @@ namespace CardGame.Managers
         private bool _gameStarted;
         public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
 
+        public delegate void EndTurnEffects();
+        private EndTurnEffects endTurnEffectsDelegate;
+
 
         #region Turn flow 
 
@@ -57,6 +60,7 @@ namespace CardGame.Managers
             DrawCards(settings.initialCardNumber);
             UIManager.Instance.CheckEndTurnButtonState(_turn);
             gameStarted = true;
+
             StartRound();
         }
 
@@ -92,6 +96,9 @@ namespace CardGame.Managers
             {
                 if (!CheckInterviewEnd())
                 {
+                    // Apply end round effects
+                    endTurnEffectsDelegate?.Invoke();
+                    
                     StartRound();
                 }
             });
@@ -119,6 +126,23 @@ namespace CardGame.Managers
 
         #endregion
 
+        public void AddEndTurnEffect(EndTurnEffects method)
+        {
+            if (endTurnEffectsDelegate == null)
+            {
+                endTurnEffectsDelegate = method;
+            }
+            else
+            {
+                endTurnEffectsDelegate += method;
+            }
+        }
+
+        public void RemoveEndTurnEffect(EndTurnEffects method)
+        {
+            endTurnEffectsDelegate -= method;
+        }
+
         public Contender GetContenderFromHand(Hand hand)
         {
             if (hand == board.playerHand) return player;
@@ -141,8 +165,8 @@ namespace CardGame.Managers
         private void InitializeDecks()
         {
             // TODO Change player.deckCards.cards for DeckManager.Instance.GetPlayerCards()
-            board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), opponent.deckCards.cards);
-            //board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
+            //board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), opponent.deckCards.cards);
+            board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
         }
 
         private void DrawCards(int cardNumber)

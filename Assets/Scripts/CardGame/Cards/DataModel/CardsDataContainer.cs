@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CardGame.Cards.DataModel
 {
-    [CreateAssetMenu(fileName = "CardsData", menuName = "DataObjects/CardsData")]
+    [CreateAssetMenu(fileName = "CardsDataContainer", menuName = "DataObjects/CardsDataContainer")]
     public class CardsDataContainer : ScriptableObject
     {
         public string resourcesPath;

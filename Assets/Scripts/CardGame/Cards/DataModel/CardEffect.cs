@@ -45,12 +45,20 @@ namespace CardGame.Cards.DataModel.Effects
 
     public enum ApplyTime
     {
-        NONE, START, ENTER, COMBAT, END
+        NONE, /*START,*/ ENTER, COMBAT, END
     }
 
+    // ALLY - ally card
+    // ENEMY - enemy card
+    // CARD - any card
+    // AALLY - all allies
+    // AENEMY - all enemies
+    // ACARD - all cards
+    // CARDZONE
+    // PLAYER - other player
     public enum Target
     {
-        NONE, ALLY, ENEMY, CARD, CARDZONE
+        NONE, ALLY, ENEMY, CARD, AALLY, AENEMY, ACARD, /*CARDZONE,*/ PLAYER, SELF
     }
 
     #endregion
@@ -75,7 +83,7 @@ namespace CardGame.Cards.DataModel.Effects
 
         public int intParameter1;
         public int intParameter2;
-        public GameObject gObjParameter;
+        public CardsData cardParameter;
 
         #region Apply
 
@@ -127,12 +135,21 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.DESTROY_CARD:
-                    if (targetType == Target.ENEMY) ((Card)target).Destroy();
-                    else Board.Instance.DestroyAll();
+                    switch (targetType)
+                    {
+                        case Target.ENEMY: ((Card)target).Destroy(); break;
+                        case Target.AENEMY: Board.Instance.DestroyCards(TurnManager.Instance.otherPlayer); break;
+                        case Target.ACARD: Board.Instance.DestroyAll(); break;
+                    }
                     break;
                 case SubType.DEAL_DAMAGE:
-                    if (targetType == Target.ENEMY) ((Card)target).ReceiveDamage(intParameter1);
-                    // else daño a todos
+                    switch (targetType)
+                    {
+                        case Target.ENEMY: ((Card)target).ReceiveDamage(intParameter1); ((Card)target).CheckDestroy(); break;
+                        //case Target.AENEMY: Board.Instance.DestroyCards(TurnManager.Instance.otherPlayer); break;
+                        //case Target.ACARD: Board.Instance.DestroyAll(); break;
+                        case Target.PLAYER: TurnManager.Instance.otherPlayer.ReceiveDamage(intParameter1); break;
+                    }
                     break;
                 case SubType.DECREASE_MANA:
                     TurnManager.Instance.currentPlayer.SubstractMana(intParameter1);
@@ -164,13 +181,21 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.TRAMPLE:
                     break;
                 case SubType.STAT_BOOST:
-                    if (targetType == Target.ALLY) ((Card)target).BoostStats(intParameter1, intParameter2);
-                    else
+                    switch (targetType)
                     {
-                        foreach (Card card in Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer))
-                        {
-                            card.BoostStats(intParameter1, intParameter2);
-                        }
+                        case Target.ALLY:
+                        case Target.ENEMY:
+                            ((Card)target).BoostStats(intParameter1, intParameter2);
+                            break;
+                        case Target.AALLY:
+                            foreach (Card card in Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer))
+                            {
+                                card.BoostStats(intParameter1, intParameter2);
+                            }
+                            break;
+                        case Target.SELF:
+                            source.BoostStats(intParameter1, intParameter2);
+                            break;
                     }
                     break;
                 case SubType.ADD_EFFECT:
@@ -187,6 +212,22 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.CREATE_CARD:
+
+                    Contender currentPlayer = TurnManager.Instance.currentPlayer;
+                    Board board = Board.Instance;
+
+                    CardZone emptyCardZone = board.GetEmptyCardZone(currentPlayer);
+
+                    if (emptyCardZone != null)
+                    {
+                        GameObject cardPrefab = board.GetDeck(currentPlayer).cardPrefab;
+                        GameObject card = UnityEngine.Object.Instantiate(cardPrefab, source.transform.position, cardPrefab.transform.rotation);
+                        CardsData data = new CardsData(cardParameter);
+                        card.GetComponent<Card>().Initialize(board.GetHand(currentPlayer), data);
+                        card.GetComponent<Card>().FlipCard();
+                        emptyCardZone.AddCard(card.GetComponent<Card>());
+                    }
+
                     break;
                 case SubType.SWAP_POSITION:
 
@@ -225,7 +266,7 @@ namespace CardGame.Cards.DataModel.Effects
                     CardZone originCardZone = cardZones[pos];
 
                     originCardZone.RemoveCard(originCardZone.GetCard().gameObject);
-                    if(destCardZone.GetCard() != null)
+                    if (destCardZone.GetCard() != null)
                     {
                         Card temp = destCardZone.GetCard();
                         destCardZone.RemoveCard(temp.gameObject);
@@ -256,97 +297,122 @@ namespace CardGame.Cards.DataModel.Effects
 
         public bool IsAppliable()
         {
-            switch (type)
-            {
-                case EffectType.NONE:
-                    return false;
-                case EffectType.DEFENSIVE:
-                    return DefensiveIsAppliable();
-                case EffectType.OFFENSIVE:
-                    return OffensiveIsAppliable();
-                case EffectType.BOOST:
-                    return BoostIsAppliable();
-                case EffectType.TACTICAL:
-                    return TacticalIsAppliable();
-                default:
-                    return false;
-            }
-        }
+            bool currentPlayerHasCards = Board.Instance.AreCardsOnTable(TurnManager.Instance.currentPlayer);
+            bool otherPlayerHasCards = Board.Instance.AreCardsOnTable(TurnManager.Instance.otherPlayer);
 
-        private bool DefensiveIsAppliable()
-        {
-            switch (subType)
+            switch (targetType)
             {
-                case SubType.NONE:
-                    return false;
-                case SubType.RESTORE_LIFE:
-                case SubType.INCREASE_MAX_MANA:
+                case Target.ALLY:
+                case Target.AALLY:
+                    return currentPlayerHasCards;
+
+                case Target.ENEMY:
+                case Target.AENEMY:
+                    return otherPlayerHasCards;
+
+                case Target.CARD:
+                case Target.ACARD:
+                    return currentPlayerHasCards || otherPlayerHasCards;
+
+                case Target.NONE:
+                case Target.PLAYER:
+                case Target.SELF:
                 default:
                     return true;
             }
+
+
+            //switch (type)
+            //{
+            //    case EffectType.NONE:
+            //        return false;
+            //    case EffectType.DEFENSIVE:
+            //        return DefensiveIsAppliable();
+            //    case EffectType.OFFENSIVE:
+            //        return OffensiveIsAppliable();
+            //    case EffectType.BOOST:
+            //        return BoostIsAppliable();
+            //    case EffectType.TACTICAL:
+            //        return TacticalIsAppliable();
+            //    default:
+            //        return false;
+            //}
         }
 
-        private bool OffensiveIsAppliable()
-        {
-            switch (subType)
-            {
-                case SubType.NONE:
-                    return false;
-                case SubType.DESTROY_CARD:
-                    return Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer) > 0;
-                case SubType.DEAL_DAMAGE:
-                case SubType.DECREASE_MANA:
-                default:
-                    return true;
-            }
-        }
+        //private bool DefensiveIsAppliable()
+        //{
+        //    switch (subType)
+        //    {
+        //        case SubType.NONE:
+        //            return false;
+        //        case SubType.RESTORE_LIFE:
+        //        case SubType.INCREASE_MAX_MANA:
+        //        default:
+        //            return true;
+        //    }
+        //}
 
-        private bool BoostIsAppliable()
-        {
-            switch (subType)
-            {
-                case SubType.NONE:
-                    break;
-                case SubType.LIFELINK:
-                    break;
-                case SubType.REBOUND:
-                    break;
-                case SubType.TRAMPLE:
-                    break;
-                case SubType.STAT_BOOST:
-                case SubType.ADD_EFFECT:
-                    return Board.Instance.NumCardsOnTable(TurnManager.Instance.currentPlayer) > 0;
-                case SubType.GUARD:
-                    break;
-            }
+        //private bool OffensiveIsAppliable()
+        //{
+        //    switch (subType)
+        //    {
+        //        case SubType.NONE:
+        //            return false;
+        //        case SubType.DESTROY_CARD:
+        //            return Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer) > 0;
+        //        case SubType.DEAL_DAMAGE:
+        //        case SubType.DECREASE_MANA:
+        //        default:
+        //            return true;
+        //    }
+        //}
 
-            return false;
-        }
+        //private bool BoostIsAppliable()
+        //{
+        //    switch (subType)
+        //    {
+        //        case SubType.NONE:
+        //            break;
+        //        case SubType.LIFELINK:
+        //            break;
+        //        case SubType.REBOUND:
+        //            break;
+        //        case SubType.TRAMPLE:
+        //            break;
+        //        case SubType.STAT_BOOST:
+        //        case SubType.ADD_EFFECT:
+        //            return Board.Instance.NumCardsOnTable(TurnManager.Instance.currentPlayer) > 0;
+        //        case SubType.GUARD:
+        //            break;
+        //    }
 
-        private bool TacticalIsAppliable()
-        {
-            int currentNumCardsOnTable = Board.Instance.NumCardsOnTable(TurnManager.Instance.currentPlayer);
-            int otherNumCardsOnTable = Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer);
-            int maxCardNumber = Board.Instance.MaxCardNumber();
+        //    return false;
+        //}
 
-            switch (subType)
-            {
-                case SubType.NONE:
-                case SubType.DRAW_CARD:
-                case SubType.DISCARD_CARD:
-                    return true;
-                case SubType.CREATE_CARD: // Empty player card zone
-                    return currentNumCardsOnTable < maxCardNumber;
-                case SubType.SWAP_POSITION: // Cards on table (player or opponent)
-                    return currentNumCardsOnTable > 0 || otherNumCardsOnTable > 0;
-                case SubType.RETURN_CARD: // Cards on table (player or opponent)
-                    return otherNumCardsOnTable > 0;
-                case SubType.SWAP_CONTENDER: // Empty card zone other contender
-                    return otherNumCardsOnTable < maxCardNumber;
-                default:
-                    return false;
-            }
-        }
+        //private bool TacticalIsAppliable()
+        //{
+        //    int currentNumCardsOnTable = Board.Instance.NumCardsOnTable(TurnManager.Instance.currentPlayer);
+        //    int otherNumCardsOnTable = Board.Instance.NumCardsOnTable(TurnManager.Instance.otherPlayer);
+        //    int maxCardNumber = Board.Instance.MaxCardNumber();
+
+        //    switch (subType)
+        //    {
+        //        case SubType.NONE:
+        //        case SubType.DRAW_CARD:
+        //        case SubType.DISCARD_CARD:
+        //            return true;
+        //        case SubType.CREATE_CARD: // Empty player card zone
+        //            return currentNumCardsOnTable < maxCardNumber;
+        //        case SubType.SWAP_POSITION: // Cards on table (player or opponent)
+        //            return currentNumCardsOnTable > 0 || otherNumCardsOnTable > 0;
+        //        case SubType.RETURN_CARD: // Cards on table (player or opponent)
+        //            return otherNumCardsOnTable > 0;
+        //        case SubType.SWAP_CONTENDER: // Empty card zone other contender
+        //            return otherNumCardsOnTable < maxCardNumber;
+        //        default:
+        //            return false;
+        //    }
+        //}
 
         #endregion
 
@@ -354,7 +420,9 @@ namespace CardGame.Cards.DataModel.Effects
 
         public bool HasTarget()
         {
-            return targetType != Target.NONE;
+            return targetType == Target.ALLY
+                || targetType == Target.ENEMY
+                || targetType == Target.CARD;
         }
 
         public List<Card> FindPossibleTargets()
@@ -375,7 +443,8 @@ namespace CardGame.Cards.DataModel.Effects
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
                     break;
-                case Target.CARDZONE:
+                //case Target.CARDZONE:
+                case Target.PLAYER:
                     break;
             }
 
@@ -397,11 +466,21 @@ namespace CardGame.Cards.DataModel.Effects
                     return "Consigues " + intParameter1 + " cristal extra de maná.";
 
                 case SubType.DESTROY_CARD:
-                    if (targetType == Target.ENEMY) return "Destruye la carta objetivo.";
-                    else return "Destruye todas las cartas sobre el campo.";
+                    switch (targetType)
+                    {
+                        case Target.ENEMY: return "Destruye la carta objetivo.";
+                        case Target.AENEMY: return "Destruye todas las cartas del oponente.";
+                        case Target.ACARD: return "Destruye todas las cartas sobre el campo.";
+                    }
+                    break;
                 case SubType.DEAL_DAMAGE:
-                    if (targetType == Target.ENEMY) return "Inflige " + intParameter1 + "puntos de daño a la carta objetivo.";
-                    else return "Inflige " + intParameter1 + "puntos de daño a todas las cartas del oponente.";
+                    switch(targetType)
+                    {
+                        case Target.ENEMY: return "Inflige " + intParameter1 + " puntos de daño a la carta objetivo.";
+                        case Target.AENEMY: return "Inflige " + intParameter1 + " puntos de daño a todas las cartas del oponente.";
+                        case Target.PLAYER: return "Inflige " + intParameter1 + " puntos de daño al oponente.";
+                    }
+                    break;
                 case SubType.DECREASE_MANA:
                     return "Reduce el maná del oponente en " + intParameter1 + " puntos.";
 
@@ -412,15 +491,20 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.TRAMPLE:
                     break;
                 case SubType.STAT_BOOST:
-                    if (targetType == Target.ALLY) return "El objetivo recibe un bonificador de " + intParameter1 + "/" + intParameter2 + ".";
-                    else return "Todas las cartas aliadas obtienen un bonificador de " + intParameter1 + "/" + intParameter2 + ".";
+                    switch (targetType)
+                    {
+                        case Target.SELF: return "Obtiene un bonificador de " + intParameter1 + " / " + intParameter2 + " al final del turno.";
+                        case Target.ALLY: return "El objetivo recibe un bonificador de " + intParameter1 + " / " + intParameter2 + ".";
+                        case Target.AALLY: return "Todas las cartas aliadas obtienen un bonificador de " + intParameter1 + "/" + intParameter2 + ".";
+                    }
+                    break;
                 case SubType.ADD_EFFECT:
                     break;
                 case SubType.GUARD:
                     break;
 
                 case SubType.CREATE_CARD:
-                    return "Invoca la carta " + gObjParameter.name + " en la zona objetivo.";
+                    return "Invoca la carta " + cardParameter.name + " en una zona libre.";
                 case SubType.SWAP_POSITION:
                     return "Mueve la carta objetivo a la zona objetivo. Si ya hay una carta, se intercambian.";
                 case SubType.SWAP_CONTENDER:

@@ -8,7 +8,7 @@ namespace CardGame.Level
 {
     public class Deck : MonoBehaviour
     {
-        [SerializeField] private GameObject cardPrefab;
+        public GameObject cardPrefab;
         private Hand _hand;
         private List<CardsData> _deckCards;
 

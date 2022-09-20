@@ -92,6 +92,7 @@ namespace CardGame.Cards
 
         private SpriteRenderer _spriteRenderer;
 
+        private TurnManager.EndTurnEffects _endTurnEffect;
 
         private void Awake()
         {
@@ -214,6 +215,29 @@ namespace CardGame.Cards
             }
 
             moveWithMouse = move;
+        }
+
+        public void FlipCard()
+        {
+            if (_cardFront)
+            {
+                _spriteRenderer.sprite = cardBack;
+                nameText.gameObject.SetActive(false);
+                descriptionText.gameObject.SetActive(false);
+                strengthText.gameObject.SetActive(false);
+                defenseText.gameObject.SetActive(false);
+            }
+            else
+            {
+                _spriteRenderer.sprite = _data.sprite;
+                nameText.gameObject.SetActive(true);
+                descriptionText.gameObject.SetActive(true);
+                strengthText.gameObject.SetActive(true);
+                defenseText.gameObject.SetActive(true);
+            }
+
+            transform.Rotate(new Vector3(0, 0, 180));
+            _cardFront = !_cardFront;
         }
 
         #endregion
@@ -339,9 +363,17 @@ namespace CardGame.Cards
             transform.DOScale(_defaultScale, 0.2f);
 
             // Apply enter effect
-            if (hasEffect && effect.IsAppliable())
+            if (hasEffect)
             {
-                effect.Apply(this, null);
+                if (effect.applyTime == ApplyTime.ENTER)
+                {
+                    ApplyEffect();
+                }
+                else if (effect.applyTime == ApplyTime.END)
+                {
+                    _endTurnEffect = new TurnManager.EndTurnEffects(ApplyEffect);
+                    TurnManager.Instance.AddEndTurnEffect(_endTurnEffect);
+                }
             }
         }
 
@@ -392,28 +424,7 @@ namespace CardGame.Cards
             }
         }
 
-        private void FlipCard()
-        {
-            if (_cardFront)
-            {
-                _spriteRenderer.sprite = cardBack;
-                nameText.gameObject.SetActive(false);
-                descriptionText.gameObject.SetActive(false);
-                strengthText.gameObject.SetActive(false);
-                defenseText.gameObject.SetActive(false);
-            }
-            else
-            {
-                _spriteRenderer.sprite = _data.sprite;
-                nameText.gameObject.SetActive(true);
-                descriptionText.gameObject.SetActive(true);
-                strengthText.gameObject.SetActive(true);
-                defenseText.gameObject.SetActive(true);
-            }
-
-            transform.Rotate(new Vector3(0, 0, 180));
-            _cardFront = !_cardFront;
-        }
+        
 
         private void MoveToWaitingSpot(TweenCallback onCompleteCallback)
         {
@@ -472,7 +483,10 @@ namespace CardGame.Cards
 
             // Enlarge and rotate
             hitSequence.Append(transform.DOScale(_hitScale, 0.5f));
+            if (contender.role == Contender.Role.PLAYER)
+                hitSequence.Join(transform.DOLocalMoveZ(-0.1f, 0.5f));
             hitSequence.Join(transform.DORotate(rotationEuler, 0.2f).SetRelative());
+
             // Hit
             hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
             hitSequence.AppendCallback(() =>
@@ -527,6 +541,12 @@ namespace CardGame.Cards
         {
             //Play destroy animation
             Debug.Log(name + " destroyed");
+
+            if(hasEffect && effect.applyTime == ApplyTime.END)
+            {
+                TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffect);
+            }
+
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
@@ -538,12 +558,20 @@ namespace CardGame.Cards
             destroySequence.Play();
         }
 
-        private void CheckDestroy()
+        public void CheckDestroy()
         {
             if (defense <= 0) Destroy();
         }
 
         #endregion
+
+        private void ApplyEffect()
+        {
+            if (effect.IsAppliable())
+            {
+                effect.Apply(this, null);
+            }
+        }
 
         public void BoostStats(int strengthBoost, int defenseBoost)
         {

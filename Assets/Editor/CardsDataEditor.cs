@@ -25,6 +25,8 @@ namespace CardGame.Cards.DataModel
             cardsData = serializedObject.FindProperty("cards");
             cardsDataContainer = (CardsDataContainer)cardsData.serializedObject.targetObject;
             cards = cardsDataContainer.cards;
+            if (cards == null) cards = new List<CardsData>();
+
             showContent = new List<bool>();
             for (int i = 0; i < cards?.Count; i++)
             {
@@ -77,11 +79,14 @@ namespace CardGame.Cards.DataModel
                         card.defense = 0;
                     }
 
-                    GUI.enabled = false;
+                    if (card.effects.Count > 0)
+                    {
+                        GUI.enabled = false;
 
-                    EditorGUILayout.IntField("Effects:", card.effects.Count);
+                        EditorGUILayout.IntField("Effects:", card.effects.Count);
 
-                    GUI.enabled = true;
+                        GUI.enabled = true;
+                    }
 
                     //card.effects.Clear();
 
@@ -165,6 +170,22 @@ namespace CardGame.Cards.DataModel
                                         break;
                                     case SubType.CREATE_CARD:
                                         // Add gameobjectParameter
+                                        if (cardEffect.cardParameter == null) cardEffect.cardParameter = new CardsData();
+
+                                        cardEffect.cardParameter.name = EditorGUILayout.TextField("Card name:", cardEffect.cardParameter.name);
+
+                                        EditorGUILayout.BeginHorizontal();
+
+                                        EditorGUILayout.PrefixLabel("Card sprite: ");
+                                        cardEffect.cardParameter.sprite = GetSpriteFromName(cardsDataContainer.resourcesPath, cardEffect.cardParameter.name);
+                                        cardEffect.cardParameter.sprite = (Sprite)EditorGUILayout.ObjectField(cardEffect.cardParameter.sprite, typeof(Sprite), allowSceneObjects: true);
+
+                                        EditorGUILayout.EndHorizontal();
+
+                                        cardEffect.cardParameter.strength = EditorGUILayout.IntField("Card strength:", cardEffect.cardParameter.strength);
+                                        cardEffect.cardParameter.defense = EditorGUILayout.IntField("Card defense:", cardEffect.cardParameter.defense);
+
+                                        //cardEffect.cardParameter = (CardsData) EditorGUILayout.ObjectField("Parameter 1:", cardEffect.cardParameter, typeof(CardsData), true);
                                         break;
                                     case SubType.DRAW_CARD:
                                         cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
@@ -177,7 +198,21 @@ namespace CardGame.Cards.DataModel
                                 break;
                         }
 
-                        cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
+                        switch (cardEffect.subType)
+                        {
+                            case SubType.RESTORE_LIFE:
+                            case SubType.INCREASE_MAX_MANA:
+                            case SubType.DECREASE_MANA:
+                            case SubType.LIFELINK:
+                            case SubType.CREATE_CARD:
+                            case SubType.DRAW_CARD:
+                            case SubType.DISCARD_CARD:
+                                break;
+                            default:
+                                cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
+                                break;
+                        }
+
                         if (card.type == CardType.ACTION)
                         {
                             cardEffect.applyTime = ApplyTime.ENTER;
@@ -189,13 +224,9 @@ namespace CardGame.Cards.DataModel
                             {
                                 case SubType.NONE:
                                     break;
-                                case SubType.STAT_BOOST:
-                                    cardEffect.applyTime = ApplyTime.ENTER;
-                                    break;
                                 case SubType.DRAW_CARD:
-                                    cardEffect.applyTime = ApplyTime.ENTER;
-                                    break;
                                 case SubType.DISCARD_CARD:
+                                case SubType.INCREASE_MAX_MANA:
                                     cardEffect.applyTime = ApplyTime.ENTER;
                                     break;
                                 case SubType.LIFELINK:

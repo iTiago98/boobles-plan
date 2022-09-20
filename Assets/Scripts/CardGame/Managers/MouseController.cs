@@ -219,7 +219,7 @@ namespace CardGame.Managers
                     layerMask = allyLayerMask | enemyLayerMask;
                     break;
 
-                case Target.CARDZONE:
+                //case Target.CARDZONE:
 
                 default:
                     //Debug.Log("selectingMask");
