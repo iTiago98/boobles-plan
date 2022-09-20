@@ -4,11 +4,11 @@ using Booble.Flags;
 
 namespace Booble.Interactables.Events
 {
-	public class SetFlags : MonoBehaviour
+	public class SetFlags : DialogueEvent
 	{
         [SerializeField] private List<Flag.Reference> _flags;
 
-    	public void StartInteraction()
+    	public override void Execute()
         {
             foreach(Flag.Reference flagRef in _flags)
             {

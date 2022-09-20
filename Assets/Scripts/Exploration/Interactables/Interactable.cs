@@ -14,7 +14,7 @@ namespace Booble.Interactables
         public static bool _interactionOnGoing;
 
         private static Dialogue _returnDialogue;
-        private static List<DialogueManager.Option> _returnOptions;
+        private static List<Option> _returnOptions;
         private static List<AnimatorIdentifier> _returnAnimIdentifiers;
         private static bool _mouseOverInteractable;
 
@@ -38,21 +38,12 @@ namespace Booble.Interactables
             _mouseOverInteractable = false;
         }
 
-        public Dialogue ContinueDialogue
-        {
-            get { return _continueDialogue; }
-            set { _continueDialogue = value; }
-        }
-
         [SerializeField] private float _interactDistance;
-        [SerializeField] private Dialogue _introDialogue;
-        [SerializeField] private Dialogue _continueDialogue;
-        [SerializeField] private Flag.Reference _introFlag;
-        [SerializeField] private List<DialogueManager.Option> _options;
+        [SerializeField] private List<ClickDialogue> _clickDialogues;
+        [SerializeField] private List<Option> _options;
         [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
 
         private Dialogue _dialogue;
-        private bool _isIntroFlagSet;
 
         private Player.Controller _player;
         private UI.Cursor _cursor;
@@ -69,19 +60,6 @@ namespace Booble.Interactables
             _cursor = UI.Cursor.Instance;
             _diagManager = DialogueManager.Instance;
             _flagManager = FlagManager.Instance;
-        }
-
-        private void Start()
-        {
-            if (_flagManager.GetFlag(_introFlag))
-            {
-                _dialogue = _continueDialogue;
-                _isIntroFlagSet = true;
-            }
-            else
-            {
-                _dialogue = _introDialogue;
-            }
         }
 
         private void OnMouseEnter()
@@ -117,18 +95,29 @@ namespace Booble.Interactables
 
                 _player.StopMovement();
                 _cursor.ShowActionText(false);
+
+                bool found = false;
+                int i = 0;
+                while(!found && i < _clickDialogues.Count)
+                {
+                    ClickDialogue clickDialogue = _clickDialogues[i];
+                    if(clickDialogue.FlagsSatisfied)
+                    {
+                        found = true;
+                        _dialogue = clickDialogue.Dialogue;
+                        clickDialogue.SetFlags();
+                    }
+                    i++;
+                }
+                if(!found)
+                {
+                    Debug.LogError("No Click Dialogue with a satisfied Flag List!");
+                }
                 _diagManager.StartDialogue(_dialogue, _options, _animatorIdentifiers);
 
+                _returnDialogue = _dialogue;
                 _returnOptions = _options;
                 _returnAnimIdentifiers = _animatorIdentifiers;
-                if (!_isIntroFlagSet)
-                {
-                    _flagManager.SetFlag(_introFlag);
-                    _isIntroFlagSet = true;
-                    _dialogue = _continueDialogue;
-                }
-                
-                _returnDialogue = _dialogue;
                 _diagManager.OnEndDialogue.RemoveAllListeners();
                 _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
             }
@@ -160,7 +149,27 @@ namespace Booble.Interactables
 
         public void CloseOptionsMenu()
         {
-            Interactable.EndInteraction();
+            EndInteraction();
+        }
+    }
+
+    [System.Serializable]
+    public class ClickDialogue
+    {
+        public Dialogue Dialogue => _dialogue;
+        public bool FlagsSatisfied => FlagManager.Instance.FlagsSatisfied(_trueFlags, _falseFlags);
+
+        [SerializeField] private Dialogue _dialogue;
+        [SerializeField] private List<Flag.Reference> _trueFlags;
+        [SerializeField] private List<Flag.Reference> _falseFlags;
+        [SerializeField] private List<Flag.Reference> _setFlags;
+
+        public void SetFlags()
+        {
+            foreach(Flag.Reference flag in _setFlags)
+            {
+                FlagManager.Instance.SetFlag(flag);
+            }
         }
     }
 

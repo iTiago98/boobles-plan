@@ -7,7 +7,7 @@ using static Booble.Interactables.Interactable;
 
 namespace Booble.Interactables.Events
 {
-	public class ThrowDialogue : MonoBehaviour
+	public class ThrowDialogue : DialogueEvent
 	{
         [SerializeField]
         private enum EndType { Nothing, Return, Close, Callback }
@@ -24,7 +24,7 @@ namespace Booble.Interactables.Events
             _diagManager = DialogueManager.Instance;
         }
 
-        public void StartInteraction()
+        public override void Execute()
         {
             _diagManager.StartDialogue(_dialogue, _animatorIdentifiers);
             _diagManager.OnEndDialogue.RemoveAllListeners();
