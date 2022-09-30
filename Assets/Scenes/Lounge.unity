@@ -7944,6 +7944,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1683167928}
     m_Modifications:
+    - target: {fileID: 1470914404600198620, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697305459616670632, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2343444203490843828, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880464607984951203, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_Size.y
+      value: 5.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2880464607984951203, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 602285941, guid: 0a7bf931ff85b2b45be1af20f1b66019, type: 3}
+    - target: {fileID: 2880464607984951203, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3024370856374206734, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
       propertyPath: m_Name
       value: Props_Loungue
@@ -7991,6 +8015,10 @@ PrefabInstance:
     - target: {fileID: 3024370856374206735, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253819385533871438, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb67204f680ecd14ab0bb2e81ba98047, type: 3}
