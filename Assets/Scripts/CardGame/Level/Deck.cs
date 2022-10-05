@@ -9,8 +9,13 @@ namespace CardGame.Level
     public class Deck : MonoBehaviour
     {
         public GameObject cardPrefab;
+        public CardsData emptyDeckCardData;
+
         private Hand _hand;
         private List<CardsData> _deckCards;
+
+        public delegate void DrawCardEffects();
+        private DrawCardEffects drawCardEffectsDelegate;
 
         public void Initialize(Hand hand, List<CardsData> deckCards)
         {
@@ -22,25 +27,35 @@ namespace CardGame.Level
         {
             for (int i = 0; i < numCards; i++)
             {
+                GameObject cardObj;
+                CardsData data;
+
                 if (_deckCards.Count == 0)
                 {
-                    TurnManager.Instance.GetContenderFromHand(_hand).ReceiveDamage(1);
+                    // Instantiate card
+                    cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+
+                    // Take data
+                    data = new CardsData(emptyDeckCardData);
                 }
                 else
                 {
                     // Instantiate card
-                    GameObject cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+                    cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
 
                     // Take data from scriptable
                     int index = Random.Range(0, _deckCards.Count);
-                    CardsData data = _deckCards[index];
+                    data = _deckCards[index];
                     _deckCards.RemoveAt(index);
-
-                    // Add card to hand
-                    Card card = cardObj.GetComponent<Card>();
-                    card.Initialize(_hand, data);
-                    _hand.AddCard(card);
                 }
+
+                // Add card to hand
+                Card card = cardObj.GetComponent<Card>();
+                card.Initialize(_hand, data, cardRevealed: false);
+                _hand.AddCard(card);
+
+                // Apply end round effects
+                drawCardEffectsDelegate?.Invoke();
             }
         }
 
@@ -60,6 +75,23 @@ namespace CardGame.Level
 
                 _deckCards.Add(temp);
             }
+        }
+
+        public void AddDrawCardEffects(DrawCardEffects method)
+        {
+            if (drawCardEffectsDelegate == null)
+            {
+                drawCardEffectsDelegate = method;
+            }
+            else
+            {
+                drawCardEffectsDelegate += method;
+            }
+        }
+
+        public void RemoveDrawCardEffect(DrawCardEffects method)
+        {
+            drawCardEffectsDelegate -= method;
         }
     }
 }

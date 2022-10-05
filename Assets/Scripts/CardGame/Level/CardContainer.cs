@@ -13,6 +13,7 @@ namespace CardGame.Level
         public float animationTime;
 
         public int numCards => (cards == null) ? 0 : cards.Count;
+        public bool isEmpty => numCards == 0;
 
         public List<GameObject> cards { private set; get; }
 

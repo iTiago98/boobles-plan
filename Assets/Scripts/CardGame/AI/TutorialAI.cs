@@ -11,16 +11,17 @@ namespace CardGame.AI
     {
         public override void Play()
         {
-            if (_contender.currentMana > 0)
+            if (_contender.currentMana > 0 || _contender.freeMana)
             {
                 List<Card> playableCards = new List<Card>();
                 CardZone emptyCardZone = RandomEmptyCardZone();
+                CardZone fieldCardZone = FieldCardZone();
 
                 foreach (GameObject cardObj in _contender.hand.cards)
                 {
                     Card card = cardObj.GetComponent<Card>();
 
-                    if (card.manaCost > _contender.currentMana) continue;
+                    if (card.manaCost > _contender.currentMana && !_contender.freeMana) continue;
 
                     switch (card.type)
                     {
@@ -31,6 +32,7 @@ namespace CardGame.AI
                             if (card.hasEffect && card.effect.IsAppliable()) playableCards.Add(card);
                             break;
                         case CardType.FIELD:
+                            if (fieldCardZone) playableCards.Add(card);
                             break;
                     }
                 }
@@ -40,16 +42,21 @@ namespace CardGame.AI
                 {
                     int index = new System.Random().Next(0, playableCards.Count);
                     Card card = playableCards[index];
+                    CardZone cardZone = null;
 
                     switch (card.type)
                     {
                         case CardType.ARGUMENT:
-                            PlayArgument(card, emptyCardZone);
+                            cardZone = emptyCardZone;
                             break;
                         case CardType.ACTION:
-                            PlayAction(card);
+                            break;
+                        case CardType.FIELD:
+                            cardZone = fieldCardZone;
                             break;
                     }
+
+                    PlayCard(card, cardZone);
                 }
             }
             else

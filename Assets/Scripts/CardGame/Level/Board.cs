@@ -22,7 +22,11 @@ namespace CardGame.Level
         public List<CardZone> playerCardZone;
         public List<CardZone> opponentCardZone;
 
+        public CardZone playerFieldCardZone;
+        public CardZone opponentFieldCardZone;
+
         public Transform waitingSpot;
+
 
         private void Awake()
         {
@@ -55,6 +59,11 @@ namespace CardGame.Level
         public void DiscardCards(int cardNumber, Contender contender)
         {
             GetHand(contender).DiscardCards(cardNumber);
+        }
+
+        public void DiscardAll(Contender contender)
+        {
+            GetHand(contender).DiscardAll();
         }
 
         public CardZone GetEmptyCardZone(Contender contender)
@@ -113,15 +122,15 @@ namespace CardGame.Level
             return (contender.role == Contender.Role.PLAYER) ? playerDeck : opponentDeck;
         }
 
-        private List<CardZone> GetCardZone(Contender contender)
+        public List<CardZone> GetCardZone(Contender contender)
         {
             return (contender.role == Contender.Role.PLAYER) ? playerCardZone : opponentCardZone;
         }
 
         public void DestroyCards(Contender contender)
         {
-            foreach(CardZone zone in GetCardZone(contender)) zone.GetCard()?.Destroy();
-        } 
+            foreach (CardZone zone in GetCardZone(contender)) zone.GetCard()?.Destroy();
+        }
 
         public void DestroyAll()
         {

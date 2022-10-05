@@ -23,16 +23,19 @@ namespace CardGame
         public int eloquence { private set; get; }
         public int currentMana { private set; get; }
         public int currentMaxMana { private set; get; }
+        public bool freeMana { private set; get; }
         private int _maxMana;
 
         public Hand hand { private set; get; }
         public List<CardZone> cardZones { private set; get; }
+        public CardZone fieldCardZone { private set; get; }
 
 
-        public void Initialize(Hand hand, List<CardZone> cardZone)
+        public void Initialize(Hand hand, List<CardZone> cardZone, CardZone fieldCardZone)
         {
             this.hand = hand;
             this.cardZones = cardZone;
+            this.fieldCardZone = fieldCardZone;
         }
 
         public void InitializeStats(int initialEloquence, int initialManaCounter, int maxManaCounter)
@@ -75,6 +78,12 @@ namespace CardGame
             eloquence -= strength;
             //if (eloquence < 0) eloquence = 0;
             UIManager.Instance.UpdateUIStats();
+        }
+
+        public void SetFreeMana(bool state)
+        {
+            freeMana = state;
+            // Show in UI
         }
     }
 }

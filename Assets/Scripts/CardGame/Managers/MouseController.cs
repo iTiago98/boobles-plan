@@ -200,29 +200,22 @@ namespace CardGame.Managers
             switch (effect.targetType)
             {
                 case Target.NONE:
-                    //Debug.Log("selectingMask");
                     layerMask = selectingLayerMask;
                     break;
 
                 case Target.ALLY:
-                    //Debug.Log("allyMask");
                     layerMask = allyLayerMask;
                     break;
 
                 case Target.ENEMY:
-                    //Debug.Log("enemyMask");
                     layerMask = enemyLayerMask;
                     break;
 
                 case Target.CARD:
-                    //Debug.Log("bothCardsMask");
                     layerMask = allyLayerMask | enemyLayerMask;
                     break;
 
-                //case Target.CARDZONE:
-
                 default:
-                    //Debug.Log("selectingMask");
                     layerMask = selectingLayerMask;
                     break;
             }

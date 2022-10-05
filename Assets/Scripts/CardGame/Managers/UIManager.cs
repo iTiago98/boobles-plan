@@ -24,6 +24,9 @@ namespace CardGame.Managers
         public EloquenceBar eloquenceBar;
         public TextMeshProUGUI log;
 
+        public GameObject extendedDescriptionPanel;
+        public TextMeshProUGUI extendedDescriptionText;
+
         private Contender _player;
         private Contender _opponent;
 
@@ -157,6 +160,17 @@ namespace CardGame.Managers
         public void OnEndButtonClick()
         {
             SceneLoader.Instance.LoadMainMenuScene();
+        }
+         
+        public void ShowExtendedDescription(string text)
+        {
+            extendedDescriptionText.text = text;
+            extendedDescriptionPanel.SetActive(true);
+        }
+
+        public void HideExtendedDescription()
+        {
+            extendedDescriptionPanel.SetActive(false);
         }
     }
 }

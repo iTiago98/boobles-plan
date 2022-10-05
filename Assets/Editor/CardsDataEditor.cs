@@ -166,11 +166,12 @@ namespace CardGame.Cards.DataModel
                                     case SubType.NONE:
                                     case SubType.SWAP_POSITION:
                                     case SubType.SWAP_CONTENDER:
+                                    case SubType.DUPLICATE_CARD:
                                     case SubType.RETURN_CARD:
                                         break;
                                     case SubType.CREATE_CARD:
                                         // Add gameobjectParameter
-                                        if (cardEffect.cardParameter == null) cardEffect.cardParameter = new CardsData();
+                                        if (cardEffect.cardParameter == null) cardEffect.cardParameter = new CardsDataNoSer();
 
                                         cardEffect.cardParameter.name = EditorGUILayout.TextField("Card name:", cardEffect.cardParameter.name);
 
@@ -204,9 +205,13 @@ namespace CardGame.Cards.DataModel
                             case SubType.INCREASE_MAX_MANA:
                             case SubType.DECREASE_MANA:
                             case SubType.LIFELINK:
+                            case SubType.REBOUND:
+                            case SubType.TRAMPLE:
                             case SubType.CREATE_CARD:
                             case SubType.DRAW_CARD:
                             case SubType.DISCARD_CARD:
+                            case SubType.FREE_MANA:
+                            case SubType.WHEEL:
                                 break;
                             default:
                                 cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
@@ -227,9 +232,12 @@ namespace CardGame.Cards.DataModel
                                 case SubType.DRAW_CARD:
                                 case SubType.DISCARD_CARD:
                                 case SubType.INCREASE_MAX_MANA:
+                                case SubType.FREE_MANA:
                                     cardEffect.applyTime = ApplyTime.ENTER;
                                     break;
                                 case SubType.LIFELINK:
+                                case SubType.REBOUND:
+                                case SubType.TRAMPLE:
                                     cardEffect.applyTime = ApplyTime.COMBAT;
                                     break;
                                 default:

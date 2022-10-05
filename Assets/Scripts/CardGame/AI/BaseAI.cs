@@ -33,17 +33,29 @@ namespace CardGame.AI
 
         public abstract void Play();
 
-        protected void PlayArgument(Card card, CardZone emptyCardZone)
+        protected void PlayCard(Card card, CardZone cardZone)
         {
-            card.RemoveFromContainer();
-            card.Play(emptyCardZone);
+            card.RemoveFromContainer(); // Remove from hand
+            card.Play(cardZone);
         }
 
-        protected void PlayAction(Card card)
-        {
-            card.RemoveFromContainer();
-            card.Play(null);
-        }
+        //protected void PlayArgument(Card card, CardZone emptyCardZone)
+        //{
+        //    card.RemoveFromContainer();
+        //    card.Play(emptyCardZone);
+        //}
+
+        //protected void PlayAction(Card card)
+        //{
+        //    card.RemoveFromContainer();
+        //    card.Play(null);
+        //}
+
+        //protected void PlayField(Card card, CardZone fieldCardZone)
+        //{
+        //    card.RemoveFromContainer();
+        //    card.Play(fieldCardZone);
+        //}
 
         protected CardZone RandomEmptyCardZone()
         {
@@ -62,6 +74,11 @@ namespace CardGame.AI
             }
 
             return null;
+        }
+
+        protected CardZone FieldCardZone()
+        {
+            return (_contender.fieldCardZone.isEmpty) ? _contender.fieldCardZone : null;
         }
 
         protected void SkipTurn()

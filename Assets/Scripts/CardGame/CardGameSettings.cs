@@ -14,6 +14,7 @@ namespace CardGame
         public int initialEloquence;
         public int initialManaCounter;
         public int maxManaCounter;
+        public int handCapacity;
 
         [Header("Hover card")]
         public float hoverPosY;

@@ -1,0 +1,276 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27a2f991ff12b647ab8c2ff7b8868d7, type: 3}
+  m_Name: PPBrosCards
+  m_EditorClassIdentifier: 
+  resourcesPath: Cards/PPBrosDeck
+  cards:
+  - name: Backspin
+    sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
+    cost: 1
+    strength: 0
+    defense: 5
+    type: 0
+    effects:
+    - type: 3
+      subType: 7
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: Backspin
+    sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
+    cost: 1
+    strength: 0
+    defense: 5
+    type: 0
+    effects:
+    - type: 3
+      subType: 7
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: Backspin
+    sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
+    cost: 1
+    strength: 0
+    defense: 5
+    type: 0
+    effects:
+    - type: 3
+      subType: 7
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: Backspin
+    sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
+    cost: 1
+    strength: 0
+    defense: 5
+    type: 0
+    effects:
+    - type: 3
+      subType: 7
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: Matar la bola
+    sprite: {fileID: 21300000, guid: 4236a030ed3801545a6950caa70b9934, type: 3}
+    cost: 5
+    strength: 7
+    defense: 2
+    type: 0
+    effects:
+    - type: 3
+      subType: 8
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: Dejadita
+    sprite: {fileID: 21300000, guid: 04243b82fdcb57249ab9d2ac00d3dc48, type: 3}
+    cost: 3
+    strength: 3
+    defense: 4
+    type: 0
+    effects:
+    - type: 4
+      subType: 14
+      applyTime: 1
+      targetType: 5
+      intParameter1: 0
+      intParameter2: 0
+  - name: La cinta de Fereder
+    sprite: {fileID: 21300000, guid: 4516b933abd7a994787fef4e82cf184d, type: 3}
+    cost: 4
+    strength: 2
+    defense: 2
+    type: 0
+    effects:
+    - type: 4
+      subType: 19
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: La cinta de Fereder
+    sprite: {fileID: 21300000, guid: 4516b933abd7a994787fef4e82cf184d, type: 3}
+    cost: 4
+    strength: 2
+    defense: 2
+    type: 0
+    effects:
+    - type: 4
+      subType: 19
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: "Piel de pl\xE1tano de Rafa Nadar"
+    sprite: {fileID: 21300000, guid: fdaf7659b9b8c5f4abe89bd9fc08ef41, type: 3}
+    cost: 2
+    strength: 2
+    defense: 3
+    type: 0
+    effects:
+    - type: 1
+      subType: 1
+      applyTime: 1
+      targetType: 0
+      intParameter1: 2
+      intParameter2: 0
+  - name: "Piel de pl\xE1tano de Rafa Nadar"
+    sprite: {fileID: 21300000, guid: fdaf7659b9b8c5f4abe89bd9fc08ef41, type: 3}
+    cost: 2
+    strength: 2
+    defense: 3
+    type: 0
+    effects:
+    - type: 1
+      subType: 1
+      applyTime: 1
+      targetType: 0
+      intParameter1: 2
+      intParameter2: 0
+  - name: "Saque en t\xE1ndem"
+    sprite: {fileID: 21300000, guid: 09483202f04be834ca70715f2b4cf65c, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 3
+      subType: 9
+      applyTime: 1
+      targetType: 1
+      intParameter1: 2
+      intParameter2: 2
+  - name: "Saque en t\xE1ndem"
+    sprite: {fileID: 21300000, guid: 09483202f04be834ca70715f2b4cf65c, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 3
+      subType: 9
+      applyTime: 1
+      targetType: 1
+      intParameter1: 2
+      intParameter2: 2
+  - name: Devolver un globo
+    sprite: {fileID: 21300000, guid: 77b152946c4c6374b9b4789c403977cc, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 4
+      applyTime: 1
+      targetType: 2
+      intParameter1: 3
+      intParameter2: 0
+  - name: Devolver un globo
+    sprite: {fileID: 21300000, guid: 77b152946c4c6374b9b4789c403977cc, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 4
+      applyTime: 1
+      targetType: 2
+      intParameter1: 3
+      intParameter2: 0
+  - name: "Empe\xF1ar la bola"
+    sprite: {fileID: 21300000, guid: 0ce3ae323789daa44aa86a9eadd2bb28, type: 3}
+    cost: 5
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 5
+      applyTime: 1
+      targetType: 0
+      intParameter1: -1
+      intParameter2: 0
+  - name: Bola trucada
+    sprite: {fileID: 21300000, guid: ed610b1328d1152419f30037b793fdcb, type: 3}
+    cost: 6
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 3
+      applyTime: 1
+      targetType: 5
+      intParameter1: 0
+      intParameter2: 0
+  - name: Son dos
+    sprite: {fileID: 21300000, guid: cc6b8f28c41844246a04c0ab64c50812, type: 3}
+    cost: 4
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 12
+      applyTime: 1
+      targetType: 1
+      intParameter1: 0
+      intParameter2: 0
+  - name: Son dos
+    sprite: {fileID: 21300000, guid: cc6b8f28c41844246a04c0ab64c50812, type: 3}
+    cost: 4
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 12
+      applyTime: 1
+      targetType: 1
+      intParameter1: 0
+      intParameter2: 0
+  - name: "Apurando la l\xEDnea"
+    sprite: {fileID: 21300000, guid: ecf5ad46fc0f04b4db7d4e95ddb6639d, type: 3}
+    cost: 3
+    strength: 3
+    defense: 3
+    type: 0
+    effects:
+    - type: 4
+      subType: 20
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+  - name: "Compa\xF1erismo"
+    sprite: {fileID: 21300000, guid: ef48c4a2ef3948b4cb85fbf065aaf5ae, type: 3}
+    cost: 0
+    strength: 0
+    defense: 0
+    type: 2
+    effects:
+    - type: 1
+      subType: 1
+      applyTime: 4
+      targetType: 0
+      intParameter1: 1
+      intParameter2: 0

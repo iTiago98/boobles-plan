@@ -23,11 +23,18 @@ MonoBehaviour:
     effects:
     - type: 3
       subType: 6
-      applyTime: 3
+      applyTime: 2
       targetType: 0
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: "Afirmaci\xF3n reconfortante"
     sprite: {fileID: 21300000, guid: 4c9a9d7d97ec66e489fb3aef5c57fa3b, type: 3}
     cost: 1
@@ -37,11 +44,18 @@ MonoBehaviour:
     effects:
     - type: 3
       subType: 6
-      applyTime: 3
+      applyTime: 2
       targetType: 0
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: Premisa
     sprite: {fileID: 21300000, guid: 0ab9bc0992821be4badf8231c5befb94, type: 3}
     cost: 1
@@ -92,12 +106,19 @@ MonoBehaviour:
     type: 0
     effects:
     - type: 4
-      subType: 15
-      applyTime: 2
+      subType: 16
+      applyTime: 1
       targetType: 0
       intParameter1: 1
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: Lo siguiente que vas a decir es...
     sprite: {fileID: 21300000, guid: a2fa9313519438f4095d14bf8c167d3b, type: 3}
     cost: 3
@@ -106,12 +127,19 @@ MonoBehaviour:
     type: 0
     effects:
     - type: 4
-      subType: 16
-      applyTime: 2
+      subType: 17
+      applyTime: 1
       targetType: 0
       intParameter1: 1
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: "Aqu\xED est\xE1n las pruebas que lo respaldan"
     sprite: {fileID: 21300000, guid: 900941b9be016ad47af6470eb23fe075, type: 3}
     cost: 4
@@ -128,11 +156,18 @@ MonoBehaviour:
     effects:
     - type: 3
       subType: 9
-      applyTime: 2
-      targetType: 0
+      applyTime: 1
+      targetType: 4
       intParameter1: 1
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: Ganar tiempo con una falacia
     sprite: {fileID: 21300000, guid: dd7a9357188c225429b0a5fa2cf0d56b, type: 3}
     cost: 1
@@ -141,12 +176,19 @@ MonoBehaviour:
     type: 1
     effects:
     - type: 4
-      subType: 17
-      applyTime: 2
+      subType: 18
+      applyTime: 1
       targetType: 2
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: Cambiar la perspectiva
     sprite: {fileID: 21300000, guid: cac3efdd9d4ee0d498958fb182821a73, type: 3}
     cost: 1
@@ -155,12 +197,19 @@ MonoBehaviour:
     type: 1
     effects:
     - type: 4
-      subType: 13
-      applyTime: 2
+      subType: 14
+      applyTime: 1
       targetType: 3
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: Aportar pruebas
     sprite: {fileID: 21300000, guid: 82892e2d1abf22340aa911873e5d3aae, type: 3}
     cost: 2
@@ -170,11 +219,18 @@ MonoBehaviour:
     effects:
     - type: 3
       subType: 9
-      applyTime: 2
+      applyTime: 1
       targetType: 1
       intParameter1: 2
       intParameter2: 2
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: Revisar los documentos
     sprite: {fileID: 21300000, guid: cce61675674fa544892b47d91a66e917, type: 3}
     cost: 2
@@ -183,12 +239,19 @@ MonoBehaviour:
     type: 1
     effects:
     - type: 4
-      subType: 15
-      applyTime: 2
+      subType: 16
+      applyTime: 1
       targetType: 0
       intParameter1: 2
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: "Tu argumento claritamente es inv\xE1lido"
     sprite: {fileID: 21300000, guid: ce844192e9ea58a4e8f2239441e04c79, type: 3}
     cost: 3
@@ -198,11 +261,18 @@ MonoBehaviour:
     effects:
     - type: 2
       subType: 3
-      applyTime: 2
+      applyTime: 1
       targetType: 2
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: "Tu argumento claritamente es inv\xE1lido"
     sprite: {fileID: 21300000, guid: ce844192e9ea58a4e8f2239441e04c79, type: 3}
     cost: 3
@@ -212,11 +282,18 @@ MonoBehaviour:
     effects:
     - type: 2
       subType: 3
-      applyTime: 2
+      applyTime: 1
       targetType: 2
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []
   - name: "Borr\xF3n y cuenta nueva"
     sprite: {fileID: 21300000, guid: 59de4d40e48c7394ea94205d025ee09f, type: 3}
     cost: 4
@@ -226,8 +303,15 @@ MonoBehaviour:
     effects:
     - type: 2
       subType: 3
-      applyTime: 2
-      targetType: 0
+      applyTime: 1
+      targetType: 6
       intParameter1: 0
       intParameter2: 0
-      gObjParameter: {fileID: 0}
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        cost: 0
+        strength: 0
+        defense: 0
+        type: 0
+        effects: []

@@ -12,6 +12,11 @@ namespace CardGame.Level
     {
         public void AddCard(Card card)
         {
+            if(numCards >= TurnManager.Instance.settings.handCapacity)
+            {
+                DiscardFirst();
+            }
+
             AddCard(card, transform);
         }
 
@@ -23,6 +28,19 @@ namespace CardGame.Level
             {
                 int index = random.Next(0, numCards);
                 cards[index].GetComponent<Card>().Destroy();
+            }
+        }
+
+        private void DiscardFirst()
+        {
+            cards[0].GetComponent<Card>().Destroy();
+        }
+
+        public void DiscardAll()
+        {
+            for (int i = 0; i < numCards; i++)
+            {
+                cards[i].GetComponent<Card>().Destroy();
             }
         }
     }

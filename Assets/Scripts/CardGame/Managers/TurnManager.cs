@@ -98,7 +98,7 @@ namespace CardGame.Managers
                 {
                     // Apply end round effects
                     endTurnEffectsDelegate?.Invoke();
-                    
+
                     StartRound();
                 }
             });
@@ -151,10 +151,10 @@ namespace CardGame.Managers
 
         private void InitializeContenders()
         {
-            player.Initialize(board.playerHand, board.playerCardZone);
+            player.Initialize(board.playerHand, board.playerCardZone, board.playerFieldCardZone);
             player.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
 
-            opponent.Initialize(board.opponentHand, board.opponentCardZone);
+            opponent.Initialize(board.opponentHand, board.opponentCardZone, board.opponentFieldCardZone);
             opponent.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
 
             opponentAI.Initialize(opponent);
@@ -191,16 +191,16 @@ namespace CardGame.Managers
 
                 if (playerCard != null && opponentCard != null)
                 {
-                    clashSequence.Join(playerCard.Hit(opponentCard));
-                    clashSequence.Join(opponentCard.Hit(playerCard));
+                    clashSequence.Join(playerCard.HitSequence(opponentCard, () => { ApplyCombatActions(playerCard, opponentCard); }));
+                    clashSequence.Join(opponentCard.HitSequence(playerCard, null));
                 }
                 else if (playerCard != null)
                 {
-                    clashSequence.Join(playerCard.Hit(opponent));
+                    clashSequence.Join(playerCard.HitSequence(opponent, () => { ApplyCombatActions(playerCard, opponent); }));
                 }
                 else if (opponentCard != null)
                 {
-                    clashSequence.Join(opponentCard.Hit(player));
+                    clashSequence.Join(opponentCard.HitSequence(player, () => { ApplyCombatActions(player, opponentCard); }));
                 }
 
                 if (playerCard != null || opponentCard != null)
@@ -210,6 +210,18 @@ namespace CardGame.Managers
             clashSequence.AppendInterval(1f);
 
             finishRoundSequence.Append(clashSequence);
+        }
+
+        public void ApplyCombatActions(object object1, object object2)
+        {
+            Card card1 = (object1 != null && object1 is Card) ? (Card)object1 : null;
+            Card card2 = (object2 != null && object2 is Card) ? (Card)object2 : null;
+
+            if (card1) card1.ApplyCombatEffects(object2);
+            if (card2) card2.ApplyCombatEffects(object1);
+
+            if(card1) card1.Hit(object2);
+            if(card2) card2.Hit(object1);
         }
 
         private void SetTurn(Turn turn)

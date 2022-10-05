@@ -10,6 +10,7 @@ namespace CardGame.Level
     {
         public Transform cardsPosition;
 
+        [SerializeField] private bool isFieldZone;
         private bool _isEmpty => numCards == 0;
         private bool _clickable;
 
@@ -62,7 +63,7 @@ namespace CardGame.Level
 
         private void CheckArgument(Card card, MouseController mouseController)
         {
-            if (_isEmpty)
+            if (isEmpty && !isFieldZone)
             {
                 mouseController.SetHolding(null);
                 card.Play(this);
@@ -89,7 +90,15 @@ namespace CardGame.Level
 
         private void CheckField(Card card, MouseController mouseController)
         {
-
+            if (isEmpty && isFieldZone)
+            {
+                mouseController.SetHolding(null);
+                card.Play(this);
+            } else
+            {
+                // Send card back to previous container
+                card.OnMouseLeftClickUp(mouseController);
+            }
         }
 
         public void AddCard(Card card)
@@ -104,7 +113,9 @@ namespace CardGame.Level
 
         private bool EnoughMana(Card card)
         {
-            return card.manaCost <= TurnManager.Instance.currentPlayer.currentMana;
+            Contender contender = TurnManager.Instance.currentPlayer;
+
+            return contender.freeMana || card.manaCost <= contender.currentMana;
         }
     }
 }

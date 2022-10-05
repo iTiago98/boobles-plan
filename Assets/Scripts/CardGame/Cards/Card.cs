@@ -93,6 +93,7 @@ namespace CardGame.Cards
         private SpriteRenderer _spriteRenderer;
 
         private TurnManager.EndTurnEffects _endTurnEffect;
+        private Deck.DrawCardEffects _drawCardEffect;
 
         private void Awake()
         {
@@ -121,14 +122,14 @@ namespace CardGame.Cards
             }
         }
 
-        public void Initialize(Hand hand, CardsData data)
+        public void Initialize(Hand hand, CardsData data, bool cardRevealed)
         {
             _hand = hand;
             _data = data;
 
             name = data.name;
 
-            if (contender.role == Contender.Role.PLAYER)
+            if (contender.role == Contender.Role.PLAYER || cardRevealed)
             {
                 if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
             }
@@ -270,7 +271,7 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickDown(MouseController mouseController)
         {
-            if (!moveWithMouse && mouseController.holdingCard == null && container == _hand)
+            if (!moveWithMouse && mouseController.holdingCard == null && container == _hand && contender.role == Contender.Role.PLAYER)
             {
                 // Deattach from parent
                 RemoveFromContainer();
@@ -283,7 +284,7 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
-            if (mouseController.holdingCard == this)
+            if (mouseController.holdingCard == this && contender.role == Contender.Role.PLAYER)
             {
                 // Return card to hand
                 _hand.AddCard(this);
@@ -301,20 +302,27 @@ namespace CardGame.Cards
 
         public void OnMouseHoverEnter()
         {
-            if (container == _hand)
+            if (container == _hand && contender.role == Contender.Role.PLAYER)
             {
                 transform.DOLocalMoveY(_hoverPosY, 0.2f);
                 transform.DOScale(_hoverScale, 0.2f);
+            }
+
+            if (contender.role == Contender.Role.PLAYER || _cardFront)
+            {
+                UIManager.Instance.ShowExtendedDescription(ToString());
             }
         }
 
         public void OnMouseHoverExit()
         {
-            if (this != null && gameObject != null && container == _hand && !moveWithMouse)
+            if (this != null && gameObject != null && container == _hand && !moveWithMouse && contender.role == Contender.Role.PLAYER)
             {
                 transform.DOLocalMoveY(0f, 0.2f);
                 transform.DOScale(_defaultScale, 0.2f);
             }
+
+            UIManager.Instance.HideExtendedDescription();
         }
 
         public void SetClickable(bool clickable)
@@ -329,7 +337,9 @@ namespace CardGame.Cards
         public void Play(CardZone cardZone)
         {
             // Substract mana
-            contender.SubstractMana(manaCost);
+            if (contender.freeMana) contender.SetFreeMana(false);
+            else contender.SubstractMana(manaCost);
+
             if (contender.role == Contender.Role.OPPONENT) FlipCard();
             SetMoveWithMouse(false);
 
@@ -344,36 +354,14 @@ namespace CardGame.Cards
             switch (type)
             {
                 case CardType.ARGUMENT:
-                    PlayArgument(cardZone);
+                case CardType.FIELD:
+                    AddToContainer(cardZone);
+                    CheckEffect();
 
                     break;
                 case CardType.ACTION:
                     PlayAction();
-
                     break;
-                case CardType.FIELD:
-                    break;
-            }
-        }
-
-        private void PlayArgument(CardZone cardZone)
-        {
-            // Add to container
-            cardZone.AddCard(this);
-            transform.DOScale(_defaultScale, 0.2f);
-
-            // Apply enter effect
-            if (hasEffect)
-            {
-                if (effect.applyTime == ApplyTime.ENTER)
-                {
-                    ApplyEffect();
-                }
-                else if (effect.applyTime == ApplyTime.END)
-                {
-                    _endTurnEffect = new TurnManager.EndTurnEffects(ApplyEffect);
-                    TurnManager.Instance.AddEndTurnEffect(_endTurnEffect);
-                }
             }
         }
 
@@ -424,7 +412,32 @@ namespace CardGame.Cards
             }
         }
 
-        
+        private void AddToContainer(CardZone cardZone)
+        {
+            cardZone.AddCard(this);
+            transform.DOScale(_defaultScale, 0.2f);
+        }
+
+        private void CheckEffect()
+        {
+            if (hasEffect)
+            {
+                if (effect.applyTime == ApplyTime.ENTER)
+                {
+                    ApplyEffect();
+                }
+                else if (effect.applyTime == ApplyTime.END)
+                {
+                    _endTurnEffect = new TurnManager.EndTurnEffects(ApplyEffect);
+                    TurnManager.Instance.AddEndTurnEffect(_endTurnEffect);
+                }
+                else if (effect.applyTime == ApplyTime.DRAW_CARD)
+                {
+                    _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
+                    Board.Instance.GetDeck(contender).AddDrawCardEffects(_drawCardEffect);
+                }
+            }
+        }
 
         private void MoveToWaitingSpot(TweenCallback onCompleteCallback)
         {
@@ -460,12 +473,21 @@ namespace CardGame.Cards
 
         #region Clash
 
-        public Sequence Hit(object target)
+        public void Hit(object target)
         {
-            return HitAnimation(target);
+            if (target is Card)
+            {
+                Card card = (Card)target;
+                card.ReceiveDamage(strength);
+            }
+            else
+            {
+                Contender contender = (Contender)target;
+                contender.ReceiveDamage(strength);
+            }
         }
 
-        private Sequence HitAnimation(object target)
+        public Sequence HitSequence(object target, TweenCallback hitCallback)
         {
             Sequence hitSequence = DOTween.Sequence();
 
@@ -489,20 +511,24 @@ namespace CardGame.Cards
 
             // Hit
             hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
-            hitSequence.AppendCallback(() =>
+            if (hitCallback != null)
             {
-                ApplyCombatEffects(target);
-                if (isCard)
-                {
-                    Card card = (Card)target;
-                    card.ReceiveDamage(strength);
-                }
-                else
-                {
-                    Contender contender = (Contender)target;
-                    contender.ReceiveDamage(strength);
-                }
-            });
+                hitSequence.AppendCallback(hitCallback);
+            }
+            //hitSequence.AppendCallback(() =>
+            //{
+            //    ApplyCombatEffects(target);
+            //    if (isCard)
+            //    {
+            //        Card card = (Card)target;
+            //        card.ReceiveDamage(strength);
+            //    }
+            //    else
+            //    {
+            //        Contender contender = (Contender)target;
+            //        contender.ReceiveDamage(strength);
+            //    }
+            //});
             // Back
             hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
             hitSequence.AppendCallback(() =>
@@ -522,7 +548,7 @@ namespace CardGame.Cards
             UpdateStatsUI();
         }
 
-        private void ApplyCombatEffects(object target)
+        public void ApplyCombatEffects(object target)
         {
             foreach (CardEffect effect in effects)
             {
@@ -542,9 +568,16 @@ namespace CardGame.Cards
             //Play destroy animation
             Debug.Log(name + " destroyed");
 
-            if(hasEffect && effect.applyTime == ApplyTime.END)
+            if (hasEffect)
             {
-                TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffect);
+                if (effect.applyTime == ApplyTime.END)
+                {
+                    TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffect);
+                }
+                else if (effect.applyTime == ApplyTime.DRAW_CARD)
+                {
+                    Board.Instance.GetDeck(contender).RemoveDrawCardEffect(_drawCardEffect);
+                }
             }
 
             Sequence destroySequence = DOTween.Sequence();
@@ -601,6 +634,26 @@ namespace CardGame.Cards
             UpdateStatsUI();
         }
 
+        public CardsData GetData()
+        {
+            return _data;
+        }
+
+        public override string ToString()
+        {
+            string s = "";
+
+            s += name.ToUpper() + "\n";
+
+            s += "TIPO: " + type.ToString() + "\n";
+
+            if (hasEffect)
+            {
+                s += effect.ToStringExtended(type);
+            }
+
+            return s;
+        }
 
     }
 }
