@@ -58,6 +58,7 @@ namespace CardGame
         public void IncreaseMaxMana(int mana)
         {
             _maxMana += mana;
+            UIManager.Instance.UpdateMaxMana(this, currentMaxMana, currentMaxMana + mana);
             currentMaxMana += mana;
         }
 
