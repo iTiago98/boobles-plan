@@ -57,6 +57,31 @@ namespace CardGame.Level
                 // Apply end round effects
                 drawCardEffectsDelegate?.Invoke();
             }
+
+            CheckCardNumber();
+        }
+
+        public void DiscardCards(int numCards)
+        {
+            for (int i = 0; i < numCards; i++)
+            {
+                if (_deckCards.Count > 0)
+                {
+                    Vector3 position = transform.position + new Vector3(0, 0, -0.1f);
+                    GameObject cardObj = Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
+
+                    // Take data from scriptable
+                    int index = Random.Range(0, _deckCards.Count);
+                    CardsData data = _deckCards[index];
+                    _deckCards.RemoveAt(index);
+
+                    Card card = cardObj.GetComponent<Card>();
+                    card.Initialize(null, data, cardRevealed: true);
+                    card.Destroy();
+                }
+            }
+
+            CheckCardNumber();
         }
 
         private void CopyCardsList(List<CardsData> cards)
@@ -92,6 +117,14 @@ namespace CardGame.Level
         public void RemoveDrawCardEffect(DrawCardEffects method)
         {
             drawCardEffectsDelegate -= method;
+        }
+
+        private void CheckCardNumber()
+        {
+            if (_deckCards.Count <= 0)
+            {
+                GetComponent<SpriteRenderer>().sprite = null;
+            }
         }
     }
 }

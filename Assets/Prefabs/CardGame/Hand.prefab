@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4065948331902605646}
   - component: {fileID: 4065948331902605642}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f1fa2a10e2d6343b2989aa7416ac28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSeparationX: 2
+  cardSeparationX: 1.7
   cardSeparationZ: 0.01
   animationTime: 0.5

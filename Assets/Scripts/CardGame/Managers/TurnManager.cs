@@ -45,11 +45,14 @@ namespace CardGame.Managers
         private bool _gameStarted;
         public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
 
-        public delegate void EndTurnEffects();
-        private EndTurnEffects endTurnEffectsDelegate;
-
+        private bool _skipCombat;
 
         #region Turn flow 
+
+        private void Start()
+        {
+            InitializeBoardBackground();
+        }
 
         public void StartGame()
         {
@@ -94,6 +97,7 @@ namespace CardGame.Managers
             finishRoundSequence = DOTween.Sequence();
             finishRoundSequence.OnComplete(() =>
             {
+                Debug.Log("OnComplete");
                 if (!CheckInterviewEnd())
                 {
                     // Apply end round effects
@@ -103,7 +107,9 @@ namespace CardGame.Managers
                 }
             });
 
-            Clash();
+            if (_skipCombat) _skipCombat = false;
+            else Clash();
+
             // END ROUND ANIMATION
 
             finishRoundSequence.Play();
@@ -126,27 +132,99 @@ namespace CardGame.Managers
 
         #endregion
 
-        public void AddEndTurnEffect(EndTurnEffects method)
+        #region Clash
+
+        private void Clash()
         {
-            if (endTurnEffectsDelegate == null)
+            //Debug.Log("Clash");
+            Sequence clashSequence = ClashContinue(0);
+
+            clashSequence.AppendInterval(1f);
+
+            finishRoundSequence.Append(clashSequence);
+        }
+
+        private Sequence ClashContinue(int index)
+        {
+            //Debug.Log("Clash continue " + index);
+            Sequence clashSequence = DOTween.Sequence();
+
+            Card playerCard = board.playerCardZone[index].GetCard();
+            Card opponentCard = board.opponentCardZone[index].GetCard();
+
+            if (playerCard != null && opponentCard != null)
             {
-                endTurnEffectsDelegate = method;
+                if (_playerGuardCard && _opponentGuardCard)
+                {
+                    clashSequence.Join(playerCard.HitSequence(_opponentGuardCard, () => { ApplyCombatActions(playerCard, _opponentGuardCard, false); }));
+                    clashSequence.Join(opponentCard.HitSequence(_playerGuardCard, () => { ApplyCombatActions(opponentCard, _playerGuardCard, false); }));
+                }
+                else if (_playerGuardCard)
+                {
+                    clashSequence.Join(playerCard.HitSequence(opponentCard, () => { ApplyCombatActions(playerCard, opponentCard, false); }));
+                    clashSequence.Join(opponentCard.HitSequence(_playerGuardCard, () => { ApplyCombatActions(opponentCard, _playerGuardCard, false); }));
+                }
+                else if (_opponentGuardCard)
+                {
+                    clashSequence.Join(playerCard.HitSequence(_opponentGuardCard, () => { ApplyCombatActions(playerCard, _opponentGuardCard, false); }));
+                    clashSequence.Join(opponentCard.HitSequence(playerCard, () => { ApplyCombatActions(opponentCard, playerCard, false); }));
+                }
+                else
+                {
+                    clashSequence.Join(playerCard.HitSequence(opponentCard, () => { ApplyCombatActions(playerCard, opponentCard, true); }));
+                    clashSequence.Join(opponentCard.HitSequence(playerCard, null));
+                }
             }
             else
             {
-                endTurnEffectsDelegate += method;
+                object playerTarget = (_opponentGuardCard != null) ? _opponentGuardCard : opponent;
+                object opponentTarget = (_playerGuardCard != null) ? _playerGuardCard : player;
+
+                if (playerCard != null)
+                {
+                    clashSequence.Join(playerCard.HitSequence(playerTarget, () => { ApplyCombatActions(playerCard, playerTarget, false); }));
+                }
+                else if (opponentCard != null)
+                {
+                    clashSequence.Join(opponentCard.HitSequence(opponentTarget, () => { ApplyCombatActions(opponentCard, opponentTarget, false); }));
+                }
+            }
+
+            if (playerCard != null || opponentCard != null)
+                clashSequence.AppendInterval(0.1f);
+
+            if (index < 3) clashSequence.Append(ClashContinue(index + 1));
+            else clashSequence.AppendInterval(0.5f);
+
+            return clashSequence;
+        }
+
+        public void ApplyCombatActions(object object1, object object2, bool hitBack)
+        {
+            Card card1 = (object1 != null && object1 is Card) ? (Card)object1 : null;
+            Card card2 = (object2 != null && object2 is Card) ? (Card)object2 : null;
+
+            if (card1) card1.ApplyCombatEffects(object2);
+            if (card2) card2.ApplyCombatEffects(object1);
+
+            if (card1) card1.Hit(object2);
+
+            if (card2)
+            {
+                if (card2.strength == 0 || !hitBack)
+                    card2.CheckDestroy();
+                else if (hitBack)
+                    card2.Hit(object1);
             }
         }
 
-        public void RemoveEndTurnEffect(EndTurnEffects method)
-        {
-            endTurnEffectsDelegate -= method;
-        }
+        #endregion
 
-        public Contender GetContenderFromHand(Hand hand)
+        #region Initialize
+
+        private void InitializeBoardBackground()
         {
-            if (hand == board.playerHand) return player;
-            else return opponent;
+            Board.Instance.InitializeBackground(DeckManager.Instance.GetOpponentName());
         }
 
         private void InitializeContenders()
@@ -158,80 +236,19 @@ namespace CardGame.Managers
             opponent.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
 
             opponentAI.Initialize(opponent);
-
-            //UIManager.Instance.UpdateUIStats();
         }
 
         private void InitializeDecks()
         {
             // TODO Change player.deckCards.cards for DeckManager.Instance.GetPlayerCards()
             //board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), opponent.deckCards.cards);
-            board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
+            board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards()) ;
+            //board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
         }
 
-        private void DrawCards(int cardNumber)
-        {
-            board.DrawCards(cardNumber, _turn);
-        }
+        #endregion
 
-        private void FillMana()
-        {
-            player.FillMana();
-            opponent.FillMana();
-        }
-
-        private void Clash()
-        {
-            Sequence clashSequence = DOTween.Sequence();
-
-            for (int i = 0; i < board.playerCardZone.Count; i++)
-            {
-                Card playerCard = board.playerCardZone[i].GetCard();
-                Card opponentCard = board.opponentCardZone[i].GetCard();
-
-                if (playerCard != null && opponentCard != null)
-                {
-                    clashSequence.Join(playerCard.HitSequence(opponentCard, () => { ApplyCombatActions(playerCard, opponentCard); }));
-                    clashSequence.Join(opponentCard.HitSequence(playerCard, null));
-                }
-                else if (playerCard != null)
-                {
-                    clashSequence.Join(playerCard.HitSequence(opponent, () => { ApplyCombatActions(playerCard, opponent); }));
-                }
-                else if (opponentCard != null)
-                {
-                    clashSequence.Join(opponentCard.HitSequence(player, () => { ApplyCombatActions(player, opponentCard); }));
-                }
-
-                if (playerCard != null || opponentCard != null)
-                    clashSequence.AppendInterval(0.1f);
-            }
-
-            clashSequence.AppendInterval(1f);
-
-            finishRoundSequence.Append(clashSequence);
-        }
-
-        public void ApplyCombatActions(object object1, object object2)
-        {
-            Card card1 = (object1 != null && object1 is Card) ? (Card)object1 : null;
-            Card card2 = (object2 != null && object2 is Card) ? (Card)object2 : null;
-
-            if (card1) card1.ApplyCombatEffects(object2);
-            if (card2) card2.ApplyCombatEffects(object1);
-
-            if(card1) card1.Hit(object2);
-            if(card2) card2.Hit(object1);
-        }
-
-        private void SetTurn(Turn turn)
-        {
-            _turn = turn;
-            if (turn == Turn.OPPONENT)
-                opponentAI.enabled = true;
-
-            UIManager.Instance.CheckEndTurnButtonState(_turn);
-        }
+        #region Interview End
 
         private bool CheckInterviewEnd()
         {
@@ -255,6 +272,97 @@ namespace CardGame.Managers
         private void OnInterviewLose()
         {
             UIManager.Instance.SetInterviewWinText(false);
+        }
+
+        #endregion
+
+        #region End Turn Effects
+
+        public delegate void EndTurnEffects();
+        private EndTurnEffects endTurnEffectsDelegate;
+
+        public void AddEndTurnEffect(EndTurnEffects method)
+        {
+            if (endTurnEffectsDelegate == null)
+            {
+                endTurnEffectsDelegate = method;
+            }
+            else
+            {
+                endTurnEffectsDelegate += method;
+            }
+        }
+
+        public void RemoveEndTurnEffect(EndTurnEffects method)
+        {
+            endTurnEffectsDelegate -= method;
+        }
+
+        #endregion
+
+        #region Guard Cards
+
+        private Card _playerGuardCard;
+        private Card _opponentGuardCard;
+
+        public void SetGuardCard(Card guardCard)
+        {
+            if (guardCard.contender.role == Contender.Role.PLAYER)
+            {
+                _playerGuardCard = guardCard;
+            }
+            else
+            {
+                _opponentGuardCard = guardCard;
+            }
+        }
+
+        public void RemoveGuardCard(Contender contender)
+        {
+            if (contender.role == Contender.Role.PLAYER)
+                _playerGuardCard = null;
+            else
+                _opponentGuardCard = null;
+        }
+
+        #endregion
+
+        private void DrawCards(int cardNumber)
+        {
+            board.DrawCards(cardNumber, _turn);
+        }
+
+        private void FillMana()
+        {
+            player.FillMana();
+            opponent.FillMana();
+        }
+
+        public void SkipCombat()
+        {
+            _skipCombat = true;
+        }
+        
+
+        private void SetTurn(Turn turn)
+        {
+            _turn = turn;
+            if (turn == Turn.OPPONENT)
+                opponentAI.enabled = true;
+
+            UIManager.Instance.CheckEndTurnButtonState(_turn);
+        }
+
+        public Contender GetContenderFromHand(Hand hand)
+        {
+            if (hand == board.playerHand) return player;
+            else return opponent;
+        }
+
+        public Contender GetOtherContender(Contender contender)
+        {
+            if (contender.role == Contender.Role.PLAYER) return opponent;
+            else return player;
         }
     }
 }

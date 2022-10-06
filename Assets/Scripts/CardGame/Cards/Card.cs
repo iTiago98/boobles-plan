@@ -180,7 +180,7 @@ namespace CardGame.Cards
 
             foreach (CardEffect effect in effects)
             {
-                temp += effect.ToString();
+                temp += effect.ToString() + "\n";
             }
 
             return temp;
@@ -218,6 +218,8 @@ namespace CardGame.Cards
             moveWithMouse = move;
         }
 
+        #endregion
+
         public void FlipCard()
         {
             if (_cardFront)
@@ -240,8 +242,6 @@ namespace CardGame.Cards
             transform.Rotate(new Vector3(0, 0, 180));
             _cardFront = !_cardFront;
         }
-
-        #endregion
 
         //private void CheckCloseUp()
         //{
@@ -422,19 +422,22 @@ namespace CardGame.Cards
         {
             if (hasEffect)
             {
-                if (effect.applyTime == ApplyTime.ENTER)
+                foreach (CardEffect effect in effects)
                 {
-                    ApplyEffect();
-                }
-                else if (effect.applyTime == ApplyTime.END)
-                {
-                    _endTurnEffect = new TurnManager.EndTurnEffects(ApplyEffect);
-                    TurnManager.Instance.AddEndTurnEffect(_endTurnEffect);
-                }
-                else if (effect.applyTime == ApplyTime.DRAW_CARD)
-                {
-                    _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
-                    Board.Instance.GetDeck(contender).AddDrawCardEffects(_drawCardEffect);
+                    if (effect.applyTime == ApplyTime.ENTER)
+                    {
+                        ApplyEffect(effect);
+                    }
+                    else if (effect.applyTime == ApplyTime.END)
+                    {
+                        _endTurnEffect = new TurnManager.EndTurnEffects(ApplyEffect);
+                        TurnManager.Instance.AddEndTurnEffect(_endTurnEffect);
+                    }
+                    else if (effect.applyTime == ApplyTime.DRAW_CARD)
+                    {
+                        _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
+                        Board.Instance.GetDeck(contender).AddDrawCardEffects(_drawCardEffect);
+                    }
                 }
             }
         }
@@ -491,52 +494,55 @@ namespace CardGame.Cards
         {
             Sequence hitSequence = DOTween.Sequence();
 
-            bool isCard = target is Card;
-            Vector3 targetPosition = (isCard) ? ((Card)target).transform.position : ((Contender)target).transform.position;
-
-            float approachFactor = isCard ? 0.2f : 0.8f;
-            Vector3 targetDir = (targetPosition - transform.position) * approachFactor;
-            targetDir = new Vector3(targetDir.x, targetDir.y, 0);
-
-            Vector3 previousRotation = transform.rotation.eulerAngles;
-            Quaternion rotation = Quaternion.FromToRotation(transform.up, targetDir);
-            Vector3 rotationEuler = rotation.eulerAngles;
-            if (rotationEuler.z > 180) rotationEuler = new Vector3(rotationEuler.x, rotationEuler.y, rotationEuler.z - 360);
-
-            // Enlarge and rotate
-            hitSequence.Append(transform.DOScale(_hitScale, 0.5f));
-            if (contender.role == Contender.Role.PLAYER)
-                hitSequence.Join(transform.DOLocalMoveZ(-0.1f, 0.5f));
-            hitSequence.Join(transform.DORotate(rotationEuler, 0.2f).SetRelative());
-
-            // Hit
-            hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
-            if (hitCallback != null)
+            if (strength != 0)
             {
-                hitSequence.AppendCallback(hitCallback);
+                bool isCard = target is Card;
+                Vector3 targetPosition = (isCard) ? ((Card)target).transform.position : ((Contender)target).transform.position;
+
+                float approachFactor = isCard ? 0.2f : 0.8f;
+                Vector3 targetDir = (targetPosition - transform.position) * approachFactor;
+                targetDir = new Vector3(targetDir.x, targetDir.y, 0);
+
+                Vector3 previousRotation = transform.rotation.eulerAngles;
+                Quaternion rotation = Quaternion.FromToRotation(transform.up, targetDir);
+                Vector3 rotationEuler = rotation.eulerAngles;
+                if (rotationEuler.z > 180) rotationEuler = new Vector3(rotationEuler.x, rotationEuler.y, rotationEuler.z - 360);
+
+                // Enlarge and rotate
+                hitSequence.Append(transform.DOScale(_hitScale, 0.5f));
+                if (contender.role == Contender.Role.PLAYER)
+                    hitSequence.Join(transform.DOLocalMoveZ(-0.1f, 0.5f));
+                else
+                    hitSequence.Join(transform.DOLocalMoveZ(-0.05f, 0.5f));
+                hitSequence.Join(transform.DORotate(rotationEuler, 0.2f).SetRelative());
+
+                // Hit
+                hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
+
+
+                // Hit callback
+                if (hitCallback != null)
+                {
+                    hitSequence.AppendCallback(hitCallback);
+                }
+
+                // Back
+                hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
+                hitSequence.AppendCallback(() =>
+                {
+                    CheckDestroy();
+                });
+                hitSequence.Append(transform.DOScale(_defaultScale, 0.2f));
+                hitSequence.Join(transform.DORotate(previousRotation, 0.2f));
             }
-            //hitSequence.AppendCallback(() =>
-            //{
-            //    ApplyCombatEffects(target);
-            //    if (isCard)
-            //    {
-            //        Card card = (Card)target;
-            //        card.ReceiveDamage(strength);
-            //    }
-            //    else
-            //    {
-            //        Contender contender = (Contender)target;
-            //        contender.ReceiveDamage(strength);
-            //    }
-            //});
-            // Back
-            hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
-            hitSequence.AppendCallback(() =>
+            else
             {
-                CheckDestroy();
-            });
-            hitSequence.Append(transform.DOScale(_defaultScale, 0.2f));
-            hitSequence.Join(transform.DORotate(previousRotation, 0.2f));
+                // Hit callback
+                if (hitCallback != null)
+                {
+                    hitSequence.AppendCallback(hitCallback);
+                }
+            }
 
             return hitSequence;
         }
@@ -570,11 +576,11 @@ namespace CardGame.Cards
 
             if (hasEffect)
             {
-                if (effect.applyTime == ApplyTime.END)
+                if (effect.applyTime == ApplyTime.END && _endTurnEffect != null)
                 {
                     TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffect);
                 }
-                else if (effect.applyTime == ApplyTime.DRAW_CARD)
+                else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
                 {
                     Board.Instance.GetDeck(contender).RemoveDrawCardEffect(_drawCardEffect);
                 }
@@ -584,7 +590,7 @@ namespace CardGame.Cards
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
             {
-                container.RemoveCard(gameObject);
+                if (container != null) container.RemoveCard(gameObject);
                 Destroy(gameObject);
             });
 
@@ -600,6 +606,11 @@ namespace CardGame.Cards
 
         private void ApplyEffect()
         {
+            ApplyEffect(effect);
+        }
+
+        private void ApplyEffect(CardEffect effect)
+        {
             if (effect.IsAppliable())
             {
                 effect.Apply(this, null);
@@ -609,10 +620,12 @@ namespace CardGame.Cards
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
             _data.strength += strengthBoost;
+            if (_data.strength < 0) _data.strength = 0;
             _data.defense += defenseBoost;
             //Update card strength and defense number
             if (type == CardType.ARGUMENT)
                 UpdateStatsUI();
+            CheckDestroy();
         }
 
         public void RemoveFromContainer()

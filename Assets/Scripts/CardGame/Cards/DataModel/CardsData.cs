@@ -32,6 +32,7 @@ namespace CardGame.Cards.DataModel
             this.strength = data.strength;
             this.defense = data.defense;
             this.type = data.type;
+            this.effects = data.effects;
         }
     } 
 }

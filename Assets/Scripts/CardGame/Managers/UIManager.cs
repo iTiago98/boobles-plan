@@ -16,30 +16,42 @@ namespace CardGame.Managers
 
         public static UIManager Instance { private set; get; }
 
-        //public Text playerStats;
-        //public Text opponentStats;
+        #region Stats
+
+        [Header("Contenders Stats")]
 
         public Image playerHealthImage;
+        public Image playerExtraHealthImage;
         public List<Image> playerManaList;
-        //public List<Image> playerExtraManaList;
 
         public Image opponentHealthImage;
+        public Image opponentExtraHealthImage;
         public List<Image> opponentManaList;
-        //public List<Image> opponentExtraManaList;
 
         public Sprite fullManaCristal;
         public Sprite emptyManaCristal;
         public Sprite fullExtraManaCristal;
-        public Sprite emptyExtraManaCristal;
+
+        #endregion
+
+        #region Extended Description
+
+        [Header("Extended Description")]
+
+        public GameObject extendedDescriptionPanel;
+        public TextMeshProUGUI extendedDescriptionText;
+
+        #endregion
+
+        #region Interactables
+
+        [Header("Interactables")]
 
         public TextMeshProUGUI interviewEnd;
         public MyButton endTurnButton;
         public MyButton endButton;
-        public EloquenceBar eloquenceBar;
-        public TextMeshProUGUI log;
 
-        public GameObject extendedDescriptionPanel;
-        public TextMeshProUGUI extendedDescriptionText;
+        #endregion
 
         private Contender _player;
         private Contender _opponent;
@@ -120,16 +132,19 @@ namespace CardGame.Managers
 
         private void SetStats(int newPlayerLife, int currentPlayerMana, int newOpponentLife, int currentOpponentMana)
         {
-            SetHealth(playerHealthImage, newPlayerLife);
-            SetHealth(opponentHealthImage, newOpponentLife);
+            SetHealth(playerHealthImage, playerExtraHealthImage, newPlayerLife);
+            SetHealth(opponentHealthImage, opponentExtraHealthImage, newOpponentLife);
 
             if (_shownPlayerMana != currentPlayerMana) SetMana(playerManaList, ref _shownPlayerMana, currentPlayerMana);
             if (_shownOpponentMana != currentOpponentMana) SetMana(opponentManaList, ref _shownOpponentMana, currentOpponentMana);
         }
 
-        private void SetHealth(Image healthImage, int life)
+        private void SetHealth(Image healthImage, Image extraHealthImage, int life)
         {
-            healthImage.fillAmount = (float)life / TurnManager.Instance.settings.initialEloquence;
+            int maxEloquence = TurnManager.Instance.settings.initialEloquence;
+            healthImage.fillAmount = (float)life / maxEloquence;
+
+            extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
         }
 
         private void SetMana(List<Image> manaList, ref int shownMana, int currentMana)
@@ -137,14 +152,14 @@ namespace CardGame.Managers
             //Debug.Log("New Mana: " + shownMana + " - CurrentMana: " + currentMana);
             if (shownMana < currentMana)
             {
-                Debug.Log("1: Mana " + (shownMana) + " full");
+                //Debug.Log("1: Mana " + (shownMana) + " full");
                 manaList[shownMana].sprite = (shownMana < TurnManager.Instance.settings.maxManaCounter) ? fullManaCristal : fullExtraManaCristal;
                 shownMana++;
             }
             else
             {
-                Debug.Log("2: Mana " + (shownMana - 1) + " empty");
-                manaList[shownMana - 1].sprite = ((shownMana - 1) < TurnManager.Instance.settings.maxManaCounter) ? emptyManaCristal : emptyExtraManaCristal;
+                //Debug.Log("2: Mana " + (shownMana - 1) + " empty");
+                manaList[shownMana - 1].sprite = emptyManaCristal;
                 shownMana--;
             }
         }
@@ -161,8 +176,8 @@ namespace CardGame.Managers
             {
                 sequence.AppendCallback(() =>
                 {
-                    Debug.Log("3: Mana " + (_shownMaxMana) + " empty");
-                    manaList[_shownMaxMana].sprite = (_shownMaxMana < TurnManager.Instance.settings.maxManaCounter) ? emptyManaCristal : emptyExtraManaCristal;
+                    //Debug.Log("3: Mana " + (_shownMaxMana) + " empty");
+                    manaList[_shownMaxMana].sprite = emptyManaCristal;
                     _shownMaxMana++;
                 });
                 sequence.AppendInterval(0.1f);
@@ -218,7 +233,7 @@ namespace CardGame.Managers
 
         public void AddToLog(string text)
         {
-            log.text += text;
+            //log.text += text;
         }
 
         public void ShowEndButton(bool show)

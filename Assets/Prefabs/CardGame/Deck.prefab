@@ -74,14 +74,10 @@ MonoBehaviour:
       targetType: 8
       intParameter1: 1
       intParameter2: 0
-      cardParameter:
-        name: 
-        sprite: {fileID: 0}
-        cost: 0
-        strength: 0
-        defense: 0
-        type: 0
-        effects: []
+      cardParameter_Name: 
+      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Strength: 0
+      cardParameter_Defense: 0
 --- !u!212 &7597065615806498474
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -123,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c3220f0a1299dc84d9ba52325a945eb1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 65cdb43eae026da4ca88a2a0cfbbce98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
