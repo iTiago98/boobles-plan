@@ -79,6 +79,7 @@ namespace CardGame
             eloquence -= strength;
             //if (eloquence < 0) eloquence = 0;
             UIManager.Instance.UpdateUIStats();
+            TurnManager.Instance.CheckEnd();
         }
 
         public void SetFreeMana(bool state)

@@ -34,5 +34,10 @@ namespace CardGame.Cards.DataModel
             this.type = data.type;
             this.effects = data.effects;
         }
+
+        public void AddEffect(CardEffect effect)
+        {
+            effects.Add(effect);
+        }
     } 
 }

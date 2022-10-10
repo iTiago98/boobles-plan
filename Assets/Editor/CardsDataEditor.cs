@@ -94,157 +94,7 @@ namespace CardGame.Cards.DataModel
                     {
                         CardEffect cardEffect = card.effects[j];
 
-                        switch (cardEffect.type)
-                        {
-                            case EffectType.NONE:
-                                break;
-                            case EffectType.DEFENSIVE:
-
-                                DefensiveType defensive = (DefensiveType)Enum.Parse(typeof(DefensiveType), cardEffect.subType.ToString());
-                                cardEffect.SetSubTypeFromChild((DefensiveType)EditorGUILayout.EnumPopup("SubType", defensive));
-
-                                switch (cardEffect.subType)
-                                {
-                                    case SubType.NONE:
-                                        break;
-                                    case SubType.RESTORE_LIFE:
-                                    case SubType.INCREASE_MAX_MANA:
-                                        cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                                        break;
-                                }
-
-                                break;
-                            case EffectType.OFFENSIVE:
-
-                                OffensiveType offensive = (OffensiveType)Enum.Parse(typeof(OffensiveType), cardEffect.subType.ToString());
-                                cardEffect.SetSubTypeFromChild((OffensiveType)EditorGUILayout.EnumPopup("SubType", offensive));
-
-                                switch (cardEffect.subType)
-                                {
-                                    case SubType.NONE:
-                                    case SubType.DESTROY_CARD:
-                                        break;
-                                    case SubType.DEAL_DAMAGE:
-                                        cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                                        break;
-                                    case SubType.DECREASE_MANA:
-                                        cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                                        break;
-                                }
-
-                                break;
-                            case EffectType.BOOST:
-
-                                BoostType boost = (BoostType)Enum.Parse(typeof(BoostType), cardEffect.subType.ToString());
-                                cardEffect.SetSubTypeFromChild((BoostType)EditorGUILayout.EnumPopup("SubType", boost));
-
-                                switch (cardEffect.subType)
-                                {
-                                    case SubType.NONE:
-                                    case SubType.LIFELINK:
-                                    case SubType.REBOUND:
-                                    case SubType.TRAMPLE:
-                                    case SubType.GUARD:
-                                        break;
-                                    case SubType.STAT_BOOST:
-                                        cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                                        cardEffect.intParameter2 = EditorGUILayout.IntField("Parameter2: ", cardEffect.intParameter2);
-                                        break;
-                                    case SubType.ADD_EFFECT:
-                                        // Add effectParameter
-                                        break;
-                                }
-
-                                break;
-                            case EffectType.TACTICAL:
-
-                                TacticalType tactical = (TacticalType)Enum.Parse(typeof(TacticalType), cardEffect.subType.ToString());
-                                cardEffect.SetSubTypeFromChild((TacticalType)EditorGUILayout.EnumPopup("SubType", tactical));
-
-                                switch (cardEffect.subType)
-                                {
-                                    case SubType.NONE:
-                                    case SubType.SWAP_POSITION:
-                                    case SubType.SWAP_CONTENDER:
-                                    case SubType.DUPLICATE_CARD:
-                                    case SubType.RETURN_CARD:
-                                        break;
-                                    case SubType.CREATE_CARD:
-                                        // Add gameobjectParameter
-                                        if (cardEffect.cardParameter == null) cardEffect.cardParameter = new CardsDataNoSer();
-
-                                        cardEffect.cardParameter.name = EditorGUILayout.TextField("Card name:", cardEffect.cardParameter.name);
-
-                                        EditorGUILayout.BeginHorizontal();
-
-                                        EditorGUILayout.PrefixLabel("Card sprite: ");
-                                        cardEffect.cardParameter.sprite = GetSpriteFromName(cardsDataContainer.resourcesPath, cardEffect.cardParameter.name);
-                                        cardEffect.cardParameter.sprite = (Sprite)EditorGUILayout.ObjectField(cardEffect.cardParameter.sprite, typeof(Sprite), allowSceneObjects: true);
-
-                                        EditorGUILayout.EndHorizontal();
-
-                                        cardEffect.cardParameter.strength = EditorGUILayout.IntField("Card strength:", cardEffect.cardParameter.strength);
-                                        cardEffect.cardParameter.defense = EditorGUILayout.IntField("Card defense:", cardEffect.cardParameter.defense);
-
-                                        //cardEffect.cardParameter = (CardsData) EditorGUILayout.ObjectField("Parameter 1:", cardEffect.cardParameter, typeof(CardsData), true);
-                                        break;
-                                    case SubType.DRAW_CARD:
-                                        cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                                        break;
-                                    case SubType.DISCARD_CARD:
-                                        cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                                        break;
-                                }
-
-                                break;
-                        }
-
-                        switch (cardEffect.subType)
-                        {
-                            case SubType.RESTORE_LIFE:
-                            case SubType.INCREASE_MAX_MANA:
-                            case SubType.DECREASE_MANA:
-                            case SubType.LIFELINK:
-                            case SubType.REBOUND:
-                            case SubType.TRAMPLE:
-                            case SubType.CREATE_CARD:
-                            case SubType.DRAW_CARD:
-                            case SubType.DISCARD_CARD:
-                            case SubType.FREE_MANA:
-                            case SubType.WHEEL:
-                                break;
-                            default:
-                                cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
-                                break;
-                        }
-
-                        if (card.type == CardType.ACTION)
-                        {
-                            cardEffect.applyTime = ApplyTime.ENTER;
-                        }
-                        else
-                        {
-                            // TODO: This switch only works for tutorial deck
-                            switch (cardEffect.subType)
-                            {
-                                case SubType.NONE:
-                                    break;
-                                case SubType.DRAW_CARD:
-                                case SubType.DISCARD_CARD:
-                                case SubType.INCREASE_MAX_MANA:
-                                case SubType.FREE_MANA:
-                                    cardEffect.applyTime = ApplyTime.ENTER;
-                                    break;
-                                case SubType.LIFELINK:
-                                case SubType.REBOUND:
-                                case SubType.TRAMPLE:
-                                    cardEffect.applyTime = ApplyTime.COMBAT;
-                                    break;
-                                default:
-                                    cardEffect.applyTime = (ApplyTime)EditorGUILayout.EnumPopup("Apply time", cardEffect.applyTime);
-                                    break;
-                            }
-                        }
+                        ShowEffect(card, cardEffect);
                     }
 
                     GUILayout.Space(10f);
@@ -262,6 +112,173 @@ namespace CardGame.Cards.DataModel
             if (GUILayout.Button("Deck options"))
             {
                 OpenDeckOptions();
+            }
+        }
+
+        private void ShowEffect(CardsData card, CardEffect cardEffect)
+        {
+            switch (cardEffect.type)
+            {
+                case EffectType.NONE:
+                    break;
+                case EffectType.DEFENSIVE:
+
+                    DefensiveType defensive = (DefensiveType)Enum.Parse(typeof(DefensiveType), cardEffect.subType.ToString());
+                    cardEffect.SetSubTypeFromChild((DefensiveType)EditorGUILayout.EnumPopup("SubType", defensive));
+
+                    switch (cardEffect.subType)
+                    {
+                        case SubType.NONE:
+                            break;
+                        case SubType.RESTORE_LIFE:
+                        case SubType.INCREASE_MAX_MANA:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            break;
+                    }
+
+                    break;
+                case EffectType.OFFENSIVE:
+
+                    OffensiveType offensive = (OffensiveType)Enum.Parse(typeof(OffensiveType), cardEffect.subType.ToString());
+                    cardEffect.SetSubTypeFromChild((OffensiveType)EditorGUILayout.EnumPopup("SubType", offensive));
+
+                    switch (cardEffect.subType)
+                    {
+                        case SubType.NONE:
+                        case SubType.DESTROY_CARD:
+                            break;
+                        case SubType.DEAL_DAMAGE:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            break;
+                        case SubType.DECREASE_MANA:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            break;
+                    }
+
+                    break;
+                case EffectType.BOOST:
+
+                    BoostType boost = (BoostType)Enum.Parse(typeof(BoostType), cardEffect.subType.ToString());
+                    cardEffect.SetSubTypeFromChild((BoostType)EditorGUILayout.EnumPopup("SubType", boost));
+
+                    switch (cardEffect.subType)
+                    {
+                        case SubType.NONE:
+                        case SubType.LIFELINK:
+                        case SubType.REBOUND:
+                        case SubType.TRAMPLE:
+                        case SubType.GUARD:
+                            break;
+                        case SubType.STAT_BOOST:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            cardEffect.intParameter2 = EditorGUILayout.IntField("Parameter2: ", cardEffect.intParameter2);
+                            break;
+                        case SubType.ADD_EFFECT:
+                            // Add effectParameter
+                            break;
+                    }
+
+                    break;
+                case EffectType.TACTICAL:
+
+                    TacticalType tactical = (TacticalType)Enum.Parse(typeof(TacticalType), cardEffect.subType.ToString());
+                    cardEffect.SetSubTypeFromChild((TacticalType)EditorGUILayout.EnumPopup("SubType", tactical));
+
+                    switch (cardEffect.subType)
+                    {
+                        case SubType.NONE:
+                        case SubType.SWAP_POSITION:
+                        case SubType.SWAP_CONTENDER:
+                        case SubType.DUPLICATE_CARD:
+                        case SubType.RETURN_CARD:
+                            break;
+                        case SubType.CREATE_CARD:
+                            // Add gameobjectParameter
+
+                            cardEffect.cardParameter_Name = EditorGUILayout.TextField("Card name:", cardEffect.cardParameter_Name);
+
+                            EditorGUILayout.BeginHorizontal();
+
+                            EditorGUILayout.PrefixLabel("Card sprite: ");
+                            cardEffect.cardParameter_Sprite = GetSpriteFromName(cardsDataContainer.resourcesPath, cardEffect.cardParameter_Name);
+                            cardEffect.cardParameter_Sprite = (Sprite)EditorGUILayout.ObjectField(cardEffect.cardParameter_Sprite, typeof(Sprite), allowSceneObjects: true);
+
+                            EditorGUILayout.EndHorizontal();
+
+                            cardEffect.cardParameter_Strength = EditorGUILayout.IntField("Card strength:", cardEffect.cardParameter_Strength);
+                            cardEffect.cardParameter_Defense = EditorGUILayout.IntField("Card defense:", cardEffect.cardParameter_Defense);
+
+                            cardEffect.cardParameter_Effect = (SubType)EditorGUILayout.EnumPopup("Card effect:", cardEffect.cardParameter_Effect);
+                            //cardEffect.cardParameter = (CardsData) EditorGUILayout.ObjectField("Parameter 1:", cardEffect.cardParameter, typeof(CardsData), true);
+                            break;
+                        case SubType.DRAW_CARD:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            break;
+                        case SubType.DISCARD_CARD:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            break;
+                    }
+
+                    break;
+                case EffectType.ALTERNATE_WIN_CONDITION:
+                    AlternateWinConditionType alternateWinCondition = (AlternateWinConditionType)Enum.Parse(typeof(AlternateWinConditionType), cardEffect.subType.ToString());
+                    cardEffect.SetSubTypeFromChild((AlternateWinConditionType)EditorGUILayout.EnumPopup("SubType", alternateWinCondition));
+                    break;
+            }
+
+            if (cardEffect.type != EffectType.ALTERNATE_WIN_CONDITION)
+            {
+                switch (cardEffect.subType)
+                {
+                    case SubType.NONE:
+                    case SubType.RESTORE_LIFE:
+                    case SubType.INCREASE_MAX_MANA:
+                    case SubType.DECREASE_MANA:
+                    case SubType.LIFELINK:
+                    case SubType.REBOUND:
+                    case SubType.TRAMPLE:
+                    case SubType.COMPARTMENTALIZE:
+                    case SubType.CREATE_CARD:
+                    case SubType.DRAW_CARD:
+                    case SubType.DISCARD_CARD:
+                    case SubType.FREE_MANA:
+                    case SubType.WHEEL:
+                    case SubType.GUARD:
+                        break;
+                    default:
+                        cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
+                        break;
+                }
+
+                if (card.type == CardType.ACTION)
+                {
+                    cardEffect.applyTime = ApplyTime.ENTER;
+                }
+                else
+                {
+                    // TODO: This switch only works for tutorial deck
+                    switch (cardEffect.subType)
+                    {
+                        case SubType.NONE:
+                            break;
+                        case SubType.DRAW_CARD:
+                        case SubType.DISCARD_CARD:
+                        case SubType.INCREASE_MAX_MANA:
+                        case SubType.FREE_MANA:
+                        case SubType.GUARD:
+                            cardEffect.applyTime = ApplyTime.ENTER;
+                            break;
+                        case SubType.LIFELINK:
+                        case SubType.REBOUND:
+                        case SubType.TRAMPLE:
+                        case SubType.COMPARTMENTALIZE:
+                            cardEffect.applyTime = ApplyTime.COMBAT;
+                            break;
+                        default:
+                            cardEffect.applyTime = (ApplyTime)EditorGUILayout.EnumPopup("Apply time", cardEffect.applyTime);
+                            break;
+                    }
+                }
             }
         }
 
@@ -297,6 +314,12 @@ namespace CardGame.Cards.DataModel
         public static void CreateTacticalEffect()
         {
             currentCard.effects.Add(new CardEffect() { type = EffectType.TACTICAL });
+        }
+
+        [MenuItem("Assets/Card Game/Card Options/Create Effect/Alternate Win Condition")]
+        public static void CreateAlternateWinCondition()
+        {
+            currentCard.effects.Add(new CardEffect() { type = EffectType.ALTERNATE_WIN_CONDITION });
         }
 
         [MenuItem("Assets/Card Game/Card Options/Remove last effect")]

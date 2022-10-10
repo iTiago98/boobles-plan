@@ -92,7 +92,8 @@ namespace CardGame.Cards
 
         private SpriteRenderer _spriteRenderer;
 
-        private TurnManager.EndTurnEffects _endTurnEffect;
+        private TurnManager.PlayArgumentEffects _playArgumentEffect;
+        private List<TurnManager.EndTurnEffects> _endTurnEffects;
         private Deck.DrawCardEffects _drawCardEffect;
 
         private void Awake()
@@ -112,6 +113,8 @@ namespace CardGame.Cards
             _moveScale = TurnManager.Instance.settings.moveScale;
 
             _hitScale = TurnManager.Instance.settings.hitScale;
+
+            _endTurnEffects = new List<TurnManager.EndTurnEffects>();
         }
 
         private void Update()
@@ -354,11 +357,16 @@ namespace CardGame.Cards
             switch (type)
             {
                 case CardType.ARGUMENT:
+                    AddToContainer(cardZone);
+                    CheckEffect();
+                    TurnManager.Instance.ApplyPlayArgumentEffects();
+                    break;
+
                 case CardType.FIELD:
                     AddToContainer(cardZone);
                     CheckEffect();
-
                     break;
+
                 case CardType.ACTION:
                     PlayAction();
                     break;
@@ -430,13 +438,18 @@ namespace CardGame.Cards
                     }
                     else if (effect.applyTime == ApplyTime.END)
                     {
-                        _endTurnEffect = new TurnManager.EndTurnEffects(ApplyEffect);
-                        TurnManager.Instance.AddEndTurnEffect(_endTurnEffect);
+                        _endTurnEffects.Add(new TurnManager.EndTurnEffects(ApplyEffect));
+                        TurnManager.Instance.AddEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
                     }
                     else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {
                         _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
                         Board.Instance.GetDeck(contender).AddDrawCardEffects(_drawCardEffect);
+                    }
+                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
+                    {
+                        _playArgumentEffect = new TurnManager.PlayArgumentEffects(ApplyEffect);
+                        TurnManager.Instance.AddPlayArgumentEffects(_playArgumentEffect);
                     }
                 }
             }
@@ -485,6 +498,8 @@ namespace CardGame.Cards
             }
             else
             {
+                if (hasEffect && effect.subType == SubType.COMPARTMENTALIZE) return;
+
                 Contender contender = (Contender)target;
                 contender.ReceiveDamage(strength);
             }
@@ -574,23 +589,14 @@ namespace CardGame.Cards
             //Play destroy animation
             Debug.Log(name + " destroyed");
 
-            if (hasEffect)
-            {
-                if (effect.applyTime == ApplyTime.END && _endTurnEffect != null)
-                {
-                    TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffect);
-                }
-                else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
-                {
-                    Board.Instance.GetDeck(contender).RemoveDrawCardEffect(_drawCardEffect);
-                }
-            }
+            if (container != null && container != _hand) container.RemoveCard(gameObject);
+            CheckRemoveDelegateEffect();
 
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
             {
-                if (container != null) container.RemoveCard(gameObject);
+                if (container != null && container == _hand) container.RemoveCard(gameObject);
                 Destroy(gameObject);
             });
 
@@ -617,6 +623,33 @@ namespace CardGame.Cards
             }
         }
 
+        private void CheckRemoveDelegateEffect()
+        {
+            if (hasEffect)
+            {
+                foreach (CardEffect effect in effects)
+                {
+                    if (effect.applyTime == ApplyTime.END && _endTurnEffects.Count > 0)
+                    {
+                        TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
+                    }
+                    else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
+                    {
+                        Board.Instance.GetDeck(contender).RemoveDrawCardEffect(_drawCardEffect);
+                    }
+                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT && _playArgumentEffect != null)
+                    {
+                        TurnManager.Instance.RemovePlayArgumentEffect(_playArgumentEffect);
+                    }
+
+                    if (effect.subType == SubType.GUARD)
+                    {
+                        TurnManager.Instance.RemoveGuardCard(contender);
+                    }
+                }
+            }
+        }
+
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
             _data.strength += strengthBoost;
@@ -640,11 +673,25 @@ namespace CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
+            CheckRemoveDelegateEffect();
+
             _data.strength = defaultStrength;
             _data.defense = defaultDefense;
             _hand.AddCard(this);
             if (contender.role == Contender.Role.OPPONENT) FlipCard();
             UpdateStatsUI();
+        }
+
+        public void SwapContender()
+        {
+            if (contender.role == Contender.Role.PLAYER)
+            {
+                _hand = Board.Instance.GetHand(TurnManager.Instance.opponent);
+            }
+            else
+            {
+                _hand = Board.Instance.GetHand(TurnManager.Instance.player);
+            }
         }
 
         public CardsData GetData()

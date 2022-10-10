@@ -45,6 +45,7 @@ namespace CardGame.Managers
         private bool _gameStarted;
         public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
 
+        private bool _alternateWinCondition;
         private bool _skipCombat;
 
         #region Turn flow 
@@ -97,7 +98,7 @@ namespace CardGame.Managers
             finishRoundSequence = DOTween.Sequence();
             finishRoundSequence.OnComplete(() =>
             {
-                Debug.Log("OnComplete");
+                //Debug.Log("OnComplete");
                 if (!CheckInterviewEnd())
                 {
                     // Apply end round effects
@@ -242,7 +243,7 @@ namespace CardGame.Managers
         {
             // TODO Change player.deckCards.cards for DeckManager.Instance.GetPlayerCards()
             //board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), opponent.deckCards.cards);
-            board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards()) ;
+            board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
             //board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
         }
 
@@ -250,14 +251,29 @@ namespace CardGame.Managers
 
         #region Interview End
 
+        public void CheckEnd()
+        {
+            if (player.eloquence <= 0 || opponent.eloquence <= 0 || _alternateWinCondition)
+            {
+                if (turn == Turn.CLASH)
+                {
+                    finishRoundSequence.Kill();
+                }
+
+                SkipCombat();
+                FinishRound();
+            }
+        }
+
         private bool CheckInterviewEnd()
         {
-            if (player.eloquence <= 0 || opponent.eloquence <= 0)
+            if (player.eloquence <= 0 || opponent.eloquence <= 0 || _alternateWinCondition)
             {
                 UIManager.Instance.ShowEndButton(true);
                 MouseController.Instance.enabled = false;
 
-                if (player.eloquence <= 0) OnInterviewLose();
+                if (_alternateWinCondition) OnInterviewWin();
+                else if (player.eloquence <= 0) OnInterviewLose();
                 else if (opponent.eloquence <= 0) OnInterviewWin();
                 return true;
             }
@@ -276,6 +292,35 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Play Argument Effects
+
+        public delegate void PlayArgumentEffects();
+        private PlayArgumentEffects playArgumentEffectsDelegate;
+
+        public void AddPlayArgumentEffects(PlayArgumentEffects method)
+        {
+            if (playArgumentEffectsDelegate == null)
+            {
+                playArgumentEffectsDelegate = method;
+            }
+            else
+            {
+                playArgumentEffectsDelegate += method;
+            }
+        }
+
+        public void RemovePlayArgumentEffect(PlayArgumentEffects method)
+        {
+            playArgumentEffectsDelegate -= method;
+        }
+
+        public void ApplyPlayArgumentEffects()
+        {
+            playArgumentEffectsDelegate?.Invoke();
+        }
+
+        #endregion
+
         #region End Turn Effects
 
         public delegate void EndTurnEffects();
@@ -283,6 +328,7 @@ namespace CardGame.Managers
 
         public void AddEndTurnEffect(EndTurnEffects method)
         {
+            Debug.Log("End turn effect added");
             if (endTurnEffectsDelegate == null)
             {
                 endTurnEffectsDelegate = method;
@@ -342,7 +388,12 @@ namespace CardGame.Managers
         {
             _skipCombat = true;
         }
-        
+
+        public void AlternateWinCondition()
+        {
+            _alternateWinCondition = true;
+            CheckEnd();
+        }
 
         private void SetTurn(Turn turn)
         {
