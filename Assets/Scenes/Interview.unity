@@ -3473,10 +3473,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 337627042}
   backgroundList:
-  - {fileID: 21300000, guid: d1942331f146f364b95b4cc9399b7d74, type: 3}
+  - {fileID: 21300000, guid: d69c06e265bea624881cf7466eee7b11, type: 3}
   - {fileID: 21300000, guid: d1942331f146f364b95b4cc9399b7d74, type: 3}
   - {fileID: 21300000, guid: e24d2fa6abc858943b666f53aef49904, type: 3}
-  - {fileID: 21300000, guid: d1942331f146f364b95b4cc9399b7d74, type: 3}
+  - {fileID: 21300000, guid: 24885e567f3bbd949a53a2da7d6daf5d, type: 3}
   - {fileID: 21300000, guid: d1942331f146f364b95b4cc9399b7d74, type: 3}
   playerDeck: {fileID: 280096153}
   opponentDeck: {fileID: 1512321934}
