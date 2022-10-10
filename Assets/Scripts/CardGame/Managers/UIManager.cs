@@ -243,7 +243,7 @@ namespace CardGame.Managers
 
         public void OnEndButtonClick()
         {
-            SceneLoader.Instance.LoadMainMenuScene();
+            SceneLoader.Instance.ReturnToLoungeScene();
         }
 
         public void ShowExtendedDescription(string text)

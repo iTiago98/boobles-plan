@@ -12,17 +12,18 @@ public class SceneLoader : MonoBehaviour
 
     [SerializeField] private FadeIn _fadeScreen;
 
-    //[SerializeField] private Camera _explorationCam;
+    private Camera _explorationCam;
     //[SerializeField] private Controller _explorationPlayerController;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
 
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }
@@ -64,6 +65,20 @@ public class SceneLoader : MonoBehaviour
         });
     }
 
+    public void ReturnToLoungeScene()
+    {
+        MusicManager.Instance.StopInterviewMusic();
+        MusicManager.Instance.PlayLoungeMusic();
+        _fadeScreen.FadeOut(() =>
+        {
+            Controller.Instance.enabled = true;
+
+            var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW_SCENE);
+            async.completed += OnSceneLoaded;
+            async.completed += RestoreMainCamera;
+        });
+    }
+
     private void OnSceneLoaded(AsyncOperation op)
     {
         _fadeScreen.FadeIn2();
@@ -71,8 +86,20 @@ public class SceneLoader : MonoBehaviour
 
     private void OnLoungeSceneLoaded(AsyncOperation op)
     {
-        Camera.main.gameObject.SetActive(true);
+        SetExplorationCam();
+        RestoreMainCamera(op);
         Controller.Instance.enabled = true;
         _fadeScreen.FadeIn2();
     }
+
+    private void RestoreMainCamera(AsyncOperation op)
+    {
+        _explorationCam.gameObject.SetActive(true);
+    }
+
+    private void SetExplorationCam()
+    {
+        _explorationCam = Camera.main;
+    }
+
 }
