@@ -570,10 +570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 2ad9fd9510eaf4c4480ecb5a03212734, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -754,13 +750,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 0e1bd7c347fb4c04dbfcf5ad49b9157a, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Ana
-    _identifier: 2
-    _animator: {fileID: 1174065280}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -1075,10 +1064,6 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 0e000000
     _dialogueOption: {fileID: 943273818}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
 --- !u!1 &300874006
 GameObject:
   m_ObjectHideFlags: 0
@@ -1170,10 +1155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: b747fd37cde9d3a4ba86d93bedd012bf, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -1370,13 +1351,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 822853ae65f97764f97729f6d15c82d0, type: 2}
-  _animatorIdentifiers:
-  - _name: Queca
-    _identifier: 6
-    _animator: {fileID: 1116803423}
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -1441,13 +1415,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 0f103f183f607b74ab34c092462ead78, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Dennis
-    _identifier: 4
-    _animator: {fileID: 927801218}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -2385,6 +2352,17 @@ MonoBehaviour:
   _closeUp: {fileID: 1807123645}
   _dialogueText: {fileID: 465255691}
   _optionsBox: {fileID: 790529717}
+  _animIdentifiers:
+  - _identifier: 1
+    _animator: {fileID: 1921504880}
+  - _identifier: 2
+    _animator: {fileID: 1174065280}
+  - _identifier: 4
+    _animator: {fileID: 927801218}
+  - _identifier: 5
+    _animator: {fileID: 1794732973}
+  - _identifier: 6
+    _animator: {fileID: 1116803423}
 --- !u!114 &467660336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2503,10 +2481,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 84220457c2dcd064e8739698b690c31c, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -2775,10 +2749,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 5a74ea7db4412254eacdb2b71e925882, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -3063,13 +3033,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: f74d757699d33e740907579c4f9ddd1f, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Ana
-    _identifier: 2
-    _animator: {fileID: 1174065280}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -3258,13 +3221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 555d6507847d1e24798f63d017c83e42, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -3592,13 +3548,6 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1755683918}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Dennis
-    _identifier: 4
-    _animator: {fileID: 927801218}
 --- !u!70 &927801220
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3692,13 +3641,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 1503084fefe28c24bb3765da886091c4, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -3775,10 +3717,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 86c4cbe3d3b4f13418e5e07b9b2fe499, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -3980,13 +3918,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: d6ef676f9cc88f74fb041742c98b344c, type: 2}
-  _animatorIdentifiers:
-  - _name: Queca
-    _identifier: 6
-    _animator: {fileID: 1116803423}
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -4332,13 +4263,6 @@ MonoBehaviour:
     _trueFlags: 1c000000
     _falseFlags: 
     _dialogueOption: {fileID: 1972677690}
-  _animatorIdentifiers:
-  - _name: Queca
-    _identifier: 6
-    _animator: {fileID: 1116803423}
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
 --- !u!1 &1174065275
 GameObject:
   m_ObjectHideFlags: 0
@@ -4471,13 +4395,6 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 212861731}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Ana
-    _identifier: 2
-    _animator: {fileID: 1174065280}
 --- !u!95 &1174065280
 Animator:
   serializedVersion: 4
@@ -4687,13 +4604,6 @@ MonoBehaviour:
   _coin2: 16
   _coin3: 17
   _arcadioAnim: {fileID: 1794732973}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _arcadeCollider: {fileID: 1774907200}
   _finalArcadioPos: {x: 20.87, y: -4.1, z: 0}
 --- !u!1 &1203109175
@@ -4742,13 +4652,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: b342ac3d1d4e1e94fbce66612d73ba71, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -4847,13 +4750,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 24f9e4c26357b7a48b150bdad68dde86, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -5277,13 +5173,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: e8d13e37c0a00384a94ad6b2fc459174, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Ana
-    _identifier: 2
-    _animator: {fileID: 1174065280}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -5429,13 +5318,6 @@ MonoBehaviour:
     _trueFlags: 08000000
     _falseFlags: 0a000000
     _dialogueOption: {fileID: 1893814061}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Dennis
-    _identifier: 4
-    _animator: {fileID: 927801218}
 --- !u!95 &1526305641
 Animator:
   serializedVersion: 4
@@ -5535,13 +5417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 5a54d0092029a68438f969b455f873f6, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -5618,10 +5493,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 5921fed4f16f20a46835cafa5ace4e12, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -5878,10 +5749,6 @@ MonoBehaviour:
     _trueFlags: 13000000
     _falseFlags: 0d000000
     _dialogueOption: {fileID: 308238636}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
 --- !u!1 &1700904628
 GameObject:
   m_ObjectHideFlags: 0
@@ -5965,13 +5832,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 9b23563949a51b146ab80f384bb33b3a, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Dennis
-    _identifier: 4
-    _animator: {fileID: 927801218}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -6095,10 +5955,6 @@ MonoBehaviour:
     _trueFlags: 13000000
     _falseFlags: 0c000000
     _dialogueOption: {fileID: 157322574}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
 --- !u!1 &1755683915
 GameObject:
   m_ObjectHideFlags: 0
@@ -6145,13 +6001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 9d320ef6d8a6a3048b6f8475821a0a18, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Dennis
-    _identifier: 4
-    _animator: {fileID: 927801218}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -6279,10 +6128,6 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 0e000000
     _dialogueOption: {fileID: 2000342840}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
 --- !u!1 &1794732971
 GameObject:
   m_ObjectHideFlags: 0
@@ -6436,13 +6281,6 @@ MonoBehaviour:
     _trueFlags: 150000000b000000
     _falseFlags: 
     _dialogueOption: {fileID: 1203109179}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
 --- !u!212 &1794732976
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6712,7 +6550,6 @@ MonoBehaviour:
   _playerDestination: {fileID: 1893814058}
   _playerAnimator: {fileID: 1921504880}
   _coinFoundDialogue: {fileID: 11400000, guid: dcd5a3acce93d9548b6a65c4ed91a667, type: 2}
-  _animatorIdentifiers: []
 --- !u!114 &1893814060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6905,13 +6742,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 853edf252e33dc04d9a11233ecba7239, type: 2}
-  _animatorIdentifiers:
-  - _name: Queca
-    _identifier: 6
-    _animator: {fileID: 1116803423}
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -7030,10 +6860,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 1397c1a07719f5c4d9b50e3050bb8207, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
   _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
@@ -7388,13 +7214,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: dd67e87c349bacf4db38ac9f5aba2c38, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Ana
-    _identifier: 2
-    _animator: {fileID: 1174065280}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -7458,13 +7277,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 13cd494334920154f80ad63549682839, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -7676,13 +7488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 0f36ba3f9afb21846b874eef563e2162, type: 2}
-  _animatorIdentifiers:
-  - _name: Nela
-    _identifier: 1
-    _animator: {fileID: 1921504880}
-  - _name: Arcadio
-    _identifier: 5
-    _animator: {fileID: 1794732973}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:

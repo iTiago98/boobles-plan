@@ -15,7 +15,6 @@ namespace Booble.Interactables
 
         private static Dialogue _returnDialogue;
         private static List<Option> _returnOptions;
-        private static List<AnimatorIdentifier> _returnAnimIdentifiers;
         private static bool _mouseOverInteractable;
 
         public static void ManualInteractionActivation()
@@ -26,7 +25,7 @@ namespace Booble.Interactables
         
         public static void ReturnToDialogue()
         {
-            DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions, _returnAnimIdentifiers);
+            DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
             DialogueManager.Instance.OnEndDialogue.AddListener(() => EndInteraction());
             DialogueManager.Instance.DisplayLastSentence();
@@ -41,8 +40,7 @@ namespace Booble.Interactables
         [SerializeField] private float _interactDistance;
         [SerializeField] private List<ClickDialogue> _clickDialogues;
         [SerializeField] private List<Option> _options;
-        [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
-
+        
         private Dialogue _dialogue;
 
         private Player.Controller _player;
@@ -113,11 +111,10 @@ namespace Booble.Interactables
                 {
                     Debug.LogError("No Click Dialogue with a satisfied Flag List!");
                 }
-                _diagManager.StartDialogue(_dialogue, _options, _animatorIdentifiers);
+                _diagManager.StartDialogue(_dialogue, _options);
 
                 _returnDialogue = _dialogue;
                 _returnOptions = _options;
-                _returnAnimIdentifiers = _animatorIdentifiers;
                 _diagManager.OnEndDialogue.RemoveAllListeners();
                 _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
             }
@@ -173,14 +170,4 @@ namespace Booble.Interactables
         }
     }
 
-    [System.Serializable]
-    public class AnimatorIdentifier
-    {
-        public CharacterList.Name Identifier => _identifier;
-        public Animator Animator => _animator;
-
-        [SerializeField] private string _name;
-        [SerializeField] private CharacterList.Name _identifier;
-        [SerializeField] private Animator _animator;
-    }
 }

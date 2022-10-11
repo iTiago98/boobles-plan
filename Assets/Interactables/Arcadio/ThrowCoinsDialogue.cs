@@ -22,7 +22,6 @@ namespace Booble.Interactables.Arcadio
         [SerializeField] private Flag.Reference _coin3;
         //[SerializeField] private Continues _arcCont;
         [SerializeField] private Animator _arcadioAnim;
-        [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
         [SerializeField] private Collider2D _arcadeCollider;
         [SerializeField] private Vector3 _finalArcadioPos;
         
@@ -63,7 +62,7 @@ namespace Booble.Interactables.Arcadio
                     break;
             }
 
-            _diagManager.StartDialogue(_dialogue, _animatorIdentifiers);
+            _diagManager.StartDialogue(_dialogue);
             _diagManager.OnEndDialogue.RemoveAllListeners();
 
             if(coinCount < 3)

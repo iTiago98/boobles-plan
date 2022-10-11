@@ -12,7 +12,6 @@ namespace Booble.Interactables.Events.PinPonBros
 		[SerializeField] private Transform _playerDestination;
 		[SerializeField] private Animator _playerAnimator;
 		[SerializeField] private Dialogue _coinFoundDialogue;
-		[SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
 		
 		private DialogueManager _diagManager;
 
@@ -40,7 +39,7 @@ namespace Booble.Interactables.Events.PinPonBros
 		
         private void ThrowDialogue()
         {
-            _diagManager.StartDialogue(_coinFoundDialogue, _animatorIdentifiers);
+            _diagManager.StartDialogue(_coinFoundDialogue);
             _diagManager.OnEndDialogue.RemoveAllListeners();
             _diagManager.OnEndDialogue.AddListener(() => Interactable.EndInteraction());
         }

@@ -13,7 +13,6 @@ namespace Booble.Interactables.Events
         private enum EndType { Nothing, Return, Close, Callback }
         
         [SerializeField] private Dialogue _dialogue;
-        [SerializeField] private List<AnimatorIdentifier> _animatorIdentifiers;
         [SerializeField] private EndType _onEnd;
         [SerializeField] private UnityEvent _callbackEvent;
 
@@ -26,7 +25,7 @@ namespace Booble.Interactables.Events
 
         public override void Execute()
         {
-            _diagManager.StartDialogue(_dialogue, _animatorIdentifiers);
+            _diagManager.StartDialogue(_dialogue);
             _diagManager.OnEndDialogue.RemoveAllListeners();
             _diagManager.OnEndDialogue.AddListener(() => OnDialogueEnd());
             switch(_onEnd)

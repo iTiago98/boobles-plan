@@ -6,8 +6,7 @@ using UnityEngine.Events;
 using TMPro;
 using Santi.Utils;
 using Booble.Flags;
-using static Booble.Interactables.Interactable;
-using static Booble.Characters.CharacterList;
+using Booble.Characters;
 using System;
 using FMODUnity;
 using Booble.Interactables.Events;
@@ -18,7 +17,7 @@ namespace Booble.Interactables.Dialogues
     {
         private const char SEPARATOR = '|';
 
-        public UnityEvent OnEndDialogue { get; set; }
+        public UnityEvent OnEndDialogue { get; private set; }
 
         [SerializeField] private KeyCode _nextKey;
         [SerializeField] private float _characterDelay;
@@ -27,12 +26,12 @@ namespace Booble.Interactables.Dialogues
         [SerializeField] private Image _closeUp;
         [SerializeField] private TextMeshProUGUI _dialogueText;
         [SerializeField] private GameObject _optionsBox;
+        [SerializeField] private List<AnimatorIdentifier> _animIdentifiers;
 
         private Dialogue _currentDialogue;
         private List<Option> _options;
-        private List<AnimatorIdentifier> _animIdentifiers;
         private string _currentSentence;
-        private Character _currentCharacter;
+        private CharacterList.Character _currentCharacter;
         private bool _dialogueRunning;
         private bool _typing;
         private bool _staggered;
@@ -42,19 +41,13 @@ namespace Booble.Interactables.Dialogues
             OnEndDialogue = new UnityEvent();
         }
 
-        public void StartDialogue(Dialogue dialogue, List<AnimatorIdentifier> animIdentifiers)
-        {
-            StartDialogue(dialogue, null, animIdentifiers);
-        }
-
-        public void StartDialogue(Dialogue dialogue, List<Option> options, List<AnimatorIdentifier> animIdentifiers)
+        public void StartDialogue(Dialogue dialogue, List<Option> options = null)
         {
             _staggered = false;
 
             _dialogueRunning = true;
             _currentDialogue = dialogue;
             _options = options ??= new List<Option>();
-            _animIdentifiers = animIdentifiers;
             if (!dialogue.Empty)
             {
                 _dialogueBox.SetActive(true);
@@ -62,7 +55,7 @@ namespace Booble.Interactables.Dialogues
             DisplayNextSentence(true);
         }
 
-        public void DisplayNextSentence(bool firstSentence = false)
+        private void DisplayNextSentence(bool firstSentence = false)
         {
             if (_currentDialogue.GetNextSentence(out _currentSentence, out _currentCharacter, firstSentence))
             {
@@ -135,7 +128,7 @@ namespace Booble.Interactables.Dialogues
             _typing = false;
         }
 
-        public void EndDialogue()
+        private void EndDialogue()
         {
             _dialogueRunning = false;
             _dialogueBox.SetActive(false);
@@ -252,7 +245,7 @@ namespace Booble.Interactables.Dialogues
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class Option
     {
         public string Text => _optionText;
@@ -268,5 +261,15 @@ namespace Booble.Interactables.Dialogues
         {
             return FlagManager.Instance.FlagsSatisfied(_trueFlags, _falseFlags);
         }
+    }
+
+    [Serializable]
+    public class AnimatorIdentifier
+    {
+        public CharacterList.Name Identifier => _identifier;
+        public Animator Animator => _animator;
+
+        [SerializeField] private CharacterList.Name _identifier;
+        [SerializeField] private Animator _animator;
     }
 }
