@@ -335,7 +335,7 @@ MonoBehaviour:
       cardParameter_Effect: 0
   - name: Exprimir la verdad
     sprite: {fileID: 21300000, guid: a93bc51e6169ada4385e548524294411, type: 3}
-    cost: 0
+    cost: 3
     strength: 0
     defense: 0
     type: 2
@@ -365,7 +365,7 @@ MonoBehaviour:
       intParameter1: 0
       intParameter2: 0
       cardParameter_Name: Zumo de naranja
-      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Sprite: {fileID: 21300000, guid: 434e94c329c3a7049b7601dde59c007b, type: 3}
       cardParameter_Strength: 1
       cardParameter_Defense: 1
       cardParameter_Effect: 6
