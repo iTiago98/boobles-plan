@@ -23,6 +23,8 @@ namespace Booble.Player
 		private Camera _cam;
         private Animator _anim;
 
+        private bool _endInteractionStagger;
+
         private void Awake()
         {
             Arrived = true;
@@ -41,7 +43,13 @@ namespace Booble.Player
 
         private void InputUpdate()
         {
-            if (Interactable.BlockActions)
+            if (_endInteractionStagger != Interactable.BlockActions)
+            {
+                _endInteractionStagger = Interactable.BlockActions;
+                return;
+            }
+
+            if(Interactable.BlockActions)
                 return;
 
             if (Input.GetKeyDown(_moveKey))
