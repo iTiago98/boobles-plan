@@ -39,7 +39,12 @@ namespace Booble.Flags
             SofaIntro,
             MachineFixed,
             ZumoIntro,
-            GranFinalObtenida
+            GranFinalObtenida,
+            PistaHortensia,
+            PistaEufrasio,
+            PistaJugosol,
+            PistaModificacion,
+            PistaAdquisicion
         }
 
         [SerializeField] private Reference _flagReference;

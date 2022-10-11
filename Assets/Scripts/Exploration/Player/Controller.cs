@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Santi.Utils;
 using Booble.Interactables;
+using UnityEngine.EventSystems;
 
 namespace Booble.Player
 {
@@ -49,6 +50,9 @@ namespace Booble.Player
                 return;
             }
 
+            if(EventSystem.current.IsPointerOverGameObject())
+                return;
+            
             if(Interactable.BlockActions)
                 return;
 
