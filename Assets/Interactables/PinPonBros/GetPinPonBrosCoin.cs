@@ -7,7 +7,7 @@ using static Booble.Interactables.Interactable;
 
 namespace Booble.Interactables.Events.PinPonBros
 {
-	public class GetPinPonBrosCoin : MonoBehaviour
+	public class GetPinPonBrosCoin : DialogueEvent
 	{
 		[SerializeField] private Transform _playerDestination;
 		[SerializeField] private Animator _playerAnimator;
@@ -21,7 +21,7 @@ namespace Booble.Interactables.Events.PinPonBros
             _diagManager = DialogueManager.Instance;
         }
 
-    	public void StartInteraction()
+    	public override void Execute()
 		{
 			Controller.Instance.SetDestination(_playerDestination.position.x);
 			StartCoroutine(WaitForArrival());
