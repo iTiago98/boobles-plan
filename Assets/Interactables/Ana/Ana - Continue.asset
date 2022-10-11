@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Por m\xED, continuamos con la pl\xE1tica. Que de arreglar esto, me
+  - _content: "Por m\xED, continuamos con la pl\xE1tica. Que de instalar esto, me
       va a dar ci\xE1tica."
     _closeUp: 2
