@@ -43,6 +43,16 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Deck Remaining Cards
+
+        public GameObject playerDeckRemainingCardsPanel;
+        public TextMeshProUGUI playerDeckRemainingCardsText;
+
+        public GameObject opponentDeckRemainingCardsPanel;
+        public TextMeshProUGUI opponentDeckRemainingCardsText;
+
+        #endregion
+
         #region Interactables
 
         [Header("Interactables")]
@@ -82,6 +92,8 @@ namespace CardGame.Managers
             _player = TurnManager.Instance.player;
             _opponent = TurnManager.Instance.opponent;
         }
+
+        #region Stats
 
         public void UpdateUIStats()
         {
@@ -186,6 +198,10 @@ namespace CardGame.Managers
             sequence.Play();
         }
 
+        #endregion
+
+        #region End Turn Button
+
         public void OnEndTurnButtonClick()
         {
             if (TurnManager.Instance.gameStarted)
@@ -225,26 +241,9 @@ namespace CardGame.Managers
             }
         }
 
-        public void SetInterviewWinText(bool win)
-        {
-            if (win) interviewEnd.text = INTERVIEW_WIN_TEXT;
-            else interviewEnd.text = INTERVIEW_LOSE_TEXT;
-        }
+        #endregion
 
-        public void AddToLog(string text)
-        {
-            //log.text += text;
-        }
-
-        public void ShowEndButton(bool show)
-        {
-            endButton.gameObject.SetActive(show);
-        }
-
-        public void OnEndButtonClick()
-        {
-            SceneLoader.Instance.ReturnToLoungeScene();
-        }
+        #region Extended Description
 
         public void ShowExtendedDescription(string text)
         {
@@ -255,6 +254,40 @@ namespace CardGame.Managers
         public void HideExtendedDescription()
         {
             extendedDescriptionPanel.SetActive(false);
+        }
+
+        #endregion
+
+        #region Deck Remaining Cards
+
+        public void ShowRemainingCards(Contender contender)
+        {
+            if (contender.role == Contender.Role.PLAYER) playerDeckRemainingCardsPanel.SetActive(true);
+            else opponentDeckRemainingCardsPanel.SetActive(true);
+        }
+
+        public void UpdateRemainingCards(int remainingCards, int maxCards, Contender contender)
+        {
+            if(contender.role == Contender.Role.PLAYER) playerDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
+            else opponentDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
+        }
+
+        #endregion
+
+        public void SetInterviewWinText(bool win)
+        {
+            if (win) interviewEnd.text = INTERVIEW_WIN_TEXT;
+            else interviewEnd.text = INTERVIEW_LOSE_TEXT;
+        }
+
+        public void ShowEndButton(bool show)
+        {
+            endButton.gameObject.SetActive(show);
+        }
+
+        public void OnEndButtonClick()
+        {
+            SceneLoader.Instance.ReturnToLoungeScene();
         }
     }
 }

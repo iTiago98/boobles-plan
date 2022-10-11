@@ -11,16 +11,21 @@ namespace CardGame.Level
         public GameObject cardPrefab;
         public CardsData emptyDeckCardData;
 
+        private int _maxCardNumber;
+        private Contender _contender;
         private Hand _hand;
         private List<CardsData> _deckCards;
 
         public delegate void DrawCardEffects();
         private DrawCardEffects drawCardEffectsDelegate;
 
-        public void Initialize(Hand hand, List<CardsData> deckCards)
+        public void Initialize(Contender contender, Hand hand, List<CardsData> deckCards)
         {
+            _contender = contender;
             _hand = hand;
             CopyCardsList(deckCards);
+            UIManager.Instance.ShowRemainingCards(contender);
+            UpdateRemainingCards();
         }
 
         public void DrawCards(int numCards)
@@ -100,6 +105,8 @@ namespace CardGame.Level
 
                 _deckCards.Add(temp);
             }
+
+            _maxCardNumber = _deckCards.Count;
         }
 
         public void AddDrawCardEffects(DrawCardEffects method)
@@ -125,6 +132,13 @@ namespace CardGame.Level
             {
                 GetComponent<SpriteRenderer>().sprite = null;
             }
+
+            UpdateRemainingCards();
+        }
+
+        private void UpdateRemainingCards()
+        {
+            UIManager.Instance.UpdateRemainingCards(_deckCards.Count, _maxCardNumber, _contender);
         }
     }
 }

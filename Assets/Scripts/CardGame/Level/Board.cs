@@ -41,8 +41,8 @@ namespace CardGame.Level
 
         public void InitializeDecks(List<CardsData> playerCards, List<CardsData> opponentCards)
         {
-            playerDeck.Initialize(playerHand, playerCards);
-            opponentDeck.Initialize(opponentHand, opponentCards);
+            playerDeck.Initialize(TurnManager.Instance.player, playerHand, playerCards);
+            opponentDeck.Initialize(TurnManager.Instance.opponent, opponentHand, opponentCards);
         }
 
         public void InitializeBackground(Opponent_Name opponentName)
