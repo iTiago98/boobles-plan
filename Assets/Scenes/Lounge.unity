@@ -532,6 +532,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 157322571}
+  - component: {fileID: 157322574}
   - component: {fileID: 157322572}
   - component: {fileID: 157322573}
   m_Layer: 0
@@ -590,6 +591,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 0c000000
+--- !u!114 &157322574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157322570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &161377152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,16 +1057,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1
-  _clickDialogues: []
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 81d0cf472b2e91a4fa1b94d7cf55daee, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
   _options:
-  - _optionText: "(Mirar por detr\xE1s de la m\xE1quina.)"
-    _trueFlags: 13000000
-    _falseFlags: 0d000000
-    _dialogueOption: {fileID: 0}
   - _optionText: (Revisar el dispensador de devoluciones.)
     _trueFlags: 
     _falseFlags: 0e000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 943273818}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -1098,6 +1111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 308238633}
+  - component: {fileID: 308238636}
   - component: {fileID: 308238635}
   - component: {fileID: 308238634}
   m_Layer: 0
@@ -1156,6 +1170,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &308238636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308238632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &318540057
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,7 +1526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344632820}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.39, y: -3.26, z: 0}
+  m_LocalPosition: {x: -0.69, y: -3.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2596,6 +2622,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 479277002}
+  - component: {fileID: 479277005}
   - component: {fileID: 479277004}
   - component: {fileID: 479277003}
   m_Layer: 0
@@ -2632,7 +2659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flags: 12000000
+  _flags: 120000001c000000
 --- !u!114 &479277004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2656,7 +2683,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1655589806}
         m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-        m_MethodName: StartInteraction
+        m_MethodName: Execute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2678,6 +2705,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &479277005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479277001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &498324085
 GameObject:
   m_ObjectHideFlags: 0
@@ -3842,6 +3881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 943273815}
+  - component: {fileID: 943273818}
   - component: {fileID: 943273817}
   - component: {fileID: 943273816}
   m_Layer: 0
@@ -3900,6 +3940,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &943273818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943273814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &962803876
 GameObject:
   m_ObjectHideFlags: 0
@@ -4478,7 +4530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactDistance: 1
+  _interactDistance: 1.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 0f8ba7ab4aae1a24f9299bb87fd85671, type: 2}
     _trueFlags: 
@@ -5706,12 +5758,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 6
-  _clickDialogues: []
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: c713ff1e9e7cb3240a34e384c6070506, type: 2}
+    _trueFlags: 
+    _falseFlags: 09000000
+    _setFlags: 09000000
+  - _dialogue: {fileID: 11400000, guid: d280ed76a687860459d0f44af55ec9c8, type: 2}
+    _trueFlags: 09000000
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: (Rebuscar en los bolsillos de Pineda)
     _trueFlags: 08000000
     _falseFlags: 0a000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 1893814061}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -5911,7 +5971,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 581803384}
         m_TargetAssemblyTypeName: Booble.Interactables.Events.ThrowDialogue, Assembly-CSharp
-        m_MethodName: StartInteraction
+        m_MethodName: Execute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6151,12 +6211,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1.5
-  _clickDialogues: []
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 7378dc792ab3d624f961dc31c616bd25, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: "(Mirar por detr\xE1s de la m\xE1quina.)"
     _trueFlags: 13000000
     _falseFlags: 0d000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 308238636}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -6453,7 +6517,7 @@ MonoBehaviour:
   - _optionText: "(Rebuscar entre los cojines del sof\xE1.)"
     _trueFlags: 13000000
     _falseFlags: 0c000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 157322574}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -6672,20 +6736,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 0.5
-  _clickDialogues: []
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: f671774f99525ac49bc28003a7c277d5, type: 2}
+    _trueFlags: 
+    _falseFlags: 16000000
+    _setFlags: 16000000
+  - _dialogue: {fileID: 11400000, guid: 722b275bdb982e34abbb668cef45ee08, type: 2}
+    _trueFlags: 16000000
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: (Meter una moneda.)
     _trueFlags: 12000000
     _falseFlags: 
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 2000342840}
   - _optionText: (Meter una moneda.)
     _trueFlags: 0e000000
     _falseFlags: 12000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 479277005}
   - _optionText: (Meter una moneda.)
     _trueFlags: 
     _falseFlags: 0e000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 2000342840}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -7079,6 +7151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1893814058}
+  - component: {fileID: 1893814061}
   - component: {fileID: 1893814059}
   - component: {fileID: 1893814060}
   m_Layer: 0
@@ -7132,6 +7205,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 0a000000
+--- !u!114 &1893814061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1893814057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1921504876
 GameObject:
   m_ObjectHideFlags: 0
@@ -7387,6 +7472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2000342837}
+  - component: {fileID: 2000342840}
   - component: {fileID: 2000342839}
   m_Layer: 0
   m_Name: MonedaNo
@@ -7431,6 +7517,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2000342840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2000342836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2020661624
 GameObject:
   m_ObjectHideFlags: 0
