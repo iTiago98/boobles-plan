@@ -1191,11 +1191,11 @@ RectTransform:
   m_Father: {fileID: 208174473}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 20, y: 20}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &318540059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,8 +1299,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 328728122}
-  - component: {fileID: 328728123}
   - component: {fileID: 328728124}
+  - component: {fileID: 328728123}
   m_Layer: 0
   m_Name: Intro
   m_TagString: Untagged
@@ -3338,6 +3338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 895481877}
+  - component: {fileID: 895481880}
   - component: {fileID: 895481878}
   - component: {fileID: 895481879}
   m_Layer: 0
@@ -3412,6 +3413,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 10000000
+--- !u!114 &895481880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895481876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &900625209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3760,6 +3773,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941303666}
+  - component: {fileID: 941303668}
   - component: {fileID: 941303667}
   m_Layer: 0
   m_Name: Cafe
@@ -3807,6 +3821,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &941303668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941303665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &943273814
 GameObject:
   m_ObjectHideFlags: 0
@@ -4022,6 +4048,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989612388}
+  - component: {fileID: 989612390}
   - component: {fileID: 989612389}
   m_Layer: 0
   m_Name: Entrevista
@@ -4081,6 +4108,18 @@ MonoBehaviour:
           m_StringArgument: Mondaroriano
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &989612390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989612387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &999634105
 GameObject:
   m_ObjectHideFlags: 0
@@ -4440,17 +4479,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactDistance: 1
-  _clickDialogues: []
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 0f8ba7ab4aae1a24f9299bb87fd85671, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
   _options:
   - _optionText: "Ya no tengo nada m\xE1s que hacer aqu\xED."
     _trueFlags: 
     _falseFlags: 
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 989612390}
   - _optionText: "Me he encontrado una carta por ah\xED. Parece que se llama \"Gran
       Final\". \xBFQu\xE9 hago con ella?"
     _trueFlags: 1c000000
     _falseFlags: 
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 1972677690}
   _animatorIdentifiers:
   - _name: Queca
     _identifier: 6
@@ -4896,6 +4939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203109176}
+  - component: {fileID: 1203109179}
   - component: {fileID: 1203109178}
   m_Layer: 0
   m_Name: Desmonte
@@ -4943,6 +4987,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1203109179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203109175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1263455673
 GameObject:
   m_ObjectHideFlags: 0
@@ -5058,6 +5114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300038654}
+  - component: {fileID: 1300038656}
   - component: {fileID: 1300038655}
   m_Layer: 0
   m_Name: Sacar
@@ -5105,6 +5162,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1300038656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300038653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1304552454
 GameObject:
   m_ObjectHideFlags: 0
@@ -5711,6 +5780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1633416255}
+  - component: {fileID: 1633416258}
   - component: {fileID: 1633416256}
   - component: {fileID: 1633416257}
   m_Layer: 0
@@ -5772,6 +5842,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 13000000
+--- !u!114 &1633416258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633416254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1655589804
 GameObject:
   m_ObjectHideFlags: 0
@@ -6734,33 +6816,33 @@ MonoBehaviour:
   - _optionText: "\xBFMe dejar\xEDas echarme una partida cuando termines?"
     _trueFlags: 
     _falseFlags: 1300000014000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 1633416258}
   - _optionText: "\xBFY de d\xF3nde narices voy a sacar yo una moneda hoy en d\xEDa?"
     _trueFlags: 13000000
     _falseFlags: 1400000015000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 1300038656}
   - _optionText: "\xBFEres t\xFA quien est\xE1 impidiendo que Ana la de mantenimiento
       desmonte la m\xE1quina del caf\xE9?"
     _trueFlags: 0b000000
     _falseFlags: 1400000015000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 941303668}
   - _optionText: "(Entregar moneda encontrada en el sof\xE1)."
     _trueFlags: 0c00000013000000
     _falseFlags: 1000000014000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 895481880}
   - _optionText: (Entregar moneda encontrada en el bolsillo de Pineda).
     _trueFlags: 0a00000013000000
     _falseFlags: 0f00000014000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 2055909458}
   - _optionText: "(Entregar moneda encontrada en la m\xE1quina de caf\xE9)."
     _trueFlags: 0d00000013000000
     _falseFlags: 1100000014000000
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 2103853671}
   - _optionText: "Entonces... \xBFle puedo decir ya a Ana que desmonte la m\xE1quina
       del caf\xE9?"
     _trueFlags: 150000000b000000
     _falseFlags: 
-    _dialogueOption: {fileID: 0}
+    _dialogueOption: {fileID: 1203109179}
   _animatorIdentifiers:
   - _name: Nela
     _identifier: 1
@@ -7180,6 +7262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1972677688}
+  - component: {fileID: 1972677690}
   - component: {fileID: 1972677689}
   m_Layer: 0
   m_Name: Gran Final
@@ -7227,6 +7310,18 @@ MonoBehaviour:
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1972677690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972677687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1978971478
 GameObject:
   m_ObjectHideFlags: 0
@@ -7693,6 +7788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055909455}
+  - component: {fileID: 2055909458}
   - component: {fileID: 2055909456}
   - component: {fileID: 2055909457}
   m_Layer: 0
@@ -7767,6 +7863,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 0f000000
+--- !u!114 &2055909458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055909454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2069022023
 GameObject:
   m_ObjectHideFlags: 0
@@ -7898,6 +8006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2103853668}
+  - component: {fileID: 2103853671}
   - component: {fileID: 2103853669}
   - component: {fileID: 2103853670}
   m_Layer: 0
@@ -7972,6 +8081,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 11000000
+--- !u!114 &2103853671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103853667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2121053232
 GameObject:
   m_ObjectHideFlags: 0
