@@ -83,3 +83,6 @@ fmod_editor.log
 /Assets/FMODAssets/*
 /Assets/FMODStudioCache.meta
 Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset
+/.idea/.idea.boobles-plan.dir/.idea/.gitignore
+/.idea/.idea.boobles-plan.dir/.idea/indexLayout.xml
+/.idea/.idea.boobles-plan.dir/.idea/vcs.xml
