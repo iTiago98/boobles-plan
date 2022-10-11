@@ -5,14 +5,16 @@ using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
 using Booble.Flags;
 using Booble.Characters;
+using UnityEngine.EventSystems;
 
 namespace Booble.Interactables
 {
 	public class Interactable : MonoBehaviour
 	{
-        public static bool BlockActions => _mouseOverInteractable || _interactionOnGoing;
-        public static bool _interactionOnGoing;
-
+        public static bool BlockActions => _mouseOverInteractable || _interactionOnGoing  || CluesOpen;
+        public static bool CluesOpen { get; set; }
+        
+        private static bool _interactionOnGoing;
         private static Dialogue _returnDialogue;
         private static List<Option> _returnOptions;
         private static bool _mouseOverInteractable;
@@ -27,7 +29,7 @@ namespace Booble.Interactables
         {
             DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-            DialogueManager.Instance.OnEndDialogue.AddListener(() => EndInteraction());
+            DialogueManager.Instance.OnEndDialogue.AddListener(EndInteraction);
             DialogueManager.Instance.DisplayLastSentence();
         }
 
@@ -84,6 +86,12 @@ namespace Booble.Interactables
 
         private void OnMouseDown()
         {
+            if(EventSystem.current.IsPointerOverGameObject())
+                return;
+            
+            if(CluesOpen)
+                return;
+            
             if (_interactionOnGoing)
                 return;
 
@@ -142,11 +150,6 @@ namespace Booble.Interactables
         public void ChangeDialogue(Dialogue dialogue)
         {
             _dialogue = dialogue;
-        }
-
-        public void CloseOptionsMenu()
-        {
-            EndInteraction();
         }
     }
 
