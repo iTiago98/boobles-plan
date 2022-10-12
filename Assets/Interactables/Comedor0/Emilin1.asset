@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Emilin1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Buenas tardes, se\xF1oritas, \xBFdesean algo?"
+    _closeUp: 7
+  - _content: "\xBFNo es una pocholada? Es la versi\xF3n deluxe, con frac de Armani
+      y bandeja de plata de ley. Si fuera humano me casar\xEDa con \xE9l, f\xEDjate
+      lo que te digo."
+    _closeUp: 6
+  - _content: "Emil\xEDn, cielo, tr\xE1ele a mami una ensalada de brotes de MacroSoja
+      y una hamburguesa doble."
+    _closeUp: 6
+  - _content: "Y a mi amiga Marif\xE9 un SuperSalmorejo y otra hamburguesa doble."
+    _closeUp: 6
+  - _content: "Enseguida, su ilustr\xEDsima."
+    _closeUp: 7
