@@ -177,6 +177,7 @@ public class Animation : MonoBehaviour
     private void ThrowDialogue(Dialogue diag, List<Option> options = null)
     {
         _dialogueEnd = false;
+        options?.ForEach(op => op.DialogueOption.DoOnSelect.AddListener(() => _dialogueEnd = true));
         _diagMng.StartDialogue(diag, options);
         _diagMng.OnEndDialogue.RemoveAllListeners();
         _diagMng.OnEndDialogue.AddListener(() => _dialogueEnd = true);
