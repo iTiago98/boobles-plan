@@ -15,7 +15,8 @@ namespace Booble.Characters
 			Dennis,
 			Arcadio,
 			Queca,
-			eMilin
+			eMilin,
+			F3RR4N
         }
 		
 		[System.Serializable]

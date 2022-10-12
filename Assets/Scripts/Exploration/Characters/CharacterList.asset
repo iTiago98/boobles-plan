@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: CharacterList
   m_EditorClassIdentifier: 
   _characters:
+  - _name: empty
+    _identifier: 0
+    _closeUp: {fileID: 21300000, guid: 4a55161ef13d9c640844edd091efb49b, type: 3}
   - _name: Nela
     _identifier: 1
     _closeUp: {fileID: 21300000, guid: 4bf4f7d636408a44e977f5f52f491fb7, type: 3}
@@ -31,3 +34,9 @@ MonoBehaviour:
   - _name: Queca
     _identifier: 6
     _closeUp: {fileID: 21300000, guid: 16739a8d0612b8e4686d33374189f173, type: 3}
+  - _name: E-Milin
+    _identifier: 7
+    _closeUp: {fileID: 21300000, guid: 8fabb7011fd1bcf4893e00a74146010c, type: 3}
+  - _name: F3RR4N
+    _identifier: 8
+    _closeUp: {fileID: 21300000, guid: 9f436e1df63eff84db876083a79dfe83, type: 3}
