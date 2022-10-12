@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: CharacterList
   m_EditorClassIdentifier: 
   _characters:
+  - _name: empty
+    _identifier: 0
+    _closeUp: {fileID: 21300000, guid: 4a55161ef13d9c640844edd091efb49b, type: 3}
   - _name: Nela
     _identifier: 1
     _closeUp: {fileID: 21300000, guid: 4bf4f7d636408a44e977f5f52f491fb7, type: 3}
