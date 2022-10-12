@@ -44,7 +44,10 @@ namespace Booble.Flags
             PistaEufrasio,
             PistaJugosol,
             PistaModificacion,
-            PistaAdquisicion
+            PistaAdquisicion,
+            GinsunnyDelight,
+            Whiskolacao,
+            PoleoAbsenta
         }
 
         [SerializeField] private Reference _flagReference;
