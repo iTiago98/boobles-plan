@@ -244,6 +244,7 @@ namespace CardGame.Cards.DataModel
                     case SubType.FREE_MANA:
                     case SubType.WHEEL:
                     case SubType.GUARD:
+                    case SubType.SKIP_COMBAT:
                         break;
                     default:
                         cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
