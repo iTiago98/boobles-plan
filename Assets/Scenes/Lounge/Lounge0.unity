@@ -2644,6 +2644,7 @@ GameObject:
   - component: {fileID: 479277005}
   - component: {fileID: 479277004}
   - component: {fileID: 479277003}
+  - component: {fileID: 479277006}
   m_Layer: 0
   m_Name: MonedaSi
   m_TagString: Untagged
@@ -2730,6 +2731,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &479277006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479277001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465cb8261447f874990c19cc48eec37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &498324085
