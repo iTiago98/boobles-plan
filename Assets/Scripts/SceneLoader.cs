@@ -54,6 +54,15 @@ public class SceneLoader : MonoBehaviour
             async.completed += OnLoungeSceneLoaded;
         });
     }
+
+    public void LoadNelaOffice0()
+    {
+        _fadeScreen.FadeOut(() =>
+        {
+            var async = SceneManager.LoadSceneAsync(Scenes.NELA_OFFICE_0);
+            async.completed += OnLoungeSceneLoaded;
+        });
+    }
     
     public void LoadInterviewScene()
     {
