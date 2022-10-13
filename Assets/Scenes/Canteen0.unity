@@ -1473,7 +1473,7 @@ SpriteRenderer:
   m_Size: {x: 1.12, y: 2.52}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &418626946
@@ -3427,7 +3427,6 @@ MonoBehaviour:
   _order1: {fileID: 2042612865}
   _sit0: {fileID: 128937011}
   _sit1: {fileID: 826669666}
-  _sit2: {fileID: 418626949}
   _emilin: {fileID: 704092743}
   _nelaAnim: {fileID: 1923934401}
   _quecaAnim: {fileID: 2045548437}
@@ -3438,8 +3437,6 @@ MonoBehaviour:
   _nelaController: {fileID: 1923934402}
   _fade: {fileID: 1615179297}
   _food: {fileID: 776396592}
-  _foodPosition0: {fileID: 0}
-  _foodPosition1: {fileID: 0}
 --- !u!1 &1038900088
 GameObject:
   m_ObjectHideFlags: 0
@@ -4337,6 +4334,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
   - {fileID: 11400000, guid: f152fd45ab84e934f9e3f1e3cc1f76b2, type: 2}
   - {fileID: 11400000, guid: 35a9ae74c69403142817aa145bd25659, type: 2}
+  playerExtraCards: []
+  citrianoExtraCards: []
 --- !u!1 &1229023237
 GameObject:
   m_ObjectHideFlags: 0
