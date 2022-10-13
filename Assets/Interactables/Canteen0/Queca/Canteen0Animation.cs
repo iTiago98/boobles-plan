@@ -34,6 +34,7 @@ namespace Booble.Interactables.Queca
         [SerializeField] private Transform _order1;
         [SerializeField] private Transform _sit0;
         [SerializeField] private Transform _sit1;
+        [SerializeField] private Transform _sit2;
         [SerializeField] private Transform _emilin;
 
         [Header("Animators")]
@@ -118,8 +119,11 @@ namespace Booble.Interactables.Queca
 
             _fade.FadeOut();
             yield return new WaitForSeconds(_fade.FadeDuration);
-            
-            // Set Queca and Nela in sit position
+
+            _quecaAnim.GetComponent<SpriteRenderer>().sortingOrder = -4;
+            _quecaAnim.transform.position = _sit2.position;
+            _quecaAnim.SetBool("Sitting", true);
+            _nelaAnim.gameObject.SetActive(false);
             _fade.FadeIn2();
             yield return new WaitForSeconds(_fade.FadeDuration);
             
@@ -156,8 +160,11 @@ namespace Booble.Interactables.Queca
             
             _fade.FadeOut();
             yield return new WaitForSeconds(_fade.FadeDuration);
-            
-            // Set Queca and Nela in standing position
+
+            _quecaAnim.GetComponent<SpriteRenderer>().sortingOrder = -1;
+            _quecaAnim.transform.position = _sit1.position;
+            _quecaAnim.SetBool("Sitting", false);
+            _nelaAnim.gameObject.SetActive(true);
             _food.SetActive(false);
             _emilinAnim.SetTrigger("Reset");
             _fade.FadeIn2();
