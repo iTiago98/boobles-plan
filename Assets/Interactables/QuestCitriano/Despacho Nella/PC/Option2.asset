@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: (Buscar el nombre en el historial)
+    _closeUp: 1
+  - _content: Claro, en una noticia que he visto antes sobre Booble.
+    _closeUp: 1
+  - _content: '"BOOBLE COMPRA JUGUILEO, LA MAYOR EMPRESA DE ZUMOS DEL MUNDO"'
+    _closeUp: 1
+  - _content: "\"...adem\xE1s, entre las marcas de zumos internacionales de la empresa,
+      est\xE1 la espa\xF1ola Jugosol, l\xEDder absoluto de las m\xE1quinas de zumos...\""
+    _closeUp: 1
+  - _content: "\"...seg\xFAn declaraciones de Batracio Cimbrel, jefe de producci\xF3n
+      de Booble Ib\xE9rica, piensan mejorar todas las m\xE1quinas que adquieran.
+      Ante la pregunta de c\xF3mo piensan hacerlo, el se\xF1or Cimbrel se ha mostrado
+      bastante misterioso al afirmar que todo se lo debemos a la modificaci\xF3n
+      7878994, un n\xFAmero que salvar\xE1 muchas vidas porque...\""
+    _closeUp: 1
