@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class DialogueCallbacks : MonoBehaviour
 {
-    public void OnQuecaInterview(string opponentName)
+    public void OnQuecaInterview()
     {
-        DeckManager.Instance.SetOpponentCards(opponentName);
-        SceneLoader.Instance.LoadInterviewScene();
+        SceneLoader.Instance.LoadNelaOffice0();
     }
 }
