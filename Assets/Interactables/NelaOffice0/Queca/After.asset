@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: After
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Veo que sigues en forma, \xA1por un momento pensaba que me ibas a
+      echar y todo!"
+    _closeUp: 6
+  - _content: "\xBFPero c\xF3mo voy a echar a mi mejor amiga de un trabajo que ella
+      misma me ha contratado?"
+    _closeUp: 1
+  - _content: "Oye y muchas gracias otra vez por el enchufe, la verdad es que est\xE1bamos
+      cada vez m\xE1s apurados, perdiendo clientes a las megaempresas."
+    _closeUp: 1
+  - _content: "Si el favor nos lo hac\xE9is a nosotros, no sabes cu\xE1nto\u2026"
+    _closeUp: 6
+  - _content: ...
+    _closeUp: 1
+  - _content: ...
+    _closeUp: 6
+  - _content: "\xA1Bueno! \xBFT\xFA no est\xE1s hambrienta?"
+    _closeUp: 6
+  - _content: "Pues un poco de gusa s\xED que me ha dado tanto ajetreo, s\xED."
+    _closeUp: 1
+  - _content: "\xA1A la cafeter\xEDa entonces! Nada mejor que una comilona despu\xE9s
+      de una buena entrevista."
+    _closeUp: 6

@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Before
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Y este es tu despacho. Mol\xF3n, \xBFeh?"
+    _closeUp: 6
+  - _content: "\xA1Halaaaaa! \xA1Pero qu\xE9 espacioso! Aqu\xED s\xED que voy a poder
+      trabajar a gusto."
+    _closeUp: 1
+  - _content: "Y tanto que s\xED. Atenta, que te explico c\xF3mo va la cosa."
+    _closeUp: 6
+  - _content: "Cada ma\xF1ana se te dir\xE1 a qu\xE9 individuo te toca investigar
+      ese d\xEDa, y cual es tu objetivo; que suele ser despedirlo."
+    _closeUp: 6
+  - _content: "\xBFSobre todo despidos? En mi antiguo puesto sol\xEDa encargarme
+      m\xE1s de las contrataciones."
+    _closeUp: 1
+  - _content: "La cosa est\xE1 como est\xE1, chiqui, aqu\xED nos sobra gente."
+    _closeUp: 6
+  - _content: Vaya...
+    _closeUp: 1
+  - _content: "Total, que cuando sepas qui\xE9n es, tienes que investigarlo. Date
+      algunas vueltas por las oficinas, pregunt\xE1ndole a sus compa\xF1eros."
+    _closeUp: 6
+  - _content: Seguro que te sacan trapos sucios que puedas usar en su contra en la
+      entrevista.
+    _closeUp: 6
+  - _content: "\xBFLa entrevista?"
+    _closeUp: 1
+  - _content: "As\xED es, una vez que creas que ya sabes lo suficiente sobre el individuo,
+      b\xFAscalo y dile que te acompa\xF1e a tu despacho."
+    _closeUp: 6
+  - _content: Voy a parecer la directora del colegio...
+    _closeUp: 1
+  - _content: Ten en cuenta que las entrevistas suelen ser bastante intensas.
+    _closeUp: 6
+  - _content: "Cuando termines, seguramente estar\xE1s demasiado canasada como para
+      seguir con el garbeo por las oficinas."
+    _closeUp: 6
+  - _content: "Yo har\xEDa todo lo que quisiera dejar listo ese d\xEDa antes de meterme
+      en una entrevista."
+    _closeUp: 6
+  - _content: "\xBFPero c\xF3mo de intensa puede llegar a ser una entrevista como
+      para que vaya a acabar tan cansada?"
+    _closeUp: 1
+  - _content: "\xBFNo te lo crees? Ver\xE1s, que te lo voy a demostrar."
+    _closeUp: 6
