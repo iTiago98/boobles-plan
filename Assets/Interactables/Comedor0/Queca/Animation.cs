@@ -47,6 +47,8 @@ public class Animation : MonoBehaviour
     [SerializeField] private Controller _nelaController;
     [SerializeField] private FadeIn _fade;
     [SerializeField] private GameObject _food;
+    [SerializeField] private Transform _foodPosition0;
+    [SerializeField] private Transform _foodPosition1;
     
     private DialogueManager _diagMng;
 
