@@ -33,6 +33,7 @@ namespace Booble.Player
             _cam = Camera.main;
             _anim = GetComponent<Animator>();
             _destination = transform.position.x;
+            Interactable.EndInteraction();
         }
 
         private void Update()

@@ -3,6 +3,7 @@ using Booble.UI;
 using Santi.Utils;
 using System.Collections;
 using System.Collections.Generic;
+using Booble;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,51 +32,67 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenuScene()
     {
-        MusicManager.Instance.StopInterviewMusic();
-        MusicManager.Instance.PlayMainMenuMusic();
+        // MusicManager.Instance.StopInterviewMusic();
+        // MusicManager.Instance.StopMusic();
+        // MusicManager.Instance.PlayMainMenuMusic();
+        MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
         _fadeScreen.FadeOut(() =>
         {
-            var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU_SCENE);
+            var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU);
             async.completed += OnSceneLoaded;
         });
     }
 
-    public void LoadLoungeScene()
+    public void LoadLoungeScene0()
     {
-        MusicManager.Instance.StopMainMenuMusic();
-        MusicManager.Instance.PlayLoungeMusic();
+        // MusicManager.Instance.StopMainMenuMusic();
+        // MusicManager.Instance.StopMusic();
+        // MusicManager.Instance.PlayLoungeMusic();
         _fadeScreen.FadeOut(() =>
         {
-            var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_SCENE);
+            var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_0);
             async.completed += OnLoungeSceneLoaded;
         });
     }
-
+    
     public void LoadInterviewScene()
     {
-        MusicManager.Instance.StopLoungeMusic();
-        MusicManager.Instance.PlayInterviewMusic();
+        // MusicManager.Instance.StopLoungeMusic();
+        // MusicManager.Instance.StopMusic();
+        // MusicManager.Instance.PlayInterviewMusic();
+        MusicManager.Instance.PlayMusic(MusicReference.Interview);
         _fadeScreen.FadeOut(() =>
         {
             Camera.main.gameObject.SetActive(false);
             Controller.Instance.enabled = false;
 
-            var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW_SCENE, LoadSceneMode.Additive);
+            var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW, LoadSceneMode.Additive);
             async.completed += OnSceneLoaded;
         });
     }
 
-    public void ReturnToLoungeScene()
+    public void UnloadInterviewScene()
     {
-        MusicManager.Instance.StopInterviewMusic();
-        MusicManager.Instance.PlayLoungeMusic();
+        // MusicManager.Instance.StopInterviewMusic();
+        // MusicManager.Instance.StopMusic();
+        // MusicManager.Instance.PlayLoungeMusic();
+        MusicManager.Instance.PlayMusic(MusicReference.Lounge);
         _fadeScreen.FadeOut(() =>
         {
             Controller.Instance.enabled = true;
 
-            var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW_SCENE);
+            var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
             async.completed += OnSceneLoaded;
             async.completed += RestoreMainCamera;
+        });
+    }
+
+    public void LoadCanteenScene0()
+    {
+        _fadeScreen.FadeOut(() =>
+        {
+            var async = SceneManager.LoadSceneAsync(Scenes.CANTEEN_0);
+            async.completed += OnLoungeSceneLoaded;
         });
     }
 

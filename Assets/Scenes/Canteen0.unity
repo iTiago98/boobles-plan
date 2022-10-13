@@ -1198,18 +1198,18 @@ MonoBehaviour:
     Path: event:/LoungeMusic
   _interviewMusicReference:
     Guid:
-      Data1: 1514793878
-      Data2: 1239756933
-      Data3: -1308863092
-      Data4: -1331080349
-    Path: event:/MainMenuMusic
-  _mainMenuReference:
-    Guid:
       Data1: 1859034673
       Data2: 1128342749
       Data3: 1890272702
       Data4: -526562447
     Path: event:/InterviewMusic
+  _mainMenuReference:
+    Guid:
+      Data1: 1514793878
+      Data2: 1239756933
+      Data3: -1308863092
+      Data4: -1331080349
+    Path: event:/MainMenuMusic
 --- !u!1 &321204997
 GameObject:
   m_ObjectHideFlags: 0

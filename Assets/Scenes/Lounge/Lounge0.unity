@@ -1001,18 +1001,18 @@ MonoBehaviour:
     Path: event:/LoungeMusic
   _interviewMusicReference:
     Guid:
-      Data1: 1514793878
-      Data2: 1239756933
-      Data3: -1308863092
-      Data4: -1331080349
-    Path: event:/MainMenuMusic
-  _mainMenuReference:
-    Guid:
       Data1: 1859034673
       Data2: 1128342749
       Data3: 1890272702
       Data4: -526562447
     Path: event:/InterviewMusic
+  _mainMenuReference:
+    Guid:
+      Data1: 1514793878
+      Data2: 1239756933
+      Data3: -1308863092
+      Data4: -1331080349
+    Path: event:/MainMenuMusic
 --- !u!1 &266013429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1544,7 +1544,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328728121}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91dbcf32368845842a8bd51b6864bb0c, type: 3}
   m_Name: 

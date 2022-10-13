@@ -17,7 +17,8 @@ namespace Booble.MainMenu
 			if(_onTween)
 				return;
 
-			SceneLoader.Instance.LoadLoungeScene();
+			SceneLoader.Instance.LoadLoungeScene0();
+			MusicManager.Instance.PlayMusic(MusicReference.Lounge);
 		}
 
 		public void CreditsOnOffButton()

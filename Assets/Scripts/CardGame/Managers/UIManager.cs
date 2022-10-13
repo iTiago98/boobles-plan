@@ -287,7 +287,7 @@ namespace CardGame.Managers
 
         public void OnEndButtonClick()
         {
-            SceneLoader.Instance.ReturnToLoungeScene();
+            SceneLoader.Instance.UnloadInterviewScene();
         }
     }
 }
