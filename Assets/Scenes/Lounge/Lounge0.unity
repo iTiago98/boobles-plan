@@ -3409,6 +3409,109 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
   - {fileID: 11400000, guid: f152fd45ab84e934f9e3f1e3cc1f76b2, type: 2}
   - {fileID: 11400000, guid: 35a9ae74c69403142817aa145bd25659, type: 2}
+  playerExtraCards:
+  - name: Gran final
+    sprite: {fileID: 21300000, guid: 58aa6b948c0e680488378667f8d70ea1, type: 3}
+    cost: 5
+    strength: 3
+    defense: 2
+    type: 0
+    effects:
+    - type: 3
+      subType: 9
+      applyTime: 1
+      targetType: 4
+      intParameter1: 1
+      intParameter2: 0
+      cardParameter_Name: 
+      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Strength: 0
+      cardParameter_Defense: 0
+      cardParameter_Effect: 0
+  citrianoExtraCards:
+  - name: Hipervitaminado
+    sprite: {fileID: 21300000, guid: 52d0e95a2b96f4749ab2b2275ae7e458, type: 3}
+    cost: 5
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 5
+      subType: 23
+      applyTime: 0
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter_Name: 
+      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Strength: 0
+      cardParameter_Defense: 0
+      cardParameter_Effect: 0
+  - name: Nueva cepa del escorbuto
+    sprite: {fileID: 21300000, guid: 8e0e203c646a3134d8acbcc5c11da2ba, type: 3}
+    cost: 4
+    strength: 4
+    defense: 4
+    type: 0
+    effects:
+    - type: 3
+      subType: 6
+      applyTime: 0
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter_Name: 
+      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Strength: 0
+      cardParameter_Defense: 0
+      cardParameter_Effect: 0
+  - name: Exprimir la verdad
+    sprite: {fileID: 21300000, guid: a93bc51e6169ada4385e548524294411, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 2
+    effects:
+    - type: 1
+      subType: 1
+      applyTime: 5
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter_Name: 
+      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Strength: 0
+      cardParameter_Defense: 0
+      cardParameter_Effect: 0
+  - name: "La m\xE1quina de zumo de los supermercados"
+    sprite: {fileID: 21300000, guid: 96af5639f3a22e94092eb9d8944d381e, type: 3}
+    cost: 5
+    strength: 0
+    defense: 5
+    type: 0
+    effects:
+    - type: 4
+      subType: 13
+      applyTime: 3
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter_Name: Zumo de naranja
+      cardParameter_Sprite: {fileID: 21300000, guid: 38b5d5e93c3541044b67a2f1a1c2934b, type: 3}
+      cardParameter_Strength: 1
+      cardParameter_Defense: 1
+      cardParameter_Effect: 6
+    - type: 3
+      subType: 9
+      applyTime: 3
+      targetType: 8
+      intParameter1: 0
+      intParameter2: -1
+      cardParameter_Name: 
+      cardParameter_Sprite: {fileID: 0}
+      cardParameter_Strength: 0
+      cardParameter_Defense: 0
+      cardParameter_Effect: 0
 --- !u!1 &766181677
 GameObject:
   m_ObjectHideFlags: 0

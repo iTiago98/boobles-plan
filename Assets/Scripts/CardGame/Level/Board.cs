@@ -52,7 +52,7 @@ namespace CardGame.Level
                 case Opponent_Name.Tutorial:
                     background.sprite = backgroundList[0];
                     break;
-                case Opponent_Name.Mondaroriano:
+                case Opponent_Name.Citriano:
                     background.sprite = backgroundList[1];
                     break;
                 case Opponent_Name.PingPongBros:

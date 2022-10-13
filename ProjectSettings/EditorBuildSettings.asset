@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 8ace4613f6535f5438127d163e5e457a
   - enabled: 1
-    path: Assets/Scenes/Lounge0.unity
+    path: Assets/Scenes/Lounge/Lounge0.unity
     guid: a3750959c00510d468256026a42e12bd
   - enabled: 1
     path: Assets/Scenes/Interview.unity

@@ -472,7 +472,7 @@ namespace CardGame.Cards.DataModel.Effects
                 switch (subType)
                 {
                     case SubType.MONDARORIANO_WIN_CONDITION:
-                        return DeckManager.Instance.GetOpponentName() == Opponent_Name.Mondaroriano 
+                        return DeckManager.Instance.GetOpponentName() == Opponent_Name.Citriano 
                             && TurnManager.Instance.player.eloquence >= 30;
                     default:
                         return false;

@@ -13,23 +13,19 @@ public class DeckManager : Singleton<DeckManager>
 
     public List<CardsDataContainer> opponentsDecks;
 
+    [Header("Extra Cards")]
+    public List<CardsData> playerExtraCards;
+    public List<CardsData> citrianoExtraCards;
+
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
 
     private Opponent_Name opponentName;
 
-
-    //private CardsData _granFinal;
-
     private void Start()
     {
         SetPlayerCards();
     }
-
-    //public void AddGranFinal()
-    //{
-    //    AddCard(_granFinal);
-    //}
 
     public void AddCard(CardsData cardsData)
     {
@@ -65,8 +61,8 @@ public class DeckManager : Singleton<DeckManager>
                 this.opponentName = Opponent_Name.Tutorial;
                 opponentDeck = opponentsDecks[0];
                 break;
-            case "Mondaroriano":
-                this.opponentName = Opponent_Name.Mondaroriano;
+            case "Citriano":
+                this.opponentName = Opponent_Name.Citriano;
                 opponentDeck = opponentsDecks[1];
                 break;
             case "PingPongBros":
@@ -100,17 +96,37 @@ public class DeckManager : Singleton<DeckManager>
             temp.type = data.type;
             temp.effects = data.effects;
 
-            //if(temp.name == "Gran final")
-            //{
-            //    _granFinal = temp;
-            //}
-            //else
-            //{
             dest.Add(temp);
-            //}
         }
     }
 
+    #region Add Extra Cards
 
+    public void AddGranFinal()
+    {
+        AddCard(playerExtraCards[0]);
+    }
+
+    public void AddHipervitaminado()
+    {
+        AddCard(citrianoExtraCards[0]);
+    }
+
+    public void AddNuevaCepaDelEscorbuto()
+    {
+        AddCard(citrianoExtraCards[1]);
+    }
+
+    public void AddExprimirLaVerdad()
+    {
+        AddCard(citrianoExtraCards[2]);
+    }
+
+    public void AddMaquinaDeZumo()
+    {
+        AddCard(citrianoExtraCards[3]);
+    }
+
+    #endregion
 }
 
