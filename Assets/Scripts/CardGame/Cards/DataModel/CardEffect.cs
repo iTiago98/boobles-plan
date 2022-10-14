@@ -153,7 +153,9 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DESTROY_CARD:
                     switch (targetType)
                     {
-                        case Target.ENEMY: ((Card)target).Destroy(); break;
+                        case Target.ENEMY:
+                        case Target.CARD:
+                            ((Card)target).Destroy(); break;
                         case Target.AENEMY: Board.Instance.DestroyCards(TurnManager.Instance.otherPlayer); break;
                         case Target.ACARD: Board.Instance.DestroyAll(); break;
                         case Target.FIELDCARD: Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard().Destroy(); break;
@@ -473,7 +475,7 @@ namespace CardGame.Cards.DataModel.Effects
                 switch (subType)
                 {
                     case SubType.MONDARORIANO_WIN_CONDITION:
-                        return DeckManager.Instance.GetOpponentName() == Opponent_Name.Citriano 
+                        return DeckManager.Instance.GetOpponentName() == Opponent_Name.Citriano
                             && TurnManager.Instance.player.eloquence >= 30;
                     default:
                         return false;
@@ -499,11 +501,11 @@ namespace CardGame.Cards.DataModel.Effects
 
                     case Target.ENEMY:
                     case Target.AENEMY:
-                        return otherPlayerHasCards;
+                        return otherPlayerHasCards || Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard() != null;
 
                     case Target.CARD:
                     case Target.ACARD:
-                        return currentPlayerHasCards || otherPlayerHasCards 
+                        return currentPlayerHasCards || otherPlayerHasCards
                             || Board.Instance.GetFieldCardZone(TurnManager.Instance.player).GetCard() != null
                             || Board.Instance.GetFieldCardZone(TurnManager.Instance.opponent).GetCard() != null;
 
@@ -540,13 +542,25 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
                 case Target.ALLY:
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
+                    if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
+                        possibleTargets.Add(Board.Instance.GetFieldCardZone(TurnManager.Instance.currentPlayer).GetCard());
                     break;
                 case Target.ENEMY:
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
+                    if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
+                        possibleTargets.Add(Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard());
                     break;
                 case Target.CARD:
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
+                    if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
+                    {
+                        Card fieldCard1 = Board.Instance.GetFieldCardZone(TurnManager.Instance.currentPlayer).GetCard();
+                        if(fieldCard1 != null) possibleTargets.Add(fieldCard1);
+
+                        Card fieldCard2 = Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard();
+                        if (fieldCard2 != null) possibleTargets.Add(fieldCard2);
+                    }
                     break;
                 //case Target.CARDZONE:
                 case Target.PLAYER:
@@ -710,7 +724,7 @@ namespace CardGame.Cards.DataModel.Effects
                     s += "si tienes 30 o más vidas, ganas la partida."; break;
             }
 
-            if(s.Length > 0) s = s[0].ToString().ToUpper() + s.Substring(1, s.Length - 1);
+            if (s.Length > 0) s = s[0].ToString().ToUpper() + s.Substring(1, s.Length - 1);
 
             return s;
         }

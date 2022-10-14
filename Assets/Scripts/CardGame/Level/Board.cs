@@ -152,7 +152,8 @@ namespace CardGame.Level
         public void DestroyCards(Contender contender)
         {
             foreach (CardZone zone in GetCardZone(contender)) zone.GetCard()?.Destroy();
-            GetFieldCardZone(contender).GetCard().Destroy();
+            Card fieldCard = GetFieldCardZone(contender).GetCard();
+            if(fieldCard != null) fieldCard.Destroy();
         }
 
         public void DestroyAll()
