@@ -3406,7 +3406,7 @@ MonoBehaviour:
       subType: 1
       applyTime: 5
       targetType: 0
-      intParameter1: 0
+      intParameter1: 1
       intParameter2: 0
       cardParameter_Name: 
       cardParameter_Sprite: {fileID: 0}
