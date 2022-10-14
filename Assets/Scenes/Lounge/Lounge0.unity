@@ -3431,17 +3431,6 @@ MonoBehaviour:
       cardParameter_Strength: 1
       cardParameter_Defense: 1
       cardParameter_Effect: 6
-    - type: 3
-      subType: 9
-      applyTime: 3
-      targetType: 8
-      intParameter1: 0
-      intParameter2: -1
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
-      cardParameter_Effect: 0
 --- !u!4 &1739292693
 Transform:
   m_ObjectHideFlags: 0
