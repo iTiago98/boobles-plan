@@ -4,6 +4,7 @@ using Santi.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Booble.Flags;
 using UnityEngine;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
@@ -40,6 +41,7 @@ namespace Booble
         private void Start()
         {
             // PlayMainMenuMusic();
+            FlagManager.Instance.ResetFlags();
             PlayMusic(MusicReference.MainMenu);
         }
 

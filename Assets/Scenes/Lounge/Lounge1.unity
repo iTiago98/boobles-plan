@@ -824,13 +824,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: e31981c5afe236c49996a029655c8f87, type: 2}
-  _onEnd: 1
+  _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 498324086}
         m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
         m_MethodName: AddExprimir
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1174065278}
+        m_TargetAssemblyTypeName: Booble.Interactables.Interactable, Assembly-CSharp
+        m_MethodName: EndInteraction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1179,13 +1191,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 7bbbcbf6c7ac22b48afc0a3bfcd99bd5, type: 2}
-  _onEnd: 2
+  _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 498324086}
         m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
         m_MethodName: AddHipervitaminado
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1289239040}
+        m_TargetAssemblyTypeName: Booble.Interactables.Interactable, Assembly-CSharp
+        m_MethodName: EndInteraction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1329,13 +1353,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 0bd302d4327b0dd4f9cb9656b86a8dec, type: 2}
-  _onEnd: 1
+  _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 498324086}
         m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
         m_MethodName: AddMaquinaZumos
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1289239040}
+        m_TargetAssemblyTypeName: Booble.Interactables.Interactable, Assembly-CSharp
+        m_MethodName: EndInteraction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2120,7 +2156,7 @@ MonoBehaviour:
   - _optionText: "T\xFA no sabr\xE1s por casualidad qu\xE9 hace la modificaci\xF3n
       7878994 de las m\xE1quinas de zumos, \xBFno?"
     _trueFlags: 20000000
-    _falseFlags: 
+    _falseFlags: 29000000
     _dialogueOption: {fileID: 450719744}
 --- !u!95 &1174065280
 Animator:
@@ -2414,7 +2450,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -1571186768, guid: dde7830b0c7525c4a9baf4e9263d89dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2947,6 +2983,7 @@ GameObject:
   - component: {fileID: 1633416258}
   - component: {fileID: 1633416256}
   - component: {fileID: 1633416257}
+  - component: {fileID: 1633416259}
   m_Layer: 0
   m_Name: Partida
   m_TagString: Untagged
@@ -3009,6 +3046,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1633416259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1633416254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465cb8261447f874990c19cc48eec37e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1655589804

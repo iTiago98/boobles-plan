@@ -1462,7 +1462,7 @@ MonoBehaviour:
   _emilinSpawnDuration: 0.5833333
   _moveSpeed: 4
   _nelaController: {fileID: 1923934402}
-  _fade: {fileID: 0}
+  _fade: {fileID: 1539748105}
   _food: {fileID: 776396592}
 --- !u!1 &1038908896
 GameObject:
@@ -1915,6 +1915,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
+--- !u!114 &1539748105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7735595120576307438, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
+  m_PrefabInstance: {fileID: 1539748104}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47385eab23fd92c42a2320bec6ed1e1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1555629233
 GameObject:
   m_ObjectHideFlags: 0

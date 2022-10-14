@@ -19,7 +19,7 @@ namespace Booble.Interactables.Arcadio
 
             if (FlagManager.Instance.FlagsSatisfied(_coins, new List<Flag.Reference>()))
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
             else
             {

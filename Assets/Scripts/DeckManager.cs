@@ -120,6 +120,7 @@ public class DeckManager : MonoBehaviour
 
     public void AddGranFinal()
     {
+        Debug.Log("ADD1");
         AddCard(playerExtraCards[0]);
     }
 

@@ -21,7 +21,10 @@ namespace Booble.Flags
         {
 #if UNITY_EDITOR
 			// if (_deleteSaveFileOnAwake) DeleteSaveFile();
-			if(_deleteSaveFileOnAwake) PlayerPrefs.DeleteAll();
+			if (_deleteSaveFileOnAwake)
+			{
+				ResetFlags();
+			}
 #endif
 
 			// if(File.Exists(FlagFilePath))
@@ -62,6 +65,12 @@ namespace Booble.Flags
 		// 		File.Delete(FlagFilePath);
 		// 	}
         // }
+
+        public void ResetFlags()
+        {
+	        Debug.Log("RESET FLAGS"); 
+	        PlayerPrefs.DeleteAll();
+        }
 
 		public bool GetFlag(Flag.Reference flagRef)
         { 

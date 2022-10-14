@@ -147,6 +147,9 @@ public class SceneLoader : MonoBehaviour
 
     private void RestoreMainCamera(AsyncOperation op)
     {
+        if(_explorationCam == null)
+            return;
+        
         _explorationCam.gameObject.SetActive(true);
     }
 

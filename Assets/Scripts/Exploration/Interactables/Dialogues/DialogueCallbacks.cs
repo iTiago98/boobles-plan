@@ -9,6 +9,12 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadNelaOffice0();
     }
 
+    public void PinPon()
+    {
+        DeckManager.Instance.SetOpponentCards("PingPongBros");
+        SceneLoader.Instance.LoadInterviewScene();
+    }
+
     public void OnBajando()
     {
         SceneLoader.Instance.LoadNelaOffice1();

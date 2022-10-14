@@ -23,13 +23,15 @@ MonoBehaviour:
   - _content: "No me gustar\xEDa, la verdad. Pero voy a serte sincera... va a ser
       complicado."
     _closeUp: 1
-  - _content: "Voy a hacer todo lo que pueda por ti, pero si Booble no est\xE1 concento
-      con mi trabajo, me echar\xE1n, y no puedo irme ahora despu\xE9s de lo que hemos
-      descubierto."
+  - _content: "Voy a hacer todo lo que pueda por ti, pero si Booble no est\xE1 contento
+      con mi trabajo, me echar\xE1n."
     _closeUp: 1
-  - _content: "\xBFQui\xE9n sabe cu\xE1ntos otros tejemanejes se traen entre manos?
-      Estoy en muy buena posici\xF3n ahora para desentramarlos... y no lo quiero
-      desaprovechar."
+  - _content: "No puedo dejar que me echen ahora, despu\xE9s de lo que hemos descubierto."
+    _closeUp: 1
+  - _content: "\xBFQui\xE9n sabe cu\xE1ntos otros tejemanejes se traen entre manos? "
+    _closeUp: 1
+  - _content: "Estoy en muy buena posici\xF3n ahora para desentramarlos... y no lo
+      quiero desaprovechar."
     _closeUp: 1
   - _content: "Admiro tu determinaci\xF3n, Nela. Si llegado el momento, no tienes
       m\xE1s remedio que despedirme, hazlo sin remordimientos."
