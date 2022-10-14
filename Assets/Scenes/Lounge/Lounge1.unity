@@ -2097,6 +2097,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433056562}
   m_CullTransparentMesh: 1
+--- !u!1 &450719741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 450719742}
+  - component: {fileID: 450719744}
+  - component: {fileID: 450719743}
+  m_Layer: 0
+  m_Name: Modificacion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &450719742
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450719741}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1174065277}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &450719743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450719741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: e31981c5afe236c49996a029655c8f87, type: 2}
+  _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 498324086}
+        m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
+        m_MethodName: AddExprimir
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &450719744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 450719741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &465255689
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,6 +4542,7 @@ Transform:
   - {fileID: 766181678}
   - {fileID: 1488464208}
   - {fileID: 2034659309}
+  - {fileID: 450719742}
   m_Father: {fileID: 1078849020}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4507,6 +4582,11 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 2034659311}
+  - _optionText: "T\xFA no sabr\xE1s por casualidad qu\xE9 hace la modificaci\xF3n
+      7878994 de las m\xE1quinas de zumos, \xBFno?"
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 450719744}
 --- !u!95 &1174065280
 Animator:
   serializedVersion: 4

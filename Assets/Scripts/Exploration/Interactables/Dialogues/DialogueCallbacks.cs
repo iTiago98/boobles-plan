@@ -33,4 +33,9 @@ public class DialogueCallbacks : MonoBehaviour
     {
         DeckManager.Instance.AddNuevaCepaDelEscorbuto();    
     }
+
+    public void AddExprimir()
+    {
+        DeckManager.Instance.AddExprimirLaVerdad();
+    }
 }
