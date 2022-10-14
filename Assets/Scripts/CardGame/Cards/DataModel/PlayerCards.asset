@@ -145,7 +145,7 @@ MonoBehaviour:
     - type: 4
       subType: 18
       applyTime: 1
-      targetType: 2
+      targetType: 3
       intParameter1: 0
       intParameter2: 0
       cardParameter_Name: 
@@ -217,7 +217,7 @@ MonoBehaviour:
     - type: 2
       subType: 3
       applyTime: 1
-      targetType: 2
+      targetType: 3
       intParameter1: 0
       intParameter2: 0
       cardParameter_Name: 
@@ -235,7 +235,7 @@ MonoBehaviour:
     - type: 2
       subType: 3
       applyTime: 1
-      targetType: 2
+      targetType: 3
       intParameter1: 0
       intParameter2: 0
       cardParameter_Name: 

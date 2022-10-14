@@ -31,6 +31,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Vitamina C
     sprite: {fileID: 21300000, guid: 6c8d4dc4e2964b5419238f9b8c166c42, type: 3}
     cost: 4
@@ -48,6 +49,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antioxidante
     sprite: {fileID: 21300000, guid: 4c9d1e2fde2e2bd4ab90405b6a3cff14, type: 3}
     cost: 1
@@ -65,6 +67,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antioxidante
     sprite: {fileID: 21300000, guid: 4c9d1e2fde2e2bd4ab90405b6a3cff14, type: 3}
     cost: 1
@@ -82,6 +85,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antioxidante
     sprite: {fileID: 21300000, guid: 4c9d1e2fde2e2bd4ab90405b6a3cff14, type: 3}
     cost: 1
@@ -99,6 +103,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antioxidante
     sprite: {fileID: 21300000, guid: 4c9d1e2fde2e2bd4ab90405b6a3cff14, type: 3}
     cost: 1
@@ -116,6 +121,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antiarrugas
     sprite: {fileID: 21300000, guid: c998aac13d150ab488cbeeab9adc7935, type: 3}
     cost: 2
@@ -127,12 +133,13 @@ MonoBehaviour:
       subType: 2
       applyTime: 1
       targetType: 0
-      intParameter1: 2
+      intParameter1: 1
       intParameter2: 0
       cardParameter_Name: 
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antiarrugas
     sprite: {fileID: 21300000, guid: c998aac13d150ab488cbeeab9adc7935, type: 3}
     cost: 2
@@ -144,12 +151,13 @@ MonoBehaviour:
       subType: 2
       applyTime: 1
       targetType: 0
-      intParameter1: 2
+      intParameter1: 1
       intParameter2: 0
       cardParameter_Name: 
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antiestrenimiento
     sprite: {fileID: 21300000, guid: ed45b84b861035147ba2066a11ea38d1, type: 3}
     cost: 2
@@ -167,6 +175,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Antiestrenimiento
     sprite: {fileID: 21300000, guid: ed45b84b861035147ba2066a11ea38d1, type: 3}
     cost: 2
@@ -184,6 +193,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: "5 piezas de fruta al d\xEDa"
     sprite: {fileID: 21300000, guid: 9e3039690dfdee744bbf8a43275d5aad, type: 3}
     cost: 5
@@ -198,9 +208,10 @@ MonoBehaviour:
       intParameter1: 0
       intParameter2: 0
       cardParameter_Name: Pieza de fruta
-      cardParameter_Sprite: {fileID: 21300000, guid: fc7a6162bf746bb469602995d72f6fb3, type: 3}
+      cardParameter_Sprite: {fileID: 21300000, guid: 5b39a7a17de87da4fb17b24820739a21, type: 3}
       cardParameter_Strength: 1
       cardParameter_Defense: 1
+      cardParameter_Effect: 0
   - name: Zumo sobre los papeles
     sprite: {fileID: 21300000, guid: 72ace0f9c96d8084b8e75d46859a5102, type: 3}
     cost: 2
@@ -218,6 +229,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Zumo sobre los papeles
     sprite: {fileID: 21300000, guid: 72ace0f9c96d8084b8e75d46859a5102, type: 3}
     cost: 2
@@ -235,6 +247,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Arrojar pieles
     sprite: {fileID: 21300000, guid: ac431a506b079ba4f930dbcafe1cdd60, type: 3}
     cost: 1
@@ -252,6 +265,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Arrojar pieles
     sprite: {fileID: 21300000, guid: ac431a506b079ba4f930dbcafe1cdd60, type: 3}
     cost: 1
@@ -269,6 +283,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Hacerse un zumo
     sprite: {fileID: 21300000, guid: f2edac0a37567274aa3117c43e5a0ea6, type: 3}
     cost: 5
@@ -286,6 +301,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Presumir de jersey
     sprite: {fileID: 21300000, guid: 6da35133c0c3de04699c0a28f0b4a3b2, type: 3}
     cost: 3
@@ -303,6 +319,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Presumir de jersey
     sprite: {fileID: 21300000, guid: 6da35133c0c3de04699c0a28f0b4a3b2, type: 3}
     cost: 3
@@ -320,6 +337,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Ofrecer un zumo
     sprite: {fileID: 21300000, guid: 0f719ca55feac2644a50b7ec15377110, type: 3}
     cost: 4
@@ -337,6 +355,7 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0
   - name: Ambientador de piel de naranja
     sprite: {fileID: 21300000, guid: 7261578fe7484d1478007e37dc4b2b80, type: 3}
     cost: 3
@@ -354,3 +373,4 @@ MonoBehaviour:
       cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 0
       cardParameter_Defense: 0
+      cardParameter_Effect: 0

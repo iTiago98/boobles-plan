@@ -340,7 +340,8 @@ namespace CardGame.Cards.DataModel.Effects
                 data.AddEffect(new CardEffect()
                 {
                     type = EffectType.BOOST, // TODO find type from subtype
-                    subType = cardParameter_Effect
+                    subType = cardParameter_Effect,
+                    applyTime = ApplyTime.COMBAT
                 });
             }
 
@@ -502,7 +503,9 @@ namespace CardGame.Cards.DataModel.Effects
 
                     case Target.CARD:
                     case Target.ACARD:
-                        return currentPlayerHasCards || otherPlayerHasCards;
+                        return currentPlayerHasCards || otherPlayerHasCards 
+                            || Board.Instance.GetFieldCardZone(TurnManager.Instance.player).GetCard() != null
+                            || Board.Instance.GetFieldCardZone(TurnManager.Instance.opponent).GetCard() != null;
 
                     case Target.FIELDCARD:
                         return Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard() != null;
@@ -629,6 +632,9 @@ namespace CardGame.Cards.DataModel.Effects
                         break;
                     case ApplyTime.DRAW_CARD:
                         s += "Al robar una carta, ";
+                        break;
+                    case ApplyTime.PLAY_ARGUMENT:
+                        s += "Al jugar un argumento, ";
                         break;
                 }
             }

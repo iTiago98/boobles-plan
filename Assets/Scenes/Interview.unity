@@ -1434,6 +1434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zone1
       objectReference: {fileID: 0}
+    - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6461131739676547815, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Center.x
       value: 0
@@ -1834,6 +1838,10 @@ PrefabInstance:
     - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Name
       value: Zone2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6461131739676547815, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Center.x
@@ -2476,6 +2484,10 @@ PrefabInstance:
     - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Name
       value: FieldZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6461131739676547815, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Center.x
@@ -5422,6 +5434,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Zone3
       objectReference: {fileID: 0}
+    - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6461131739676547815, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Center.x
       value: 0
@@ -6058,6 +6074,10 @@ PrefabInstance:
     - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Name
       value: Zone4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2585460997866550776, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6461131739676547815, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
       propertyPath: m_Center.x

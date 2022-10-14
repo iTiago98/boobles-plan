@@ -679,7 +679,7 @@ namespace CardGame.Cards
             _data.defense = defaultDefense;
             _hand.AddCard(this);
             if (contender.role == Contender.Role.OPPONENT) FlipCard();
-            UpdateStatsUI();
+            if (type == CardType.ARGUMENT) UpdateStatsUI();
         }
 
         public void SwapContender()
