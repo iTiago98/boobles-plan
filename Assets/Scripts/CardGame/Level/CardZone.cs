@@ -90,11 +90,17 @@ namespace CardGame.Level
 
         private void CheckField(Card card, MouseController mouseController)
         {
-            if (isEmpty && isFieldZone)
+            if (!isEmpty)
+            {
+                GetCard().Destroy();
+            }
+
+            if (isFieldZone)
             {
                 mouseController.SetHolding(null);
                 card.Play(this);
-            } else
+            }
+            else
             {
                 // Send card back to previous container
                 card.OnMouseLeftClickUp(mouseController);
