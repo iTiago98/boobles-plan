@@ -1,3 +1,4 @@
+using System;
 using CardGame;
 using CardGame.Cards.DataModel;
 using CardGame.Cards.DataModel.Effects;
@@ -6,9 +7,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeckManager : Singleton<DeckManager>
+public class DeckManager : MonoBehaviour
 {
-
+    public static DeckManager Instance { get; private set; }
+    
     public CardsDataContainer playerDeckBase;
 
     public List<CardsDataContainer> opponentsDecks;
@@ -21,6 +23,20 @@ public class DeckManager : Singleton<DeckManager>
     private List<CardsData> _opponentDeck;
 
     private Opponent_Name opponentName;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
