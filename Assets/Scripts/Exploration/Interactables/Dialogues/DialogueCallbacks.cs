@@ -23,4 +23,14 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadLowerHall1();
     }
+
+    public void LoadNelaOffice1()
+    {
+        SceneLoader.Instance.LoadNelaOffice1();
+    }
+
+    public void AddEscorbuto()
+    {
+        DeckManager.Instance.AddNuevaCepaDelEscorbuto();    
+    }
 }

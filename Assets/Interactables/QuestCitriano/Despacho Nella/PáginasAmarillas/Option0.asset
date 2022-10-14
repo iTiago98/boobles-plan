@@ -14,34 +14,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "(Buscar el n\xFAmero en la gu\xEDa telef\xF3nica)"
-    _closeUp: 1
   - _content: "\xA1Ah, claro, Eufrasio Patali\xE9brez, el famoso Premio Nobel de
       Metamedicina! Voy a llamarlo ahora mismo."
     _closeUp: 1
+  - _content: (Ring ring)
+    _closeUp: 0
   - _content: "Dr. Patali\xE9brez: \xA1Dejen de acosarme, pienso llamar a la polic\xEDa!"
     _closeUp: 0
   - _content: "Perdone, \xBFes usted el Doctor Patali\xE9brez? Me llamo Nella y no
       deseo molestarle, s\xF3lo quiero preguntarle sobre su investigaci\xF3n. "
     _closeUp: 1
   - _content: "Dr. Patali\xE9brez: Perdone, desde que publiqu\xE9 ese maldito estudio
-      me han arruinado la vida. Antes sal\xEDa en programas de la 2, ahora estoy
+      me han arruinado la vida."
+    _closeUp: 0
+  - _content: "Dr. Patali\xE9brez: Antes sal\xEDa en programas de la 2, ahora estoy
       hasta en el S\xE1lvame Aguacate."
     _closeUp: 0
-  - _content: "\xBFSabe d\xF3nde podr\xEDa encontrar esa publicaci\xF3n? Estoy bastante
-      interesada en su estudio, no es la primera vez que oigo esa teor\xEDa de la
-      nueva cepa del escorbuto."
+  - _content: "\xBFSabe d\xF3nde podr\xEDa encontrar esa publicaci\xF3n?"
+    _closeUp: 1
+  - _content: "Estoy bastante interesada en su estudio, no es la primera vez que
+      oigo esa teor\xEDa de la nueva cepa del escorbuto."
     _closeUp: 1
   - _content: "Dr. Patali\xE9brez: Ahora es imposible de encontrar, lo eliminaron
-      de todas las revistas donde se public\xF3. Si, seg\xFAn ellos, tan mal estaba,
-      \xBFpor qu\xE9 ese miedo a que alguien lo lea?"
+      de todas las revistas donde se public\xF3."
+    _closeUp: 0
+  - _content: "Dr. Patali\xE9brez: Si, seg\xFAn ellos, tan mal estaba, \xBFpor qu\xE9
+      ese miedo a que alguien lo lea?"
     _closeUp: 0
   - _content: "No tendr\xE1 por casualidad una copia de esa publicaci\xF3n, \xBFno?"
     _closeUp: 1
   - _content: "Dr. Patali\xE9brez: Qu\xE9 m\xE1s quisiera yo, se llevaron mis ordenadores
-      y todo mi material de laboratorio. Al menos conservo mis preciadas notas. Creo
-      que podr\xEDa mand\xE1rselas por fax. "
+      y todo mi material de laboratorio."
+    _closeUp: 0
+  - _content: "Dr. Patali\xE9brez: Al menos conservo mis preciadas notas. Creo que
+      podr\xEDa mand\xE1rselas por fax. "
     _closeUp: 0
   - _content: "\xA1Much\xEDsimas gracias! Le mantendr\xE9 al tanto de todo, me da
       a m\xED que esto es m\xE1s grande de lo que creemos."
+    _closeUp: 1
+  - _content: (Clic)
+    _closeUp: 0
+  - _content: "Parece que Eufrasio me ha mandado ya el fax. A ver qu\xE9 pone..."
+    _closeUp: 1
+  - _content: "Vale, no tengo ni pajolera idea de lo que dice aqu\xED, s\xF3lo entiendo
+      donde pone \"Marca: Jugosol\"."
+    _closeUp: 1
+  - _content: "Jugosol... Me suena haber le\xEDdo ese nombre antes en el ordenador."
+    _closeUp: 1
+  - _content: "A ver.. \xBFd\xF3nde era? Voy a mirar mi historial..."
+    _closeUp: 1
+  - _content: "\xA1Aqu\xED! Una noticia que le\xED antes sobre Booble."
+    _closeUp: 1
+  - _content: '"BOOBLE COMPRA JUGUILEO, LA MAYOR EMPRESA DE ZUMOS DEL MUNDO"'
+    _closeUp: 1
+  - _content: "\"... entre las marcas de zumos internacionales de la empresa, est\xE1
+      la espa\xF1ola Jugosol, l\xEDder absoluto de las m\xE1quinas de zumos...\""
+    _closeUp: 1
+  - _content: "\"...seg\xFAn declaraciones de Batracio Cimbrel, jefe de producci\xF3n
+      de Booble Ib\xE9rica, piensan mejorar todas las m\xE1quinas que adquieran...\""
+    _closeUp: 1
+  - _content: "\"...Ante la pregunta de c\xF3mo piensan hacerlo, el se\xF1or Cimbrel
+      se ha mostrado bastante misterioso...\""
+    _closeUp: 1
+  - _content: "\"... Afirma que todo se lo debemos a la modificaci\xF3n 7878994,
+      un n\xFAmero que salvar\xE1 muchas vidas porque blablabla...\""
+    _closeUp: 1
+  - _content: "Modificaci\xF3n 7878994... A saber lo que ser\xE1 eso."
+    _closeUp: 1
+  - _content: "\xA1Anda! \xBFY esto? En el fax ven\xEDa adjunto una especie de marca
+      p\xE1ginas."
+    _closeUp: 1
+  - _content: "En realidad, \xA1parece m\xE1s bien una carta! Tiene nombre y todo:
+      \"Nueva Cepa del Escorbuto\"."
     _closeUp: 1

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lounge/Lounge1.unity
     guid: 55deceef84a4c2f47a886b02fe6e583c
+  - enabled: 1
+    path: Assets/Scenes/NelaOffice/NelaOffice1.unity
+    guid: a44ecbc336f0b4444bc8c0c4cd9e1304
   m_configObjects: {}

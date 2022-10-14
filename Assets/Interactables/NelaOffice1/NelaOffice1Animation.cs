@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Booble.Flags;
 using Booble.Interactables;
 using Booble.Interactables.Dialogues;
 using Booble.Player;
@@ -7,6 +8,7 @@ using Booble.UI;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class NelaOffice1Animation : MonoBehaviour
@@ -15,8 +17,12 @@ public class NelaOffice1Animation : MonoBehaviour
     [SerializeField] private FadeIn _fade;
     [SerializeField] private Image _image;
     [SerializeField] private Dialogue _dialogue;
+    [SerializeField] private Flag.Reference _day1;
+    [SerializeField] private Dialogue _officeDialogue;
+    [SerializeField] private List<Option> _options;
     
     private bool _dialogueEnd;
+    private bool _throwAgain;
     private DialogueManager _diagMng;
 
     private void Awake()
@@ -26,10 +32,18 @@ public class NelaOffice1Animation : MonoBehaviour
     
     private void Start()
     {
-        StartCoroutine(AnimationCoroutine());
+        if (!FlagManager.Instance.GetFlag(_day1))
+        {
+            FlagManager.Instance.SetFlag(_day1);
+            StartCoroutine(Day1AnimationCoroutine());
+        }
+        else
+        {
+            StartCoroutine(OfficeDialogueCoroutine());
+        }
     }
 
-    private IEnumerator AnimationCoroutine()
+    private IEnumerator Day1AnimationCoroutine()
     {
         _nelaController.enabled = false;
             
@@ -46,6 +60,29 @@ public class NelaOffice1Animation : MonoBehaviour
         SceneLoader.Instance.LoadLowerHall1();
     }
 
+    private IEnumerator OfficeDialogueCoroutine()
+    {
+        _nelaController.enabled = false;
+            
+        Interactable.ManualInteractionActivation();
+        _image.gameObject.SetActive(false);
+        yield return new WaitForSeconds(_fade.FadeDuration);
+
+        do
+        {
+            _throwAgain = false;
+            ThrowDialogue(_officeDialogue, _options);
+            yield return new WaitUntil(() => _dialogueEnd);
+            if (_throwAgain)
+            {
+                _dialogueEnd = false;
+                yield return new WaitUntil(() => _dialogueEnd);
+            }
+        } while (_throwAgain);
+        
+        SceneLoader.Instance.LoadLowerHall1();
+    }
+
     private void ThrowDialogue(Dialogue diag, List<Option> options = null)
     {
         _dialogueEnd = false;
@@ -53,5 +90,15 @@ public class NelaOffice1Animation : MonoBehaviour
         _diagMng.StartDialogue(diag, options);
         _diagMng.OnEndDialogue.RemoveAllListeners();
         _diagMng.OnEndDialogue.AddListener(() => _dialogueEnd = true);
+    }
+
+    public void ThrowAgain()
+    {
+        _throwAgain = true;
+    }
+
+    public void DialogueEnd()
+    {
+        _dialogueEnd = true;
     }
 }

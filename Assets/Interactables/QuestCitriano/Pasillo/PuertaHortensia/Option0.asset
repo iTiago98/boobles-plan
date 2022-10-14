@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: (Pegar la oreja)
-    _closeUp: 1
   - _content: "Hortensia: \xA1\xBFTe puedes creer que el escorbuto ha vuelto?!"
     _closeUp: 0
   - _content: "Lucrecia: \xA1Qu\xE9 me dices Maria Hortensia! \xBFLa enfermedad de
@@ -30,8 +28,9 @@ MonoBehaviour:
   - _content: 'Hortensia: No perdamos el oremus, Maria Lucrecia. '
     _closeUp: 0
   - _content: "Lucrecia: \xBFY d\xF3nde te has encontrado ese peri\xF3dico? \xBFEn
-      los tiempos de la posguerra? Aparte, \xBFqu\xE9 haces t\xFA leyendo propaganda
-      fascista?"
+      los tiempos de la posguerra?"
+    _closeUp: 0
+  - _content: "Lucrecia: Aparte, \xBFqu\xE9 haces t\xFA leyendo propaganda fascista?"
     _closeUp: 0
   - _content: "Hortensia: Pues donde va a ser, en el Lounge. Y no te preocupes que
       lo he tirado en cuanto lo he le\xEDdo"
