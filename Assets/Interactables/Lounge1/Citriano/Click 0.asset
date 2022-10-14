@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Click 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Buenos d\xEDas, buen hombre, \xBFse encuentra a la cola para usar
+      la m\xE1quina de zumos?"
+    _closeUp: 1
+  - _content: "\xA1Ojal\xE1! Lo que estoy haciendo es vigilar la m\xE1quina. Por
+      mi nombre que es Citriano, nadie m\xE1s la toca hasta que la arreglen."
+    _closeUp: 3
+  - _content: "\xBFC\xF3mo que la est\xE1 vigilando? \xBFCree que alguien la ha roto
+      a prop\xF3sito?"
+    _closeUp: 1
+  - _content: "No, se\xF1orita, no lo creo. LO S\xC9. Ayer mismo estaba la m\xE1quina
+      funcionando perfectamente."
+    _closeUp: 3
+  - _content: "Y esta ma\xF1ana, de buenas a primeras... PAFF... la m\xE1quina ya
+      no funcionaba."
+    _closeUp: 3
+  - _content: "Bueno, tampoco se enoje. Y baje un poco el tono, que me va a perforar
+      un t\xEDmpano."
+    _closeUp: 1

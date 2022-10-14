@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Click 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Bueno Citriano... Booble me ha encargado la tarea de despedirte, y
+      ahora seguramente sabemos por qu\xE9."
+    _closeUp: 1
+  - _content: "Pero no ir\xE1s a despedirme... \xBFverdad? Despu\xE9s de todo lo
+      que hemos pasado juntos..."
+    _closeUp: 3
+  - _content: "No me gustar\xEDa, la verdad. Pero voy a serte sincera... va a ser
+      complicado."
+    _closeUp: 1
+  - _content: "Voy a hacer todo lo que pueda por ti, pero si Booble no est\xE1 concento
+      con mi trabajo, me echar\xE1n, y no puedo irme ahora despu\xE9s de lo que hemos
+      descubierto."
+    _closeUp: 1
+  - _content: "\xBFQui\xE9n sabe cu\xE1ntos otros tejemanejes se traen entre manos?
+      Estoy en muy buena posici\xF3n ahora para desentramarlos... y no lo quiero
+      desaprovechar."
+    _closeUp: 1
+  - _content: "Admiro tu determinaci\xF3n, Nela. Si llegado el momento, no tienes
+      m\xE1s remedio que despedirme, hazlo sin remordimientos."
+    _closeUp: 3
+  - _content: "Mant\xE9n tu posici\xF3n y DESARMA A ESTA EMPRESA DESDE DENTRO."
+    _closeUp: 3
+  - _content: "\xA1Shh! Pero no grites, animal. Como nos oigan, nos despiden a los
+      dos, cenutrio."
+    _closeUp: 1
+  - _content: "S\xED, s\xED... perd\xF3n... es que me emociono..."
+    _closeUp: 3

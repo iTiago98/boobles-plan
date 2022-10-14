@@ -38,4 +38,14 @@ public class DialogueCallbacks : MonoBehaviour
     {
         DeckManager.Instance.AddExprimirLaVerdad();
     }
+
+    public void AddMaquinaZumos()
+    {
+        DeckManager.Instance.AddMaquinaDeZumo();
+    }
+
+    public void AddHipervitaminado()
+    {
+        DeckManager.Instance.AddHipervitaminado();
+    }
 }

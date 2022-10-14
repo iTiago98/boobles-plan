@@ -49,7 +49,12 @@ namespace Booble.Flags
             Whiskolacao,
             PoleoAbsenta,
             Day1,
-            EufrasioHablado
+            EufrasioHablado,
+            BajarBoobledona,
+            EscorbutoObtenida,
+            ExprimirObtenida,
+            MaquinaZumosObtenida,
+            HipervitaminadoObtenida
         }
 
         [SerializeField] private Reference _flagReference;

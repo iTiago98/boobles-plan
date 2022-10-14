@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "\xBFQu\xE9 sabes t\xFA de Jugosol?"
+  - _content: "He estado investigando sobre el nuevo escorbuto, y las marcas que
+      ha comprado Booble, y las modificaciones que instalan a sus m\xE1quinas..."
+    _closeUp: 1
+  - _content: "Tengo una sospecha... \xBFQu\xE9 sabes t\xFA de Jugosol?"
     _closeUp: 1
   - _content: "Pues era la marca l\xEDder de m\xE1quinas de zumos, hasta que fue
       comprada por Booble. Ahora son bastante mediocres."

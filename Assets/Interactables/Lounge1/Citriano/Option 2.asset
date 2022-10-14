@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFY si le digo que sospecho que esta m\xE1quina es de la misma marca
+      que las que tienen en Boobledona?"
+    _closeUp: 1
+  - _content: "\xBFPero qu\xE9 dice? Si lo pone aqu\xED claramente: Z U M O S O L.
+      Las que tienen en Boobledona son Jugosol, completamente distinto."
+    _closeUp: 3
+  - _content: "Ya, claro. Ay\xFAdeme a mover un poco la m\xE1quina anda, que quiero
+      ver una cosa."
+    _closeUp: 1
+  - _content: Bueno, vale... si usted lo dice...
+    _closeUp: 3
+  - _content: Venga, a la de tres.
+    _closeUp: 3
+  - _content: Una.
+    _closeUp: 3
+  - _content: Dos.
+    _closeUp: 1
+  - _content: "\xA1Y TRES!"
+    _closeUp: 3
+  - _content: "\xA1Hmpf!"
+    _closeUp: 1
+  - _content: "\xA1Hmpf!"
+    _closeUp: 3
+  - _content: "Ufff... Ya est\xE1... pesa un poco m\xE1s de lo que parece, \xBFeh?"
+    _closeUp: 1
+  - _content: "S\xED, s\xED... desde luego..."
+    _closeUp: 3
+  - _content: "Aqu\xED est\xE1 lo que yo buscaba. Mire, lo pone bien clarito."
+    _closeUp: 1
+  - _content: "\"M\xE1quina fabricada por Jugosol.\""
+    _closeUp: 3
+  - _content: ...
+    _closeUp: 3
+  - _content: "No me lo puedo creer... He estado enga\xF1ado todo este tiempo..."
+    _closeUp: 3
+  - _content: "Pero... no lo entiendo... \xA1El sabor es distinto! \xA1Y la concentraci\xF3n
+      en vitaminas tambi\xE9n!"
+    _closeUp: 3
+  - _content: "\xA1De verdad! \xA1Se lo aseguro!"
+    _closeUp: 3
+  - _content: "A lo mejor el motivo no es la m\xE1quina, si no otra cosa distinta..."
+    _closeUp: 1
+  - _content: "\xA1Anda! \xA1Hab\xEDa una carta detr\xE1s de la m\xE1quina! \"M\xE1quina
+      de Zumos del Supermercado\"."
+    _closeUp: 1
