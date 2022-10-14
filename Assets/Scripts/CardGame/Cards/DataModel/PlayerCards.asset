@@ -135,24 +135,6 @@ MonoBehaviour:
     defense: 5
     type: 0
     effects: []
-  - name: Gran final
-    sprite: {fileID: 21300000, guid: 58aa6b948c0e680488378667f8d70ea1, type: 3}
-    cost: 5
-    strength: 3
-    defense: 2
-    type: 0
-    effects:
-    - type: 3
-      subType: 9
-      applyTime: 1
-      targetType: 4
-      intParameter1: 1
-      intParameter2: 0
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
-      cardParameter_Effect: 0
   - name: Ganar tiempo con una falacia
     sprite: {fileID: 21300000, guid: dd7a9357188c225429b0a5fa2cf0d56b, type: 3}
     cost: 1
@@ -315,24 +297,6 @@ MonoBehaviour:
       cardParameter_Strength: 0
       cardParameter_Defense: 0
       cardParameter_Effect: 0
-  - name: Nueva cepa del escorbuto
-    sprite: {fileID: 21300000, guid: 8e0e203c646a3134d8acbcc5c11da2ba, type: 3}
-    cost: 4
-    strength: 4
-    defense: 4
-    type: 0
-    effects:
-    - type: 3
-      subType: 6
-      applyTime: 2
-      targetType: 0
-      intParameter1: 0
-      intParameter2: 0
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
-      cardParameter_Effect: 0
   - name: Exprimir la verdad
     sprite: {fileID: 21300000, guid: a93bc51e6169ada4385e548524294411, type: 3}
     cost: 3
@@ -365,7 +329,7 @@ MonoBehaviour:
       intParameter1: 0
       intParameter2: 0
       cardParameter_Name: Zumo de naranja
-      cardParameter_Sprite: {fileID: 21300000, guid: 434e94c329c3a7049b7601dde59c007b, type: 3}
+      cardParameter_Sprite: {fileID: 0}
       cardParameter_Strength: 1
       cardParameter_Defense: 1
       cardParameter_Effect: 6
