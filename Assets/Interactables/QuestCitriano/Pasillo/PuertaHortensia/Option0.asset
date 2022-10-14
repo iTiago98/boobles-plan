@@ -12,5 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
   m_Name: Option0
   m_EditorClassIdentifier: 
-  _characters: {fileID: 0}
-  _sentences: []
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: (Pegar la oreja)
+    _closeUp: 1
+  - _content: "Hortensia: \xA1\xBFTe puedes creer que el escorbuto ha vuelto?!"
+    _closeUp: 0
+  - _content: "Lucrecia: \xA1Qu\xE9 me dices Maria Hortensia! \xBFLa enfermedad de
+      los piratas? Eso ya son cuentos de viejas."
+    _closeUp: 0
+  - _content: "Hortensia: \xA1Cuentos dice la filindona! No sab\xEDa yo que en el
+      Abec\xE9 publicaran cuentos."
+    _closeUp: 0
+  - _content: "Lucrecia: \xA1Anda ya! Si lo dice el Abec\xE9 tiene que ser cosa seria.
+      \xA1Madre del amor hermoso, con el escorbuto hemos topado!"
+    _closeUp: 0
+  - _content: 'Hortensia: No perdamos el oremus, Maria Lucrecia. '
+    _closeUp: 0
+  - _content: "Lucrecia: \xBFY d\xF3nde te has encontrado ese peri\xF3dico? \xBFEn
+      los tiempos de la posguerra? Aparte, \xBFqu\xE9 haces t\xFA leyendo propaganda
+      fascista?"
+    _closeUp: 0
+  - _content: "Hortensia: Pues donde va a ser, en el Lounge. Y no te preocupes que
+      lo he tirado en cuanto lo he le\xEDdo"
+    _closeUp: 0

@@ -13,4 +13,52 @@ MonoBehaviour:
   m_Name: confesion0
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: "\xBFQu\xE9 sabes t\xFA de Jugosol?"
+    _closeUp: 1
+  - _content: "Pues era la marca l\xEDder de m\xE1quinas de zumos, hasta que fue
+      comprada por Booble. Ahora son bastante mediocres."
+    _closeUp: 3
+  - _content: "Que sean mediocres parece que es parte del plan. \xBFSab\xEDas que
+      ha vuelto el escorbuto? "
+    _closeUp: 1
+  - _content: "Tranquila, sab\xEDa que llegar\xEDa este d\xEDa."
+    _closeUp: 3
+  - _content: "\xBF\xA1De manera que ya lo sab\xEDas!? \xBFQui\xE9n te lo dijo?"
+    _closeUp: 1
+  - _content: "Naranjito, \xBFqui\xE9n si no? Hace unos meses me avis\xF3 del apocalipsis
+      jug\xF3nico. "
+    _closeUp: 3
+  - _content: "\xA1\xBFNaranjito?! \xBF\xBFLa mascota del mundial 82??"
+    _closeUp: 1
+  - _content: "\xA1El que viste y calza! \xA1El n\xFAmero uno! Me dijo que el mundo
+      se estaba quedando sin vitamina C, y que s\xF3lo yo pod\xEDa salvarlo. "
+    _closeUp: 3
+  - _content: "Madre del amor hermoso. \xBFTiene esto algo que ver con el patio de
+      los naranjos que te has montado en tu despacho?"
+    _closeUp: 1
+  - _content: "Por eso empec\xE9 a plantar naranjos en mi despacho, me ayudaron unos
+      chicos simpatiqu\xEDsimos. Son especialistas en plantaciones de interiores,
+      muy majos, aunque muy sentimentales. Siempre parec\xEDa que hab\xEDan llorado
+      antes de venir."
+    _closeUp: 3
+  - _content: "Est\xE1s fatal Citriano, pero eres buena persona. \xBFC\xF3mo hacemos
+      ahora que ya le han hecho la modificaci\xF3n a esta m\xE1quina? \xA1Sin vitamina
+      C acabaremos toos con escorbuto en menos de una semana!"
+    _closeUp: 1
+  - _content: "\xBFAna, est\xE1s por ah\xED? \xBFPor casualidad no tendr\xE1s por
+      ah\xED la pieza que le quitaste a la m\xE1quina de zumos?"
+    _closeUp: 3
+  - _content: "Ay pues claro que s\xED, mandariniano, ahora mismo te la coloco. Os
+      he o\xEDdo y no me gusta nada lo que trama el coco."
+    _closeUp: 2
+  - _content: "\xA1Much\xEDsimas gracias! \xA1Acabas de salvar la vida a toda la
+      oficina!"
+    _closeUp: 1
+  - _content: "Achucha, pero si no me cuesta nada, \xA1a\xFAn, jaja! Y toma, el primel
+      sumo te lo tomas a mi salud."
+    _closeUp: 2
+  - _content: "\xA1Brindo por vosotros dos, los reyes de la vitamina! Anda, pero
+      si hab\xEDa una carta en el fondo del vaso. Qu\xE9 raro, \xBFpor qu\xE9 aparecen
+      tantas cartas cuando celebro algo?"
+    _closeUp: 1

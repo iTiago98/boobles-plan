@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
   m_Name: Option1
   m_EditorClassIdentifier: 
-  _characters: {fileID: 0}
-  _sentences: []
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: (Buscar el nombre en Booble)
+    _closeUp: 1
+  - _content: "\"JUGO DE MACHO SALUDANDO AL SOL\" \"TARDE SOLEADA CON TU JUGO EN
+      MI CARA\" \"JUGUITOS AL SOL, NUEVA TEMPORADA, A\xDAN M\xC1S GRUMOSA\""
+    _closeUp: 1
+  - _content: "Madre m\xEDa, \xA1la pornograf\xEDa se ha adue\xF1ado de todo hoy
+      en d\xEDa!"
+    _closeUp: 1

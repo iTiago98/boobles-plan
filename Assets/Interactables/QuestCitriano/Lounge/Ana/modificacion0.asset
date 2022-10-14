@@ -13,4 +13,16 @@ MonoBehaviour:
   m_Name: modificacion0
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: "T\xFA no sabr\xE1s por casualidad qu\xE9 hace la modificaci\xF3n 7878994
+      de las m\xE1quinas de zumos, \xBFno?"
+    _closeUp: 1
+  - _content: "Precisamente es lo que me han pedido hacerle a esta m\xE1quina, resulta
+      que da demasiada vitamina. Les he preguntado que qu\xE9 tiene de malo, y me
+      han dicho que eso contamina."
+    _closeUp: 2
+  - _content: "Vaya, qu\xE9 casualidad que el escorbuto sea falta de vitamina C..."
+    _closeUp: 1
+  - _content: "Anda, mira, hab\xEDa una cartita de esas que coleccionas detr\xE1s
+      de uno de los componentes de esta maquinona."
+    _closeUp: 2

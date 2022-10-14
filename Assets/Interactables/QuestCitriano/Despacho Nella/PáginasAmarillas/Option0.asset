@@ -12,5 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
   m_Name: Option0
   m_EditorClassIdentifier: 
-  _characters: {fileID: 0}
-  _sentences: []
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "(Buscar el n\xFAmero en la gu\xEDa telef\xF3nica)"
+    _closeUp: 1
+  - _content: "\xA1Ah, claro, Eufrasio Patali\xE9brez, el famoso Premio Nobel de
+      Metamedicina! Voy a llamarlo ahora mismo."
+    _closeUp: 1
+  - _content: "Dr. Patali\xE9brez: \xA1Dejen de acosarme, pienso llamar a la polic\xEDa!"
+    _closeUp: 0
+  - _content: "Perdone, \xBFes usted el Doctor Patali\xE9brez? Me llamo Nella y no
+      deseo molestarle, s\xF3lo quiero preguntarle sobre su investigaci\xF3n. "
+    _closeUp: 1
+  - _content: "Dr. Patali\xE9brez: Perdone, desde que publiqu\xE9 ese maldito estudio
+      me han arruinado la vida. Antes sal\xEDa en programas de la 2, ahora estoy
+      hasta en el S\xE1lvame Aguacate."
+    _closeUp: 0
+  - _content: "\xBFSabe d\xF3nde podr\xEDa encontrar esa publicaci\xF3n? Estoy bastante
+      interesada en su estudio, no es la primera vez que oigo esa teor\xEDa de la
+      nueva cepa del escorbuto."
+    _closeUp: 1
+  - _content: "Dr. Patali\xE9brez: Ahora es imposible de encontrar, lo eliminaron
+      de todas las revistas donde se public\xF3. Si, seg\xFAn ellos, tan mal estaba,
+      \xBFpor qu\xE9 ese miedo a que alguien lo lea?"
+    _closeUp: 0
+  - _content: "No tendr\xE1 por casualidad una copia de esa publicaci\xF3n, \xBFno?"
+    _closeUp: 1
+  - _content: "Dr. Patali\xE9brez: Qu\xE9 m\xE1s quisiera yo, se llevaron mis ordenadores
+      y todo mi material de laboratorio. Al menos conservo mis preciadas notas. Creo
+      que podr\xEDa mand\xE1rselas por fax. "
+    _closeUp: 0
+  - _content: "\xA1Much\xEDsimas gracias! Le mantendr\xE9 al tanto de todo, me da
+      a m\xED que esto es m\xE1s grande de lo que creemos."
+    _closeUp: 1

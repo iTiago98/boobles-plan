@@ -12,5 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
   m_Name: Option0
   m_EditorClassIdentifier: 
-  _characters: {fileID: 0}
-  _sentences: []
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "(Coger peri\xF3dico/propaganda fascista)"
+    _closeUp: 1
+  - _content: '"REPUTADO DOCTOR SACA EL FANTASMA DEL ESCORBUTO"'
+    _closeUp: 1
+  - _content: "\"...la publicaci\xF3n del ya ex-doctor ha levantado mucho revuelo
+      en la comunidad cient\xEDfica...\""
+    _closeUp: 1
+  - _content: "\"...ha sido despojado de su doctorado por la Universidad De La Mamola,
+      pese a no haber ning\xFAn error en sus resultados\""
+    _closeUp: 1
+  - _content: "\"...todo lo anterior no importa cuando se trata de poner en peligro
+      la salud p\xFAblica con enfermedades tan erradicadas como el escorbuto...\""
+    _closeUp: 1
+  - _content: "\"...por lo que debemos recordar que hace m\xE1s de un siglo que no
+      hay escorbuto en este pa\xEDs, y volvi\xF3 de forma puntual debido a la miseria
+      que dejaron en este pa\xEDs los rojos piojosos que...\""
+    _closeUp: 1
+  - _content: "Pues s\xED que es propaganda fascista, s\xED. No sale ni el nombre
+      del doctor, a ver si en el pie de foto..."
+    _closeUp: 1
+  - _content: "Oh no, est\xE1 manchado de caf\xE9, pero bueno, algo se lee: EU__IO
+      PATA___."
+    _closeUp: 1

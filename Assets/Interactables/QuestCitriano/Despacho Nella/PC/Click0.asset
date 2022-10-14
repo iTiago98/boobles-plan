@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Click0
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: "A ver d\xF3nde vi yo ese nombre..."
+    _closeUp: 1
