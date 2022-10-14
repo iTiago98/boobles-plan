@@ -64,6 +64,15 @@ public class SceneLoader : MonoBehaviour
         });
     }
     
+    public void LoadNelaOffice1()
+    {
+        _fadeScreen.FadeOut(() =>
+        {
+            var async = SceneManager.LoadSceneAsync(Scenes.NELA_OFFICE_1);
+            async.completed += OnLoungeSceneLoaded;
+        });
+    }
+    
     public void LoadInterviewScene()
     {
         // MusicManager.Instance.StopLoungeMusic();
@@ -101,6 +110,24 @@ public class SceneLoader : MonoBehaviour
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.CANTEEN_0);
+            async.completed += OnLoungeSceneLoaded;
+        });
+    }
+
+    public void LoadLowerHall1()
+    {
+        _fadeScreen.FadeOut(() =>
+        {
+            var async = SceneManager.LoadSceneAsync(Scenes.LOWER_HALL_1);
+            async.completed += OnLoungeSceneLoaded;
+        });
+    }
+
+    public void LoadLoungeScene1()
+    {
+        _fadeScreen.FadeOut(() =>
+        {
+            var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_1);
             async.completed += OnLoungeSceneLoaded;
         });
     }

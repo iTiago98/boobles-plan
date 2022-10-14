@@ -8,4 +8,19 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadNelaOffice0();
     }
+
+    public void OnBajando()
+    {
+        SceneLoader.Instance.LoadNelaOffice1();
+    }
+
+    public void LoadLounge1()
+    {
+        SceneLoader.Instance.LoadLoungeScene1();
+    }
+
+    public void LoadLowerHall1()
+    {
+        SceneLoader.Instance.LoadLowerHall1();
+    }
 }

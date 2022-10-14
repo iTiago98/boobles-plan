@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Bueno, hoy es mi primer d\xEDa de verdad aqu\xED en la oficina. Me
+      tengo que esforzar para dar una buena impresi\xF3n."
+    _closeUp: 1
+  - _content: "Seg\xFAn pone en el correo que me han mandado a primera hora, tengo
+      que investigar a un tal Citriano."
+    _closeUp: 1
+  - _content: "Objetivo de la investigaci\xF3n: Despido."
+    _closeUp: 1
+  - _content: "Seguramente deber\xEDa darme una vuelta por las oficinas y preguntar
+      a sus compa\xF1eros tal y como me dijo Queca ayer."
+    _closeUp: 1
+  - _content: Pues nada, vamos a ello.
+    _closeUp: 1
