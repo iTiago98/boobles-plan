@@ -54,7 +54,8 @@ namespace Booble.Flags
             EscorbutoObtenida,
             ExprimirObtenida,
             MaquinaZumosObtenida,
-            HipervitaminadoObtenida
+            HipervitaminadoObtenida,
+            Car0
         }
 
         [SerializeField] private Reference _flagReference;

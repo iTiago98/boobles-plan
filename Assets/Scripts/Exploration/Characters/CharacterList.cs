@@ -16,7 +16,8 @@ namespace Booble.Characters
 			Arcadio,
 			Queca,
 			eMilin,
-			F3RR4N
+			F3RR4N,
+			Anselmo
         }
 		
 		[System.Serializable]

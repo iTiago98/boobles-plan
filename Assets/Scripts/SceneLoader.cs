@@ -43,6 +43,15 @@ public class SceneLoader : MonoBehaviour
         });
     }
 
+    public void LoadScene(string scene)
+    {
+        _fadeScreen.FadeOut(() =>
+        {
+            var async = SceneManager.LoadSceneAsync(scene);
+            async.completed += OnLoungeSceneLoaded;
+        });
+    }
+    
     public void LoadLoungeScene0()
     {
         // MusicManager.Instance.StopMainMenuMusic();

@@ -40,3 +40,6 @@ MonoBehaviour:
   - _name: F3RR4N
     _identifier: 8
     _closeUp: {fileID: 21300000, guid: 9f436e1df63eff84db876083a79dfe83, type: 3}
+  - _name: Anselmo
+    _identifier: 9
+    _closeUp: {fileID: -1202108623, guid: 204ab4cef4044ea4db41ae003a186249, type: 3}
