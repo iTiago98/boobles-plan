@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Car0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Buenos d\xEDas se\xF1ora Laphant, me llamo Anselmo Ndongo. Soy su
+      nuevo ch\xF3fer, espero que su carrera en esta empresa sea fruct\xEDfera."
+    _closeUp: 9
+  - _content: "Buenos d\xEDas, puedes llamarme Nella, y tut\xE9ame hombre, que soy
+      m\xE1s joven que t\xFA. Gracias, yo tambi\xE9n lo espero. \xBFDe d\xF3nde eres,
+      Anselmo?"
+    _closeUp: 1
+  - _content: "Soy de Barbate, en C\xE1diz."
+    _closeUp: 9
+  - _content: "Ya dec\xEDa yo que ese acento me sonaba. Me encantan los carnavales
+      de C\xE1diz. \xBFEres t\xFA chirigotero?"
+    _closeUp: 1
+  - _content: "\xA1Lo llevo en la sangre! Mi padre gan\xF3 un par de a\xF1os el Gran
+      Premio del Falla."
+    _closeUp: 9
+  - _content: Aunque con las inundaciones del sur tuvimos que venirnos a la gran
+      ciudad.
+    _closeUp: 9
+  - _content: "Las inundaciones, \xA1menuda cat\xE1strofe! Todas esas ciudades hundidas\u2026"
+    _closeUp: 1
+  - _content: La verdad es que mi familia ha estado siempre de un lado a otro.
+    _closeUp: 9
+  - _content: "Siendo pescadores \xEDbamos de una ciudad costera a otra con la subida
+      del nivel del mar."
+    _closeUp: 9
+  - _content: Normal que acabarais en la costa de Madrid.
+    _closeUp: 1
+  - _content: "Bueno aqu\xED no hay mucho que pescar debido a la contaminaci\xF3n,
+      por lo que yo acab\xE9 montando un negocio de transporte personal."
+    _closeUp: 9
+  - _content: Y parece que de los buenos, no todo el mundo se puede permitir un Maclaren-Dacia.
+    _closeUp: 1
+  - _content: "Bueno, no me quejo, he trabajado mucho para llegar a donde estoy.
+      La verdad es que estoy muy orgulloso de mi b\xF3lido."
+    _closeUp: 9
+  - _content: "Y que lo digas, es uno de los coches m\xE1s lujosos del mundo, \xA1y
+      seguros! dicen que Putin Jr. Jr. no sale de su fortaleza si no es en uno."
+    _closeUp: 1
+  - _content: "Bueno Nela, ya hemos llegado, \xA1que tengas un muy buen primer d\xEDa!"
+    _closeUp: 9

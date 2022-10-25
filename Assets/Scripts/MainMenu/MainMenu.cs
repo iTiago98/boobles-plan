@@ -1,3 +1,4 @@
+using Booble.Flags;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
@@ -16,8 +17,9 @@ namespace Booble.MainMenu
 		{
 			if(_onTween)
 				return;
-
-			SceneLoader.Instance.LoadLoungeScene0();
+			
+			FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+			SceneLoader.Instance.LoadScene("Car");
 			MusicManager.Instance.PlayMusic(MusicReference.Lounge);
 		}
 
