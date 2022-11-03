@@ -9,6 +9,7 @@ namespace Booble.MainMenu
 	{
 		[SerializeField] private RectTransform _mainMenu;
 		[SerializeField] private RectTransform _credits;
+        [SerializeField] private RectTransform _cardGameMenu;
 		[SerializeField] private float _duration;
 
 		private bool _onTween;
@@ -21,6 +22,39 @@ namespace Booble.MainMenu
 			FlagManager.Instance.SetFlag(Flag.Reference.Car0);
 			SceneLoader.Instance.LoadScene("Car");
 			MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+		}
+
+		public void CardGameButton()
+        {
+			if (_onTween)
+				return;
+
+			_onTween = true;
+			_mainMenu.DOMoveX(_cardGameMenu.position.x, _duration);
+			_cardGameMenu.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
+		}
+
+		public void TutorialCardsButton()
+        {
+			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Tutorial);
+			LoadInterview();
+        }
+
+		public void CitrianoCardsButton()
+        {
+			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Citriano);
+			LoadInterview();
+		}
+
+		public void PingPongBrosCardsButton()
+        {
+			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.PingPongBros);
+			LoadInterview();
+		}
+
+		public void LoadInterview()
+        {
+			SceneLoader.Instance.LoadInterviewScene();
 		}
 
 		public void CreditsOnOffButton()
@@ -38,7 +72,11 @@ namespace Booble.MainMenu
 			if(_onTween)
 				return;
 
+#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+#else
 			Application.Quit();
+#endif
 		}
 	}
 }

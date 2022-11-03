@@ -52,7 +52,7 @@ namespace CardGame.Managers
 
         private void Start()
         {
-            InitializeBoardBackground();
+            //InitializeBoardBackground();
         }
 
         public void StartGame()
@@ -223,7 +223,7 @@ namespace CardGame.Managers
 
         #region Initialize
 
-        private void InitializeBoardBackground()
+        public void InitializeBoardBackground()
         {
             Board.Instance.InitializeBackground(DeckManager.Instance.GetOpponentName());
         }

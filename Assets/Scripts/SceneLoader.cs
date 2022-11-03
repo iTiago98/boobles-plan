@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Booble;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using CardGame.Managers;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -13,7 +14,9 @@ public class SceneLoader : MonoBehaviour
 
     [SerializeField] private FadeIn _fadeScreen;
 
-    private Camera _explorationCam;
+    private string _currentScene;
+    private string _previousScene;
+    private Camera _mainCamera;
     //[SerializeField] private Controller _explorationPlayerController;
 
     private void Awake()
@@ -30,11 +33,15 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        _currentScene = Scenes.MAIN_MENU;
+    }
+
     public void LoadMainMenuScene()
     {
-        // MusicManager.Instance.StopInterviewMusic();
-        // MusicManager.Instance.StopMusic();
-        // MusicManager.Instance.PlayMainMenuMusic();
+        _currentScene = Scenes.MAIN_MENU;
+
         MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
         _fadeScreen.FadeOut(() =>
         {
@@ -51,12 +58,11 @@ public class SceneLoader : MonoBehaviour
             async.completed += OnLoungeSceneLoaded;
         });
     }
-    
+
     public void LoadLoungeScene0()
     {
-        // MusicManager.Instance.StopMainMenuMusic();
-        // MusicManager.Instance.StopMusic();
-        // MusicManager.Instance.PlayLoungeMusic();
+        _currentScene = Scenes.LOUNGE_0;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_0);
@@ -66,47 +72,54 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadNelaOffice0()
     {
+        _currentScene = Scenes.NELA_OFFICE_0;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.NELA_OFFICE_0);
             async.completed += OnLoungeSceneLoaded;
         });
     }
-    
+
     public void LoadNelaOffice1()
     {
+        _currentScene = Scenes.NELA_OFFICE_1;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.NELA_OFFICE_1);
             async.completed += OnLoungeSceneLoaded;
         });
     }
-    
+
     public void LoadInterviewScene()
     {
-        // MusicManager.Instance.StopLoungeMusic();
-        // MusicManager.Instance.StopMusic();
-        // MusicManager.Instance.PlayInterviewMusic();
+        _previousScene = _currentScene;
+        _currentScene = Scenes.INTERVIEW;
+
         MusicManager.Instance.PlayMusic(MusicReference.Interview);
         _fadeScreen.FadeOut(() =>
         {
-            Camera.main.gameObject.SetActive(false);
-            Controller.Instance.enabled = false;
+            DisableMainCamera();
+            if (_previousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
 
             var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW, LoadSceneMode.Additive);
             async.completed += OnSceneLoaded;
+            async.completed += OnInterviewLoaded;
         });
     }
 
     public void UnloadInterviewScene()
     {
-        // MusicManager.Instance.StopInterviewMusic();
-        // MusicManager.Instance.StopMusic();
-        // MusicManager.Instance.PlayLoungeMusic();
-        MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+        _currentScene = _previousScene;
+
+        if (_previousScene == Scenes.MAIN_MENU) MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+        else MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+
         _fadeScreen.FadeOut(() =>
         {
-            Controller.Instance.enabled = true;
+            if (_previousScene != Scenes.MAIN_MENU)
+                Controller.Instance.enabled = true;
 
             var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
             async.completed += OnSceneLoaded;
@@ -116,6 +129,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadCanteenScene0()
     {
+        _currentScene = Scenes.CANTEEN_0;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.CANTEEN_0);
@@ -125,6 +140,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLowerHall1()
     {
+        _currentScene = Scenes.LOWER_HALL_1;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.LOWER_HALL_1);
@@ -134,6 +151,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadLoungeScene1()
     {
+        _currentScene = Scenes.LOUNGE_1;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_1);
@@ -148,23 +167,27 @@ public class SceneLoader : MonoBehaviour
 
     private void OnLoungeSceneLoaded(AsyncOperation op)
     {
-        SetExplorationCam();
         RestoreMainCamera(op);
         Controller.Instance.enabled = true;
         _fadeScreen.FadeIn2();
     }
 
+    private void OnInterviewLoaded(AsyncOperation op)
+    {
+        TurnManager.Instance.InitializeBoardBackground();
+    }
+
+    private void DisableMainCamera()
+    {
+        _mainCamera = Camera.main;
+        _mainCamera.gameObject.SetActive(false);
+    }
+
     private void RestoreMainCamera(AsyncOperation op)
     {
-        if(_explorationCam == null)
+        if (_mainCamera == null)
             return;
-        
-        _explorationCam.gameObject.SetActive(true);
-    }
 
-    private void SetExplorationCam()
-    {
-        _explorationCam = Camera.main;
+        _mainCamera.gameObject.SetActive(true);
     }
-
 }

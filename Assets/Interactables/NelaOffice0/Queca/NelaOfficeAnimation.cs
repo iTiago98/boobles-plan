@@ -46,7 +46,7 @@ namespace Booble.Interactables.Queca
             yield return new WaitForSeconds(_fade.FadeDuration);
             
             _fade.FadeIn2();
-            DeckManager.Instance.SetOpponentCards("Tutorial");
+            DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Tutorial);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);

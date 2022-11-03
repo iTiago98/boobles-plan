@@ -22,7 +22,7 @@ public class DeckManager : MonoBehaviour
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
 
-    private Opponent_Name opponentName;
+    private Opponent_Name _opponentName;
 
     private void Awake()
     {
@@ -60,7 +60,7 @@ public class DeckManager : MonoBehaviour
 
     public Opponent_Name GetOpponentName()
     {
-        return opponentName;
+        return _opponentName;
     }
 
     public void SetPlayerCards()
@@ -68,32 +68,28 @@ public class DeckManager : MonoBehaviour
         SetDeck(playerDeckBase, ref _playerDeck);
     }
 
-    public void SetOpponentCards(string opponentName)
+    public void SetOpponentCards(Opponent_Name opponentName)
     {
         CardsDataContainer opponentDeck = null;
         switch(opponentName)
         {
-            case "Tutorial":
-                this.opponentName = Opponent_Name.Tutorial;
+            case Opponent_Name.Tutorial:
                 opponentDeck = opponentsDecks[0];
                 break;
-            case "Citriano":
-                this.opponentName = Opponent_Name.Citriano;
+            case Opponent_Name.Citriano:
                 opponentDeck = opponentsDecks[1];
                 break;
-            case "PingPongBros":
-                this.opponentName = Opponent_Name.PingPongBros;
+            case Opponent_Name.PingPongBros:
                 opponentDeck = opponentsDecks[2]; 
                 break;
-            case "Secretaria":
-                this.opponentName = Opponent_Name.Secretaria;
+            case Opponent_Name.Secretaria:
                 opponentDeck = opponentsDecks[3]; 
                 break;
-            case "Jefe":
-                this.opponentName = Opponent_Name.Jefe;
+            case Opponent_Name.Jefe:
                 opponentDeck = opponentsDecks[4]; 
                 break;
         }
+        _opponentName = opponentName;
 
         SetDeck(opponentDeck, ref _opponentDeck);
     }
