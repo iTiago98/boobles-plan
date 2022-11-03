@@ -22,10 +22,12 @@ namespace CardGame.Managers
 
         public Image playerHealthImage;
         public Image playerExtraHealthImage;
+        public Image playerExtraHealthImage2;
         public List<Image> playerManaList;
 
         public Image opponentHealthImage;
         public Image opponentExtraHealthImage;
+        public Image opponentExtraHealthImage2;
         public List<Image> opponentManaList;
 
         public Sprite fullManaCristal;
@@ -144,19 +146,20 @@ namespace CardGame.Managers
 
         private void SetStats(int newPlayerLife, int currentPlayerMana, int newOpponentLife, int currentOpponentMana)
         {
-            SetHealth(playerHealthImage, playerExtraHealthImage, newPlayerLife);
-            SetHealth(opponentHealthImage, opponentExtraHealthImage, newOpponentLife);
+            SetHealth(playerHealthImage, playerExtraHealthImage, playerExtraHealthImage2, newPlayerLife);
+            SetHealth(opponentHealthImage, opponentExtraHealthImage, opponentExtraHealthImage2, newOpponentLife);
 
             if (_shownPlayerMana != currentPlayerMana) SetMana(playerManaList, ref _shownPlayerMana, currentPlayerMana);
             if (_shownOpponentMana != currentOpponentMana) SetMana(opponentManaList, ref _shownOpponentMana, currentOpponentMana);
         }
 
-        private void SetHealth(Image healthImage, Image extraHealthImage, int life)
+        private void SetHealth(Image healthImage, Image extraHealthImage, Image extraHealthImage2, int life)
         {
             int maxEloquence = TurnManager.Instance.settings.initialEloquence;
             healthImage.fillAmount = (float)life / maxEloquence;
 
             extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
+            extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
         }
 
         private void SetMana(List<Image> manaList, ref int shownMana, int currentMana)
