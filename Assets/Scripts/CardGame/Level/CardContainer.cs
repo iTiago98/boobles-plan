@@ -25,7 +25,7 @@ namespace CardGame.Level
         public void AddCard(Card card, Transform parent)
         {
             card.transform.parent = transform;
-            card.SetMoveWithMouse(false);
+            //card.SetMoveWithMouse(false);
             card.container = this;
 
             cards.Add(card.gameObject);

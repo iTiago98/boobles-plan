@@ -1,3 +1,5 @@
+using CardGame.Cards;
+using CardGame.Level;
 using CardGame.Utils;
 using DG.Tweening;
 using System;
@@ -58,6 +60,9 @@ namespace CardGame.Managers
         #region Interactables
 
         [Header("Interactables")]
+
+        public MyButton continuePlayButton;
+        public MyButton cancelPlayButton;
 
         public TextMeshProUGUI interviewEnd;
         public MyButton endTurnButton;
@@ -159,7 +164,7 @@ namespace CardGame.Managers
             healthImage.fillAmount = (float)life / maxEloquence;
 
             extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
-            extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
+            extraHealthImage2.fillAmount = (life - (maxEloquence * 2)) / maxEloquence;
         }
 
         private void SetMana(List<Image> manaList, ref int shownMana, int currentMana)
@@ -271,11 +276,41 @@ namespace CardGame.Managers
 
         public void UpdateRemainingCards(int remainingCards, int maxCards, Contender contender)
         {
-            if(contender.role == Contender.Role.PLAYER) playerDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
+            if (contender.role == Contender.Role.PLAYER) playerDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
             else opponentDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
         }
 
         #endregion
+
+        public void OnContinuePlayButtonClick()
+        {
+            MouseController.Instance.holdingCard.ContinuePlay();
+            HidePlayButtons();
+        }
+
+        public void OnCancelPlayButtonClick()
+        {
+            Card holdingCard = MouseController.Instance.holdingCard;
+            holdingCard.CancelPlay();
+            Board.Instance.HighlightTargets(new List<Card>());
+            Board.Instance.HighlightZoneTargets(holdingCard.type, holdingCard.contender, show: false); 
+            HidePlayButtons();
+        }
+
+        public void ShowContinuePlayButton()
+        {
+            continuePlayButton.gameObject.SetActive(true);
+        }
+        public void ShowCancelPlayButton()
+        {
+            cancelPlayButton.gameObject.SetActive(true);
+        }
+
+        public void HidePlayButtons()
+        {
+            continuePlayButton.gameObject.SetActive(false);
+            cancelPlayButton.gameObject.SetActive(false);
+        }
 
         public void SetInterviewWinText(bool win)
         {

@@ -120,7 +120,7 @@ namespace CardGame.Managers
                 }
                 else
                 {
-                    if (clickableObject != null)
+                    if (clickableObject != null && TurnManager.Instance.isPlayerTurn)
                     {
                         clickableObject.OnMouseLeftClickUp(this);
                     }
@@ -162,6 +162,7 @@ namespace CardGame.Managers
             _effectCard = null;
             SetMask(selectingLayerMask);
             UIManager.Instance.SetEndTurnButtonInteractable(true);
+            UIManager.Instance.HidePlayButtons();
             Board.Instance.HighlightTargets(new List<Card>());
         }
 

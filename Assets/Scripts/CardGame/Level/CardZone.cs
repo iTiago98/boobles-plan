@@ -10,12 +10,19 @@ namespace CardGame.Level
     {
         public Transform cardsPosition;
 
-        [SerializeField] private bool isFieldZone;
-        private bool _isEmpty => numCards == 0;
+        [SerializeField] private bool _isFieldZone;
+
+        private SpriteRenderer _highlightSprite;
+        private bool _isHighlighted => _highlightSprite.enabled;
         private bool _clickable;
 
         bool IClickable.clickable { get => _clickable; set => _clickable = value; }
         GameObject IClickable.gameObject { get => gameObject; set => Debug.Log(""); }
+
+        private void Start()
+        {
+            _highlightSprite = GetComponent<SpriteRenderer>();
+        }
 
         #region IClickable methods
         public void OnMouseLeftClickDown(MouseController mouseController)
@@ -26,25 +33,34 @@ namespace CardGame.Level
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
             Card card = mouseController.holdingCard;
-            if (card != null)
+
+            if (card != null && _isHighlighted)
             {
-                // If the player has enough mana
-                if (EnoughMana(card))
-                {
-                    switch (card.type)
-                    {
-                        case CardType.ARGUMENT: CheckArgument(card, mouseController); break;
-                        case CardType.ACTION: CheckAction(card, mouseController); break;
-                        case CardType.FIELD: CheckField(card, mouseController); break;
-                    }
-                }
-                else
-                {
-                    // Animate mana counter to show not enough mana
-                    Debug.Log("Not enough mana");
-                    card.OnMouseLeftClickUp(mouseController);
-                }
+                mouseController.SetHolding(null);
+                card.Play(this);
+                Board.Instance.HighlightZoneTargets(card.type, card.contender, show: false);
+                UIManager.Instance.HidePlayButtons();
             }
+            //Card card = mouseController.holdingCard;
+            //if (card != null)
+            //{
+            //    // If the player has enough mana
+            //    if (EnoughMana(card))
+            //    {
+            //        switch (card.type)
+            //        {
+            //            case CardType.ARGUMENT: CheckArgument(card, mouseController); break;
+            //            case CardType.ACTION: CheckAction(card, mouseController); break;
+            //            case CardType.FIELD: CheckField(card, mouseController); break;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // Animate mana counter to show not enough mana
+            //        Debug.Log("Not enough mana");
+            //        card.OnMouseLeftClickUp(mouseController);
+            //    }
+            //}
         }
 
         public void OnMouseHoverEnter()
@@ -61,51 +77,51 @@ namespace CardGame.Level
 
         #endregion
 
-        private void CheckArgument(Card card, MouseController mouseController)
-        {
-            if (isEmpty && !isFieldZone)
-            {
-                mouseController.SetHolding(null);
-                card.Play(this);
-            }
-            else
-            {
-                // Send card back to previous container
-                card.OnMouseLeftClickUp(mouseController);
-            }
-        }
+        //private void CheckArgument(Card card, MouseController mouseController)
+        //{
+        //    if (isEmpty && !_isFieldZone)
+        //    {
+        //        mouseController.SetHolding(null);
+        //        card.Play(this);
+        //    }
+        //    else
+        //    {
+        //        // Send card back to previous container
+        //        card.OnMouseLeftClickUp(mouseController);
+        //    }
+        //}
 
-        private void CheckAction(Card card, MouseController mouseController)
-        {
-            // If effect not appliable
-            if (card.hasEffect && !card.effect.IsAppliable())
-            {
-                //Debug.Log("Effect not appliable");
-                card.OnMouseLeftClickUp(mouseController);
-                return;
-            }
+        //private void CheckAction(Card card, MouseController mouseController)
+        //{
+        //    // If effect not appliable
+        //    if (card.hasEffect && !card.effect.IsAppliable())
+        //    {
+        //        //Debug.Log("Effect not appliable");
+        //        card.OnMouseLeftClickUp(mouseController);
+        //        return;
+        //    }
 
-            card.Play(null);
-        }
+        //    card.Play(null);
+        //}
 
-        private void CheckField(Card card, MouseController mouseController)
-        {
-            if (!isEmpty)
-            {
-                GetCard().Destroy();
-            }
+        //private void CheckField(Card card, MouseController mouseController)
+        //{
+        //    if (!isEmpty)
+        //    {
+        //        GetCard().Destroy();
+        //    }
 
-            if (isFieldZone)
-            {
-                mouseController.SetHolding(null);
-                card.Play(this);
-            }
-            else
-            {
-                // Send card back to previous container
-                card.OnMouseLeftClickUp(mouseController);
-            }
-        }
+        //    if (_isFieldZone)
+        //    {
+        //        mouseController.SetHolding(null);
+        //        card.Play(this);
+        //    }
+        //    else
+        //    {
+        //        // Send card back to previous container
+        //        card.OnMouseLeftClickUp(mouseController);
+        //    }
+        //}
 
         public void AddCard(Card card)
         {
@@ -117,11 +133,17 @@ namespace CardGame.Level
             return (cards.Count > 0) ? cards[0].GetComponent<Card>() : null;
         }
 
-        private bool EnoughMana(Card card)
+        public void ShowHighlight(bool show)
         {
-            Contender contender = TurnManager.Instance.currentPlayer;
-
-            return contender.freeMana || card.manaCost <= contender.currentMana;
+            _highlightSprite.enabled = show;
         }
+
+
+        //private bool EnoughMana(Card card)
+        //{
+        //    Contender contender = TurnManager.Instance.currentPlayer;
+
+        //    return contender.freeMana || card.manaCost <= contender.currentMana;
+        //}
     }
 }

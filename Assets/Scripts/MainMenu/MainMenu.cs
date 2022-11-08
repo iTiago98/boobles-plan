@@ -2,11 +2,13 @@ using Booble.Flags;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System.Collections.Generic;
 
 namespace Booble.MainMenu
 {
 	public class MainMenu : MonoBehaviour
 	{
+		[SerializeField] private GameObject _canvas;
 		[SerializeField] private RectTransform _mainMenu;
 		[SerializeField] private RectTransform _credits;
         [SerializeField] private RectTransform _cardGameMenu;
@@ -54,7 +56,11 @@ namespace Booble.MainMenu
 
 		public void LoadInterview()
         {
-			SceneLoader.Instance.LoadInterviewScene();
+			SceneLoader.Instance.LoadInterviewScene(new List<GameObject>()
+			{
+				Camera.main.gameObject,
+				_canvas
+			}) ;
 		}
 
 		public void CreditsOnOffButton()

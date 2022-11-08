@@ -56,13 +56,13 @@ namespace CardGame.Level
                     background.sprite = backgroundList[1];
                     break;
                 case Opponent_Name.PingPongBros:
-                    background.sprite = backgroundList[2]; 
+                    background.sprite = backgroundList[2];
                     break;
                 case Opponent_Name.Secretaria:
-                    background.sprite = backgroundList[3]; 
+                    background.sprite = backgroundList[3];
                     break;
                 case Opponent_Name.Jefe:
-                    background.sprite = backgroundList[4]; 
+                    background.sprite = backgroundList[4];
                     break;
             }
         }
@@ -153,7 +153,7 @@ namespace CardGame.Level
         {
             foreach (CardZone zone in GetCardZone(contender)) zone.GetCard()?.Destroy();
             Card fieldCard = GetFieldCardZone(contender).GetCard();
-            if(fieldCard != null) fieldCard.Destroy();
+            if (fieldCard != null) fieldCard.Destroy();
         }
 
         public void DestroyAll()
@@ -177,5 +177,28 @@ namespace CardGame.Level
                 }
             }
         }
+
+        public void HighlightZoneTargets(CardType type, Contender contender, bool show)
+        {
+            switch (type)
+            {
+                case CardType.ARGUMENT:
+                    {
+                        List<CardZone> cardZones = GetCardZone(contender);
+                        foreach (CardZone zone in cardZones)
+                        {
+                            if(!show || zone.isEmpty) zone.ShowHighlight(show);
+                        }
+                        break;
+                    }
+                case CardType.FIELD:
+                    {
+                        CardZone zone = GetFieldCardZone(contender);
+                        zone.ShowHighlight(show);
+                        break;
+                    }
+            }
+        }
+
     }
 }
