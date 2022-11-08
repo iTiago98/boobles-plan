@@ -17,6 +17,7 @@ public class SceneLoader : MonoBehaviour
     private string _currentScene;
     private string _previousScene;
     private Camera _mainCamera;
+    private List<GameObject> _disabledObjects;
     //[SerializeField] private Controller _explorationPlayerController;
 
     private void Awake()
@@ -36,6 +37,7 @@ public class SceneLoader : MonoBehaviour
     private void Start()
     {
         _currentScene = Scenes.MAIN_MENU;
+        _disabledObjects = new List<GameObject>();
     }
 
     public void LoadMainMenuScene()
@@ -94,13 +96,19 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadInterviewScene()
     {
+        LoadInterviewScene(new List<GameObject>() { Camera.main.gameObject });
+    }
+
+    public void LoadInterviewScene(List<GameObject> objects)
+    {
         _previousScene = _currentScene;
         _currentScene = Scenes.INTERVIEW;
 
         MusicManager.Instance.PlayMusic(MusicReference.Interview);
         _fadeScreen.FadeOut(() =>
         {
-            DisableMainCamera();
+            _disabledObjects = objects;
+            EnableObjects(objects, false);
             if (_previousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
 
             var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW, LoadSceneMode.Additive);
@@ -118,12 +126,13 @@ public class SceneLoader : MonoBehaviour
 
         _fadeScreen.FadeOut(() =>
         {
+            EnableObjects(_disabledObjects, true);
             if (_previousScene != Scenes.MAIN_MENU)
                 Controller.Instance.enabled = true;
 
             var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
             async.completed += OnSceneLoaded;
-            async.completed += RestoreMainCamera;
+            //async.completed += RestoreMainCamera;
         });
     }
 
@@ -167,7 +176,7 @@ public class SceneLoader : MonoBehaviour
 
     private void OnLoungeSceneLoaded(AsyncOperation op)
     {
-        RestoreMainCamera(op);
+        //RestoreMainCamera(op);
         Controller.Instance.enabled = true;
         _fadeScreen.FadeIn2();
     }
@@ -177,17 +186,12 @@ public class SceneLoader : MonoBehaviour
         TurnManager.Instance.InitializeBoardBackground();
     }
 
-    private void DisableMainCamera()
+    private void EnableObjects(List<GameObject> objects, bool enable)
     {
-        _mainCamera = Camera.main;
-        _mainCamera.gameObject.SetActive(false);
+        foreach (GameObject obj in objects)
+        {
+            obj.SetActive(enable);
+        }
     }
 
-    private void RestoreMainCamera(AsyncOperation op)
-    {
-        if (_mainCamera == null)
-            return;
-
-        _mainCamera.gameObject.SetActive(true);
-    }
 }
