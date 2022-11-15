@@ -19,15 +19,9 @@ namespace CardGame.Managers
             START, PLAYER, OPPONENT, CLASH
         }
 
-        public CardGameSettings settings;
+        //public CardGameSettings settings;
 
         public Board board;
-
-        [Header("Contenders")]
-        public Contender player;
-        public Contender opponent;
-
-        public BaseAI opponentAI;
 
         #region Tweens
 
@@ -36,34 +30,21 @@ namespace CardGame.Managers
         #endregion
 
         public bool isPlayerTurn => _turn == Turn.PLAYER;
-        public Contender currentPlayer => (_turn == Turn.PLAYER) ? player : opponent;
-        public Contender otherPlayer => (_turn == Turn.PLAYER) ? opponent : player;
 
         private Turn _turn = Turn.START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
 
-        private bool _gameStarted;
-        public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
-
-        private bool _alternateWinCondition;
+        //private bool _alternateWinCondition;
         private bool _skipCombat;
 
         #region Turn flow 
-
-        private void Start()
-        {
-            //InitializeBoardBackground();
-        }
 
         public void StartGame()
         {
             // START GAME ANIMATION
 
-            InitializeDecks();
-            InitializeContenders();
-            DrawCards(settings.initialCardNumber);
+            DrawCards(CardGameManager.Instance.settings.initialCardNumber);
             UIManager.Instance.CheckEndTurnButtonState(_turn);
-            gameStarted = true;
 
             StartRound();
         }
@@ -72,7 +53,7 @@ namespace CardGame.Managers
         {
             // START ROUND ANIMATION 
 
-            FillMana();
+            CardGameManager.Instance.FillMana();
             TweenCallback callback = () =>
             {
                 SetTurn(Turn.OPPONENT);
@@ -99,7 +80,7 @@ namespace CardGame.Managers
             finishRoundSequence.OnComplete(() =>
             {
                 //Debug.Log("OnComplete");
-                if (!CheckInterviewEnd())
+                if (!CardGameManager.Instance.CheckEnd())
                 {
                     // Apply end round effects
                     endTurnEffectsDelegate?.Invoke();
@@ -120,7 +101,7 @@ namespace CardGame.Managers
         {
             if (_turn == Turn.OPPONENT)
             {
-                opponentAI.enabled = false;
+                CardGameManager.Instance.opponentAI.enabled = false;
                 SetTurn(Turn.PLAYER);
                 StartTurn();
             }
@@ -178,8 +159,8 @@ namespace CardGame.Managers
             }
             else
             {
-                object playerTarget = (_opponentGuardCard != null) ? _opponentGuardCard : opponent;
-                object opponentTarget = (_playerGuardCard != null) ? _playerGuardCard : player;
+                object playerTarget = (_opponentGuardCard != null) ? _opponentGuardCard : CardGameManager.Instance.opponent;
+                object opponentTarget = (_playerGuardCard != null) ? _playerGuardCard : CardGameManager.Instance.player;
 
                 if (playerCard != null)
                 {
@@ -221,39 +202,13 @@ namespace CardGame.Managers
 
         #endregion
 
-        #region Initialize
-
-        public void InitializeBoardBackground()
-        {
-            Board.Instance.InitializeBackground(DeckManager.Instance.GetOpponentName());
-        }
-
-        private void InitializeContenders()
-        {
-            player.Initialize(board.playerHand, board.playerCardZone, board.playerFieldCardZone);
-            player.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
-
-            opponent.Initialize(board.opponentHand, board.opponentCardZone, board.opponentFieldCardZone);
-            opponent.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
-
-            opponentAI.Initialize(opponent);
-        }
-
-        private void InitializeDecks()
-        {
-            // TODO Change player.deckCards.cards for DeckManager.Instance.GetPlayerCards()
-            //board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), opponent.deckCards.cards);
-            board.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
-            //board.InitializeDecks(player.deckCards.cards, opponent.deckCards.cards);
-        }
-
-        #endregion
-
         #region Interview End
 
-        public void CheckEnd()
+        public void CheckEndMidTurn()
         {
-            if (player.eloquence <= 0 || opponent.eloquence <= 0 || _alternateWinCondition)
+            if (CardGameManager.Instance.player.eloquence <= 0 
+                || CardGameManager.Instance.opponent.eloquence <= 0 
+                || CardGameManager.Instance.alternateWinCondition)
             {
                 if (turn == Turn.CLASH)
                 {
@@ -263,31 +218,6 @@ namespace CardGame.Managers
                 SkipCombat();
                 FinishRound();
             }
-        }
-
-        private bool CheckInterviewEnd()
-        {
-            if (player.eloquence <= 0 || opponent.eloquence <= 0 || _alternateWinCondition)
-            {
-                UIManager.Instance.ShowEndButton(true);
-                MouseController.Instance.enabled = false;
-
-                if (_alternateWinCondition) OnInterviewWin();
-                else if (player.eloquence <= 0) OnInterviewLose();
-                else if (opponent.eloquence <= 0) OnInterviewWin();
-                return true;
-            }
-            else return false;
-        }
-
-        private void OnInterviewWin()
-        {
-            UIManager.Instance.SetInterviewWinText(true);
-        }
-
-        private void OnInterviewLose()
-        {
-            UIManager.Instance.SetInterviewWinText(false);
         }
 
         #endregion
@@ -378,12 +308,6 @@ namespace CardGame.Managers
             board.DrawCards(cardNumber, _turn);
         }
 
-        private void FillMana()
-        {
-            player.FillMana();
-            opponent.FillMana();
-        }
-
         public void SkipCombat()
         {
             _skipCombat = true;
@@ -391,29 +315,17 @@ namespace CardGame.Managers
 
         public void AlternateWinCondition()
         {
-            _alternateWinCondition = true;
-            CheckEnd();
+            CardGameManager.Instance.SetAlternateWinCondition();
+            CheckEndMidTurn();
         }
 
         private void SetTurn(Turn turn)
         {
             _turn = turn;
             if (turn == Turn.OPPONENT)
-                opponentAI.enabled = true;
+                CardGameManager.Instance.opponentAI.enabled = true;
 
             UIManager.Instance.CheckEndTurnButtonState(_turn);
-        }
-
-        public Contender GetContenderFromHand(Hand hand)
-        {
-            if (hand == board.playerHand) return player;
-            else return opponent;
-        }
-
-        public Contender GetOtherContender(Contender contender)
-        {
-            if (contender.role == Contender.Role.PLAYER) return opponent;
-            else return player;
         }
     }
 }

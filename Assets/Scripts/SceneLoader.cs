@@ -183,7 +183,7 @@ public class SceneLoader : MonoBehaviour
 
     private void OnInterviewLoaded(AsyncOperation op)
     {
-        TurnManager.Instance.InitializeBoardBackground();
+        CardGameManager.Instance.Initialize();
     }
 
     private void EnableObjects(List<GameObject> objects, bool enable)

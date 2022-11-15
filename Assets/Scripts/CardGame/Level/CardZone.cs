@@ -119,7 +119,7 @@ namespace CardGame.Level
 
         private bool EnoughMana(Card card)
         {
-            Contender contender = TurnManager.Instance.currentPlayer;
+            Contender contender = CardGameManager.Instance.currentPlayer;
 
             return contender.freeMana || card.manaCost <= contender.currentMana;
         }

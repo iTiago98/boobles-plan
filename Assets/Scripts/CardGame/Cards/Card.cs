@@ -81,8 +81,8 @@ namespace CardGame.Cards
 
         [HideInInspector]
         public CardContainer container;
-        public Contender contender => TurnManager.Instance.GetContenderFromHand(_hand);
-
+        [HideInInspector]
+        public Contender contender;
         private Hand _hand;
 
         private bool _clickable;
@@ -105,14 +105,14 @@ namespace CardGame.Cards
         {
             _clickable = true;
 
-            _hoverPosY = TurnManager.Instance.settings.hoverPosY;
-            _hoverScale = TurnManager.Instance.settings.hoverScale;
+            _hoverPosY = CardGameManager.Instance.settings.hoverPosY;
+            _hoverScale = CardGameManager.Instance.settings.hoverScale;
 
-            _movePositionZ = TurnManager.Instance.settings.movePositionZ;
-            _defaultScale = TurnManager.Instance.settings.defaultScale;
-            _moveScale = TurnManager.Instance.settings.moveScale;
+            _movePositionZ = CardGameManager.Instance.settings.movePositionZ;
+            _defaultScale = CardGameManager.Instance.settings.defaultScale;
+            _moveScale = CardGameManager.Instance.settings.moveScale;
 
-            _hitScale = TurnManager.Instance.settings.hitScale;
+            _hitScale = CardGameManager.Instance.settings.hitScale;
 
             _endTurnEffects = new List<TurnManager.EndTurnEffects>();
         }
@@ -125,8 +125,9 @@ namespace CardGame.Cards
             }
         }
 
-        public void Initialize(Hand hand, CardsData data, bool cardRevealed)
+        public void Initialize(Contender contender, Hand hand, CardsData data, bool cardRevealed)
         {
+            this.contender = contender;
             _hand = hand;
             _data = data;
 
@@ -350,6 +351,7 @@ namespace CardGame.Cards
             //else PlayCard(cardZone);
 
             PlayCard(cardZone);
+            CardGameManager.Instance.CheckDialogue(this);
         }
 
         private void PlayCard(CardZone cardZone)
@@ -686,11 +688,11 @@ namespace CardGame.Cards
         {
             if (contender.role == Contender.Role.PLAYER)
             {
-                _hand = Board.Instance.GetHand(TurnManager.Instance.opponent);
+                _hand = Board.Instance.GetHand(CardGameManager.Instance.opponent);
             }
             else
             {
-                _hand = Board.Instance.GetHand(TurnManager.Instance.player);
+                _hand = Board.Instance.GetHand(CardGameManager.Instance.player);
             }
         }
 

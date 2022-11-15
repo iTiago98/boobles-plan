@@ -10,9 +10,11 @@ namespace CardGame.Level
 {
     public class Hand : CardContainer
     {
+        public Contender contender; 
+
         public void AddCard(Card card)
         {
-            if(numCards >= TurnManager.Instance.settings.handCapacity)
+            if(numCards >= CardGameManager.Instance.settings.handCapacity)
             {
                 DiscardFirst();
             }

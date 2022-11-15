@@ -41,8 +41,8 @@ namespace CardGame.Level
 
         public void InitializeDecks(List<CardsData> playerCards, List<CardsData> opponentCards)
         {
-            playerDeck.Initialize(TurnManager.Instance.player, playerHand, playerCards);
-            opponentDeck.Initialize(TurnManager.Instance.opponent, opponentHand, opponentCards);
+            playerDeck.Initialize(CardGameManager.Instance.player, playerHand, playerCards);
+            opponentDeck.Initialize(CardGameManager.Instance.opponent, opponentHand, opponentCards);
         }
 
         public void InitializeBackground(Opponent_Name opponentName)
@@ -158,8 +158,8 @@ namespace CardGame.Level
 
         public void DestroyAll()
         {
-            DestroyCards(TurnManager.Instance.player);
-            DestroyCards(TurnManager.Instance.opponent);
+            DestroyCards(CardGameManager.Instance.player);
+            DestroyCards(CardGameManager.Instance.opponent);
         }
 
         public void HighlightTargets(List<Card> possibleTargets)

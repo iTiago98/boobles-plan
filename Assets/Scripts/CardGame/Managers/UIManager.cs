@@ -91,8 +91,8 @@ namespace CardGame.Managers
 
         private void Start()
         {
-            _player = TurnManager.Instance.player;
-            _opponent = TurnManager.Instance.opponent;
+            _player = CardGameManager.Instance.player;
+            _opponent = CardGameManager.Instance.opponent;
         }
 
         #region Stats
@@ -155,11 +155,11 @@ namespace CardGame.Managers
 
         private void SetHealth(Image healthImage, Image extraHealthImage, Image extraHealthImage2, int life)
         {
-            int maxEloquence = TurnManager.Instance.settings.initialEloquence;
+            int maxEloquence = CardGameManager.Instance.settings.initialEloquence;
             healthImage.fillAmount = (float)life / maxEloquence;
 
-            extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
-            extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
+            if(life >= maxEloquence) extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
+            if(life >= (maxEloquence * 2)) extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
         }
 
         private void SetMana(List<Image> manaList, ref int shownMana, int currentMana)
@@ -168,7 +168,7 @@ namespace CardGame.Managers
             if (shownMana < currentMana)
             {
                 //Debug.Log("1: Mana " + (shownMana) + " full");
-                manaList[shownMana].sprite = (shownMana < TurnManager.Instance.settings.maxManaCounter) ? fullManaCristal : fullExtraManaCristal;
+                manaList[shownMana].sprite = (shownMana < CardGameManager.Instance.settings.maxManaCounter) ? fullManaCristal : fullExtraManaCristal;
                 shownMana++;
             }
             else
@@ -207,13 +207,13 @@ namespace CardGame.Managers
 
         public void OnEndTurnButtonClick()
         {
-            if (TurnManager.Instance.gameStarted)
+            if (CardGameManager.Instance.gameStarted)
             {
                 TurnManager.Instance.FinishTurn();
             }
             else
             {
-                TurnManager.Instance.StartGame();
+                CardGameManager.Instance.StartGame();
             }
         }
 

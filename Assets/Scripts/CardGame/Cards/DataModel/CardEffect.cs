@@ -156,9 +156,9 @@ namespace CardGame.Cards.DataModel.Effects
                         case Target.ENEMY:
                         case Target.CARD:
                             ((Card)target).Destroy(); break;
-                        case Target.AENEMY: Board.Instance.DestroyCards(TurnManager.Instance.otherPlayer); break;
+                        case Target.AENEMY: Board.Instance.DestroyCards(CardGameManager.Instance.otherPlayer); break;
                         case Target.ACARD: Board.Instance.DestroyAll(); break;
-                        case Target.FIELDCARD: Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard().Destroy(); break;
+                        case Target.FIELDCARD: Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard().Destroy(); break;
                     }
                     break;
                 case SubType.DEAL_DAMAGE:
@@ -167,12 +167,12 @@ namespace CardGame.Cards.DataModel.Effects
                         case Target.ENEMY: ((Card)target).ReceiveDamage(intParameter1); ((Card)target).CheckDestroy(); break;
                         //case Target.AENEMY: Board.Instance.DestroyCards(TurnManager.Instance.otherPlayer); break;
                         //case Target.ACARD: Board.Instance.DestroyAll(); break;
-                        case Target.PLAYER: TurnManager.Instance.otherPlayer.ReceiveDamage(intParameter1); break;
-                        case Target.SELF: TurnManager.Instance.currentPlayer.ReceiveDamage(intParameter1); break;
+                        case Target.PLAYER: CardGameManager.Instance.otherPlayer.ReceiveDamage(intParameter1); break;
+                        case Target.SELF: CardGameManager.Instance.currentPlayer.ReceiveDamage(intParameter1); break;
                     }
                     break;
                 case SubType.DECREASE_MANA:
-                    Contender otherPlayer = TurnManager.Instance.otherPlayer;
+                    Contender otherPlayer = CardGameManager.Instance.otherPlayer;
                     int manaValue = intParameter1;
                     if (intParameter1 == -1)
                     {
@@ -221,7 +221,7 @@ namespace CardGame.Cards.DataModel.Effects
                         {
                             Card targetCard = (Card)target;
                             int lifeValue = source.strength - targetCard.defense;
-                            TurnManager.Instance.otherPlayer.ReceiveDamage(lifeValue);
+                            CardGameManager.Instance.otherPlayer.ReceiveDamage(lifeValue);
                         }
                     }
                     break;
@@ -239,7 +239,7 @@ namespace CardGame.Cards.DataModel.Effects
                             }
                             break;
                         case Target.AENEMY:
-                            foreach (Card card in Board.Instance.CardsOnTable(TurnManager.Instance.GetOtherContender(source.contender)))
+                            foreach (Card card in Board.Instance.CardsOnTable(CardGameManager.Instance.GetOtherContender(source.contender)))
                             {
                                 card.BoostStats(intParameter1, intParameter2);
                             }
@@ -288,7 +288,7 @@ namespace CardGame.Cards.DataModel.Effects
                     Board.Instance.DrawCards(intParameter1, TurnManager.Instance.turn);
                     break;
                 case SubType.DISCARD_CARD:
-                    Board.Instance.DiscardCards(intParameter1, TurnManager.Instance.otherPlayer);
+                    Board.Instance.DiscardCards(intParameter1, CardGameManager.Instance.otherPlayer);
                     break;
                 case SubType.RETURN_CARD:
                     ((Card)target).ReturnToHand();
@@ -298,8 +298,8 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.WHEEL:
-                    Contender player = TurnManager.Instance.player;
-                    Contender opponent = TurnManager.Instance.opponent;
+                    Contender player = CardGameManager.Instance.player;
+                    Contender opponent = CardGameManager.Instance.opponent;
 
                     int playerNumCards = player.hand.numCards;
                     int opponentNumCards = opponent.hand.numCards;
@@ -357,7 +357,7 @@ namespace CardGame.Cards.DataModel.Effects
                 GameObject cardPrefab = board.GetDeck(owner).cardPrefab;
                 GameObject card = UnityEngine.Object.Instantiate(cardPrefab, source.transform.position, cardPrefab.transform.rotation);
                 CardsData newData = new CardsData(data);
-                card.GetComponent<Card>().Initialize(board.GetHand(owner), newData, cardRevealed: true);
+                card.GetComponent<Card>().Initialize(owner, board.GetHand(owner), newData, cardRevealed: true);
                 emptyCardZone.AddCard(card.GetComponent<Card>());
             }
         }
@@ -391,7 +391,7 @@ namespace CardGame.Cards.DataModel.Effects
             }
             else if (targetType == Target.AENEMY)
             {
-                List<CardZone> cardZones = Board.Instance.GetCardZone(TurnManager.Instance.otherPlayer);
+                List<CardZone> cardZones = Board.Instance.GetCardZone(CardGameManager.Instance.otherPlayer);
                 int pos = -1;
 
                 // Find any card
@@ -430,7 +430,7 @@ namespace CardGame.Cards.DataModel.Effects
             }
 
             // Get destination
-            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(TurnManager.Instance.otherPlayer);
+            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.otherPlayer);
             if (emptyCardZone != null)
             {
                 Card originCard = originCardZone.GetCard();
@@ -476,7 +476,7 @@ namespace CardGame.Cards.DataModel.Effects
                 {
                     case SubType.MONDARORIANO_WIN_CONDITION:
                         return DeckManager.Instance.GetOpponentName() == Opponent_Name.Citriano
-                            && TurnManager.Instance.player.eloquence >= 30;
+                            && CardGameManager.Instance.player.eloquence >= 30;
                     default:
                         return false;
                 }
@@ -484,14 +484,14 @@ namespace CardGame.Cards.DataModel.Effects
             else
             {
 
-                bool currentPlayerHasCards = Board.Instance.AreCardsOnTable(TurnManager.Instance.currentPlayer);
-                bool otherPlayerHasCards = Board.Instance.AreCardsOnTable(TurnManager.Instance.otherPlayer);
+                bool currentPlayerHasCards = Board.Instance.AreCardsOnTable(CardGameManager.Instance.currentPlayer);
+                bool otherPlayerHasCards = Board.Instance.AreCardsOnTable(CardGameManager.Instance.otherPlayer);
 
                 switch (targetType)
                 {
                     case Target.ALLY:
                     case Target.AALLY:
-                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(TurnManager.Instance.currentPlayer);
+                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.currentPlayer);
                         if (subType == SubType.DUPLICATE_CARD)
                             return emptyCardZone != null && currentPlayerHasCards;
                         else if (subType == SubType.CREATE_CARD)
@@ -501,16 +501,16 @@ namespace CardGame.Cards.DataModel.Effects
 
                     case Target.ENEMY:
                     case Target.AENEMY:
-                        return otherPlayerHasCards || Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard() != null;
+                        return otherPlayerHasCards || Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
 
                     case Target.CARD:
                     case Target.ACARD:
                         return currentPlayerHasCards || otherPlayerHasCards
-                            || Board.Instance.GetFieldCardZone(TurnManager.Instance.player).GetCard() != null
-                            || Board.Instance.GetFieldCardZone(TurnManager.Instance.opponent).GetCard() != null;
+                            || Board.Instance.GetFieldCardZone(CardGameManager.Instance.player).GetCard() != null
+                            || Board.Instance.GetFieldCardZone(CardGameManager.Instance.opponent).GetCard() != null;
 
                     case Target.FIELDCARD:
-                        return Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard() != null;
+                        return Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
 
                     case Target.NONE:
                     case Target.PLAYER:
@@ -541,24 +541,24 @@ namespace CardGame.Cards.DataModel.Effects
                 case Target.NONE:
                     break;
                 case Target.ALLY:
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.currentPlayer));
                     if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
-                        possibleTargets.Add(Board.Instance.GetFieldCardZone(TurnManager.Instance.currentPlayer).GetCard());
+                        possibleTargets.Add(Board.Instance.GetFieldCardZone(CardGameManager.Instance.currentPlayer).GetCard());
                     break;
                 case Target.ENEMY:
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.otherPlayer));
                     if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
-                        possibleTargets.Add(Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard());
+                        possibleTargets.Add(Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard());
                     break;
                 case Target.CARD:
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.currentPlayer));
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(TurnManager.Instance.otherPlayer));
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.currentPlayer));
+                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.otherPlayer));
                     if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
                     {
-                        Card fieldCard1 = Board.Instance.GetFieldCardZone(TurnManager.Instance.currentPlayer).GetCard();
+                        Card fieldCard1 = Board.Instance.GetFieldCardZone(CardGameManager.Instance.currentPlayer).GetCard();
                         if(fieldCard1 != null) possibleTargets.Add(fieldCard1);
 
-                        Card fieldCard2 = Board.Instance.GetFieldCardZone(TurnManager.Instance.otherPlayer).GetCard();
+                        Card fieldCard2 = Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard();
                         if (fieldCard2 != null) possibleTargets.Add(fieldCard2);
                     }
                     break;
