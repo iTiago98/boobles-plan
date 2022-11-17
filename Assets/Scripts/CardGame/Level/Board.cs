@@ -58,7 +58,7 @@ namespace CardGame.Level
                 case Opponent_Name.PingPongBros:
                     background.sprite = backgroundList[2]; 
                     break;
-                case Opponent_Name.Secretaria:
+                case Opponent_Name.Secretary:
                     background.sprite = backgroundList[3]; 
                     break;
                 case Opponent_Name.Jefe:

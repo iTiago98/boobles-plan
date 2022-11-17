@@ -6,6 +6,6 @@ namespace CardGame
 {
     public enum Opponent_Name 
     {
-        Tutorial, Citriano, PingPongBros, Secretaria, Jefe
+        Tutorial, Citriano, PingPongBros, Secretary, Jefe
     }
 }

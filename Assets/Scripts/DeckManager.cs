@@ -18,6 +18,7 @@ public class DeckManager : MonoBehaviour
     [Header("Extra Cards")]
     public List<CardsData> playerExtraCards;
     public List<CardsData> citrianoExtraCards;
+    public List<CardsData> pinponbrosExtraCards;
 
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
@@ -82,7 +83,7 @@ public class DeckManager : MonoBehaviour
             case Opponent_Name.PingPongBros:
                 opponentDeck = opponentsDecks[2]; 
                 break;
-            case Opponent_Name.Secretaria:
+            case Opponent_Name.Secretary:
                 opponentDeck = opponentsDecks[3]; 
                 break;
             case Opponent_Name.Jefe:

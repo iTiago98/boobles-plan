@@ -13,7 +13,6 @@ namespace CardGame.Managers
 {
     public class UIManager : MonoBehaviour
     {
-
         public static UIManager Instance { private set; get; }
 
         #region Stats
@@ -79,6 +78,7 @@ namespace CardGame.Managers
         private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
         private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
         private const string CLASH_BUTTON_TEXT = "Combate";
+        private const string SKIP_COMBAT_BUTTON_TEXT = "Pasar turno";
 
         private const string INTERVIEW_WIN_TEXT = "Has ganado";
         private const string INTERVIEW_LOSE_TEXT = "Has perdido";
@@ -86,7 +86,6 @@ namespace CardGame.Managers
         private void Awake()
         {
             Instance = this;
-
         }
 
         private void Start()
@@ -231,7 +230,8 @@ namespace CardGame.Managers
                     break;
                 case Turn.PLAYER:
                     endTurnButton.SetInteractable(true);
-                    endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
+                    if(TurnManager.Instance.skipCombat) endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
+                    else endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
                     break;
                 case Turn.OPPONENT:
                     endTurnButton.SetInteractable(false);

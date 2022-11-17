@@ -31,6 +31,8 @@ namespace CardGame.Managers
 
         [HideInInspector]
         public bool alternateWinCondition;
+        [HideInInspector]
+        public int alternateWinConditionParameter;
 
         #region Initialize
 
@@ -59,7 +61,7 @@ namespace CardGame.Managers
                 case Opponent_Name.PingPongBros:
                     _interviewDialogue = null;
                     break;
-                case Opponent_Name.Secretaria:
+                case Opponent_Name.Secretary:
                     _interviewDialogue = null;
                     break;
                 case Opponent_Name.Jefe:
@@ -115,7 +117,7 @@ namespace CardGame.Managers
 
         public void CheckDialogue(Card cardPlayed)
         {
-            _interviewDialogue.CheckDialogue(cardPlayed);
+            _interviewDialogue?.CheckDialogue(cardPlayed);
         }
 
         #endregion

@@ -54,6 +54,12 @@ namespace Booble.MainMenu
 			LoadInterview();
 		}
 
+		public void SecretaryCardsButton()
+        {
+			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Secretary);
+			LoadInterview();
+        }
+
 		public void LoadInterview()
         {
 			SceneLoader.Instance.LoadInterviewScene(new List<GameObject>()

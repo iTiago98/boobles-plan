@@ -174,7 +174,7 @@ namespace CardGame.Cards.DataModel
                             cardEffect.intParameter2 = EditorGUILayout.IntField("Parameter2: ", cardEffect.intParameter2);
                             break;
                         case SubType.ADD_EFFECT:
-                            // Add effectParameter
+                            cardEffect.cardParameter_Effect = (SubType)EditorGUILayout.EnumPopup("Effect:", cardEffect.cardParameter_Effect);
                             break;
                     }
 
@@ -193,23 +193,27 @@ namespace CardGame.Cards.DataModel
                         case SubType.RETURN_CARD:
                             break;
                         case SubType.CREATE_CARD:
-                            // Add gameobjectParameter
+                            if (cardEffect.cardParameter == null)
+                            {
+                                if (GUILayout.Button("Create")) cardEffect.cardParameter = new CardsDataSimple();
+                            }
+                            else
+                            {
+                                cardEffect.cardParameter.name = EditorGUILayout.TextField("Card name:", cardEffect.cardParameter.name);
 
-                            cardEffect.cardParameter_Name = EditorGUILayout.TextField("Card name:", cardEffect.cardParameter_Name);
+                                EditorGUILayout.BeginHorizontal();
 
-                            EditorGUILayout.BeginHorizontal();
+                                EditorGUILayout.PrefixLabel("Card sprite: ");
+                                cardEffect.cardParameter.sprite = GetSpriteFromName(cardsDataContainer.resourcesPath, cardEffect.cardParameter.name);
+                                cardEffect.cardParameter.sprite = (Sprite)EditorGUILayout.ObjectField(cardEffect.cardParameter.sprite, typeof(Sprite), allowSceneObjects: true);
 
-                            EditorGUILayout.PrefixLabel("Card sprite: ");
-                            cardEffect.cardParameter_Sprite = GetSpriteFromName(cardsDataContainer.resourcesPath, cardEffect.cardParameter_Name);
-                            cardEffect.cardParameter_Sprite = (Sprite)EditorGUILayout.ObjectField(cardEffect.cardParameter_Sprite, typeof(Sprite), allowSceneObjects: true);
+                                EditorGUILayout.EndHorizontal();
 
-                            EditorGUILayout.EndHorizontal();
+                                cardEffect.cardParameter.strength = EditorGUILayout.IntField("Card strength:", cardEffect.cardParameter.strength);
+                                cardEffect.cardParameter.defense = EditorGUILayout.IntField("Card defense:", cardEffect.cardParameter.defense);
 
-                            cardEffect.cardParameter_Strength = EditorGUILayout.IntField("Card strength:", cardEffect.cardParameter_Strength);
-                            cardEffect.cardParameter_Defense = EditorGUILayout.IntField("Card defense:", cardEffect.cardParameter_Defense);
-
-                            cardEffect.cardParameter_Effect = (SubType)EditorGUILayout.EnumPopup("Card effect:", cardEffect.cardParameter_Effect);
-                            //cardEffect.cardParameter = (CardsData) EditorGUILayout.ObjectField("Parameter 1:", cardEffect.cardParameter, typeof(CardsData), true);
+                                cardEffect.cardParameter_Effect = (SubType)EditorGUILayout.EnumPopup("Card effect:", cardEffect.cardParameter_Effect);
+                            }
                             break;
                         case SubType.DRAW_CARD:
                             cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);

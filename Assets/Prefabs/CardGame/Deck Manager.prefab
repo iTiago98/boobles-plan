@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2329183105752295764}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
   - {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
   - {fileID: 11400000, guid: f152fd45ab84e934f9e3f1e3cc1f76b2, type: 2}
-  - {fileID: 11400000, guid: 35a9ae74c69403142817aa145bd25659, type: 2}
+  - {fileID: 11400000, guid: 90980eacec418e64e8bd3d8346801d87, type: 2}
   playerExtraCards:
   - name: Gran final
     sprite: {fileID: 21300000, guid: 58aa6b948c0e680488378667f8d70ea1, type: 3}
@@ -64,10 +64,11 @@ MonoBehaviour:
       targetType: 4
       intParameter1: 1
       intParameter2: 0
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
       cardParameter_Effect: 0
   citrianoExtraCards:
   - name: Hipervitaminado
@@ -83,10 +84,11 @@ MonoBehaviour:
       targetType: 0
       intParameter1: 0
       intParameter2: 0
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
       cardParameter_Effect: 0
   - name: Nueva cepa del escorbuto
     sprite: {fileID: 21300000, guid: 8e0e203c646a3134d8acbcc5c11da2ba, type: 3}
@@ -101,10 +103,11 @@ MonoBehaviour:
       targetType: 0
       intParameter1: 0
       intParameter2: 0
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
       cardParameter_Effect: 0
   - name: Exprimir la verdad
     sprite: {fileID: 21300000, guid: a93bc51e6169ada4385e548524294411, type: 3}
@@ -119,10 +122,11 @@ MonoBehaviour:
       targetType: 0
       intParameter1: 1
       intParameter2: 0
-      cardParameter_Name: 
-      cardParameter_Sprite: {fileID: 0}
-      cardParameter_Strength: 0
-      cardParameter_Defense: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
       cardParameter_Effect: 0
   - name: "La m\xE1quina de zumo de los supermercados"
     sprite: {fileID: 21300000, guid: 96af5639f3a22e94092eb9d8944d381e, type: 3}
@@ -137,8 +141,48 @@ MonoBehaviour:
       targetType: 0
       intParameter1: 0
       intParameter2: 0
-      cardParameter_Name: Zumo de naranja
-      cardParameter_Sprite: {fileID: 21300000, guid: 38b5d5e93c3541044b67a2f1a1c2934b, type: 3}
-      cardParameter_Strength: 1
-      cardParameter_Defense: 1
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
       cardParameter_Effect: 6
+  pinponbrosExtraCards:
+  - name: Victoria por desgaste
+    sprite: {fileID: 0}
+    cost: 5
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 5
+      subType: 24
+      applyTime: 0
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+      cardParameter_Effect: 0
+  - name: Pared
+    sprite: {fileID: 0}
+    cost: 4
+    strength: 0
+    defense: 0
+    type: 2
+    effects:
+    - type: 4
+      subType: 10
+      applyTime: 3
+      targetType: 4
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+      cardParameter_Effect: 7

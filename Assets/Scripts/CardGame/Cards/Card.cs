@@ -133,7 +133,7 @@ namespace CardGame.Cards
 
             name = data.name;
 
-            if (contender.role == Contender.Role.PLAYER || cardRevealed)
+            if (cardRevealed || contender.role == Contender.Role.PLAYER)
             {
                 if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
             }
@@ -663,6 +663,14 @@ namespace CardGame.Cards
             CheckDestroy();
         }
 
+        public void AddEffect(CardEffect effect)
+        {
+            if (!effects.Contains(effect))
+            {
+                effects.Add(effect);
+                if (descriptionText != null) descriptionText.text = GetDescriptionText();
+            }
+        }
         public void RemoveFromContainer()
         {
             if (container != null)

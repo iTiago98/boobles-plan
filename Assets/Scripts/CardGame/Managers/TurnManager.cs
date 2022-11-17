@@ -19,8 +19,6 @@ namespace CardGame.Managers
             START, PLAYER, OPPONENT, CLASH
         }
 
-        //public CardGameSettings settings;
-
         public Board board;
 
         #region Tweens
@@ -34,8 +32,7 @@ namespace CardGame.Managers
         private Turn _turn = Turn.START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
 
-        //private bool _alternateWinCondition;
-        private bool _skipCombat;
+        public bool skipCombat;
 
         #region Turn flow 
 
@@ -89,7 +86,7 @@ namespace CardGame.Managers
                 }
             });
 
-            if (_skipCombat) _skipCombat = false;
+            if (skipCombat) skipCombat = false;
             else Clash();
 
             // END ROUND ANIMATION
@@ -310,7 +307,7 @@ namespace CardGame.Managers
 
         public void SkipCombat()
         {
-            _skipCombat = true;
+            skipCombat = true;
         }
 
         public void AlternateWinCondition()
