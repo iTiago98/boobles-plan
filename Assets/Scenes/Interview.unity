@@ -1464,6 +1464,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1925b941ec9028d42bc0fc2037f76886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &554912370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 554912371}
+  - component: {fileID: 554912372}
+  m_Layer: 0
+  m_Name: PinPonBrosDialogues
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &554912371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554912370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4125483664799137382}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &554912372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554912370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba41f789ea57fca49a0971e6c0bbee55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDialogue: {fileID: 0}
+  _winDialogue: {fileID: 0}
+  _alternateWinDialogue: {fileID: 0}
+  _loseDialogue: {fileID: 0}
+  _paredCardDialogue: {fileID: 0}
+  _palaCardDialogue: {fileID: 0}
+  _gomuCardDialogue: {fileID: 0}
 --- !u!4 &559922152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2585460997866550775, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
@@ -3001,7 +3052,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1110409946}
   - component: {fileID: 1110409947}
-  - component: {fileID: 1110409948}
   m_Layer: 0
   m_Name: CardGameManager
   m_TagString: Untagged
@@ -3040,22 +3090,8 @@ MonoBehaviour:
   player: {fileID: 1749118725}
   opponent: {fileID: 50242698}
   opponentAI: {fileID: 50242697}
-  citrianoInterviewDialogue: {fileID: 1110409948}
-  alternateWinCondition: 0
-  alternateWinConditionParameter: 0
---- !u!114 &1110409948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1110409945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 428529aa0d017ea4cbbc142ee10b25b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maquinaDeZumosCardDialogue: {fileID: 11400000, guid: 1503084fefe28c24bb3765da886091c4, type: 2}
+  citrianoInterviewDialogue: {fileID: 2126277579}
+  ppBrosInterviewDialogue: {fileID: 554912372}
 --- !u!1 &1111698753
 GameObject:
   m_ObjectHideFlags: 0
@@ -6164,6 +6200,57 @@ Transform:
   m_Father: {fileID: 1944825247}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2126277577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2126277578}
+  - component: {fileID: 2126277579}
+  m_Layer: 0
+  m_Name: CitrianoDialogues
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2126277578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126277577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4125483664799137382}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2126277579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126277577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 428529aa0d017ea4cbbc142ee10b25b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDialogue: {fileID: 0}
+  _winDialogue: {fileID: 0}
+  _alternateWinDialogue: {fileID: 0}
+  _loseDialogue: {fileID: 0}
+  _nuevaCepaCardDialogue: {fileID: 0}
+  _exprimirCardDialogue: {fileID: 0}
+  _maquinaDeZumosCardDialogue: {fileID: 11400000, guid: 1503084fefe28c24bb3765da886091c4, type: 2}
 --- !u!1001 &2133589259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7261,7 +7348,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2126277578}
+  - {fileID: 554912371}
   m_Father: {fileID: 2032876714}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

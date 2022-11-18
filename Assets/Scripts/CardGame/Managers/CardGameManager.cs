@@ -20,6 +20,7 @@ namespace CardGame.Managers
 
         [Header("Dialogues")]
         public InterviewDialogue citrianoInterviewDialogue;
+        public InterviewDialogue ppBrosInterviewDialogue;
 
         private InterviewDialogue _interviewDialogue;
 
@@ -29,10 +30,13 @@ namespace CardGame.Managers
         private bool _gameStarted;
         public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
 
-        [HideInInspector]
-        public bool alternateWinCondition;
-        [HideInInspector]
-        public int alternateWinConditionParameter;
+        public bool alternateWinCondition { private set; get; }
+        public int alternateWinConditionParameter { get; set; }
+
+        private void Start()
+        {
+            ThrowStartDialogue();
+        }
 
         #region Initialize
 
@@ -88,6 +92,8 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Game Flow 
+
         public void StartGame()
         {
             _gameStarted = true;
@@ -107,13 +113,24 @@ namespace CardGame.Managers
             MouseController.Instance.enabled = true;
         }
 
-        public void FillMana()
-        {
-            player.FillMana();
-            opponent.FillMana();
-        }
+        #endregion
 
         #region Dialogues
+
+        public void ThrowStartDialogue()
+        {
+            _interviewDialogue?.ThrowStartDialogue();
+        }
+
+        public void ThrowWinDialogue()
+        {
+            _interviewDialogue?.ThrowWinDialogue(); 
+        }
+
+        public void ThrowLoseDialogue()
+        {
+            _interviewDialogue?.ThrowLoseDialogue();
+        }
 
         public void CheckDialogue(Card cardPlayed)
         {
@@ -147,11 +164,13 @@ namespace CardGame.Managers
         private void OnInterviewWin()
         {
             UIManager.Instance.SetInterviewWinText(true);
+            ThrowWinDialogue();
         }
 
         private void OnInterviewLose()
         {
             UIManager.Instance.SetInterviewWinText(false);
+            ThrowLoseDialogue();
         }
 
         #endregion
@@ -165,5 +184,11 @@ namespace CardGame.Managers
         }
 
         #endregion
+
+        public void FillMana()
+        {
+            player.FillMana();
+            opponent.FillMana();
+        }
     }
 }
