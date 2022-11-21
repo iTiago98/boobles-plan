@@ -23,24 +23,24 @@ public abstract class InterviewDialogue : MonoBehaviour
     abstract public void CheckDialogue(Card cardPlayed);
     public void ThrowStartDialogue()
     {
-        ThrowDialogue(_startDialogue);
+        if(_startDialogue != null) ThrowDialogue(_startDialogue);
     }
 
     public void ThrowWinDialogue()
     {
         if (CardGameManager.Instance.alternateWinCondition)
         {
-            ThrowDialogue(_alternateWinDialogue);
+            if (_alternateWinDialogue != null) ThrowDialogue(_alternateWinDialogue);
         }
         else
         {
-            ThrowDialogue(_winDialogue);
+            if (_winDialogue != null) ThrowDialogue(_winDialogue);
         }
     }
 
     public void ThrowLoseDialogue()
     {
-        ThrowDialogue(_loseDialogue);
+        if (_loseDialogue != null) ThrowDialogue(_loseDialogue);
     }
 
     protected void ThrowDialogue(Dialogue diag, List<Option> options = null)
