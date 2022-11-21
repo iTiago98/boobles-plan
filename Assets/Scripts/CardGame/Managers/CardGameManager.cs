@@ -119,22 +119,22 @@ namespace CardGame.Managers
 
         public void ThrowStartDialogue()
         {
-            _interviewDialogue.ThrowStartDialogue();
+            _interviewDialogue?.ThrowStartDialogue();
         }
 
         public void ThrowWinDialogue()
         {
-            _interviewDialogue.ThrowWinDialogue(); 
+            _interviewDialogue?.ThrowWinDialogue(); 
         }
 
         public void ThrowLoseDialogue()
         {
-            _interviewDialogue.ThrowLoseDialogue();
+            _interviewDialogue?.ThrowLoseDialogue();
         }
 
         public void CheckDialogue(Card cardPlayed)
         {
-            _interviewDialogue.CheckDialogue(cardPlayed);
+            _interviewDialogue?.CheckDialogue(cardPlayed);
         }
 
         #endregion
