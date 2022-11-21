@@ -5251,7 +5251,7 @@ MonoBehaviour:
   - {fileID: 1111698756}
   - {fileID: 1507022974}
   fullManaCristal: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
-  emptyManaCristal: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  emptyManaCristal: {fileID: 785031068, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   fullExtraManaCristal: {fileID: 1482803665, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   extendedDescriptionPanel: {fileID: 1670671383}
   extendedDescriptionText: {fileID: 384659097}
