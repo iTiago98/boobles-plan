@@ -85,6 +85,9 @@ namespace CardGame.Cards
         public Contender contender;
         private Hand _hand;
 
+        public bool IsInHand => container == _hand;
+        public bool IsPlayerCard => contender.role == Contender.Role.PLAYER;
+
         private bool _clickable;
 
         bool IClickable.clickable { get => _clickable; set => _clickable = value; }
@@ -133,7 +136,7 @@ namespace CardGame.Cards
 
             name = data.name;
 
-            if (cardRevealed || contender.role == Contender.Role.PLAYER)
+            if (cardRevealed || IsPlayerCard)
             {
                 if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
             }
@@ -275,7 +278,7 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickDown(MouseController mouseController)
         {
-            if (!moveWithMouse && mouseController.holdingCard == null && container == _hand && contender.role == Contender.Role.PLAYER)
+            if (!moveWithMouse && mouseController.holdingCard == null && IsInHand && IsPlayerCard)
             {
                 // Deattach from parent
                 RemoveFromContainer();
@@ -288,7 +291,7 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
-            if (mouseController.holdingCard == this && contender.role == Contender.Role.PLAYER)
+            if (mouseController.holdingCard == this && IsPlayerCard)
             {
                 // Return card to hand
                 _hand.AddCard(this);
@@ -306,7 +309,7 @@ namespace CardGame.Cards
 
         public void OnMouseHoverEnter()
         {
-            if (container == _hand && contender.role == Contender.Role.PLAYER)
+            if (IsInHand && IsPlayerCard)
             {
                 transform.DOLocalMoveY(_hoverPosY, 0.2f);
                 transform.DOScale(_hoverScale, 0.2f);
@@ -320,7 +323,7 @@ namespace CardGame.Cards
 
         public void OnMouseHoverExit()
         {
-            if (this != null && gameObject != null && container == _hand && !moveWithMouse && contender.role == Contender.Role.PLAYER)
+            if (this != null && gameObject != null && !moveWithMouse && IsInHand && IsPlayerCard)
             {
                 transform.DOLocalMoveY(0f, 0.2f);
                 transform.DOScale(_defaultScale, 0.2f);
@@ -344,7 +347,7 @@ namespace CardGame.Cards
             if (contender.freeMana) contender.SetFreeMana(false);
             else contender.SubstractMana(manaCost);
 
-            if (contender.role == Contender.Role.OPPONENT) FlipCard();
+            if (!IsPlayerCard) FlipCard();
             SetMoveWithMouse(false);
 
             //if (hasEffect) CloseUp(() => PlayCard(cardZone));
@@ -381,7 +384,7 @@ namespace CardGame.Cards
             {
                 List<Card> possibleTargets = effect.FindPossibleTargets();
 
-                if (contender.role == Contender.Role.PLAYER)
+                if (IsPlayerCard)
                 {
                     MoveToWaitingSpot(null);
 
@@ -591,14 +594,14 @@ namespace CardGame.Cards
             //Play destroy animation
             Debug.Log(name + " destroyed");
 
-            if (container != null && container != _hand) container.RemoveCard(gameObject);
+            if (container != null && !IsInHand) container.RemoveCard(gameObject);
             CheckRemoveDelegateEffect();
 
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
             {
-                if (container != null && container == _hand) container.RemoveCard(gameObject);
+                if (container != null && IsInHand) container.RemoveCard(gameObject);
                 Destroy(gameObject);
             });
 

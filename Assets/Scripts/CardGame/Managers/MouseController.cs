@@ -157,8 +157,16 @@ namespace CardGame.Managers
 
         private void ApplyEffectToTarget(IClickable clickableObject)
         {
-            _effectCard.effect.Apply(_effectCard, (Card)clickableObject);
+            Card targetCard = (Card)clickableObject;
+            if (targetCard.IsInHand) return;
+
+            _effectCard.effect.Apply(_effectCard, targetCard);
             if (_effectCard.type == CardType.ACTION) _effectCard.Destroy();
+            ResetApplyingEffect();
+        }
+
+        public void ResetApplyingEffect()
+        {
             _effectCard = null;
             SetMask(selectingLayerMask);
             UIManager.Instance.SetEndTurnButtonInteractable(true);
