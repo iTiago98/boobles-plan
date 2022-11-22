@@ -40,12 +40,16 @@ namespace CardGame.Managers
         [Header("Extended Description")]
 
         public GameObject extendedDescriptionPanel;
+
+        public TextMeshProUGUI extendedDescriptionName;
+        public TextMeshProUGUI extendedDescriptionType;
         public TextMeshProUGUI extendedDescriptionText;
 
         #endregion
 
         #region Deck Remaining Cards
 
+        [Header("Deck Remaining Cards")]
         public GameObject playerDeckRemainingCardsPanel;
         public TextMeshProUGUI playerDeckRemainingCardsText;
 
@@ -248,9 +252,11 @@ namespace CardGame.Managers
 
         #region Extended Description
 
-        public void ShowExtendedDescription(string text)
+        public void ShowExtendedDescription(string name, string type, string description)
         {
-            extendedDescriptionText.text = text;
+            extendedDescriptionName.text = name;
+            extendedDescriptionType.text = type;
+            extendedDescriptionText.text = description;
             extendedDescriptionPanel.SetActive(true);
         }
 
