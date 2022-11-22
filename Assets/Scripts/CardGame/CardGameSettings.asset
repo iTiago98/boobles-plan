@@ -20,6 +20,7 @@ MonoBehaviour:
   hoverPosY: 0.4
   hoverScale: 0.55
   movePositionZ: -1.2
-  defaultScale: 0.41
   moveScale: 0.6
+  highlightScale: 0.45
+  defaultScale: 0.41
   hitScale: 0.6

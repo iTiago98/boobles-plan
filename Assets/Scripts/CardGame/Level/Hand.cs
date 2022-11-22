@@ -10,15 +10,12 @@ namespace CardGame.Level
 {
     public class Hand : CardContainer
     {
-        public Contender contender; 
+        public Contender contender;
+
+        public bool isDiscarding;
 
         public void AddCard(Card card)
         {
-            if(numCards >= CardGameManager.Instance.settings.handCapacity)
-            {
-                DiscardFirst();
-            }
-
             AddCard(card, transform);
         }
 
@@ -33,16 +30,50 @@ namespace CardGame.Level
             }
         }
 
-        private void DiscardFirst()
-        {
-            cards[0].GetComponent<Card>().Destroy();
-        }
-
         public void DiscardAll()
         {
             for (int i = 0; i < numCards; i++)
             {
                 cards[i].GetComponent<Card>().Destroy();
+            }
+        }
+
+        public void CheckDiscarding()
+        {
+            CheckDiscarding(numCards);
+        }
+        public void CheckDiscarding(int numCards)
+        {
+            int handCapacity = CardGameManager.Instance.settings.handCapacity;
+            if (numCards >= handCapacity)
+            {
+                if (contender.isPlayer)
+                {
+                    isDiscarding = true;
+                    MouseController.Instance.SetDiscarding();
+                    ChangeScale(CardGameManager.Instance.settings.highlightScale);
+                }
+                else
+                {
+                    DiscardCards(numCards - handCapacity);
+                }
+            }
+            else
+            {
+                if (contender.isPlayer)
+                {
+                    isDiscarding = false;
+                    ChangeScale(CardGameManager.Instance.settings.defaultScale);
+                    TurnManager.Instance.ContinueClash();
+                }
+            }
+        }
+
+        private void ChangeScale(float scale)
+        {
+            foreach (GameObject cardObj in cards)
+            {
+                cardObj.transform.DOScale(scale, 0.2f);
             }
         }
     }

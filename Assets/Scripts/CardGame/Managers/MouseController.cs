@@ -30,6 +30,7 @@ namespace CardGame.Managers
         public Card holdingCard = null;
 
         private Card _effectCard;
+        public bool IsApplyingEffect => _effectCard != null;
 
         private IClickable _hovering;
         //private IClickable _closeUp;
@@ -107,14 +108,14 @@ namespace CardGame.Managers
 
             if (leftClickDown)
             {
-                if (!IsApplyingEffect() && clickableObject != null && TurnManager.Instance.isPlayerTurn)
+                if (!IsApplyingEffect && clickableObject != null && TurnManager.Instance.isPlayerTurn)
                 {
                     clickableObject.OnMouseLeftClickDown(this);
                 }
             }
             else if (leftClickUp)
             {
-                if (IsApplyingEffect())
+                if (IsApplyingEffect)
                 {
                     ApplyEffectToTarget(clickableObject);
                 }
@@ -148,11 +149,6 @@ namespace CardGame.Managers
         {
             _effectCard = card;
             SetMask(GetTargetMask(card.effect));
-        }
-
-        private bool IsApplyingEffect()
-        {
-            return _effectCard != null;
         }
 
         private void ApplyEffectToTarget(IClickable clickableObject)
@@ -236,6 +232,7 @@ namespace CardGame.Managers
         }
 
         #endregion
+
 
     }
 }

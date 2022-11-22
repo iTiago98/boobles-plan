@@ -99,14 +99,20 @@ namespace CardGame.Managers
             if (_turn == Turn.OPPONENT)
             {
                 CardGameManager.Instance.opponentAI.enabled = false;
+                Board.Instance.GetHand(CardGameManager.Instance.opponent).CheckDiscarding();
                 SetTurn(Turn.PLAYER);
                 StartTurn();
             }
             else if (_turn == Turn.PLAYER)
             {
-                SetTurn(Turn.CLASH);
-                FinishRound();
+                Board.Instance.GetHand(CardGameManager.Instance.player).CheckDiscarding();
             }
+        }
+
+        public void ContinueClash()
+        {
+            SetTurn(Turn.CLASH);
+            FinishRound();
         }
 
         #endregion

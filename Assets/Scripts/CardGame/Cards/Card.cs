@@ -68,10 +68,12 @@ namespace CardGame.Cards
         public bool moveWithMouse;
 
         private float _movePositionZ;
-        private float _defaultScale;
         private float _moveScale;
 
         #endregion
+
+        private float _highlightScale;
+        private float _defaultScale;
 
         #region Hit animation
 
@@ -86,7 +88,7 @@ namespace CardGame.Cards
         private Hand _hand;
 
         public bool IsInHand => container == _hand;
-        public bool IsPlayerCard => contender.role == Contender.Role.PLAYER;
+        public bool IsPlayerCard => contender.isPlayer;
 
         private bool _clickable;
 
@@ -112,8 +114,10 @@ namespace CardGame.Cards
             _hoverScale = CardGameManager.Instance.settings.hoverScale;
 
             _movePositionZ = CardGameManager.Instance.settings.movePositionZ;
-            _defaultScale = CardGameManager.Instance.settings.defaultScale;
             _moveScale = CardGameManager.Instance.settings.moveScale;
+
+            _highlightScale = CardGameManager.Instance.settings.highlightScale;
+            _defaultScale = CardGameManager.Instance.settings.defaultScale;
 
             _hitScale = CardGameManager.Instance.settings.hitScale;
 
@@ -298,6 +302,13 @@ namespace CardGame.Cards
                 mouseController.SetHolding(null);
                 SetMoveWithMouse(false);
             }
+
+            if (_hand.isDiscarding && IsInHand)
+            {
+                int numCards = _hand.numCards - 1;
+                _hand.CheckDiscarding(numCards);
+                Destroy();
+            }
         }
 
         public void OnMouseRightClick()
@@ -317,7 +328,7 @@ namespace CardGame.Cards
 
             if (contender.role == Contender.Role.PLAYER || _cardFront)
             {
-                UIManager.Instance.ShowExtendedDescription(ToString());
+                UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
             }
         }
 
@@ -326,7 +337,8 @@ namespace CardGame.Cards
             if (this != null && gameObject != null && !moveWithMouse && IsInHand && IsPlayerCard)
             {
                 transform.DOLocalMoveY(0f, 0.2f);
-                transform.DOScale(_defaultScale, 0.2f);
+                if (_hand.isDiscarding) transform.DOScale(_highlightScale, 0.2f);
+                else transform.DOScale(_defaultScale, 0.2f);
             }
 
             UIManager.Instance.HideExtendedDescription();
@@ -594,7 +606,7 @@ namespace CardGame.Cards
             //Play destroy animation
             Debug.Log(name + " destroyed");
 
-            if (container != null && !IsInHand) container.RemoveCard(gameObject);
+            if (container != null /*&& !IsInHand*/) container.RemoveCard(gameObject);
             CheckRemoveDelegateEffect();
 
             Sequence destroySequence = DOTween.Sequence();
@@ -712,20 +724,24 @@ namespace CardGame.Cards
             return _data;
         }
 
-        public override string ToString()
+        public string NameToString()
         {
-            string s = "";
+            return name.ToUpper();
+        }
 
-            s += name.ToUpper() + "\n";
+        public string TypeToString()
+        {
+            return "TIPO: " + type.ToString();
+        }
 
-            s += "TIPO: " + type.ToString() + "\n";
-
+        public string DescriptionToString()
+        {
             if (hasEffect)
             {
-                s += effect.ToStringExtended(type);
+                return effect.ToStringExtended(type);
             }
 
-            return s;
+            return "";
         }
 
     }

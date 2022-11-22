@@ -22,8 +22,13 @@ namespace CardGame
 
         [Header("Move card with mouse")]
         public float movePositionZ;
-        public float defaultScale;
         public float moveScale;
+
+        [Header("Highlight")]
+        public float highlightScale;
+
+        [Header("Default")]
+        public float defaultScale;
 
         [Header("Hit animation")]
         public float hitScale;

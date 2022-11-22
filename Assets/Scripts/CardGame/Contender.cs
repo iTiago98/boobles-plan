@@ -26,6 +26,8 @@ namespace CardGame
         public bool freeMana { private set; get; }
         private int _maxMana;
 
+        public bool isPlayer => role == Role.PLAYER;
+
         public Hand hand { private set; get; }
         public List<CardZone> cardZones { private set; get; }
         public CardZone fieldCardZone { private set; get; }
@@ -34,6 +36,7 @@ namespace CardGame
         public void Initialize(Hand hand, List<CardZone> cardZone, CardZone fieldCardZone)
         {
             this.hand = hand;
+            hand.contender = this;
             this.cardZones = cardZone;
             this.fieldCardZone = fieldCardZone;
         }
