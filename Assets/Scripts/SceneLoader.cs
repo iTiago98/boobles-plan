@@ -17,6 +17,7 @@ public class SceneLoader : MonoBehaviour
     private string _currentScene;
     private string _previousScene;
     private Camera _mainCamera;
+
     private List<GameObject> _disabledObjects;
     //[SerializeField] private Controller _explorationPlayerController;
 

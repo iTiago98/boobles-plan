@@ -126,10 +126,10 @@ namespace CardGame.Cards
 
         private void Update()
         {
-            if (moveWithMouse)
-            {
-                Move();
-            }
+            //if (moveWithMouse)
+            //{
+            //    Move();
+            //}
         }
 
         public void Initialize(Contender contender, Hand hand, CardsData data, bool cardRevealed)
@@ -204,30 +204,30 @@ namespace CardGame.Cards
         /// <summary>
         /// Maps mouse position in the screen to world coordinates to move the holding card.
         /// </summary>
-        private void Move()
-        {
-            Vector3 mousePos = Input.mousePosition;
-            Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-            transform.position = new Vector3(worldPos.x, worldPos.y, _movePositionZ);
-        }
+        //private void Move()
+        //{
+        //    Vector3 mousePos = Input.mousePosition;
+        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        //    transform.position = new Vector3(worldPos.x, worldPos.y, _movePositionZ);
+        //}
 
-        public void SetMoveWithMouse(bool move)
-        {
-            if (move && !moveWithMouse)
-            {
-                // Increase scale
-                transform.DOScale(_moveScale, 0.2f);
-                shadow.SetActive(true);
-            }
-            else if (!move && moveWithMouse)
-            {
-                // Decrease scale
-                //transform.DOScale(_defaultScale, 0.2f);
-                shadow.SetActive(false);
-            }
+        //public void SetMoveWithMouse(bool move)
+        //{
+        //    if (move && !moveWithMouse)
+        //    {
+        //        // Increase scale
+        //        transform.DOScale(_moveScale, 0.2f);
+        //        shadow.SetActive(true);
+        //    }
+        //    else if (!move && moveWithMouse)
+        //    {
+        //        // Decrease scale
+        //        //transform.DOScale(_defaultScale, 0.2f);
+        //        shadow.SetActive(false);
+        //    }
 
-            moveWithMouse = move;
-        }
+        //    moveWithMouse = move;
+        //}
 
         #endregion
 
@@ -286,21 +286,45 @@ namespace CardGame.Cards
             {
                 // Deattach from parent
                 RemoveFromContainer();
-
-                // Stick to mouse
-                SetMoveWithMouse(true);
-                mouseController.SetHolding(this);
             }
+
+            //    // Stick to mouse
+            //    SetMoveWithMouse(true);
+            //    mouseController.SetHolding(this);
+            //}
         }
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
-            if (mouseController.holdingCard == this && IsPlayerCard)
+
+            //if (mouseController.holdingCard == this && contender.role == Contender.Role.PLAYER)
+            //{
+            //    // Return card to hand
+            //    _hand.AddCard(this);
+            //    mouseController.SetHolding(null);
+            //    SetMoveWithMouse(false);
+            //}
+            if (mouseController.holdingCard == null && IsInHand && IsPlayerCard)
             {
-                // Return card to hand
-                _hand.AddCard(this);
-                mouseController.SetHolding(null);
-                SetMoveWithMouse(false);
+                if (EnoughMana())
+                {
+                    // Deattach from parent
+                    RemoveFromContainer();
+
+                    MoveToWaitingSpot(null);
+                    mouseController.SetHolding(this);
+
+                    if (type == CardType.ARGUMENT || type == CardType.FIELD)
+                    {
+                        Board.Instance.HighlightZoneTargets(type, contender, show: true);
+                    }
+                    else
+                    {
+                        PlayAction();
+                    }
+
+                    UIManager.Instance.ShowCancelPlayButton();
+                }
             }
 
             if (_hand.isDiscarding && IsInHand)
@@ -309,6 +333,11 @@ namespace CardGame.Cards
                 _hand.CheckDiscarding(numCards);
                 Destroy();
             }
+        }
+
+        private bool EnoughMana()
+        {
+            return contender.freeMana || manaCost <= contender.currentMana;
         }
 
         public void OnMouseRightClick()
@@ -360,7 +389,7 @@ namespace CardGame.Cards
             else contender.SubstractMana(manaCost);
 
             if (!IsPlayerCard) FlipCard();
-            SetMoveWithMouse(false);
+            //SetMoveWithMouse(false);
 
             //if (hasEffect) CloseUp(() => PlayCard(cardZone));
             //else PlayCard(cardZone);
@@ -427,13 +456,20 @@ namespace CardGame.Cards
             }
             else
             {
-                //If the effect has no target, we apply the effect and destroy the card
-                MoveToWaitingSpot(() =>
+                if (contender.role == Contender.Role.PLAYER)
                 {
-                    effect.Apply(this, null);
-                    Destroy();
-                });
-                MouseController.Instance.SetHolding(null);
+                    UIManager.Instance.ShowContinuePlayButton();
+                }
+                else
+                {
+                    //If the effect has no target, we apply the effect and destroy the card
+                    MoveToWaitingSpot(() =>
+                    {
+                        effect.Apply(this, null);
+                        Destroy();
+                    });
+                    MouseController.Instance.SetHolding(null);
+                }
             }
         }
 
@@ -476,7 +512,7 @@ namespace CardGame.Cards
         {
             // Move card to board waiting spot
             Transform dest = Board.Instance.waitingSpot;
-            SetMoveWithMouse(false);
+            //SetMoveWithMouse(false);
 
             Sequence sequence = DOTween.Sequence();
 
@@ -501,6 +537,25 @@ namespace CardGame.Cards
 
         //    sequence.Play();
         //}
+
+        public void ContinuePlay()
+        {
+            // Substract mana
+            if (contender.freeMana) contender.SetFreeMana(false);
+            else contender.SubstractMana(manaCost);
+
+            ApplyEffect();
+            Destroy();
+
+            MouseController.Instance.SetHolding(null);
+        }
+
+        public void CancelPlay()
+        {
+            // Return card to hand
+            _hand.AddCard(this);
+            MouseController.Instance.SetHolding(null);
+        }
 
         #endregion
 
@@ -627,7 +682,8 @@ namespace CardGame.Cards
 
         #endregion
 
-        private void ApplyEffect()
+
+        public void ApplyEffect()
         {
             ApplyEffect(effect);
         }

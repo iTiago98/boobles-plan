@@ -50,7 +50,6 @@ namespace CardGame.Level
                 if (contender.isPlayer)
                 {
                     isDiscarding = true;
-                    MouseController.Instance.SetDiscarding();
                     ChangeScale(CardGameManager.Instance.settings.highlightScale);
                 }
                 else
