@@ -82,7 +82,7 @@ namespace CardGame.Managers
         private int _shownOpponentLife;
         private int _shownOpponentMana;
 
-        private int _shownMaxMana;
+        private int _defaultMaxMana;
 
         private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
         private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
@@ -101,6 +101,7 @@ namespace CardGame.Managers
         {
             _player = CardGameManager.Instance.player;
             _opponent = CardGameManager.Instance.opponent;
+            _defaultMaxMana = CardGameManager.Instance.settings.maxManaCounter;
         }
 
         #region Stats
@@ -125,15 +126,20 @@ namespace CardGame.Managers
             {
                 int newPlayerLife = CheckParameterDifference(ref _shownPlayerLife, _player.eloquence);
                 int newPlayerMana = _shownPlayerMana;
-                int currentPlayerMana = _player.currentMana;
+                int playerCurrentMana = _player.currentMana;
+                int playerCurrentMaxMana = _player.currentMaxMana;
+                int playerExtraMana = _player.extraMana;
 
                 int newOpponnentLife = CheckParameterDifference(ref _shownOpponentLife, _opponent.eloquence);
                 int newOpponnentMana = _shownOpponentMana;
-                int currentOpponentMana = _opponent.currentMana;
+                int opponentCurrentMana = _opponent.currentMana;
+                int opponentCurrentMaxMana = _opponent.currentMaxMana;
+                int opponentExtraMana = _opponent.extraMana;
 
                 sequence.AppendCallback(() =>
                 {
-                    SetStats(newPlayerLife, currentPlayerMana, newOpponnentLife, currentOpponentMana);
+                    SetStats(newPlayerLife, playerCurrentMana, playerCurrentMaxMana, playerExtraMana,
+                        newOpponnentLife, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
                 });
                 sequence.AppendInterval(0.1f);
             }
@@ -152,13 +158,14 @@ namespace CardGame.Managers
             return shownValue;
         }
 
-        private void SetStats(int newPlayerLife, int currentPlayerMana, int newOpponentLife, int currentOpponentMana)
+        private void SetStats(int newPlayerLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
+            int newOpponentLife, int opponentCurrentMana, int opponentCurrentMaxMana, int opponentExtraMana)
         {
             SetHealth(playerHealthImage, playerExtraHealthImage, playerExtraHealthImage2, newPlayerLife);
             SetHealth(opponentHealthImage, opponentExtraHealthImage, opponentExtraHealthImage2, newOpponentLife);
 
-            if (_shownPlayerMana != currentPlayerMana) SetMana(playerManaList, ref _shownPlayerMana, currentPlayerMana);
-            if (_shownOpponentMana != currentOpponentMana) SetMana(opponentManaList, ref _shownOpponentMana, currentOpponentMana);
+            if (_shownPlayerMana != playerCurrentMana) SetMana(playerManaList, ref _shownPlayerMana, playerCurrentMana, playerCurrentMaxMana, playerExtraMana);
+            if (_shownOpponentMana != opponentCurrentMana) SetMana(opponentManaList, ref _shownOpponentMana, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
         }
 
         private void SetHealth(Image healthImage, Image extraHealthImage, Image extraHealthImage2, int life)
@@ -167,46 +174,45 @@ namespace CardGame.Managers
             healthImage.fillAmount = (float)life / maxEloquence;
 
             if (life >= maxEloquence) extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
-            if (life >= (maxEloquence * 2)) extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
+            if (life >= (maxEloquence * 2)) extraHealthImage2.fillAmount = (float)(life - (maxEloquence * 2)) / maxEloquence;
         }
 
-        private void SetMana(List<Image> manaList, ref int shownMana, int currentMana)
+        private void SetMana(List<Image> manaList, ref int shownMana, int currentMana, int currentMaxMana, int extraMana)
         {
-            //Debug.Log("New Mana: " + shownMana + " - CurrentMana: " + currentMana);
+            //Debug.Log("Shown Mana: " + shownMana + " - CurrentMana: " + currentMana);
             if (shownMana < currentMana)
             {
                 //Debug.Log("1: Mana " + (shownMana) + " full");
-                manaList[shownMana].sprite = (shownMana < CardGameManager.Instance.settings.maxManaCounter) ? fullManaCristal : fullExtraManaCristal;
+                if (IsExtraMana(extraMana, currentMaxMana, shownMana))
+                    manaList[_defaultMaxMana + (shownMana - currentMaxMana + extraMana)].sprite = fullExtraManaCristal;
+                
+                else manaList[shownMana].sprite = fullManaCristal;
+
                 shownMana++;
             }
             else
             {
                 //Debug.Log("2: Mana " + (shownMana - 1) + " empty");
-                manaList[shownMana - 1].sprite = emptyManaCristal;
                 shownMana--;
+                int index;
+                if (IsExtraMana(extraMana, currentMaxMana, shownMana)) index = _defaultMaxMana + (shownMana - currentMaxMana + extraMana);
+                else index = shownMana;
+
+                manaList[index].sprite = emptyManaCristal;
             }
         }
 
-        public void UpdateMaxMana(Contender contender, int shownMaxMana, int newMaxMana)
+        private bool IsExtraMana(int extraMana, int currentMaxMana, int shownMana)
         {
-            Sequence sequence = DOTween.Sequence();
-            int loops = newMaxMana - shownMaxMana;
-            _shownMaxMana = shownMaxMana;
+            return extraMana > 0
+                && (currentMaxMana - shownMana) <= extraMana
+                && (currentMaxMana - extraMana) <= _defaultMaxMana;
+        }
 
+        public void UpdateMaxMana(Contender contender, int newMaxMana)
+        {
             List<Image> manaList = (contender.role == Contender.Role.PLAYER) ? playerManaList : opponentManaList;
-
-            for (int i = 0; i < loops; i++)
-            {
-                sequence.AppendCallback(() =>
-                {
-                    //Debug.Log("3: Mana " + (_shownMaxMana) + " empty");
-                    manaList[_shownMaxMana].sprite = emptyManaCristal;
-                    _shownMaxMana++;
-                });
-                sequence.AppendInterval(0.1f);
-            }
-
-            sequence.Play();
+            manaList[newMaxMana - 1].sprite = emptyManaCristal;
         }
 
         #endregion

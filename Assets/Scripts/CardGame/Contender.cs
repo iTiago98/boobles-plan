@@ -23,6 +23,7 @@ namespace CardGame
         public int eloquence { private set; get; }
         public int currentMana { private set; get; }
         public int currentMaxMana { private set; get; }
+        public int extraMana { private set; get; }
         public bool freeMana { private set; get; }
         private int _maxMana;
 
@@ -61,7 +62,8 @@ namespace CardGame
         public void IncreaseMaxMana(int mana)
         {
             _maxMana += mana;
-            UIManager.Instance.UpdateMaxMana(this, currentMaxMana, currentMaxMana + mana);
+            extraMana += mana;
+            UIManager.Instance.UpdateMaxMana(this, _maxMana);
             currentMaxMana += mana;
         }
 

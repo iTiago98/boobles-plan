@@ -30,6 +30,7 @@ namespace CardGame.Managers
         public Card holdingCard = null;
 
         private Card _effectCard;
+        public bool IsHoldingCard => holdingCard != null;
         public bool IsApplyingEffect => _effectCard != null;
 
         private IClickable _hovering;

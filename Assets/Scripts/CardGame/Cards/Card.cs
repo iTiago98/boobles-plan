@@ -298,42 +298,36 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
-
-            //if (mouseController.holdingCard == this && contender.role == Contender.Role.PLAYER)
-            //{
-            //    // Return card to hand
-            //    _hand.AddCard(this);
-            //    mouseController.SetHolding(null);
-            //    SetMoveWithMouse(false);
-            //}
-            if (mouseController.holdingCard == null && IsInHand && IsPlayerCard)
+            if (IsInHand)
             {
-                if (EnoughMana())
+                if (_hand.isDiscarding)
                 {
-                    // Deattach from parent
-                    RemoveFromContainer();
-
-                    MoveToWaitingSpot();
-
-                    if (type == CardType.ARGUMENT || type == CardType.FIELD)
-                    {
-                        Board.Instance.HighlightZoneTargets(type, contender, show: true);
-                        UIManager.Instance.SetEndTurnButtonInteractable(false);
-                    }
-                    else
-                    {
-                        PlayAction();
-                    }
-
-                    UIManager.Instance.ShowCancelPlayButton();
+                    int numCards = _hand.numCards - 1;
+                    _hand.CheckDiscarding(numCards);
+                    Destroy();
                 }
-            }
+                else if (IsPlayerCard && !mouseController.IsHoldingCard)
+                {
+                    if (EnoughMana())
+                    {
+                        // Deattach from parent
+                        RemoveFromContainer();
 
-            if (_hand.isDiscarding && IsInHand)
-            {
-                int numCards = _hand.numCards - 1;
-                _hand.CheckDiscarding(numCards);
-                Destroy();
+                        MoveToWaitingSpot();
+
+                        if (type == CardType.ARGUMENT || type == CardType.FIELD)
+                        {
+                            Board.Instance.HighlightZoneTargets(type, contender, show: true);
+                            UIManager.Instance.SetEndTurnButtonInteractable(false);
+                        }
+                        else
+                        {
+                            PlayAction();
+                        }
+
+                        UIManager.Instance.ShowCancelPlayButton();
+                    }
+                }
             }
         }
 
