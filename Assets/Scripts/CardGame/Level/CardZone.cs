@@ -40,6 +40,7 @@ namespace CardGame.Level
                 card.Play(this);
                 Board.Instance.HighlightZoneTargets(card.type, card.contender, show: false);
                 UIManager.Instance.HidePlayButtons();
+                UIManager.Instance.SetEndTurnButtonInteractable(true);
             }
             //Card card = mouseController.holdingCard;
             //if (card != null)

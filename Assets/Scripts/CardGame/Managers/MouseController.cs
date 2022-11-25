@@ -156,6 +156,7 @@ namespace CardGame.Managers
             Card targetCard = (Card)clickableObject;
             if (targetCard.IsInHand) return;
 
+            _effectCard.contender.SubstractMana(_effectCard.manaCost);
             _effectCard.effect.Apply(_effectCard, targetCard);
             if (_effectCard.type == CardType.ACTION) _effectCard.Destroy();
             ResetApplyingEffect();

@@ -282,11 +282,11 @@ namespace CardGame.Cards
 
         public void OnMouseLeftClickDown(MouseController mouseController)
         {
-            if (!moveWithMouse && mouseController.holdingCard == null && IsInHand && IsPlayerCard)
-            {
-                // Deattach from parent
-                RemoveFromContainer();
-            }
+            //if (!moveWithMouse && mouseController.holdingCard == null && IsInHand && IsPlayerCard)
+            //{
+            //    // Deattach from parent
+            //    RemoveFromContainer();
+            //}
 
             //    // Stick to mouse
             //    SetMoveWithMouse(true);
@@ -317,6 +317,7 @@ namespace CardGame.Cards
                     if (type == CardType.ARGUMENT || type == CardType.FIELD)
                     {
                         Board.Instance.HighlightZoneTargets(type, contender, show: true);
+                        UIManager.Instance.SetEndTurnButtonInteractable(false);
                     }
                     else
                     {
@@ -427,7 +428,7 @@ namespace CardGame.Cards
 
                 if (IsPlayerCard)
                 {
-                    MoveToWaitingSpot(null);
+                    //MoveToWaitingSpot(null);
 
                     Board.Instance.HighlightTargets(possibleTargets);
 
