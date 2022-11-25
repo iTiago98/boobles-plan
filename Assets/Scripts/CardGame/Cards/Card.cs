@@ -101,6 +101,8 @@ namespace CardGame.Cards
         private List<TurnManager.EndTurnEffects> _endTurnEffects;
         private Deck.DrawCardEffects _drawCardEffect;
 
+        private Card _storedTarget;
+
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -311,8 +313,7 @@ namespace CardGame.Cards
                     // Deattach from parent
                     RemoveFromContainer();
 
-                    MoveToWaitingSpot(null);
-                    mouseController.SetHolding(this);
+                    MoveToWaitingSpot();
 
                     if (type == CardType.ARGUMENT || type == CardType.FIELD)
                     {
@@ -385,15 +386,7 @@ namespace CardGame.Cards
 
         public void Play(CardZone cardZone)
         {
-            // Substract mana
-            if (contender.freeMana) contender.SetFreeMana(false);
-            else contender.SubstractMana(manaCost);
-
             if (!IsPlayerCard) FlipCard();
-            //SetMoveWithMouse(false);
-
-            //if (hasEffect) CloseUp(() => PlayCard(cardZone));
-            //else PlayCard(cardZone);
 
             PlayCard(cardZone);
             CardGameManager.Instance.CheckDialogue(this);
@@ -404,12 +397,14 @@ namespace CardGame.Cards
             switch (type)
             {
                 case CardType.ARGUMENT:
+                    SubstractMana();
                     AddToContainer(cardZone);
                     CheckEffect();
                     TurnManager.Instance.ApplyPlayArgumentEffects();
                     break;
 
                 case CardType.FIELD:
+                    SubstractMana();
                     AddToContainer(cardZone);
                     CheckEffect();
                     break;
@@ -422,13 +417,11 @@ namespace CardGame.Cards
 
         private void PlayAction()
         {
-            if (effect.HasTarget())
+            if (IsPlayerCard)
             {
-                List<Card> possibleTargets = effect.FindPossibleTargets();
-
-                if (IsPlayerCard)
+                if (effect.HasTarget())
                 {
-                    //MoveToWaitingSpot(null);
+                    List<Card> possibleTargets = effect.FindPossibleTargets();
 
                     Board.Instance.HighlightTargets(possibleTargets);
 
@@ -437,40 +430,23 @@ namespace CardGame.Cards
                 }
                 else
                 {
-                    if (possibleTargets.Count > 0)
-                    {
-                        int index = new System.Random().Next(0, possibleTargets.Count);
-                        MoveToWaitingSpot(() =>
-                        {
-                            effect.Apply(this, possibleTargets[index]);
-                            Destroy();
-                        });
-                    }
-                    else
-                    {
-                        MoveToWaitingSpot(() =>
-                        {
-                            Destroy();
-                        });
-                    }
+                    UIManager.Instance.ShowContinuePlayButton();
                 }
             }
             else
             {
-                if (contender.role == Contender.Role.PLAYER)
+                List<Card> possibleTargets = effect.FindPossibleTargets();
+
+                if (possibleTargets.Count > 0)
                 {
-                    UIManager.Instance.ShowContinuePlayButton();
+                    int index = new System.Random().Next(0, possibleTargets.Count);
+                    Board.Instance.HighlightTargets(new List<Card>() { possibleTargets[index] });
+                    _storedTarget = possibleTargets[index];
                 }
-                else
-                {
-                    //If the effect has no target, we apply the effect and destroy the card
-                    MoveToWaitingSpot(() =>
-                    {
-                        effect.Apply(this, null);
-                        Destroy();
-                    });
-                    MouseController.Instance.SetHolding(null);
-                }
+
+                MoveToWaitingSpot();
+                CardGameManager.Instance.opponentAI.enabled = false;
+                UIManager.Instance.ShowContinuePlayButton();
             }
         }
 
@@ -509,18 +485,18 @@ namespace CardGame.Cards
             }
         }
 
-        private void MoveToWaitingSpot(TweenCallback onCompleteCallback)
+        private void MoveToWaitingSpot()
         {
             // Move card to board waiting spot
             Transform dest = Board.Instance.waitingSpot;
-            //SetMoveWithMouse(false);
+            MouseController.Instance.SetHolding(this);
 
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(transform.DOMove(dest.position, 0.5f));
             sequence.Join(transform.DOScale(_defaultScale, 0.5f));
-            sequence.AppendInterval(0.5f);
-            sequence.OnComplete(onCompleteCallback);
+            //sequence.AppendInterval(0.5f);
+            //sequence.OnComplete(onCompleteCallback);
 
             sequence.Play();
         }
@@ -541,14 +517,30 @@ namespace CardGame.Cards
 
         public void ContinuePlay()
         {
-            // Substract mana
-            if (contender.freeMana) contender.SetFreeMana(false);
-            else contender.SubstractMana(manaCost);
+            SubstractMana();
 
             ApplyEffect();
             Destroy();
 
             MouseController.Instance.SetHolding(null);
+        }
+
+        public void ContinuePlayOpponent()
+        {
+            SubstractMana();
+
+            ApplyEffect(_storedTarget);
+            Destroy();
+
+            _storedTarget = null;
+            CardGameManager.Instance.opponentAI.enabled = true;
+            MouseController.Instance.SetHolding(null);
+        }
+
+        private void SubstractMana()
+        {
+            if (contender.freeMana) contender.SetFreeMana(false);
+            else contender.SubstractMana(manaCost);
         }
 
         public void CancelPlay()
@@ -691,10 +683,12 @@ namespace CardGame.Cards
 
         private void ApplyEffect(CardEffect effect)
         {
-            if (effect.IsAppliable())
-            {
-                effect.Apply(this, null);
-            }
+            if (effect.IsAppliable()) effect.Apply(this, null);
+        }
+
+        private void ApplyEffect(Card target)
+        {
+            if (effect.IsAppliable()) effect.Apply(this, target);
         }
 
         private void CheckRemoveDelegateEffect()

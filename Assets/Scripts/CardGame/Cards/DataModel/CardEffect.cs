@@ -22,7 +22,7 @@ namespace CardGame.Cards.DataModel.Effects
         DESTROY_CARD, DEAL_DAMAGE, DECREASE_MANA,
         LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD,
         DUPLICATE_CARD, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD,
-        FREE_MANA, WHEEL, COMPARTMENTALIZE, SKIP_COMBAT, CITRIANO_WIN_CONDITION, PINPONBROS_WIN_CONDITION 
+        FREE_MANA, WHEEL, COMPARTMENTALIZE, SKIP_COMBAT, CITRIANO_WIN_CONDITION, PINPONBROS_WIN_CONDITION
     }
 
     public enum DefensiveType
@@ -65,7 +65,7 @@ namespace CardGame.Cards.DataModel.Effects
     // PLAYER - other player
     public enum Target
     {
-        NONE, ALLY, ENEMY, CARD, AALLY, AENEMY, ACARD, /*CARDZONE,*/ PLAYER, SELF, FIELDCARD
+        NONE, ALLY, ENEMY, CARD, AALLY, AENEMY, ACARD, /*CARDZONE,*/ PLAYER, SELF, FIELDCARD, ARGUMENTCARD
     }
 
     #endregion
@@ -210,7 +210,7 @@ namespace CardGame.Cards.DataModel.Effects
                             int lifeValue = Mathf.Min(source.defense, targetCard.strength);
                             targetCard.ReceiveDamage(lifeValue);
 
-                            if(source.contender.role == Contender.Role.PLAYER)
+                            if (source.contender.role == Contender.Role.PLAYER)
                             {
                                 CardGameManager.Instance.alternateWinConditionParameter += lifeValue;
                             }
@@ -264,7 +264,7 @@ namespace CardGame.Cards.DataModel.Effects
                     effect.subType = cardParameter_Effect;
                     effect.applyTime = ApplyTime.COMBAT;
 
-                    switch(targetType)
+                    switch (targetType)
                     {
                         case Target.ALLY:
                         case Target.ENEMY:
@@ -523,13 +523,19 @@ namespace CardGame.Cards.DataModel.Effects
 
                     case Target.ENEMY:
                     case Target.AENEMY:
-                        return otherPlayerHasCards || Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
+                        if (subType == SubType.SWAP_POSITION)
+                            return otherPlayerHasCards;
+                        else
+                            return otherPlayerHasCards || Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
 
                     case Target.CARD:
                     case Target.ACARD:
                         return currentPlayerHasCards || otherPlayerHasCards
                             || Board.Instance.GetFieldCardZone(CardGameManager.Instance.player).GetCard() != null
                             || Board.Instance.GetFieldCardZone(CardGameManager.Instance.opponent).GetCard() != null;
+
+                    case Target.ARGUMENTCARD:
+                        return currentPlayerHasCards || otherPlayerHasCards;
 
                     case Target.FIELDCARD:
                         return Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
@@ -578,7 +584,7 @@ namespace CardGame.Cards.DataModel.Effects
                     if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
                     {
                         Card fieldCard1 = Board.Instance.GetFieldCardZone(CardGameManager.Instance.currentPlayer).GetCard();
-                        if(fieldCard1 != null) possibleTargets.Add(fieldCard1);
+                        if (fieldCard1 != null) possibleTargets.Add(fieldCard1);
 
                         Card fieldCard2 = Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard();
                         if (fieldCard2 != null) possibleTargets.Add(fieldCard2);

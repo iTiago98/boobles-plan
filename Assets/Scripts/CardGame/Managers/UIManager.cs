@@ -290,7 +290,9 @@ namespace CardGame.Managers
 
         public void OnContinuePlayButtonClick()
         {
-            MouseController.Instance.holdingCard.ContinuePlay();
+            Card card = MouseController.Instance.holdingCard;
+            if (card.IsPlayerCard) card.ContinuePlay();
+            else card.ContinuePlayOpponent();
             HidePlayButtons();
         }
 
