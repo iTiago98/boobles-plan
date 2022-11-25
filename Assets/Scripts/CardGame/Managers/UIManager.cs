@@ -166,8 +166,8 @@ namespace CardGame.Managers
             int maxEloquence = CardGameManager.Instance.settings.initialEloquence;
             healthImage.fillAmount = (float)life / maxEloquence;
 
-            if(life >= maxEloquence) extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
-            if(life >= (maxEloquence * 2)) extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
+            if (life >= maxEloquence) extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
+            if (life >= (maxEloquence * 2)) extraHealthImage2.fillAmount = life - (maxEloquence * 2) / maxEloquence;
         }
 
         private void SetMana(List<Image> manaList, ref int shownMana, int currentMana)
@@ -239,7 +239,7 @@ namespace CardGame.Managers
                     break;
                 case Turn.PLAYER:
                     endTurnButton.SetInteractable(true);
-                    if(TurnManager.Instance.skipCombat) endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
+                    if (TurnManager.Instance.skipCombat) endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
                     else endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
                     break;
                 case Turn.OPPONENT:
@@ -297,9 +297,16 @@ namespace CardGame.Managers
         public void OnCancelPlayButtonClick()
         {
             Card holdingCard = MouseController.Instance.holdingCard;
-            holdingCard.CancelPlay();
-            Board.Instance.HighlightTargets(new List<Card>());
-            Board.Instance.HighlightZoneTargets(holdingCard.type, holdingCard.contender, show: false); 
+            if (holdingCard != null)
+            {
+                holdingCard.CancelPlay();
+
+                if (MouseController.Instance.IsApplyingEffect)
+                    MouseController.Instance.ResetApplyingEffect();
+                else
+                    Board.Instance.HighlightZoneTargets(holdingCard.type, holdingCard.contender, show: false);
+            }
+
             HidePlayButtons();
         }
 
