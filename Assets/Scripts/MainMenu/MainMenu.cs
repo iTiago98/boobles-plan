@@ -22,7 +22,7 @@ namespace Booble.MainMenu
 				return;
 			
 			FlagManager.Instance.SetFlag(Flag.Reference.Car0);
-			SceneLoader.Instance.LoadScene("Car");
+			SceneLoader.Instance.LoadScene(Scenes.CAR_0);
 			MusicManager.Instance.PlayMusic(MusicReference.Lounge);
 		}
 

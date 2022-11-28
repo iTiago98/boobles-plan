@@ -55,6 +55,8 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadScene(string scene)
     {
+        _currentScene = scene;
+
         _fadeScreen.FadeOut(() =>
         {
             var async = SceneManager.LoadSceneAsync(scene);
@@ -62,38 +64,40 @@ public class SceneLoader : MonoBehaviour
         });
     }
 
+    #region Quick Access
+
     public void LoadLoungeScene0()
     {
-        _currentScene = Scenes.LOUNGE_0;
-
-        _fadeScreen.FadeOut(() =>
-        {
-            var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_0);
-            async.completed += OnLoungeSceneLoaded;
-        });
+        LoadScene(Scenes.LOUNGE_0);
     }
 
     public void LoadNelaOffice0()
     {
-        _currentScene = Scenes.NELA_OFFICE_0;
-
-        _fadeScreen.FadeOut(() =>
-        {
-            var async = SceneManager.LoadSceneAsync(Scenes.NELA_OFFICE_0);
-            async.completed += OnLoungeSceneLoaded;
-        });
+        LoadScene(Scenes.NELA_OFFICE_0);
     }
 
     public void LoadNelaOffice1()
     {
-        _currentScene = Scenes.NELA_OFFICE_1;
-
-        _fadeScreen.FadeOut(() =>
-        {
-            var async = SceneManager.LoadSceneAsync(Scenes.NELA_OFFICE_1);
-            async.completed += OnLoungeSceneLoaded;
-        });
+        LoadScene(Scenes.NELA_OFFICE_1);
     }
+    public void LoadCanteenScene0()
+    {
+        LoadScene(Scenes.CANTEEN_0);
+    }
+
+    public void LoadLowerHall1()
+    {
+        LoadScene(Scenes.LOWER_HALL_1);
+    }
+
+    public void LoadLoungeScene1()
+    {
+        LoadScene(Scenes.LOUNGE_1);
+    }
+
+    #endregion
+
+    #region Interview
 
     public void LoadInterviewScene()
     {
@@ -137,38 +141,9 @@ public class SceneLoader : MonoBehaviour
         });
     }
 
-    public void LoadCanteenScene0()
-    {
-        _currentScene = Scenes.CANTEEN_0;
+    #endregion
 
-        _fadeScreen.FadeOut(() =>
-        {
-            var async = SceneManager.LoadSceneAsync(Scenes.CANTEEN_0);
-            async.completed += OnLoungeSceneLoaded;
-        });
-    }
-
-    public void LoadLowerHall1()
-    {
-        _currentScene = Scenes.LOWER_HALL_1;
-
-        _fadeScreen.FadeOut(() =>
-        {
-            var async = SceneManager.LoadSceneAsync(Scenes.LOWER_HALL_1);
-            async.completed += OnLoungeSceneLoaded;
-        });
-    }
-
-    public void LoadLoungeScene1()
-    {
-        _currentScene = Scenes.LOUNGE_1;
-
-        _fadeScreen.FadeOut(() =>
-        {
-            var async = SceneManager.LoadSceneAsync(Scenes.LOUNGE_1);
-            async.completed += OnLoungeSceneLoaded;
-        });
-    }
+    
 
     private void OnSceneLoaded(AsyncOperation op)
     {
