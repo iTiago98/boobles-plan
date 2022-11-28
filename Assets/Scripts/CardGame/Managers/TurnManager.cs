@@ -16,7 +16,7 @@ namespace CardGame.Managers
 
         public enum Turn
         {
-            START, PLAYER, OPPONENT, CLASH
+            START, PLAYER, OPPONENT, DISCARDING, CLASH
         }
 
         public Board board;
@@ -94,25 +94,28 @@ namespace CardGame.Managers
             finishRoundSequence.Play();
         }
 
-        private void ChangeTurn()
+        public void ChangeTurn()
         {
-            if (_turn == Turn.OPPONENT)
+            switch (_turn)
             {
-                CardGameManager.Instance.opponentAI.enabled = false;
-                Board.Instance.GetHand(CardGameManager.Instance.opponent).CheckDiscarding();
-                SetTurn(Turn.PLAYER);
-                StartTurn();
-            }
-            else if (_turn == Turn.PLAYER)
-            {
-                Board.Instance.GetHand(CardGameManager.Instance.player).CheckDiscarding();
-            }
-        }
+                case Turn.OPPONENT:
+                    SetTurn(Turn.PLAYER);
+                    CardGameManager.Instance.opponentAI.enabled = false;
+                    Board.Instance.GetHand(CardGameManager.Instance.opponent).CheckDiscarding();
+                    StartTurn();
+                    break;
 
-        public void ContinueClash()
-        {
-            SetTurn(Turn.CLASH);
-            FinishRound();
+                case Turn.PLAYER:
+                    SetTurn(Turn.DISCARDING);
+                    Board.Instance.GetHand(CardGameManager.Instance.player).CheckDiscarding();
+                    break;
+
+                case Turn.DISCARDING:
+                    SetTurn(Turn.CLASH);
+                    FinishRound();
+                    break;
+            }
+
         }
 
         #endregion
@@ -209,8 +212,8 @@ namespace CardGame.Managers
 
         public void CheckEndMidTurn()
         {
-            if (CardGameManager.Instance.player.eloquence <= 0 
-                || CardGameManager.Instance.opponent.eloquence <= 0 
+            if (CardGameManager.Instance.player.eloquence <= 0
+                || CardGameManager.Instance.opponent.eloquence <= 0
                 || CardGameManager.Instance.alternateWinCondition)
             {
                 if (turn == Turn.CLASH)

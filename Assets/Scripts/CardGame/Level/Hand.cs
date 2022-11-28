@@ -63,7 +63,7 @@ namespace CardGame.Level
                 {
                     isDiscarding = false;
                     ChangeScale(CardGameManager.Instance.settings.defaultScale);
-                    TurnManager.Instance.ContinueClash();
+                    TurnManager.Instance.ChangeTurn();
                 }
             }
         }

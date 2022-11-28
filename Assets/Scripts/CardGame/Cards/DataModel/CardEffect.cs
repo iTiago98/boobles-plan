@@ -301,7 +301,7 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.DUPLICATE_CARD:
-                    InstantiateCard(source, ((Card)target).GetData());
+                    InstantiateCard(source, ((Card)target).data);
                     break;
 
                 case SubType.SWAP_POSITION:

@@ -14,15 +14,15 @@ namespace CardGame.Cards
     public class Card : MonoBehaviour, IClickable
     {
         #region Card Data
-        public int manaCost => _data.cost;
-        public int strength => _data.strength;
-        public int defense => _data.defense;
-        public CardType type => _data.type;
-        public List<CardEffect> effects => _data.effects;
+        public int manaCost => data.cost;
+        public int strength => data.strength;
+        public int defense => data.defense;
+        public CardType type => data.type;
+        public List<CardEffect> effects => data.effects;
         public CardEffect effect => effects[0];
         public bool hasEffect => effects.Count > 0;
 
-        private CardsData _data;
+        public CardsData data { private set; get; }
         private int defaultStrength;
         private int defaultDefense;
 
@@ -126,19 +126,11 @@ namespace CardGame.Cards
             _endTurnEffects = new List<TurnManager.EndTurnEffects>();
         }
 
-        private void Update()
-        {
-            //if (moveWithMouse)
-            //{
-            //    Move();
-            //}
-        }
-
         public void Initialize(Contender contender, Hand hand, CardsData data, bool cardRevealed)
         {
             this.contender = contender;
             _hand = hand;
-            _data = data;
+            this.data = data;
 
             name = data.name;
 
@@ -199,40 +191,6 @@ namespace CardGame.Cards
             return temp;
         }
 
-        #endregion
-
-        #region Drag
-
-        /// <summary>
-        /// Maps mouse position in the screen to world coordinates to move the holding card.
-        /// </summary>
-        //private void Move()
-        //{
-        //    Vector3 mousePos = Input.mousePosition;
-        //    Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);
-        //    transform.position = new Vector3(worldPos.x, worldPos.y, _movePositionZ);
-        //}
-
-        //public void SetMoveWithMouse(bool move)
-        //{
-        //    if (move && !moveWithMouse)
-        //    {
-        //        // Increase scale
-        //        transform.DOScale(_moveScale, 0.2f);
-        //        shadow.SetActive(true);
-        //    }
-        //    else if (!move && moveWithMouse)
-        //    {
-        //        // Decrease scale
-        //        //transform.DOScale(_defaultScale, 0.2f);
-        //        shadow.SetActive(false);
-        //    }
-
-        //    moveWithMouse = move;
-        //}
-
-        #endregion
-
         public void FlipCard()
         {
             if (_cardFront)
@@ -245,7 +203,7 @@ namespace CardGame.Cards
             }
             else
             {
-                _spriteRenderer.sprite = _data.sprite;
+                _spriteRenderer.sprite = data.sprite;
                 nameText.gameObject.SetActive(true);
                 descriptionText.gameObject.SetActive(true);
                 strengthText.gameObject.SetActive(true);
@@ -256,48 +214,18 @@ namespace CardGame.Cards
             _cardFront = !_cardFront;
         }
 
-        //private void CheckCloseUp()
-        //{
-        //    Sequence sequence = DOTween.Sequence();
-        //    sequence.AppendCallback(() => _clickable = false);
-
-        //    if (_closeUp)
-        //    {
-        //        sequence.Join(transform.DOMove(_defaultPos, _closeUpTime));
-        //        sequence.Join(transform.DOScale(_defaultScale, _closeUpTime));
-        //    }
-        //    else
-        //    {
-        //        _defaultPos = transform.position;
-        //        sequence.Join(transform.DOMove(_closeUpPosition.position, _closeUpTime));
-        //        sequence.Join(transform.DOScale(_augmentedScale, _closeUpTime));
-        //    }
-
-        //    sequence.AppendCallback(() => _clickable = true);
-        //    sequence.Play();
-
-        //    _closeUp = !_closeUp;
-        //}
-
+        #endregion
 
         #region IClickable methods
 
         public void OnMouseLeftClickDown(MouseController mouseController)
         {
-            //if (!moveWithMouse && mouseController.holdingCard == null && IsInHand && IsPlayerCard)
-            //{
-            //    // Deattach from parent
-            //    RemoveFromContainer();
-            //}
-
-            //    // Stick to mouse
-            //    SetMoveWithMouse(true);
-            //    mouseController.SetHolding(this);
-            //}
         }
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
+            if (!_clickable) return;
+
             if (IsInHand)
             {
                 if (_hand.isDiscarding)
@@ -336,29 +264,23 @@ namespace CardGame.Cards
             return contender.freeMana || manaCost <= contender.currentMana;
         }
 
-        public void OnMouseRightClick()
-        {
-            //if (!_clickable) return;
-
-            //CheckCloseUp();
-        }
-
         public void OnMouseHoverEnter()
         {
+            if (!_clickable) return;
+
             if (IsInHand && IsPlayerCard)
             {
                 transform.DOLocalMoveY(_hoverPosY, 0.2f);
                 transform.DOScale(_hoverScale, 0.2f);
             }
 
-            if (contender.role == Contender.Role.PLAYER || _cardFront)
-            {
-                UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
-            }
+            if (_cardFront) ShowExtendedDescription();
         }
 
         public void OnMouseHoverExit()
         {
+            if (!_clickable) return;
+
             if (this != null && gameObject != null && !moveWithMouse && IsInHand && IsPlayerCard)
             {
                 transform.DOLocalMoveY(0f, 0.2f);
@@ -366,7 +288,7 @@ namespace CardGame.Cards
                 else transform.DOScale(_defaultScale, 0.2f);
             }
 
-            UIManager.Instance.HideExtendedDescription();
+            HideExtendedDescription();
         }
 
         public void SetClickable(bool clickable)
@@ -623,8 +545,8 @@ namespace CardGame.Cards
 
         public void ReceiveDamage(int strength)
         {
-            _data.defense -= strength;
-            if (_data.defense < 0) _data.defense = 0;
+            data.defense -= strength;
+            if (data.defense < 0) data.defense = 0;
             UpdateStatsUI();
         }
 
@@ -648,14 +570,15 @@ namespace CardGame.Cards
             //Play destroy animation
             Debug.Log(name + " destroyed");
 
-            if (container != null /*&& !IsInHand*/) container.RemoveCard(gameObject);
+            _clickable = false;
+            if (!IsInHand) RemoveFromContainer();
             CheckRemoveDelegateEffect();
 
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
             {
-                if (container != null && IsInHand) container.RemoveCard(gameObject);
+                if (IsInHand) RemoveFromContainer();
                 Destroy(gameObject);
             });
 
@@ -669,6 +592,16 @@ namespace CardGame.Cards
 
         #endregion
 
+        #region Effects
+
+        public void AddEffect(CardEffect effect)
+        {
+            if (!effects.Contains(effect))
+            {
+                effects.Add(effect);
+                if (descriptionText != null) descriptionText.text = GetDescriptionText();
+            }
+        }
 
         public void ApplyEffect()
         {
@@ -714,42 +647,13 @@ namespace CardGame.Cards
 
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
-            _data.strength += strengthBoost;
-            if (_data.strength < 0) _data.strength = 0;
-            _data.defense += defenseBoost;
+            data.strength += strengthBoost;
+            if (data.strength < 0) data.strength = 0;
+            data.defense += defenseBoost;
             //Update card strength and defense number
             if (type == CardType.ARGUMENT)
                 UpdateStatsUI();
             CheckDestroy();
-        }
-
-        public void AddEffect(CardEffect effect)
-        {
-            if (!effects.Contains(effect))
-            {
-                effects.Add(effect);
-                if (descriptionText != null) descriptionText.text = GetDescriptionText();
-            }
-        }
-        public void RemoveFromContainer()
-        {
-            if (container != null)
-            {
-                container.RemoveCard(gameObject);
-                transform.parent = null;
-            }
-        }
-
-        public void ReturnToHand()
-        {
-            RemoveFromContainer();
-            CheckRemoveDelegateEffect();
-
-            _data.strength = defaultStrength;
-            _data.defense = defaultDefense;
-            _hand.AddCard(this);
-            if (contender.role == Contender.Role.OPPONENT) FlipCard();
-            if (type == CardType.ARGUMENT) UpdateStatsUI();
         }
 
         public void SwapContender()
@@ -764,9 +668,44 @@ namespace CardGame.Cards
             }
         }
 
-        public CardsData GetData()
+        #endregion
+
+        #region Containers
+
+        public void RemoveFromContainer()
         {
-            return _data;
+            if (container != null)
+            {
+                container.RemoveCard(gameObject);
+                container = null;
+                transform.parent = null;
+            }
+        }
+
+        public void ReturnToHand()
+        {
+            RemoveFromContainer();
+            CheckRemoveDelegateEffect();
+
+            data.strength = defaultStrength;
+            data.defense = defaultDefense;
+            _hand.AddCard(this);
+            if (contender.role == Contender.Role.OPPONENT) FlipCard();
+            if (type == CardType.ARGUMENT) UpdateStatsUI();
+        }
+
+        #endregion
+
+        #region ToString
+
+        public void ShowExtendedDescription()
+        {
+            UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
+        }
+
+        public void HideExtendedDescription()
+        {
+            UIManager.Instance.HideExtendedDescription();
         }
 
         public string NameToString()
@@ -789,5 +728,6 @@ namespace CardGame.Cards
             return "";
         }
 
+        #endregion
     }
 }

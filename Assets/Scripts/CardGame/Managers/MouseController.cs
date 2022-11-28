@@ -16,7 +16,6 @@ namespace CardGame.Managers
 
         [Header("Layer Masks")]
         public LayerMask selectingLayerMask;
-        public LayerMask holdingLayerMask;
 
         public LayerMask noTargetLayerMask;
         public LayerMask allyLayerMask;
@@ -178,27 +177,7 @@ namespace CardGame.Managers
 
         public void SetHolding(Card card)
         {
-            CheckMask(card);
             holdingCard = card;
-        }
-
-        public void CheckMask(Card card)
-        {
-            if (card == null)
-            {
-                if (_currentMask == holdingLayerMask)
-                {
-                    // From holding card to selecting
-                    //Debug.Log("selectingMask");
-                    SetMask(selectingLayerMask);
-                }
-            }
-            else if (_currentMask == selectingLayerMask)
-            {
-                // From selecting to holding card
-                //Debug.Log("holdingMask");
-                SetMask(holdingLayerMask);
-            }
         }
 
         private LayerMask GetTargetMask(CardEffect effect)

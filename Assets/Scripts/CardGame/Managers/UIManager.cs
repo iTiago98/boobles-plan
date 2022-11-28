@@ -86,6 +86,7 @@ namespace CardGame.Managers
 
         private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
         private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
+        private const string DISCARDING_BUTTON_TEXT = "Descartando";
         private const string CLASH_BUTTON_TEXT = "Combate";
         private const string SKIP_COMBAT_BUTTON_TEXT = "Pasar turno";
 
@@ -243,14 +244,20 @@ namespace CardGame.Managers
                 case Turn.START:
                     endTurnButton.SetInteractable(false);
                     break;
-                case Turn.PLAYER:
-                    endTurnButton.SetInteractable(true);
-                    if (TurnManager.Instance.skipCombat) endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
-                    else endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
-                    break;
                 case Turn.OPPONENT:
                     endTurnButton.SetInteractable(false);
                     endTurnButton.SetText(OPPONENT_TURN_BUTTON_TEXT);
+                    break;
+                case Turn.PLAYER:
+                    endTurnButton.SetInteractable(true);
+                    if (TurnManager.Instance.skipCombat)
+                        endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
+                    else 
+                        endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
+                    break;
+                case Turn.DISCARDING:
+                    endTurnButton.SetInteractable(false);
+                    endTurnButton.SetText(DISCARDING_BUTTON_TEXT);
                     break;
                 case Turn.CLASH:
                     endTurnButton.SetInteractable(false);

@@ -20,7 +20,7 @@ namespace CardGame
             //OnMouseHoverExit();
         }
 
-        abstract public void OnMouseRightClick();
+        //abstract public void OnMouseRightClick();
         abstract public void OnMouseHoverEnter();
         abstract public void OnMouseHoverExit();
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2585460997866550774}
   - component: {fileID: 6461131739676547815}
   - component: {fileID: 9035456593489404361}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: CardZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,8 +62,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7844198, y: 2.356773, z: 1}
-  m_Center: {x: -0.027783513, y: 0.0009622574, z: 0}
+  m_Size: {x: 2.307322, y: 2.5892346, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &9035456593489404361
 SpriteRenderer:
   m_ObjectHideFlags: 0
