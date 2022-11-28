@@ -722,7 +722,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.LIFELINK:
                     s += "el jugador recupera el daño infligido por la carta."; break;
                 case SubType.REBOUND:
-                    s += "el daño recibido es infligido al origen de ese daño."; break;
+                    s += "el daño recibido es infligido al argumento enemigo."; break;
                 case SubType.TRAMPLE:
                     s += "si la fuerza de la carta es mayor que la defensa de la carta rival, el daño restante es infligido al oponente."; break;
                 case SubType.STAT_BOOST:
@@ -749,7 +749,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.CREATE_CARD:
                     s += "invoca la carta " + cardParameter.name + " en una zona libre."; break;
                 case SubType.SWAP_POSITION:
-                    s += "mueve la carta objetivo a la zona objetivo. Si ya hay una carta, se intercambian."; break;
+                    s += "mueve la carta objetivo a una zona adyacente. Si ya hay una carta, se intercambian."; break;
                 case SubType.SWAP_CONTENDER:
                     s += "la carta pasa al control del oponente."; break;
                 case SubType.DRAW_CARD:
