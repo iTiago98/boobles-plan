@@ -151,7 +151,7 @@ namespace CardGame.Managers
             if (player.eloquence <= 0 || opponent.eloquence <= 0 || alternateWinCondition)
             {
                 UIManager.Instance.ShowEndButton(true);
-                MouseController.Instance.enabled = true;
+                MouseController.Instance.enabled = false;
 
                 if (alternateWinCondition) OnInterviewWin();
                 else if (player.eloquence <= 0) OnInterviewLose();
