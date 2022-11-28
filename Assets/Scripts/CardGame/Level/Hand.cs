@@ -45,7 +45,7 @@ namespace CardGame.Level
         public void CheckDiscarding(int numCards)
         {
             int handCapacity = CardGameManager.Instance.settings.handCapacity;
-            if (numCards >= handCapacity)
+            if (numCards > handCapacity)
             {
                 if (contender.isPlayer)
                 {
