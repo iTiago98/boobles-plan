@@ -323,6 +323,7 @@ namespace CardGame.Managers
             }
 
             HidePlayButtons();
+            SetEndTurnButtonInteractable(true);
         }
 
         public void ShowContinuePlayButton()

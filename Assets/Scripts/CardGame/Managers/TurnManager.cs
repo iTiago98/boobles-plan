@@ -5,6 +5,7 @@ using CardGame.Utils;
 using DG.Tweening;
 using Santi.Utils;
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,25 +74,25 @@ namespace CardGame.Managers
 
         private void FinishRound()
         {
-            finishRoundSequence = DOTween.Sequence();
-            finishRoundSequence.OnComplete(() =>
+            if (skipCombat)
             {
-                //Debug.Log("OnComplete");
-                if (!CardGameManager.Instance.CheckEnd())
-                {
-                    // Apply end round effects
-                    endTurnEffectsDelegate?.Invoke();
-
-                    StartRound();
-                }
-            });
-
-            if (skipCombat) skipCombat = false;
+                skipCombat = false;
+                FinishRoundContinue();
+            }
             else Clash();
+        }
 
+        private void FinishRoundContinue()
+        {
             // END ROUND ANIMATION
 
-            finishRoundSequence.Play();
+            if (!CardGameManager.Instance.CheckEnd())
+            {
+                // Apply end round effects
+                endTurnEffectsDelegate?.Invoke();
+
+                StartRound();
+            }
         }
 
         public void ChangeTurn()
@@ -124,92 +125,48 @@ namespace CardGame.Managers
 
         private void Clash()
         {
-            //Debug.Log("Clash");
-            Sequence clashSequence = ClashContinue(0);
-
-            clashSequence.AppendInterval(1f);
-
-            finishRoundSequence.Append(clashSequence);
+            StartCoroutine(ClashCoroutine());
         }
 
-        private Sequence ClashContinue(int index)
+        private IEnumerator ClashCoroutine()
         {
-            //Debug.Log("Clash continue " + index);
-            Sequence clashSequence = DOTween.Sequence();
+            bool combat = false;
 
-            Card playerCard = board.playerCardZone[index].GetCard();
-            Card opponentCard = board.opponentCardZone[index].GetCard();
+            for (int index = 0; index < 4; index++)
+            {
+                combat = true;
+                Sequence sequence = DOTween.Sequence();
 
-            if (playerCard != null && opponentCard != null)
-            {
-                if (_playerGuardCard && _opponentGuardCard)
-                {
-                    clashSequence.Join(playerCard.HitSequence(_opponentGuardCard, () => { ApplyCombatActions(playerCard, _opponentGuardCard, false); }));
-                    clashSequence.Join(opponentCard.HitSequence(_playerGuardCard, () => { ApplyCombatActions(opponentCard, _playerGuardCard, false); }));
-                }
-                else if (_playerGuardCard)
-                {
-                    clashSequence.Join(playerCard.HitSequence(opponentCard, () => { ApplyCombatActions(playerCard, opponentCard, false); }));
-                    clashSequence.Join(opponentCard.HitSequence(_playerGuardCard, () => { ApplyCombatActions(opponentCard, _playerGuardCard, false); }));
-                }
-                else if (_opponentGuardCard)
-                {
-                    clashSequence.Join(playerCard.HitSequence(_opponentGuardCard, () => { ApplyCombatActions(playerCard, _opponentGuardCard, false); }));
-                    clashSequence.Join(opponentCard.HitSequence(playerCard, () => { ApplyCombatActions(opponentCard, playerCard, false); }));
-                }
-                else
-                {
-                    clashSequence.Join(playerCard.HitSequence(opponentCard, () => { ApplyCombatActions(playerCard, opponentCard, true); }));
-                    clashSequence.Join(opponentCard.HitSequence(playerCard, null));
-                }
-            }
-            else
-            {
-                object playerTarget = (_opponentGuardCard != null) ? _opponentGuardCard : CardGameManager.Instance.opponent;
-                object opponentTarget = (_playerGuardCard != null) ? _playerGuardCard : CardGameManager.Instance.player;
+                Card playerCard = board.playerCardZone[index].GetCard();
+                Card opponentCard = board.opponentCardZone[index].GetCard();
+
+                object playerTarget = (_opponentGuardCard != null) ? _opponentGuardCard
+                    : (opponentCard != null) ? opponentCard
+                    : CardGameManager.Instance.opponent;
+
+                object opponentTarget = (_playerGuardCard != null) ? _playerGuardCard
+                    : (playerCard != null) ? playerCard
+                    : CardGameManager.Instance.player;
 
                 if (playerCard != null)
-                {
-                    clashSequence.Join(playerCard.HitSequence(playerTarget, () => { ApplyCombatActions(playerCard, playerTarget, false); }));
-                }
-                else if (opponentCard != null)
-                {
-                    clashSequence.Join(opponentCard.HitSequence(opponentTarget, () => { ApplyCombatActions(opponentCard, opponentTarget, false); }));
-                }
+                    sequence.Join(playerCard.HitSequence(playerTarget));
+
+                if (opponentCard != null)
+                    sequence.Join(opponentCard.HitSequence(opponentTarget));
+
+                sequence.AppendCallback(() => combat = false);
+                sequence.Play();
+
+                yield return new WaitWhile(() => combat);
             }
 
-            if (playerCard != null || opponentCard != null)
-                clashSequence.AppendInterval(0.1f);
-
-            if (index < 3) clashSequence.Append(ClashContinue(index + 1));
-            else clashSequence.AppendInterval(0.5f);
-
-            return clashSequence;
+            FinishRoundContinue();
         }
 
-        public void ApplyCombatActions(object object1, object object2, bool hitBack)
+        public void ApplyCombatActions(Card source, object targetObj)
         {
-            Card card1 = (object1 != null && object1 is Card) ? (Card)object1 : null;
-            Card card2 = (object2 != null && object2 is Card) ? (Card)object2 : null;
-
-            if (card1) card1.ApplyCombatEffects(object2);
-            if (card2) card2.ApplyCombatEffects(object1);
-
-            if (card1)
-            {
-                if (card1.strength == 0)
-                    card1.CheckDestroy();
-                else
-                    card1.Hit(object2);
-            }
-
-            if (card2)
-            {
-                if (card2.strength == 0 || !hitBack)
-                    card2.CheckDestroy();
-                else if (hitBack)
-                    card2.Hit(object1);
-            }
+            source.ApplyCombatEffects(targetObj);
+            source.Hit(targetObj);
         }
 
         #endregion

@@ -18,13 +18,13 @@ namespace CardGame.Cards
         public int strength => data.strength;
         public int defense => data.defense;
         public CardType type => data.type;
-        public List<CardEffect> effects => data.effects;
+        public List<CardEffect> effects { private set { data.effects = value; } get { return data.effects; } }
         public CardEffect effect => effects[0];
         public bool hasEffect => effects.Count > 0;
 
         public CardsData data { private set; get; }
-        private int defaultStrength;
-        private int defaultDefense;
+        private int _defaultStrength;
+        private int _defaultDefense;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace CardGame.Cards
         public Sprite cardBack;
         public Color altColor;
         public GameObject shadow;
-        public GameObject highlight;
+        [SerializeField] private GameObject highlight;
 
         private bool _cardFront = true;
 
@@ -128,11 +128,13 @@ namespace CardGame.Cards
             _endTurnEffects = new List<TurnManager.EndTurnEffects>();
         }
 
+        #region Initialize
+
         public void Initialize(Contender contender, Hand hand, CardsData data, bool cardRevealed)
         {
             this.contender = contender;
-            _hand = hand;
-            this.data = data;
+            this._hand = hand;
+            this.data = new CardsData(data); ;
 
             name = data.name;
 
@@ -150,18 +152,21 @@ namespace CardGame.Cards
 
             if (type == CardType.ARGUMENT)
             {
-                defaultStrength = data.strength;
-                defaultDefense = data.defense;
+                _defaultStrength = data.strength;
+                _defaultDefense = data.defense;
+
                 UpdateStatsUI();
             }
         }
+
+        #endregion
 
         #region UI
 
         private void UpdateStatsUI()
         {
-            UpdateStatUI(strengthText, strength, defaultStrength, Color.black);
-            UpdateStatUI(defenseText, defense, defaultDefense, Color.white);
+            UpdateStatUI(strengthText, strength, _defaultStrength, Color.black);
+            UpdateStatUI(defenseText, defense, _defaultDefense, Color.white);
         }
 
         private void UpdateStatUI(TextMeshPro text, int value, int defaultValue, Color defaultColor)
@@ -411,30 +416,15 @@ namespace CardGame.Cards
             // Move card to board waiting spot
             Transform dest = Board.Instance.waitingSpot;
             MouseController.Instance.SetHolding(this);
+            UIManager.Instance.SetEndTurnButtonInteractable(false);
 
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(transform.DOMove(dest.position, 0.5f));
             sequence.Join(transform.DOScale(_defaultScale, 0.5f));
-            //sequence.AppendInterval(0.5f);
-            //sequence.OnComplete(onCompleteCallback);
 
             sequence.Play();
         }
-
-        //private void CloseUp(TweenCallback onCompleteCallback)
-        //{
-        //    Sequence sequence = DOTween.Sequence();
-        //    Transform dest = Board.Instance.closeUpSpot;
-
-        //    sequence.Append(transform.DOLocalMove(dest.position, 0.2f));
-        //    sequence.Join(transform.DOScale(1, 0.2f));
-        //    sequence.AppendInterval(0.5f);
-        //    //sequence.onComplete += () => transform.position = dest.position;
-        //    sequence.onComplete += onCompleteCallback;
-
-        //    sequence.Play();
-        //}
 
         public void ContinuePlay()
         {
@@ -444,6 +434,7 @@ namespace CardGame.Cards
             Destroy();
 
             MouseController.Instance.SetHolding(null);
+            UIManager.Instance.SetEndTurnButtonInteractable(true);
         }
 
         public void ContinuePlayOpponent()
@@ -491,7 +482,7 @@ namespace CardGame.Cards
             }
         }
 
-        public Sequence HitSequence(object target, TweenCallback hitCallback)
+        public Sequence HitSequence(object target)
         {
             Sequence hitSequence = DOTween.Sequence();
 
@@ -520,29 +511,25 @@ namespace CardGame.Cards
                 // Hit
                 hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
 
-
                 // Hit callback
-                if (hitCallback != null)
-                {
-                    hitSequence.AppendCallback(hitCallback);
-                }
+                hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
 
                 // Back
                 hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
-                hitSequence.AppendCallback(() =>
-                {
-                    CheckDestroy();
-                });
+                //hitSequence.AppendCallback(() =>
+                //{
+                //    CheckDestroy();
+                //});
                 hitSequence.Append(transform.DOScale(_defaultScale, 0.2f));
                 hitSequence.Join(transform.DORotate(previousRotation, 0.2f));
+                hitSequence.AppendCallback(() => CheckDestroy());
             }
             else
             {
+                hitSequence.AppendInterval(1.1f);
                 // Hit callback
-                if (hitCallback != null)
-                {
-                    hitSequence.AppendCallback(hitCallback);
-                }
+                hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
+                hitSequence.AppendCallback(() => CheckDestroy());
             }
 
             return hitSequence;
@@ -579,7 +566,7 @@ namespace CardGame.Cards
             HideExtendedDescription();
 
             if (!IsInHand) RemoveFromContainer();
-            CheckRemoveDelegateEffect();
+            CheckRemoveEffects();
 
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
@@ -603,11 +590,21 @@ namespace CardGame.Cards
 
         public void AddEffect(CardEffect effect)
         {
-            if (!effects.Contains(effect))
+            if (!HasEffect(effect))
             {
                 effects.Add(effect);
                 if (descriptionText != null) descriptionText.text = GetDescriptionText();
             }
+        }
+
+        private bool HasEffect(CardEffect effect)
+        {
+            foreach (CardEffect e in effects)
+            {
+                if (e.subType == effect.subType) return true;
+            }
+
+            return false;
         }
 
         public void ApplyEffect()
@@ -625,7 +622,7 @@ namespace CardGame.Cards
             if (effect.IsAppliable()) effect.Apply(this, target);
         }
 
-        private void CheckRemoveDelegateEffect()
+        private void CheckRemoveEffects()
         {
             if (hasEffect)
             {
@@ -698,10 +695,10 @@ namespace CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
-            CheckRemoveDelegateEffect();
+            CheckRemoveEffects();
 
-            data.strength = defaultStrength;
-            data.defense = defaultDefense;
+            data.strength = _defaultStrength;
+            data.defense = _defaultDefense;
             _hand.AddCard(this);
             if (contender.role == Contender.Role.OPPONENT) FlipCard();
             if (type == CardType.ARGUMENT) UpdateStatsUI();

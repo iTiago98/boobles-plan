@@ -32,7 +32,12 @@ namespace CardGame.Cards.DataModel
             this.strength = data.strength;
             this.defense = data.defense;
             this.type = data.type;
-            this.effects = data.effects;
+
+            this.effects = new List<CardEffect>();
+            foreach(CardEffect effect in data.effects)
+            {
+                this.effects.Add(effect);
+            }
         }
 
         public void AddEffect(CardEffect effect)
