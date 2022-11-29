@@ -102,7 +102,7 @@ namespace CardGame.Cards.DataModel.Effects
             //Debug.Log(type + " " + subType + " effect applied");
 
             if (target != null && target is Card)
-                ((Card)target).highlight.SetActive(false);
+                ((Card)target).ShowHighlight(false);
 
             switch (type)
             {
@@ -566,36 +566,34 @@ namespace CardGame.Cards.DataModel.Effects
 
             switch (targetType)
             {
-                case Target.NONE:
-                    break;
                 case Target.ALLY:
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.currentPlayer));
-                    if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
-                        possibleTargets.Add(Board.Instance.GetFieldCardZone(CardGameManager.Instance.currentPlayer).GetCard());
+                    CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.currentPlayer);
                     break;
+
                 case Target.ENEMY:
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.otherPlayer));
-                    if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
-                        possibleTargets.Add(Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard());
+                    CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.otherPlayer);
                     break;
+
                 case Target.CARD:
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.currentPlayer));
                     possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.otherPlayer));
-                    if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
-                    {
-                        Card fieldCard1 = Board.Instance.GetFieldCardZone(CardGameManager.Instance.currentPlayer).GetCard();
-                        if (fieldCard1 != null) possibleTargets.Add(fieldCard1);
-
-                        Card fieldCard2 = Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard();
-                        if (fieldCard2 != null) possibleTargets.Add(fieldCard2);
-                    }
-                    break;
-                //case Target.CARDZONE:
-                case Target.PLAYER:
+                    CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.currentPlayer);
+                    CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.otherPlayer);
                     break;
             }
 
             return possibleTargets;
+        }
+
+        private void CheckAddFieldCard(SubType subType, List<Card> possibleTargets, Contender contender)
+        {
+            if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
+            {
+                Card fieldCard = Board.Instance.GetFieldCardZone(contender).GetCard();
+                if (fieldCard != null) possibleTargets.Add(fieldCard);
+            }
         }
 
         #endregion

@@ -103,6 +103,8 @@ namespace CardGame.Cards
 
         private Card _storedTarget;
 
+        public bool isHighlighted { private set; get; }
+
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -351,13 +353,16 @@ namespace CardGame.Cards
             }
             else
             {
-                List<Card> possibleTargets = effect.FindPossibleTargets();
-
-                if (possibleTargets.Count > 0)
+                if (effect.HasTarget())
                 {
-                    int index = new System.Random().Next(0, possibleTargets.Count);
-                    Board.Instance.HighlightTargets(new List<Card>() { possibleTargets[index] });
-                    _storedTarget = possibleTargets[index];
+                    List<Card> possibleTargets = effect.FindPossibleTargets();
+
+                    if (possibleTargets.Count > 0)
+                    {
+                        int index = new System.Random().Next(0, possibleTargets.Count);
+                        Board.Instance.HighlightTargets(new List<Card>() { possibleTargets[index] });
+                        _storedTarget = possibleTargets[index];
+                    }
                 }
 
                 MoveToWaitingSpot();
@@ -668,6 +673,12 @@ namespace CardGame.Cards
             {
                 _hand = Board.Instance.GetHand(CardGameManager.Instance.player);
             }
+        }
+
+        public void ShowHighlight(bool show)
+        {
+            highlight.SetActive(show);
+            isHighlighted = show;
         }
 
         #endregion

@@ -173,7 +173,7 @@ namespace CardGame.Level
                 Card card = cardZone.GetCard();
                 if (card != null)
                 {
-                    card.highlight.SetActive(possibleTargets.Contains(card));
+                    card.ShowHighlight(possibleTargets.Contains(card));
                 }
             }
         }

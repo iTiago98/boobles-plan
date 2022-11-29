@@ -154,7 +154,10 @@ namespace CardGame.Managers
         private void ApplyEffectToTarget(IClickable clickableObject)
         {
             Card targetCard = (Card)clickableObject;
-            if (targetCard.IsInHand) return;
+            if (targetCard == null 
+                || targetCard.IsInHand
+                || !targetCard.isHighlighted)
+                return;
 
             _effectCard.contender.SubstractMana(_effectCard.manaCost);
             _effectCard.effect.Apply(_effectCard, targetCard);
