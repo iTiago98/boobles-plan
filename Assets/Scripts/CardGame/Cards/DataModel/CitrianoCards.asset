@@ -384,7 +384,7 @@ MonoBehaviour:
     effects:
     - type: 3
       subType: 9
-      applyTime: 1
+      applyTime: 3
       targetType: 5
       intParameter1: -1
       intParameter2: 0
