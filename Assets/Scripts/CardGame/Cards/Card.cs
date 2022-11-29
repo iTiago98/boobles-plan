@@ -665,10 +665,12 @@ namespace CardGame.Cards
             if (contender.role == Contender.Role.PLAYER)
             {
                 _hand = Board.Instance.GetHand(CardGameManager.Instance.opponent);
+                contender = CardGameManager.Instance.opponent;
             }
             else
             {
                 _hand = Board.Instance.GetHand(CardGameManager.Instance.player);
+                contender = CardGameManager.Instance.player;
             }
         }
 
