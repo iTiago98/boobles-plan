@@ -234,7 +234,7 @@ namespace CardGame.Cards
                     _hand.CheckDiscarding(numCards);
                     Destroy();
                 }
-                else if (IsPlayerCard && !mouseController.IsHoldingCard)
+                else if (TurnManager.Instance.isPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
                     if (EnoughMana())
                     {
@@ -571,6 +571,8 @@ namespace CardGame.Cards
             Debug.Log(name + " destroyed");
 
             _clickable = false;
+            HideExtendedDescription();
+
             if (!IsInHand) RemoveFromContainer();
             CheckRemoveDelegateEffect();
 

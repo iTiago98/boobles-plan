@@ -94,7 +94,7 @@ namespace CardGame.Managers
 
         private void CheckClick(IClickable clickableObject)
         {
-            bool leftClickDown = Input.GetMouseButtonDown(0);
+            //bool leftClickDown = Input.GetMouseButtonDown(0);
             bool leftClickUp = Input.GetMouseButtonUp(0);
             //bool rightClick = Input.GetMouseButtonDown(1) || Input.GetMouseButtonUp(1);
 
@@ -106,14 +106,14 @@ namespace CardGame.Managers
             //    _closeUp = null;
             //}
 
-            if (leftClickDown)
-            {
-                if (!IsApplyingEffect && clickableObject != null && TurnManager.Instance.isPlayerTurn)
-                {
-                    clickableObject.OnMouseLeftClickDown(this);
-                }
-            }
-            else if (leftClickUp)
+            //if (leftClickDown)
+            //{
+            //    if (!IsApplyingEffect && clickableObject != null && TurnManager.Instance.isPlayerTurn)
+            //    {
+            //        clickableObject.OnMouseLeftClickDown(this);
+            //    }
+            //}
+            if (leftClickUp)
             {
                 if (IsApplyingEffect)
                 {
@@ -121,7 +121,7 @@ namespace CardGame.Managers
                 }
                 else
                 {
-                    if (clickableObject != null && TurnManager.Instance.isPlayerTurn)
+                    if (clickableObject != null)
                     {
                         clickableObject.OnMouseLeftClickUp(this);
                     }
