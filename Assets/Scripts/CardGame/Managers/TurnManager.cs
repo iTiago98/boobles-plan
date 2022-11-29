@@ -195,7 +195,13 @@ namespace CardGame.Managers
             if (card1) card1.ApplyCombatEffects(object2);
             if (card2) card2.ApplyCombatEffects(object1);
 
-            if (card1) card1.Hit(object2);
+            if (card1)
+            {
+                if (card1.strength == 0)
+                    card1.CheckDestroy();
+                else
+                    card1.Hit(object2);
+            }
 
             if (card2)
             {
