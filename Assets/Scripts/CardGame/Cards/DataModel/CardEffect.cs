@@ -171,7 +171,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DECREASE_MANA:
                     Contender otherPlayer = CardGameManager.Instance.otherPlayer;
                     int manaValue = intParameter1;
-                    if (intParameter1 == -1)
+                    if (intParameter1 == 0)
                     {
                         manaValue = otherPlayer.currentMana;
                     }
@@ -704,6 +704,7 @@ namespace CardGame.Cards.DataModel.Effects
                         case Target.ENEMY: s += "destruye la carta objetivo."; break;
                         case Target.AENEMY: s += "destruye todas las cartas del oponente."; break;
                         case Target.ACARD: s += "destruye todas las cartas sobre el campo."; break;
+                        case Target.FIELDCARD: s += "destruye la carta de campo del oponente."; break;
                     }
                     break;
                 case SubType.DEAL_DAMAGE:
@@ -715,7 +716,8 @@ namespace CardGame.Cards.DataModel.Effects
                     }
                     break;
                 case SubType.DECREASE_MANA:
-                    s += "reduce el maná del oponente en " + intParameter1 + " puntos."; break;
+                    if (intParameter1 == 0) s += "reduce el maná del oponente a 0.";
+                    else s += "reduce el maná del oponente en " + intParameter1 + " puntos."; break;
 
                 case SubType.LIFELINK:
                     s += "el jugador recupera el daño infligido por la carta."; break;
@@ -734,9 +736,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.ADD_EFFECT:
                     switch (targetType)
                     {
-                        case Target.SELF: s += "obtiene un bonificador de " + intParameter1 + " / " + intParameter2 + " al final del turno."; break;
-                        case Target.ALLY: s += "el objetivo recibe un bonificador de " + intParameter1 + " / " + intParameter2 + "."; break;
-                        case Target.AALLY: s += "todas las cartas aliadas obtienen un bonificador de " + intParameter1 + "/" + intParameter2 + "."; break;
+                        case Target.AALLY: s += "todas las cartas aliadas obtienen el efecto " + cardParameter_Effect + "."; break;
                     }
                     break;
                 case SubType.GUARD:
