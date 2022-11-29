@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 8ace4613f6535f5438127d163e5e457a
   - enabled: 1
-    path: Assets/Scenes/Car.unity
+    path: Assets/Scenes/Car0.unity
     guid: 2dea175b9df7f38448f9e9fcf69b6dd8
   - enabled: 1
     path: Assets/Scenes/Lounge/Lounge0.unity
