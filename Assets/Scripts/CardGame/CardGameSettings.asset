@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CardGameSettings
   m_EditorClassIdentifier: 
   initialCardNumber: 4
-  initialEloquence: 15
+  initialLife: 15
   initialManaCounter: 0
   maxManaCounter: 5
   handCapacity: 5

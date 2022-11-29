@@ -11,7 +11,7 @@ namespace CardGame
     {
         [Header("Stats")]
         public int initialCardNumber;
-        public int initialEloquence;
+        public int initialLife;
         public int initialManaCounter;
         public int maxManaCounter;
         public int handCapacity;

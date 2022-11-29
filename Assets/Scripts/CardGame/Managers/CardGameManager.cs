@@ -77,10 +77,10 @@ namespace CardGame.Managers
         private void InitializeContenders()
         {
             player.Initialize(Board.Instance.playerHand, Board.Instance.playerCardZone, Board.Instance.playerFieldCardZone);
-            player.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
+            player.InitializeStats(settings.initialLife, settings.initialManaCounter, settings.maxManaCounter);
 
             opponent.Initialize(Board.Instance.opponentHand, Board.Instance.opponentCardZone, Board.Instance.opponentFieldCardZone);
-            opponent.InitializeStats(settings.initialEloquence, settings.initialManaCounter, settings.maxManaCounter);
+            opponent.InitializeStats(settings.initialLife, settings.initialManaCounter, settings.maxManaCounter);
 
             opponentAI.Initialize(opponent);
         }

@@ -82,6 +82,7 @@ namespace CardGame.Managers
         private int _shownOpponentLife;
         private int _shownOpponentMana;
 
+        private int _defaultMaxLife;
         private int _defaultMaxMana;
 
         private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
@@ -102,6 +103,7 @@ namespace CardGame.Managers
         {
             _player = CardGameManager.Instance.player;
             _opponent = CardGameManager.Instance.opponent;
+            _defaultMaxLife = CardGameManager.Instance.settings.initialLife;
             _defaultMaxMana = CardGameManager.Instance.settings.maxManaCounter;
         }
 
@@ -109,13 +111,16 @@ namespace CardGame.Managers
 
         public void UpdateUIStats()
         {
-            UpdateUIStats(null);
+            UpdateUIStats(startRound: false);
         }
 
-        public void UpdateUIStats(TweenCallback callback)
+        public void UpdateUIStats(bool startRound)
         {
-            Sequence sequence = DOTween.Sequence();
+            StartCoroutine(UpdateUIStatsCoroutine(startRound));
+        }
 
+        private IEnumerator UpdateUIStatsCoroutine(bool startRound)
+        {
             int loops = Mathf.Max(
                 Mathf.Abs(_player.eloquence - _shownPlayerLife),
                 Mathf.Abs(_player.currentMana - _shownPlayerMana),
@@ -125,57 +130,41 @@ namespace CardGame.Managers
 
             for (int i = 0; i < loops; i++)
             {
-                int newPlayerLife = CheckParameterDifference(ref _shownPlayerLife, _player.eloquence);
-                int newPlayerMana = _shownPlayerMana;
-                int playerCurrentMana = _player.currentMana;
-                int playerCurrentMaxMana = _player.currentMaxMana;
-                int playerExtraMana = _player.extraMana;
+                SetStats(_player.eloquence, _player.currentMana, _player.currentMaxMana, _player.extraMana,
+                    _opponent.eloquence, _opponent.currentMana, _opponent.currentMaxMana, _opponent.extraMana);
 
-                int newOpponnentLife = CheckParameterDifference(ref _shownOpponentLife, _opponent.eloquence);
-                int newOpponnentMana = _shownOpponentMana;
-                int opponentCurrentMana = _opponent.currentMana;
-                int opponentCurrentMaxMana = _opponent.currentMaxMana;
-                int opponentExtraMana = _opponent.extraMana;
-
-                sequence.AppendCallback(() =>
-                {
-                    SetStats(newPlayerLife, playerCurrentMana, playerCurrentMaxMana, playerExtraMana,
-                        newOpponnentLife, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
-                });
-                sequence.AppendInterval(0.1f);
+                yield return new WaitForSeconds(0.1f);
             }
-
-            if (callback != null) sequence.AppendCallback(callback);
-            sequence.Play();
 
             _shownPlayerLife = _player.eloquence;
             _shownOpponentLife = _opponent.eloquence;
+
+           if(startRound) TurnManager.Instance.StartRoundContinue();
         }
 
-        private int CheckParameterDifference(ref int shownValue, int currentValue)
+        private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
+            int opponentCurrentLife, int opponentCurrentMana, int opponentCurrentMaxMana, int opponentExtraMana)
         {
-            if (shownValue < currentValue) shownValue++;
-            else if (shownValue > currentValue) shownValue--;
-            return shownValue;
+            if(_shownPlayerLife != playerCurrentLife) 
+                SetHealth(playerHealthImage, playerExtraHealthImage, playerExtraHealthImage2, ref _shownPlayerLife, playerCurrentLife);
+            if(_shownOpponentLife != opponentCurrentLife) 
+                SetHealth(opponentHealthImage, opponentExtraHealthImage, opponentExtraHealthImage2, ref _shownOpponentLife, opponentCurrentLife);
+
+            if (_shownPlayerMana != playerCurrentMana) 
+                SetMana(playerManaList, ref _shownPlayerMana, playerCurrentMana, playerCurrentMaxMana, playerExtraMana);
+            if (_shownOpponentMana != opponentCurrentMana) 
+                SetMana(opponentManaList, ref _shownOpponentMana, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
         }
 
-        private void SetStats(int newPlayerLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
-            int newOpponentLife, int opponentCurrentMana, int opponentCurrentMaxMana, int opponentExtraMana)
+        private void SetHealth(Image healthImage, Image extraHealthImage, Image extraHealthImage2, ref int shownLife, int currentLife)
         {
-            SetHealth(playerHealthImage, playerExtraHealthImage, playerExtraHealthImage2, newPlayerLife);
-            SetHealth(opponentHealthImage, opponentExtraHealthImage, opponentExtraHealthImage2, newOpponentLife);
+            if (shownLife < currentLife) shownLife++;
+            else shownLife--;
 
-            if (_shownPlayerMana != playerCurrentMana) SetMana(playerManaList, ref _shownPlayerMana, playerCurrentMana, playerCurrentMaxMana, playerExtraMana);
-            if (_shownOpponentMana != opponentCurrentMana) SetMana(opponentManaList, ref _shownOpponentMana, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
-        }
+            healthImage.fillAmount = (float)shownLife / _defaultMaxLife;
 
-        private void SetHealth(Image healthImage, Image extraHealthImage, Image extraHealthImage2, int life)
-        {
-            int maxEloquence = CardGameManager.Instance.settings.initialEloquence;
-            healthImage.fillAmount = (float)life / maxEloquence;
-
-            if (life >= maxEloquence) extraHealthImage.fillAmount = (float)(life - maxEloquence) / maxEloquence;
-            if (life >= (maxEloquence * 2)) extraHealthImage2.fillAmount = (float)(life - (maxEloquence * 2)) / maxEloquence;
+            if (shownLife >= _defaultMaxLife) extraHealthImage.fillAmount = (float)(shownLife - _defaultMaxLife) / _defaultMaxLife;
+            if (shownLife >= (_defaultMaxLife * 2)) extraHealthImage2.fillAmount = (float)(shownLife - (_defaultMaxLife * 2)) / _defaultMaxLife;
         }
 
         private void SetMana(List<Image> manaList, ref int shownMana, int currentMana, int currentMaxMana, int extraMana)

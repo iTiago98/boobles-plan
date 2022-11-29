@@ -52,13 +52,13 @@ namespace CardGame.Managers
             // START ROUND ANIMATION 
 
             CardGameManager.Instance.FillMana();
-            TweenCallback callback = () =>
-            {
-                SetTurn(Turn.OPPONENT);
-                StartTurn();
-            };
+            UIManager.Instance.UpdateUIStats(startRound: true);
+        }
 
-            UIManager.Instance.UpdateUIStats(callback);
+        public void StartRoundContinue()
+        {
+            SetTurn(Turn.OPPONENT);
+            StartTurn();
         }
 
         private void StartTurn()
