@@ -1,6 +1,7 @@
 using CardGame.Cards;
-using CardGame.Cards.DataModel;
+using CardGame.Cards.DataModel.Effects;
 using CardGame.Level;
+using CardGame.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,60 +10,64 @@ namespace CardGame.AI
 {
     public class TutorialAI : BaseAI
     {
-        public override void Play()
+        protected override bool IsGoodChoice(CardEffect effect)
         {
-            if (_contender.currentMana > 0 || _contender.freeMana)
+            Contender player = CardGameManager.Instance.player;
+            Contender opponent = CardGameManager.Instance.opponent;
+
+            List<CardZone> playerCardZones = Board.Instance.GetCardZones(player);
+            List<CardZone> opponentCardZones = Board.Instance.GetCardZones(opponent);
+
+            switch (effect.subType)
             {
-                List<Card> playableCards = new List<Card>();
-                CardZone emptyCardZone = RandomEmptyCardZone();
-                CardZone fieldCardZone = FieldCardZone();
+                case SubType.RETURN_CARD:
+                    return playerCardZones.Count > opponentCardZones.Count;
 
-                foreach (GameObject cardObj in _contender.hand.cards)
-                {
-                    Card card = cardObj.GetComponent<Card>();
+                case SubType.SWAP_POSITION:
+                    return true;
 
-                    if (card.manaCost > _contender.currentMana && !_contender.freeMana) continue;
+                case SubType.STAT_BOOST:
+                    return GetStatsSummary(player, playerCardZones, opponent, opponentCardZones) > 0;
 
-                    switch (card.type)
+                case SubType.DRAW_CARD:
+                    return Board.Instance.GetHand(opponent).numCards <= 3;
+
+                case SubType.DESTROY_CARD:
+                    if (effect.targetType == Target.CARD)
                     {
-                        case CardType.ARGUMENT:
-                            if (emptyCardZone) playableCards.Add(card);
-                            break;
-                        case CardType.ACTION:
-                            if (card.hasEffect && card.effect.IsAppliable()) playableCards.Add(card);
-                            break;
-                        case CardType.FIELD:
-                            if (fieldCardZone) playableCards.Add(card);
-                            break;
+                        if (Board.Instance.GetFieldCardZone(player).GetCard() != null) return true;
+
+                        return playerCardZones.Count > opponentCardZones.Count;
                     }
-                }
-
-                if (playableCards.Count == 0) SkipTurn();
-                else
-                {
-                    int index = new System.Random().Next(0, playableCards.Count);
-                    Card card = playableCards[index];
-                    CardZone cardZone = null;
-
-                    switch (card.type)
+                    else if (effect.targetType == Target.ACARD)
                     {
-                        case CardType.ARGUMENT:
-                            cardZone = emptyCardZone;
-                            break;
-                        case CardType.ACTION:
-                            break;
-                        case CardType.FIELD:
-                            cardZone = fieldCardZone;
-                            break;
+                        return GetStatsSummary(player, playerCardZones, opponent, opponentCardZones) > 0;
                     }
+                    break;
 
-                    PlayCard(card, cardZone);
-                }
+                default:
+                    return true;
             }
-            else
-            {
-                SkipTurn();
-            }
+
+            return true;
+        }
+
+        private int GetStatsSummary(Contender player, List<CardZone> playerCardZones, Contender opponent, List<CardZone> opponentCardZones)
+        {
+            int temp = 0;
+            foreach (CardZone cardZone in playerCardZones) temp += GetStats(cardZone.GetCard());
+            if (Board.Instance.GetFieldCardZone(player).GetCard() != null) temp += 5;
+
+            foreach (CardZone cardZone in opponentCardZones) temp -= GetStats(cardZone.GetCard());
+            if (Board.Instance.GetFieldCardZone(opponent).GetCard() != null) temp -= 5;
+
+            return temp;
+        }
+
+        private int GetStats(Card card)
+        {
+            if (card != null) return card.strength + card.defense;
+            else return 0;
         }
     }
 }

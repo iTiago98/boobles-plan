@@ -364,9 +364,11 @@ namespace CardGame.Cards
 
                     if (possibleTargets.Count > 0)
                     {
-                        int index = new System.Random().Next(0, possibleTargets.Count);
-                        Board.Instance.HighlightTargets(new List<Card>() { possibleTargets[index] });
-                        _storedTarget = possibleTargets[index];
+                        //int index = new System.Random().Next(0, possibleTargets.Count);
+                        Card bestTarget = CardGameManager.Instance.opponentAI.GetBestTarget(effect, possibleTargets);
+
+                        Board.Instance.HighlightTargets(new List<Card>() { bestTarget });
+                        _storedTarget = bestTarget;
                     }
                 }
 
@@ -658,6 +660,29 @@ namespace CardGame.Cards
             if (type == CardType.ARGUMENT)
                 UpdateStatsUI();
             CheckDestroy();
+        }
+
+        public bool IsBoosted()
+        {
+            return strength > _defaultStrength || defense > _defaultDefense;
+        }
+
+        public int GetBoost()
+        {
+            int boost = 0;
+            if (strength > _defaultStrength) boost += strength - _defaultStrength;
+            if (defense > _defaultDefense) boost += defense - _defaultDefense;
+            return boost;
+        }
+
+        public bool IsDamaged()
+        {
+            return defense < _defaultDefense;
+        }
+
+        public int GetDamage()
+        {
+            return _defaultDefense - defense;
         }
 
         public void SwapContender()

@@ -242,13 +242,13 @@ namespace CardGame.Cards.DataModel.Effects
                             ((Card)target).BoostStats(intParameter1, intParameter2);
                             break;
                         case Target.AALLY:
-                            foreach (Card card in Board.Instance.CardsOnTable(source.contender))
+                            foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
                             {
                                 card.BoostStats(intParameter1, intParameter2);
                             }
                             break;
                         case Target.AENEMY:
-                            foreach (Card card in Board.Instance.CardsOnTable(CardGameManager.Instance.GetOtherContender(source.contender)))
+                            foreach (Card card in Board.Instance.GetCardsOnTable(CardGameManager.Instance.GetOtherContender(source.contender)))
                             {
                                 card.BoostStats(intParameter1, intParameter2);
                             }
@@ -271,7 +271,7 @@ namespace CardGame.Cards.DataModel.Effects
                             ((Card)target).AddEffect(effect);
                             break;
                         case Target.AALLY:
-                            foreach (Card card in Board.Instance.CardsOnTable(source.contender))
+                            foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
                             {
                                 card.AddEffect(effect);
                             }
@@ -385,19 +385,8 @@ namespace CardGame.Cards.DataModel.Effects
         {
             if (targetType == Target.CARD)
             {
-                List<CardZone> cardZones = Board.Instance.GetCardZone(target.contender);
-                int pos = -1;
-
-                // Get card position
-                foreach (CardZone cardZone in cardZones)
-                {
-                    Card card = cardZone.GetCard();
-                    if (card != null && card == target)
-                    {
-                        pos = cardZones.IndexOf(cardZone);
-                        break;
-                    }
-                }
+                // Get origin position
+                int pos = Board.Instance.GetPositionFromCard(target);
 
                 // Get destination
                 List<int> possibleCardZones = new List<int>();
@@ -406,11 +395,12 @@ namespace CardGame.Cards.DataModel.Effects
 
                 int dest = possibleCardZones[UnityEngine.Random.Range(0, possibleCardZones.Count)];
 
-                Swap(cardZones, pos, dest);
+                Swap(pos, dest, target.contender);
             }
             else if (targetType == Target.AENEMY)
             {
-                List<CardZone> cardZones = Board.Instance.GetCardZone(CardGameManager.Instance.otherPlayer);
+                Contender contender = CardGameManager.Instance.otherPlayer;
+                List<CardZone> cardZones = Board.Instance.GetCardZones(contender);
                 int pos = -1;
 
                 // Find any card
@@ -428,25 +418,14 @@ namespace CardGame.Cards.DataModel.Effects
                 possibleCardZones.Remove(pos);
                 int dest = possibleCardZones[UnityEngine.Random.Range(0, possibleCardZones.Count)];
 
-                Swap(cardZones, pos, dest);
+                Swap(pos, dest, contender);
             }
         }
 
         private void SwapContender(Card target)
         {
-            List<CardZone> cardZones = Board.Instance.GetCardZone(target.contender);
-            CardZone originCardZone = null;
-
-            // Get card position
-            foreach (CardZone cardZone in cardZones)
-            {
-                Card card = cardZone.GetCard();
-                if (card != null && card == target)
-                {
-                    originCardZone = cardZone;
-                    break;
-                }
-            }
+            // Get origin card zone
+            CardZone originCardZone = Board.Instance.GetCardZoneFromPosition(Board.Instance.GetPositionFromCard(target), target.contender);
 
             // Get destination
             CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.otherPlayer);
@@ -461,10 +440,13 @@ namespace CardGame.Cards.DataModel.Effects
             }
         }
 
-        private void Swap(List<CardZone> cardZones, int pos1, int pos2)
+        private void Swap(int pos1, int pos2, Contender contender)
         {
-            CardZone originCardZone = cardZones[pos1];
-            CardZone destCardZone = cardZones[pos2];
+            //CardZone originCardZone = cardZones[pos1];
+            //CardZone destCardZone = cardZones[pos2];
+
+            CardZone originCardZone = Board.Instance.GetCardZoneFromPosition(pos1, contender);
+            CardZone destCardZone = Board.Instance.GetCardZoneFromPosition(pos2, contender);
 
             Card originCard = originCardZone.GetCard();
             originCardZone.RemoveCard(originCard.gameObject);
@@ -567,18 +549,18 @@ namespace CardGame.Cards.DataModel.Effects
             switch (targetType)
             {
                 case Target.ALLY:
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.currentPlayer));
+                    possibleTargets.AddRange(Board.Instance.GetCardsOnTable(CardGameManager.Instance.currentPlayer));
                     CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.currentPlayer);
                     break;
 
                 case Target.ENEMY:
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.otherPlayer));
+                    possibleTargets.AddRange(Board.Instance.GetCardsOnTable(CardGameManager.Instance.otherPlayer));
                     CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.otherPlayer);
                     break;
 
                 case Target.CARD:
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.currentPlayer));
-                    possibleTargets.AddRange(Board.Instance.CardsOnTable(CardGameManager.Instance.otherPlayer));
+                    possibleTargets.AddRange(Board.Instance.GetCardsOnTable(CardGameManager.Instance.currentPlayer));
+                    possibleTargets.AddRange(Board.Instance.GetCardsOnTable(CardGameManager.Instance.otherPlayer));
                     CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.currentPlayer);
                     CheckAddFieldCard(subType, possibleTargets, CardGameManager.Instance.otherPlayer);
                     break;
