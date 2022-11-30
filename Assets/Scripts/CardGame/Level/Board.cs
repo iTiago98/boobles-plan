@@ -166,7 +166,9 @@ namespace CardGame.Level
         {
             List<CardZone> temp = new List<CardZone>();
             temp.AddRange(playerCardZone);
+            temp.Add(playerFieldCardZone);
             temp.AddRange(opponentCardZone);
+            temp.Add(opponentFieldCardZone);
 
             foreach (CardZone cardZone in temp)
             {
