@@ -56,7 +56,7 @@ namespace CardGame.Level
 
                 // Add card to hand
                 Card card = cardObj.GetComponent<Card>();
-                card.Initialize(_contender, _hand, data, cardRevealed: false);
+                card.Initialize(_contender, data, cardRevealed: false);
                 _hand.AddCard(card);
 
                 // Apply end round effects
@@ -81,7 +81,7 @@ namespace CardGame.Level
                     _deckCards.RemoveAt(index);
 
                     Card card = cardObj.GetComponent<Card>();
-                    card.Initialize(null, null, data, cardRevealed: true);
+                    card.Initialize(null, data, cardRevealed: true);
                     card.Destroy();
                 }
             }

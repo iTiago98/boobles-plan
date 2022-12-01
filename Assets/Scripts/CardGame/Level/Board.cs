@@ -84,21 +84,11 @@ namespace CardGame.Level
             }
         }
 
-        public void DiscardCards(int cardNumber, Contender contender)
-        {
-            GetHand(contender).DiscardCards(cardNumber);
-        }
-
-        public void DiscardAll(Contender contender)
-        {
-            GetHand(contender).DiscardAll();
-        }
-
         #region Getters
 
         public CardZone GetEmptyCardZone(Contender contender)
         {
-            List<CardZone> cardZone = GetCardZones(contender);
+            List<CardZone> cardZone = contender.cardZones;
             foreach (CardZone zone in cardZone)
             {
                 if (zone.numCards == 0) return zone;
@@ -109,7 +99,7 @@ namespace CardGame.Level
 
         public List<Card> GetCardsOnTable(Contender contender)
         {
-            List<CardZone> cardZone = GetCardZones(contender);
+            List<CardZone> cardZone = contender.cardZones;
             List<Card> temp = new List<Card>();
             foreach (CardZone zone in cardZone)
             {
@@ -121,18 +111,12 @@ namespace CardGame.Level
 
         public bool AreCardsOnTable(Contender contender)
         {
-            List<CardZone> cardZone = GetCardZones(contender);
-            foreach (CardZone zone in cardZone)
-            {
-                if (zone.numCards > 0) return true;
-            }
-
-            return false;
+            return NumCardsOnTable(contender) > 0;
         }
 
         public int NumCardsOnTable(Contender contender)
         {
-            List<CardZone> cardZone = GetCardZones(contender);
+            List<CardZone> cardZone = contender.cardZones;
             int num = 0;
             foreach (CardZone zone in cardZone)
             {
@@ -141,24 +125,9 @@ namespace CardGame.Level
             return num;
         }
 
-        public Hand GetHand(Contender contender)
-        {
-            return (contender.role == Contender.Role.PLAYER) ? playerHand : opponentHand;
-        }
-
-        public Deck GetDeck(Contender contender)
-        {
-            return (contender.role == Contender.Role.PLAYER) ? playerDeck : opponentDeck;
-        }
-
-        public List<CardZone> GetCardZones(Contender contender)
-        {
-            return (contender.role == Contender.Role.PLAYER) ? playerCardZone : opponentCardZone;
-        }
-
         public int GetPositionFromCard(Card card)
         {
-            List<CardZone> cardZones = GetCardZones(card.contender);
+            List<CardZone> cardZones = card.contender.cardZones;
 
             for(int i = 0; i < cardZones.Count; i++)
             {
@@ -173,18 +142,8 @@ namespace CardGame.Level
         {
             int position = GetPositionFromCard(card);
             Contender otherContender = CardGameManager.Instance.GetOtherContender(card.contender);
-            CardZone oppositeCardZone = GetCardZoneFromPosition(position, otherContender);
+            CardZone oppositeCardZone = otherContender.cardZones[position];
             return oppositeCardZone.GetCard();
-        }
-
-        public CardZone GetCardZoneFromPosition(int position, Contender contender)
-        {
-            return GetCardZones(contender)[position];
-        }
-
-        public CardZone GetFieldCardZone(Contender contender)
-        {
-            return (contender.role == Contender.Role.PLAYER) ? playerFieldCardZone : opponentFieldCardZone;
         }
 
         #endregion
@@ -193,8 +152,8 @@ namespace CardGame.Level
 
         public void DestroyCards(Contender contender)
         {
-            foreach (CardZone zone in GetCardZones(contender)) zone.GetCard()?.Destroy();
-            Card fieldCard = GetFieldCardZone(contender).GetCard();
+            foreach (CardZone zone in contender.cardZones) zone.GetCard()?.Destroy();
+            Card fieldCard = contender.fieldCardZone.GetCard();
             if (fieldCard != null) fieldCard.Destroy();
         }
 
@@ -232,7 +191,7 @@ namespace CardGame.Level
             {
                 case CardType.ARGUMENT:
                     {
-                        List<CardZone> cardZones = GetCardZones(contender);
+                        List<CardZone> cardZones = contender.cardZones;
                         foreach (CardZone zone in cardZones)
                         {
                             if (!show || zone.isEmpty) zone.ShowHighlight(show);
@@ -241,7 +200,7 @@ namespace CardGame.Level
                     }
                 case CardType.FIELD:
                     {
-                        CardZone zone = GetFieldCardZone(contender);
+                        CardZone zone = contender.fieldCardZone;
                         zone.ShowHighlight(show);
                         break;
                     }

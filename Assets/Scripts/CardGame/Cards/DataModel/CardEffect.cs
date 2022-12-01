@@ -155,7 +155,7 @@ namespace CardGame.Cards.DataModel.Effects
                             ((Card)target).Destroy(); break;
                         case Target.AENEMY: Board.Instance.DestroyCards(CardGameManager.Instance.otherPlayer); break;
                         case Target.ACARD: Board.Instance.DestroyAll(); break;
-                        case Target.FIELDCARD: Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard().Destroy(); break;
+                        case Target.FIELDCARD: CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard()?.Destroy(); break;
                     }
                     break;
                 case SubType.DEAL_DAMAGE:
@@ -231,7 +231,7 @@ namespace CardGame.Cards.DataModel.Effects
 
                     if (target is Contender)
                     {
-                        Board.Instance.GetDeck((Contender)target).DiscardCards(source.strength);
+                        ((Contender)target).deck.DiscardCards(source.strength);
                     }
                     break;
                 case SubType.STAT_BOOST:
@@ -315,7 +315,7 @@ namespace CardGame.Cards.DataModel.Effects
                     Board.Instance.DrawCards(intParameter1, TurnManager.Instance.turn);
                     break;
                 case SubType.DISCARD_CARD:
-                    Board.Instance.DiscardCards(intParameter1, CardGameManager.Instance.otherPlayer);
+                    CardGameManager.Instance.otherPlayer.hand.DiscardCards(intParameter1);
                     break;
                 case SubType.RETURN_CARD:
                     ((Card)target).ReturnToHand();
@@ -335,8 +335,8 @@ namespace CardGame.Cards.DataModel.Effects
 
                     sequence.AppendCallback(() =>
                     {
-                        Board.Instance.DiscardAll(player);
-                        Board.Instance.DiscardAll(opponent);
+                        player.hand.DiscardAll();
+                        opponent.hand.DiscardAll();
                     });
                     sequence.AppendCallback(() =>
                     {
@@ -373,10 +373,10 @@ namespace CardGame.Cards.DataModel.Effects
 
             if (emptyCardZone != null)
             {
-                GameObject cardPrefab = board.GetDeck(owner).cardPrefab;
+                GameObject cardPrefab = owner.deck.cardPrefab;
                 GameObject card = UnityEngine.Object.Instantiate(cardPrefab, source.transform.position, cardPrefab.transform.rotation);
                 CardsData newData = new CardsData(data);
-                card.GetComponent<Card>().Initialize(owner, board.GetHand(owner), newData, cardRevealed: true);
+                card.GetComponent<Card>().Initialize(owner, newData, cardRevealed: true);
                 emptyCardZone.AddCard(card.GetComponent<Card>());
             }
         }
@@ -400,7 +400,7 @@ namespace CardGame.Cards.DataModel.Effects
             else if (targetType == Target.AENEMY)
             {
                 Contender contender = CardGameManager.Instance.otherPlayer;
-                List<CardZone> cardZones = Board.Instance.GetCardZones(contender);
+                List<CardZone> cardZones = contender.cardZones;
                 int pos = -1;
 
                 // Find any card
@@ -425,7 +425,8 @@ namespace CardGame.Cards.DataModel.Effects
         private void SwapContender(Card target)
         {
             // Get origin card zone
-            CardZone originCardZone = Board.Instance.GetCardZoneFromPosition(Board.Instance.GetPositionFromCard(target), target.contender);
+            int position = Board.Instance.GetPositionFromCard(target);
+            CardZone originCardZone = target.contender.cardZones[position];
 
             // Get destination
             CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.otherPlayer);
@@ -442,11 +443,8 @@ namespace CardGame.Cards.DataModel.Effects
 
         private void Swap(int pos1, int pos2, Contender contender)
         {
-            //CardZone originCardZone = cardZones[pos1];
-            //CardZone destCardZone = cardZones[pos2];
-
-            CardZone originCardZone = Board.Instance.GetCardZoneFromPosition(pos1, contender);
-            CardZone destCardZone = Board.Instance.GetCardZoneFromPosition(pos2, contender);
+            CardZone originCardZone = contender.cardZones[pos1]; 
+            CardZone destCardZone = contender.cardZones[pos2];
 
             Card originCard = originCardZone.GetCard();
             originCardZone.RemoveCard(originCard.gameObject);
@@ -508,19 +506,19 @@ namespace CardGame.Cards.DataModel.Effects
                         if (subType == SubType.SWAP_POSITION)
                             return otherPlayerHasCards;
                         else
-                            return otherPlayerHasCards || Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
+                            return otherPlayerHasCards || CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard() != null;
 
                     case Target.CARD:
                     case Target.ACARD:
                         return currentPlayerHasCards || otherPlayerHasCards
-                            || Board.Instance.GetFieldCardZone(CardGameManager.Instance.player).GetCard() != null
-                            || Board.Instance.GetFieldCardZone(CardGameManager.Instance.opponent).GetCard() != null;
+                            || CardGameManager.Instance.player.fieldCardZone.GetCard() != null
+                            || CardGameManager.Instance.opponent.fieldCardZone.GetCard() != null;
 
                     case Target.ARGUMENTCARD:
                         return currentPlayerHasCards || otherPlayerHasCards;
 
                     case Target.FIELDCARD:
-                        return Board.Instance.GetFieldCardZone(CardGameManager.Instance.otherPlayer).GetCard() != null;
+                        return CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard() != null;
 
                     case Target.NONE:
                     case Target.PLAYER:
@@ -573,7 +571,7 @@ namespace CardGame.Cards.DataModel.Effects
         {
             if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
             {
-                Card fieldCard = Board.Instance.GetFieldCardZone(contender).GetCard();
+                Card fieldCard = contender.fieldCardZone.GetCard();
                 if (fieldCard != null) possibleTargets.Add(fieldCard);
             }
         }

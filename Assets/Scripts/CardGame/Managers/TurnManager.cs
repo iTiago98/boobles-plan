@@ -102,13 +102,13 @@ namespace CardGame.Managers
                 case Turn.OPPONENT:
                     SetTurn(Turn.PLAYER);
                     CardGameManager.Instance.opponentAI.enabled = false;
-                    Board.Instance.GetHand(CardGameManager.Instance.opponent).CheckDiscarding();
+                    CardGameManager.Instance.opponent.hand.CheckDiscarding();
                     StartTurn();
                     break;
 
                 case Turn.PLAYER:
                     SetTurn(Turn.DISCARDING);
-                    Board.Instance.GetHand(CardGameManager.Instance.player).CheckDiscarding();
+                    CardGameManager.Instance.player.hand.CheckDiscarding();
                     break;
 
                 case Turn.DISCARDING:

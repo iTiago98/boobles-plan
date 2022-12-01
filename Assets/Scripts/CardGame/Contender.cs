@@ -30,15 +30,17 @@ namespace CardGame
         public bool isPlayer => role == Role.PLAYER;
 
         public Hand hand { private set; get; }
+        public Deck deck { private set; get; }
         public List<CardZone> cardZones { private set; get; }
         public CardZone fieldCardZone { private set; get; }
 
 
-        public void Initialize(Hand hand, List<CardZone> cardZone, CardZone fieldCardZone)
+        public void Initialize(Hand hand, Deck deck, List<CardZone> cardZones, CardZone fieldCardZone)
         {
             this.hand = hand;
             hand.contender = this;
-            this.cardZones = cardZone;
+            this.deck = deck;
+            this.cardZones = cardZones;
             this.fieldCardZone = fieldCardZone;
         }
 

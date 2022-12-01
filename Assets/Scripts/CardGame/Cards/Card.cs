@@ -130,10 +130,10 @@ namespace CardGame.Cards
 
         #region Initialize
 
-        public void Initialize(Contender contender, Hand hand, CardsData data, bool cardRevealed)
+        public void Initialize(Contender contender, CardsData data, bool cardRevealed)
         {
             this.contender = contender;
-            this._hand = hand;
+            this._hand = contender.hand;
             this.data = new CardsData(data); ;
 
             name = data.name;
@@ -402,7 +402,7 @@ namespace CardGame.Cards
                     else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {
                         _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
-                        Board.Instance.GetDeck(contender).AddDrawCardEffects(_drawCardEffect);
+                        contender.deck.AddDrawCardEffects(_drawCardEffect);
                     }
                     else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
                     {
@@ -636,7 +636,7 @@ namespace CardGame.Cards
                     }
                     else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
                     {
-                        Board.Instance.GetDeck(contender).RemoveDrawCardEffect(_drawCardEffect);
+                        contender.deck.RemoveDrawCardEffect(_drawCardEffect);
                     }
                     else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT && _playArgumentEffect != null)
                     {
@@ -688,15 +688,11 @@ namespace CardGame.Cards
         public void SwapContender()
         {
             if (contender.role == Contender.Role.PLAYER)
-            {
-                _hand = Board.Instance.GetHand(CardGameManager.Instance.opponent);
                 contender = CardGameManager.Instance.opponent;
-            }
             else
-            {
-                _hand = Board.Instance.GetHand(CardGameManager.Instance.player);
                 contender = CardGameManager.Instance.player;
-            }
+
+            _hand = contender.hand;
         }
 
         public void ShowHighlight(bool show)

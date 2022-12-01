@@ -213,10 +213,9 @@ namespace CardGame.AI
         private bool IsGoodChoice(CardEffect effect)
         {
             Contender player = CardGameManager.Instance.player;
-            Contender opponent = CardGameManager.Instance.opponent;
 
-            List<CardZone> playerCardZones = Board.Instance.GetCardZones(player);
-            List<CardZone> opponentCardZones = Board.Instance.GetCardZones(opponent);
+            List<CardZone> playerCardZones = player.cardZones;
+            List<CardZone> opponentCardZones = _contender.cardZones;
 
             switch (effect.subType)
             {
@@ -226,18 +225,18 @@ namespace CardGame.AI
                 case SubType.DESTROY_CARD:
                     if (effect.targetType == Target.CARD)
                     {
-                        if (Board.Instance.GetFieldCardZone(player).GetCard() != null) return true;
+                        if (player.fieldCardZone.GetCard() != null) return true;
 
-                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent);
+                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
                     }
                     else if (effect.targetType == Target.AENEMY)
                     {
-                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent) 
+                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender) 
                             && Board.Instance.NumCardsOnTable(player) > 2;
                     }
                     else if (effect.targetType == Target.ACARD)
                     {
-                        return GetStatsSummary(player, playerCardZones, opponent, opponentCardZones) > 0;
+                        return GetStatsSummary(player, playerCardZones, _contender, opponentCardZones) > 0;
                     }
                     break;
 
@@ -262,13 +261,13 @@ namespace CardGame.AI
                     break;
 
                 case SubType.DECREASE_MANA:
-                    return (Board.Instance.NumCardsOnTable(opponent) - Board.Instance.NumCardsOnTable(player)) >= 2;
+                    return (Board.Instance.NumCardsOnTable(_contender) - Board.Instance.NumCardsOnTable(player)) >= 2;
 
                 case SubType.STAT_BOOST:
-                    int statsSummary = GetStatsSummary(player, playerCardZones, opponent, opponentCardZones);
+                    int statsSummary = GetStatsSummary(player, playerCardZones, _contender, opponentCardZones);
                     if (effect.targetType == Target.ALLY) return statsSummary > 0;
                     else if (effect.targetType == Target.AALLY)
-                        return (statsSummary < 0) && Board.Instance.NumCardsOnTable(opponent) >= 2;
+                        return (statsSummary < 0) && Board.Instance.NumCardsOnTable(_contender) >= 2;
                     break;
 
                 case SubType.DUPLICATE_CARD:
@@ -284,19 +283,19 @@ namespace CardGame.AI
 
                 case SubType.SWAP_POSITION:
                     return Board.Instance.NumCardsOnTable(player) < playerCardZones.Count
-                        && Board.Instance.NumCardsOnTable(opponent) < opponentCardZones.Count;
+                        && Board.Instance.NumCardsOnTable(_contender) < opponentCardZones.Count;
 
                 case SubType.DRAW_CARD:
-                    return Board.Instance.GetHand(opponent).numCards <= 3;
+                    return _contender.hand.numCards <= 3;
 
                 case SubType.DISCARD_CARD:
                     return player.hand.numCards >= effect.intParameter1;
 
                 case SubType.RETURN_CARD:
-                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent);
+                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
                 case SubType.SKIP_COMBAT:
-                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent);
+                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
                 default:
                     return true;
@@ -309,10 +308,10 @@ namespace CardGame.AI
         {
             int temp = 0;
             foreach (CardZone cardZone in playerCardZones) temp += GetStats(cardZone.GetCard());
-            if (Board.Instance.GetFieldCardZone(player).GetCard() != null) temp += 5;
+            if (player.fieldCardZone.GetCard() != null) temp += 5;
 
             foreach (CardZone cardZone in opponentCardZones) temp -= GetStats(cardZone.GetCard());
-            if (Board.Instance.GetFieldCardZone(opponent).GetCard() != null) temp -= 5;
+            if (opponent.fieldCardZone.GetCard() != null) temp -= 5;
 
             return temp;
         }
