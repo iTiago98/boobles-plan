@@ -148,11 +148,14 @@ namespace CardGame.Managers
                     : (playerCard != null) ? playerCard
                     : CardGameManager.Instance.player;
 
-                if (playerCard != null)
-                    sequence.Join(playerCard.HitSequence(playerTarget));
+                if ((playerCard != null && playerCard.strength > 0) || (opponentCard != null && opponentCard.strength > 0))
+                {
+                    if (playerCard != null)
+                        sequence.Join(playerCard.HitSequence(playerTarget));
 
-                if (opponentCard != null)
-                    sequence.Join(opponentCard.HitSequence(opponentTarget));
+                    if (opponentCard != null)
+                        sequence.Join(opponentCard.HitSequence(opponentTarget));
+                }
 
                 sequence.AppendCallback(() => combat = false);
                 sequence.Play();

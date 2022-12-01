@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8179450bbd7873c40ab5ae2ab0706711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 0.1
+  _waitTime: 1.5
 --- !u!1 &97507207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3797,7 +3797,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: ce7ffcb72ac8361419f6c55408d881f3, type: 2}
   player: {fileID: 1749118725}
   opponent: {fileID: 50242698}
-  opponentAI: {fileID: 0}
+  opponentAI: {fileID: 50242699}
   citrianoInterviewDialogue: {fileID: 2126277579}
   ppBrosInterviewDialogue: {fileID: 554912372}
 --- !u!1 &1111698753

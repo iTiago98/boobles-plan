@@ -24,6 +24,8 @@ namespace CardGame.AI
 
         private void Update()
         {
+            if (_contender == null) return;
+
             _timer += Time.deltaTime;
             if (_timer > _waitTime)
             {
@@ -221,29 +223,17 @@ namespace CardGame.AI
                 case SubType.RESTORE_LIFE:
                     return true;
 
-                case SubType.RETURN_CARD:
-                    return playerCardZones.Count > opponentCardZones.Count;
-
-                case SubType.SWAP_POSITION:
-                    return Board.Instance.NumCardsOnTable(player) < playerCardZones.Count
-                        && Board.Instance.NumCardsOnTable(opponent) < opponentCardZones.Count;
-
-                case SubType.STAT_BOOST:
-                    int statsSummary = GetStatsSummary(player, playerCardZones, opponent, opponentCardZones);
-                    if (effect.targetType == Target.ALLY) return statsSummary > 0;
-                    else if (effect.targetType == Target.AALLY)
-                        return (statsSummary < 0) && Board.Instance.NumCardsOnTable(opponent) >= 2;
-                    break;
-
-                case SubType.DRAW_CARD:
-                    return Board.Instance.GetHand(opponent).numCards <= 3;
-
                 case SubType.DESTROY_CARD:
                     if (effect.targetType == Target.CARD)
                     {
                         if (Board.Instance.GetFieldCardZone(player).GetCard() != null) return true;
 
-                        return playerCardZones.Count > opponentCardZones.Count;
+                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent);
+                    }
+                    else if (effect.targetType == Target.AENEMY)
+                    {
+                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent) 
+                            && Board.Instance.NumCardsOnTable(player) > 2;
                     }
                     else if (effect.targetType == Target.ACARD)
                     {
@@ -271,8 +261,42 @@ namespace CardGame.AI
                     else if (effect.targetType == Target.PLAYER) return true;
                     break;
 
+                case SubType.DECREASE_MANA:
+                    return (Board.Instance.NumCardsOnTable(opponent) - Board.Instance.NumCardsOnTable(player)) >= 2;
+
+                case SubType.STAT_BOOST:
+                    int statsSummary = GetStatsSummary(player, playerCardZones, opponent, opponentCardZones);
+                    if (effect.targetType == Target.ALLY) return statsSummary > 0;
+                    else if (effect.targetType == Target.AALLY)
+                        return (statsSummary < 0) && Board.Instance.NumCardsOnTable(opponent) >= 2;
+                    break;
+
+                case SubType.DUPLICATE_CARD:
+                    int bestStats = 0;
+                    Card bestTarget = null;
+                    foreach(CardZone cardZone in opponentCardZones)
+                    {
+                        Card card = cardZone.GetCard();
+                        if (card != null) GetBestStats(card, ref bestTarget, ref bestStats);
+                    }
+
+                    return bestStats > 5;
+
+                case SubType.SWAP_POSITION:
+                    return Board.Instance.NumCardsOnTable(player) < playerCardZones.Count
+                        && Board.Instance.NumCardsOnTable(opponent) < opponentCardZones.Count;
+
+                case SubType.DRAW_CARD:
+                    return Board.Instance.GetHand(opponent).numCards <= 3;
+
                 case SubType.DISCARD_CARD:
                     return player.hand.numCards >= effect.intParameter1;
+
+                case SubType.RETURN_CARD:
+                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent);
+
+                case SubType.SKIP_COMBAT:
+                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(opponent);
 
                 default:
                     return true;
