@@ -175,8 +175,8 @@ namespace CardGame.Managers
 
         public void CheckEndMidTurn()
         {
-            if (CardGameManager.Instance.player.eloquence <= 0
-                || CardGameManager.Instance.opponent.eloquence <= 0
+            if (CardGameManager.Instance.player.life <= 0
+                || CardGameManager.Instance.opponent.life <= 0
                 || CardGameManager.Instance.alternateWinCondition)
             {
                 if (turn == Turn.CLASH)

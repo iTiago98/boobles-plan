@@ -20,7 +20,7 @@ namespace CardGame
 
         public CardsDataContainer deckCards;
 
-        public int eloquence { private set; get; }
+        public int life { private set; get; }
         public int currentMana { private set; get; }
         public int currentMaxMana { private set; get; }
         public int extraMana { private set; get; }
@@ -44,7 +44,7 @@ namespace CardGame
 
         public void InitializeStats(int initialEloquence, int initialManaCounter, int maxManaCounter)
         {
-            eloquence = initialEloquence;
+            life = initialEloquence;
             currentMaxMana = initialManaCounter;
             currentMana = currentMaxMana;
             _maxMana = maxManaCounter;
@@ -75,13 +75,13 @@ namespace CardGame
 
         public void RestoreLife(int life)
         {
-            eloquence += life;
+            this.life += life;
             UIManager.Instance.UpdateUIStats();
         }
 
         public void ReceiveDamage(int strength)
         {
-            eloquence -= strength;
+            life -= strength;
             //if (eloquence < 0) eloquence = 0;
             UIManager.Instance.UpdateUIStats();
             TurnManager.Instance.CheckEndMidTurn();

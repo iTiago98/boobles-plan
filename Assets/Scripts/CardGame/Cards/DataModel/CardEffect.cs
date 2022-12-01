@@ -477,7 +477,7 @@ namespace CardGame.Cards.DataModel.Effects
                 {
                     case SubType.CITRIANO_WIN_CONDITION:
                         return DeckManager.Instance.GetOpponentName() == Opponent_Name.Citriano
-                            && CardGameManager.Instance.player.eloquence >= 30;
+                            && CardGameManager.Instance.player.life >= 30;
                     case SubType.PINPONBROS_WIN_CONDITION:
                         return DeckManager.Instance.GetOpponentName() == Opponent_Name.PingPongBros
                             && CardGameManager.Instance.alternateWinConditionParameter >= 15;

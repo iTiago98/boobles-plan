@@ -122,22 +122,22 @@ namespace CardGame.Managers
         private IEnumerator UpdateUIStatsCoroutine(bool startRound)
         {
             int loops = Mathf.Max(
-                Mathf.Abs(_player.eloquence - _shownPlayerLife),
+                Mathf.Abs(_player.life - _shownPlayerLife),
                 Mathf.Abs(_player.currentMana - _shownPlayerMana),
-                Mathf.Abs(_opponent.eloquence - _shownOpponentLife),
+                Mathf.Abs(_opponent.life - _shownOpponentLife),
                 Mathf.Abs(_opponent.currentMana - _shownOpponentMana)
                 );
 
             for (int i = 0; i < loops; i++)
             {
-                SetStats(_player.eloquence, _player.currentMana, _player.currentMaxMana, _player.extraMana,
-                    _opponent.eloquence, _opponent.currentMana, _opponent.currentMaxMana, _opponent.extraMana);
+                SetStats(_player.life, _player.currentMana, _player.currentMaxMana, _player.extraMana,
+                    _opponent.life, _opponent.currentMana, _opponent.currentMaxMana, _opponent.extraMana);
 
                 yield return new WaitForSeconds(0.1f);
             }
 
-            _shownPlayerLife = _player.eloquence;
-            _shownOpponentLife = _opponent.eloquence;
+            _shownPlayerLife = _player.life;
+            _shownOpponentLife = _opponent.life;
 
            if(startRound) TurnManager.Instance.StartRoundContinue();
         }

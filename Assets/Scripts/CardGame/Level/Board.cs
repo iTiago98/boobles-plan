@@ -169,6 +169,14 @@ namespace CardGame.Level
             return -1;
         }
 
+        public Card GetOppositeCard(Card card)
+        {
+            int position = GetPositionFromCard(card);
+            Contender otherContender = CardGameManager.Instance.GetOtherContender(card.contender);
+            CardZone oppositeCardZone = GetCardZoneFromPosition(position, otherContender);
+            return oppositeCardZone.GetCard();
+        }
+
         public CardZone GetCardZoneFromPosition(int position, Contender contender)
         {
             return GetCardZones(contender)[position];

@@ -237,7 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 50242696}
   - component: {fileID: 50242698}
-  - component: {fileID: 50242697}
+  - component: {fileID: 50242699}
   m_Layer: 10
   m_Name: Opponent
   m_TagString: Untagged
@@ -260,19 +260,6 @@ Transform:
   m_Father: {fileID: 1919471608}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &50242697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50242695}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90a7844a4199a484cb39268dbfd500a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _waitTime: 2
 --- !u!114 &50242698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +274,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: 1
   deckCards: {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
+--- !u!114 &50242699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50242695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8179450bbd7873c40ab5ae2ab0706711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _waitTime: 0.1
 --- !u!1 &97507207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3797,7 +3797,7 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: ce7ffcb72ac8361419f6c55408d881f3, type: 2}
   player: {fileID: 1749118725}
   opponent: {fileID: 50242698}
-  opponentAI: {fileID: 50242697}
+  opponentAI: {fileID: 0}
   citrianoInterviewDialogue: {fileID: 2126277579}
   ppBrosInterviewDialogue: {fileID: 554912372}
 --- !u!1 &1111698753

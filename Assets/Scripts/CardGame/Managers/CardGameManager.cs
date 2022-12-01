@@ -16,7 +16,7 @@ namespace CardGame.Managers
         [Header("Contenders")]
         public Contender player;
         public Contender opponent;
-        public BaseAI opponentAI;
+        public OpponentAI opponentAI;
 
         [Header("Dialogues")]
         public InterviewDialogue citrianoInterviewDialogue;
@@ -148,14 +148,14 @@ namespace CardGame.Managers
 
         public bool CheckEnd()
         {
-            if (player.eloquence <= 0 || opponent.eloquence <= 0 || alternateWinCondition)
+            if (player.life <= 0 || opponent.life <= 0 || alternateWinCondition)
             {
                 UIManager.Instance.ShowEndButton(true);
                 MouseController.Instance.enabled = false;
 
                 if (alternateWinCondition) OnInterviewWin();
-                else if (player.eloquence <= 0) OnInterviewLose();
-                else if (opponent.eloquence <= 0) OnInterviewWin();
+                else if (player.life <= 0) OnInterviewLose();
+                else if (opponent.life <= 0) OnInterviewWin();
                 return true;
             }
             else return false;
