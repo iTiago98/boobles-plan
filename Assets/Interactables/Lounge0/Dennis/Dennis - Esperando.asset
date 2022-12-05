@@ -20,3 +20,10 @@ MonoBehaviour:
   - _content: "La mesa era el \xFAnico sitio del lounge donde desentumecer los m\xFAsculos
       y estirar un poco, pero ahora solo venimos a mirar."
     _closeUp: 4
+  - _content: "Adem\xE1s, est\xE1n tan obcecados que no se enteran de nada."
+    _closeUp: 4
+  - _content: "De hecho, yo le cojo monedas del bolsillo a Pineda para pagarme los
+      caf\xE9s..."
+    _closeUp: 4
+  - _content: "Oiga pues eso tampoco est\xE1 bien..."
+    _closeUp: 1

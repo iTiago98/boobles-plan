@@ -587,82 +587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _intro: {fileID: 328728123}
---- !u!1 &354629195
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 354629196}
-  - component: {fileID: 354629199}
-  - component: {fileID: 354629197}
-  - component: {fileID: 354629198}
-  m_Layer: 0
-  m_Name: Desbloqueen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &354629196
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354629195}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 927801215}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &354629197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354629195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 0f103f183f607b74ab34c092462ead78, type: 2}
-  _onEnd: 1
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &354629198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354629195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flags: 08000000
---- !u!114 &354629199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 354629195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &406088860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 282539769259861372, guid: da66e75a601e4214da436b554e7b943b, type: 3}
@@ -1164,7 +1088,6 @@ Transform:
   m_Children:
   - {fileID: 1755683916}
   - {fileID: 1737888734}
-  - {fileID: 354629196}
   m_Father: {fileID: 1078849020}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1263,11 +1186,6 @@ MonoBehaviour:
     _falseFlags: 
     _setFlags: 
   _options:
-  - _optionText: Pues esto no puede ser, pienso ocuparme personalmente de que desbloqueen
-      la mesa.
-    _trueFlags: 07000000
-    _falseFlags: 
-    _dialogueOption: {fileID: 354629199}
   - _optionText: "\xBFLlevas mucho esperando?"
     _trueFlags: 
     _falseFlags: 
@@ -2995,7 +2913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flags: 07000000
+  _flags: 08000000
 --- !u!114 &1737888737
 MonoBehaviour:
   m_ObjectHideFlags: 0
