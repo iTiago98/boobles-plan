@@ -22,6 +22,11 @@ namespace CardGame.AI
             _contender = contender;
         }
 
+        private void OnEnable()
+        {
+            _timer = 0;
+        }
+
         private void Update()
         {
             if (_contender == null) return;

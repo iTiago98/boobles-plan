@@ -231,7 +231,6 @@ namespace CardGame.Cards.DataModel.Effects
 
                     if (target is Contender)
                     {
-                        TurnManager.Instance.continueClash = false;
                         ((Contender)target).deck.DiscardCards(source.strength);
                     }
                     break;

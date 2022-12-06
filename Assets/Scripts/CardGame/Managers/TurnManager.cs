@@ -39,32 +39,68 @@ namespace CardGame.Managers
 
         public void StartGame()
         {
-            // START GAME ANIMATION
+            StartCoroutine(StartGameCoroutine());
+        }
 
+        private IEnumerator StartGameCoroutine()
+        {
+            // START GAME ANIMATION
+            continueFlow = false;
+            UIManager.Instance.TurnAnimation(turn);
+
+            yield return new WaitUntil(() => continueFlow);
+            Debug.Log("seguimos");
+            
+            // DRAW CARDS
+            continueFlow = false;
             DrawCards(CardGameManager.Instance.settings.initialCardNumber);
-            UIManager.Instance.CheckEndTurnButtonState(_turn);
+
+            yield return new WaitUntil(() => continueFlow);
+            Debug.Log("seguimos");
 
             StartRound();
         }
 
         private void StartRound()
         {
-            // START ROUND ANIMATION 
-
-            CardGameManager.Instance.FillMana();
-            UIManager.Instance.UpdateUIStats(startRound: true);
+            StartCoroutine(StartRoundCoroutine());
         }
 
-        public void StartRoundContinue()
+        private IEnumerator StartRoundCoroutine()
         {
-            SetTurn(Turn.OPPONENT);
+            // UPDATE HEALTH AND MANA
+            continueFlow = false;
+            CardGameManager.Instance.FillMana();
+            UIManager.Instance.UpdateUIStats(startRound: true);
+
+            yield return new WaitUntil(() => continueFlow);
+            Debug.Log("seguimos");
+
+            ChangeTurn();
             StartTurn();
         }
 
         private void StartTurn()
         {
+            StartCoroutine(StartTurnCoroutine());
+        }
+
+        private IEnumerator StartTurnCoroutine()
+        {
             // START TURN ANIMATION
+            continueFlow = false;
+            UIManager.Instance.TurnAnimation(turn);
+
+            yield return new WaitUntil(() => continueFlow);
+
+            // DRAW CARD
+            continueFlow = false;
             DrawCards(1);
+
+            yield return new WaitUntil(() => continueFlow);
+            
+            if (turn == Turn.OPPONENT)
+                CardGameManager.Instance.opponentAI.enabled = true;
         }
 
         public void FinishTurn()
@@ -79,13 +115,12 @@ namespace CardGame.Managers
                 skipCombat = false;
                 FinishRoundContinue();
             }
-            else Clash();
+            else    
+                StartCoroutine(FinishRoundCoroutine());
         }
 
         private void FinishRoundContinue()
         {
-            // END ROUND ANIMATION
-
             if (!CardGameManager.Instance.CheckEnd())
             {
                 // Apply end round effects
@@ -95,10 +130,26 @@ namespace CardGame.Managers
             }
         }
 
+        private IEnumerator FinishRoundCoroutine()
+        {
+            // CLASH TURN ANIMATION
+            continueFlow = false;
+            UIManager.Instance.TurnAnimation(turn);
+
+            yield return new WaitUntil(() => continueFlow);
+
+            Clash();
+        }
+
         public void ChangeTurn()
         {
             switch (_turn)
             {
+                case Turn.START:
+                case Turn.CLASH:
+                    SetTurn(Turn.OPPONENT);
+                    break;
+
                 case Turn.OPPONENT:
                     SetTurn(Turn.PLAYER);
                     CardGameManager.Instance.opponentAI.enabled = false;
@@ -128,13 +179,13 @@ namespace CardGame.Managers
             StartCoroutine(ClashCoroutine());
         }
 
-        public bool clashing;
-        public bool continueClash;
+        //public bool clashing;
+        public bool continueFlow;
 
         private IEnumerator ClashCoroutine()
         {
-            clashing = true;
-            continueClash = true;
+            //clashing = true;
+            continueFlow = true;
 
             bool combat = false;
 
@@ -167,7 +218,7 @@ namespace CardGame.Managers
                 sequence.Play();
 
                 yield return new WaitWhile(() => combat);
-                yield return new WaitUntil(() => continueClash);
+                yield return new WaitUntil(() => continueFlow);
             }
 
             FinishRoundContinue();
@@ -301,8 +352,8 @@ namespace CardGame.Managers
         private void SetTurn(Turn turn)
         {
             _turn = turn;
-            if (turn == Turn.OPPONENT)
-                CardGameManager.Instance.opponentAI.enabled = true;
+            //if (turn == Turn.OPPONENT)
+            //    CardGameManager.Instance.opponentAI.enabled = true;
 
             UIManager.Instance.CheckEndTurnButtonState(_turn);
         }

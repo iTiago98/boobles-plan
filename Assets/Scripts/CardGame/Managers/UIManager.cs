@@ -17,7 +17,7 @@ namespace CardGame.Managers
     {
         public static UIManager Instance { private set; get; }
 
-        #region Stats
+        #region Stats Parameters
 
         [Header("Contenders Stats")]
 
@@ -35,9 +35,18 @@ namespace CardGame.Managers
         public Sprite emptyManaCristal;
         public Sprite fullExtraManaCristal;
 
+        private int _shownPlayerLife;
+        private int _shownPlayerMana;
+
+        private int _shownOpponentLife;
+        private int _shownOpponentMana;
+
+        private int _defaultMaxLife;
+        private int _defaultMaxMana;
+
         #endregion
 
-        #region Extended Description
+        #region Extended Description Parameters
 
         [Header("Extended Description")]
 
@@ -49,7 +58,7 @@ namespace CardGame.Managers
 
         #endregion
 
-        #region Deck Remaining Cards
+        #region Deck Remaining Cards Parameters
 
         [Header("Deck Remaining Cards")]
         public GameObject playerDeckRemainingCardsPanel;
@@ -60,7 +69,7 @@ namespace CardGame.Managers
 
         #endregion
 
-        #region Interactables
+        #region Interactables Parameters
 
         [Header("Interactables")]
 
@@ -73,17 +82,21 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Turn Animation
+
+        [Header("Turn Animation")]
+        public Image turnAnimationImage;
+        public TextMeshProUGUI turnAnimationText;
+
+        #endregion
+
         private Contender _player;
         private Contender _opponent;
 
-        private int _shownPlayerLife;
-        private int _shownPlayerMana;
-
-        private int _shownOpponentLife;
-        private int _shownOpponentMana;
-
-        private int _defaultMaxLife;
-        private int _defaultMaxMana;
+        private const string START_TEXT = "Comienza el combate";
+        private const string PLAYER_TURN_TEXT = "Tu turno";
+        private const string OPPONENT_TURN_TEXT = "Turno del oponente";
+        private const string CLASH_TEXT = "Combate";
 
         private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
         private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
@@ -105,6 +118,40 @@ namespace CardGame.Managers
             _opponent = CardGameManager.Instance.opponent;
             _defaultMaxLife = CardGameManager.Instance.settings.initialLife;
             _defaultMaxMana = CardGameManager.Instance.settings.maxManaCounter;
+        }
+
+        public void TurnAnimation(Turn turn)
+        {
+            switch (turn)
+            {
+                case Turn.START:
+                    turnAnimationText.text = START_TEXT;
+                    break;
+                case Turn.PLAYER:
+                    turnAnimationText.text = PLAYER_TURN_TEXT;
+                    break;
+                case Turn.OPPONENT:
+                    turnAnimationText.text = OPPONENT_TURN_TEXT;
+                    break;
+                case Turn.DISCARDING:
+                    break;
+                case Turn.CLASH:
+                    turnAnimationText.text = CLASH_TEXT;
+                    break;
+            }
+
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
+            sequence.Join(turnAnimationText.DOFade(1, 0.5f));
+            sequence.AppendInterval(0.5f);
+            sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
+            sequence.Join(turnAnimationText.DOFade(0, 0.5f));
+            sequence.AppendCallback(() => TurnManager.Instance.continueFlow = true);
+
+            sequence.Play();
+
+            CheckEndTurnButtonState(turn);
         }
 
         #region Stats
@@ -139,7 +186,7 @@ namespace CardGame.Managers
             _shownPlayerLife = _player.life;
             _shownOpponentLife = _opponent.life;
 
-           if(startRound) TurnManager.Instance.StartRoundContinue();
+            if (startRound) TurnManager.Instance.continueFlow = true;
         }
 
         private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
@@ -211,6 +258,7 @@ namespace CardGame.Managers
 
         public void OnEndTurnButtonClick()
         {
+            Debug.Log("End Turn Button Click");
             if (CardGameManager.Instance.gameStarted)
             {
                 TurnManager.Instance.FinishTurn();
@@ -290,6 +338,8 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Play Buttons
+
         public void OnContinuePlayButtonClick()
         {
             Card card = MouseController.Instance.holdingCard;
@@ -332,6 +382,10 @@ namespace CardGame.Managers
             cancelPlayButton.gameObject.SetActive(false);
         }
 
+        #endregion
+
+        #region Game End
+
         public void SetInterviewWinText(bool win)
         {
             if (win) interviewEnd.text = INTERVIEW_WIN_TEXT;
@@ -347,5 +401,7 @@ namespace CardGame.Managers
         {
             SceneLoader.Instance.UnloadInterviewScene();
         }
+
+        #endregion
     }
 }

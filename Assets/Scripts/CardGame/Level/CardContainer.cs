@@ -12,6 +12,8 @@ namespace CardGame.Level
         public float cardSeparationZ;
         public float animationTime;
 
+        public bool cardsAtPosition { private set; get; }
+
         public int numCards => (cards == null) ? 0 : cards.Count;
         public bool isEmpty => numCards == 0;
 
@@ -24,6 +26,7 @@ namespace CardGame.Level
 
         public void AddCard(Card card, Transform parent)
         {
+            cardsAtPosition = false;
             card.transform.parent = transform;
             card.container = this;
 
@@ -33,26 +36,40 @@ namespace CardGame.Level
 
         public void RemoveCard(GameObject card)
         {
+            cardsAtPosition = false;
             cards.Remove(card);
             UpdateCardsPosition();
         }
+
+        Sequence updateCardsPositionSequence = null;
 
         private void UpdateCardsPosition()
         {
             float posX = CalculateInitialPosition();
             float posZ = 0f;
 
-            Sequence sequence = DOTween.Sequence();
+            if (updateCardsPositionSequence != null)
+            {
+                updateCardsPositionSequence.Kill();
+            }
+
+            updateCardsPositionSequence = DOTween.Sequence();
 
             for (int i = 0; i < cards.Count; i++)
             {
                 posX += cardSeparationX;
                 //posZ += cardSeparationZ;
 
-                MoveCard(sequence, cards[i], new Vector3(posX, 0, posZ), i == cards.Count - 1);
+                MoveCard(updateCardsPositionSequence, cards[i], new Vector3(posX, 0, posZ), i == cards.Count - 1);
             }
 
-            sequence.Play();
+            updateCardsPositionSequence.OnComplete(() =>
+            {
+                cardsAtPosition = true;
+                updateCardsPositionSequence = null;
+            });
+
+            updateCardsPositionSequence.Play();
         }
 
         private void MoveCard(Sequence seq, GameObject card, Vector3 pos, bool last)
