@@ -295,6 +295,8 @@ namespace CardGame.Managers
             Card card = MouseController.Instance.holdingCard;
             if (card.IsPlayerCard) card.ContinuePlay();
             else card.ContinuePlayOpponent();
+
+            Board.Instance.HighlightTargets(new List<Card>());
             HidePlayButtons();
         }
 

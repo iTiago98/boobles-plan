@@ -128,8 +128,14 @@ namespace CardGame.Managers
             StartCoroutine(ClashCoroutine());
         }
 
+        public bool clashing;
+        public bool continueClash;
+
         private IEnumerator ClashCoroutine()
         {
+            clashing = true;
+            continueClash = true;
+
             bool combat = false;
 
             for (int index = 0; index < 4; index++)
@@ -161,6 +167,7 @@ namespace CardGame.Managers
                 sequence.Play();
 
                 yield return new WaitWhile(() => combat);
+                yield return new WaitUntil(() => continueClash);
             }
 
             FinishRoundContinue();

@@ -1,6 +1,7 @@
 using CardGame.Cards;
 using CardGame.Cards.DataModel;
 using CardGame.Managers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ namespace CardGame.Level
         private Contender _contender;
         private Hand _hand;
         private List<CardsData> _deckCards;
+
+        public int numCards => _deckCards.Count;
+
+        private List<Card> _listToDiscard = new List<Card>();
 
         public delegate void DrawCardEffects();
         private DrawCardEffects drawCardEffectsDelegate;
@@ -35,7 +40,7 @@ namespace CardGame.Level
                 GameObject cardObj;
                 CardsData data;
 
-                if (_deckCards.Count == 0)
+                if (numCards == 0)
                 {
                     // Instantiate card
                     cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
@@ -49,7 +54,7 @@ namespace CardGame.Level
                     cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
 
                     // Take data from scriptable
-                    int index = Random.Range(0, _deckCards.Count);
+                    int index = Random.Range(0, numCards);
                     data = _deckCards[index];
                     _deckCards.RemoveAt(index);
                 }
@@ -66,27 +71,47 @@ namespace CardGame.Level
             CheckCardNumber();
         }
 
-        public void DiscardCards(int numCards)
+        public void DiscardCards(int numCardsToDiscard)
         {
-            for (int i = 0; i < numCards; i++)
+            int numCardsStart = numCards;
+
+            for (int i = 0; i < numCardsToDiscard; i++)
             {
-                if (_deckCards.Count > 0)
+                if (numCards > 0)
                 {
                     Vector3 position = transform.position + new Vector3(0, 0, -0.1f);
                     GameObject cardObj = Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
 
                     // Take data from scriptable
-                    int index = Random.Range(0, _deckCards.Count);
+                    int index = Random.Range(0, numCards);
                     CardsData data = _deckCards[index];
                     _deckCards.RemoveAt(index);
 
                     Card card = cardObj.GetComponent<Card>();
                     card.Initialize(null, data, cardRevealed: true);
-                    card.Destroy();
+                    card.gameObject.SetActive(false);
+
+                    _listToDiscard.Add(card);
                 }
             }
 
+            StartCoroutine(DiscardCardsCoroutine(numCardsStart));
+        }
+
+        private IEnumerator DiscardCardsCoroutine(int numCardsStart)
+        {
+            foreach(Card card in _listToDiscard)
+            {
+                card.gameObject.SetActive(true);
+                card.Destroy();
+                yield return new WaitUntil(() => card == null);
+                UpdateRemainingCards(--numCardsStart);
+            }
+
+            _listToDiscard.Clear();
             CheckCardNumber();
+
+            if (TurnManager.Instance.clashing) TurnManager.Instance.continueClash = true; ;
         }
 
         private void CopyCardsList(List<CardsData> cards)
@@ -106,7 +131,7 @@ namespace CardGame.Level
                 _deckCards.Add(temp);
             }
 
-            _maxCardNumber = _deckCards.Count;
+            _maxCardNumber = numCards;
         }
 
         public void AddDrawCardEffects(DrawCardEffects method)
@@ -128,7 +153,7 @@ namespace CardGame.Level
 
         private void CheckCardNumber()
         {
-            if (_deckCards.Count <= 0)
+            if (numCards <= 0)
             {
                 GetComponent<SpriteRenderer>().sprite = null;
             }
@@ -138,7 +163,12 @@ namespace CardGame.Level
 
         private void UpdateRemainingCards()
         {
-            UIManager.Instance.UpdateRemainingCards(_deckCards.Count, _maxCardNumber, _contender);
+            UpdateRemainingCards(numCards);
+        }
+
+        private void UpdateRemainingCards(int numCards)
+        {
+            UIManager.Instance.UpdateRemainingCards(numCards, _maxCardNumber, _contender);
         }
     }
 }
