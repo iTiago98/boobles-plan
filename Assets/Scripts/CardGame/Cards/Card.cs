@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 using CardGame.Managers;
 using CardGame.Level;
 using CardGame.Cards.DataModel;
@@ -42,19 +44,40 @@ namespace CardGame.Cards
 
         #endregion
 
-        #region Hover
+        #region Close up
 
-        private float _hoverPosY => CardGameManager.Instance.settings.hoverPosY;
-        private float _hoverScale => CardGameManager.Instance.settings.hoverScale;
+        //private bool _closeUp;
+        //private Vector3 _defaultPos;
+        //private Transform _closeUpPosition;
+        //private Vector3 _defaultScale;
+        //private Vector3 _augmentedScale;
+        //private float _closeUpTime;
 
         #endregion
 
-        private float _highlightScale => CardGameManager.Instance.settings.highlightScale;
-        private float _defaultScale => CardGameManager.Instance.settings.defaultScale;
+        #region Hover
+
+        private float _hoverPosY;
+        private float _hoverScale;
+
+        #endregion
+
+        #region Move with mouse 
+
+        [HideInInspector]
+        public bool moveWithMouse;
+
+        private float _movePositionZ;
+        private float _moveScale;
+
+        #endregion
+
+        private float _highlightScale;
+        private float _defaultScale;
 
         #region Hit animation
 
-        private float _hitScale => CardGameManager.Instance.settings.hitScale;
+        private float _hitScale;
 
         #endregion
 
@@ -79,7 +102,6 @@ namespace CardGame.Cards
         private Deck.DrawCardEffects _drawCardEffect;
 
         private Card _storedTarget;
-        private bool _swapped;
 
         public bool isHighlighted { private set; get; }
 
@@ -91,6 +113,18 @@ namespace CardGame.Cards
         private void Start()
         {
             _clickable = true;
+
+            _hoverPosY = CardGameManager.Instance.settings.hoverPosY;
+            _hoverScale = CardGameManager.Instance.settings.hoverScale;
+
+            _movePositionZ = CardGameManager.Instance.settings.movePositionZ;
+            _moveScale = CardGameManager.Instance.settings.moveScale;
+
+            _highlightScale = CardGameManager.Instance.settings.highlightScale;
+            _defaultScale = CardGameManager.Instance.settings.defaultScale;
+
+            _hitScale = CardGameManager.Instance.settings.hitScale;
+
             _endTurnEffects = new List<TurnManager.EndTurnEffects>();
         }
 
@@ -99,7 +133,7 @@ namespace CardGame.Cards
         public void Initialize(Contender contender, CardsData data, bool cardRevealed)
         {
             this.contender = contender;
-            this._hand = contender?.hand;
+            this._hand = contender.hand;
             this.data = new CardsData(data); ;
 
             name = data.name;
@@ -162,37 +196,6 @@ namespace CardGame.Cards
             }
 
             return temp;
-        }
-
-        public void ShowExtendedDescription()
-        {
-            UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
-        }
-
-        public void HideExtendedDescription()
-        {
-            UIManager.Instance.HideExtendedDescription();
-        }
-
-        public string NameToString()
-        {
-            return name.ToUpper();
-        }
-
-        public string TypeToString()
-        {
-            return "TIPO: " + type.ToString();
-        }
-
-        public string DescriptionToString()
-        {
-            string s = "";
-            foreach (CardEffect effect in effects)
-            {
-                s += effect.ToStringExtended(type) + "\n";
-            }
-
-            return s;
         }
 
         public void FlipCard()
@@ -270,7 +273,7 @@ namespace CardGame.Cards
 
         public void OnMouseHoverEnter()
         {
-            if (!_clickable || contender == null) return;
+            if (!_clickable) return;
 
             if (IsInHand && IsPlayerCard)
             {
@@ -285,7 +288,7 @@ namespace CardGame.Cards
         {
             if (!_clickable) return;
 
-            if (this != null && gameObject != null && IsInHand && IsPlayerCard)
+            if (this != null && gameObject != null && !moveWithMouse && IsInHand && IsPlayerCard)
             {
                 transform.DOLocalMoveY(0f, 0.2f);
                 if (_hand.isDiscarding) transform.DOScale(_highlightScale, 0.2f);
@@ -350,7 +353,6 @@ namespace CardGame.Cards
                 }
                 else
                 {
-                    Board.Instance.HighlightMultipleTargets(contender, effect.subType, effect.targetType);
                     UIManager.Instance.ShowContinuePlayButton();
                 }
             }
@@ -368,10 +370,6 @@ namespace CardGame.Cards
                         Board.Instance.HighlightTargets(new List<Card>() { bestTarget });
                         _storedTarget = bestTarget;
                     }
-                }
-                else
-                {
-                    Board.Instance.HighlightMultipleTargets(contender, effect.subType, effect.targetType);
                 }
 
                 MoveToWaitingSpot();
@@ -479,10 +477,9 @@ namespace CardGame.Cards
             }
             else
             {
+                if (hasEffect && effect.subType == SubType.COMPARTMENTALIZE) return;
+
                 Contender contender = (Contender)target;
-
-                if (HasEffect(SubType.COMPARTMENTALIZE) && contender.deck.numCards > 0) return;
-
                 contender.ReceiveDamage(strength);
             }
         }
@@ -595,18 +592,18 @@ namespace CardGame.Cards
 
         public void AddEffect(CardEffect effect)
         {
-            if (!HasEffect(effect.subType))
+            if (!HasEffect(effect))
             {
                 effects.Add(effect);
                 if (descriptionText != null) descriptionText.text = GetDescriptionText();
             }
         }
 
-        private bool HasEffect(SubType subType)
+        private bool HasEffect(CardEffect effect)
         {
             foreach (CardEffect e in effects)
             {
-                if (e.subType == subType) return true;
+                if (e.subType == effect.subType) return true;
             }
 
             return false;
@@ -696,7 +693,6 @@ namespace CardGame.Cards
                 contender = CardGameManager.Instance.player;
 
             _hand = contender.hand;
-            _swapped = !_swapped;
         }
 
         public void ShowHighlight(bool show)
@@ -726,8 +722,6 @@ namespace CardGame.Cards
 
             data.strength = _defaultStrength;
             data.defense = _defaultDefense;
-
-            if (_swapped) SwapContender();
             _hand.AddCard(this);
             if (contender.role == Contender.Role.OPPONENT) FlipCard();
             if (type == CardType.ARGUMENT) UpdateStatsUI();
@@ -735,5 +729,38 @@ namespace CardGame.Cards
 
         #endregion
 
+        #region ToString
+
+        public void ShowExtendedDescription()
+        {
+            UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
+        }
+
+        public void HideExtendedDescription()
+        {
+            UIManager.Instance.HideExtendedDescription();
+        }
+
+        public string NameToString()
+        {
+            return name.ToUpper();
+        }
+
+        public string TypeToString()
+        {
+            return "TIPO: " + type.ToString();
+        }
+
+        public string DescriptionToString()
+        {
+            if (hasEffect)
+            {
+                return effect.ToStringExtended(type);
+            }
+
+            return "";
+        }
+
+        #endregion
     }
 }
