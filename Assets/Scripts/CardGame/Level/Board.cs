@@ -1,5 +1,6 @@
 using CardGame.Cards;
 using CardGame.Cards.DataModel;
+using CardGame.Cards.DataModel.Effects;
 using CardGame.Managers;
 using System;
 using System.Collections;
@@ -129,7 +130,7 @@ namespace CardGame.Level
         {
             List<CardZone> cardZones = card.contender.cardZones;
 
-            for(int i = 0; i < cardZones.Count; i++)
+            for (int i = 0; i < cardZones.Count; i++)
             {
                 CardZone cardZone = cardZones[i];
                 if (cardZone.GetCard()?.name == card.name) return i;
@@ -181,6 +182,45 @@ namespace CardGame.Level
                 if (card != null)
                 {
                     card.ShowHighlight(possibleTargets.Contains(card));
+                }
+            }
+        }
+
+        public void HighlightMultipleTargets(Contender contender, SubType subType, Target targetType)
+        {
+            List<CardZone> cardZones = new List<CardZone>();
+            bool addFieldCard = subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD;
+            
+            switch (targetType)
+            {
+                case Target.AALLY:
+                    cardZones.AddRange(contender.cardZones);
+                    if (addFieldCard) cardZones.Add(contender.fieldCardZone);
+                    break;
+                case Target.AENEMY:
+                    Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
+                    cardZones.AddRange(otherContender.cardZones);
+                    if(addFieldCard) cardZones.Add(otherContender.fieldCardZone);
+                    break;
+                case Target.ACARD:
+                    cardZones.AddRange(playerCardZone);
+                    cardZones.AddRange(opponentCardZone);
+
+                    if (addFieldCard)
+                    {
+                        cardZones.Add(playerFieldCardZone);
+                        cardZones.Add(opponentFieldCardZone);
+                    }
+
+                    break;
+            }
+
+            foreach (CardZone cardZone in cardZones)
+            {
+                Card card = cardZone.GetCard();
+                if (card != null)
+                {
+                    card.ShowHighlight(true);
                 }
             }
         }
