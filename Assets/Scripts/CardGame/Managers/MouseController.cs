@@ -33,7 +33,6 @@ namespace CardGame.Managers
         public bool IsApplyingEffect => _effectCard != null;
 
         private IClickable _hovering;
-        //private IClickable _closeUp;
 
         private void Start()
         {
@@ -94,25 +93,8 @@ namespace CardGame.Managers
 
         private void CheckClick(IClickable clickableObject)
         {
-            //bool leftClickDown = Input.GetMouseButtonDown(0);
             bool leftClickUp = Input.GetMouseButtonUp(0);
-            //bool rightClick = Input.GetMouseButtonDown(1) || Input.GetMouseButtonUp(1);
-
-            //if ((leftClickDown || rightClick) && (_closeUp != null) && (_closeUp != clickableObject))
-            //{
-            //    if (!_closeUp.clickable) return;
-
-            //    _closeUp.OnMouseRightClick();
-            //    _closeUp = null;
-            //}
-
-            //if (leftClickDown)
-            //{
-            //    if (!IsApplyingEffect && clickableObject != null && TurnManager.Instance.isPlayerTurn)
-            //    {
-            //        clickableObject.OnMouseLeftClickDown(this);
-            //    }
-            //}
+            
             if (leftClickUp)
             {
                 if (IsApplyingEffect)
@@ -131,14 +113,6 @@ namespace CardGame.Managers
                     }
                 }
             }
-            //else if (rightClick)
-            //{
-            //    if (clickableObject != null)
-            //    {
-            //        clickableObject.OnMouseRightClick();
-            //        _closeUp = (_closeUp == clickableObject) ? null : clickableObject;
-            //    }
-            //}
         }
 
         #endregion
