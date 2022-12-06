@@ -85,6 +85,43 @@ namespace CardGame.Level
             }
         }
 
+        public void WheelEffect()
+        {
+            StartCoroutine(WheelCoroutine());
+        }
+
+        private IEnumerator WheelCoroutine()
+        {
+            TurnManager.Instance.StopFlow();
+
+            Contender player = CardGameManager.Instance.player;
+            Contender opponent = CardGameManager.Instance.opponent;
+
+            int playerNumCards = player.hand.numCards;
+            int opponentNumCards = opponent.hand.numCards;
+
+            player.hand.DiscardAll();
+            opponent.hand.DiscardAll();
+
+            yield return new WaitUntil(() => EmptyHands());
+
+            Debug.Log(playerNumCards);
+            Debug.Log(opponentNumCards);
+
+            TurnManager.Instance.StopFlow();
+
+            DrawCards(playerNumCards, Turn.PLAYER);
+            DrawCards(opponentNumCards, Turn.OPPONENT);
+
+            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+        }
+
+        private bool EmptyHands()
+        {
+            return (playerHand.numCards == 0 || playerHand.HasAlternateWinConditionCard())
+                && (opponentHand.numCards == 0 || opponentHand.HasAlternateWinConditionCard());
+        }
+
         #region Getters
 
         public CardZone GetEmptyCardZone(Contender contender)

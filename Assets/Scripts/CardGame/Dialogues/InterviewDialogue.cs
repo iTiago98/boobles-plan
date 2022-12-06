@@ -7,7 +7,7 @@ using UnityEngine;
 
 public abstract class InterviewDialogue : MonoBehaviour
 {
-    private bool _dialogueEnd;
+    //private bool _dialogueEnd;
     private DialogueManager _dialogueManager;
 
     [SerializeField] protected Dialogue _startDialogue;
@@ -45,14 +45,15 @@ public abstract class InterviewDialogue : MonoBehaviour
 
     protected void ThrowDialogue(Dialogue diag, List<Option> options = null)
     {
+        if (diag == null) return;
         CardGameManager.Instance.PauseGame();
 
-        _dialogueEnd = false;
+       // _dialogueEnd = false;
         _dialogueManager.StartDialogue(diag, options);
         _dialogueManager.OnEndDialogue.RemoveAllListeners();
         _dialogueManager.OnEndDialogue.AddListener(() =>
         {
-            _dialogueEnd = true;
+            //_dialogueEnd = true;
             CardGameManager.Instance.ResumeGame();
         });
     }

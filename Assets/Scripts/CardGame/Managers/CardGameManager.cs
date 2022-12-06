@@ -96,7 +96,6 @@ namespace CardGame.Managers
 
         public void StartGame()
         {
-            Debug.Log("Start Game");
             _gameStarted = true;
             InitializeGame();
             TurnManager.Instance.StartGame();

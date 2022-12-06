@@ -1,5 +1,6 @@
 using CardGame.AI;
 using CardGame.Cards;
+using CardGame.Cards.DataModel.Effects;
 using CardGame.Level;
 using CardGame.Utils;
 using DG.Tweening;
@@ -22,12 +23,6 @@ namespace CardGame.Managers
 
         public Board board;
 
-        #region Tweens
-
-        public Sequence finishRoundSequence;
-
-        #endregion
-
         public bool isPlayerTurn => _turn == Turn.PLAYER;
 
         private Turn _turn = Turn.START;
@@ -45,18 +40,16 @@ namespace CardGame.Managers
         private IEnumerator StartGameCoroutine()
         {
             // START GAME ANIMATION
-            continueFlow = false;
+            StopFlow();
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
-            Debug.Log("seguimos");
-            
+
             // DRAW CARDS
-            continueFlow = false;
+            StopFlow();
             DrawCards(CardGameManager.Instance.settings.initialCardNumber);
 
             yield return new WaitUntil(() => continueFlow);
-            Debug.Log("seguimos");
 
             StartRound();
         }
@@ -69,12 +62,11 @@ namespace CardGame.Managers
         private IEnumerator StartRoundCoroutine()
         {
             // UPDATE HEALTH AND MANA
-            continueFlow = false;
+            StopFlow();
             CardGameManager.Instance.FillMana();
             UIManager.Instance.UpdateUIStats(startRound: true);
 
             yield return new WaitUntil(() => continueFlow);
-            Debug.Log("seguimos");
 
             ChangeTurn();
             StartTurn();
@@ -88,17 +80,17 @@ namespace CardGame.Managers
         private IEnumerator StartTurnCoroutine()
         {
             // START TURN ANIMATION
-            continueFlow = false;
+            StopFlow();
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
 
             // DRAW CARD
-            continueFlow = false;
+            StopFlow();
             DrawCards(1);
 
             yield return new WaitUntil(() => continueFlow);
-            
+
             if (turn == Turn.OPPONENT)
                 CardGameManager.Instance.opponentAI.enabled = true;
         }
@@ -115,7 +107,7 @@ namespace CardGame.Managers
                 skipCombat = false;
                 FinishRoundContinue();
             }
-            else    
+            else
                 StartCoroutine(FinishRoundCoroutine());
         }
 
@@ -124,7 +116,8 @@ namespace CardGame.Managers
             if (!CardGameManager.Instance.CheckEnd())
             {
                 // Apply end round effects
-                endTurnEffectsDelegate?.Invoke();
+                if (endTurnEffectsDelegate != null)
+                    endTurnEffectsDelegate.Invoke();
 
                 StartRound();
             }
@@ -133,7 +126,7 @@ namespace CardGame.Managers
         private IEnumerator FinishRoundCoroutine()
         {
             // CLASH TURN ANIMATION
-            continueFlow = false;
+            StopFlow();
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
@@ -170,6 +163,16 @@ namespace CardGame.Managers
 
         }
 
+        public void StopFlow()
+        {
+            continueFlow = false;
+        }
+
+        public void ContinueFlow()
+        {
+            continueFlow = true;
+        }
+
         #endregion
 
         #region Clash
@@ -185,7 +188,7 @@ namespace CardGame.Managers
         private IEnumerator ClashCoroutine()
         {
             //clashing = true;
-            continueFlow = true;
+            ContinueFlow();
 
             bool combat = false;
 
@@ -219,6 +222,9 @@ namespace CardGame.Managers
 
                 yield return new WaitWhile(() => combat);
                 yield return new WaitUntil(() => continueFlow);
+
+                playerCard?.CheckDestroy();
+                opponentCard?.CheckDestroy();
             }
 
             FinishRoundContinue();
@@ -227,6 +233,9 @@ namespace CardGame.Managers
         public void ApplyCombatActions(Card source, object targetObj)
         {
             source.ApplyCombatEffects(targetObj);
+            if ((targetObj is Card) && (source.HasEffect(SubType.REBOUND) || ((Card)targetObj).HasEffect(SubType.REBOUND)))
+                return;
+
             source.Hit(targetObj);
         }
 
@@ -240,11 +249,6 @@ namespace CardGame.Managers
                 || CardGameManager.Instance.opponent.life <= 0
                 || CardGameManager.Instance.alternateWinCondition)
             {
-                if (turn == Turn.CLASH)
-                {
-                    finishRoundSequence.Kill();
-                }
-
                 SkipCombat();
                 FinishRound();
             }
@@ -285,10 +289,12 @@ namespace CardGame.Managers
 
         public delegate void EndTurnEffects();
         private EndTurnEffects endTurnEffectsDelegate;
+        private int numberEffects = 0;
 
         public void AddEndTurnEffect(EndTurnEffects method)
         {
             Debug.Log("End turn effect added");
+            numberEffects++;
             if (endTurnEffectsDelegate == null)
             {
                 endTurnEffectsDelegate = method;
@@ -302,6 +308,9 @@ namespace CardGame.Managers
         public void RemoveEndTurnEffect(EndTurnEffects method)
         {
             endTurnEffectsDelegate -= method;
+            numberEffects--;
+
+            if (numberEffects == 0) endTurnEffectsDelegate = null;
         }
 
         #endregion

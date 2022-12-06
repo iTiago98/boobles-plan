@@ -67,6 +67,7 @@ public class DeckManager : MonoBehaviour
     public void SetPlayerCards()
     {
         SetDeck(playerDeckBase, ref _playerDeck);
+        AddPPBrosCards();
     }
 
     public void SetOpponentCards(Opponent_Name opponentName)
@@ -121,6 +122,22 @@ public class DeckManager : MonoBehaviour
         AddCard(playerExtraCards[0]);
     }
 
+    public void AddCitrianoCards()
+    {
+        AddHipervitaminado();
+        AddNuevaCepaDelEscorbuto();
+        AddExprimirLaVerdad();
+        AddMaquinaDeZumo();
+    }
+
+    public void RemoveCitrianoCards()
+    {
+        foreach(CardsData card in _playerDeck)
+        {
+            if (citrianoExtraCards.Contains(card)) _playerDeck.Remove(card);
+        }
+    }
+
     public void AddHipervitaminado()
     {
         AddCard(citrianoExtraCards[0]);
@@ -141,6 +158,39 @@ public class DeckManager : MonoBehaviour
         AddCard(citrianoExtraCards[3]);
     }
 
+    public void AddPPBrosCards()
+    {
+        AddVictoriaPorDesgaste();
+        AddPared();
+        AddPalaDeNocobich();
+        AddGomuGomuNo();
+        AddPelotaBomba();
+    }
+
+    public void AddVictoriaPorDesgaste()
+    {
+        AddCard(pinponbrosExtraCards[0]);
+    }
+
+    public void AddPared()
+    {
+        AddCard(pinponbrosExtraCards[1]);
+    }
+    
+    public void AddPalaDeNocobich()
+    {
+        AddCard(pinponbrosExtraCards[2]);
+    }
+
+    public void AddGomuGomuNo()
+    {
+        AddCard(pinponbrosExtraCards[3]);
+    }
+
+    public void AddPelotaBomba()
+    {
+        AddCard(pinponbrosExtraCards[4]);
+    }
     #endregion
 }
 

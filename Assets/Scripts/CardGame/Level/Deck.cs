@@ -36,12 +36,12 @@ namespace CardGame.Level
 
         #region Draw Cards
 
-        public void DrawCards(int numCards)
+        public void DrawCards(int numCardsToAdd)
         {
-            TurnManager.Instance.continueFlow = false;
+            TurnManager.Instance.StopFlow();
             int numCardsStart = numCards;
 
-            for (int i = 0; i < numCards; i++)
+            for (int i = 0; i < numCardsToAdd; i++)
             {
                 GameObject cardObj;
                 CardsData data;
@@ -78,24 +78,26 @@ namespace CardGame.Level
 
         private IEnumerator DrawCardsCoroutine(int numCardsStart)
         {
-            foreach (Card card in _listToAdd)
+            int loops = _listToAdd.Count;
+            for (int i = 0; i < loops; i++)
             {
+                Card card = _listToAdd[0];
                 card.gameObject.SetActive(true);
                 _hand.AddCard(card);
-                Debug.Log("Add card");
 
                 // Apply end round effects
                 drawCardEffectsDelegate?.Invoke();
 
                 yield return new WaitUntil(() => _hand.cardsAtPosition);
-                Debug.Log("At position");
                 UpdateRemainingCards(++numCardsStart);
+
+                _listToAdd.RemoveAt(0);
             }
 
             _listToAdd.Clear();
             CheckCardNumber();
 
-            TurnManager.Instance.continueFlow = true;
+            TurnManager.Instance.ContinueFlow();
         }
 
         #endregion
@@ -104,7 +106,7 @@ namespace CardGame.Level
 
         public void DiscardCards(int numCardsToDiscard)
         {
-            TurnManager.Instance.continueFlow = false;
+            TurnManager.Instance.StopFlow();
             int numCardsStart = numCards;
 
             for (int i = 0; i < numCardsToDiscard; i++)
@@ -132,19 +134,25 @@ namespace CardGame.Level
 
         private IEnumerator DiscardCardsCoroutine(int numCardsStart)
         {
-            foreach (Card card in _listToDiscard)
+            int loops = _listToDiscard.Count;
+
+            for (int i = 0; i < loops; i++)
             {
+                Card card = _listToDiscard[0];
                 card.gameObject.SetActive(true);
                 card.Destroy();
+
                 yield return new WaitUntil(() => card == null);
+
                 UpdateRemainingCards(--numCardsStart);
+                _listToDiscard.RemoveAt(0);
             }
 
             _listToDiscard.Clear();
             CheckCardNumber();
 
             /*if (TurnManager.Instance.clashing) */
-            TurnManager.Instance.continueFlow = true;
+            TurnManager.Instance.ContinueFlow();
         }
 
         #endregion

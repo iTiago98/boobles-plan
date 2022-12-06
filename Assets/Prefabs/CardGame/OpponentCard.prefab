@@ -109,7 +109,6 @@ MonoBehaviour:
   altColor: {r: 0.6226415, g: 0.30664304, b: 0.1262905, a: 1}
   shadow: {fileID: 5036119495120381806}
   highlight: {fileID: 1671532448065763131}
-  moveWithMouse: 0
   container: {fileID: 0}
   contender: {fileID: 0}
 --- !u!65 &8687193210750069689
@@ -160,8 +159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.08, y: -1.47}
-  m_SizeDelta: {x: 3.128, y: 0.5239}
+  m_AnchoredPosition: {x: 0.02, y: -1.54}
+  m_SizeDelta: {x: 3.283, y: 0.524}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4267273933013527144
 MeshRenderer:
@@ -225,7 +224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "V\xEDnculo vital"
+  m_text: "Bonificador de par\xE1metros"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 88c4a86cbd19c484b8759fa457d05673, type: 2}
   m_sharedMaterial: {fileID: -2605380336036183669, guid: 88c4a86cbd19c484b8759fa457d05673, type: 2}
@@ -252,15 +251,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3
+  m_fontSize: 2.25
   m_fontSizeBase: 3
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 3
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 2.2
+  m_fontSizeMax: 3
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -268,9 +267,9 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 3
+  m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1

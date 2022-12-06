@@ -527,14 +527,12 @@ namespace CardGame.Cards
                 //});
                 hitSequence.Append(transform.DOScale(_defaultScale, 0.2f));
                 hitSequence.Join(transform.DORotate(previousRotation, 0.2f));
-                hitSequence.AppendCallback(() => CheckDestroy());
             }
             else
             {
-                hitSequence.AppendInterval(1.1f);
+                hitSequence.AppendInterval(0.7f);
                 // Hit callback
                 hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
-                hitSequence.AppendCallback(() => CheckDestroy());
             }
 
             return hitSequence;
@@ -571,7 +569,7 @@ namespace CardGame.Cards
             HideExtendedDescription();
 
             if (!IsInHand) RemoveFromContainer();
-            CheckRemoveEffects();
+            CheckDestroyEffects();
 
             Sequence destroySequence = DOTween.Sequence();
             destroySequence.Append(transform.DOScale(0, 1));
@@ -602,7 +600,7 @@ namespace CardGame.Cards
             }
         }
 
-        private bool HasEffect(SubType subType)
+        public bool HasEffect(SubType subType)
         {
             foreach (CardEffect e in effects)
             {
@@ -627,23 +625,31 @@ namespace CardGame.Cards
             if (effect.IsAppliable()) effect.Apply(this, target);
         }
 
-        private void CheckRemoveEffects()
+        private void CheckDestroyEffects()
         {
             if (hasEffect)
             {
                 foreach (CardEffect effect in effects)
                 {
+                    // End Turn Effects
                     if (effect.applyTime == ApplyTime.END && _endTurnEffects.Count > 0)
                     {
                         TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
                     }
+                    // Draw Card Effects
                     else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
                     {
                         contender.deck.RemoveDrawCardEffect(_drawCardEffect);
                     }
+                    // Play Argument Effects
                     else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT && _playArgumentEffect != null)
                     {
                         TurnManager.Instance.RemovePlayArgumentEffect(_playArgumentEffect);
+                    }
+                    // Destroy Effects
+                    else if(effect.applyTime == ApplyTime.DESTROY && !IsInHand)
+                    {
+                        effect.Apply(this, null);
                     }
 
                     if (effect.subType == SubType.GUARD)
@@ -722,7 +728,7 @@ namespace CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
-            CheckRemoveEffects();
+            CheckDestroyEffects();
 
             data.strength = _defaultStrength;
             data.defense = _defaultDefense;

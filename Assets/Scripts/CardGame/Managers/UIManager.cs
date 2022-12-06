@@ -147,7 +147,7 @@ namespace CardGame.Managers
             sequence.AppendInterval(0.5f);
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
             sequence.Join(turnAnimationText.DOFade(0, 0.5f));
-            sequence.AppendCallback(() => TurnManager.Instance.continueFlow = true);
+            sequence.AppendCallback(() => TurnManager.Instance.ContinueFlow());
 
             sequence.Play();
 
@@ -186,7 +186,7 @@ namespace CardGame.Managers
             _shownPlayerLife = _player.life;
             _shownOpponentLife = _opponent.life;
 
-            if (startRound) TurnManager.Instance.continueFlow = true;
+            if (startRound) TurnManager.Instance.ContinueFlow();
         }
 
         private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
@@ -258,7 +258,6 @@ namespace CardGame.Managers
 
         public void OnEndTurnButtonClick()
         {
-            Debug.Log("End Turn Button Click");
             if (CardGameManager.Instance.gameStarted)
             {
                 TurnManager.Instance.FinishTurn();
@@ -363,6 +362,7 @@ namespace CardGame.Managers
                     Board.Instance.HighlightZoneTargets(holdingCard.type, holdingCard.contender, show: false);
             }
 
+            Board.Instance.HighlightTargets(new List<Card>());
             HidePlayButtons();
             SetEndTurnButtonInteractable(true);
         }

@@ -9,6 +9,8 @@ namespace Booble.MainMenu
 	public class MainMenu : MonoBehaviour
     {
         [SerializeField] private GameObject _canvas;
+        [SerializeField] private GameObject _eventSystem;
+
 		[SerializeField] private RectTransform _mainMenu;
 		[SerializeField] private RectTransform _credits;
         [SerializeField] private RectTransform _cardGameMenu;
@@ -65,7 +67,8 @@ namespace Booble.MainMenu
 			SceneLoader.Instance.LoadInterviewScene(new List<GameObject>()
 			{
 				Camera.main.gameObject,
-				_canvas
+				_canvas,
+				_eventSystem
 			});
 		}
 

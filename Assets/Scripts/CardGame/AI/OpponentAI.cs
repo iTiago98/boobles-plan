@@ -30,6 +30,10 @@ namespace CardGame.AI
         private void Update()
         {
             if (_contender == null) return;
+            if (!TurnManager.Instance.continueFlow) return;
+
+            if (Input.GetKeyDown(KeyCode.H)) _waitTime = 0;
+            if (Input.GetKeyDown(KeyCode.J)) _waitTime = 1.5f;
 
             _timer += Time.deltaTime;
             if (_timer > _waitTime)

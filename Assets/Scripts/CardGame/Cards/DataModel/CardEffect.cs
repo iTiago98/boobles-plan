@@ -52,7 +52,7 @@ namespace CardGame.Cards.DataModel.Effects
 
     public enum ApplyTime
     {
-        NONE, /*START,*/ ENTER, COMBAT, END, DRAW_CARD, PLAY_ARGUMENT
+        NONE, /*START,*/ ENTER, COMBAT, END, DRAW_CARD, PLAY_ARGUMENT, DESTROY
     }
 
     // ALLY - ally card
@@ -94,6 +94,8 @@ namespace CardGame.Cards.DataModel.Effects
         public CardsDataSimple cardParameter;
 
         public SubType cardParameter_Effect;
+
+        private int _storedValue = -1;
 
         #region Apply
 
@@ -207,12 +209,27 @@ namespace CardGame.Cards.DataModel.Effects
                         if (target is Card)
                         {
                             Card targetCard = (Card)target;
-                            int lifeValue = Mathf.Min(source.defense, targetCard.strength);
-                            targetCard.ReceiveDamage(lifeValue);
+                            int reboundValue = Mathf.Min(source.defense, targetCard.strength);
+
+                            if (targetCard.HasEffect(SubType.REBOUND)) {
+                                if (_storedValue == -1)
+                                    _storedValue = reboundValue + source.strength;
+                                else
+                                {
+                                    targetCard.ReceiveDamage(reboundValue + source.strength);
+                                    source.ReceiveDamage(_storedValue);
+                                    _storedValue = -1;
+                                }
+                            }
+                            else
+                            {
+                                targetCard.ReceiveDamage(reboundValue + source.strength);
+                                source.ReceiveDamage(targetCard.strength);
+                            }
 
                             if (source.contender.role == Contender.Role.PLAYER)
                             {
-                                CardGameManager.Instance.alternateWinConditionParameter += lifeValue;
+                                CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
                             }
                         }
                     }
@@ -268,6 +285,7 @@ namespace CardGame.Cards.DataModel.Effects
                     {
                         case Target.ALLY:
                         case Target.ENEMY:
+                        case Target.CARD:
                             ((Card)target).AddEffect(effect);
                             break;
                         case Target.AALLY:
@@ -301,7 +319,7 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.DUPLICATE_CARD:
-                    InstantiateCard(source, ((Card)target).data);
+                    InstantiateCard(source, ((Card)target).data); //TODO change from create card
                     break;
 
                 case SubType.SWAP_POSITION:
@@ -325,27 +343,7 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.WHEEL:
-                    Contender player = CardGameManager.Instance.player;
-                    Contender opponent = CardGameManager.Instance.opponent;
-
-                    int playerNumCards = player.hand.numCards;
-                    int opponentNumCards = opponent.hand.numCards;
-
-                    Sequence sequence = DOTween.Sequence();
-
-                    sequence.AppendCallback(() =>
-                    {
-                        player.hand.DiscardAll();
-                        opponent.hand.DiscardAll();
-                    });
-                    sequence.AppendCallback(() =>
-                    {
-                        Board.Instance.DrawCards(playerNumCards, TurnManager.Turn.PLAYER);
-                        Board.Instance.DrawCards(opponentNumCards, TurnManager.Turn.OPPONENT);
-                    });
-
-                    sequence.Play();
-
+                    Board.Instance.WheelEffect();
                     break;
 
                 case SubType.SKIP_COMBAT:
@@ -353,6 +351,7 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
             }
         }
+
 
         private void InstantiateCard(Card source, CardsData data)
         {
@@ -429,7 +428,7 @@ namespace CardGame.Cards.DataModel.Effects
             CardZone originCardZone = target.contender.cardZones[position];
 
             // Get destination
-            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.otherPlayer);
+            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.GetOtherContender(target.contender));
             if (emptyCardZone != null)
             {
                 Card originCard = originCardZone.GetCard();
@@ -443,7 +442,7 @@ namespace CardGame.Cards.DataModel.Effects
 
         private void Swap(int pos1, int pos2, Contender contender)
         {
-            CardZone originCardZone = contender.cardZones[pos1]; 
+            CardZone originCardZone = contender.cardZones[pos1];
             CardZone destCardZone = contender.cardZones[pos2];
 
             Card originCard = originCardZone.GetCard();
@@ -748,7 +747,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.CITRIANO_WIN_CONDITION:
                     s += "si tienes 30 o más vidas, ganas la partida."; break;
                 case SubType.PINPONBROS_WIN_CONDITION:
-                    s += "si has rebotado 15 o más puntos de vida, ganas la partida."; break;
+                    s += "si has rebotado 15 o más puntos de vida, ganas la partida. (" + CardGameManager.Instance.alternateWinConditionParameter + "/15)"; break;
             }
 
             if (s.Length > 0) s = s[0].ToString().ToUpper() + s.Substring(1, s.Length - 1);
