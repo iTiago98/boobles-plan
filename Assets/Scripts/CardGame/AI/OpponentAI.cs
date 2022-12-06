@@ -137,6 +137,8 @@ namespace CardGame.AI
                 {
                     case SubType.DESTROY_CARD:
                         {
+                            if (!card.contender.isPlayer) continue;
+
                             if (card.type == CardType.FIELD)
                                 return card;
                             else
@@ -231,7 +233,7 @@ namespace CardGame.AI
                     }
                     else if (effect.targetType == Target.AENEMY)
                     {
-                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender) 
+                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender)
                             && Board.Instance.NumCardsOnTable(player) > 2;
                     }
                     else if (effect.targetType == Target.ACARD)
@@ -273,7 +275,7 @@ namespace CardGame.AI
                 case SubType.DUPLICATE_CARD:
                     int bestStats = 0;
                     Card bestTarget = null;
-                    foreach(CardZone cardZone in opponentCardZones)
+                    foreach (CardZone cardZone in opponentCardZones)
                     {
                         Card card = cardZone.GetCard();
                         if (card != null) GetBestStats(card, ref bestTarget, ref bestStats);
@@ -295,7 +297,7 @@ namespace CardGame.AI
                     return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
                 case SubType.SKIP_COMBAT:
-                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
+                    return !TurnManager.Instance.skipCombat && Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
                 default:
                     return true;
