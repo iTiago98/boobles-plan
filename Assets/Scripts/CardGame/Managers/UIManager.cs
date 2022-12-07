@@ -183,8 +183,9 @@ namespace CardGame.Managers
                 yield return new WaitForSeconds(0.1f);
             }
 
-            _shownPlayerLife = _player.life;
-            _shownOpponentLife = _opponent.life;
+            yield return new WaitUntil(() =>
+                _shownPlayerLife == _player.life && _shownPlayerMana == _player.currentMana
+                && _shownOpponentLife == _opponent.life && _shownOpponentMana == _opponent.currentMana);
 
             if (startRound) TurnManager.Instance.ContinueFlow();
         }

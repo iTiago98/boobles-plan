@@ -67,7 +67,7 @@ public class DeckManager : MonoBehaviour
     public void SetPlayerCards()
     {
         SetDeck(playerDeckBase, ref _playerDeck);
-        AddPPBrosCards();
+        AddCitrianoCards();
     }
 
     public void SetOpponentCards(Opponent_Name opponentName)

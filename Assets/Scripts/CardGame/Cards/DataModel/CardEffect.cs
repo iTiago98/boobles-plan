@@ -745,7 +745,7 @@ namespace CardGame.Cards.DataModel.Effects
                     s += "se omite la ronda de combate."; break;
 
                 case SubType.CITRIANO_WIN_CONDITION:
-                    s += "si tienes 30 o más vidas, ganas la partida."; break;
+                    s += "si tienes 30 o más vidas, ganas la partida. (" + CardGameManager.Instance.player.life + "/30)" ; break;
                 case SubType.PINPONBROS_WIN_CONDITION:
                     s += "si has rebotado 15 o más puntos de vida, ganas la partida. (" + CardGameManager.Instance.alternateWinConditionParameter + "/15)"; break;
             }
