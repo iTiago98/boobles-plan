@@ -41,24 +41,31 @@ namespace Booble.MainMenu
 		public void TutorialCardsButton()
         {
 			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Tutorial);
+			DeckManager.Instance.RemoveExtraCards();
 			LoadInterview();
         }
 
 		public void CitrianoCardsButton()
         {
 			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Citriano);
+			DeckManager.Instance.RemoveExtraCards();
+			DeckManager.Instance.AddCitrianoCards();
 			LoadInterview();
 		}
 
 		public void PingPongBrosCardsButton()
         {
 			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.PingPongBros);
+			DeckManager.Instance.RemoveExtraCards();
+			DeckManager.Instance.AddPPBrosCards();
 			LoadInterview();
 		}
 
 		public void SecretaryCardsButton()
         {
 			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Secretary);
+			DeckManager.Instance.RemoveExtraCards();
+			DeckManager.Instance.AddSecretaryCards();
 			LoadInterview();
         }
 

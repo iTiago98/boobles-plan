@@ -10,7 +10,7 @@ using UnityEngine;
 public class DeckManager : MonoBehaviour
 {
     public static DeckManager Instance { get; private set; }
-    
+
     [SerializeField] private CardsDataContainer playerDeckBase;
 
     [SerializeField] private List<CardsDataContainer> opponentsDecks;
@@ -68,13 +68,12 @@ public class DeckManager : MonoBehaviour
     public void SetPlayerCards()
     {
         SetDeck(playerDeckBase, ref _playerDeck);
-        AddSecretaryCards();
     }
 
     public void SetOpponentCards(Opponent_Name opponentName)
     {
         CardsDataContainer opponentDeck = null;
-        switch(opponentName)
+        switch (opponentName)
         {
             case Opponent_Name.Tutorial:
                 opponentDeck = opponentsDecks[0];
@@ -83,13 +82,13 @@ public class DeckManager : MonoBehaviour
                 opponentDeck = opponentsDecks[1];
                 break;
             case Opponent_Name.PingPongBros:
-                opponentDeck = opponentsDecks[2]; 
+                opponentDeck = opponentsDecks[2];
                 break;
             case Opponent_Name.Secretary:
-                opponentDeck = opponentsDecks[3]; 
+                opponentDeck = opponentsDecks[3];
                 break;
             case Opponent_Name.Jefe:
-                opponentDeck = opponentsDecks[4]; 
+                opponentDeck = opponentsDecks[4];
                 break;
         }
         _opponentName = opponentName;
@@ -123,6 +122,30 @@ public class DeckManager : MonoBehaviour
         AddCard(playerExtraCards[0]);
     }
 
+    List<int> indexToRemove = new List<int>();
+
+    public void RemoveExtraCards()
+    {
+        if(_opponentName != Opponent_Name.Citriano) RemoveCitrianoCards();
+        if (_opponentName != Opponent_Name.PingPongBros) RemovePPBrosCards();
+        if (_opponentName != Opponent_Name.Secretary) RemoveSecretaryCards();
+        RemoveCards();
+    }
+
+    private void RemoveCards()
+    {
+        indexToRemove.Sort();
+        indexToRemove.Reverse();
+        for (int i = 0; i < indexToRemove.Count; i++)
+        {
+            int index = indexToRemove[i];
+            _playerDeck.RemoveAt(index);
+        }
+        indexToRemove.Clear();
+    }
+
+    #region Citriano Cards
+
     public void AddCitrianoCards()
     {
         AddHipervitaminado();
@@ -133,9 +156,9 @@ public class DeckManager : MonoBehaviour
 
     public void RemoveCitrianoCards()
     {
-        foreach(CardsData card in _playerDeck)
+        foreach (CardsData card in _playerDeck)
         {
-            if (citrianoExtraCards.Contains(card)) _playerDeck.Remove(card);
+            if (citrianoExtraCards.Contains(card)) indexToRemove.Add(_playerDeck.IndexOf(card));
         }
     }
 
@@ -159,6 +182,10 @@ public class DeckManager : MonoBehaviour
         AddCard(citrianoExtraCards[3]);
     }
 
+    #endregion
+
+    #region PPBros Cards
+
     public void AddPPBrosCards()
     {
         AddVictoriaPorDesgaste();
@@ -166,6 +193,14 @@ public class DeckManager : MonoBehaviour
         AddPalaDeNocobich();
         AddGomuGomuNo();
         AddPelotaBomba();
+    }
+
+    public void RemovePPBrosCards()
+    {
+        foreach (CardsData card in _playerDeck)
+        {
+            if (pinponbrosExtraCards.Contains(card)) indexToRemove.Add(_playerDeck.IndexOf(card));
+        }
     }
 
     public void AddVictoriaPorDesgaste()
@@ -177,7 +212,7 @@ public class DeckManager : MonoBehaviour
     {
         AddCard(pinponbrosExtraCards[1]);
     }
-    
+
     public void AddPalaDeNocobich()
     {
         AddCard(pinponbrosExtraCards[2]);
@@ -193,12 +228,25 @@ public class DeckManager : MonoBehaviour
         AddCard(pinponbrosExtraCards[4]);
     }
 
+    #endregion
+
+    #region Secretary Cards
+
     public void AddSecretaryCards()
     {
         AddHaPerdidoUsteLosPapele();
         AddTraigoLosAnexosCorrespondientes();
         AddAfidavit();
         AddResaltarUnaContradiccion();
+    }
+
+    public void RemoveSecretaryCards()
+    {
+        foreach (CardsData card in _playerDeck)
+        {
+            if (secretaryExtraCards.Contains(card)) indexToRemove.Add(_playerDeck.IndexOf(card));
+        }
+        
     }
 
     public void AddHaPerdidoUsteLosPapele()
@@ -220,6 +268,9 @@ public class DeckManager : MonoBehaviour
     {
         AddCard(secretaryExtraCards[3]);
     }
+
+    #endregion
+
     #endregion
 }
 
