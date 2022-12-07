@@ -190,9 +190,26 @@ namespace CardGame.Level
 
         public void DestroyCards(Contender contender)
         {
-            foreach (CardZone zone in contender.cardZones) zone.GetCard()?.Destroy();
+            StartCoroutine(DestroyCardsCoroutine(contender));
+        }
+
+        private IEnumerator DestroyCardsCoroutine(Contender contender)
+        {
+            Card aux = null;
+            foreach (CardZone zone in contender.cardZones)
+            {
+                Card card = zone.GetCard();
+                if(card != null)
+                {
+                    aux = card;
+                    card.Destroy();
+                }
+            }
             Card fieldCard = contender.fieldCardZone.GetCard();
             if (fieldCard != null) fieldCard.Destroy();
+
+            yield return new WaitUntil(() => aux == null);
+            TurnManager.Instance.ContinueFlow();
         }
 
         public void DestroyAll()
@@ -227,7 +244,7 @@ namespace CardGame.Level
         {
             List<CardZone> cardZones = new List<CardZone>();
             bool addFieldCard = subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD;
-            
+
             switch (targetType)
             {
                 case Target.AALLY:
@@ -237,7 +254,7 @@ namespace CardGame.Level
                 case Target.AENEMY:
                     Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
                     cardZones.AddRange(otherContender.cardZones);
-                    if(addFieldCard) cardZones.Add(otherContender.fieldCardZone);
+                    if (addFieldCard) cardZones.Add(otherContender.fieldCardZone);
                     break;
                 case Target.ACARD:
                     cardZones.AddRange(playerCardZone);

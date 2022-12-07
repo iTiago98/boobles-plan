@@ -11,14 +11,15 @@ public class DeckManager : MonoBehaviour
 {
     public static DeckManager Instance { get; private set; }
     
-    public CardsDataContainer playerDeckBase;
+    [SerializeField] private CardsDataContainer playerDeckBase;
 
-    public List<CardsDataContainer> opponentsDecks;
+    [SerializeField] private List<CardsDataContainer> opponentsDecks;
 
     [Header("Extra Cards")]
-    public List<CardsData> playerExtraCards;
-    public List<CardsData> citrianoExtraCards;
-    public List<CardsData> pinponbrosExtraCards;
+    [SerializeField] private List<CardsData> playerExtraCards;
+    [SerializeField] private List<CardsData> citrianoExtraCards;
+    [SerializeField] private List<CardsData> pinponbrosExtraCards;
+    [SerializeField] private List<CardsData> secretaryExtraCards;
 
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
@@ -67,7 +68,7 @@ public class DeckManager : MonoBehaviour
     public void SetPlayerCards()
     {
         SetDeck(playerDeckBase, ref _playerDeck);
-        AddCitrianoCards();
+        AddSecretaryCards();
     }
 
     public void SetOpponentCards(Opponent_Name opponentName)
@@ -190,6 +191,34 @@ public class DeckManager : MonoBehaviour
     public void AddPelotaBomba()
     {
         AddCard(pinponbrosExtraCards[4]);
+    }
+
+    public void AddSecretaryCards()
+    {
+        AddHaPerdidoUsteLosPapele();
+        AddTraigoLosAnexosCorrespondientes();
+        AddAfidavit();
+        AddResaltarUnaContradiccion();
+    }
+
+    public void AddHaPerdidoUsteLosPapele()
+    {
+        AddCard(secretaryExtraCards[0]);
+    }
+
+    public void AddTraigoLosAnexosCorrespondientes()
+    {
+        AddCard(secretaryExtraCards[1]);
+    }
+
+    public void AddAfidavit()
+    {
+        AddCard(secretaryExtraCards[2]);
+    }
+
+    public void AddResaltarUnaContradiccion()
+    {
+        AddCard(secretaryExtraCards[3]);
     }
     #endregion
 }

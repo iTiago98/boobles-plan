@@ -251,6 +251,8 @@ namespace CardGame.Managers
         {
             List<Image> manaList = (contender.role == Contender.Role.PLAYER) ? playerManaList : opponentManaList;
             manaList[newMaxMana - 1].sprite = emptyManaCristal;
+
+            TurnManager.Instance.ContinueFlow();
         }
 
         #endregion

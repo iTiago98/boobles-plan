@@ -28,7 +28,7 @@ namespace CardGame.Level
         {
             cardsAtPosition = false;
             card.transform.parent = transform;
-            card.container = this;
+            card.SetContainer(this);
 
             cards.Add(card.gameObject);
             UpdateCardsPosition();

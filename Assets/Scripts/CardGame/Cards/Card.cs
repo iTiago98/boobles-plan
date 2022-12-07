@@ -6,6 +6,7 @@ using CardGame.Level;
 using CardGame.Cards.DataModel;
 using TMPro;
 using CardGame.Cards.DataModel.Effects;
+using System.Collections;
 
 namespace CardGame.Cards
 {
@@ -283,7 +284,7 @@ namespace CardGame.Cards
 
         public void OnMouseHoverExit()
         {
-            if (!_clickable) return;
+            if (!_clickable || contender == null) return;
 
             if (this != null && gameObject != null && IsInHand && IsPlayerCard)
             {
@@ -432,11 +433,19 @@ namespace CardGame.Cards
 
         public void ContinuePlay()
         {
+            StartCoroutine(ContinuePlayCoroutine());
+        }
+
+        private IEnumerator ContinuePlayCoroutine()
+        {
+            TurnManager.Instance.StopFlow();
+
             SubstractMana();
-
             ApplyEffect();
-            Destroy();
 
+            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+
+            Destroy();
             MouseController.Instance.SetHolding(null);
             UIManager.Instance.SetEndTurnButtonInteractable(true);
         }
@@ -507,7 +516,7 @@ namespace CardGame.Cards
 
                 // Enlarge and rotate
                 hitSequence.Append(transform.DOScale(_hitScale, 0.5f));
-                if (contender.role == Contender.Role.PLAYER)
+                if (contender.isPlayer)
                     hitSequence.Join(transform.DOLocalMoveZ(-0.1f, 0.5f));
                 else
                     hitSequence.Join(transform.DOLocalMoveZ(-0.05f, 0.5f));
@@ -632,7 +641,7 @@ namespace CardGame.Cards
                 foreach (CardEffect effect in effects)
                 {
                     // End Turn Effects
-                    if (effect.applyTime == ApplyTime.END && _endTurnEffects.Count > 0)
+                    if (effect.applyTime == ApplyTime.END && _endTurnEffects?.Count > 0)
                     {
                         TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
                     }
@@ -647,7 +656,7 @@ namespace CardGame.Cards
                         TurnManager.Instance.RemovePlayArgumentEffect(_playArgumentEffect);
                     }
                     // Destroy Effects
-                    else if(effect.applyTime == ApplyTime.DESTROY && !IsInHand)
+                    else if (effect.applyTime == ApplyTime.DESTROY && !IsInHand)
                     {
                         effect.Apply(this, null);
                     }
@@ -696,7 +705,7 @@ namespace CardGame.Cards
 
         public void SwapContender()
         {
-            if (contender.role == Contender.Role.PLAYER)
+            if (contender.isPlayer)
                 contender = CardGameManager.Instance.opponent;
             else
                 contender = CardGameManager.Instance.player;
@@ -714,6 +723,16 @@ namespace CardGame.Cards
         #endregion
 
         #region Containers
+
+        public void SetContainer(CardContainer container)
+        {
+            this.container = container;
+            if (_hand == null && container is Hand)
+            {
+                _hand = (Hand)container;
+                if (contender == null) contender = _hand.contender;
+            }
+        }
 
         public void RemoveFromContainer()
         {
@@ -735,7 +754,7 @@ namespace CardGame.Cards
 
             if (_swapped) SwapContender();
             _hand.AddCard(this);
-            if (contender.role == Contender.Role.OPPONENT) FlipCard();
+            if (!contender.isPlayer) FlipCard();
             if (type == CardType.ARGUMENT) UpdateStatsUI();
         }
 

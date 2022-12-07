@@ -1,6 +1,8 @@
 using CardGame.Cards;
 using CardGame.Cards.DataModel;
+using CardGame.Cards.DataModel.Effects;
 using CardGame.Managers;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,8 +24,7 @@ namespace CardGame.Level
         private List<Card> _listToAdd = new List<Card>();
         private List<Card> _listToDiscard = new List<Card>();
 
-        public delegate void DrawCardEffects();
-        private DrawCardEffects drawCardEffectsDelegate;
+        #region Initialize
 
         public void Initialize(Contender contender, Hand hand, List<CardsData> deckCards)
         {
@@ -33,6 +34,28 @@ namespace CardGame.Level
             UIManager.Instance.ShowRemainingCards(contender);
             UpdateRemainingCards();
         }
+
+        private void CopyCardsList(List<CardsData> cards)
+        {
+            _deckCards = new List<CardsData>();
+            foreach (CardsData data in cards)
+            {
+                CardsData temp = new CardsData();
+                temp.name = data.name;
+                temp.sprite = data.sprite;
+                temp.cost = data.cost;
+                temp.strength = data.strength;
+                temp.defense = data.defense;
+                temp.type = data.type;
+                temp.effects = data.effects;
+
+                _deckCards.Add(temp);
+            }
+
+            _maxCardNumber = numCards;
+        }
+
+        #endregion
 
         #region Draw Cards
 
@@ -88,14 +111,15 @@ namespace CardGame.Level
                 // Apply end round effects
                 drawCardEffectsDelegate?.Invoke();
 
+                UpdateRemainingCards(--numCardsStart);
+                CheckDeckSprite();
+
                 yield return new WaitUntil(() => _hand.cardsAtPosition);
-                UpdateRemainingCards(++numCardsStart);
 
                 _listToAdd.RemoveAt(0);
             }
 
             _listToAdd.Clear();
-            CheckCardNumber();
 
             TurnManager.Instance.ContinueFlow();
         }
@@ -125,7 +149,15 @@ namespace CardGame.Level
                     card.Initialize(null, data, cardRevealed: true);
                     card.gameObject.SetActive(false);
 
-                    _listToDiscard.Add(card);
+                    if (card.HasEffect(SubType.INCOMPARTMENTABLE))
+                    {
+                        _listToAdd.Add(card);
+                        break;
+                    }
+                    else
+                    {
+                        _listToDiscard.Add(card);
+                    }
                 }
             }
 
@@ -142,40 +174,26 @@ namespace CardGame.Level
                 card.gameObject.SetActive(true);
                 card.Destroy();
 
+                UpdateRemainingCards(--numCardsStart);
+                CheckDeckSprite();
+
                 yield return new WaitUntil(() => card == null);
 
-                UpdateRemainingCards(--numCardsStart);
                 _listToDiscard.RemoveAt(0);
             }
 
             _listToDiscard.Clear();
-            CheckCardNumber();
 
-            /*if (TurnManager.Instance.clashing) */
-            TurnManager.Instance.ContinueFlow();
+            if (_listToAdd.Count > 0) StartCoroutine(DrawCardsCoroutine(numCardsStart));
+            else TurnManager.Instance.ContinueFlow();
         }
 
         #endregion
 
-        private void CopyCardsList(List<CardsData> cards)
-        {
-            _deckCards = new List<CardsData>();
-            foreach (CardsData data in cards)
-            {
-                CardsData temp = new CardsData();
-                temp.name = data.name;
-                temp.sprite = data.sprite;
-                temp.cost = data.cost;
-                temp.strength = data.strength;
-                temp.defense = data.defense;
-                temp.type = data.type;
-                temp.effects = data.effects;
+        #region Draw Card Effects
 
-                _deckCards.Add(temp);
-            }
-
-            _maxCardNumber = numCards;
-        }
+        public delegate void DrawCardEffects();
+        private DrawCardEffects drawCardEffectsDelegate;
 
         public void AddDrawCardEffects(DrawCardEffects method)
         {
@@ -194,14 +212,16 @@ namespace CardGame.Level
             drawCardEffectsDelegate -= method;
         }
 
-        private void CheckCardNumber()
+        #endregion
+
+        #region UI
+
+        private void CheckDeckSprite()
         {
             if (numCards <= 0)
             {
                 GetComponent<SpriteRenderer>().sprite = null;
             }
-
-            UpdateRemainingCards();
         }
 
         private void UpdateRemainingCards()
@@ -212,6 +232,41 @@ namespace CardGame.Level
         private void UpdateRemainingCards(int numCards)
         {
             UIManager.Instance.UpdateRemainingCards(numCards, _maxCardNumber, _contender);
+        }
+
+        #endregion
+
+        public void AddCards(List<Card> cards)
+        {
+            TurnManager.Instance.StopFlow();
+            StartCoroutine(AddCardCoroutine(cards));
+        }
+
+        private IEnumerator AddCardCoroutine(List<Card> cards)
+        {
+            int loops = cards.Count;
+            for (int i = 0; i < loops; i++)
+            {
+                Card card = cards[0];
+                card.gameObject.SetActive(true);
+
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(card.transform.DOMove(transform.position + new Vector3(0, 0, -0.2f), 0.5f));
+                sequence.Append(card.transform.DOScale(0, 0.5f));
+                sequence.Play();
+
+                yield return new WaitForSeconds(0.5f);
+
+                _deckCards.Add(card.data);
+                card.Destroy();
+                UpdateRemainingCards();
+
+                yield return new WaitUntil(() => card == null);
+
+                cards.RemoveAt(0);
+            }
+
+            TurnManager.Instance.ContinueFlow();
         }
     }
 }

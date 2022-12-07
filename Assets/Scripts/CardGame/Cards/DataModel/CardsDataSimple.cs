@@ -12,5 +12,6 @@ namespace CardGame.Cards.DataModel
         public Sprite sprite;
         public int strength;
         public int defense;
+        public int manaCost;
     }
 }

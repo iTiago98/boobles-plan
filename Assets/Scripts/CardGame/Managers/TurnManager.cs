@@ -322,7 +322,7 @@ namespace CardGame.Managers
 
         public void SetGuardCard(Card guardCard)
         {
-            if (guardCard.contender.role == Contender.Role.PLAYER)
+            if (guardCard.contender.isPlayer)
             {
                 _playerGuardCard = guardCard;
             }
