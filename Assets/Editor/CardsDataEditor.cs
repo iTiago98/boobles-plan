@@ -132,7 +132,7 @@ namespace CardGame.Cards.DataModel
                             break;
                         case SubType.RESTORE_LIFE:
                         case SubType.INCREASE_MAX_MANA:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Mana amount: ", cardEffect.intParameter1);
                             break;
                     }
 
@@ -148,10 +148,10 @@ namespace CardGame.Cards.DataModel
                         case SubType.DESTROY_CARD:
                             break;
                         case SubType.DEAL_DAMAGE:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Damage: ", cardEffect.intParameter1);
                             break;
                         case SubType.DECREASE_MANA:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Mana amount: ", cardEffect.intParameter1);
                             break;
                     }
 
@@ -170,8 +170,8 @@ namespace CardGame.Cards.DataModel
                         case SubType.GUARD:
                             break;
                         case SubType.STAT_BOOST:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
-                            cardEffect.intParameter2 = EditorGUILayout.IntField("Parameter2: ", cardEffect.intParameter2);
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Strength boost: ", cardEffect.intParameter1);
+                            cardEffect.intParameter2 = EditorGUILayout.IntField("Defense boost: ", cardEffect.intParameter2);
                             break;
                         case SubType.ADD_EFFECT:
                             cardEffect.cardParameter_Effect = (SubType)EditorGUILayout.EnumPopup("Effect:", cardEffect.cardParameter_Effect);
@@ -216,10 +216,13 @@ namespace CardGame.Cards.DataModel
                             }
                             break;
                         case SubType.DRAW_CARD:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Num cards: ", cardEffect.intParameter1);
                             break;
                         case SubType.DISCARD_CARD:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Parameter1: ", cardEffect.intParameter1);
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Num cards: ", cardEffect.intParameter1);
+                            break;
+                        case SubType.STEAL_CARD_FROM_HAND:
+                            cardEffect.intParameter1 = EditorGUILayout.IntField("Num cards: ", cardEffect.intParameter1);
                             break;
                     }
 
@@ -232,27 +235,36 @@ namespace CardGame.Cards.DataModel
 
             if (cardEffect.type != EffectType.ALTERNATE_WIN_CONDITION)
             {
-                switch (cardEffect.subType)
+                if (cardEffect.applyTime != ApplyTime.COMBAT)
                 {
-                    case SubType.NONE:
-                    case SubType.RESTORE_LIFE:
-                    case SubType.INCREASE_MAX_MANA:
-                    case SubType.DECREASE_MANA:
-                    case SubType.LIFELINK:
-                    case SubType.REBOUND:
-                    case SubType.TRAMPLE:
-                    case SubType.COMPARTMENTALIZE:
-                    case SubType.CREATE_CARD:
-                    case SubType.DRAW_CARD:
-                    case SubType.DISCARD_CARD:
-                    case SubType.FREE_MANA:
-                    case SubType.WHEEL:
-                    case SubType.GUARD:
-                    case SubType.SKIP_COMBAT:
-                        break;
-                    default:
-                        cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
-                        break;
+                    switch (cardEffect.subType)
+                    {
+                        case SubType.NONE:
+                        case SubType.RESTORE_LIFE:
+                        case SubType.INCREASE_MAX_MANA:
+                        case SubType.DECREASE_MANA:
+                        case SubType.LIFELINK:
+                        case SubType.REBOUND:
+                        case SubType.TRAMPLE:
+                        case SubType.COMPARTMENTALIZE:
+                        case SubType.CREATE_CARD:
+                        case SubType.DRAW_CARD:
+                        case SubType.DISCARD_CARD:
+                        case SubType.FREE_MANA:
+                        case SubType.WHEEL:
+                        case SubType.GUARD:
+                        case SubType.SPONGE:
+                        case SubType.SKIP_COMBAT:
+                        case SubType.STEAL_CARD_FROM_HAND:
+                        case SubType.MIRROR:
+                        case SubType.STEAL_MANA:
+                        case SubType.STEAL_REWARD:
+                            cardEffect.targetType = Target.NONE;
+                            break;
+                        default:
+                            cardEffect.targetType = (Target)EditorGUILayout.EnumPopup("Target", cardEffect.targetType);
+                            break;
+                    }
                 }
 
                 if (card.type == CardType.ACTION)
@@ -277,6 +289,7 @@ namespace CardGame.Cards.DataModel
                         case SubType.REBOUND:
                         case SubType.TRAMPLE:
                         case SubType.COMPARTMENTALIZE:
+                        case SubType.SPONGE:
                             cardEffect.applyTime = ApplyTime.COMBAT;
                             break;
                         default:
@@ -344,7 +357,9 @@ namespace CardGame.Cards.DataModel
         public static void DuplicateCard()
         {
             int i = cards.IndexOf(currentCard);
-            cards.Insert(i, currentCard);
+
+            cards.Insert(i, new CardsData(currentCard));
+
             showContent.Insert(i, true);
         }
 

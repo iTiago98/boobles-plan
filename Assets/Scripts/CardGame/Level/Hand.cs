@@ -60,7 +60,7 @@ namespace CardGame.Level
             for (int i = 0; i < loops; i++)
             {
                 Card card = _listToDiscard[0];
-                card.Destroy();
+                card.DestroyCard();
 
                 if (!wheelEffect) yield return new WaitUntil(() => card == null);
                 _listToDiscard.RemoveAt(0);
@@ -68,6 +68,17 @@ namespace CardGame.Level
 
             _listToDiscard.Clear();
             TurnManager.Instance.ContinueFlow();
+        }
+
+        public Card StealCard()
+        {
+            System.Random random = new System.Random();
+            int index = random.Next(0, numCards);
+            GameObject cardObj = cards[index];
+
+            RemoveCard(cardObj);
+            Card card = cardObj.GetComponent<Card>();
+            return card;
         }
 
         public bool HasAlternateWinConditionCard()

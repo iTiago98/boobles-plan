@@ -4,6 +4,7 @@ using CardGame.Cards.DataModel.Effects;
 using CardGame.Level;
 using Santi.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -94,7 +95,7 @@ namespace CardGame.Managers
         private void CheckClick(IClickable clickableObject)
         {
             bool leftClickUp = Input.GetMouseButtonUp(0);
-            
+
             if (leftClickUp)
             {
                 if (IsApplyingEffect)
@@ -128,14 +129,28 @@ namespace CardGame.Managers
         private void ApplyEffectToTarget(IClickable clickableObject)
         {
             Card targetCard = (Card)clickableObject;
-            if (targetCard == null 
+            if (targetCard == null
                 || targetCard.IsInHand
                 || !targetCard.isHighlighted)
                 return;
 
-            _effectCard.contender.SubstractMana(_effectCard.manaCost);
-            _effectCard.effect.Apply(_effectCard, targetCard);
-            if (_effectCard.type == CardType.ACTION) _effectCard.Destroy();
+            StartCoroutine(ApplyEffectCoroutine(targetCard));
+        }
+
+        private IEnumerator ApplyEffectCoroutine(Card targetCard)
+        {
+            _effectCard.SubstractMana();
+            _effectCard.ApplyEffect(targetCard);
+
+            UIManager.Instance.HidePlayButtons();
+            Board.Instance.HighlightTargets(new List<Card>());
+
+            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+
+            _effectCard.DestroyCard();
+
+            yield return new WaitUntil(() => _effectCard == null);
+
             ResetApplyingEffect();
         }
 
@@ -144,8 +159,6 @@ namespace CardGame.Managers
             _effectCard = null;
             SetMask(selectingLayerMask);
             UIManager.Instance.SetEndTurnButtonInteractable(true);
-            UIManager.Instance.HidePlayButtons();
-            Board.Instance.HighlightTargets(new List<Card>());
         }
 
         #endregion

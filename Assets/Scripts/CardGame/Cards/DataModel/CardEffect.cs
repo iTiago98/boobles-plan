@@ -23,12 +23,13 @@ namespace CardGame.Cards.DataModel.Effects
         LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD,
         DUPLICATE_CARD, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD,
         FREE_MANA, WHEEL, COMPARTMENTALIZE, SKIP_COMBAT, CITRIANO_WIN_CONDITION, PINPONBROS_WIN_CONDITION, SECRETARY_WIN_CONDITION,
-        INCOMPARTMENTABLE, ADD_CARD_TO_DECK, DISCARD_CARD_FROM_DECK
+        INCOMPARTMENTABLE, ADD_CARD_TO_DECK, DISCARD_CARD_FROM_DECK, SPONGE, STEAL_CARD, STEAL_CARD_FROM_HAND, MIRROR, STEAL_MANA,
+        STEAL_REWARD
     }
 
     public enum DefensiveType
     {
-        NONE, RESTORE_LIFE, INCREASE_MAX_MANA
+        NONE, RESTORE_LIFE, INCREASE_MAX_MANA, STEAL_REWARD
     }
 
     public enum OffensiveType
@@ -38,13 +39,14 @@ namespace CardGame.Cards.DataModel.Effects
 
     public enum BoostType
     {
-        NONE, LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD, COMPARTMENTALIZE, INCOMPARTMENTABLE
+        NONE, LIFELINK, REBOUND, TRAMPLE, STAT_BOOST, ADD_EFFECT, GUARD, COMPARTMENTALIZE, INCOMPARTMENTABLE, SPONGE
     }
 
     public enum TacticalType
     {
         NONE, DUPLICATE_CARD, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD,
-        FREE_MANA, WHEEL, SKIP_COMBAT, ADD_CARD_TO_DECK, DISCARD_CARD_FROM_DECK
+        FREE_MANA, WHEEL, SKIP_COMBAT, ADD_CARD_TO_DECK, DISCARD_CARD_FROM_DECK, STEAL_CARD, STEAL_CARD_FROM_HAND,
+        MIRROR, STEAL_MANA
     }
 
     public enum AlternateWinConditionType
@@ -67,7 +69,7 @@ namespace CardGame.Cards.DataModel.Effects
     // PLAYER - other player
     public enum Target
     {
-        NONE, ALLY, ENEMY, CARD, AALLY, AENEMY, ACARD, /*CARDZONE,*/ PLAYER, SELF, FIELDCARD, ARGUMENTCARD
+        NONE, ALLY, ENEMY, CARD, AALLY, AENEMY, ACARD, /*CARDZONE,*/ PLAYER, SELF, FIELDCARD, ALL
     }
 
     #endregion
@@ -153,6 +155,23 @@ namespace CardGame.Cards.DataModel.Effects
                     ApplyAlternateWinCondition(source, target);
                     break;
             }
+
+            switch (subType)
+            {
+                case SubType.INCREASE_MAX_MANA:
+                case SubType.DEAL_DAMAGE:
+                case SubType.STAT_BOOST:
+                case SubType.ADD_EFFECT:
+                case SubType.SWAP_POSITION:
+                case SubType.SWAP_CONTENDER:
+                case SubType.RETURN_CARD:
+                case SubType.FREE_MANA:
+                case SubType.SKIP_COMBAT:
+                case SubType.MIRROR:
+                case SubType.STEAL_MANA:
+                case SubType.STEAL_CARD_FROM_HAND:
+                    TurnManager.Instance.ContinueFlow(); break;
+            }
         }
 
         private void ApplyDefensiveEffect(Card source, object target)
@@ -166,6 +185,9 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
                 case SubType.INCREASE_MAX_MANA:
                     source.contender.IncreaseMaxMana(intParameter1);
+                    break;
+                case SubType.STEAL_REWARD:
+                    source.contender.RestoreLife(source.contender.stolenCards * 5);
                     break;
             }
         }
@@ -181,16 +203,14 @@ namespace CardGame.Cards.DataModel.Effects
                     {
                         case Target.ENEMY:
                         case Target.CARD:
-                            ((Card)target).Destroy();
-                            TurnManager.Instance.ContinueFlow();
+                            ((Card)target).DestroyCard(continueFlow: true);
                             break;
 
                         case Target.AENEMY: Board.Instance.DestroyCards(CardGameManager.Instance.otherPlayer); break;
                         case Target.ACARD: Board.Instance.DestroyAll(); break;
 
                         case Target.FIELDCARD:
-                            CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard()?.Destroy();
-                            TurnManager.Instance.ContinueFlow();
+                            CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard()?.DestroyCard(continueFlow: true);
                             break;
                     }
                     break;
@@ -198,13 +218,29 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DEAL_DAMAGE:
                     switch (targetType)
                     {
-                        case Target.ENEMY: ((Card)target).ReceiveDamage(intParameter1); ((Card)target).CheckDestroy(); break;
-                        //case Target.AENEMY: Board.Instance.DestroyCards(TurnManager.Instance.otherPlayer); break;
-                        //case Target.ACARD: Board.Instance.DestroyAll(); break;
+                        case Target.ENEMY: ((Card)target).ReceiveDamage(intParameter1); break;
                         case Target.PLAYER: CardGameManager.Instance.otherPlayer.ReceiveDamage(intParameter1); break;
                         case Target.SELF: CardGameManager.Instance.currentPlayer.ReceiveDamage(intParameter1); break;
+
+                        case Target.ALL:
+                            {
+                                Contender player = CardGameManager.Instance.player;
+                                Contender opponent = CardGameManager.Instance.opponent;
+
+                                if (source.name != "¡Va a llover!" || !Board.Instance.HasCard(player, "Abro paraguas"))
+                                {
+                                    Board.Instance.HitCards(player, intParameter1);
+                                    player.ReceiveDamage(intParameter1);
+                                }
+
+                                if (source.name != "¡Va a llover!" || !Board.Instance.HasCard(opponent, "Abro paraguas"))
+                                {
+                                    Board.Instance.HitCards(opponent, intParameter1);
+                                    opponent.ReceiveDamage(intParameter1);
+                                }
+                            }
+                            break;
                     }
-                    TurnManager.Instance.ContinueFlow();
                     break;
 
                 case SubType.DECREASE_MANA:
@@ -241,6 +277,7 @@ namespace CardGame.Cards.DataModel.Effects
                         source.contender.RestoreLife(lifeValue);
                     }
                     break;
+
                 case SubType.REBOUND:
                     {
                         if (target is Card)
@@ -272,6 +309,7 @@ namespace CardGame.Cards.DataModel.Effects
                         }
                     }
                     break;
+
                 case SubType.TRAMPLE:
                     {
                         if (target is Card)
@@ -282,11 +320,23 @@ namespace CardGame.Cards.DataModel.Effects
                         }
                     }
                     break;
+
                 case SubType.COMPARTMENTALIZE:
 
                     if (target is Contender)
                     {
                         ((Contender)target).deck.DiscardCards(source.strength);
+                    }
+                    break;
+
+                case SubType.SPONGE:
+
+                    source.Hit(target);
+                    if (target is Card)
+                    {
+                        Card targetCard = (Card)target;
+                        targetCard.Hit(source);
+                        source.BoostStats(targetCard.strength, 0);
                     }
                     break;
 
@@ -313,7 +363,6 @@ namespace CardGame.Cards.DataModel.Effects
                             source.BoostStats(intParameter1, intParameter2);
                             break;
                     }
-                    TurnManager.Instance.ContinueFlow();
                     break;
 
                 case SubType.ADD_EFFECT:
@@ -336,7 +385,6 @@ namespace CardGame.Cards.DataModel.Effects
                             }
                             break;
                     }
-                    TurnManager.Instance.ContinueFlow();
                     break;
 
                 case SubType.GUARD:
@@ -352,21 +400,31 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.CREATE_CARD:
-                    InstantiateCard(source, GetDataFromParameters());
+                    {
+                        Card card = InstantiateCard(source.contender, source.transform.position, GetDataFromParameters(), cardRevealed: true);
+                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
+                        emptyCardZone.AddCard(card);
+                    }
                     break;
 
                 case SubType.DUPLICATE_CARD:
-                    InstantiateCard(source, ((Card)target).data);
+                    {
+                        Card card = InstantiateCard(source.contender, source.transform.position, ((Card)target).data, cardRevealed: true);
+                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
+                        emptyCardZone.AddCard(card);
+                    }
                     break;
 
                 case SubType.SWAP_POSITION:
                     SwapPosition((Card)target);
-                    TurnManager.Instance.ContinueFlow();
                     break;
 
                 case SubType.SWAP_CONTENDER:
-                    if (targetType == Target.SELF) SwapContender(source);
-                    TurnManager.Instance.ContinueFlow();
+                    if (targetType == Target.SELF)
+                    {
+                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.GetOtherContender(source.contender));
+                        SwapContender(source, source, emptyCardZone);
+                    }
                     break;
 
                 case SubType.DRAW_CARD:
@@ -379,12 +437,10 @@ namespace CardGame.Cards.DataModel.Effects
 
                 case SubType.RETURN_CARD:
                     ((Card)target).ReturnToHand();
-                    TurnManager.Instance.ContinueFlow();
                     break;
 
                 case SubType.FREE_MANA:
                     source.contender.SetFreeMana(true);
-                    TurnManager.Instance.ContinueFlow();
                     break;
 
                 case SubType.WHEEL:
@@ -393,12 +449,18 @@ namespace CardGame.Cards.DataModel.Effects
 
                 case SubType.SKIP_COMBAT:
                     TurnManager.Instance.SkipCombat();
-                    TurnManager.Instance.ContinueFlow();
+                    break;
+
+                case SubType.MIRROR:
+                    TurnManager.Instance.SetMirror(source.contender, true);
+                    break;
+
+                case SubType.STEAL_MANA:
+                    TurnManager.Instance.SetStealMana(source.contender);
                     break;
 
                 case SubType.ADD_CARD_TO_DECK:
                     {
-
                         int number = source.manaCost;
                         if (source.manaCost == 0)
                         {
@@ -416,6 +478,42 @@ namespace CardGame.Cards.DataModel.Effects
 
                         CardGameManager.Instance.GetOtherContender(source.contender).deck.DiscardCards(number);
                     }
+                    break;
+
+                case SubType.STEAL_CARD:
+                    if (target is Card)
+                    {
+                        Card targetCard = (Card)target;
+                        CardZone dest = null;
+
+                        if (applyTime == ApplyTime.COMBAT && targetCard.strength >= source.defense)
+                        {
+                            int position = Board.Instance.GetPositionFromCard(source);
+                            dest = source.contender.cardZones[position];
+                        }
+                        else if (source.type == CardType.ACTION)
+                        {
+                            dest = Board.Instance.GetEmptyCardZone(source.contender);
+                        }
+
+                        SwapContender(source, targetCard, dest);
+                        source.contender.stolenCards++;
+                    }
+                    break;
+
+                case SubType.STEAL_CARD_FROM_HAND:
+                    Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
+                    int loops = Mathf.Min(intParameter1, otherContender.hand.numCards);
+
+                    for (int i = 0; i < loops; i++)
+                    {
+                        Card card = otherContender.hand.StealCard();
+                        Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.contender.isPlayer);
+                        source.contender.hand.AddCard(newCard);
+                        source.contender.stolenCards++;
+                        card.DestroyCard(instant: true, continueFlow: false);
+                    }
+
                     break;
             }
         }
@@ -441,19 +539,14 @@ namespace CardGame.Cards.DataModel.Effects
             owner.deck.AddCards(cards);
         }
 
-        private void InstantiateCard(Card source, CardsData data)
+        private Card InstantiateCard(Contender newOwner, Vector3 position, CardsData data, bool cardRevealed)
         {
-            Contender owner = source.contender;
-            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(owner);
-
-            if (emptyCardZone != null)
-            {
-                GameObject cardPrefab = owner.deck.cardPrefab;
-                GameObject card = UnityEngine.Object.Instantiate(cardPrefab, source.transform.position, cardPrefab.transform.rotation);
-                CardsData newData = new CardsData(data);
-                card.GetComponent<Card>().Initialize(owner, newData, cardRevealed: true);
-                emptyCardZone.AddCard(card.GetComponent<Card>());
-            }
+            GameObject cardPrefab = newOwner.deck.cardPrefab;
+            GameObject cardObj = UnityEngine.Object.Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
+            CardsData newData = new CardsData(data);
+            Card card = cardObj.GetComponent<Card>();
+            card.Initialize(newOwner, newData, cardRevealed);
+            return card;
         }
 
         private CardsData GetDataFromParameters()
@@ -521,22 +614,28 @@ namespace CardGame.Cards.DataModel.Effects
             }
         }
 
-        private void SwapContender(Card target)
+        private void SwapContender(Card source, Card target, CardZone dest)
         {
             // Get origin card zone
             int position = Board.Instance.GetPositionFromCard(target);
             CardZone originCardZone = target.contender.cardZones[position];
 
-            // Get destination
-            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.GetOtherContender(target.contender));
-            if (emptyCardZone != null)
+            // Create card with other prefab 
+            Card newCard = InstantiateCard(source.contender, target.transform.position, target.data, cardRevealed: true);
+
+            if (dest != null)
             {
+                // Empty destination zone
+                if (dest.GetCard() != null)
+                    dest.GetCard().RemoveFromContainer();
+
+                // Destroy original
                 Card originCard = originCardZone.GetCard();
-                originCardZone.RemoveCard(originCard.gameObject);
+                originCard.DestroyCard(instant: true, continueFlow: true);
 
-                originCard.SwapContender();
+                //originCard.SwapContender();
 
-                emptyCardZone.AddCard(originCard);
+                dest.AddCard(newCard);
             }
         }
 
@@ -616,15 +715,13 @@ namespace CardGame.Cards.DataModel.Effects
                             || CardGameManager.Instance.player.fieldCardZone.GetCard() != null
                             || CardGameManager.Instance.opponent.fieldCardZone.GetCard() != null;
 
-                    case Target.ARGUMENTCARD:
-                        return currentPlayerHasCards || otherPlayerHasCards;
-
                     case Target.FIELDCARD:
                         return CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard() != null;
 
                     case Target.NONE:
                     case Target.PLAYER:
                     case Target.SELF:
+                    case Target.ALL:
                     default:
                         return true;
                 }
@@ -700,6 +797,8 @@ namespace CardGame.Cards.DataModel.Effects
                     return "Infligir daño (" + intParameter1 + ")";
                 case SubType.DECREASE_MANA:
                     return "Reducir maná (" + intParameter1 + ")";
+                case SubType.STEAL_REWARD:
+                    return "Recompensa de ladrón";
 
                 case SubType.LIFELINK:
                     return "Vínculo vital";
@@ -736,10 +835,17 @@ namespace CardGame.Cards.DataModel.Effects
                     return "Compartimentar";
                 case SubType.SKIP_COMBAT:
                     return "Omitir combate";
+                case SubType.MIRROR:
+                    return "Espejo";
+                case SubType.STEAL_MANA:
+                    return "Robar maná";
                 case SubType.ADD_CARD_TO_DECK:
                     return "Añadir al mazo";
                 case SubType.DISCARD_CARD_FROM_DECK:
                     return "Descartar del mazo";
+                case SubType.STEAL_CARD:
+                case SubType.STEAL_CARD_FROM_HAND:
+                    return "Robar carta";
 
                 case SubType.CITRIANO_WIN_CONDITION:
                 case SubType.PINPONBROS_WIN_CONDITION:
@@ -784,6 +890,8 @@ namespace CardGame.Cards.DataModel.Effects
                     s += "el jugador recupera " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de vida."; break;
                 case SubType.INCREASE_MAX_MANA:
                     s += "consigues " + intParameter1 + " cristal extra de maná."; break;
+                case SubType.STEAL_REWARD:
+                    s += "el jugador recupera 5 puntos de vida por cada carta robada."; break; 
 
                 case SubType.DESTROY_CARD:
                     switch (targetType)
@@ -797,8 +905,8 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DEAL_DAMAGE:
                     switch (targetType)
                     {
-                        case Target.ENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a la carta objetivo."; break;
-                        case Target.AENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a todas las cartas del oponente."; break;
+                        case Target.ENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al argumento objetivo."; break;
+                        case Target.AENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a todos los argumentos del oponente."; break;
                         case Target.PLAYER: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al oponente."; break;
                     }
                     break;
@@ -807,23 +915,23 @@ namespace CardGame.Cards.DataModel.Effects
                     else s += "reduce el maná del oponente en " + intParameter1 + " puntos."; break;
 
                 case SubType.LIFELINK:
-                    s += "el jugador recupera el daño infligido por la carta."; break;
+                    s += "el jugador recupera el daño infligido por el argumento enemigo."; break;
                 case SubType.REBOUND:
                     s += "el daño recibido es infligido al argumento enemigo."; break;
                 case SubType.TRAMPLE:
-                    s += "si la fuerza de la carta es mayor que la defensa de la carta rival, el daño restante es infligido al oponente."; break;
+                    s += "si la fuerza del argumento es mayor que la defensa del argumento rival, el daño restante es infligido al oponente."; break;
                 case SubType.STAT_BOOST:
                     switch (targetType)
                     {
                         case Target.SELF: s += "obtiene un bonificador de " + intParameter1 + " / " + intParameter2 + " al final del turno."; break;
                         case Target.ALLY: s += "el objetivo recibe un bonificador de " + intParameter1 + " / " + intParameter2 + "."; break;
-                        case Target.AALLY: s += "todas las cartas aliadas obtienen un bonificador de " + intParameter1 + "/" + intParameter2 + "."; break;
+                        case Target.AALLY: s += "todos los argumentos aliados obtienen un bonificador de " + intParameter1 + "/" + intParameter2 + "."; break;
                     }
                     break;
                 case SubType.ADD_EFFECT:
                     switch (targetType)
                     {
-                        case Target.AALLY: s += "todas las cartas aliadas obtienen el efecto " + cardParameter_Effect + "."; break;
+                        case Target.AALLY: s += "todos los argumentos aliados obtienen el efecto " + cardParameter_Effect + "."; break;
                     }
                     break;
                 case SubType.GUARD:
@@ -831,14 +939,18 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.COMPARTMENTALIZE:
                     s += "el oponente descarta el número de cartas de la baraja equivalente al daño que fuera a recibir."; break;
                 case SubType.INCOMPARTMENTABLE:
-                    s += "si esta carta fuera a ser descartada del mazo, pasa a la mano del jugador. Corta el efecto de descarte."; break;
+                    s += "si este argumento fuera a ser descartado del mazo, pasa a la mano del jugador. Corta el efecto de descarte."; break;
+                case SubType.SPONGE:
+                    s += "suma a la fuerza el daño recibido."; break;
 
                 case SubType.DUPLICATE_CARD:
-                    s += "duplica la carta objetivo"; break;
+                    if(targetType == Target.ALLY) s  += "duplica el argumento objetivo."; 
+                    else if(targetType == Target.ENEMY) s  += "duplica el argumento rival objetivo."; 
+                    break;
                 case SubType.CREATE_CARD:
-                    s += "invoca la carta " + cardParameter.name + " en una zona libre."; break;
+                    s += "invoca el argumento " + cardParameter.name + " en una zona libre."; break;
                 case SubType.SWAP_POSITION:
-                    s += "mueve la carta objetivo a una zona adyacente. Si ya hay una carta, se intercambian."; break;
+                    s += "mueve el argumento objetivo a una zona adyacente. Si ya hay un argumento, se intercambian."; break;
                 case SubType.SWAP_CONTENDER:
                     s += "la carta pasa al control del oponente."; break;
                 case SubType.DRAW_CARD:
@@ -846,17 +958,28 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DISCARD_CARD:
                     s += "el oponente descarta " + intParameter1 + ((intParameter1 > 1) ? " cartas." : " carta."); break;
                 case SubType.RETURN_CARD:
-                    s += "devuelve la carta objetivo a la mano de su propietario."; break;
+                    s += "devuelve el argumento objetivo a la mano de su propietario."; break;
                 case SubType.FREE_MANA:
                     s += "la próxima carta que juegues tendrá coste 0."; break;
                 case SubType.WHEEL:
                     s += "los jugadores descartan las cartas de su mano y roban la misma cantidad."; break;
                 case SubType.SKIP_COMBAT:
                     s += "se omite la ronda de combate."; break;
+                case SubType.MIRROR:
+                    s += "el daño que fuera a recibir el jugador, lo recibe el oponente."; break;
+                case SubType.STEAL_MANA:
+                    s += "puedes utilizar el maná del oponente durante el turno."; break;
                 case SubType.ADD_CARD_TO_DECK:
-                    s += "se añaden tantas cartas" + cardParameter.name + " al mazo como el maná restante."; break;
+                    s += "se añaden tantas cartas " + cardParameter.name + " al mazo como el maná restante."; break;
                 case SubType.DISCARD_CARD_FROM_DECK:
-                    s += "se descartan tantas cartas del mazo del oponente como el coste de maná de la carta objetivo."; break;
+                    s += "se descartan tantas cartas del mazo del oponente como el coste de maná del argumento objetivo."; break;
+                case SubType.STEAL_CARD:
+                    if (applyTime == ApplyTime.COMBAT) s += "roba el argumento que lo destruya.";
+                    else s += "roba la carta objetivo.";
+                    break;
+                case SubType.STEAL_CARD_FROM_HAND:
+                    s += "roba " + intParameter1 + ((intParameter1 > 1) ? " cartas" : " carta") + " de la mano del oponente."; break;
+
 
                 case SubType.CITRIANO_WIN_CONDITION:
                     s += "si tienes 30 o más vidas, ganas la partida. (" + CardGameManager.Instance.player.life + "/30)"; break;

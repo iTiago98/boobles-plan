@@ -122,6 +122,8 @@ namespace CardGame.Managers
 
         public void TurnAnimation(Turn turn)
         {
+            TurnManager.Instance.StopFlow();
+
             switch (turn)
             {
                 case Turn.START:
@@ -193,14 +195,14 @@ namespace CardGame.Managers
         private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
             int opponentCurrentLife, int opponentCurrentMana, int opponentCurrentMaxMana, int opponentExtraMana)
         {
-            if(_shownPlayerLife != playerCurrentLife) 
+            if (_shownPlayerLife != playerCurrentLife)
                 SetHealth(playerHealthImage, playerExtraHealthImage, playerExtraHealthImage2, ref _shownPlayerLife, playerCurrentLife);
-            if(_shownOpponentLife != opponentCurrentLife) 
+            if (_shownOpponentLife != opponentCurrentLife)
                 SetHealth(opponentHealthImage, opponentExtraHealthImage, opponentExtraHealthImage2, ref _shownOpponentLife, opponentCurrentLife);
 
-            if (_shownPlayerMana != playerCurrentMana) 
+            if (_shownPlayerMana != playerCurrentMana)
                 SetMana(playerManaList, ref _shownPlayerMana, playerCurrentMana, playerCurrentMaxMana, playerExtraMana);
-            if (_shownOpponentMana != opponentCurrentMana) 
+            if (_shownOpponentMana != opponentCurrentMana)
                 SetMana(opponentManaList, ref _shownOpponentMana, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
         }
 
@@ -223,7 +225,7 @@ namespace CardGame.Managers
                 //Debug.Log("1: Mana " + (shownMana) + " full");
                 if (IsExtraMana(extraMana, currentMaxMana, shownMana))
                     manaList[_defaultMaxMana + (shownMana - currentMaxMana + extraMana)].sprite = fullExtraManaCristal;
-                
+
                 else manaList[shownMana].sprite = fullManaCristal;
 
                 shownMana++;
@@ -251,8 +253,6 @@ namespace CardGame.Managers
         {
             List<Image> manaList = (contender.role == Contender.Role.PLAYER) ? playerManaList : opponentManaList;
             manaList[newMaxMana - 1].sprite = emptyManaCristal;
-
-            TurnManager.Instance.ContinueFlow();
         }
 
         #endregion
@@ -291,7 +291,7 @@ namespace CardGame.Managers
                     endTurnButton.SetInteractable(true);
                     if (TurnManager.Instance.skipCombat)
                         endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
-                    else 
+                    else
                         endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
                     break;
                 case Turn.DISCARDING:
@@ -334,6 +334,7 @@ namespace CardGame.Managers
 
         public void UpdateRemainingCards(int remainingCards, int maxCards, Contender contender)
         {
+            if (remainingCards < 0) remainingCards = 0;
             if (contender.role == Contender.Role.PLAYER) playerDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
             else opponentDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
         }

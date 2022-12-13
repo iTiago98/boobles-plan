@@ -61,7 +61,6 @@ namespace CardGame.Level
 
         public void DrawCards(int numCardsToAdd)
         {
-            TurnManager.Instance.StopFlow();
             int numCardsStart = numCards;
 
             for (int i = 0; i < numCardsToAdd; i++)
@@ -130,7 +129,6 @@ namespace CardGame.Level
 
         public void DiscardCards(int numCardsToDiscard)
         {
-            TurnManager.Instance.StopFlow();
             int numCardsStart = numCards;
 
             for (int i = 0; i < numCardsToDiscard; i++)
@@ -172,7 +170,7 @@ namespace CardGame.Level
             {
                 Card card = _listToDiscard[0];
                 card.gameObject.SetActive(true);
-                card.Destroy();
+                card.DestroyCard();
 
                 UpdateRemainingCards(--numCardsStart);
                 CheckDeckSprite();
@@ -238,7 +236,6 @@ namespace CardGame.Level
 
         public void AddCards(List<Card> cards)
         {
-            TurnManager.Instance.StopFlow();
             StartCoroutine(AddCardCoroutine(cards));
         }
 
@@ -258,7 +255,7 @@ namespace CardGame.Level
                 yield return new WaitForSeconds(0.5f);
 
                 _deckCards.Add(card.data);
-                card.Destroy();
+                card.DestroyCard();
                 UpdateRemainingCards();
 
                 yield return new WaitUntil(() => card == null);

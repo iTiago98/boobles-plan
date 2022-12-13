@@ -1,0 +1,403 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27a2f991ff12b647ab8c2ff7b8868d7, type: 3}
+  m_Name: BossCards
+  m_EditorClassIdentifier: 
+  resourcesPath: Cards/BossDeck
+  cards:
+  - name: Abro paraguas
+    sprite: {fileID: 21300000, guid: fa2b09ed172b47a408232d3cc2bb77b8, type: 3}
+    cost: 2
+    strength: 0
+    defense: 5
+    type: 0
+    effects: []
+  - name: "Cl\xE1usula sorpresa"
+    sprite: {fileID: 21300000, guid: d62fce07e7fc3ce498777f5956642644, type: 3}
+    cost: 1
+    strength: 0
+    defense: 1
+    type: 0
+    effects:
+    - type: 4
+      subType: 30
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "Cl\xE1usula sorpresa"
+    sprite: {fileID: 21300000, guid: d62fce07e7fc3ce498777f5956642644, type: 3}
+    cost: 1
+    strength: 0
+    defense: 1
+    type: 0
+    effects:
+    - type: 4
+      subType: 30
+      applyTime: 2
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: De casa se viene cagao
+    sprite: {fileID: 21300000, guid: a8befc8368197d74cae0860c533079c9, type: 3}
+    cost: 3
+    strength: 2
+    defense: 3
+    type: 0
+    effects:
+    - type: 3
+      subType: 9
+      applyTime: 1
+      targetType: 5
+      intParameter1: -1
+      intParameter2: -1
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "\xA1Para eso te pago!"
+    sprite: {fileID: 21300000, guid: be4d23058217a154a95955c4b888b494, type: 3}
+    cost: 4
+    strength: 1
+    defense: 4
+    type: 0
+    effects:
+    - type: 4
+      subType: 32
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "\xA1Seguridad!"
+    sprite: {fileID: 21300000, guid: 0e74666a64d39be46a2ab2f065bca23d, type: 3}
+    cost: 4
+    strength: 0
+    defense: 15
+    type: 0
+    effects:
+    - type: 3
+      subType: 29
+      applyTime: 2
+      targetType: 0
+      intParameter1: -1
+      intParameter2: -1
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "M\xE1quina de control mental"
+    sprite: {fileID: 21300000, guid: 6ae8c85b2205a6c4cb8beee4bcc218e1, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 30
+      applyTime: 1
+      targetType: 2
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "M\xE1quina de control mental"
+    sprite: {fileID: 21300000, guid: 6ae8c85b2205a6c4cb8beee4bcc218e1, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 30
+      applyTime: 1
+      targetType: 2
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "M\xE1quina de control mental"
+    sprite: {fileID: 21300000, guid: 6ae8c85b2205a6c4cb8beee4bcc218e1, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 30
+      applyTime: 1
+      targetType: 2
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: Explotar recursos
+    sprite: {fileID: 21300000, guid: 5d067ad91f917cc479985deb9583b75f, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 33
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: Explotar recursos
+    sprite: {fileID: 21300000, guid: 5d067ad91f917cc479985deb9583b75f, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 33
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: OPA hostil
+    sprite: {fileID: 21300000, guid: 997019e1b90c24b47b2d1048de93c137, type: 3}
+    cost: 4
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 31
+      applyTime: 1
+      targetType: 0
+      intParameter1: 2
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: OPA hostil
+    sprite: {fileID: 21300000, guid: 997019e1b90c24b47b2d1048de93c137, type: 3}
+    cost: 4
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 31
+      applyTime: 1
+      targetType: 0
+      intParameter1: 2
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "Me gusta c\xF3mo piensas"
+    sprite: {fileID: 21300000, guid: 404f63a549198fb47a19760efba1baf4, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 12
+      applyTime: 1
+      targetType: 2
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "Me gusta c\xF3mo piensas"
+    sprite: {fileID: 21300000, guid: 404f63a549198fb47a19760efba1baf4, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 4
+      subType: 12
+      applyTime: 1
+      targetType: 2
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "Llevarse el m\xE9rito"
+    sprite: {fileID: 21300000, guid: 249e96f0fbf10d141ad6213bbfac0b89, type: 3}
+    cost: 2
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 1
+      subType: 34
+      applyTime: 1
+      targetType: 0
+      intParameter1: 0
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: Cushillo
+    sprite: {fileID: 21300000, guid: bb0ed193aa3e72047bc3886ce3d7cc50, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 4
+      applyTime: 1
+      targetType: 2
+      intParameter1: 21
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: Cushillo
+    sprite: {fileID: 21300000, guid: bb0ed193aa3e72047bc3886ce3d7cc50, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 4
+      applyTime: 1
+      targetType: 2
+      intParameter1: 21
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: Cushillo
+    sprite: {fileID: 21300000, guid: bb0ed193aa3e72047bc3886ce3d7cc50, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 1
+    effects:
+    - type: 2
+      subType: 4
+      applyTime: 1
+      targetType: 2
+      intParameter1: 21
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0
+  - name: "\xA1Va a llover!"
+    sprite: {fileID: 21300000, guid: a6eddb7cee269d241a0bce94de22562e, type: 3}
+    cost: 3
+    strength: 0
+    defense: 0
+    type: 2
+    effects:
+    - type: 2
+      subType: 4
+      applyTime: 3
+      targetType: 10
+      intParameter1: 1
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0

@@ -34,6 +34,7 @@ namespace CardGame
         public List<CardZone> cardZones { private set; get; }
         public CardZone fieldCardZone { private set; get; }
 
+        public int stolenCards;
 
         public void Initialize(Hand hand, Deck deck, List<CardZone> cardZones, CardZone fieldCardZone)
         {
@@ -72,6 +73,7 @@ namespace CardGame
         public void SubstractMana(int cost)
         {
             currentMana -= cost;
+            if (currentMana < 0) currentMana = 0;
             UIManager.Instance.UpdateUIStats();
         }
 

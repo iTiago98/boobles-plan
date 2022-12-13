@@ -68,7 +68,7 @@ namespace CardGame.Managers
                 case Opponent_Name.Secretary:
                     _interviewDialogue = null;
                     break;
-                case Opponent_Name.Jefe:
+                case Opponent_Name.Boss:
                     _interviewDialogue = null;
                     break;
             }

@@ -237,7 +237,7 @@ namespace CardGame.Cards
                 {
                     int numCards = _hand.numCards - 1;
                     _hand.CheckDiscarding(numCards);
-                    Destroy();
+                    DestroyCard();
                 }
                 else if (TurnManager.Instance.isPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
@@ -266,7 +266,11 @@ namespace CardGame.Cards
 
         private bool EnoughMana()
         {
-            return contender.freeMana || manaCost <= contender.currentMana;
+            int mana = contender.currentMana;
+            if (TurnManager.Instance.IsStealMana(contender))
+                mana += CardGameManager.Instance.GetOtherContender(contender).currentMana;
+
+            return contender.freeMana || manaCost <= mana;
         }
 
         public void OnMouseHoverEnter()
@@ -381,11 +385,6 @@ namespace CardGame.Cards
             }
         }
 
-        private void AddToContainer(CardZone cardZone)
-        {
-            cardZone.AddCard(this);
-            transform.DOScale(_defaultScale, 0.2f);
-        }
 
         private void CheckEffect()
         {
@@ -445,7 +444,7 @@ namespace CardGame.Cards
 
             yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
-            Destroy();
+            DestroyCard();
             MouseController.Instance.SetHolding(null);
             UIManager.Instance.SetEndTurnButtonInteractable(true);
         }
@@ -454,18 +453,30 @@ namespace CardGame.Cards
         {
             SubstractMana();
 
-            ApplyEffect(_storedTarget);
-            Destroy();
+            ApplyEffect(effect, _storedTarget);
+            DestroyCard();
 
             _storedTarget = null;
             CardGameManager.Instance.opponentAI.enabled = true;
             MouseController.Instance.SetHolding(null);
         }
 
-        private void SubstractMana()
+        public void SubstractMana()
         {
-            if (contender.freeMana) contender.SetFreeMana(false);
-            else contender.SubstractMana(manaCost);
+            int manaCostLeft = manaCost;
+
+            if (TurnManager.Instance.IsStealMana(contender))
+            {
+                Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
+                manaCostLeft -= otherContender.currentMana;
+                otherContender.SubstractMana(manaCost);
+            }
+
+            if (manaCostLeft > 0)
+            {
+                if (contender.freeMana) contender.SetFreeMana(false);
+                else contender.SubstractMana(manaCostLeft);
+            }
         }
 
         public void CancelPlay()
@@ -488,11 +499,14 @@ namespace CardGame.Cards
             }
             else
             {
-                Contender contender = (Contender)target;
+                Contender targetContender = (Contender)target;
 
-                if (HasEffect(SubType.COMPARTMENTALIZE) && contender.deck.numCards > 0) return;
+                if (HasEffect(SubType.COMPARTMENTALIZE) && targetContender.deck.numCards > 0) return;
 
-                contender.ReceiveDamage(strength);
+                if (TurnManager.Instance.IsMirror(targetContender))
+                    contender.ReceiveDamage(strength);
+                else
+                    targetContender.ReceiveDamage(strength);
             }
         }
 
@@ -552,6 +566,7 @@ namespace CardGame.Cards
             data.defense -= strength;
             if (data.defense < 0) data.defense = 0;
             UpdateStatsUI();
+            CheckDestroy();
         }
 
         public void ApplyCombatEffects(object target)
@@ -560,7 +575,7 @@ namespace CardGame.Cards
             {
                 if (effect.applyTime == ApplyTime.COMBAT)
                 {
-                    effect.Apply(this, target);
+                    ApplyEffect(effect, target);
                 }
             }
         }
@@ -569,18 +584,37 @@ namespace CardGame.Cards
 
         #region Destroy
 
-        public void Destroy()
+        public void DestroyCard()
+        {
+            DestroyCard(false, false);
+        }
+
+        public void DestroyCard(bool continueFlow)
+        {
+            DestroyCard(instant: false, continueFlow);
+        }
+
+        public void DestroyCard(bool instant, bool continueFlow)
         {
             //Play destroy animation
             Debug.Log(name + " destroyed");
+            StartCoroutine(DestroyCardCoroutine(instant, continueFlow));
+        }
 
+        private IEnumerator DestroyCardCoroutine(bool instant, bool continueFlow)
+        {
             _clickable = false;
             HideExtendedDescription();
 
-            if (!IsInHand) RemoveFromContainer();
+            CheckDelegateEffects();
             CheckDestroyEffects();
 
+            if (!IsInHand) RemoveFromContainer();
+
             Sequence destroySequence = DOTween.Sequence();
+
+            if (instant) destroySequence.AppendCallback(() => gameObject.SetActive(false));
+
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
             {
@@ -589,11 +623,14 @@ namespace CardGame.Cards
             });
 
             destroySequence.Play();
+
+            yield return new WaitUntil(() => this == null);
         }
 
         public void CheckDestroy()
         {
-            if (defense <= 0) Destroy();
+            if (TurnManager.Instance.combat) return;
+            if (defense <= 0) DestroyCard();
         }
 
         #endregion
@@ -624,17 +661,41 @@ namespace CardGame.Cards
             ApplyEffect(effect);
         }
 
-        private void ApplyEffect(CardEffect effect)
+        public void ApplyEffect(object target)
         {
-            if (effect.IsAppliable()) effect.Apply(this, null);
+            ApplyEffect(effect, target);
         }
 
-        private void ApplyEffect(Card target)
+        private void ApplyEffect(CardEffect effect)
+        {
+            ApplyEffect(effect, null);
+        }
+
+        public void ApplyEffect(CardEffect effect, object target)
         {
             if (effect.IsAppliable()) effect.Apply(this, target);
         }
 
         private void CheckDestroyEffects()
+        {
+            if (hasEffect)
+            {
+                foreach (CardEffect effect in effects)
+                {
+                    if (effect.applyTime == ApplyTime.DESTROY && !IsInHand)
+                    {
+                        ApplyEffect(effect);
+                    }
+
+                    if (effect.subType == SubType.MIRROR)
+                    {
+                        TurnManager.Instance.SetMirror(contender, false);
+                    }
+                }
+            }
+        }
+
+        private void CheckDelegateEffects()
         {
             if (hasEffect)
             {
@@ -655,12 +716,8 @@ namespace CardGame.Cards
                     {
                         TurnManager.Instance.RemovePlayArgumentEffect(_playArgumentEffect);
                     }
-                    // Destroy Effects
-                    else if (effect.applyTime == ApplyTime.DESTROY && !IsInHand)
-                    {
-                        effect.Apply(this, null);
-                    }
 
+                    // Guard Card
                     if (effect.subType == SubType.GUARD)
                     {
                         TurnManager.Instance.RemoveGuardCard(contender);
@@ -724,6 +781,12 @@ namespace CardGame.Cards
 
         #region Containers
 
+        private void AddToContainer(CardZone cardZone)
+        {
+            cardZone.AddCard(this);
+            transform.DOScale(_defaultScale, 0.2f);
+        }
+
         public void SetContainer(CardContainer container)
         {
             this.container = container;
@@ -747,7 +810,7 @@ namespace CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
-            CheckDestroyEffects();
+            CheckDelegateEffects();
 
             data.strength = _defaultStrength;
             data.defense = _defaultDefense;

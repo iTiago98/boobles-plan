@@ -28,7 +28,17 @@ namespace CardGame.Managers
         private Turn _turn = Turn.START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
 
+
+        // Skip Combat Effect
         public bool skipCombat;
+
+        // Mirror Effect
+        public bool playerMirror;
+        public bool opponentMirror;
+
+        // Steal Mana Effect
+        public bool playerStealMana;
+        public bool opponentStealMana;
 
         #region Turn flow 
 
@@ -40,13 +50,11 @@ namespace CardGame.Managers
         private IEnumerator StartGameCoroutine()
         {
             // START GAME ANIMATION
-            StopFlow();
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
 
             // DRAW CARDS
-            StopFlow();
             DrawCards(CardGameManager.Instance.settings.initialCardNumber);
 
             yield return new WaitUntil(() => continueFlow);
@@ -80,13 +88,10 @@ namespace CardGame.Managers
         private IEnumerator StartTurnCoroutine()
         {
             // START TURN ANIMATION
-            StopFlow();
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
 
-            // DRAW CARD
-            StopFlow();
             DrawCards(1);
 
             yield return new WaitUntil(() => continueFlow);
@@ -126,8 +131,8 @@ namespace CardGame.Managers
         private IEnumerator FinishRoundCoroutine()
         {
             // CLASH TURN ANIMATION
-            StopFlow();
             UIManager.Instance.TurnAnimation(turn);
+            RemoveStealMana();
 
             yield return new WaitUntil(() => continueFlow);
 
@@ -160,7 +165,13 @@ namespace CardGame.Managers
                     FinishRound();
                     break;
             }
+        }
 
+        private void SetTurn(Turn turn)
+        {
+            _turn = turn;
+
+            UIManager.Instance.CheckEndTurnButtonState(_turn);
         }
 
         public void StopFlow()
@@ -182,15 +193,12 @@ namespace CardGame.Managers
             StartCoroutine(ClashCoroutine());
         }
 
-        //public bool clashing;
-        public bool continueFlow;
+        public bool continueFlow { private set; get; }
+        public bool combat;
 
         private IEnumerator ClashCoroutine()
         {
-            //clashing = true;
-            ContinueFlow();
-
-            bool combat = false;
+            combat = false;
 
             for (int index = 0; index < 4; index++)
             {
@@ -233,10 +241,20 @@ namespace CardGame.Managers
         public void ApplyCombatActions(Card source, object targetObj)
         {
             source.ApplyCombatEffects(targetObj);
-            if ((targetObj is Card) && (source.HasEffect(SubType.REBOUND) || ((Card)targetObj).HasEffect(SubType.REBOUND)))
+            if (IsHitManagedByEffect(source, targetObj))
                 return;
 
             source.Hit(targetObj);
+        }
+
+        private bool IsHitManagedByEffect(Card source, object targetObj)
+        {
+            return targetObj is Card && (IsEffect(SubType.REBOUND, source, (Card)targetObj) || IsEffect(SubType.SPONGE, source, (Card)targetObj));
+        }
+
+        private bool IsEffect(SubType subType, Card source, Card target)
+        {
+            return source.HasEffect(subType) || target.HasEffect(subType);
         }
 
         #endregion
@@ -252,6 +270,12 @@ namespace CardGame.Managers
                 SkipCombat();
                 FinishRound();
             }
+        }
+
+        public void AlternateWinCondition()
+        {
+            CardGameManager.Instance.SetAlternateWinCondition();
+            CheckEndMidTurn();
         }
 
         #endregion
@@ -344,6 +368,7 @@ namespace CardGame.Managers
 
         private void DrawCards(int cardNumber)
         {
+            StopFlow();
             board.DrawCards(cardNumber, _turn);
         }
 
@@ -352,19 +377,31 @@ namespace CardGame.Managers
             skipCombat = true;
         }
 
-        public void AlternateWinCondition()
+        public void SetMirror(Contender contender, bool state)
         {
-            CardGameManager.Instance.SetAlternateWinCondition();
-            CheckEndMidTurn();
+            if (contender.isPlayer) playerMirror = state;
+            else opponentMirror = state;
+        }
+        public bool IsMirror(Contender contender)
+        {
+            return (contender.isPlayer && playerMirror) || (!contender.isPlayer && opponentMirror);
+        }
+        
+        public void SetStealMana(Contender contender)
+        {
+            if (contender.isPlayer) playerStealMana = true;
+            else opponentStealMana = true;
         }
 
-        private void SetTurn(Turn turn)
+        public void RemoveStealMana()
         {
-            _turn = turn;
-            //if (turn == Turn.OPPONENT)
-            //    CardGameManager.Instance.opponentAI.enabled = true;
+            playerStealMana = false;
+            opponentStealMana = false;
+        }
 
-            UIManager.Instance.CheckEndTurnButtonState(_turn);
+        public bool IsStealMana(Contender contender)
+        {
+            return (contender.isPlayer && playerStealMana) || (!contender.isPlayer && opponentStealMana);
         }
     }
 }

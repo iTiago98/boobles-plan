@@ -69,6 +69,13 @@ namespace Booble.MainMenu
 			LoadInterview();
         }
 
+		public void BossCardsButton()
+        {
+			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Boss);
+			DeckManager.Instance.RemoveExtraCards();
+			LoadInterview();
+        }
+
 		public void LoadInterview()
         {
 			SceneLoader.Instance.LoadInterviewScene(new List<GameObject>()

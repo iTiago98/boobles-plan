@@ -20,6 +20,7 @@ public class DeckManager : MonoBehaviour
     [SerializeField] private List<CardsData> citrianoExtraCards;
     [SerializeField] private List<CardsData> pinponbrosExtraCards;
     [SerializeField] private List<CardsData> secretaryExtraCards;
+    [SerializeField] private List<CardsData> bossExtraCards;
 
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
@@ -87,7 +88,7 @@ public class DeckManager : MonoBehaviour
             case Opponent_Name.Secretary:
                 opponentDeck = opponentsDecks[3];
                 break;
-            case Opponent_Name.Jefe:
+            case Opponent_Name.Boss:
                 opponentDeck = opponentsDecks[4];
                 break;
         }
@@ -246,7 +247,6 @@ public class DeckManager : MonoBehaviour
         {
             if (secretaryExtraCards.Contains(card)) indexToRemove.Add(_playerDeck.IndexOf(card));
         }
-        
     }
 
     public void AddHaPerdidoUsteLosPapele()
@@ -267,6 +267,32 @@ public class DeckManager : MonoBehaviour
     public void AddResaltarUnaContradiccion()
     {
         AddCard(secretaryExtraCards[3]);
+    }
+
+    #endregion
+
+    #region Boss Extra Cards
+
+    public void AddBossCards()
+    {
+        AddHipervitaminadoPlus();
+        AddVictoriaPorDesgastePlus();
+        AddHaPerdidoUsteLosPapelePlus();
+    }
+
+    public void AddHipervitaminadoPlus()
+    {
+        AddCard(bossExtraCards[0]);
+    }
+
+    public void AddVictoriaPorDesgastePlus()
+    {
+        AddCard(bossExtraCards[1]);
+    }
+
+    public void AddHaPerdidoUsteLosPapelePlus()
+    {
+        AddCard(bossExtraCards[2]);
     }
 
     #endregion

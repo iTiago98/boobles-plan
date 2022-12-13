@@ -2,7 +2,6 @@ using CardGame.Cards;
 using CardGame.Cards.DataModel;
 using CardGame.Cards.DataModel.Effects;
 using CardGame.Managers;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,7 +61,7 @@ namespace CardGame.Level
                 case Opponent_Name.Secretary:
                     background.sprite = backgroundList[3];
                     break;
-                case Opponent_Name.Jefe:
+                case Opponent_Name.Boss:
                     background.sprite = backgroundList[4];
                     break;
             }
@@ -92,8 +91,6 @@ namespace CardGame.Level
 
         private IEnumerator WheelCoroutine()
         {
-            TurnManager.Instance.StopFlow();
-
             Contender player = CardGameManager.Instance.player;
             Contender opponent = CardGameManager.Instance.opponent;
 
@@ -105,15 +102,10 @@ namespace CardGame.Level
 
             yield return new WaitUntil(() => EmptyHands());
 
-            Debug.Log(playerNumCards);
-            Debug.Log(opponentNumCards);
-
-            TurnManager.Instance.StopFlow();
-
             DrawCards(playerNumCards, Turn.PLAYER);
             DrawCards(opponentNumCards, Turn.OPPONENT);
 
-            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+            yield return new WaitUntil(() => playerHand.numCards == playerNumCards && opponentHand.numCards == opponentNumCards);
         }
 
         private bool EmptyHands()
@@ -126,12 +118,16 @@ namespace CardGame.Level
 
         public CardZone GetEmptyCardZone(Contender contender)
         {
-            List<CardZone> cardZone = contender.cardZones;
-            foreach (CardZone zone in cardZone)
-            {
-                if (zone.numCards == 0) return zone;
-            }
+            int tries = 10;
 
+            List<CardZone> cardZones = contender.cardZones;
+            for (int i = 0; i < tries; i++)
+            {
+                int index = Random.Range(0, cardZones.Count);
+                CardZone cardZone = cardZones[index];
+                if (cardZone.GetCard() == null) return cardZone;
+            }
+            
             return null;
         }
 
@@ -170,7 +166,7 @@ namespace CardGame.Level
             for (int i = 0; i < cardZones.Count; i++)
             {
                 CardZone cardZone = cardZones[i];
-                if (cardZone.GetCard()?.name == card.name) return i;
+                if (cardZone.GetCard() == card) return i;
             }
 
             return -1;
@@ -186,6 +182,30 @@ namespace CardGame.Level
 
         #endregion
 
+        public bool HasCard(Contender contender, string name)
+        {
+            foreach(CardZone cardZone in contender.cardZones)
+            {
+                Card card = cardZone.GetCard();
+                if (card != null && card.name.Equals(name)) return true;
+            }
+
+            return false;
+        }
+
+        #region Hit
+
+        public void HitCards(Contender contender, int damage)
+        {
+            foreach(CardZone cardZone in contender.cardZones)
+            {
+                Card card = cardZone.GetCard();
+                if (card != null) card.ReceiveDamage(damage);
+            }
+        }
+
+        #endregion
+        
         #region Destroy
 
         public void DestroyCards(Contender contender)
@@ -202,11 +222,15 @@ namespace CardGame.Level
                 if(card != null)
                 {
                     aux = card;
-                    card.Destroy();
+                    card.DestroyCard();
                 }
             }
             Card fieldCard = contender.fieldCardZone.GetCard();
-            if (fieldCard != null) fieldCard.Destroy();
+            if (fieldCard != null)
+            {
+                aux = fieldCard;
+                fieldCard.DestroyCard();
+            }
 
             yield return new WaitUntil(() => aux == null);
             TurnManager.Instance.ContinueFlow();
