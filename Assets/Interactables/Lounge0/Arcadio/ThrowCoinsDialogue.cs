@@ -67,11 +67,11 @@ namespace Booble.Interactables.Arcadio
 
             if(coinCount < 3)
             {
-                _diagManager.OnEndDialogue.AddListener(() => Interactable.EndInteraction());
+                _diagManager.OnEndDialogue.AddListener(Interactable.EndInteraction);
             }
             else
             {
-                _diagManager.OnEndDialogue.AddListener(() => WalkToSofa());
+                _diagManager.OnEndDialogue.AddListener(WalkToSofa);
                 FlagManager.Instance.SetFlag(Flag.Reference.AllCoins);
             }
         }

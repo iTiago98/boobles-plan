@@ -488,6 +488,9 @@ MonoBehaviour:
   - <FlagRef>k__BackingField: 44
     <Content>k__BackingField: {fileID: 11400000, guid: 8a378440822fd634bb9d7cac92659244, type: 2}
     <Scene>k__BackingField: Lounge0
+  - <FlagRef>k__BackingField: 45
+    <Content>k__BackingField: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+    <Scene>k__BackingField: Lounge2
 --- !u!1 &1959909039
 GameObject:
   m_ObjectHideFlags: 0
