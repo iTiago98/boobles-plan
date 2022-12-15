@@ -36,15 +36,15 @@ namespace Booble.Interactables.Arcadio
         public void StartInteraction()
         {
             int coinCount = 0;
-            if (FlagManager.Instance.GetFlag(_coin1))
+            if (FlagManager.Instance.GetFlag(Flag.Reference.MonedaPinPonBrosEntregada))
             {
                 coinCount++;
             }
-            if (FlagManager.Instance.GetFlag(_coin2))
+            if (FlagManager.Instance.GetFlag(Flag.Reference.MonedaSofasEntregada))
             {
                 coinCount++;
             }
-            if (FlagManager.Instance.GetFlag(_coin3))
+            if (FlagManager.Instance.GetFlag(Flag.Reference.MonedaMaquinaCafesEntregada))
             {
                 coinCount++;
             }
@@ -72,6 +72,7 @@ namespace Booble.Interactables.Arcadio
             else
             {
                 _diagManager.OnEndDialogue.AddListener(() => WalkToSofa());
+                FlagManager.Instance.SetFlag(Flag.Reference.AllCoins);
             }
         }
 
