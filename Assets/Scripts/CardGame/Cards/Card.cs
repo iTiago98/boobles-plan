@@ -21,7 +21,7 @@ namespace CardGame.Cards
         public CardEffect effect => effects[0];
         public bool hasEffect => effects.Count > 0;
 
-        public CardsData data { private set; get; }
+        public CardsData data { set; get; }
         private int _defaultStrength;
         private int _defaultDefense;
 
@@ -385,7 +385,6 @@ namespace CardGame.Cards
             }
         }
 
-
         private void CheckEffect()
         {
             if (hasEffect)
@@ -607,7 +606,7 @@ namespace CardGame.Cards
             HideExtendedDescription();
 
             CheckDelegateEffects();
-            CheckDestroyEffects();
+            if (!instant) CheckDestroyEffects();
 
             if (!IsInHand) RemoveFromContainer();
 

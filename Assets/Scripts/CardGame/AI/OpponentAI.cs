@@ -3,18 +3,16 @@ using CardGame.Cards.DataModel;
 using CardGame.Cards.DataModel.Effects;
 using CardGame.Level;
 using CardGame.Managers;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace CardGame.AI
 {
-    public class OpponentAI : MonoBehaviour
+    abstract public class OpponentAI : MonoBehaviour
     {
         protected Contender _contender;
 
-        [SerializeField] private float _waitTime;
+        private float _waitTime = 1.5f;
         private float _timer;
 
         public void Initialize(Contender contender)
@@ -32,9 +30,6 @@ namespace CardGame.AI
             if (_contender == null) return;
             if (!TurnManager.Instance.continueFlow) return;
 
-            if (Input.GetKeyDown(KeyCode.H)) _waitTime = 0;
-            if (Input.GetKeyDown(KeyCode.J)) _waitTime = 1.5f;
-
             _timer += Time.deltaTime;
             if (_timer > _waitTime)
             {
@@ -43,49 +38,33 @@ namespace CardGame.AI
             }
         }
 
+        #region Play
+
         private void Play()
         {
-            if (_contender.currentMana > 0 || _contender.freeMana)
+            if (HasMana())
             {
                 List<Card> playableCards = new List<Card>();
-                CardZone emptyCardZone = GetRandomEmptyCardZone();
+
+                CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(_contender);
                 CardZone fieldCardZone = GetFieldCardZone();
 
-                foreach (GameObject cardObj in _contender.hand.cards)
-                {
-                    Card card = cardObj.GetComponent<Card>();
-
-                    if (card.manaCost > _contender.currentMana && !_contender.freeMana) continue;
-
-                    switch (card.type)
-                    {
-                        case CardType.ARGUMENT:
-                            if (emptyCardZone) playableCards.Add(card);
-                            break;
-                        case CardType.ACTION:
-                            if (card.hasEffect && card.effect.IsAppliable() && IsGoodChoice(card.effect))
-                                playableCards.Add(card);
-                            break;
-                        case CardType.FIELD:
-                            if (fieldCardZone) playableCards.Add(card);
-                            break;
-                    }
-                }
+                GetCards(ref playableCards, emptyCardZone, fieldCardZone);
 
                 if (playableCards.Count == 0) SkipTurn();
                 else
                 {
-                    int index = new System.Random().Next(0, playableCards.Count);
+                    int index = Random.Range(0, playableCards.Count);
                     Card card = playableCards[index];
                     CardZone cardZone = null;
 
                     switch (card.type)
                     {
                         case CardType.ARGUMENT:
-                            cardZone = emptyCardZone;
+                            CardZone bestCardZone = GetBestPosition(card);
+                            cardZone = (bestCardZone != null) ? bestCardZone : emptyCardZone;
                             break;
-                        case CardType.ACTION:
-                            break;
+
                         case CardType.FIELD:
                             cardZone = fieldCardZone;
                             break;
@@ -100,29 +79,71 @@ namespace CardGame.AI
             }
         }
 
+        private void GetCards(ref List<Card> playableCards, bool emptyCardZone, bool fieldCardZone)
+        {
+            foreach (GameObject cardObj in _contender.hand.cards)
+            {
+                Card card = cardObj.GetComponent<Card>();
+
+                if (!EnoughMana(card.manaCost)) continue;
+
+                switch (card.type)
+                {
+                    case CardType.ARGUMENT:
+
+                        if (emptyCardZone && IsGoodChoice(card)) playableCards.Add(card); break;
+
+                    case CardType.ACTION:
+
+                        if (IsAppliable(card) && IsGoodChoice(card)) playableCards.Add(card); break;
+
+                    case CardType.FIELD:
+
+                        if (fieldCardZone) playableCards.Add(card); break;
+                }
+            }
+        }
+
         private void PlayCard(Card card, CardZone cardZone)
         {
             card.RemoveFromContainer(); // Remove from hand
             card.Play(cardZone);
         }
 
-        private CardZone GetRandomEmptyCardZone()
+        #region Aux
+
+        private bool HasMana()
         {
-            List<CardZone> cardZones = _contender.cardZones;
-            int tries = 10;
-            System.Random random = new System.Random();
-            for (int i = 0; i < tries; i++)
+            return _contender.freeMana
+                || _contender.currentMana > 0
+                || (TurnManager.Instance.IsStealMana(_contender) && CardGameManager.Instance.player.currentMana > 0);
+        }
+
+        private bool EnoughMana(int manaCost)
+        {
+            if (_contender.freeMana) return true;
+
+            int manaAvailable = 0;
+
+            if (TurnManager.Instance.IsStealMana(_contender))
             {
-                int index = random.Next(0, cardZones.Count);
-                if (cardZones[index].GetCard() == null) return cardZones[index];
+                Contender player = CardGameManager.Instance.player;
+                manaAvailable += player.currentMana;
             }
 
-            foreach (CardZone cardZone in cardZones)
-            {
-                if (cardZone.GetCard() == null) return cardZone;
-            }
+            manaAvailable += _contender.currentMana;
 
-            return null;
+            return manaAvailable >= manaCost;
+        }
+
+        private bool IsAppliable(Card action)
+        {
+            return action.hasEffect && action.effect.IsAppliable();
+        }
+
+        private void SkipTurn()
+        {
+            TurnManager.Instance.FinishTurn();
         }
 
         private CardZone GetFieldCardZone()
@@ -130,10 +151,91 @@ namespace CardGame.AI
             return (_contender.fieldCardZone.isEmpty) ? _contender.fieldCardZone : null;
         }
 
-        private void SkipTurn()
+        #endregion
+
+        #endregion
+
+        #region AI
+
+        private bool IsGoodChoice(Card card)
         {
-            TurnManager.Instance.FinishTurn();
+            if (card.type == CardType.ARGUMENT) return ArgumentIsGoodChoice(card);
+            else if (card.type == CardType.ACTION) return ActionIsGoodChoice(card);
+            else return true;
         }
+
+        #region Arguments
+
+        abstract protected bool ArgumentIsGoodChoice(Card argument);
+
+        private CardZone GetBestPosition(Card argument)
+        {
+            CardZone bestCardZone = null;
+            Card bestOppositeCard = null;
+
+            Contender player = CardGameManager.Instance.player;
+
+            for (int i = 0; i < _contender.cardZones.Count; i++)
+            {
+                CardZone cardZone = _contender.cardZones[i];
+                if (cardZone.isNotEmpty) continue;
+
+                Card oppositeCard = player.cardZones[i].GetCard();
+
+                if (GetBestPosition(argument, cardZone, oppositeCard, bestCardZone, bestOppositeCard))
+                {
+                    bestCardZone = cardZone;
+                    bestOppositeCard = oppositeCard;
+                }
+            }
+
+            return bestCardZone;
+        }
+
+        abstract protected bool GetBestPosition(Card argument, CardZone cardZone, Card oppositeCard, CardZone bestCardZone, Card bestOppositeCard);
+
+        protected bool DefaultGetBestPosition(Card oppositeCard, Card bestOppositeCard)
+        {
+            Contender player = CardGameManager.Instance.player;
+
+            if (player.life > _contender.life)
+            {
+                if (oppositeCard != null)
+                {
+                    return GetStats(oppositeCard) > GetStats(bestOppositeCard);
+                }
+            }
+            else
+            {
+                return oppositeCard == null;
+            }
+
+            return false;
+        }
+
+        protected bool GetStrongestOppositeCard(Card oppositeCard, Card bestOppositeCard)
+        {
+            if (oppositeCard != null)
+            {
+                bool betterStats = GetStats(oppositeCard) > GetStats(bestOppositeCard);
+                return betterStats;
+            }
+            return false;
+        }
+
+        protected bool GetWeakestOppositeCard(Card oppositeCard, Card bestOppositeCard)
+        {
+            if (oppositeCard != null)
+            {
+                bool lowerStrength = oppositeCard.strength < ((bestOppositeCard != null) ? bestOppositeCard.strength : 0);
+                return lowerStrength && oppositeCard.strength <= 1;
+            }
+            return false;
+        }
+
+        #endregion
+
+        #region Actions
 
         public Card GetBestTarget(CardEffect effect, List<Card> possibleTargets)
         {
@@ -151,7 +253,11 @@ namespace CardGame.AI
                             if (card.type == CardType.FIELD)
                                 return card;
                             else
-                                GetBestStats(card, ref bestTarget, ref bestStats);
+                            {
+                                Card oppositeCard = Board.Instance.GetOppositeCard(card);
+                                int temp = (oppositeCard != null) ? -3 : 0;
+                                GetBestStats(card, temp, ref bestTarget, ref bestStats);
+                            }
                         }
                         break;
 
@@ -180,10 +286,14 @@ namespace CardGame.AI
                             if (card.IsBoosted()) temp += card.GetBoost();
                             if (card.IsDamaged()) temp -= card.GetDamage();
 
+                            Card oppositeCard = Board.Instance.GetOppositeCard(card);
+                            if (oppositeCard != null) temp -= 3;
+
                             GetBestStats(card, temp, ref bestTarget, ref bestStats);
                         }
                         break;
 
+                    case SubType.STEAL_CARD:
                     case SubType.DUPLICATE_CARD:
                         GetBestStats(card, ref bestTarget, ref bestStats); break;
 
@@ -221,12 +331,14 @@ namespace CardGame.AI
             return bestTarget;
         }
 
-        private bool IsGoodChoice(CardEffect effect)
+        private bool ActionIsGoodChoice(Card source)
         {
             Contender player = CardGameManager.Instance.player;
 
             List<CardZone> playerCardZones = player.cardZones;
             List<CardZone> opponentCardZones = _contender.cardZones;
+
+            CardEffect effect = source.effect;
 
             switch (effect.subType)
             {
@@ -236,9 +348,10 @@ namespace CardGame.AI
                 case SubType.DESTROY_CARD:
                     if (effect.targetType == Target.CARD)
                     {
-                        if (player.fieldCardZone.GetCard() != null) return true;
+                        if (player.fieldCardZone.isNotEmpty) return true;
 
-                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
+                        return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender)
+                            && Board.Instance.NumCardsOnTable(player) > 0;
                     }
                     else if (effect.targetType == Target.AENEMY)
                     {
@@ -247,7 +360,9 @@ namespace CardGame.AI
                     }
                     else if (effect.targetType == Target.ACARD)
                     {
-                        return GetStatsSummary(player, playerCardZones, _contender, opponentCardZones) > 0;
+                        return GetStatsSummary(player, playerCardZones, _contender, opponentCardZones) > 0
+                            && Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender)
+                            && Board.Instance.NumCardsOnTable(player) >= 2;
                     }
                     break;
 
@@ -256,10 +371,9 @@ namespace CardGame.AI
                     {
                         foreach (CardZone cardZone in playerCardZones)
                         {
-                            Card playerCard = cardZone.GetCard();
-
-                            if (playerCard != null)
+                            if (cardZone.isNotEmpty)
                             {
+                                Card playerCard = cardZone.GetCard();
                                 Card oppositeCard = Board.Instance.GetOppositeCard(playerCard);
                                 int temp = effect.intParameter1;
                                 if (oppositeCard != null) temp += oppositeCard.strength;
@@ -282,19 +396,55 @@ namespace CardGame.AI
                     break;
 
                 case SubType.DUPLICATE_CARD:
-                    int bestStats = 0;
-                    Card bestTarget = null;
-                    foreach (CardZone cardZone in opponentCardZones)
                     {
-                        Card card = cardZone.GetCard();
-                        if (card != null) GetBestStats(card, ref bestTarget, ref bestStats);
+                        int bestStats = 0;
+                        Card bestTarget = null;
+                        foreach (CardZone cardZone in opponentCardZones)
+                        {
+                            if (cardZone.isNotEmpty)
+                            {
+                                Card card = cardZone.GetCard();
+                                GetBestStats(card, ref bestTarget, ref bestStats);
+                            }
+                        }
+
+                        return bestStats > 5;
                     }
-
-                    return bestStats > 5;
-
                 case SubType.SWAP_POSITION:
-                    return Board.Instance.NumCardsOnTable(player) < playerCardZones.Count
-                        && Board.Instance.NumCardsOnTable(_contender) < opponentCardZones.Count;
+                    {
+                        List<CardZone> cardZones = (_contender.life < player.life) ? playerCardZones : opponentCardZones;
+
+                        int bestStats = 0;
+                        Card bestTarget = null;
+                        foreach (CardZone cardZone in cardZones)
+                        {
+                            if (cardZone.isNotEmpty)
+                            {
+                                Card card = cardZone.GetCard();
+                                GetBestStats(card, ref bestTarget, ref bestStats);
+                            }
+                        }
+
+                        int position = Board.Instance.GetPositionFromCard(bestTarget);
+                        if (_contender.life < player.life)
+                        {
+                            if (_contender.cardZones[position].isEmpty)
+                            {
+                                if (position > 0 && opponentCardZones[position - 1].isNotEmpty) return true;
+                                else if (position < 3 && opponentCardZones[position + 1].isNotEmpty) return true;
+                            }
+                        }
+                        else
+                        {
+                            if (playerCardZones[position].isNotEmpty)
+                            {
+                                if (position > 0 && playerCardZones[position - 1].isEmpty) return true;
+                                else if (position < 3 && playerCardZones[position + 1].isEmpty) return true;
+                            }
+                        }
+
+                        return false;
+                    }
 
                 case SubType.DRAW_CARD:
                     return _contender.hand.numCards <= 3;
@@ -308,29 +458,32 @@ namespace CardGame.AI
                 case SubType.SKIP_COMBAT:
                     return !TurnManager.Instance.skipCombat && Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
+                case SubType.STEAL_CARD:
+                    return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
+
+                case SubType.STEAL_MANA:
+                    {
+                        int startMana = _contender.currentMana;
+                        int finalMana = player.currentMana + _contender.currentMana - source.manaCost;
+                        foreach (GameObject cardObj in _contender.hand.cards)
+                        {
+                            Card card = cardObj.GetComponent<Card>();
+                            if (card.manaCost > startMana && card.manaCost <= finalMana) return true;
+                        }
+                    }
+                    return false;
+
+                case SubType.STEAL_CARD_FROM_HAND:
+                    return _contender.hand.numCards <= 3 && player.hand.numCards >= effect.intParameter1;
+
+                case SubType.STEAL_REWARD:
+                    return _contender.stolenCards >= 3 || (_contender.stolenCards >= 1 && _contender.life <= 5);
+
                 default:
                     return true;
             }
 
             return true;
-        }
-
-        private int GetStatsSummary(Contender player, List<CardZone> playerCardZones, Contender opponent, List<CardZone> opponentCardZones)
-        {
-            int temp = 0;
-            foreach (CardZone cardZone in playerCardZones) temp += GetStats(cardZone.GetCard());
-            if (player.fieldCardZone.GetCard() != null) temp += 5;
-
-            foreach (CardZone cardZone in opponentCardZones) temp -= GetStats(cardZone.GetCard());
-            if (opponent.fieldCardZone.GetCard() != null) temp -= 5;
-
-            return temp;
-        }
-
-        private int GetStats(Card card)
-        {
-            if (card != null) return card.strength + card.defense;
-            else return 0;
         }
 
         private void GetSwapPositionTarget(Card card, ref Card bestTarget, ref int bestStats)
@@ -349,6 +502,20 @@ namespace CardGame.AI
             }
         }
 
+        private int GetStatsSummary(Contender player, List<CardZone> playerCardZones, Contender opponent, List<CardZone> opponentCardZones)
+        {
+            int temp = 0;
+            foreach (CardZone cardZone in playerCardZones) temp += GetStats(cardZone.GetCard());
+            if (player.fieldCardZone.isNotEmpty) temp += 5;
+
+            foreach (CardZone cardZone in opponentCardZones) temp -= GetStats(cardZone.GetCard());
+            if (opponent.fieldCardZone.isNotEmpty) temp -= 5;
+
+            return temp;
+        }
+
+        #endregion
+
         private void GetBestStats(Card card, ref Card bestTarget, ref int bestStats)
         {
             GetBestStats(card, 0, ref bestTarget, ref bestStats);
@@ -363,5 +530,14 @@ namespace CardGame.AI
                 bestStats = temp;
             }
         }
+
+        protected int GetStats(Card card)
+        {
+            if (card != null) return card.strength + card.defense;
+            else return 0;
+        }
+
+        #endregion
+
     }
 }

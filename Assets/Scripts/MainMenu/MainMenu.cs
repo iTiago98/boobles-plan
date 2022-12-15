@@ -40,14 +40,14 @@ namespace Booble.MainMenu
 
 		public void TutorialCardsButton()
         {
-			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Tutorial);
+			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Tutorial);
 			DeckManager.Instance.RemoveExtraCards();
 			LoadInterview();
         }
 
 		public void CitrianoCardsButton()
         {
-			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Citriano);
+			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Citriano);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddCitrianoCards();
 			LoadInterview();
@@ -55,7 +55,7 @@ namespace Booble.MainMenu
 
 		public void PingPongBrosCardsButton()
         {
-			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.PingPongBros);
+			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.PingPongBros);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddPPBrosCards();
 			LoadInterview();
@@ -63,7 +63,7 @@ namespace Booble.MainMenu
 
 		public void SecretaryCardsButton()
         {
-			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Secretary);
+			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Secretary);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddSecretaryCards();
 			LoadInterview();
@@ -71,7 +71,7 @@ namespace Booble.MainMenu
 
 		public void BossCardsButton()
         {
-			DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Boss);
+			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Boss);
 			DeckManager.Instance.RemoveExtraCards();
 			LoadInterview();
         }

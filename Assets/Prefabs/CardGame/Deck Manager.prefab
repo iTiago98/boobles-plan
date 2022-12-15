@@ -45,12 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDeckBase: {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
-  opponentsDecks:
-  - {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
-  - {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
-  - {fileID: 11400000, guid: f152fd45ab84e934f9e3f1e3cc1f76b2, type: 2}
-  - {fileID: 11400000, guid: 90980eacec418e64e8bd3d8346801d87, type: 2}
-  - {fileID: 11400000, guid: d43619add30b0f646a63ee9c0214fdaa, type: 2}
   playerExtraCards:
   - name: Gran final
     sprite: {fileID: 21300000, guid: 58aa6b948c0e680488378667f8d70ea1, type: 3}
@@ -148,12 +142,12 @@ MonoBehaviour:
       intParameter2: 0
       cardParameter:
         name: Zumito
-        sprite: {fileID: 21300000, guid: 38b5d5e93c3541044b67a2f1a1c2934b, type: 3}
+        sprite: {fileID: 21300000, guid: 8b26b359de8387348bbf94df30436ea2, type: 3}
         strength: 1
         defense: 1
         manaCost: 0
       cardParameter_Effect: 6
-  pinponbrosExtraCards:
+  ppBrosExtraCards:
   - name: Victoria por desgaste
     sprite: {fileID: 21300000, guid: 6a0458c0bb1abfd40a9961fc6e722278, type: 3}
     cost: 5
@@ -214,7 +208,7 @@ MonoBehaviour:
         defense: 0
         manaCost: 0
       cardParameter_Effect: 0
-  - name: Gomu gomu no
+  - name: Gomu Gomu no
     sprite: {fileID: 21300000, guid: 2118d6df19fa5674ea761281913bec88, type: 3}
     cost: 2
     strength: 0
@@ -224,7 +218,7 @@ MonoBehaviour:
     - type: 3
       subType: 10
       applyTime: 0
-      targetType: 3
+      targetType: 1
       intParameter1: 0
       intParameter2: 0
       cardParameter:

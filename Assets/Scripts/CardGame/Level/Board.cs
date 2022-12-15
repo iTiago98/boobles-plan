@@ -45,26 +45,9 @@ namespace CardGame.Level
             opponentDeck.Initialize(CardGameManager.Instance.opponent, opponentHand, opponentCards);
         }
 
-        public void InitializeBackground(Opponent_Name opponentName)
+        public void InitializeBackground(Sprite backgroundSprite)
         {
-            switch (opponentName)
-            {
-                case Opponent_Name.Tutorial:
-                    background.sprite = backgroundList[0];
-                    break;
-                case Opponent_Name.Citriano:
-                    background.sprite = backgroundList[1];
-                    break;
-                case Opponent_Name.PingPongBros:
-                    background.sprite = backgroundList[2];
-                    break;
-                case Opponent_Name.Secretary:
-                    background.sprite = backgroundList[3];
-                    break;
-                case Opponent_Name.Boss:
-                    background.sprite = backgroundList[4];
-                    break;
-            }
+            background.sprite = backgroundSprite;
         }
 
         public void DrawCards(int cardNumber, Turn turn)
@@ -125,9 +108,14 @@ namespace CardGame.Level
             {
                 int index = Random.Range(0, cardZones.Count);
                 CardZone cardZone = cardZones[index];
-                if (cardZone.GetCard() == null) return cardZone;
+                if (cardZone.isEmpty) return cardZone;
             }
-            
+
+            foreach (CardZone cardZone in cardZones)
+            {
+                if (cardZone.isEmpty) return cardZone;
+            }
+
             return null;
         }
 
@@ -137,8 +125,8 @@ namespace CardGame.Level
             List<Card> temp = new List<Card>();
             foreach (CardZone zone in cardZone)
             {
-                Card card = zone.GetCard();
-                if (card != null) temp.Add(card);
+                if (zone.isNotEmpty)
+                    temp.Add(zone.GetCard());
             }
             return temp;
         }
@@ -175,6 +163,8 @@ namespace CardGame.Level
         public Card GetOppositeCard(Card card)
         {
             int position = GetPositionFromCard(card);
+            if (position == -1) return null;
+
             Contender otherContender = CardGameManager.Instance.GetOtherContender(card.contender);
             CardZone oppositeCardZone = otherContender.cardZones[position];
             return oppositeCardZone.GetCard();
@@ -184,10 +174,12 @@ namespace CardGame.Level
 
         public bool HasCard(Contender contender, string name)
         {
-            foreach(CardZone cardZone in contender.cardZones)
+            foreach (CardZone cardZone in contender.cardZones)
             {
-                Card card = cardZone.GetCard();
-                if (card != null && card.name.Equals(name)) return true;
+                if (cardZone.isNotEmpty)
+                {
+                    if (cardZone.GetCard().name.Equals(name)) return true;
+                }
             }
 
             return false;
@@ -197,15 +189,15 @@ namespace CardGame.Level
 
         public void HitCards(Contender contender, int damage)
         {
-            foreach(CardZone cardZone in contender.cardZones)
+            foreach (CardZone cardZone in contender.cardZones)
             {
-                Card card = cardZone.GetCard();
-                if (card != null) card.ReceiveDamage(damage);
+                if (cardZone.isNotEmpty)
+                    cardZone.GetCard().ReceiveDamage(damage);
             }
         }
 
         #endregion
-        
+
         #region Destroy
 
         public void DestroyCards(Contender contender)
@@ -218,16 +210,16 @@ namespace CardGame.Level
             Card aux = null;
             foreach (CardZone zone in contender.cardZones)
             {
-                Card card = zone.GetCard();
-                if(card != null)
+                if (zone.isNotEmpty)
                 {
+                    Card card = zone.GetCard();
                     aux = card;
                     card.DestroyCard();
                 }
             }
-            Card fieldCard = contender.fieldCardZone.GetCard();
-            if (fieldCard != null)
+            if (contender.fieldCardZone.isNotEmpty)
             {
+                Card fieldCard = contender.fieldCardZone.GetCard();
                 aux = fieldCard;
                 fieldCard.DestroyCard();
             }
@@ -256,9 +248,9 @@ namespace CardGame.Level
 
             foreach (CardZone cardZone in temp)
             {
-                Card card = cardZone.GetCard();
-                if (card != null)
+                if (cardZone.isNotEmpty)
                 {
+                    Card card = cardZone.GetCard();
                     card.ShowHighlight(possibleTargets.Contains(card));
                 }
             }
@@ -295,9 +287,9 @@ namespace CardGame.Level
 
             foreach (CardZone cardZone in cardZones)
             {
-                Card card = cardZone.GetCard();
-                if (card != null)
+                if (cardZone.isNotEmpty)
                 {
+                    Card card = cardZone.GetCard();
                     card.ShowHighlight(true);
                 }
             }

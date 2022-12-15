@@ -6,6 +6,7 @@ using Santi.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CardGame.AI;
 
 public class DeckManager : MonoBehaviour
 {
@@ -13,17 +14,26 @@ public class DeckManager : MonoBehaviour
 
     [SerializeField] private CardsDataContainer playerDeckBase;
 
-    [SerializeField] private List<CardsDataContainer> opponentsDecks;
+    //[SerializeField] private List<CardsDataContainer> opponentsDecks;
+
+    //[Header("AI Scripts")]
+    //[SerializeField] private OpponentAI _tutorialAI;
+    //[SerializeField] private OpponentAI _citrianoAI;
+    //[SerializeField] private OpponentAI _ppBrosAI;
+    //[SerializeField] private OpponentAI _secretaryAI;
+    //[SerializeField] private OpponentAI _bossAI;
 
     [Header("Extra Cards")]
     [SerializeField] private List<CardsData> playerExtraCards;
     [SerializeField] private List<CardsData> citrianoExtraCards;
-    [SerializeField] private List<CardsData> pinponbrosExtraCards;
+    [SerializeField] private List<CardsData> ppBrosExtraCards;
     [SerializeField] private List<CardsData> secretaryExtraCards;
     [SerializeField] private List<CardsData> bossExtraCards;
 
     private List<CardsData> _playerDeck;
     private List<CardsData> _opponentDeck;
+
+    private OpponentAI _opponentAI;
 
     private Opponent_Name _opponentName;
 
@@ -61,6 +71,11 @@ public class DeckManager : MonoBehaviour
         return _opponentDeck;
     }
 
+    public OpponentAI GetOpponentAI()
+    {
+        return _opponentAI;
+    }
+
     public Opponent_Name GetOpponentName()
     {
         return _opponentName;
@@ -71,30 +86,14 @@ public class DeckManager : MonoBehaviour
         SetDeck(playerDeckBase, ref _playerDeck);
     }
 
-    public void SetOpponentCards(Opponent_Name opponentName)
+    public void SetOpponent(Opponent_Name opponentName)
     {
-        CardsDataContainer opponentDeck = null;
-        switch (opponentName)
-        {
-            case Opponent_Name.Tutorial:
-                opponentDeck = opponentsDecks[0];
-                break;
-            case Opponent_Name.Citriano:
-                opponentDeck = opponentsDecks[1];
-                break;
-            case Opponent_Name.PingPongBros:
-                opponentDeck = opponentsDecks[2];
-                break;
-            case Opponent_Name.Secretary:
-                opponentDeck = opponentsDecks[3];
-                break;
-            case Opponent_Name.Boss:
-                opponentDeck = opponentsDecks[4];
-                break;
-        }
         _opponentName = opponentName;
+    }
 
-        SetDeck(opponentDeck, ref _opponentDeck);
+    public void SetOpponentCards(CardsDataContainer deck)
+    {
+        SetDeck(deck, ref _opponentDeck);
     }
 
     private void SetDeck(CardsDataContainer source, ref List<CardsData> dest)
@@ -200,33 +199,33 @@ public class DeckManager : MonoBehaviour
     {
         foreach (CardsData card in _playerDeck)
         {
-            if (pinponbrosExtraCards.Contains(card)) indexToRemove.Add(_playerDeck.IndexOf(card));
+            if (ppBrosExtraCards.Contains(card)) indexToRemove.Add(_playerDeck.IndexOf(card));
         }
     }
 
     public void AddVictoriaPorDesgaste()
     {
-        AddCard(pinponbrosExtraCards[0]);
+        AddCard(ppBrosExtraCards[0]);
     }
 
     public void AddPared()
     {
-        AddCard(pinponbrosExtraCards[1]);
+        AddCard(ppBrosExtraCards[1]);
     }
 
     public void AddPalaDeNocobich()
     {
-        AddCard(pinponbrosExtraCards[2]);
+        AddCard(ppBrosExtraCards[2]);
     }
 
     public void AddGomuGomuNo()
     {
-        AddCard(pinponbrosExtraCards[3]);
+        AddCard(ppBrosExtraCards[3]);
     }
 
     public void AddPelotaBomba()
     {
-        AddCard(pinponbrosExtraCards[4]);
+        AddCard(ppBrosExtraCards[4]);
     }
 
     #endregion

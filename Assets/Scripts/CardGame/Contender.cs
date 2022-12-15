@@ -1,3 +1,4 @@
+using CardGame.AI;
 using CardGame.Cards.DataModel;
 using CardGame.Level;
 using CardGame.Managers;
@@ -11,14 +12,19 @@ namespace CardGame
 {
     public class Contender : MonoBehaviour
     {
+        #region Role 
+
         public enum Role
         {
             PLAYER, OPPONENT
         }
 
         public Role role;
+        public bool isPlayer => role == Role.PLAYER;
 
-        public CardsDataContainer deckCards;
+        #endregion
+
+        #region Stats
 
         public int life { private set; get; }
         public int currentMana { private set; get; }
@@ -27,13 +33,21 @@ namespace CardGame
         public bool freeMana { private set; get; }
         private int _maxMana;
 
-        public bool isPlayer => role == Role.PLAYER;
+        #endregion
+
+        [SerializeField] private CardsDataContainer _deckCards;
+
+        [Header("Opponent settings")]
+        [SerializeField] private Sprite _interviewBackground;
+        [SerializeField] private InterviewDialogue _interviewDialogue;
+        [SerializeField] private OpponentAI _aIScript;
 
         public Hand hand { private set; get; }
         public Deck deck { private set; get; }
         public List<CardZone> cardZones { private set; get; }
         public CardZone fieldCardZone { private set; get; }
 
+        [HideInInspector]
         public int stolenCards;
 
         public void Initialize(Hand hand, Deck deck, List<CardZone> cardZones, CardZone fieldCardZone)
@@ -96,5 +110,10 @@ namespace CardGame
             freeMana = state;
             // Show in UI
         }
+
+        public CardsDataContainer GetDeckCards() { return _deckCards; }
+        public InterviewDialogue GetInterviewDialogue() { return _interviewDialogue; }
+        public Sprite GetInterviewBackground() { return _interviewBackground; }
+        public OpponentAI GetAIScript() { return _aIScript; }
     }
 }

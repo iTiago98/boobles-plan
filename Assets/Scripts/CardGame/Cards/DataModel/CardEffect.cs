@@ -401,17 +401,23 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
                 case SubType.CREATE_CARD:
                     {
-                        Card card = InstantiateCard(source.contender, source.transform.position, GetDataFromParameters(), cardRevealed: true);
                         CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
-                        emptyCardZone.AddCard(card);
+                        if (emptyCardZone != null)
+                        {
+                            Card card = InstantiateCard(source.contender, source.transform.position, GetDataFromParameters(), cardRevealed: true);
+                            emptyCardZone.AddCard(card);
+                        }
                     }
                     break;
 
                 case SubType.DUPLICATE_CARD:
                     {
-                        Card card = InstantiateCard(source.contender, source.transform.position, ((Card)target).data, cardRevealed: true);
                         CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
-                        emptyCardZone.AddCard(card);
+                        if (emptyCardZone != null)
+                        {
+                            Card card = InstantiateCard(source.contender, source.transform.position, ((Card)target).data, cardRevealed: true);
+                            emptyCardZone.AddCard(card);
+                        }
                     }
                     break;
 
@@ -423,7 +429,7 @@ namespace CardGame.Cards.DataModel.Effects
                     if (targetType == Target.SELF)
                     {
                         CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.GetOtherContender(source.contender));
-                        SwapContender(source, source, emptyCardZone);
+                        if (emptyCardZone != null) SwapContender(source, source, emptyCardZone);
                     }
                     break;
 
@@ -496,8 +502,11 @@ namespace CardGame.Cards.DataModel.Effects
                             dest = Board.Instance.GetEmptyCardZone(source.contender);
                         }
 
-                        SwapContender(source, targetCard, dest);
-                        source.contender.stolenCards++;
+                        if (dest != null)
+                        {
+                            SwapContender(source, targetCard, dest);
+                            source.contender.stolenCards++;
+                        }
                     }
                     break;
 
@@ -598,8 +607,7 @@ namespace CardGame.Cards.DataModel.Effects
                 // Find any card
                 foreach (CardZone cardZone in cardZones)
                 {
-                    Card card = cardZone.GetCard();
-                    if (card != null)
+                    if (cardZone.isNotEmpty)
                     {
                         pos = cardZones.IndexOf(cardZone);
                         break;
@@ -623,20 +631,14 @@ namespace CardGame.Cards.DataModel.Effects
             // Create card with other prefab 
             Card newCard = InstantiateCard(source.contender, target.transform.position, target.data, cardRevealed: true);
 
-            if (dest != null)
-            {
-                // Empty destination zone
-                if (dest.GetCard() != null)
-                    dest.GetCard().RemoveFromContainer();
+            // Empty destination zone
+            dest.GetCard()?.RemoveFromContainer();
 
-                // Destroy original
-                Card originCard = originCardZone.GetCard();
-                originCard.DestroyCard(instant: true, continueFlow: true);
+            // Destroy original
+            Card originCard = originCardZone.GetCard();
+            originCard.DestroyCard(instant: true, continueFlow: true);
 
-                //originCard.SwapContender();
-
-                dest.AddCard(newCard);
-            }
+            dest.AddCard(newCard);
         }
 
         private void Swap(int pos1, int pos2, Contender contender)
@@ -646,7 +648,7 @@ namespace CardGame.Cards.DataModel.Effects
 
             Card originCard = originCardZone.GetCard();
             originCardZone.RemoveCard(originCard.gameObject);
-            if (destCardZone.GetCard() != null)
+            if (destCardZone.isNotEmpty)
             {
                 Card temp = destCardZone.GetCard();
                 destCardZone.RemoveCard(temp.gameObject);
@@ -707,16 +709,16 @@ namespace CardGame.Cards.DataModel.Effects
                         if (subType == SubType.SWAP_POSITION)
                             return otherPlayerHasCards;
                         else
-                            return otherPlayerHasCards || CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard() != null;
+                            return otherPlayerHasCards || CardGameManager.Instance.otherPlayer.fieldCardZone.isNotEmpty;
 
                     case Target.CARD:
                     case Target.ACARD:
                         return currentPlayerHasCards || otherPlayerHasCards
-                            || CardGameManager.Instance.player.fieldCardZone.GetCard() != null
-                            || CardGameManager.Instance.opponent.fieldCardZone.GetCard() != null;
+                            || CardGameManager.Instance.player.fieldCardZone.isNotEmpty
+                            || CardGameManager.Instance.opponent.fieldCardZone.isNotEmpty;
 
                     case Target.FIELDCARD:
-                        return CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard() != null;
+                        return CardGameManager.Instance.otherPlayer.fieldCardZone.isNotEmpty;
 
                     case Target.NONE:
                     case Target.PLAYER:
@@ -770,8 +772,8 @@ namespace CardGame.Cards.DataModel.Effects
         {
             if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
             {
-                Card fieldCard = contender.fieldCardZone.GetCard();
-                if (fieldCard != null) possibleTargets.Add(fieldCard);
+                if (contender.fieldCardZone.isNotEmpty)
+                    possibleTargets.Add(contender.fieldCardZone.GetCard());
             }
         }
 
@@ -891,12 +893,13 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.INCREASE_MAX_MANA:
                     s += "consigues " + intParameter1 + " cristal extra de maná."; break;
                 case SubType.STEAL_REWARD:
-                    s += "el jugador recupera 5 puntos de vida por cada carta robada."; break; 
+                    s += "el jugador recupera 5 puntos de vida por cada carta robada."; break;
 
                 case SubType.DESTROY_CARD:
                     switch (targetType)
                     {
-                        case Target.ENEMY: s += "destruye la carta objetivo."; break;
+                        case Target.ENEMY:
+                        case Target.CARD: s += "destruye la carta objetivo."; break;
                         case Target.AENEMY: s += "destruye todas las cartas del oponente."; break;
                         case Target.ACARD: s += "destruye todas las cartas sobre el campo."; break;
                         case Target.FIELDCARD: s += "destruye la carta de campo del oponente."; break;
@@ -944,8 +947,8 @@ namespace CardGame.Cards.DataModel.Effects
                     s += "suma a la fuerza el daño recibido."; break;
 
                 case SubType.DUPLICATE_CARD:
-                    if(targetType == Target.ALLY) s  += "duplica el argumento objetivo."; 
-                    else if(targetType == Target.ENEMY) s  += "duplica el argumento rival objetivo."; 
+                    if (targetType == Target.ALLY) s += "duplica el argumento objetivo.";
+                    else if (targetType == Target.ENEMY) s += "duplica el argumento rival objetivo.";
                     break;
                 case SubType.CREATE_CARD:
                     s += "invoca el argumento " + cardParameter.name + " en una zona libre."; break;

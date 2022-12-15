@@ -44,17 +44,13 @@ namespace CardGame.Level
 
         public void OnMouseHoverEnter()
         {
-            if (!isEmpty) GetCard().ShowExtendedDescription();
+            if (isNotEmpty) GetCard().ShowExtendedDescription();
         }
 
         public void OnMouseHoverExit()
         {
-            if (!isEmpty) GetCard().HideExtendedDescription();
+            if (isNotEmpty) GetCard().HideExtendedDescription();
         }
-
-        //public void OnMouseRightClick()
-        //{
-        //}
 
         #endregion
 

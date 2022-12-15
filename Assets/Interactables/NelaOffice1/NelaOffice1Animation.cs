@@ -85,7 +85,7 @@ public class NelaOffice1Animation : MonoBehaviour
 
         if (_interview)
         {
-            DeckManager.Instance.SetOpponentCards(CardGame.Opponent_Name.Citriano);
+            DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Citriano);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);

@@ -15,12 +15,11 @@ namespace CardGame.Managers
 
         [Header("Contenders")]
         public Contender player;
-        public Contender opponent;
-        public OpponentAI opponentAI;
+        [HideInInspector] public Contender opponent;
+        [HideInInspector] public OpponentAI opponentAI;
 
-        [Header("Dialogues")]
-        public InterviewDialogue citrianoInterviewDialogue;
-        public InterviewDialogue ppBrosInterviewDialogue;
+        [SerializeField] private Transform _opponentParent;
+        [SerializeField] private List<GameObject> _opponents;
 
         private InterviewDialogue _interviewDialogue;
 
@@ -40,54 +39,67 @@ namespace CardGame.Managers
 
         #region Initialize
 
+        public void Initialize()
+        {
+            InitializeOpponent();
+            InitializeDialogues();
+            Board.Instance.InitializeBackground(opponent.GetInterviewBackground());
+        }
+
+        private void InitializeOpponent()
+        {
+            GameObject opponentObj = Instantiate(
+                _opponents[(int)DeckManager.Instance.GetOpponentName()],
+                _opponentParent);
+
+            opponent = opponentObj.GetComponent<Contender>();
+
+            DeckManager.Instance.SetOpponentCards(opponent.GetDeckCards());
+        }
+
+        private void InitializeDialogues()
+        {
+            _interviewDialogue = opponent.GetInterviewDialogue();
+        }
+
         public void InitializeGame()
         {
             InitializeDecks();
             InitializeContenders();
         }
-
-        public void Initialize()
+       
+        private void InitializeDecks()
         {
-            InitializeDialogues();
-            Board.Instance.InitializeBackground(DeckManager.Instance.GetOpponentName());
-        }
-
-        private void InitializeDialogues()
-        {
-            switch (DeckManager.Instance.GetOpponentName())
-            {
-                case Opponent_Name.Tutorial:
-                    _interviewDialogue = null;
-                    break;
-                case Opponent_Name.Citriano:
-                    _interviewDialogue = citrianoInterviewDialogue;
-                    break;
-                case Opponent_Name.PingPongBros:
-                    _interviewDialogue = ppBrosInterviewDialogue;
-                    break;
-                case Opponent_Name.Secretary:
-                    _interviewDialogue = null;
-                    break;
-                case Opponent_Name.Boss:
-                    _interviewDialogue = null;
-                    break;
-            }
+            Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
         }
 
         private void InitializeContenders()
         {
-            player.Initialize(Board.Instance.playerHand, Board.Instance.playerDeck, Board.Instance.playerCardZone, Board.Instance.playerFieldCardZone);
-            player.InitializeStats(settings.initialLife, settings.initialManaCounter, settings.maxManaCounter);
+            player.Initialize(
+                Board.Instance.playerHand, 
+                Board.Instance.playerDeck, 
+                Board.Instance.playerCardZone, 
+                Board.Instance.playerFieldCardZone);
 
-            opponent.Initialize(Board.Instance.opponentHand, Board.Instance.opponentDeck, Board.Instance.opponentCardZone, Board.Instance.opponentFieldCardZone);
-            opponent.InitializeStats(settings.initialLife, settings.initialManaCounter, settings.maxManaCounter);
+            player.InitializeStats(
+                settings.initialLife, 
+                settings.initialManaCounter, 
+                settings.maxManaCounter);
 
+
+            opponent.Initialize(
+                Board.Instance.opponentHand, 
+                Board.Instance.opponentDeck,
+                Board.Instance.opponentCardZone, 
+                Board.Instance.opponentFieldCardZone);
+
+            opponent.InitializeStats(
+                settings.initialLife, 
+                settings.initialManaCounter, 
+                settings.maxManaCounter);
+
+            opponentAI = opponent.GetAIScript();
             opponentAI.Initialize(opponent);
-        }
-
-        private void InitializeDecks()
-        {
-            Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
         }
 
         #endregion
