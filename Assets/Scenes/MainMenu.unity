@@ -599,7 +599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59843755, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 770.9999, y: 0}
+  m_AnchoredPosition: {x: 770.99994, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172151444
@@ -1609,7 +1609,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59843755, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 770.9999, y: 0.5}
+  m_AnchoredPosition: {x: 770.99994, y: 0.5}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &390264417
@@ -2061,18 +2061,6 @@ PrefabInstance:
     - target: {fileID: 2329183105752295762, guid: 59ef8334258e509478a8abc2585b9cf7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2329183105752295763, guid: 59ef8334258e509478a8abc2585b9cf7, type: 3}
-      propertyPath: playerDeckBase
-      value: 
-      objectReference: {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
-    - target: {fileID: 2329183105752295763, guid: 59ef8334258e509478a8abc2585b9cf7, type: 3}
-      propertyPath: bossExtraCards.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2329183105752295763, guid: 59ef8334258e509478a8abc2585b9cf7, type: 3}
-      propertyPath: bossExtraCards.Array.data[0].name
-      value: Hipervitaminado
       objectReference: {fileID: 0}
     - target: {fileID: 2329183105752295764, guid: 59ef8334258e509478a8abc2585b9cf7, type: 3}
       propertyPath: m_Name
