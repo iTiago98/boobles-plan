@@ -216,12 +216,9 @@ namespace CardGame.Cards.DataModel
                             }
                             break;
                         case SubType.DRAW_CARD:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Num cards: ", cardEffect.intParameter1);
-                            break;
                         case SubType.DISCARD_CARD:
-                            cardEffect.intParameter1 = EditorGUILayout.IntField("Num cards: ", cardEffect.intParameter1);
-                            break;
                         case SubType.STEAL_CARD_FROM_HAND:
+                        case SubType.STEAL_CARD_FROM_DECK:
                             cardEffect.intParameter1 = EditorGUILayout.IntField("Num cards: ", cardEffect.intParameter1);
                             break;
                     }
@@ -259,6 +256,7 @@ namespace CardGame.Cards.DataModel
                         case SubType.MIRROR:
                         case SubType.STEAL_MANA:
                         case SubType.STEAL_REWARD:
+                        case SubType.STEAL_CARD_FROM_DECK:
                             cardEffect.targetType = Target.NONE;
                             break;
                         default:

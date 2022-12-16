@@ -1,4 +1,5 @@
 using CardGame.Cards;
+using CardGame.Cards.DataModel;
 using CardGame.Level;
 using CardGame.Utils;
 using DG.Tweening;
@@ -21,19 +22,19 @@ namespace CardGame.Managers
 
         [Header("Contenders Stats")]
 
-        public Image playerHealthImage;
-        public Image playerExtraHealthImage;
-        public Image playerExtraHealthImage2;
-        public List<Image> playerManaList;
+        [SerializeField] private Image playerHealthImage;
+        [SerializeField] private Image playerExtraHealthImage;
+        [SerializeField] private Image playerExtraHealthImage2;
+        [SerializeField] private List<Image> playerManaList;
 
-        public Image opponentHealthImage;
-        public Image opponentExtraHealthImage;
-        public Image opponentExtraHealthImage2;
-        public List<Image> opponentManaList;
+        [SerializeField] private Image opponentHealthImage;
+        [SerializeField] private Image opponentExtraHealthImage;
+        [SerializeField] private Image opponentExtraHealthImage2;
+        [SerializeField] private List<Image> opponentManaList;
 
-        public Sprite fullManaCristal;
-        public Sprite emptyManaCristal;
-        public Sprite fullExtraManaCristal;
+        [SerializeField] private Sprite fullManaCristal;
+        [SerializeField] private Sprite emptyManaCristal;
+        [SerializeField] private Sprite fullExtraManaCristal;
 
         private int _shownPlayerLife;
         private int _shownPlayerMana;
@@ -50,22 +51,22 @@ namespace CardGame.Managers
 
         [Header("Extended Description")]
 
-        public GameObject extendedDescriptionPanel;
+        [SerializeField] private GameObject extendedDescriptionPanel;
 
-        public TextMeshProUGUI extendedDescriptionName;
-        public TextMeshProUGUI extendedDescriptionType;
-        public TextMeshProUGUI extendedDescriptionText;
+        [SerializeField] private TextMeshProUGUI extendedDescriptionName;
+        [SerializeField] private TextMeshProUGUI extendedDescriptionType;
+        [SerializeField] private TextMeshProUGUI extendedDescriptionText;
 
         #endregion
 
         #region Deck Remaining Cards Parameters
 
         [Header("Deck Remaining Cards")]
-        public GameObject playerDeckRemainingCardsPanel;
-        public TextMeshProUGUI playerDeckRemainingCardsText;
+        [SerializeField] private GameObject playerDeckRemainingCardsPanel;
+        [SerializeField] private TextMeshProUGUI playerDeckRemainingCardsText;
 
-        public GameObject opponentDeckRemainingCardsPanel;
-        public TextMeshProUGUI opponentDeckRemainingCardsText;
+        [SerializeField] private GameObject opponentDeckRemainingCardsPanel;
+        [SerializeField] private TextMeshProUGUI opponentDeckRemainingCardsText;
 
         #endregion
 
@@ -73,20 +74,31 @@ namespace CardGame.Managers
 
         [Header("Interactables")]
 
-        public MyButton continuePlayButton;
-        public MyButton cancelPlayButton;
+        [SerializeField] private MyButton continuePlayButton;
+        [SerializeField] private MyButton cancelPlayButton;
 
-        public TextMeshProUGUI interviewEnd;
-        public MyButton endTurnButton;
-        public MyButton endButton;
+        [SerializeField] private TextMeshProUGUI interviewEndText;
+        [SerializeField] private MyButton interviewEndButton;
+
+        [SerializeField] private MyButton endTurnButton;
 
         #endregion
 
         #region Turn Animation
 
         [Header("Turn Animation")]
-        public Image turnAnimationImage;
-        public TextMeshProUGUI turnAnimationText;
+        [SerializeField] private Image turnAnimationImage;
+        [SerializeField] private TextMeshProUGUI turnAnimationText;
+
+        #endregion
+
+        #region Steal Cards From Deck
+
+        [Header("Steal Cards From Deck")]
+        [SerializeField] private GameObject stealCardsFromDeckGameObj;
+        [SerializeField] private Transform stealCardsFromDeckParent;
+        [SerializeField] private GameObject stealCardsFromDeckButton;
+        [SerializeField] private GameObject cardImagePrefab;
 
         #endregion
 
@@ -161,6 +173,8 @@ namespace CardGame.Managers
             CheckEndTurnButtonState(turn);
         }
 
+
+
         #region Stats
 
         public void UpdateUIStats()
@@ -194,7 +208,8 @@ namespace CardGame.Managers
                 _shownPlayerLife == _player.life && _shownPlayerMana == _player.currentMana
                 && _shownOpponentLife == _opponent.life && _shownOpponentMana == _opponent.currentMana);
 
-            if (startRound) TurnManager.Instance.ContinueFlow();
+            /*if (startRound) */
+            TurnManager.Instance.ContinueFlow();
         }
 
         private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
@@ -393,17 +408,69 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Steal Cards From Deck
+
+        private List<int> cardsToSteal = new List<int>();
+        private int _numCardsToSteal;
+        private Deck _deckToSteal;
+
+        public void ShowStealCardsFromDeck(Deck deck, int numCards)
+        {
+            stealCardsFromDeckGameObj.SetActive(true);
+            stealCardsFromDeckButton.SetActive(false);
+
+            MouseController.Instance.SetStealing();
+
+            _numCardsToSteal = (deck.numCards >= numCards) ? numCards : deck.numCards;
+            _deckToSteal = deck;
+
+            List<CardsData> deckCards = deck.GetDeckCards();
+
+            foreach (CardsData cardData in deckCards)
+            {
+                GameObject cardObj = Instantiate(cardImagePrefab, stealCardsFromDeckParent);
+                CardImageUI cardImageUI = cardObj.GetComponent<CardImageUI>();
+                cardImageUI.Initialize(cardData, deckCards.IndexOf(cardData));
+            }
+        }
+
+        public void AddStolenCard(int index)
+        {
+            if (cardsToSteal.Count == _numCardsToSteal) return;
+
+            cardsToSteal.Add(index);
+            if (cardsToSteal.Count == _numCardsToSteal)
+            {
+                stealCardsFromDeckButton.SetActive(true);
+            }
+        }
+
+        public void RemoveStolenCard(int index)
+        {
+            cardsToSteal.Remove(index);
+            stealCardsFromDeckButton.SetActive(false);
+        }
+
+        public void OnStealCardsFromDeckButtonClick()
+        {
+            stealCardsFromDeckGameObj.SetActive(false);
+            _deckToSteal.StealCards(cardsToSteal);
+            MouseController.Instance.SetSelecting();
+        }
+
+        #endregion
+
         #region Game End
 
         public void SetInterviewWinText(bool win)
         {
-            if (win) interviewEnd.text = INTERVIEW_WIN_TEXT;
-            else interviewEnd.text = INTERVIEW_LOSE_TEXT;
+            if (win) interviewEndText.text = INTERVIEW_WIN_TEXT;
+            else interviewEndText.text = INTERVIEW_LOSE_TEXT;
         }
 
         public void ShowEndButton(bool show)
         {
-            endButton.gameObject.SetActive(show);
+            interviewEndButton.gameObject.SetActive(show);
         }
 
         public void OnEndButtonClick()

@@ -15,7 +15,6 @@ namespace CardGame.Level
         private bool _clickable;
 
         bool IClickable.clickable { get => _clickable; set => _clickable = value; }
-        GameObject IClickable.gameObject { get => gameObject; set => Debug.Log(""); }
 
         private void Start()
         {

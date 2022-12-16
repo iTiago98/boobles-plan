@@ -22,6 +22,8 @@ namespace CardGame.Managers
         public LayerMask allyLayerMask;
         public LayerMask enemyLayerMask;
 
+        public LayerMask stealingLayerMask;
+
         private LayerMask _currentMask;
 
         #endregion
@@ -37,7 +39,7 @@ namespace CardGame.Managers
 
         private void Start()
         {
-            _currentMask = selectingLayerMask;
+            SetMask(selectingLayerMask);
         }
 
         void Update()
@@ -168,6 +170,16 @@ namespace CardGame.Managers
         public void SetHolding(Card card)
         {
             holdingCard = card;
+        }
+
+        public void SetStealing()
+        {
+            SetMask(stealingLayerMask);
+        }
+
+        public void SetSelecting()
+        {
+            SetMask(selectingLayerMask);
         }
 
         private LayerMask GetTargetMask(CardEffect effect)

@@ -101,17 +101,17 @@ namespace CardGame.Level
                 _listToAdd.Add(card);
             }
 
-            StartCoroutine(DrawCardsCoroutine(numCardsStart));
+            StartCoroutine(DrawCardsCoroutine(_hand, numCardsStart));
         }
 
-        private IEnumerator DrawCardsCoroutine(int numCardsStart)
+        private IEnumerator DrawCardsCoroutine(Hand hand, int numCardsStart)
         {
             int loops = _listToAdd.Count;
             for (int i = 0; i < loops; i++)
             {
                 Card card = _listToAdd[0];
                 card.gameObject.SetActive(true);
-                _hand.AddCard(card);
+                hand.AddCard(card);
 
                 // Apply end round effects
                 drawCardEffectsDelegate?.Invoke();
@@ -119,7 +119,7 @@ namespace CardGame.Level
                 UpdateRemainingCards(--numCardsStart);
                 CheckDeckSprite();
 
-                yield return new WaitUntil(() => _hand.cardsAtPosition);
+                yield return new WaitUntil(() => hand.cardsAtPosition);
 
                 _listToAdd.RemoveAt(0);
             }
@@ -150,7 +150,7 @@ namespace CardGame.Level
                     _deckCards.RemoveAt(index);
 
                     Card card = cardObj.GetComponent<Card>();
-                    card.Initialize(null, data, cardRevealed: true);
+                    card.Initialize(_contender, data, cardRevealed: true);
                     card.gameObject.SetActive(false);
 
                     if (card.HasEffect(SubType.INCOMPARTMENTABLE))
@@ -188,8 +188,79 @@ namespace CardGame.Level
 
             _listToDiscard.Clear();
 
-            if (_listToAdd.Count > 0) StartCoroutine(DrawCardsCoroutine(numCardsStart));
+            if (_listToAdd.Count > 0) StartCoroutine(DrawCardsCoroutine(_hand, numCardsStart));
             else TurnManager.Instance.ContinueFlow();
+        }
+
+        #endregion
+
+        #region AddCards
+
+        public void AddCards(List<Card> cards)
+        {
+            StartCoroutine(AddCardCoroutine(cards));
+        }
+
+        private IEnumerator AddCardCoroutine(List<Card> cards)
+        {
+            int loops = cards.Count;
+            for (int i = 0; i < loops; i++)
+            {
+                Card card = cards[0];
+                card.gameObject.SetActive(true);
+
+                Sequence sequence = DOTween.Sequence();
+                sequence.Append(card.transform.DOMove(transform.position + new Vector3(0, 0, -0.2f), 0.5f));
+                sequence.Append(card.transform.DOScale(0, 0.5f));
+                sequence.Play();
+
+                yield return new WaitForSeconds(0.5f);
+
+                _deckCards.Add(card.data);
+                card.DestroyCard();
+                UpdateRemainingCards();
+
+                yield return new WaitUntil(() => card == null);
+
+                cards.RemoveAt(0);
+            }
+
+            TurnManager.Instance.ContinueFlow();
+        }
+
+        #endregion
+
+        #region Steal Cards
+
+        public void StealCards(List<int> cardsToSteal)
+        {
+            int numCardsStart = numCards;
+
+            Contender otherContender = CardGameManager.Instance.GetOtherContender(_contender);
+            GameObject cardPrefab = otherContender.deck.cardPrefab;
+
+            for (int i = cardsToSteal.Count - 1; i >= 0; i--)
+            {
+                GameObject cardObj;
+                CardsData data;
+
+                // Instantiate card
+                cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+
+                // Take data from scriptable
+                int index = cardsToSteal[i];
+                data = _deckCards[index];
+                _deckCards.RemoveAt(index);
+
+                // Add card to list
+                Card card = cardObj.GetComponent<Card>();
+                card.Initialize(otherContender, data, cardRevealed: false);
+                card.gameObject.SetActive(false);
+
+                _listToAdd.Add(card);
+            }
+
+            StartCoroutine(DrawCardsCoroutine(otherContender.hand, numCardsStart));
         }
 
         #endregion
@@ -240,36 +311,7 @@ namespace CardGame.Level
 
         #endregion
 
-        public void AddCards(List<Card> cards)
-        {
-            StartCoroutine(AddCardCoroutine(cards));
-        }
+        public List<CardsData> GetDeckCards() { return _deckCards; }
 
-        private IEnumerator AddCardCoroutine(List<Card> cards)
-        {
-            int loops = cards.Count;
-            for (int i = 0; i < loops; i++)
-            {
-                Card card = cards[0];
-                card.gameObject.SetActive(true);
-
-                Sequence sequence = DOTween.Sequence();
-                sequence.Append(card.transform.DOMove(transform.position + new Vector3(0, 0, -0.2f), 0.5f));
-                sequence.Append(card.transform.DOScale(0, 0.5f));
-                sequence.Play();
-
-                yield return new WaitForSeconds(0.5f);
-
-                _deckCards.Add(card.data);
-                card.DestroyCard();
-                UpdateRemainingCards();
-
-                yield return new WaitUntil(() => card == null);
-
-                cards.RemoveAt(0);
-            }
-
-            TurnManager.Instance.ContinueFlow();
-        }
     }
 }

@@ -402,4 +402,17 @@ MonoBehaviour:
     strength: 0
     defense: 0
     type: 1
-    effects: []
+    effects:
+    - type: 4
+      subType: 35
+      applyTime: 0
+      targetType: 0
+      intParameter1: 3
+      intParameter2: 0
+      cardParameter:
+        name: 
+        sprite: {fileID: 0}
+        strength: 0
+        defense: 0
+        manaCost: 0
+      cardParameter_Effect: 0

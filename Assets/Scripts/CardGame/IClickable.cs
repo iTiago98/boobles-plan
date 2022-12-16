@@ -8,7 +8,6 @@ namespace CardGame
     public interface IClickable
     {
         public bool clickable { get; set; }
-        public GameObject gameObject { protected set; get; }
 
         virtual public void OnMouseLeftClickDown(MouseController mouseController)
         {
@@ -20,7 +19,6 @@ namespace CardGame
             //OnMouseHoverExit();
         }
 
-        //abstract public void OnMouseRightClick();
         abstract public void OnMouseHoverEnter();
         abstract public void OnMouseHoverExit();
 

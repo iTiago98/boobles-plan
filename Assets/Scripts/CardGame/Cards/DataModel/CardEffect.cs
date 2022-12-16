@@ -24,7 +24,7 @@ namespace CardGame.Cards.DataModel.Effects
         DUPLICATE_CARD, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD,
         FREE_MANA, WHEEL, COMPARTMENTALIZE, SKIP_COMBAT, CITRIANO_WIN_CONDITION, PINPONBROS_WIN_CONDITION, SECRETARY_WIN_CONDITION,
         INCOMPARTMENTABLE, ADD_CARD_TO_DECK, DISCARD_CARD_FROM_DECK, SPONGE, STEAL_CARD, STEAL_CARD_FROM_HAND, MIRROR, STEAL_MANA,
-        STEAL_REWARD
+        STEAL_REWARD, STEAL_CARD_FROM_DECK
     }
 
     public enum DefensiveType
@@ -46,7 +46,7 @@ namespace CardGame.Cards.DataModel.Effects
     {
         NONE, DUPLICATE_CARD, CREATE_CARD, SWAP_POSITION, SWAP_CONTENDER, DRAW_CARD, DISCARD_CARD, RETURN_CARD,
         FREE_MANA, WHEEL, SKIP_COMBAT, ADD_CARD_TO_DECK, DISCARD_CARD_FROM_DECK, STEAL_CARD, STEAL_CARD_FROM_HAND,
-        MIRROR, STEAL_MANA
+        MIRROR, STEAL_MANA, STEAL_CARD_FROM_DECK
     }
 
     public enum AlternateWinConditionType
@@ -511,18 +511,26 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.STEAL_CARD_FROM_HAND:
-                    Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
-                    int loops = Mathf.Min(intParameter1, otherContender.hand.numCards);
-
-                    for (int i = 0; i < loops; i++)
                     {
-                        Card card = otherContender.hand.StealCard();
-                        Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.contender.isPlayer);
-                        source.contender.hand.AddCard(newCard);
-                        source.contender.stolenCards++;
-                        card.DestroyCard(instant: true, continueFlow: false);
-                    }
+                        Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
+                        int loops = Mathf.Min(intParameter1, otherContender.hand.numCards);
 
+                        for (int i = 0; i < loops; i++)
+                        {
+                            Card card = otherContender.hand.StealCard();
+                            Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.contender.isPlayer);
+                            source.contender.hand.AddCard(newCard);
+                            source.contender.stolenCards++;
+                            card.DestroyCard(instant: true, continueFlow: false);
+                        }
+                    }
+                    break;
+
+                case SubType.STEAL_CARD_FROM_DECK:
+                    {
+                        Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
+                        UIManager.Instance.ShowStealCardsFromDeck(otherContender.deck, intParameter1);
+                    }
                     break;
             }
         }
@@ -847,6 +855,7 @@ namespace CardGame.Cards.DataModel.Effects
                     return "Descartar del mazo";
                 case SubType.STEAL_CARD:
                 case SubType.STEAL_CARD_FROM_HAND:
+                case SubType.STEAL_CARD_FROM_DECK:
                     return "Robar carta";
 
                 case SubType.CITRIANO_WIN_CONDITION:
@@ -911,6 +920,7 @@ namespace CardGame.Cards.DataModel.Effects
                         case Target.ENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al argumento objetivo."; break;
                         case Target.AENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a todos los argumentos del oponente."; break;
                         case Target.PLAYER: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al oponente."; break;
+                        case Target.ALL: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a cartas y jugadores."; break;
                     }
                     break;
                 case SubType.DECREASE_MANA:
@@ -982,7 +992,9 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
                 case SubType.STEAL_CARD_FROM_HAND:
                     s += "roba " + intParameter1 + ((intParameter1 > 1) ? " cartas" : " carta") + " de la mano del oponente."; break;
-
+                case SubType.STEAL_CARD_FROM_DECK:
+                    s += "selecciona " + intParameter1 + ((intParameter1 > 1) ? " cartas" : " carta") + " de la baraja del oponente y " 
+                        + ((intParameter1 > 1) ? "añádelas" : "añádela") + " tu mano."; break;
 
                 case SubType.CITRIANO_WIN_CONDITION:
                     s += "si tienes 30 o más vidas, ganas la partida. (" + CardGameManager.Instance.player.life + "/30)"; break;

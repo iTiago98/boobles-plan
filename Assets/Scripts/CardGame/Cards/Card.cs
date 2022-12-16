@@ -71,7 +71,6 @@ namespace CardGame.Cards
         private bool _clickable;
 
         bool IClickable.clickable { get => _clickable; set => _clickable = value; }
-        GameObject IClickable.gameObject { get => gameObject; set => Debug.Log(""); }
 
         private SpriteRenderer _spriteRenderer;
 
@@ -84,11 +83,6 @@ namespace CardGame.Cards
 
         public bool isHighlighted { private set; get; }
 
-        private void Awake()
-        {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-
         private void Start()
         {
             _clickable = true;
@@ -100,14 +94,15 @@ namespace CardGame.Cards
         public void Initialize(Contender contender, CardsData data, bool cardRevealed)
         {
             this.contender = contender;
-            this._hand = contender?.hand;
+            this._hand = contender.hand;
             this.data = new CardsData(data); ;
 
             name = data.name;
 
             cardBack = contender.GetCardBack();
 
-            if (cardRevealed || IsPlayerCard)
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            if (cardRevealed || IsPlayerCard) 
             {
                 if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
             }
@@ -177,17 +172,17 @@ namespace CardGame.Cards
             UIManager.Instance.HideExtendedDescription();
         }
 
-        public string NameToString()
+        private string NameToString()
         {
             return name.ToUpper();
         }
 
-        public string TypeToString()
+        private string TypeToString()
         {
             return "TIPO: " + type.ToString();
         }
 
-        public string DescriptionToString()
+        private string DescriptionToString()
         {
             string s = "";
             foreach (CardEffect effect in effects)
@@ -224,10 +219,6 @@ namespace CardGame.Cards
         #endregion
 
         #region IClickable methods
-
-        public void OnMouseLeftClickDown(MouseController mouseController)
-        {
-        }
 
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
