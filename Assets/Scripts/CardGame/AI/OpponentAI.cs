@@ -45,41 +45,30 @@ namespace CardGame.AI
             if (HasMana())
             {
                 List<Card> playableCards = new List<Card>();
+                List<Card> goodCards = new List<Card>();
 
                 CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(_contender);
                 CardZone fieldCardZone = GetFieldCardZone();
 
-                GetCards(ref playableCards, emptyCardZone, fieldCardZone);
+                GetCards(ref playableCards, ref goodCards, emptyCardZone, fieldCardZone);
 
-                if (playableCards.Count == 0) SkipTurn();
+                if (goodCards.Count > 0)
+                    PlayCard(goodCards, emptyCardZone);
                 else
                 {
-                    int index = Random.Range(0, playableCards.Count);
-                    Card card = playableCards[index];
-                    CardZone cardZone = null;
-
-                    switch (card.type)
+                    if (playableCards.Count > 0
+                        && _contender.currentMana == _contender.currentMaxMana
+                        && _contender.hand.numCards > CardGameManager.Instance.settings.handCapacity)
                     {
-                        case CardType.ARGUMENT:
-                            CardZone bestCardZone = GetBestPosition(card);
-                            cardZone = (bestCardZone != null) ? bestCardZone : emptyCardZone;
-                            break;
-
-                        case CardType.FIELD:
-                            cardZone = fieldCardZone;
-                            break;
+                        PlayCard(playableCards, emptyCardZone);
                     }
-
-                    PlayCard(card, cardZone);
+                    else SkipTurn();
                 }
             }
-            else
-            {
-                SkipTurn();
-            }
+            else SkipTurn();
         }
 
-        private void GetCards(ref List<Card> playableCards, bool emptyCardZone, bool fieldCardZone)
+        private void GetCards(ref List<Card> playableCards, ref List<Card> goodCards, bool emptyCardZone, bool fieldCardZone)
         {
             foreach (GameObject cardObj in _contender.hand.cards)
             {
@@ -91,17 +80,48 @@ namespace CardGame.AI
                 {
                     case CardType.ARGUMENT:
 
-                        if (emptyCardZone && IsGoodChoice(card)) playableCards.Add(card); break;
+                        if (emptyCardZone)
+                        {
+                            playableCards.Add(card);
+                            if (IsGoodChoice(card)) goodCards.Add(card);
+                        }
+                        break;
 
                     case CardType.ACTION:
 
-                        if (IsAppliable(card) && IsGoodChoice(card)) playableCards.Add(card); break;
+                        if (IsAppliable(card))
+                        {
+                            playableCards.Add(card);
+                            if (IsGoodChoice(card)) goodCards.Add(card);
+                        }
+                        break;
 
                     case CardType.FIELD:
 
-                        if (fieldCardZone) playableCards.Add(card); break;
+                        if (fieldCardZone) goodCards.Add(card); break;
                 }
             }
+        }
+
+        private void PlayCard(List<Card> cards, CardZone emptyCardZone)
+        {
+            int index = Random.Range(0, cards.Count);
+            Card card = cards[index];
+            CardZone cardZone = null;
+
+            switch (card.type)
+            {
+                case CardType.ARGUMENT:
+                    CardZone bestCardZone = GetBestPosition(card);
+                    cardZone = (bestCardZone != null) ? bestCardZone : emptyCardZone;
+                    break;
+
+                case CardType.FIELD:
+                    cardZone = _contender.fieldCardZone;
+                    break;
+            }
+
+            PlayCard(card, cardZone);
         }
 
         private void PlayCard(Card card, CardZone cardZone)
@@ -463,6 +483,8 @@ namespace CardGame.AI
 
                 case SubType.STEAL_MANA:
                     {
+                        if (TurnManager.Instance.IsStealMana(_contender)) return false;
+
                         int startMana = _contender.currentMana;
                         int finalMana = player.currentMana + _contender.currentMana - source.manaCost;
                         foreach (GameObject cardObj in _contender.hand.cards)
