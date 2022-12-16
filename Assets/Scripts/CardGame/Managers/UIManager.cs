@@ -120,6 +120,11 @@ namespace CardGame.Managers
             _defaultMaxMana = CardGameManager.Instance.settings.maxManaCounter;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape)) OnCancelPlayButtonClick();
+        }
+
         public void TurnAnimation(Turn turn)
         {
             TurnManager.Instance.StopFlow();
@@ -356,7 +361,7 @@ namespace CardGame.Managers
         public void OnCancelPlayButtonClick()
         {
             Card holdingCard = MouseController.Instance.holdingCard;
-            if (holdingCard != null)
+            if (holdingCard != null && holdingCard.contender.isPlayer)
             {
                 holdingCard.CancelPlay();
 
@@ -364,11 +369,11 @@ namespace CardGame.Managers
                     MouseController.Instance.ResetApplyingEffect();
                 else
                     Board.Instance.HighlightZoneTargets(holdingCard.type, holdingCard.contender, show: false);
-            }
 
-            Board.Instance.HighlightTargets(new List<Card>());
-            HidePlayButtons();
-            SetEndTurnButtonInteractable(true);
+                Board.Instance.HighlightTargets(new List<Card>());
+                HidePlayButtons();
+                SetEndTurnButtonInteractable(true);
+            }
         }
 
         public void ShowContinuePlayButton()
