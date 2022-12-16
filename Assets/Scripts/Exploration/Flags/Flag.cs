@@ -57,7 +57,18 @@ namespace Booble.Flags
             HipervitaminadoObtenida,
             Car0,
             Car1,
-            DennisMencionaExplosionFamilia
+            DennisMencionaExplosionFamilia,
+            AnaMencionaIngredientes,
+            PajitaObtenida,
+            GomaObtenida,
+            PolvoraObtenida,
+            IngredientesObtenidos,
+            MontarBombaPedido,
+            AlbumFotosVisto,
+            PelotaMencionada,
+            PelotaObtenida,
+            BombaObtenida,
+            VictoriaPorDesgasteObtenida
         }
 
         [SerializeField] private Reference _flagReference;
