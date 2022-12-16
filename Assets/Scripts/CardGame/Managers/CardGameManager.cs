@@ -44,6 +44,7 @@ namespace CardGame.Managers
             InitializeOpponent();
             InitializeDialogues();
             Board.Instance.InitializeBackground(opponent.GetInterviewBackground());
+            InitializeDecks();
         }
 
         private void InitializeOpponent()
@@ -62,15 +63,14 @@ namespace CardGame.Managers
             _interviewDialogue = opponent.GetInterviewDialogue();
         }
 
-        public void InitializeGame()
-        {
-            InitializeDecks();
-            InitializeContenders();
-        }
-       
         private void InitializeDecks()
         {
             Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
+        }
+
+        public void InitializeGame()
+        {
+            InitializeContenders();
         }
 
         private void InitializeContenders()

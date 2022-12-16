@@ -29,16 +29,15 @@ namespace CardGame.Cards
 
         #region UI
 
-        public TextMeshPro nameText;
-        public TextMeshPro descriptionText;
-        public TextMeshPro strengthText;
-        public TextMeshPro defenseText;
+        [SerializeField] private TextMeshPro nameText;
+        [SerializeField] private TextMeshPro descriptionText;
+        [SerializeField] private TextMeshPro strengthText;
+        [SerializeField] private TextMeshPro defenseText;
 
-        public Sprite cardBack;
-        public Color altColor;
-        public GameObject shadow;
+        [SerializeField] private Color altColor;
         [SerializeField] private GameObject highlight;
 
+        private Sprite cardBack;
         private bool _cardFront = true;
 
         #endregion
@@ -104,6 +103,8 @@ namespace CardGame.Cards
             this.data = new CardsData(data); ;
 
             name = data.name;
+
+            cardBack = contender.GetCardBack();
 
             if (cardRevealed || IsPlayerCard)
             {
@@ -241,6 +242,8 @@ namespace CardGame.Cards
                 }
                 else if (TurnManager.Instance.isPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
+                    if (type == CardType.ACTION && !effect.IsAppliable()) return;
+
                     if (EnoughMana())
                     {
                         // Deattach from parent

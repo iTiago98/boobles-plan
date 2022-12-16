@@ -47,7 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role: 1
   _deckCards: {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
+  _cardBack: {fileID: 21300000, guid: 3c25bc3c1eb34004e9460f7b222f0fe9, type: 3}
   _interviewBackground: {fileID: 21300000, guid: d1942331f146f364b95b4cc9399b7d74, type: 3}
+  _interviewDialogue: {fileID: 0}
   _aIScript: {fileID: 7488545381912919283}
   stolenCards: 0
 --- !u!114 &7488545381912919283
@@ -62,4 +64,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15660fcf2a587549a2051de57d54a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waitTime: 0

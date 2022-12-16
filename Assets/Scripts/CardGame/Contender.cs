@@ -36,6 +36,7 @@ namespace CardGame
         #endregion
 
         [SerializeField] private CardsDataContainer _deckCards;
+        [SerializeField] private Sprite _cardBack;
 
         [Header("Opponent settings")]
         [SerializeField] private Sprite _interviewBackground;
@@ -112,6 +113,7 @@ namespace CardGame
         }
 
         public CardsDataContainer GetDeckCards() { return _deckCards; }
+        public Sprite GetCardBack() { return _cardBack; }
         public InterviewDialogue GetInterviewDialogue() { return _interviewDialogue; }
         public Sprite GetInterviewBackground() { return _interviewBackground; }
         public OpponentAI GetAIScript() { return _aIScript; }

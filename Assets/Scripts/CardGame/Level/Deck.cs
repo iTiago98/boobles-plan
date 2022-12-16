@@ -24,12 +24,18 @@ namespace CardGame.Level
         private List<Card> _listToAdd = new List<Card>();
         private List<Card> _listToDiscard = new List<Card>();
 
+        private SpriteRenderer _spriteRenderer;
+
         #region Initialize
 
         public void Initialize(Contender contender, Hand hand, List<CardsData> deckCards)
         {
             _contender = contender;
             _hand = hand;
+
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.sprite = contender.GetCardBack();
+
             CopyCardsList(deckCards);
             UIManager.Instance.ShowRemainingCards(contender);
             UpdateRemainingCards();
@@ -218,7 +224,7 @@ namespace CardGame.Level
         {
             if (numCards <= 0)
             {
-                GetComponent<SpriteRenderer>().sprite = null;
+                _spriteRenderer.sprite = null;
             }
         }
 

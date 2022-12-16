@@ -46,8 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   role: 0
-  deckCards: {fileID: 11400000, guid: 3a5595458d27512418907d5913937748, type: 2}
-  maxMana: 0
+  _deckCards: {fileID: 0}
+  _cardBack: {fileID: 21300000, guid: f633ec062ec47374ab8db96df637c09f, type: 3}
+  _interviewBackground: {fileID: 0}
+  _interviewDialogue: {fileID: 0}
+  _aIScript: {fileID: 0}
+  stolenCards: 0
 --- !u!1 &8052343457199921778
 GameObject:
   m_ObjectHideFlags: 0
