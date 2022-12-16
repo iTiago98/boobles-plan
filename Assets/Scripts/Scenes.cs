@@ -15,11 +15,12 @@ namespace Booble
         public static string CAR_0 = "Car0";
         public static string CAR_1 = "Car1";
         public static string LOWER_HALL_1 = "LowerHall1";
+        public static string LOWER_HALL_2 = "LowerHall2";
         public static string UPPER_HALL_1 = "UpperHall1";
         public static string BOSS_HALL_1 = "BossHall1";
         public static string CANTEEN_0 = "Canteen0";
+        public static string CANTEEN_2 = "Canteen2";
         public static string MAIN_MENU = "MainMenu";
         public static string HOME_0 = "Home0";
-
     }
 }

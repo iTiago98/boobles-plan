@@ -79,24 +79,34 @@ namespace Booble.Managers
             LoadScene(Scenes.NELA_OFFICE_0);
         }
 
-        public void LoadNelaOffice1()
-        {
-            LoadScene(Scenes.NELA_OFFICE_1);
-        }
-        public void LoadCanteenScene0()
-        {
-            LoadScene(Scenes.CANTEEN_0);
-        }
+    public void LoadNelaOffice1()
+    {
+        LoadScene(Scenes.NELA_OFFICE_1);
+    }
+    public void LoadCanteenScene0()
+    {
+        LoadScene(Scenes.CANTEEN_0);
+    }
+    
+    public void LoadCanteenScene2()
+    {
+        LoadScene(Scenes.CANTEEN_2);
+    }
 
         public void LoadLowerHall1()
         {
             LoadScene(Scenes.LOWER_HALL_1);
         }
 
-        public void LoadLoungeScene1()
-        {
-            LoadScene(Scenes.LOUNGE_1);
-        }
+    public void LoadLowerHall2()
+    {
+        LoadScene(Scenes.LOWER_HALL_2);
+    }
+    
+    public void LoadLoungeScene1()
+    {
+        LoadScene(Scenes.LOUNGE_1);
+    }
 
         #endregion
 
