@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: Zumos - Continue
+  m_Name: Zumos - Intro
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "(Una m\xE1quina de zumos bastante antigua, \xA1incluso tiene para
-      pagar con monedas!)"
+  - _content: "(La m\xE1quina de zumos de Citriano... \xA1No me hab\xEDa fijado en
+      que tiene hasta para pagar con monedas!)"
+    _closeUp: 1
+  - _content: "(Qu\xE9 antigua que es esta m\xE1quina...)"
     _closeUp: 1
