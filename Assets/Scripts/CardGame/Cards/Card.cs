@@ -7,6 +7,7 @@ using CardGame.Cards.DataModel;
 using TMPro;
 using CardGame.Cards.DataModel.Effects;
 using System.Collections;
+using System;
 
 namespace CardGame.Cards
 {
@@ -74,8 +75,8 @@ namespace CardGame.Cards
 
         private SpriteRenderer _spriteRenderer;
 
-        private TurnManager.PlayArgumentEffects _playArgumentEffect;
-        private List<TurnManager.EndTurnEffects> _endTurnEffects;
+        private Action _playArgumentEffect;
+        private List<Action> _endTurnEffects;
         private Deck.DrawCardEffects _drawCardEffect;
 
         private Card _storedTarget;
@@ -91,7 +92,7 @@ namespace CardGame.Cards
         private void Start()
         {
             _clickable = true;
-            _endTurnEffects = new List<TurnManager.EndTurnEffects>();
+            _endTurnEffects = new List<Action>();
         }
 
         #region Initialize
@@ -400,8 +401,9 @@ namespace CardGame.Cards
                     }
                     else if (effect.applyTime == ApplyTime.END)
                     {
-                        _endTurnEffects.Add(new TurnManager.EndTurnEffects(ApplyEffect));
-                        TurnManager.Instance.AddEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
+                        Action action = new Action(ApplyEffect);
+                        _endTurnEffects.Add(action);
+                        TurnManager.Instance.AddEndTurnEffect(action);
                     }
                     else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {
@@ -410,7 +412,7 @@ namespace CardGame.Cards
                     }
                     else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
                     {
-                        _playArgumentEffect = new TurnManager.PlayArgumentEffects(ApplyEffect);
+                        _playArgumentEffect = new Action(ApplyEffect);
                         TurnManager.Instance.AddPlayArgumentEffects(_playArgumentEffect);
                     }
                 }

@@ -7,6 +7,7 @@ using DG.Tweening;
 using Santi.Utils;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -120,11 +121,7 @@ namespace CardGame.Managers
         {
             if (!CardGameManager.Instance.CheckEnd())
             {
-                // Apply end round effects
-                if (endTurnEffectsDelegate != null)
-                    endTurnEffectsDelegate.Invoke();
-
-                StartRound();
+                StartCoroutine(ApplyEndTurnEffectsCoroutine(StartRound));
             }
         }
 
@@ -182,6 +179,12 @@ namespace CardGame.Managers
         public void ContinueFlow()
         {
             continueFlow = true;
+        }
+
+        private void DrawCards(int cardNumber)
+        {
+            StopFlow();
+            board.DrawCards(cardNumber, _turn);
         }
 
         #endregion
@@ -280,61 +283,63 @@ namespace CardGame.Managers
 
         #endregion
 
-        #region Play Argument Effects
+        #region Effects
 
-        public delegate void PlayArgumentEffects();
-        private PlayArgumentEffects playArgumentEffectsDelegate;
-
-        public void AddPlayArgumentEffects(PlayArgumentEffects method)
+        public void SkipCombat()
         {
-            if (playArgumentEffectsDelegate == null)
-            {
-                playArgumentEffectsDelegate = method;
-            }
-            else
-            {
-                playArgumentEffectsDelegate += method;
-            }
+            skipCombat = true;
         }
 
-        public void RemovePlayArgumentEffect(PlayArgumentEffects method)
+        #region Play Argument Effects
+
+        private List<Action> playArgumentEffectsActions = new List<Action>();
+
+        public void AddPlayArgumentEffects(Action method)
         {
-            playArgumentEffectsDelegate -= method;
+            playArgumentEffectsActions.Add(method);
+        }
+
+        public void RemovePlayArgumentEffect(Action method)
+        {
+            playArgumentEffectsActions.Remove(method);
         }
 
         public void ApplyPlayArgumentEffects()
         {
-            playArgumentEffectsDelegate?.Invoke();
+            foreach(Action action in playArgumentEffectsActions)
+            {
+                action();
+            }
         }
 
         #endregion
 
         #region End Turn Effects
 
-        public delegate void EndTurnEffects();
-        private EndTurnEffects endTurnEffectsDelegate;
-        private int numberEffects = 0;
+        private List<Action> endTurnEffectsActions = new List<Action>();
 
-        public void AddEndTurnEffect(EndTurnEffects method)
+        public void AddEndTurnEffect(Action method)
         {
             Debug.Log("End turn effect added");
-            numberEffects++;
-            if (endTurnEffectsDelegate == null)
-            {
-                endTurnEffectsDelegate = method;
-            }
-            else
-            {
-                endTurnEffectsDelegate += method;
-            }
+            endTurnEffectsActions.Add(method);
         }
 
-        public void RemoveEndTurnEffect(EndTurnEffects method)
+        public void RemoveEndTurnEffect(Action method)
         {
-            endTurnEffectsDelegate -= method;
-            numberEffects--;
+            endTurnEffectsActions.Remove(method);
+        }
 
-            if (numberEffects == 0) endTurnEffectsDelegate = null;
+        private IEnumerator ApplyEndTurnEffectsCoroutine(Action followUp)
+        {
+            foreach (Action endTurnEffect in endTurnEffectsActions)
+            {
+                StopFlow();
+                endTurnEffect();
+                Debug.Log(endTurnEffectsActions.IndexOf(endTurnEffect));
+                yield return new WaitUntil(() => continueFlow);
+            }
+
+            followUp();
         }
 
         #endregion
@@ -366,16 +371,7 @@ namespace CardGame.Managers
 
         #endregion
 
-        private void DrawCards(int cardNumber)
-        {
-            StopFlow();
-            board.DrawCards(cardNumber, _turn);
-        }
-
-        public void SkipCombat()
-        {
-            skipCombat = true;
-        }
+        #region Mirror
 
         public void SetMirror(Contender contender, bool state)
         {
@@ -386,7 +382,11 @@ namespace CardGame.Managers
         {
             return (contender.isPlayer && playerMirror) || (!contender.isPlayer && opponentMirror);
         }
-        
+
+        #endregion
+
+        #region Steal Mana
+
         public void SetStealMana(Contender contender)
         {
             if (contender.isPlayer) playerStealMana = true;
@@ -403,5 +403,9 @@ namespace CardGame.Managers
         {
             return (contender.isPlayer && playerStealMana) || (!contender.isPlayer && opponentStealMana);
         }
+
+        #endregion
+
+        #endregion
     }
 }
