@@ -11,8 +11,10 @@ namespace CardGame.Level
 {
     public class Deck : MonoBehaviour
     {
-        public GameObject cardPrefab;
-        public CardsData emptyDeckCardData;
+        [SerializeField] private GameObject argumentCardPrefab;
+        [SerializeField] private GameObject actionCardPrefab;
+
+        [SerializeField] private CardsData emptyDeckCardData;
 
         private int _maxCardNumber;
         private Contender _contender;
@@ -77,20 +79,21 @@ namespace CardGame.Level
                 if (numCards == 0)
                 {
                     // Instantiate card
-                    cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+                    cardObj = Instantiate(argumentCardPrefab, transform.position, argumentCardPrefab.transform.rotation, _hand.transform);
 
                     // Take data
                     data = new CardsData(emptyDeckCardData);
                 }
                 else
                 {
-                    // Instantiate card
-                    cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
-
                     // Take data from scriptable
                     int index = Random.Range(0, numCards);
                     data = _deckCards[index];
                     _deckCards.RemoveAt(index);
+
+                    // Instantiate card
+                    GameObject cardPrefab = GetCardPrefab(data.type);
+                    cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
                 }
 
                 // Add card to hand
@@ -141,13 +144,14 @@ namespace CardGame.Level
             {
                 if (numCards > 0)
                 {
-                    Vector3 position = transform.position + new Vector3(0, 0, -0.1f);
-                    GameObject cardObj = Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
-
                     // Take data from scriptable
                     int index = Random.Range(0, numCards);
                     CardsData data = _deckCards[index];
                     _deckCards.RemoveAt(index);
+
+                    Vector3 position = transform.position + new Vector3(0, 0, -0.1f);
+                    GameObject cardPrefab = GetCardPrefab(data.type);
+                    GameObject cardObj = Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
 
                     Card card = cardObj.GetComponent<Card>();
                     card.Initialize(_contender, data, cardRevealed: true);
@@ -237,21 +241,21 @@ namespace CardGame.Level
             int numCardsStart = numCards;
 
             Contender otherContender = CardGameManager.Instance.GetOtherContender(_contender);
-            GameObject cardPrefab = otherContender.deck.cardPrefab;
 
             for (int i = cardsToSteal.Count - 1; i >= 0; i--)
             {
                 GameObject cardObj;
                 CardsData data;
 
-                // Instantiate card
-                cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
-
                 // Take data from scriptable
                 int index = cardsToSteal[i];
                 data = _deckCards[index];
                 _deckCards.RemoveAt(index);
 
+                // Instantiate card
+                GameObject cardPrefab = GetCardPrefab(data.type);
+                cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+                
                 // Add card to list
                 Card card = cardObj.GetComponent<Card>();
                 card.Initialize(otherContender, data, cardRevealed: false);
@@ -312,6 +316,10 @@ namespace CardGame.Level
         #endregion
 
         public List<CardsData> GetDeckCards() { return _deckCards; }
-
+        public GameObject GetCardPrefab(CardType type)
+        {
+            if (type == CardType.ARGUMENT) return argumentCardPrefab;
+            else return actionCardPrefab;
+        }
     }
 }

@@ -69,11 +69,11 @@ MonoBehaviour:
     type: 0
     effects:
     - type: 3
-      subType: 9
+      subType: 36
       applyTime: 1
       targetType: 5
-      intParameter1: -1
-      intParameter2: -1
+      intParameter1: 1
+      intParameter2: 1
       cardParameter:
         name: 
         sprite: {fileID: 0}

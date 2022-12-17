@@ -3607,7 +3607,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2016
+    m_Bits: 4064
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -4040,6 +4040,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5361708988085911353, guid: 82810575771546e4682e8c77c5afa680, type: 3}
       propertyPath: cardPrefab
+      value: 
+      objectReference: {fileID: 1254610937219164558, guid: cebffa8800f4e544ea2b432fd3dab413, type: 3}
+    - target: {fileID: 5361708988085911353, guid: 82810575771546e4682e8c77c5afa680, type: 3}
+      propertyPath: actionCardPrefab
+      value: 
+      objectReference: {fileID: 1254610937219164558, guid: c9470c81abc8cd045b05e52384deb78a, type: 3}
+    - target: {fileID: 5361708988085911353, guid: 82810575771546e4682e8c77c5afa680, type: 3}
+      propertyPath: argumentCardPrefab
       value: 
       objectReference: {fileID: 1254610937219164558, guid: cebffa8800f4e544ea2b432fd3dab413, type: 3}
     m_RemovedComponents: []
@@ -5542,11 +5550,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   board: {fileID: 1433726608}
-  skipCombat: 0
-  playerMirror: 0
-  opponentMirror: 0
-  playerStealMana: 0
-  opponentStealMana: 0
   combat: 0
 --- !u!1 &1479472348
 GameObject:
@@ -6949,8 +6952,8 @@ MonoBehaviour:
   playerDeckRemainingCardsText: {fileID: 411745939}
   opponentDeckRemainingCardsPanel: {fileID: 383091430}
   opponentDeckRemainingCardsText: {fileID: 1624696462}
-  continuePlayButton: {fileID: 381356681}
-  cancelPlayButton: {fileID: 1001476599}
+  continuePlayButton: {fileID: 381356676}
+  cancelPlayButton: {fileID: 1001476594}
   interviewEndText: {fileID: 283200277}
   interviewEndButton: {fileID: 1347776988}
   endTurnButton: {fileID: 854331679}
@@ -6960,6 +6963,9 @@ MonoBehaviour:
   stealCardsFromDeckParent: {fileID: 1400340499}
   stealCardsFromDeckButton: {fileID: 1328135743}
   cardImagePrefab: {fileID: 2272773859446305511, guid: 4718eb3a5cd88fe41b0be47e85fa97cf, type: 3}
+  particleSystem_effectApply_Prefab: {fileID: 8613634428003109819, guid: b5ba0b32e4d6b074fa7978d86998d968, type: 3}
+  particleSystem_effectTargetPositive_Prefab: {fileID: 3411222107394574140, guid: e015fe08627db994ca3689adcd429528, type: 3}
+  particleSystem_effectTargetNegative_Prefab: {fileID: 6336714060449679389, guid: f4d036dd917e9c347a97da69ed75236b, type: 3}
 --- !u!1 &1709985713
 GameObject:
   m_ObjectHideFlags: 0
@@ -12829,9 +12835,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7597065615806498474, guid: 82810575771546e4682e8c77c5afa680, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 65cdb43eae026da4ca88a2a0cfbbce98, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82810575771546e4682e8c77c5afa680, type: 3}

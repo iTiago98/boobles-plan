@@ -445,21 +445,24 @@ namespace CardGame.AI
                             }
                         }
 
-                        int position = Board.Instance.GetPositionFromCard(bestTarget);
-                        if (_contender.life < player.life)
+                        if (bestTarget != null)
                         {
-                            if (_contender.cardZones[position].isEmpty)
+                            int position = Board.Instance.GetPositionFromCard(bestTarget);
+                            if (_contender.life < player.life)
                             {
-                                if (position > 0 && opponentCardZones[position - 1].isNotEmpty) return true;
-                                else if (position < 3 && opponentCardZones[position + 1].isNotEmpty) return true;
+                                if (_contender.cardZones[position].isEmpty)
+                                {
+                                    if (position > 0 && opponentCardZones[position - 1].isNotEmpty) return true;
+                                    else if (position < 3 && opponentCardZones[position + 1].isNotEmpty) return true;
+                                }
                             }
-                        }
-                        else
-                        {
-                            if (playerCardZones[position].isNotEmpty)
+                            else
                             {
-                                if (position > 0 && playerCardZones[position - 1].isEmpty) return true;
-                                else if (position < 3 && playerCardZones[position + 1].isEmpty) return true;
+                                if (playerCardZones[position].isNotEmpty)
+                                {
+                                    if (position > 0 && playerCardZones[position - 1].isEmpty) return true;
+                                    else if (position < 3 && playerCardZones[position + 1].isEmpty) return true;
+                                }
                             }
                         }
 
@@ -476,7 +479,7 @@ namespace CardGame.AI
                     return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
                 case SubType.SKIP_COMBAT:
-                    return !TurnManager.Instance.skipCombat && Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
+                    return !TurnManager.Instance.GetSkipCombat() && Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);
 
                 case SubType.STEAL_CARD:
                     return Board.Instance.NumCardsOnTable(player) > Board.Instance.NumCardsOnTable(_contender);

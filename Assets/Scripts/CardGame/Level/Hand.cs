@@ -31,10 +31,15 @@ namespace CardGame.Level
             {
                 int index = random.Next(0, numCards);
                 Card card = cards[index].GetComponent<Card>();
-                if (card.type == CardType.ACTION && card.hasEffect && card.effect.type == EffectType.ALTERNATE_WIN_CONDITION)
-                    continue;
 
-                _listToDiscard.Add(cards[index].GetComponent<Card>());
+                if (_listToDiscard.Contains(card)
+                    || card.IsAlternateWinConditionCard())
+                {
+                    i--;
+                    continue;
+                }
+
+                _listToDiscard.Add(card);
             }
 
             StartCoroutine(DiscardCoroutine(wheelEffect: false));
@@ -45,7 +50,7 @@ namespace CardGame.Level
             for (int i = 0; i < numCards; i++)
             {
                 Card card = cards[i].GetComponent<Card>();
-                if (card.type == CardType.ACTION && card.hasEffect && card.effect.type == EffectType.ALTERNATE_WIN_CONDITION)
+                if (card.IsAlternateWinConditionCard())
                     continue;
 
                 _listToDiscard.Add(card);
@@ -63,6 +68,7 @@ namespace CardGame.Level
                 card.DestroyCard();
 
                 if (!wheelEffect) yield return new WaitUntil(() => card == null);
+
                 _listToDiscard.RemoveAt(0);
             }
 
@@ -83,10 +89,10 @@ namespace CardGame.Level
 
         public bool HasAlternateWinConditionCard()
         {
-            foreach(GameObject cardObj in cards)
+            foreach (GameObject cardObj in cards)
             {
                 Card card = cardObj.GetComponent<Card>();
-                if (card.hasEffect && card.effect.type == EffectType.ALTERNATE_WIN_CONDITION) return true;
+                if (card.IsAlternateWinConditionCard()) return true;
             }
 
             return false;
@@ -94,9 +100,15 @@ namespace CardGame.Level
 
         public void CheckDiscarding()
         {
-            CheckDiscarding(numCards);
+            StartCoroutine(CheckDiscardingCoroutine(numCards));
         }
+
         public void CheckDiscarding(int numCards)
+        {
+            StartCoroutine(CheckDiscardingCoroutine(numCards));
+        }
+
+        private IEnumerator CheckDiscardingCoroutine(int numCards)
         {
             int handCapacity = CardGameManager.Instance.settings.handCapacity;
             if (numCards > handCapacity)
@@ -117,6 +129,9 @@ namespace CardGame.Level
                 {
                     isDiscarding = false;
                     ChangeScale(CardGameManager.Instance.settings.defaultScale);
+
+                    yield return new WaitUntil(() => this.numCards == numCards);
+
                     TurnManager.Instance.ChangeTurn();
                 }
             }

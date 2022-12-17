@@ -51,6 +51,8 @@ MonoBehaviour:
     cost: 5
     strength: 3
     defense: 2
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -72,6 +74,8 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 5
@@ -92,6 +96,8 @@ MonoBehaviour:
     cost: 4
     strength: 4
     defense: 4
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -112,6 +118,8 @@ MonoBehaviour:
     cost: 3
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 2
     effects:
     - type: 1
@@ -132,6 +140,8 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 5
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 4
@@ -153,6 +163,8 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 5
@@ -173,6 +185,8 @@ MonoBehaviour:
     cost: 4
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 2
     effects:
     - type: 3
@@ -193,6 +207,8 @@ MonoBehaviour:
     cost: 3
     strength: 0
     defense: 15
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -213,6 +229,8 @@ MonoBehaviour:
     cost: 2
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 3
@@ -233,6 +251,8 @@ MonoBehaviour:
     cost: 1
     strength: 0
     defense: 7
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 4
@@ -267,6 +287,8 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 5
@@ -287,6 +309,8 @@ MonoBehaviour:
     cost: 0
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 4
@@ -307,6 +331,8 @@ MonoBehaviour:
     cost: 5
     strength: 5
     defense: 5
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -327,6 +353,8 @@ MonoBehaviour:
     cost: 2
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 4
@@ -348,6 +376,8 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 1
@@ -368,6 +398,8 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 15
+    defaultStrength: 0
+    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -398,9 +430,11 @@ MonoBehaviour:
       cardParameter_Effect: 0
   - name: "Ha perdido ust\xE9 los papele+"
     sprite: {fileID: 21300000, guid: 164ff933105cfee4abe54e441e35b97f, type: 3}
-    cost: 5
+    cost: 1
     strength: 0
     defense: 0
+    defaultStrength: 0
+    defaultDefense: 0
     type: 1
     effects:
     - type: 4

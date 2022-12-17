@@ -74,8 +74,8 @@ namespace CardGame.Managers
 
         [Header("Interactables")]
 
-        [SerializeField] private MyButton continuePlayButton;
-        [SerializeField] private MyButton cancelPlayButton;
+        [SerializeField] private GameObject continuePlayButton;
+        [SerializeField] private GameObject cancelPlayButton;
 
         [SerializeField] private TextMeshProUGUI interviewEndText;
         [SerializeField] private MyButton interviewEndButton;
@@ -102,6 +102,15 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Particle Systems
+
+        [Header("Particle Systems")]
+        [SerializeField] private GameObject particleSystem_effectApply_Prefab;
+        [SerializeField] private GameObject particleSystem_effectTargetPositive_Prefab;
+        [SerializeField] private GameObject particleSystem_effectTargetNegative_Prefab;
+
+        #endregion
+
         private Contender _player;
         private Contender _opponent;
 
@@ -109,11 +118,13 @@ namespace CardGame.Managers
         private const string PLAYER_TURN_TEXT = "Tu turno";
         private const string OPPONENT_TURN_TEXT = "Turno del oponente";
         private const string CLASH_TEXT = "Combate";
+        private const string END_TEXT = "Fin de la ronda";
 
         private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
         private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
         private const string DISCARDING_BUTTON_TEXT = "Descartando";
         private const string CLASH_BUTTON_TEXT = "Combate";
+        private const string END_BUTTON_TEXT = "Fin de la ronda";
         private const string SKIP_COMBAT_BUTTON_TEXT = "Pasar turno";
 
         private const string INTERVIEW_WIN_TEXT = "Has ganado";
@@ -134,7 +145,10 @@ namespace CardGame.Managers
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape)) OnCancelPlayButtonClick();
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if(cancelPlayButton.activeSelf) OnCancelPlayButtonClick();
+            }
         }
 
         public void TurnAnimation(Turn turn)
@@ -156,6 +170,9 @@ namespace CardGame.Managers
                     break;
                 case Turn.CLASH:
                     turnAnimationText.text = CLASH_TEXT;
+                    break;
+                case Turn.END:
+                    turnAnimationText.text = END_TEXT;
                     break;
             }
 
@@ -187,7 +204,7 @@ namespace CardGame.Managers
             StartCoroutine(UpdateUIStatsCoroutine(startRound));
         }
 
-        private IEnumerator UpdateUIStatsCoroutine(bool startRound)
+        private IEnumerator UpdateUIStatsCoroutine(bool continueFlow)
         {
             int loops = Mathf.Max(
                 Mathf.Abs(_player.life - _shownPlayerLife),
@@ -208,8 +225,7 @@ namespace CardGame.Managers
                 _shownPlayerLife == _player.life && _shownPlayerMana == _player.currentMana
                 && _shownOpponentLife == _opponent.life && _shownOpponentMana == _opponent.currentMana);
 
-            /*if (startRound) */
-            TurnManager.Instance.ContinueFlow();
+            if (continueFlow) TurnManager.Instance.ContinueFlow();
         }
 
         private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
@@ -309,7 +325,7 @@ namespace CardGame.Managers
                     break;
                 case Turn.PLAYER:
                     endTurnButton.SetInteractable(true);
-                    if (TurnManager.Instance.skipCombat)
+                    if (TurnManager.Instance.GetSkipCombat())
                         endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
                     else
                         endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
@@ -321,6 +337,10 @@ namespace CardGame.Managers
                 case Turn.CLASH:
                     endTurnButton.SetInteractable(false);
                     endTurnButton.SetText(CLASH_BUTTON_TEXT);
+                    break;
+                case Turn.END:
+                    endTurnButton.SetInteractable(false);
+                    endTurnButton.SetText(END_BUTTON_TEXT);
                     break;
             }
         }
@@ -393,17 +413,17 @@ namespace CardGame.Managers
 
         public void ShowContinuePlayButton()
         {
-            continuePlayButton.gameObject.SetActive(true);
+            continuePlayButton.SetActive(true);
         }
         public void ShowCancelPlayButton()
         {
-            cancelPlayButton.gameObject.SetActive(true);
+            cancelPlayButton.SetActive(true);
         }
 
         public void HidePlayButtons()
         {
-            continuePlayButton.gameObject.SetActive(false);
-            cancelPlayButton.gameObject.SetActive(false);
+            continuePlayButton.SetActive(false);
+            cancelPlayButton.SetActive(false);
         }
 
         #endregion
@@ -457,6 +477,26 @@ namespace CardGame.Managers
             _deckToSteal.StealCards(cardsToSteal);
             MouseController.Instance.SetSelecting();
         }
+
+        #endregion
+
+        #region Particle Systems 
+
+        public GameObject ShowParticlesEffectApply(Transform parent)
+        {
+            return Instantiate(particleSystem_effectApply_Prefab, parent);
+        }
+
+        public void ShowParticlesEffectTargetPositive(Transform parent)
+        {
+            Instantiate(particleSystem_effectTargetPositive_Prefab, parent);
+        }
+
+        public void ShowParticlesEffectTargetNegative(Transform parent)
+        {
+            Instantiate(particleSystem_effectTargetNegative_Prefab, parent);
+        }
+
 
         #endregion
 

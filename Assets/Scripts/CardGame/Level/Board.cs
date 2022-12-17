@@ -192,7 +192,9 @@ namespace CardGame.Level
             foreach (CardZone cardZone in contender.cardZones)
             {
                 if (cardZone.isNotEmpty)
-                    cardZone.GetCard().ReceiveDamage(damage);
+                {
+                    cardZone.GetCard().ReceiveDamage(damage, showParticles: true);
+                }
             }
         }
 

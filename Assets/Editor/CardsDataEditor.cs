@@ -170,6 +170,7 @@ namespace CardGame.Cards.DataModel
                         case SubType.GUARD:
                             break;
                         case SubType.STAT_BOOST:
+                        case SubType.STAT_DECREASE:
                             cardEffect.intParameter1 = EditorGUILayout.IntField("Strength boost: ", cardEffect.intParameter1);
                             cardEffect.intParameter2 = EditorGUILayout.IntField("Defense boost: ", cardEffect.intParameter2);
                             break;

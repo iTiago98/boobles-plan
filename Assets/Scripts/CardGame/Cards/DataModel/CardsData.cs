@@ -15,6 +15,9 @@ namespace CardGame.Cards.DataModel
         public int strength;
         public int defense;
 
+        public int defaultStrength { private set; get; }
+        public int defaultDefense { private set; get; }
+
         public CardType type;
 
         public List<CardEffect> effects = new List<CardEffect>();
@@ -31,10 +34,12 @@ namespace CardGame.Cards.DataModel
             this.cost = data.cost;
             this.strength = data.strength;
             this.defense = data.defense;
+            this.defaultStrength = data.strength;
+            this.defaultDefense = data.defense;
             this.type = data.type;
 
             this.effects = new List<CardEffect>();
-            foreach(CardEffect effect in data.effects)
+            foreach (CardEffect effect in data.effects)
             {
                 this.effects.Add(effect);
             }
@@ -44,5 +49,5 @@ namespace CardGame.Cards.DataModel
         {
             effects.Add(effect);
         }
-    } 
+    }
 }

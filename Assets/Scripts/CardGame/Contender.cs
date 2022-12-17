@@ -85,17 +85,17 @@ namespace CardGame
             currentMaxMana += mana;
         }
 
-        public void SubstractMana(int cost)
+        public void SubstractMana(int cost, bool continueFlow)
         {
             currentMana -= cost;
             if (currentMana < 0) currentMana = 0;
-            UIManager.Instance.UpdateUIStats();
+            UIManager.Instance.UpdateUIStats(continueFlow);
         }
 
-        public void RestoreLife(int life)
+        public void RestoreLife(int life, bool continueFlow)
         {
             this.life += life;
-            UIManager.Instance.UpdateUIStats();
+            UIManager.Instance.UpdateUIStats(continueFlow);
         }
 
         public void ReceiveDamage(int strength)

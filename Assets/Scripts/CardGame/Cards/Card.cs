@@ -17,14 +17,14 @@ namespace CardGame.Cards
         public int manaCost => data.cost;
         public int strength => data.strength;
         public int defense => data.defense;
+        public int defaultStrength => data.defaultStrength;
+        public int defaultDefense => data.defaultDefense;
         public CardType type => data.type;
         public List<CardEffect> effects { private set { data.effects = value; } get { return data.effects; } }
         public CardEffect effect => effects[0];
         public bool hasEffect => effects.Count > 0;
 
         public CardsData data { set; get; }
-        private int _defaultStrength;
-        private int _defaultDefense;
 
         #endregion
 
@@ -98,27 +98,20 @@ namespace CardGame.Cards
             this.data = new CardsData(data); ;
 
             name = data.name;
+            if (nameText != null) nameText.text = data.name;
+            if (descriptionText != null) descriptionText.text = GetDescriptionText();
 
             cardBack = contender.GetCardBack();
 
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            if (cardRevealed || IsPlayerCard) 
+            if (cardRevealed || IsPlayerCard)
             {
                 if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
             }
-            else
-            {
-                FlipCard();
-            }
-
-            if (nameText != null) nameText.text = data.name;
-            if (descriptionText != null) descriptionText.text = GetDescriptionText();
+            else FlipCard();
 
             if (type == CardType.ARGUMENT)
             {
-                _defaultStrength = data.strength;
-                _defaultDefense = data.defense;
-
                 UpdateStatsUI();
             }
         }
@@ -129,8 +122,8 @@ namespace CardGame.Cards
 
         private void UpdateStatsUI()
         {
-            UpdateStatUI(strengthText, strength, _defaultStrength, Color.black);
-            UpdateStatUI(defenseText, defense, _defaultDefense, Color.white);
+            UpdateStatUI(strengthText, strength, defaultStrength, Color.black);
+            UpdateStatUI(defenseText, defense, defaultDefense, Color.white);
         }
 
         private void UpdateStatUI(TextMeshPro text, int value, int defaultValue, Color defaultColor)
@@ -195,25 +188,21 @@ namespace CardGame.Cards
 
         public void FlipCard()
         {
-            if (_cardFront)
+            if (_cardFront) _spriteRenderer.sprite = cardBack;
+            else _spriteRenderer.sprite = data.sprite;
+
+            _cardFront = !_cardFront;
+
+            nameText.gameObject.SetActive(_cardFront);
+            descriptionText.gameObject.SetActive(_cardFront);
+
+            if (type == CardType.ARGUMENT)
             {
-                _spriteRenderer.sprite = cardBack;
-                nameText.gameObject.SetActive(false);
-                descriptionText.gameObject.SetActive(false);
-                strengthText.gameObject.SetActive(false);
-                defenseText.gameObject.SetActive(false);
-            }
-            else
-            {
-                _spriteRenderer.sprite = data.sprite;
-                nameText.gameObject.SetActive(true);
-                descriptionText.gameObject.SetActive(true);
-                strengthText.gameObject.SetActive(true);
-                defenseText.gameObject.SetActive(true);
+                strengthText.gameObject.SetActive(_cardFront);
+                defenseText.gameObject.SetActive(_cardFront);
             }
 
             transform.Rotate(new Vector3(0, 0, 180));
-            _cardFront = !_cardFront;
         }
 
         #endregion
@@ -229,8 +218,8 @@ namespace CardGame.Cards
                 if (_hand.isDiscarding)
                 {
                     int numCards = _hand.numCards - 1;
+                    DestroyCard(continueFlow: false);
                     _hand.CheckDiscarding(numCards);
-                    DestroyCard();
                 }
                 else if (TurnManager.Instance.isPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
@@ -240,7 +229,6 @@ namespace CardGame.Cards
                     {
                         // Deattach from parent
                         RemoveFromContainer();
-
                         MoveToWaitingSpot();
 
                         if (type == CardType.ARGUMENT || type == CardType.FIELD)
@@ -392,9 +380,9 @@ namespace CardGame.Cards
                     }
                     else if (effect.applyTime == ApplyTime.END)
                     {
-                        Action action = new Action(ApplyEffect);
+                        Action action = new Action(ApplyEndTurnEffect);
                         _endTurnEffects.Add(action);
-                        TurnManager.Instance.AddEndTurnEffect(action);
+                        TurnManager.Instance.AddEndTurnEffect(action, data.name);
                     }
                     else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {
@@ -464,13 +452,13 @@ namespace CardGame.Cards
             {
                 Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
                 manaCostLeft -= otherContender.currentMana;
-                otherContender.SubstractMana(manaCost);
+                otherContender.SubstractMana(manaCost, continueFlow: false);
             }
 
             if (manaCostLeft > 0)
             {
                 if (contender.freeMana) contender.SetFreeMana(false);
-                else contender.SubstractMana(manaCostLeft);
+                else contender.SubstractMana(manaCostLeft, continueFlow: false);
             }
         }
 
@@ -519,7 +507,12 @@ namespace CardGame.Cards
                 targetDir = new Vector3(targetDir.x, targetDir.y, 0);
 
                 Vector3 previousRotation = transform.rotation.eulerAngles;
-                Quaternion rotation = Quaternion.FromToRotation(transform.up, targetDir);
+                Quaternion rotation;
+                if(contender.isPlayer)
+                    rotation = Quaternion.FromToRotation(transform.up, targetDir);
+                else
+                    rotation = Quaternion.FromToRotation(transform.up * -1, targetDir);
+
                 Vector3 rotationEuler = rotation.eulerAngles;
                 if (rotationEuler.z > 180) rotationEuler = new Vector3(rotationEuler.x, rotationEuler.y, rotationEuler.z - 360);
 
@@ -539,10 +532,6 @@ namespace CardGame.Cards
 
                 // Back
                 hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
-                //hitSequence.AppendCallback(() =>
-                //{
-                //    CheckDestroy();
-                //});
                 hitSequence.Append(transform.DOScale(_defaultScale, 0.2f));
                 hitSequence.Join(transform.DORotate(previousRotation, 0.2f));
             }
@@ -558,6 +547,13 @@ namespace CardGame.Cards
 
         public void ReceiveDamage(int strength)
         {
+            ReceiveDamage(strength, showParticles: false);
+        }
+
+        public void ReceiveDamage(int strength, bool showParticles)
+        {
+            if (showParticles) UIManager.Instance.ShowParticlesEffectTargetNegative(transform);
+
             data.defense -= strength;
             if (data.defense < 0) data.defense = 0;
             UpdateStatsUI();
@@ -671,6 +667,20 @@ namespace CardGame.Cards
             if (effect.IsAppliable()) effect.Apply(this, target);
         }
 
+        public void ApplyEndTurnEffect()
+        {
+            StartCoroutine(ApplyEndTurnEffectCoroutine());
+        }
+
+        private IEnumerator ApplyEndTurnEffectCoroutine()
+        {
+            GameObject applyEffectParticles = UIManager.Instance.ShowParticlesEffectApply(transform);
+
+            yield return new WaitUntil(() => applyEffectParticles == null);
+
+            ApplyEffect(effect);
+        }
+
         private void CheckDestroyEffects()
         {
             if (hasEffect)
@@ -680,11 +690,6 @@ namespace CardGame.Cards
                     if (effect.applyTime == ApplyTime.DESTROY && !IsInHand)
                     {
                         ApplyEffect(effect);
-                    }
-
-                    if (effect.subType == SubType.MIRROR)
-                    {
-                        TurnManager.Instance.SetMirror(contender, false);
                     }
                 }
             }
@@ -717,6 +722,22 @@ namespace CardGame.Cards
                     {
                         TurnManager.Instance.RemoveGuardCard(contender);
                     }
+                    else if (effect.subType == SubType.MIRROR)
+                    {
+                        TurnManager.Instance.SetMirror(contender, false);
+                    }
+                }
+            }
+        }
+
+        public void ManageEffects()
+        {
+            if (hasEffect)
+            {
+                foreach (CardEffect effect in effects)
+                {
+                    if (effect.subType == SubType.GUARD) TurnManager.Instance.SetGuardCard(this);
+                    else if (effect.subType == SubType.MIRROR) TurnManager.Instance.SetMirror(contender, true);
                 }
             }
         }
@@ -724,35 +745,47 @@ namespace CardGame.Cards
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
             data.strength += strengthBoost;
-            if (data.strength < 0) data.strength = 0;
             data.defense += defenseBoost;
-            //Update card strength and defense number
+
             if (type == CardType.ARGUMENT)
                 UpdateStatsUI();
+
+            UIManager.Instance.ShowParticlesEffectTargetPositive(transform);
+        }
+
+        public void DecreaseStats(int strengthDecrease, int defenseDecrease)
+        {
+            data.strength -= strengthDecrease;
+            data.defense -= defenseDecrease;
+            if (data.strength < 0) data.strength = 0;
+            if (type == CardType.ARGUMENT)
+                UpdateStatsUI();
+
+            UIManager.Instance.ShowParticlesEffectTargetNegative(transform);
             CheckDestroy();
         }
 
         public bool IsBoosted()
         {
-            return strength > _defaultStrength || defense > _defaultDefense;
+            return strength > defaultStrength || defense > defaultDefense;
         }
 
         public int GetBoost()
         {
             int boost = 0;
-            if (strength > _defaultStrength) boost += strength - _defaultStrength;
-            if (defense > _defaultDefense) boost += defense - _defaultDefense;
+            if (strength > defaultStrength) boost += strength - defaultStrength;
+            if (defense > defaultDefense) boost += defense - defaultDefense;
             return boost;
         }
 
         public bool IsDamaged()
         {
-            return defense < _defaultDefense;
+            return defense < defaultDefense;
         }
 
         public int GetDamage()
         {
-            return _defaultDefense - defense;
+            return defaultDefense - defense;
         }
 
         public void SwapContender()
@@ -772,6 +805,11 @@ namespace CardGame.Cards
             isHighlighted = show;
         }
 
+        public bool IsAlternateWinConditionCard()
+        {
+            return type == CardType.ACTION && hasEffect && effect.type == EffectType.ALTERNATE_WIN_CONDITION;
+        }
+        
         #endregion
 
         #region Containers
@@ -807,8 +845,8 @@ namespace CardGame.Cards
             RemoveFromContainer();
             CheckDelegateEffects();
 
-            data.strength = _defaultStrength;
-            data.defense = _defaultDefense;
+            data.strength = defaultStrength;
+            data.defense = defaultDefense;
 
             if (_swapped) SwapContender();
             _hand.AddCard(this);
