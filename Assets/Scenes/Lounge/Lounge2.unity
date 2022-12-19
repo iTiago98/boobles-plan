@@ -199,6 +199,94 @@ Transform:
   m_Father: {fileID: 1174065277}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &130846006
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 130846007}
+  - component: {fileID: 130846009}
+  - component: {fileID: 130846008}
+  - component: {fileID: 130846011}
+  m_Layer: 0
+  m_Name: Pobres
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &130846007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130846006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 324579749}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &130846008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130846006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 927801221}
+        m_TargetAssemblyTypeName: DennisWalk, Assembly-CSharp
+        m_MethodName: WalkAway
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &130846009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130846006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &130846011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130846006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 3a000000
 --- !u!1 &157322570
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 81d0cf472b2e91a4fa1b94d7cf55daee, type: 2}
@@ -570,8 +659,8 @@ GameObject:
   m_Component:
   - component: {fileID: 324579749}
   - component: {fileID: 324579752}
-  - component: {fileID: 324579751}
-  - component: {fileID: 324579750}
+  - component: {fileID: 324579754}
+  - component: {fileID: 324579753}
   m_Layer: 0
   m_Name: TENGO QUE DESPEDIR A LOS PPB
   m_TagString: Untagged
@@ -590,52 +679,13 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 130846007}
+  - {fileID: 863635363}
+  - {fileID: 1184045880}
   m_Father: {fileID: 927801215}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &324579750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324579748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flags: 2e000000
---- !u!114 &324579751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324579748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
-  _onEnd: 3
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 927801221}
-        m_TargetAssemblyTypeName: DennisWalk, Assembly-CSharp
-        m_MethodName: WalkAway
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &324579752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,6 +698,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &324579753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324579748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unclickable: 1
+  _interactDistance: 0
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
+  _options:
+  - _optionText: "\xA1Es verdad, pobres familias! Creo que las llamar\xE9. \xBFSabes
+      c\xF3mo se llaman?"
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 130846009}
+  - _optionText: Ahora mismo cuanto menos personal sea la cosa, mejor. Dejaremos
+      a las familias aparte.
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 863635365}
+  - _optionText: Bueno, al menos pueden verlos en directo por BooTube.
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 1184045882}
+--- !u!114 &324579754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324579748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2df29dfe0175d44961047781705213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 324579753}
 --- !u!1 &328877700
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +873,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: fcbf655fb54dd3f4287d73f1515692d9, type: 2}
@@ -1272,6 +1370,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &863635362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 863635363}
+  - component: {fileID: 863635365}
+  - component: {fileID: 863635364}
+  m_Layer: 0
+  m_Name: Aparte
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &863635363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863635362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 324579749}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &863635364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863635362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &863635365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863635362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &895481876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,6 +1737,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: da3fdb83cfbd84a4d87bbba6d311afe6, type: 2}
@@ -1629,6 +1790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _finalDennisPos: {x: -9, y: -3.49, z: 0}
+  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
 --- !u!1 &928461886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,6 +2252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 449bf0f911e092f43b91031489cd4cbc, type: 2}
@@ -2182,6 +2345,94 @@ CapsuleCollider2D:
   m_Offset: {x: -0.087910175, y: 1.8285652}
   m_Size: {x: 1.3074617, y: 3.6571305}
   m_Direction: 0
+--- !u!1 &1184045879
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184045880}
+  - component: {fileID: 1184045882}
+  - component: {fileID: 1184045881}
+  - component: {fileID: 1184045883}
+  m_Layer: 0
+  m_Name: BooTube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1184045880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184045879}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 324579749}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1184045881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184045879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 927801221}
+        m_TargetAssemblyTypeName: DennisWalk, Assembly-CSharp
+        m_MethodName: WalkAway
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1184045882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184045879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1184045883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184045879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 2e000000
 --- !u!1 &1192919496
 GameObject:
   m_ObjectHideFlags: 0
@@ -2787,6 +3038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 6
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: e20c587393e1a5548948752fe654235b, type: 2}
@@ -3243,6 +3495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 7378dc792ab3d624f961dc31c616bd25, type: 2}
@@ -3413,6 +3666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 2472c3f6ee1bbd24fb20d785a832134a, type: 2}
@@ -3648,6 +3902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 0.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: f671774f99525ac49bc28003a7c277d5, type: 2}
@@ -3748,6 +4003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 2
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: da151e6faf50144408bbbcbda036547f, type: 2}
@@ -4038,6 +4294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1.5
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 3937758230cdeea45ae0b01770b7fbdd, type: 2}

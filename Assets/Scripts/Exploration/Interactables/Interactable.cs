@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
 using Booble.Flags;
 using Booble.Characters;
+using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 
 namespace Booble.Interactables
@@ -39,6 +40,7 @@ namespace Booble.Interactables
             _mouseOverInteractable = false;
         }
 
+        [SerializeField] private bool _unclickable;
         [SerializeField] private float _interactDistance;
         [SerializeField] private List<ClickDialogue> _clickDialogues;
         [SerializeField] private List<Option> _options;
@@ -97,34 +99,35 @@ namespace Booble.Interactables
 
             if (_xDistanceToPlayer <= _interactDistance)
             {
-                _interactionOnGoing = true;
-
-                _player.StopMovement();
-                _cursor.ShowActionText(false);
-
-                bool found = false;
-                int i = 0;
-                while(!found && i < _clickDialogues.Count)
-                {
-                    ClickDialogue clickDialogue = _clickDialogues[i];
-                    if(clickDialogue.FlagsSatisfied)
-                    {
-                        found = true;
-                        _dialogue = clickDialogue.Dialogue;
-                        clickDialogue.SetFlags();
-                    }
-                    i++;
-                }
-                if(!found)
-                {
-                    Debug.LogError("No Click Dialogue with a satisfied Flag List!");
-                }
-                _diagManager.StartDialogue(_dialogue, _options);
-
-                _returnDialogue = _dialogue;
-                _returnOptions = _options;
-                _diagManager.OnEndDialogue.RemoveAllListeners();
-                _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
+                StartInteraction();
+                // _interactionOnGoing = true;
+                //
+                // _player.StopMovement();
+                // _cursor.ShowActionText(false);
+                //
+                // bool found = false;
+                // int i = 0;
+                // while(!found && i < _clickDialogues.Count)
+                // {
+                //     ClickDialogue clickDialogue = _clickDialogues[i];
+                //     if(clickDialogue.FlagsSatisfied)
+                //     {
+                //         found = true;
+                //         _dialogue = clickDialogue.Dialogue;
+                //         clickDialogue.SetFlags();
+                //     }
+                //     i++;
+                // }
+                // if(!found)
+                // {
+                //     Debug.LogError("No Click Dialogue with a satisfied Flag List!");
+                // }
+                // _diagManager.StartDialogue(_dialogue, _options);
+                //
+                // _returnDialogue = _dialogue;
+                // _returnOptions = _options;
+                // _diagManager.OnEndDialogue.RemoveAllListeners();
+                // _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
             }
             else
             {
@@ -134,6 +137,9 @@ namespace Booble.Interactables
 
         private void Update()
         {
+            if (_unclickable)
+                return;
+            
             if (_interactionOnGoing || !_mouseOverThisInteractable)
                 return;
 
@@ -146,12 +152,45 @@ namespace Booble.Interactables
                 _cursor.SetApproachText();
             }
         }
+        
+        public void StartInteraction()
+        {
+            _interactionOnGoing = true;
+
+            _player.StopMovement();
+            _cursor.ShowActionText(false);
+
+            bool found = false;
+            int i = 0;
+            while(!found && i < _clickDialogues.Count)
+            {
+                ClickDialogue clickDialogue = _clickDialogues[i];
+                if(clickDialogue.FlagsSatisfied)
+                {
+                    found = true;
+                    _dialogue = clickDialogue.Dialogue;
+                    clickDialogue.SetFlags();
+                }
+                i++;
+            }
+            if(!found)
+            {
+                Debug.LogError("No Click Dialogue with a satisfied Flag List!");
+            }
+            _diagManager.StartDialogue(_dialogue, _options);
+
+            _returnDialogue = _dialogue;
+            _returnOptions = _options;
+            _diagManager.OnEndDialogue.RemoveAllListeners();
+            _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
+        }
 
         public void ChangeDialogue(Dialogue dialogue)
         {
             _dialogue = dialogue;
         }
     }
+    
 
     [System.Serializable]
     public class ClickDialogue
