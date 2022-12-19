@@ -22,8 +22,6 @@ namespace CardGame.Managers
             START, PLAYER, OPPONENT, DISCARDING, CLASH, END
         }
 
-        public Board board;
-
         public bool isPlayerTurn => _turn == Turn.PLAYER;
 
         private Turn _turn = Turn.START;
@@ -186,7 +184,7 @@ namespace CardGame.Managers
         private void DrawCards(int cardNumber)
         {
             StopFlow();
-            board.DrawCards(cardNumber, _turn);
+            Board.Instance.DrawCards(cardNumber, _turn);
         }
 
         #endregion
@@ -203,32 +201,25 @@ namespace CardGame.Managers
 
         private IEnumerator ClashCoroutine()
         {
-            combat = false;
+            Contender player = CardGameManager.Instance.player;
+            Contender opponent = CardGameManager.Instance.opponent;
 
             for (int index = 0; index < 4; index++)
             {
                 combat = true;
+
+                Card playerCard = player.cardZones[index].GetCard();
+                Card opponentCard = opponent.cardZones[index].GetCard();
+
+                if (playerCard == null && opponentCard == null) continue;
+
+                object playerTarget = GetTarget(opponent, _opponentGuardCard, opponentCard);
+                object opponentTarget = GetTarget(player, _playerGuardCard, playerCard);
+
                 Sequence sequence = DOTween.Sequence();
 
-                Card playerCard = board.playerCardZone[index].GetCard();
-                Card opponentCard = board.opponentCardZone[index].GetCard();
-
-                object playerTarget = (_opponentGuardCard != null) ? _opponentGuardCard
-                    : (opponentCard != null) ? opponentCard
-                    : CardGameManager.Instance.opponent;
-
-                object opponentTarget = (_playerGuardCard != null) ? _playerGuardCard
-                    : (playerCard != null) ? playerCard
-                    : CardGameManager.Instance.player;
-
-                if ((playerCard != null && playerCard.Stats.strength > 0) || (opponentCard != null && opponentCard.Stats.strength > 0))
-                {
-                    if (playerCard != null)
-                        sequence.Join(playerCard.HitSequence(playerTarget));
-
-                    if (opponentCard != null)
-                        sequence.Join(opponentCard.HitSequence(opponentTarget));
-                }
+                if (playerCard) sequence.Join(playerCard.HitSequence(playerTarget));
+                if (opponentCard) sequence.Join(opponentCard.HitSequence(opponentTarget));
 
                 sequence.AppendCallback(() => combat = false);
                 sequence.Play();
@@ -236,8 +227,13 @@ namespace CardGame.Managers
                 yield return new WaitWhile(() => combat);
                 yield return new WaitUntil(() => continueFlow);
 
-                playerCard?.CheckDestroy();
-                opponentCard?.CheckDestroy();
+                yield return new WaitWhile(() => (playerCard && playerCard.CardUI.IsPlayingAnimation)
+                    || (opponentCard && opponentCard.CardUI.IsPlayingAnimation));
+
+                bool playerCardDestroy = playerCard && playerCard.CheckDestroy();
+                bool opponentCardDestroy = opponentCard && opponentCard.CheckDestroy();
+
+                yield return new WaitWhile(() => (playerCardDestroy && playerCard != null) || (opponentCardDestroy && opponentCard != null));
             }
 
             FinishRound();
@@ -250,6 +246,13 @@ namespace CardGame.Managers
                 return;
 
             source.Hit(targetObj);
+        }
+
+        private object GetTarget(Contender contender, Card guardCard, Card card)
+        {
+            return (guardCard != null) ? guardCard
+                : (card != null) ? card
+                : contender;
         }
 
         private bool IsHitManagedByEffect(Card source, object targetObj)

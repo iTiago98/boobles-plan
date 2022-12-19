@@ -16,20 +16,15 @@ namespace CardGame.Managers
         #region Layer Masks
 
         [Header("Layer Masks")]
-        public LayerMask selectingLayerMask;
-
-        public LayerMask noTargetLayerMask;
-        public LayerMask allyLayerMask;
-        public LayerMask enemyLayerMask;
-
-        public LayerMask stealingLayerMask;
+        [SerializeField] private LayerMask selectingLayerMask;
+        [SerializeField] private LayerMask targetLayerMask;
+        [SerializeField] private LayerMask stealingLayerMask;
 
         private LayerMask _currentMask;
 
         #endregion
 
-        [HideInInspector]
-        public Card holdingCard = null;
+        public Card holdingCard { private set; get; }
 
         private Card _effectCard;
         public bool IsHoldingCard => holdingCard != null;
@@ -133,7 +128,7 @@ namespace CardGame.Managers
             Card targetCard = (Card)clickableObject;
             if (targetCard == null
                 || targetCard.IsInHand
-                || !targetCard.isHighlighted)
+                || !targetCard.CardUI.IsHighlighted)
                 return;
 
             StartCoroutine(ApplyEffectCoroutine(targetCard));
@@ -192,15 +187,9 @@ namespace CardGame.Managers
                     break;
 
                 case Target.ALLY:
-                    layerMask = allyLayerMask;
-                    break;
-
                 case Target.ENEMY:
-                    layerMask = enemyLayerMask;
-                    break;
-
                 case Target.CARD:
-                    layerMask = allyLayerMask | enemyLayerMask;
+                    layerMask = targetLayerMask;
                     break;
 
                 default:

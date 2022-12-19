@@ -193,7 +193,7 @@ namespace CardGame.Level
             {
                 if (cardZone.isNotEmpty)
                 {
-                    cardZone.GetCard().ReceiveDamage(damage, showParticles: true);
+                    cardZone.GetCard().ReceiveDamage(damage);
                 }
             }
         }

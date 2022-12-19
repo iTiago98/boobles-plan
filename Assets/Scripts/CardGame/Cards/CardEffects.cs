@@ -95,11 +95,13 @@ namespace CardGame.Cards
 
         private IEnumerator ApplyEndTurnEffectCoroutine()
         {
-            GameObject applyEffectParticles = UIManager.Instance.ShowParticlesEffectApply(transform);
+            //GameObject applyEffectParticles = UIManager.Instance.ShowParticlesEffectApply(transform);
 
-            yield return new WaitUntil(() => applyEffectParticles == null);
+            //yield return new WaitUntil(() => applyEffectParticles == null);
 
             ApplyEffect(firstEffect);
+
+            yield return null;
         }
 
         #endregion

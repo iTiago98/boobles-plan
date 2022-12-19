@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - SelectingCard
+  - CardGame_Selecting
+  - CardGame_Card
   - 
-  - AllyCard
-  - EnemyCard
-  - CardDefault
-  - StealingCard
+  - 
+  - CardGame_Default
+  - CardGame_Stealing
   - 
   - 
   - 
