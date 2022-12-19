@@ -403,7 +403,7 @@ namespace CardGame.Managers
                 if (MouseController.Instance.IsApplyingEffect)
                     MouseController.Instance.ResetApplyingEffect();
                 else
-                    Board.Instance.HighlightZoneTargets(holdingCard.type, holdingCard.contender, show: false);
+                    Board.Instance.HighlightZoneTargets(holdingCard.Stats.type, holdingCard.contender, show: false);
 
                 Board.Instance.HighlightTargets(new List<Card>());
                 HidePlayButtons();

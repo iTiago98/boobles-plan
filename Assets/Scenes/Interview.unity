@@ -4045,11 +4045,11 @@ PrefabInstance:
     - target: {fileID: 5361708988085911353, guid: 82810575771546e4682e8c77c5afa680, type: 3}
       propertyPath: actionCardPrefab
       value: 
-      objectReference: {fileID: 1254610937219164558, guid: c9470c81abc8cd045b05e52384deb78a, type: 3}
+      objectReference: {fileID: 1254610937219164558, guid: 81e6a669aecb56544818447bc50c4ece, type: 3}
     - target: {fileID: 5361708988085911353, guid: 82810575771546e4682e8c77c5afa680, type: 3}
       propertyPath: argumentCardPrefab
       value: 
-      objectReference: {fileID: 1254610937219164558, guid: cebffa8800f4e544ea2b432fd3dab413, type: 3}
+      objectReference: {fileID: 1254610937219164558, guid: 11b5e59a5587d5f4b8739c0a07763315, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82810575771546e4682e8c77c5afa680, type: 3}
 --- !u!1 &1099214179

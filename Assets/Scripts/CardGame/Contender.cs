@@ -85,6 +85,13 @@ namespace CardGame
             currentMaxMana += mana;
         }
 
+        public void RestoreMana(int mana, bool continueFlow)
+        {
+            currentMana += mana;
+            if (currentMana > currentMaxMana) currentMana = currentMaxMana;
+            UIManager.Instance.UpdateUIStats(continueFlow);
+        }
+
         public void SubstractMana(int cost, bool continueFlow)
         {
             currentMana -= cost;

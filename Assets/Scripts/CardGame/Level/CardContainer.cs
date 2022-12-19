@@ -8,9 +8,8 @@ namespace CardGame.Level
 {
     public class CardContainer : MonoBehaviour
     {
-        public float cardSeparationX;
-        public float cardSeparationZ;
-        public float animationTime;
+        [SerializeField] private float cardSeparationX;
+        [SerializeField] private float animationTime;
 
         public bool cardsAtPosition { private set; get; }
 
@@ -59,7 +58,6 @@ namespace CardGame.Level
             for (int i = 0; i < cards.Count; i++)
             {
                 posX += cardSeparationX;
-                //posZ += cardSeparationZ;
 
                 MoveCard(updateCardsPositionSequence, cards[i], new Vector3(posX, 0, posZ), i == cards.Count - 1);
             }
@@ -75,7 +73,6 @@ namespace CardGame.Level
 
         private void MoveCard(Sequence seq, GameObject card, Vector3 pos, bool last)
         {
-            //seq.Join(card.transform.DOLocalMove(pos, animationTime));
             seq.Join(card.transform.DOLocalMoveX(pos.x, animationTime));
             seq.Join(card.transform.DOLocalMoveY(pos.y, animationTime));
             if (last) seq.Append(card.transform.DOLocalMoveZ(pos.z, animationTime));

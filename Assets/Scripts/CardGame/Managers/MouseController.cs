@@ -141,8 +141,8 @@ namespace CardGame.Managers
 
         private IEnumerator ApplyEffectCoroutine(Card targetCard)
         {
-            _effectCard.SubstractMana();
-            _effectCard.ApplyEffect(targetCard);
+            _effectCard.Stats.SubstractMana();
+            _effectCard.Effects.ApplyEffect(targetCard);
 
             UIManager.Instance.HidePlayButtons();
             Board.Instance.HighlightTargets(new List<Card>());

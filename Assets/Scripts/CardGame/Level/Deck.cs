@@ -157,7 +157,7 @@ namespace CardGame.Level
                     card.Initialize(_contender, data, cardRevealed: true);
                     card.gameObject.SetActive(false);
 
-                    if (card.HasEffect(SubType.INCOMPARTMENTABLE))
+                    if (card.Effects.HasEffect(SubType.INCOMPARTMENTABLE))
                     {
                         _listToAdd.Add(card);
                         break;

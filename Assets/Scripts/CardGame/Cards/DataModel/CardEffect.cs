@@ -206,14 +206,14 @@ namespace CardGame.Cards.DataModel.Effects
                     {
                         case Target.ENEMY:
                         case Target.CARD:
-                            ((Card)target).DestroyCard(continueFlow: true);
+                            ((Card)target).DestroyCard();
                             break;
 
                         case Target.AENEMY: Board.Instance.DestroyCards(CardGameManager.Instance.otherPlayer); break;
                         case Target.ACARD: Board.Instance.DestroyAll(); break;
 
                         case Target.FIELDCARD:
-                            CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard()?.DestroyCard(continueFlow: true);
+                            CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard()?.DestroyCard();
                             break;
                     }
                     break;
@@ -271,11 +271,11 @@ namespace CardGame.Cards.DataModel.Effects
                         if (target is Card)
                         {
                             Card targetCard = (Card)target;
-                            lifeValue = Mathf.Min(source.strength, targetCard.defense);
+                            lifeValue = Mathf.Min(source.Stats.strength, targetCard.Stats.defense);
                         }
                         else if (target is Contender)
                         {
-                            lifeValue = source.strength;
+                            lifeValue = source.Stats.strength;
                         }
                         source.contender.RestoreLife(lifeValue, continueFlow: false);
                     }
@@ -286,26 +286,26 @@ namespace CardGame.Cards.DataModel.Effects
                         if (target is Card)
                         {
                             Card targetCard = (Card)target;
-                            int reboundValue = Mathf.Min(source.defense, targetCard.strength);
+                            int reboundValue = Mathf.Min(source.Stats.defense, targetCard.Stats.strength);
 
-                            if (targetCard.HasEffect(SubType.REBOUND))
+                            if (targetCard.Effects.HasEffect(SubType.REBOUND))
                             {
                                 if (_storedValue == -1)
-                                    _storedValue = reboundValue + source.strength;
+                                    _storedValue = reboundValue + source.Stats.strength;
                                 else
                                 {
-                                    targetCard.ReceiveDamage(reboundValue + source.strength);
+                                    targetCard.ReceiveDamage(reboundValue + source.Stats.strength);
                                     source.ReceiveDamage(_storedValue);
                                     _storedValue = -1;
                                 }
                             }
                             else
                             {
-                                targetCard.ReceiveDamage(reboundValue + source.strength);
-                                source.ReceiveDamage(targetCard.strength);
+                                targetCard.ReceiveDamage(reboundValue + source.Stats.strength);
+                                source.ReceiveDamage(targetCard.Stats.strength);
                             }
 
-                            if (source.contender.role == Contender.Role.PLAYER)
+                            if (source.IsPlayerCard)
                             {
                                 CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
                             }
@@ -318,7 +318,7 @@ namespace CardGame.Cards.DataModel.Effects
                         if (target is Card)
                         {
                             Card targetCard = (Card)target;
-                            int lifeValue = source.strength - targetCard.defense;
+                            int lifeValue = source.Stats.strength - targetCard.Stats.defense;
                             CardGameManager.Instance.otherPlayer.ReceiveDamage(lifeValue);
                         }
                     }
@@ -328,7 +328,7 @@ namespace CardGame.Cards.DataModel.Effects
 
                     if (target is Contender)
                     {
-                        ((Contender)target).deck.DiscardCards(source.strength);
+                        ((Contender)target).deck.DiscardCards(source.Stats.strength);
                     }
                     break;
 
@@ -339,7 +339,7 @@ namespace CardGame.Cards.DataModel.Effects
                     {
                         Card targetCard = (Card)target;
                         targetCard.Hit(source);
-                        source.BoostStats(targetCard.strength, 0);
+                        source.BoostStats(targetCard.Stats.strength, 0);
                     }
                     break;
 
@@ -406,12 +406,12 @@ namespace CardGame.Cards.DataModel.Effects
                         case Target.ALLY:
                         case Target.ENEMY:
                         case Target.CARD:
-                            ((Card)target).AddEffect(effect);
+                            ((Card)target).Effects.AddEffect(effect);
                             break;
                         case Target.AALLY:
                             foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
                             {
-                                card.AddEffect(effect);
+                                card.Effects.AddEffect(effect);
                             }
                             break;
                     }
@@ -492,13 +492,19 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.STEAL_MANA:
-                    TurnManager.Instance.SetStealMana(source.contender);
+                    {
+                        Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
+                        int manaValue = otherContender.currentMana;
+
+                        otherContender.SubstractMana(manaValue, continueFlow: false);
+                        source.contender.RestoreMana(manaValue, continueFlow: true);
+                    }
                     break;
 
                 case SubType.ADD_CARD_TO_DECK:
                     {
-                        int number = source.manaCost;
-                        if (source.manaCost == 0)
+                        int number = source.Stats.manaCost;
+                        if (source.Stats.manaCost == 0)
                         {
                             number = source.contender.currentMana;
                             source.contender.SubstractMana(number, continueFlow: false);
@@ -510,7 +516,7 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.DISCARD_CARD_FROM_DECK:
                     {
                         int number = intParameter1;
-                        if (HasTarget()) number = ((Card)target).manaCost;
+                        if (HasTarget()) number = ((Card)target).Stats.manaCost;
 
                         CardGameManager.Instance.GetOtherContender(source.contender).deck.DiscardCards(number);
                     }
@@ -522,12 +528,12 @@ namespace CardGame.Cards.DataModel.Effects
                         Card targetCard = (Card)target;
                         CardZone dest = null;
 
-                        if (applyTime == ApplyTime.COMBAT && targetCard.strength >= source.defense)
+                        if (applyTime == ApplyTime.COMBAT && targetCard.Stats.strength >= source.Stats.defense)
                         {
                             int position = Board.Instance.GetPositionFromCard(source);
                             dest = source.contender.cardZones[position];
                         }
-                        else if (source.type == CardType.ACTION)
+                        else if (source.IsAction)
                         {
                             dest = Board.Instance.GetEmptyCardZone(source.contender);
                         }
@@ -548,10 +554,10 @@ namespace CardGame.Cards.DataModel.Effects
                         for (int i = 0; i < loops; i++)
                         {
                             Card card = otherContender.hand.StealCard();
-                            Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.contender.isPlayer);
+                            Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.IsPlayerCard);
                             source.contender.hand.AddCard(newCard);
                             source.contender.stolenCards++;
-                            card.DestroyCard(instant: true, continueFlow: false);
+                            card.DestroyCard(instant: true);
                         }
                     }
                     break;
@@ -675,11 +681,11 @@ namespace CardGame.Cards.DataModel.Effects
 
             // Destroy original
             Card originCard = originCardZone.GetCard();
-            originCard.DestroyCard(instant: true, continueFlow: true);
+            originCard.DestroyCard(instant: true);
 
             dest.AddCard(newCard);
 
-            newCard.ManageEffects();
+            newCard.Effects.ManageEffects();
         }
 
         private void Swap(int pos1, int pos2, Contender contender)

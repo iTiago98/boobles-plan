@@ -6,15 +6,12 @@ namespace CardGame.Level
 {
     public class CardZone : CardContainer, IClickable
     {
-        public Transform cardsPosition;
+        //public Transform cardsPosition;
 
         [SerializeField] private bool _isFieldZone;
 
         private SpriteRenderer _highlightSprite;
         private bool _isHighlighted => _highlightSprite.enabled;
-        private bool _clickable;
-
-        bool IClickable.clickable { get => _clickable; set => _clickable = value; }
 
         private void Start()
         {
@@ -35,7 +32,7 @@ namespace CardGame.Level
             {
                 mouseController.SetHolding(null);
                 card.Play(this);
-                Board.Instance.HighlightZoneTargets(card.type, card.contender, show: false);
+                Board.Instance.HighlightZoneTargets(card.Stats.type, card.contender, show: false);
                 UIManager.Instance.HidePlayButtons();
                 UIManager.Instance.SetEndTurnButtonInteractable(true);
             }
@@ -55,7 +52,7 @@ namespace CardGame.Level
 
         public void AddCard(Card card)
         {
-            AddCard(card, cardsPosition);
+            AddCard(card, transform);
         }
 
         public Card GetCard()

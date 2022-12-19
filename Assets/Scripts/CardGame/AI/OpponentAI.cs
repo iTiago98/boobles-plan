@@ -74,9 +74,9 @@ namespace CardGame.AI
             {
                 Card card = cardObj.GetComponent<Card>();
 
-                if (!EnoughMana(card.manaCost)) continue;
+                if (!EnoughMana(card.Stats.manaCost)) continue;
 
-                switch (card.type)
+                switch (card.Stats.type)
                 {
                     case CardType.ARGUMENT:
 
@@ -109,7 +109,7 @@ namespace CardGame.AI
             Card card = cards[index];
             CardZone cardZone = null;
 
-            switch (card.type)
+            switch (card.Stats.type)
             {
                 case CardType.ARGUMENT:
                     CardZone bestCardZone = GetBestPosition(card);
@@ -135,30 +135,19 @@ namespace CardGame.AI
         private bool HasMana()
         {
             return _contender.freeMana
-                || _contender.currentMana > 0
-                || (TurnManager.Instance.IsStealMana(_contender) && CardGameManager.Instance.player.currentMana > 0);
+                || _contender.currentMana > 0;
         }
 
         private bool EnoughMana(int manaCost)
         {
             if (_contender.freeMana) return true;
 
-            int manaAvailable = 0;
-
-            if (TurnManager.Instance.IsStealMana(_contender))
-            {
-                Contender player = CardGameManager.Instance.player;
-                manaAvailable += player.currentMana;
-            }
-
-            manaAvailable += _contender.currentMana;
-
-            return manaAvailable >= manaCost;
+            return _contender.currentMana >= manaCost;
         }
 
         private bool IsAppliable(Card action)
         {
-            return action.hasEffect && action.effect.IsAppliable();
+            return action.HasEffect && action.effect.IsAppliable();
         }
 
         private void SkipTurn()
@@ -179,8 +168,8 @@ namespace CardGame.AI
 
         private bool IsGoodChoice(Card card)
         {
-            if (card.type == CardType.ARGUMENT) return ArgumentIsGoodChoice(card);
-            else if (card.type == CardType.ACTION) return ActionIsGoodChoice(card);
+            if (card.IsArgument) return ArgumentIsGoodChoice(card);
+            else if (card.IsAction) return ActionIsGoodChoice(card);
             else return true;
         }
 
@@ -247,8 +236,8 @@ namespace CardGame.AI
         {
             if (oppositeCard != null)
             {
-                bool lowerStrength = oppositeCard.strength < ((bestOppositeCard != null) ? bestOppositeCard.strength : 0);
-                return lowerStrength && oppositeCard.strength <= 1;
+                bool lowerStrength = oppositeCard.Stats.strength < ((bestOppositeCard != null) ? bestOppositeCard.Stats.strength : 0);
+                return lowerStrength && oppositeCard.Stats.strength <= 1;
             }
             return false;
         }
@@ -268,9 +257,9 @@ namespace CardGame.AI
                 {
                     case SubType.DESTROY_CARD:
                         {
-                            if (!card.contender.isPlayer) continue;
+                            if (!card.IsPlayerCard) continue;
 
-                            if (card.type == CardType.FIELD)
+                            if (card.IsField)
                                 return card;
                             else
                             {
@@ -289,9 +278,9 @@ namespace CardGame.AI
                             {
                                 int temp = GetStats(card);
                                 int damage = effect.intParameter1;
-                                if (oppositeCard != null) damage += oppositeCard.strength;
+                                if (oppositeCard != null) damage += oppositeCard.Stats.strength;
 
-                                if ((card.defense <= damage) && (temp > bestStats))
+                                if ((card.Stats.defense <= damage) && (temp > bestStats))
                                 {
                                     bestStats = temp;
                                     bestTarget = card;
@@ -303,8 +292,8 @@ namespace CardGame.AI
                     case SubType.RETURN_CARD:
                         {
                             int temp = 0;
-                            if (card.IsBoosted()) temp += card.GetBoost();
-                            if (card.IsDamaged()) temp -= card.GetDamage();
+                            if (card.Stats.IsBoosted()) temp += card.Stats.GetBoost();
+                            if (card.Stats.IsDamaged()) temp -= card.Stats.GetDamage();
 
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
                             if (oppositeCard != null) temp -= 3;
@@ -323,24 +312,26 @@ namespace CardGame.AI
                     case SubType.STAT_BOOST:
                         {
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
+                            CardStats cardStats = card.Stats;
+                            CardStats oppositeStats = oppositeCard.Stats;
 
                             if (oppositeCard != null)
                             {
-                                bool savedCard = card.defense <= oppositeCard.strength && (card.defense + effect.intParameter2) > oppositeCard.strength;
-                                bool killedCard = card.strength < oppositeCard.defense && (card.strength + effect.intParameter1) >= oppositeCard.defense;
+                                bool savedCard = cardStats.defense <= oppositeStats.strength && (cardStats.defense + effect.intParameter2) > oppositeStats.strength;
+                                bool killedCard = cardStats.strength < oppositeStats.defense && (cardStats.strength + effect.intParameter1) >= oppositeStats.defense;
 
-                                int cardStats = GetStats(card);
-                                int oppositeCardStats = GetStats(oppositeCard);
+                                int cardStatsSum = GetStats(card);
+                                int oppositeCardStatsSum = GetStats(oppositeCard);
 
-                                if (killedCard && oppositeCardStats > bestStats)
+                                if (killedCard && oppositeCardStatsSum > bestStats)
                                 {
-                                    bestTarget = card;
-                                    bestStats = oppositeCardStats;
+                                    bestTarget = oppositeCard;
+                                    bestStats = oppositeCardStatsSum;
                                 }
-                                else if (savedCard && cardStats > bestStats)
+                                else if (savedCard && cardStatsSum > bestStats)
                                 {
                                     bestTarget = card;
-                                    bestStats = cardStats;
+                                    bestStats = cardStatsSum;
                                 }
                             }
                         }
@@ -396,8 +387,8 @@ namespace CardGame.AI
                                 Card playerCard = cardZone.GetCard();
                                 Card oppositeCard = Board.Instance.GetOppositeCard(playerCard);
                                 int temp = effect.intParameter1;
-                                if (oppositeCard != null) temp += oppositeCard.strength;
-                                if (playerCard.strength <= temp) return true;
+                                if (oppositeCard != null) temp += oppositeCard.Stats.strength;
+                                if (playerCard.Stats.strength <= temp) return true;
                             }
                         }
                         return false;
@@ -486,14 +477,13 @@ namespace CardGame.AI
 
                 case SubType.STEAL_MANA:
                     {
-                        if (TurnManager.Instance.IsStealMana(_contender)) return false;
-
                         int startMana = _contender.currentMana;
-                        int finalMana = player.currentMana + _contender.currentMana - source.manaCost;
+                        int finalMana = Mathf.Min(_contender.currentMana - source.Stats.manaCost + player.currentMana, _contender.currentMaxMana);
+
                         foreach (GameObject cardObj in _contender.hand.cards)
                         {
-                            Card card = cardObj.GetComponent<Card>();
-                            if (card.manaCost > startMana && card.manaCost <= finalMana) return true;
+                            CardStats cardStats = cardObj.GetComponent<Card>().Stats;
+                            if (cardStats.manaCost > startMana && cardStats.manaCost <= finalMana) return true;
                         }
                     }
                     return false;
@@ -515,11 +505,11 @@ namespace CardGame.AI
         {
             Card oppositeCard = Board.Instance.GetOppositeCard(card);
 
-            int temp = card.strength;
+            int temp = card.Stats.strength;
             if (temp > bestStats)
             {
-                if ((card.contender.isPlayer && oppositeCard == null)
-                    || (!card.contender.isPlayer && oppositeCard != null))
+                if ((card.IsPlayerCard && oppositeCard == null)
+                    || (!card.IsPlayerCard && oppositeCard != null))
                 {
                     bestTarget = card;
                     bestStats = temp;
@@ -558,7 +548,7 @@ namespace CardGame.AI
 
         protected int GetStats(Card card)
         {
-            if (card != null) return card.strength + card.defense;
+            if (card != null) return card.Stats.strength + card.Stats.defense;
             else return 0;
         }
 

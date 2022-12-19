@@ -109,7 +109,6 @@ namespace CardGame.Managers
         {
             // CLASH TURN ANIMATION
             UIManager.Instance.TurnAnimation(turn);
-            RemoveStealMana();
 
             yield return new WaitUntil(() => continueFlow);
 
@@ -222,7 +221,7 @@ namespace CardGame.Managers
                     : (playerCard != null) ? playerCard
                     : CardGameManager.Instance.player;
 
-                if ((playerCard != null && playerCard.strength > 0) || (opponentCard != null && opponentCard.strength > 0))
+                if ((playerCard != null && playerCard.Stats.strength > 0) || (opponentCard != null && opponentCard.Stats.strength > 0))
                 {
                     if (playerCard != null)
                         sequence.Join(playerCard.HitSequence(playerTarget));
@@ -246,7 +245,7 @@ namespace CardGame.Managers
 
         public void ApplyCombatActions(Card source, object targetObj)
         {
-            source.ApplyCombatEffects(targetObj);
+            source.Effects.ApplyCombatEffects(targetObj);
             if (IsHitManagedByEffect(source, targetObj))
                 return;
 
@@ -260,7 +259,7 @@ namespace CardGame.Managers
 
         private bool IsEffect(SubType subType, Card source, Card target)
         {
-            return source.HasEffect(subType) || target.HasEffect(subType);
+            return source.Effects.HasEffect(subType) || target.Effects.HasEffect(subType);
         }
 
         #endregion
@@ -423,25 +422,25 @@ namespace CardGame.Managers
 
         #region Steal Mana
 
-        private bool _playerStealMana;
-        private bool _opponentStealMana;
+        //private bool _playerStealMana;
+        //private bool _opponentStealMana;
 
-        public void SetStealMana(Contender contender)
-        {
-            if (contender.isPlayer) _playerStealMana = true;
-            else _opponentStealMana = true;
-        }
+        //public void SetStealMana(Contender contender)
+        //{
+        //    if (contender.isPlayer) _playerStealMana = true;
+        //    else _opponentStealMana = true;
+        //}
 
-        public void RemoveStealMana()
-        {
-            _playerStealMana = false;
-            _opponentStealMana = false;
-        }
+        //public void RemoveStealMana()
+        //{
+        //    _playerStealMana = false;
+        //    _opponentStealMana = false;
+        //}
 
-        public bool IsStealMana(Contender contender)
-        {
-            return (contender.isPlayer && _playerStealMana) || (!contender.isPlayer && _opponentStealMana);
-        }
+        //public bool IsStealMana(Contender contender)
+        //{
+        //    return (contender.isPlayer && _playerStealMana) || (!contender.isPlayer && _opponentStealMana);
+        //}
 
         #endregion
 

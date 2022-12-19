@@ -59,7 +59,7 @@ namespace CardGame.AI
                 if (bestOppositeCard == null) return true;
 
                 bool betterStats = GetStats(oppositeCard) > GetStats(bestOppositeCard);
-                bool reboundKill = (oppositeCard.strength > oppositeCard.defense) && (oppositeCard.defense <= argument.defense);
+                bool reboundKill = (oppositeCard.Stats.strength > oppositeCard.Stats.defense) && (oppositeCard.Stats.defense <= argument.Stats.defense);
 
                 return reboundKill && betterStats;
             }

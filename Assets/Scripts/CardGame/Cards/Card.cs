@@ -13,80 +13,36 @@ namespace CardGame.Cards
 {
     public class Card : MonoBehaviour, IClickable
     {
-        #region Card Data
-        public int manaCost => data.cost;
-        public int strength => data.strength;
-        public int defense => data.defense;
-        public int defaultStrength => data.defaultStrength;
-        public int defaultDefense => data.defaultDefense;
-        public CardType type => data.type;
-        public List<CardEffect> effects { private set { data.effects = value; } get { return data.effects; } }
-        public CardEffect effect => effects[0];
-        public bool hasEffect => effects.Count > 0;
-
         public CardsData data { set; get; }
+        public CardUI CardUI { private set; get; }
+        public CardStats Stats { private set; get; }
+        public CardEffects Effects { private set; get; }
 
-        #endregion
+        public Contender contender { private set; get; }
 
-        #region UI
-
-        [SerializeField] private TextMeshPro nameText;
-        [SerializeField] private TextMeshPro descriptionText;
-        [SerializeField] private TextMeshPro strengthText;
-        [SerializeField] private TextMeshPro defenseText;
-
-        [SerializeField] private Color altColor;
-        [SerializeField] private GameObject highlight;
-
-        private Sprite cardBack;
-        private bool _cardFront = true;
-
-        #endregion
-
-        #region Hover
-
-        private float _hoverPosY => CardGameManager.Instance.settings.hoverPosY;
-        private float _hoverScale => CardGameManager.Instance.settings.hoverScale;
-
-        #endregion
-
-        private float _highlightScale => CardGameManager.Instance.settings.highlightScale;
-        private float _defaultScale => CardGameManager.Instance.settings.defaultScale;
-
-        #region Hit animation
-
-        private float _hitScale => CardGameManager.Instance.settings.hitScale;
-
-        #endregion
-
-        [HideInInspector]
-        public CardContainer container;
-        [HideInInspector]
-        public Contender contender;
-        private Hand _hand;
-
-        public bool IsInHand => container == _hand;
+        public bool IsInHand => _container == _hand;
         public bool IsPlayerCard => contender.isPlayer;
 
+        public bool IsArgument => Stats.type == CardType.ARGUMENT;
+        public bool IsAction => Stats.type == CardType.ACTION;
+        public bool IsField => Stats.type == CardType.FIELD;
+        
+        public bool isHighlighted { private set; get; }
+
+        public CardEffect effect => Effects.firstEffect;
+        public bool HasEffect => Effects.effectsList.Count > 0;
+
         private bool _clickable;
-
-        bool IClickable.clickable { get => _clickable; set => _clickable = value; }
-
-        private SpriteRenderer _spriteRenderer;
-
-        private Action _playArgumentEffect;
-        private List<Action> _endTurnEffects;
-        private Deck.DrawCardEffects _drawCardEffect;
 
         private Card _storedTarget;
         private bool _swapped;
 
-        public bool isHighlighted { private set; get; }
+        private CardContainer _container;
+        private Hand _hand;
 
         private void Start()
         {
             _clickable = true;
-            _endTurnEffects = new List<Action>();
         }
 
         #region Initialize
@@ -98,111 +54,38 @@ namespace CardGame.Cards
             this.data = new CardsData(data); ;
 
             name = data.name;
-            if (nameText != null) nameText.text = data.name;
-            if (descriptionText != null) descriptionText.text = GetDescriptionText();
 
-            cardBack = contender.GetCardBack();
-
-            _spriteRenderer = GetComponent<SpriteRenderer>();
-            if (cardRevealed || IsPlayerCard)
-            {
-                if (data.sprite != null) _spriteRenderer.sprite = data.sprite;
-            }
-            else FlipCard();
-
-            if (type == CardType.ARGUMENT)
-            {
-                UpdateStatsUI();
-            }
+            Stats = GetComponent<CardStats>();
+            Effects = GetComponent<CardEffects>();
+            CardUI = GetComponent<CardUI>();
+            
+            Stats.Initialize(this);
+            Effects.Initialize(this);
+            CardUI.Initialize(this, cardRevealed);
         }
 
         #endregion
 
         #region UI
 
-        private void UpdateStatsUI()
+        public void UpdateStatsUI()
         {
-            UpdateStatUI(strengthText, strength, defaultStrength, Color.black);
-            UpdateStatUI(defenseText, defense, defaultDefense, Color.white);
-        }
-
-        private void UpdateStatUI(TextMeshPro text, int value, int defaultValue, Color defaultColor)
-        {
-            if (text != null)
-            {
-                text.text = value.ToString();
-
-                if (value != defaultValue)
-                {
-                    text.color = altColor;
-                }
-                else
-                {
-                    text.color = defaultColor;
-                }
-            }
-        }
-
-        private string GetDescriptionText()
-        {
-            string temp = "";
-
-            foreach (CardEffect effect in effects)
-            {
-                temp += effect.ToString() + "\n";
-            }
-
-            return temp;
+            if (IsArgument) CardUI.UpdateStatsUI();
         }
 
         public void ShowExtendedDescription()
         {
-            UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
+            CardUI.ShowExtendedDescription();
         }
 
         public void HideExtendedDescription()
         {
-            UIManager.Instance.HideExtendedDescription();
+            CardUI.HideExtendedDescription();
         }
 
-        private string NameToString()
+        public void ShowHighlight(bool show)
         {
-            return name.ToUpper();
-        }
-
-        private string TypeToString()
-        {
-            return "TIPO: " + type.ToString();
-        }
-
-        private string DescriptionToString()
-        {
-            string s = "";
-            foreach (CardEffect effect in effects)
-            {
-                s += effect.ToStringExtended(type) + "\n";
-            }
-
-            return s;
-        }
-
-        public void FlipCard()
-        {
-            if (_cardFront) _spriteRenderer.sprite = cardBack;
-            else _spriteRenderer.sprite = data.sprite;
-
-            _cardFront = !_cardFront;
-
-            nameText.gameObject.SetActive(_cardFront);
-            descriptionText.gameObject.SetActive(_cardFront);
-
-            if (type == CardType.ARGUMENT)
-            {
-                strengthText.gameObject.SetActive(_cardFront);
-                defenseText.gameObject.SetActive(_cardFront);
-            }
-
-            transform.Rotate(new Vector3(0, 0, 180));
+            CardUI.ShowHighlight(show);
         }
 
         #endregion
@@ -218,12 +101,12 @@ namespace CardGame.Cards
                 if (_hand.isDiscarding)
                 {
                     int numCards = _hand.numCards - 1;
-                    DestroyCard(continueFlow: false);
+                    DestroyCard();
                     _hand.CheckDiscarding(numCards);
                 }
                 else if (TurnManager.Instance.isPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
-                    if (type == CardType.ACTION && !effect.IsAppliable()) return;
+                    if (IsAction && !effect.IsAppliable()) return;
 
                     if (EnoughMana())
                     {
@@ -231,9 +114,9 @@ namespace CardGame.Cards
                         RemoveFromContainer();
                         MoveToWaitingSpot();
 
-                        if (type == CardType.ARGUMENT || type == CardType.FIELD)
+                        if (IsArgument || IsField)
                         {
-                            Board.Instance.HighlightZoneTargets(type, contender, show: true);
+                            Board.Instance.HighlightZoneTargets(Stats.type, contender, show: true);
                             UIManager.Instance.SetEndTurnButtonInteractable(false);
                         }
                         else
@@ -249,11 +132,7 @@ namespace CardGame.Cards
 
         private bool EnoughMana()
         {
-            int mana = contender.currentMana;
-            if (TurnManager.Instance.IsStealMana(contender))
-                mana += CardGameManager.Instance.GetOtherContender(contender).currentMana;
-
-            return contender.freeMana || manaCost <= mana;
+            return contender.freeMana || Stats.manaCost <= contender.currentMana;
         }
 
         public void OnMouseHoverEnter()
@@ -262,11 +141,10 @@ namespace CardGame.Cards
 
             if (IsInHand && IsPlayerCard)
             {
-                transform.DOLocalMoveY(_hoverPosY, 0.2f);
-                transform.DOScale(_hoverScale, 0.2f);
+                CardUI.HoverOn();
             }
 
-            if (_cardFront) ShowExtendedDescription();
+            ShowExtendedDescription();
         }
 
         public void OnMouseHoverExit()
@@ -275,17 +153,10 @@ namespace CardGame.Cards
 
             if (this != null && gameObject != null && IsInHand && IsPlayerCard)
             {
-                transform.DOLocalMoveY(0f, 0.2f);
-                if (_hand.isDiscarding) transform.DOScale(_highlightScale, 0.2f);
-                else transform.DOScale(_defaultScale, 0.2f);
+                CardUI.HoverOff(_hand);
             }
 
             HideExtendedDescription();
-        }
-
-        public void SetClickable(bool clickable)
-        {
-            this._clickable = clickable;
         }
 
         #endregion
@@ -294,7 +165,7 @@ namespace CardGame.Cards
 
         public void Play(CardZone cardZone)
         {
-            if (!IsPlayerCard) FlipCard();
+            if (!IsPlayerCard) CardUI.FlipCard();
 
             PlayCard(cardZone);
             CardGameManager.Instance.CheckDialogue(this);
@@ -302,19 +173,19 @@ namespace CardGame.Cards
 
         private void PlayCard(CardZone cardZone)
         {
-            switch (type)
+            switch (Stats.type)
             {
                 case CardType.ARGUMENT:
-                    SubstractMana();
+                    Stats.SubstractMana();
                     AddToContainer(cardZone);
-                    CheckEffect();
+                    Effects.CheckEffect();
                     TurnManager.Instance.ApplyPlayArgumentEffects();
                     break;
 
                 case CardType.FIELD:
-                    SubstractMana();
+                    Stats.SubstractMana();
                     AddToContainer(cardZone);
-                    CheckEffect();
+                    Effects.CheckEffect();
                     break;
 
                 case CardType.ACTION:
@@ -350,7 +221,6 @@ namespace CardGame.Cards
 
                     if (possibleTargets.Count > 0)
                     {
-                        //int index = new System.Random().Next(0, possibleTargets.Count);
                         Card bestTarget = CardGameManager.Instance.opponentAI.GetBestTarget(effect, possibleTargets);
 
                         Board.Instance.HighlightTargets(new List<Card>() { bestTarget });
@@ -368,39 +238,8 @@ namespace CardGame.Cards
             }
         }
 
-        private void CheckEffect()
-        {
-            if (hasEffect)
-            {
-                foreach (CardEffect effect in effects)
-                {
-                    if (effect.applyTime == ApplyTime.ENTER)
-                    {
-                        ApplyEffect(effect);
-                    }
-                    else if (effect.applyTime == ApplyTime.END)
-                    {
-                        Action action = new Action(ApplyEndTurnEffect);
-                        _endTurnEffects.Add(action);
-                        TurnManager.Instance.AddEndTurnEffect(action, data.name);
-                    }
-                    else if (effect.applyTime == ApplyTime.DRAW_CARD)
-                    {
-                        _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
-                        contender.deck.AddDrawCardEffects(_drawCardEffect);
-                    }
-                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
-                    {
-                        _playArgumentEffect = new Action(ApplyEffect);
-                        TurnManager.Instance.AddPlayArgumentEffects(_playArgumentEffect);
-                    }
-                }
-            }
-        }
-
         private void MoveToWaitingSpot()
         {
-            // Move card to board waiting spot
             Transform dest = Board.Instance.waitingSpot;
             MouseController.Instance.SetHolding(this);
             UIManager.Instance.SetEndTurnButtonInteractable(false);
@@ -408,7 +247,7 @@ namespace CardGame.Cards
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(transform.DOMove(dest.position, 0.5f));
-            sequence.Join(transform.DOScale(_defaultScale, 0.5f));
+            sequence.Join(transform.DOScale(CardUI.defaultScale, 0.5f));
 
             sequence.Play();
         }
@@ -422,8 +261,8 @@ namespace CardGame.Cards
         {
             TurnManager.Instance.StopFlow();
 
-            SubstractMana();
-            ApplyEffect();
+            Stats.SubstractMana();
+            Effects.ApplyEffect();
 
             yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
@@ -434,32 +273,14 @@ namespace CardGame.Cards
 
         public void ContinuePlayOpponent()
         {
-            SubstractMana();
+            Stats.SubstractMana();
 
-            ApplyEffect(effect, _storedTarget);
+            Effects.ApplyEffect(effect, _storedTarget);
             DestroyCard();
 
             _storedTarget = null;
             CardGameManager.Instance.opponentAI.enabled = true;
             MouseController.Instance.SetHolding(null);
-        }
-
-        public void SubstractMana()
-        {
-            int manaCostLeft = manaCost;
-
-            if (TurnManager.Instance.IsStealMana(contender))
-            {
-                Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
-                manaCostLeft -= otherContender.currentMana;
-                otherContender.SubstractMana(manaCost, continueFlow: false);
-            }
-
-            if (manaCostLeft > 0)
-            {
-                if (contender.freeMana) contender.SetFreeMana(false);
-                else contender.SubstractMana(manaCostLeft, continueFlow: false);
-            }
         }
 
         public void CancelPlay()
@@ -478,18 +299,18 @@ namespace CardGame.Cards
             if (target is Card)
             {
                 Card card = (Card)target;
-                card.ReceiveDamage(strength);
+                card.ReceiveDamage(Stats.strength);
             }
             else
             {
                 Contender targetContender = (Contender)target;
 
-                if (HasEffect(SubType.COMPARTMENTALIZE) && targetContender.deck.numCards > 0) return;
+                if (Effects.HasEffect(SubType.COMPARTMENTALIZE) && targetContender.deck.numCards > 0) return;
 
                 if (TurnManager.Instance.IsMirror(targetContender))
-                    contender.ReceiveDamage(strength);
+                    contender.ReceiveDamage(Stats.strength);
                 else
-                    targetContender.ReceiveDamage(strength);
+                    targetContender.ReceiveDamage(Stats.strength);
             }
         }
 
@@ -497,7 +318,7 @@ namespace CardGame.Cards
         {
             Sequence hitSequence = DOTween.Sequence();
 
-            if (strength != 0)
+            if (Stats.strength != 0)
             {
                 bool isCard = target is Card;
                 Vector3 targetPosition = (isCard) ? ((Card)target).transform.position : ((Contender)target).transform.position;
@@ -508,7 +329,7 @@ namespace CardGame.Cards
 
                 Vector3 previousRotation = transform.rotation.eulerAngles;
                 Quaternion rotation;
-                if(contender.isPlayer)
+                if (IsPlayerCard)
                     rotation = Quaternion.FromToRotation(transform.up, targetDir);
                 else
                     rotation = Quaternion.FromToRotation(transform.up * -1, targetDir);
@@ -517,8 +338,8 @@ namespace CardGame.Cards
                 if (rotationEuler.z > 180) rotationEuler = new Vector3(rotationEuler.x, rotationEuler.y, rotationEuler.z - 360);
 
                 // Enlarge and rotate
-                hitSequence.Append(transform.DOScale(_hitScale, 0.5f));
-                if (contender.isPlayer)
+                hitSequence.Append(transform.DOScale(CardUI.hitScale, 0.5f));
+                if (IsPlayerCard)
                     hitSequence.Join(transform.DOLocalMoveZ(-0.1f, 0.5f));
                 else
                     hitSequence.Join(transform.DOLocalMoveZ(-0.05f, 0.5f));
@@ -532,7 +353,7 @@ namespace CardGame.Cards
 
                 // Back
                 hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
-                hitSequence.Append(transform.DOScale(_defaultScale, 0.2f));
+                hitSequence.Append(transform.DOScale(CardUI.defaultScale, 0.2f));
                 hitSequence.Join(transform.DORotate(previousRotation, 0.2f));
             }
             else
@@ -554,21 +375,9 @@ namespace CardGame.Cards
         {
             if (showParticles) UIManager.Instance.ShowParticlesEffectTargetNegative(transform);
 
-            data.defense -= strength;
-            if (data.defense < 0) data.defense = 0;
+            Stats.ReceiveDamage();
             UpdateStatsUI();
             CheckDestroy();
-        }
-
-        public void ApplyCombatEffects(object target)
-        {
-            foreach (CardEffect effect in effects)
-            {
-                if (effect.applyTime == ApplyTime.COMBAT)
-                {
-                    ApplyEffect(effect, target);
-                }
-            }
         }
 
         #endregion
@@ -577,28 +386,23 @@ namespace CardGame.Cards
 
         public void DestroyCard()
         {
-            DestroyCard(false, false);
+            DestroyCard(instant: false);
         }
 
-        public void DestroyCard(bool continueFlow)
-        {
-            DestroyCard(instant: false, continueFlow);
-        }
-
-        public void DestroyCard(bool instant, bool continueFlow)
+        public void DestroyCard(bool instant)
         {
             //Play destroy animation
             Debug.Log(name + " destroyed");
-            StartCoroutine(DestroyCardCoroutine(instant, continueFlow));
+            StartCoroutine(DestroyCardCoroutine(instant));
         }
 
-        private IEnumerator DestroyCardCoroutine(bool instant, bool continueFlow)
+        private IEnumerator DestroyCardCoroutine(bool instant)
         {
             _clickable = false;
             HideExtendedDescription();
 
-            CheckDelegateEffects();
-            if (!instant) CheckDestroyEffects();
+            Effects.CheckDelegateEffects();
+            if (!instant) Effects.CheckDestroyEffects();
 
             if (!IsInHand) RemoveFromContainer();
 
@@ -621,176 +425,34 @@ namespace CardGame.Cards
         public void CheckDestroy()
         {
             if (TurnManager.Instance.combat) return;
-            if (defense <= 0) DestroyCard();
+            if (Stats.defense <= 0) DestroyCard();
         }
 
         #endregion
 
         #region Effects
-
-        public void AddEffect(CardEffect effect)
-        {
-            if (!HasEffect(effect.subType))
-            {
-                effects.Add(effect);
-                if (descriptionText != null) descriptionText.text = GetDescriptionText();
-            }
-        }
-
-        public bool HasEffect(SubType subType)
-        {
-            foreach (CardEffect e in effects)
-            {
-                if (e.subType == subType) return true;
-            }
-
-            return false;
-        }
-
-        public void ApplyEffect()
-        {
-            ApplyEffect(effect);
-        }
-
-        public void ApplyEffect(object target)
-        {
-            ApplyEffect(effect, target);
-        }
-
-        private void ApplyEffect(CardEffect effect)
-        {
-            ApplyEffect(effect, null);
-        }
-
-        public void ApplyEffect(CardEffect effect, object target)
-        {
-            if (effect.IsAppliable()) effect.Apply(this, target);
-        }
-
-        public void ApplyEndTurnEffect()
-        {
-            StartCoroutine(ApplyEndTurnEffectCoroutine());
-        }
-
-        private IEnumerator ApplyEndTurnEffectCoroutine()
-        {
-            GameObject applyEffectParticles = UIManager.Instance.ShowParticlesEffectApply(transform);
-
-            yield return new WaitUntil(() => applyEffectParticles == null);
-
-            ApplyEffect(effect);
-        }
-
-        private void CheckDestroyEffects()
-        {
-            if (hasEffect)
-            {
-                foreach (CardEffect effect in effects)
-                {
-                    if (effect.applyTime == ApplyTime.DESTROY && !IsInHand)
-                    {
-                        ApplyEffect(effect);
-                    }
-                }
-            }
-        }
-
-        private void CheckDelegateEffects()
-        {
-            if (hasEffect)
-            {
-                foreach (CardEffect effect in effects)
-                {
-                    // End Turn Effects
-                    if (effect.applyTime == ApplyTime.END && _endTurnEffects?.Count > 0)
-                    {
-                        TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
-                    }
-                    // Draw Card Effects
-                    else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
-                    {
-                        contender.deck.RemoveDrawCardEffect(_drawCardEffect);
-                    }
-                    // Play Argument Effects
-                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT && _playArgumentEffect != null)
-                    {
-                        TurnManager.Instance.RemovePlayArgumentEffect(_playArgumentEffect);
-                    }
-
-                    // Guard Card
-                    if (effect.subType == SubType.GUARD)
-                    {
-                        TurnManager.Instance.RemoveGuardCard(contender);
-                    }
-                    else if (effect.subType == SubType.MIRROR)
-                    {
-                        TurnManager.Instance.SetMirror(contender, false);
-                    }
-                }
-            }
-        }
-
-        public void ManageEffects()
-        {
-            if (hasEffect)
-            {
-                foreach (CardEffect effect in effects)
-                {
-                    if (effect.subType == SubType.GUARD) TurnManager.Instance.SetGuardCard(this);
-                    else if (effect.subType == SubType.MIRROR) TurnManager.Instance.SetMirror(contender, true);
-                }
-            }
-        }
-
+       
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
-            data.strength += strengthBoost;
-            data.defense += defenseBoost;
+            Stats.BoostStats(strengthBoost, defenseBoost);
 
-            if (type == CardType.ARGUMENT)
-                UpdateStatsUI();
+            UpdateStatsUI();
 
             UIManager.Instance.ShowParticlesEffectTargetPositive(transform);
         }
 
         public void DecreaseStats(int strengthDecrease, int defenseDecrease)
         {
-            data.strength -= strengthDecrease;
-            data.defense -= defenseDecrease;
-            if (data.strength < 0) data.strength = 0;
-            if (type == CardType.ARGUMENT)
-                UpdateStatsUI();
+            Stats.DecreaseStats(strengthDecrease, defenseDecrease);
+            UpdateStatsUI();
 
             UIManager.Instance.ShowParticlesEffectTargetNegative(transform);
             CheckDestroy();
         }
 
-        public bool IsBoosted()
-        {
-            return strength > defaultStrength || defense > defaultDefense;
-        }
-
-        public int GetBoost()
-        {
-            int boost = 0;
-            if (strength > defaultStrength) boost += strength - defaultStrength;
-            if (defense > defaultDefense) boost += defense - defaultDefense;
-            return boost;
-        }
-
-        public bool IsDamaged()
-        {
-            return defense < defaultDefense;
-        }
-
-        public int GetDamage()
-        {
-            return defaultDefense - defense;
-        }
-
         public void SwapContender()
         {
-            if (contender.isPlayer)
+            if (IsPlayerCard)
                 contender = CardGameManager.Instance.opponent;
             else
                 contender = CardGameManager.Instance.player;
@@ -799,17 +461,11 @@ namespace CardGame.Cards
             _swapped = !_swapped;
         }
 
-        public void ShowHighlight(bool show)
-        {
-            highlight.SetActive(show);
-            isHighlighted = show;
-        }
-
         public bool IsAlternateWinConditionCard()
         {
-            return type == CardType.ACTION && hasEffect && effect.type == EffectType.ALTERNATE_WIN_CONDITION;
+            return IsAction && HasEffect && effect.type == EffectType.ALTERNATE_WIN_CONDITION;
         }
-        
+
         #endregion
 
         #region Containers
@@ -817,12 +473,12 @@ namespace CardGame.Cards
         private void AddToContainer(CardZone cardZone)
         {
             cardZone.AddCard(this);
-            transform.DOScale(_defaultScale, 0.2f);
+            transform.DOScale(CardUI.defaultScale, 0.2f);
         }
 
         public void SetContainer(CardContainer container)
         {
-            this.container = container;
+            this._container = container;
             if (_hand == null && container is Hand)
             {
                 _hand = (Hand)container;
@@ -832,10 +488,10 @@ namespace CardGame.Cards
 
         public void RemoveFromContainer()
         {
-            if (container != null)
+            if (_container != null)
             {
-                container.RemoveCard(gameObject);
-                container = null;
+                _container.RemoveCard(gameObject);
+                _container = null;
                 transform.parent = null;
             }
         }
@@ -843,15 +499,12 @@ namespace CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
-            CheckDelegateEffects();
-
-            data.strength = defaultStrength;
-            data.defense = defaultDefense;
-
+            Effects.CheckDelegateEffects();
             if (_swapped) SwapContender();
+
             _hand.AddCard(this);
-            if (!contender.isPlayer) FlipCard();
-            if (type == CardType.ARGUMENT) UpdateStatsUI();
+            CardUI.ReturnToHand();
+            Stats.ReturnToHand();
         }
 
         #endregion
