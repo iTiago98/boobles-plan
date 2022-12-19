@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSeparationX: 1.7
-  cardSeparationZ: 0.01
   animationTime: 0.5
+  contender: {fileID: 0}
+  isDiscarding: 0

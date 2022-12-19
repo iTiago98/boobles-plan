@@ -41,7 +41,7 @@ namespace CardGame.Cards
             }
         }
 
-        public void ReceiveDamage()
+        public void ReceiveDamage(int strength)
         {
             defense -= strength;
             if (defense < 0) defense = 0;

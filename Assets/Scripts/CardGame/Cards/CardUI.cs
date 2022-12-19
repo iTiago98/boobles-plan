@@ -22,23 +22,38 @@ namespace CardGame.Cards
         [SerializeField] private Color altColor;
         [SerializeField] private GameObject highlight;
 
+        [Header("Animations")]
+        [SerializeField] private Animator VFX_Animator;
+        [SerializeField] private AnimationClip damagedClip;
+
         private Sprite cardBack;
         private bool _cardFront = true;
 
-        #region Hover
+        private float _defaultScale;
+        private float _hitScale;
+        private float _hoverPosY;
+        private float _hoverScale;
+        private float _highlightScale;
 
-        private float _hoverPosY => CardGameManager.Instance.settings.hoverPosY;
-        private float _hoverScale => CardGameManager.Instance.settings.hoverScale;
+        public float defaultScale => _defaultScale;
+        public float hitScale => _hitScale;
 
-        #endregion
-
-        private float _highlightScale => CardGameManager.Instance.settings.highlightScale;
-        public float defaultScale => CardGameManager.Instance.settings.defaultScale;
-        public float hitScale => CardGameManager.Instance.settings.hitScale;
-
+        private bool _playingAnimation;
+        public bool IsPlayingAnimation => _playingAnimation;
 
         private Card _card;
         private SpriteRenderer _spriteRenderer;
+
+        private void Start()
+        {
+            _defaultScale = CardGameManager.Instance.settings.defaultScale;
+            _hitScale = CardGameManager.Instance.settings.hitScale;
+
+            _hoverPosY = CardGameManager.Instance.settings.hoverPosY;
+            _hoverScale = CardGameManager.Instance.settings.hoverScale;
+
+            _highlightScale = CardGameManager.Instance.settings.highlightScale;
+        }
 
         #region Initialize
 
@@ -176,6 +191,22 @@ namespace CardGame.Cards
             transform.DOLocalMoveY(0f, 0.2f);
             if (hand.isDiscarding) transform.DOScale(_highlightScale, 0.2f);
             else transform.DOScale(defaultScale, 0.2f);
+        }
+
+        #endregion
+
+        #region VFX
+
+        public float ShowDamagedAnimation()
+        {
+            _playingAnimation = true;
+            VFX_Animator.Play("VFX_Damage");
+            return damagedClip.length;
+        }
+
+        public void SetPlayingAnimation(bool playing)
+        {
+            _playingAnimation = playing;
         }
 
         #endregion

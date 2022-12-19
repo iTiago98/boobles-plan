@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5138280395971648550}
   - component: {fileID: 8072621929134181596}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 8007531122277775737}
   - component: {fileID: 8937582922442671585}
   - component: {fileID: 3958278711200841065}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: PlayerCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -220,8 +220,10 @@ MonoBehaviour:
   descriptionText: {fileID: 1896924632871242647}
   strengthText: {fileID: 4583088024639747997}
   defenseText: {fileID: 795541855709781874}
-  altColor: {r: 1, g: 0.38056102, b: 0, a: 0}
+  altColor: {r: 1, g: 0.38056102, b: 0, a: 1}
   highlight: {fileID: 262799051470167342}
+  VFX_Animator: {fileID: 931074573393506462}
+  damagedClip: {fileID: 7400000, guid: c89a09376d528b940a41e43491cd786c, type: 2}
 --- !u!114 &8937582922442671585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ GameObject:
   - component: {fileID: 3799578751182580368}
   - component: {fileID: 4267273933013527144}
   - component: {fileID: 1896924632871242647}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: DescText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,7 +431,7 @@ GameObject:
   - component: {fileID: 4205871128236564102}
   - component: {fileID: 5471153169427882878}
   - component: {fileID: 4583088024639747997}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: StrengthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,7 +603,7 @@ GameObject:
   - component: {fileID: 8417624206926088923}
   - component: {fileID: 5512765058806990480}
   - component: {fileID: 795541855709781874}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: DefenseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +775,7 @@ GameObject:
   - component: {fileID: 7169090881363200129}
   - component: {fileID: 8095427851232307227}
   - component: {fileID: 931074573393506462}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: VFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,8 +790,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7521666715711142308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.021, y: 0.021, z: 0}
-  m_LocalScale: {x: 3.0516713, y: 3.041368, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7601796988743528008}
@@ -878,7 +880,7 @@ GameObject:
   - component: {fileID: 8522558938654634486}
   - component: {fileID: 2432156233912417526}
   - component: {fileID: 3434461425723286842}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

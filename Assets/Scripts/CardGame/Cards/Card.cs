@@ -26,8 +26,6 @@ namespace CardGame.Cards
         public bool IsArgument => Stats.type == CardType.ARGUMENT;
         public bool IsAction => Stats.type == CardType.ACTION;
         public bool IsField => Stats.type == CardType.FIELD;
-        
-        public bool isHighlighted { private set; get; }
 
         public CardEffect effect => Effects.firstEffect;
         public bool HasEffect => Effects.effectsList.Count > 0;
@@ -58,7 +56,7 @@ namespace CardGame.Cards
             Stats = GetComponent<CardStats>();
             Effects = GetComponent<CardEffects>();
             CardUI = GetComponent<CardUI>();
-            
+
             Stats.Initialize(this);
             Effects.Initialize(this);
             CardUI.Initialize(this, cardRevealed);
@@ -368,16 +366,20 @@ namespace CardGame.Cards
 
         public void ReceiveDamage(int strength)
         {
-            ReceiveDamage(strength, showParticles: false);
+            StartCoroutine(ReceiveDamageCoroutine(strength));
         }
 
-        public void ReceiveDamage(int strength, bool showParticles)
+        private IEnumerator ReceiveDamageCoroutine(int strength)
         {
-            if (showParticles) UIManager.Instance.ShowParticlesEffectTargetNegative(transform);
+            bool combat = TurnManager.Instance.combat;
 
-            Stats.ReceiveDamage();
+            float length = CardUI.ShowDamagedAnimation();
+            Stats.ReceiveDamage(strength);
             UpdateStatsUI();
-            CheckDestroy();
+
+            yield return new WaitForSeconds(length);
+            CardUI.SetPlayingAnimation(false);
+            if (!combat) CheckDestroy();
         }
 
         #endregion
@@ -422,31 +424,28 @@ namespace CardGame.Cards
             yield return new WaitUntil(() => this == null);
         }
 
-        public void CheckDestroy()
+        public bool CheckDestroy()
         {
-            if (TurnManager.Instance.combat) return;
-            if (Stats.defense <= 0) DestroyCard();
+            bool destroy = Stats.defense <= 0;
+            if (destroy) DestroyCard();
+            return destroy;
         }
 
         #endregion
 
         #region Effects
-       
+
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
             Stats.BoostStats(strengthBoost, defenseBoost);
 
             UpdateStatsUI();
-
-            UIManager.Instance.ShowParticlesEffectTargetPositive(transform);
         }
 
         public void DecreaseStats(int strengthDecrease, int defenseDecrease)
         {
             Stats.DecreaseStats(strengthDecrease, defenseDecrease);
             UpdateStatsUI();
-
-            UIManager.Instance.ShowParticlesEffectTargetNegative(transform);
             CheckDestroy();
         }
 

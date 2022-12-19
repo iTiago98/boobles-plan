@@ -54,7 +54,7 @@ namespace CardGame
         public void Initialize(Hand hand, Deck deck, List<CardZone> cardZones, CardZone fieldCardZone)
         {
             this.hand = hand;
-            hand.contender = this;
+            hand.Initialize(this);
             this.deck = deck;
             this.cardZones = cardZones;
             this.fieldCardZone = fieldCardZone;

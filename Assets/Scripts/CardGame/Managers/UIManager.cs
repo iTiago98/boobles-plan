@@ -482,20 +482,20 @@ namespace CardGame.Managers
 
         #region Particle Systems 
 
-        public GameObject ShowParticlesEffectApply(Transform parent)
-        {
-            return Instantiate(particleSystem_effectApply_Prefab, parent);
-        }
+        //public GameObject ShowParticlesEffectApply(Transform parent)
+        //{
+        //    return Instantiate(particleSystem_effectApply_Prefab, parent);
+        //}
 
-        public void ShowParticlesEffectTargetPositive(Transform parent)
-        {
-            Instantiate(particleSystem_effectTargetPositive_Prefab, parent);
-        }
+        //public void ShowParticlesEffectTargetPositive(Transform parent)
+        //{
+        //    Instantiate(particleSystem_effectTargetPositive_Prefab, parent);
+        //}
 
-        public void ShowParticlesEffectTargetNegative(Transform parent)
-        {
-            Instantiate(particleSystem_effectTargetNegative_Prefab, parent);
-        }
+        //public void ShowParticlesEffectTargetNegative(Transform parent)
+        //{
+        //    Instantiate(particleSystem_effectTargetNegative_Prefab, parent);
+        //}
 
 
         #endregion

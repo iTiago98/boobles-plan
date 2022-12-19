@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5138280395971648550}
   - component: {fileID: 8072621929134181596}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 4225023346298815906}
   - component: {fileID: 3468997372867953653}
   - component: {fileID: 2746086164834269556}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: PlayerCard_Action
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,6 +219,7 @@ MonoBehaviour:
   defenseText: {fileID: 0}
   altColor: {r: 1, g: 0.38431373, b: 0, a: 0}
   highlight: {fileID: 262799051470167342}
+  VFX_Animator: {fileID: 0}
 --- !u!114 &3468997372867953653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +255,7 @@ GameObject:
   - component: {fileID: 3799578751182580368}
   - component: {fileID: 4267273933013527144}
   - component: {fileID: 1896924632871242647}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: DescText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +427,7 @@ GameObject:
   - component: {fileID: 8522558938654634486}
   - component: {fileID: 2432156233912417526}
   - component: {fileID: 3434461425723286842}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: NameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}

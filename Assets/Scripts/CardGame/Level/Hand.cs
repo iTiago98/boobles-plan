@@ -12,11 +12,15 @@ namespace CardGame.Level
 {
     public class Hand : CardContainer
     {
-        public Contender contender;
-
-        public bool isDiscarding;
+        public Contender contender { private set; get; }
+        public bool isDiscarding { private set; get; }
 
         private List<Card> _listToDiscard = new List<Card>();
+
+        public void Initialize(Contender contender)
+        {
+            this.contender = contender;
+        }
 
         public void AddCard(Card card)
         {
