@@ -189,8 +189,8 @@ namespace Booble.Interactables.Dialogues
 
             foreach (AnimatorIdentifier ai in _animIdentifiers)
             {
-                if(ai.Identifier == CharacterList.Name.Nela)
-                    continue;
+                // if(ai.Identifier == CharacterList.Name.Nela)
+                //     continue;
                 
                 ai.Animator.SetBool("Speaking", _typing && ai.Identifier == _currentCharacter.Identifier);
             }
