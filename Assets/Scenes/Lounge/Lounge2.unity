@@ -133,10 +133,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2846567}
   - component: {fileID: 2846564}
-  - component: {fileID: 2846566}
-  - component: {fileID: 2846565}
+  - component: {fileID: 2846569}
+  - component: {fileID: 2846568}
   m_Layer: 0
-  m_Name: DENNIS HA DICHO EXPLOSION
+  m_Name: Sabrias
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,36 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2846565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flags: 2f000000
---- !u!114 &2846566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
-  _onEnd: 1
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &2846567
 Transform:
   m_ObjectHideFlags: 0
@@ -195,10 +165,130 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 61643964}
+  - {fileID: 1546098707}
   m_Father: {fileID: 1174065277}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2846568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unclickable: 1
+  _interactDistance: 0
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
+  _options:
+  - _optionText: "Bueno entonces, \xBFqu\xE9 necesitas para crear una pelota bomba?"
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 61643967}
+  - _optionText: "Hay mucha gente decente que lleva guantes: cocineros, enfermeros,
+      conductores\u2026"
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 1546098705}
+--- !u!114 &2846569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2846563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2df29dfe0175d44961047781705213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 2846568}
+--- !u!1 &61643963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 61643964}
+  - component: {fileID: 61643967}
+  - component: {fileID: 61643966}
+  - component: {fileID: 61643965}
+  m_Layer: 0
+  m_Name: Demonio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &61643964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61643963}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2846567}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &61643965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61643963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 2f000000
+--- !u!114 &61643966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61643963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &61643967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61643963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &130846006
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,11 +624,12 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 0e000000
     _dialogueOption: {fileID: 943273818}
-  - _optionText: BUSCAR PAJITA
+  - _optionText: "Un momento, aqu\xED puede que haya pajitas. Coger\xE9 una."
     _trueFlags: 2f000000
     _falseFlags: 30000000
     _dialogueOption: {fileID: 328877704}
-  - _optionText: COMENTAR QUE YA TIENE PAJITA
+  - _optionText: "Paso de malgastar m\xE1s pajitas. Con un mundo tan contaminado
+      no es plan de ir haciendo m\xE1s pajas."
     _trueFlags: 2f00000030000000
     _falseFlags: 
     _dialogueOption: {fileID: 774643060}
@@ -662,7 +753,7 @@ GameObject:
   - component: {fileID: 324579754}
   - component: {fileID: 324579753}
   m_Layer: 0
-  m_Name: TENGO QUE DESPEDIR A LOS PPB
+  m_Name: Echar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,7 +849,7 @@ GameObject:
   - component: {fileID: 328877703}
   - component: {fileID: 328877702}
   m_Layer: 0
-  m_Name: BUSCAR PAJITA
+  m_Name: Pajitas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1183,7 +1274,7 @@ GameObject:
   - component: {fileID: 741483880}
   - component: {fileID: 741483879}
   m_Layer: 0
-  m_Name: TENGO LOS INGREDIENTES
+  m_Name: Explotar el partido
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1320,7 +1411,7 @@ GameObject:
   - component: {fileID: 774643060}
   - component: {fileID: 774643059}
   m_Layer: 0
-  m_Name: COMENTAR QUE YA TIENE PAJITA
+  m_Name: Pajas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1757,7 +1848,8 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1755683918}
-  - _optionText: TENGO QUE DESPEDIR A LOS PPB
+  - _optionText: "\xBFSabes c\xF3mo puedo hacer para que me hagan caso? \xA1Si no
+      les hago entrar en raz\xF3n y que vuelvan a trabajar los van a echar hoy mismo!"
     _trueFlags: 08000000
     _falseFlags: 
     _dialogueOption: {fileID: 324579752}
@@ -1965,82 +2057,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 1921504880, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
   m_PrefabInstance: {fileID: 2131080882}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1027637520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1027637521}
-  - component: {fileID: 1027637522}
-  - component: {fileID: 1027637523}
-  - component: {fileID: 1027637524}
-  m_Layer: 0
-  m_Name: option 0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1027637521
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027637520}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1884167483}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1027637522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027637520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1027637523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027637520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 6591366faf0655c4bbff1fc7bae3bbf2, type: 2}
-  _onEnd: 2
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1027637524
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027637520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _flags: 1e000000
 --- !u!1 &1078849019
 GameObject:
   m_ObjectHideFlags: 0
@@ -2142,7 +2158,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1174065277}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174065275
 GameObject:
@@ -2233,7 +2249,6 @@ Transform:
   - {fileID: 2034659309}
   - {fileID: 2846567}
   - {fileID: 741483878}
-  - {fileID: 1920109463}
   - {fileID: 2118701042}
   - {fileID: 1366052898}
   - {fileID: 1096582216}
@@ -2277,31 +2292,36 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 2034659311}
-  - _optionText: DENNIS HA DICHO EXPLOSION
+  - _optionText: "\xBFOye t\xFA sabes c\xF3mo se podr\xEDa hacer que una pelota explote?"
     _trueFlags: 2e000000
     _falseFlags: 33000000
     _dialogueOption: {fileID: 2846564}
-  - _optionText: TENGO LOS INGREDIENTES
+  - _optionText: "Ya tengo la pajita, la goma y la p\xF3lvora. \xA1Vamos a explotar
+      el partido!"
     _trueFlags: 33000000
     _falseFlags: 34000000
     _dialogueOption: {fileID: 741483881}
-  - _optionText: NECESITO LA BOMBA PARA QUE PPB ME HAGA CASO
+  - _optionText: "Ya tengo la pajita, la goma y la p\xF3lvora. \xA1Vamos a explotar
+      el partido!"
     _trueFlags: 34000000
     _falseFlags: 35000000
-    _dialogueOption: {fileID: 1920109465}
-  - _optionText: NECESITO LA BOMBA PARA QUE PPB SALGA DEL CONTROL MENTAL
+    _dialogueOption: {fileID: 741483881}
+  - _optionText: "\xA1S\xED que tengo pruebas! Dennis sale en una foto con ellos
+      de ni\xF1os."
     _trueFlags: 3500000034000000
     _falseFlags: 3600000037000000
     _dialogueOption: {fileID: 2118701040}
-  - _optionText: NECESITO LA BOMBA PARA QUE PPB SALGA DEL CONTROL MENTAL
+  - _optionText: "\xA1S\xED que tengo pruebas! Dennis sale en una foto con ellos
+      de ni\xF1os."
     _trueFlags: 350000003400000036000000
     _falseFlags: 37000000
     _dialogueOption: {fileID: 2118701040}
-  - _optionText: NECESITO LA BOMBA PARA QUE PPB SALGA DEL CONTROL MENTAL
+  - _optionText: "\xA1S\xED que tengo pruebas! Dennis sale en una foto con ellos
+      de ni\xF1os."
     _trueFlags: 350000003400000037000000
     _falseFlags: 36000000
     _dialogueOption: {fileID: 2118701040}
-  - _optionText: TENGO LA PELOTA
+  - _optionText: "Encontr\xE9 esta guarrada en su despacho, \xBFservir\xE1?"
     _trueFlags: 3600000037000000
     _falseFlags: 38000000
     _dialogueOption: {fileID: 1366052901}
@@ -2592,7 +2612,7 @@ GameObject:
   - component: {fileID: 1270625316}
   - component: {fileID: 1270625315}
   m_Layer: 0
-  m_Name: CAMBIAZO DE LA PELOTA POR LA BOMBA
+  m_Name: Cambiar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2797,7 +2817,7 @@ GameObject:
   - component: {fileID: 1366052900}
   - component: {fileID: 1366052899}
   m_Layer: 0
-  m_Name: TENGO LA PELOTA
+  m_Name: Guarrada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2816,7 +2836,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1174065277}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1366052899
 MonoBehaviour:
@@ -3058,7 +3078,7 @@ MonoBehaviour:
     _trueFlags: 08000000
     _falseFlags: 0a000000
     _dialogueOption: {fileID: 1893814061}
-  - _optionText: CAMBIAZO DE LA BOMBA POR LA PELOTA
+  - _optionText: (Cambiar la pelota con la que juegan por la pelota bomba)
     _trueFlags: 38000000
     _falseFlags: 39000000
     _dialogueOption: {fileID: 1270625317}
@@ -3114,6 +3134,68 @@ CapsuleCollider2D:
   m_Offset: {x: 3.27, y: -0.01}
   m_Size: {x: 1.1093597, y: 3.381985}
   m_Direction: 0
+--- !u!1 &1546098704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546098707}
+  - component: {fileID: 1546098705}
+  - component: {fileID: 1546098706}
+  m_Layer: 0
+  m_Name: Decente
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1546098705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546098704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1546098706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546098704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _onEnd: 1
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &1546098707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546098704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2846567}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1633416254
 GameObject:
   m_ObjectHideFlags: 0
@@ -4277,8 +4359,7 @@ Transform:
   m_LocalPosition: {x: 27.5, y: -4.75, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1027637521}
+  m_Children: []
   m_Father: {fileID: 1078849020}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4301,11 +4382,7 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _setFlags: 
-  _options:
-  - _optionText: "(Rebuscar para encontrar el peri\xF3dico que ley\xF3 Hortensia)"
-    _trueFlags: 1d000000
-    _falseFlags: 
-    _dialogueOption: {fileID: 1027637522}
+  _options: []
 --- !u!61 &1884167485
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4401,68 +4478,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1893814057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1920109462
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1920109463}
-  - component: {fileID: 1920109465}
-  - component: {fileID: 1920109464}
-  m_Layer: 0
-  m_Name: NECESITO LA BOMBA PARA QUE PPB ME HAGA CASO
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1920109463
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920109462}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1174065277}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1920109464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920109462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
-  _onEnd: 1
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1920109465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920109462}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
@@ -4813,7 +4828,7 @@ GameObject:
   - component: {fileID: 2118701040}
   - component: {fileID: 2118701041}
   m_Layer: 0
-  m_Name: NECESITO LA BOMBA PARA QUE PPB SALGA DEL CONTROL MENTAL
+  m_Name: Pruebas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4861,7 +4876,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1174065277}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2121053232
 GameObject:
