@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1360895776962490420}
   - component: {fileID: 1360895776962490421}
   - component: {fileID: 1360895776962490422}
+  - component: {fileID: 7448302375218268877}
   m_Layer: 0
   m_Name: PPBrosContender
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   _cardBack: {fileID: 21300000, guid: f1ce838afe8a24241a924e7d633147db, type: 3}
   _interviewBanner: {fileID: 21300000, guid: 3adeb1b4b1a93b84181ed83cfc999f86, type: 3}
   _interviewBackground: {fileID: 21300000, guid: e24d2fa6abc858943b666f53aef49904, type: 3}
-  _interviewDialogue: {fileID: 0}
+  _interviewDialogue: {fileID: 7448302375218268877}
   _aIScript: {fileID: 1360895776962490422}
   stolenCards: 0
 --- !u!114 &1360895776962490422
@@ -65,3 +66,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21587d8ad1e740842af6663e1d66e8cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7448302375218268877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360895776962490423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba41f789ea57fca49a0971e6c0bbee55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDialogue: {fileID: 0}
+  _winDialogue: {fileID: 0}
+  _alternateWinDialogue: {fileID: 0}
+  _loseDialogue: {fileID: 0}
+  _paredCardDialogue: {fileID: 0}
+  _palaCardDialogue: {fileID: 0}
+  _gomuCardDialogue: {fileID: 0}

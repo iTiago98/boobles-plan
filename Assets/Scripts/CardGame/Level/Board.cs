@@ -240,6 +240,11 @@ namespace CardGame.Level
 
         #region Highlight
 
+        public void RemoveTargetsHighlight()
+        {
+            HighlightTargets(new List<Card>());
+        }
+
         public void HighlightTargets(List<Card> possibleTargets)
         {
             List<CardZone> temp = new List<CardZone>();
@@ -297,13 +302,18 @@ namespace CardGame.Level
             }
         }
 
-        public void HighlightZoneTargets(CardType type, Contender contender, bool show)
+        public void RemoveCardZonesHighlight(Card card)
         {
-            switch (type)
+            HighlightCardZones(card, false);
+        }
+
+        public void HighlightCardZones(Card card, bool show)
+        {
+            switch (card.Stats.type)
             {
                 case CardType.ARGUMENT:
                     {
-                        List<CardZone> cardZones = contender.cardZones;
+                        List<CardZone> cardZones = card.contender.cardZones;
                         foreach (CardZone zone in cardZones)
                         {
                             if (!show || zone.isEmpty) zone.ShowHighlight(show);
@@ -312,7 +322,7 @@ namespace CardGame.Level
                     }
                 case CardType.FIELD:
                     {
-                        CardZone zone = contender.fieldCardZone;
+                        CardZone zone = card.contender.fieldCardZone;
                         zone.ShowHighlight(show);
                         break;
                     }

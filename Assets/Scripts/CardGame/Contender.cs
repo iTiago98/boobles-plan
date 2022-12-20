@@ -95,9 +95,22 @@ namespace CardGame
 
         public void SubstractMana(int cost, bool continueFlow)
         {
-            currentMana -= cost;
-            if (currentMana < 0) currentMana = 0;
-            UIManager.Instance.UpdateUIStats(continueFlow);
+            SubstractMana(cost, continueFlow, false);
+        }
+
+        public void SubstractMana(int manaCost, bool continueFlow, bool useFreeMana)
+        {
+            if (manaCost > 0)
+            {
+                if (useFreeMana && freeMana) SetFreeMana(false);
+                else
+                {
+                    currentMana -= manaCost;
+                    if (currentMana < 0) currentMana = 0;
+                    UIManager.Instance.UpdateUIStats(continueFlow);
+
+                }
+            }
         }
 
         public void RestoreLife(int life, bool continueFlow)

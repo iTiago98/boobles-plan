@@ -312,11 +312,12 @@ namespace CardGame.AI
                     case SubType.STAT_BOOST:
                         {
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
-                            CardStats cardStats = card.Stats;
-                            CardStats oppositeStats = oppositeCard.Stats;
 
                             if (oppositeCard != null)
                             {
+                                CardStats cardStats = card.Stats;
+                                CardStats oppositeStats = oppositeCard.Stats;
+
                                 bool savedCard = cardStats.defense <= oppositeStats.strength && (cardStats.defense + effect.intParameter2) > oppositeStats.strength;
                                 bool killedCard = cardStats.strength < oppositeStats.defense && (cardStats.strength + effect.intParameter1) >= oppositeStats.defense;
 

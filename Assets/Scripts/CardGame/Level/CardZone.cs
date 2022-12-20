@@ -32,7 +32,7 @@ namespace CardGame.Level
             {
                 mouseController.SetHolding(null);
                 card.Play(this);
-                Board.Instance.HighlightZoneTargets(card.Stats.type, card.contender, show: false);
+                Board.Instance.RemoveCardZonesHighlight(card);
                 UIManager.Instance.HidePlayButtons();
                 UIManager.Instance.SetEndTurnButtonInteractable(true);
             }

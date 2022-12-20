@@ -119,8 +119,11 @@ namespace CardGame.Level
             {
                 if (contender.isPlayer)
                 {
-                    isDiscarding = true;
-                    ChangeScale(CardGameManager.Instance.settings.highlightScale);
+                    if (!isDiscarding)
+                    {
+                        isDiscarding = true;
+                        ChangeScale(CardGameManager.Instance.settings.highlightScale);
+                    }
                 }
                 else
                 {
@@ -131,10 +134,13 @@ namespace CardGame.Level
             {
                 if (contender.isPlayer)
                 {
-                    isDiscarding = false;
-                    ChangeScale(CardGameManager.Instance.settings.defaultScale);
+                    if (isDiscarding)
+                    {
+                        isDiscarding = false;
+                        ChangeScale(CardGameManager.Instance.settings.defaultScale);
 
-                    yield return new WaitUntil(() => this.numCards == numCards);
+                        yield return new WaitUntil(() => this.numCards == numCards);
+                    }
 
                     TurnManager.Instance.ChangeTurn();
                 }

@@ -33,12 +33,7 @@ namespace CardGame.Cards
 
         public void SubstractMana()
         {
-            Contender contender = _card.contender;
-            if (manaCost > 0)
-            {
-                if (contender.freeMana) contender.SetFreeMana(false);
-                else contender.SubstractMana(manaCost, continueFlow: false);
-            }
+            _card.contender.SubstractMana(manaCost, continueFlow: false, useFreeMana: true);
         }
 
         public void ReceiveDamage(int strength)

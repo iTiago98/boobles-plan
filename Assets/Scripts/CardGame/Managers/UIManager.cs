@@ -125,6 +125,8 @@ namespace CardGame.Managers
         [SerializeField] private GameObject _playerBanner;
         [SerializeField] private GameObject _opponentBanner;
 
+        private bool _bannersOn = true;
+
         #endregion
 
         private Contender _player;
@@ -163,7 +165,7 @@ namespace CardGame.Managers
                 if (cancelPlayButton.activeSelf) OnCancelPlayButtonClick();
             }
 
-            if (Input.GetMouseButtonUp(0)) MoveBanners();
+            if (Input.GetMouseButtonUp(0) && _bannersOn) MoveBanners();
         }
 
         public void TurnAnimation(Turn turn)
@@ -207,12 +209,13 @@ namespace CardGame.Managers
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
             sequence.AppendCallback(() => TurnManager.Instance.ContinueFlow());
 
+            if (turn == Turn.PLAYER) sequence.AppendCallback(() => SetEndTurnButtonInteractable(true));
+            else SetEndTurnButtonInteractable(false);
+
             sequence.Play();
 
-            CheckEndTurnButtonState(turn);
+            SetEndTurnButtonText(turn);
         }
-
-
 
         #region Stats
 
@@ -319,14 +322,7 @@ namespace CardGame.Managers
 
         public void OnEndTurnButtonClick()
         {
-            if (CardGameManager.Instance.gameStarted)
-            {
-                TurnManager.Instance.FinishTurn();
-            }
-            else
-            {
-                CardGameManager.Instance.StartGame();
-            }
+            TurnManager.Instance.FinishTurn();
         }
 
         public void SetEndTurnButtonInteractable(bool interactable)
@@ -334,10 +330,8 @@ namespace CardGame.Managers
             endTurnButton.SetInteractable(interactable);
         }
 
-        public void CheckEndTurnButtonState(Turn turn)
+        private void SetEndTurnButtonText(Turn turn)
         {
-            endTurnButton.SetInteractable(turn == Turn.PLAYER);
-
             switch (turn)
             {
                 case Turn.INTERVIEW_START:
@@ -412,11 +406,50 @@ namespace CardGame.Managers
         public void OnContinuePlayButtonClick()
         {
             Card card = MouseController.Instance.holdingCard;
-            if (card.IsPlayerCard) card.ContinuePlay();
-            else card.ContinuePlayOpponent();
+            if (card.IsPlayerCard) ContinuePlay(card);
+            else ContinuePlayOpponent(card);
 
-            Board.Instance.HighlightTargets(new List<Card>());
+            Board.Instance.RemoveTargetsHighlight();
             HidePlayButtons();
+        }
+
+        private void ContinuePlay(Card card)
+        {
+            StartCoroutine(ContinuePlayCoroutine(
+                card,
+                card.Effects.ApplyEffect,
+                () => {
+                    SetEndTurnButtonInteractable(true);
+                }));
+        }
+
+        private void ContinuePlayOpponent(Card card)
+        {
+            StartCoroutine(ContinuePlayCoroutine(
+                card,
+                () => card.Effects.ApplyEffect(card.storedTarget),
+                () => {
+                    card.storedTarget = null;
+                    CardGameManager.Instance.opponentAI.enabled = true;
+                }));
+        }
+
+        private IEnumerator ContinuePlayCoroutine(Card card, Action applyEffect, Action onDestroy)
+        {
+            TurnManager.Instance.StopFlow();
+
+            card.Stats.SubstractMana();
+            applyEffect();
+
+            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+
+            card.DestroyCard();
+
+            yield return new WaitUntil(() => card == null);
+
+            onDestroy();
+
+            MouseController.Instance.SetHolding(null);
         }
 
         public void OnCancelPlayButtonClick()
@@ -424,16 +457,15 @@ namespace CardGame.Managers
             Card holdingCard = MouseController.Instance.holdingCard;
             if (holdingCard != null && holdingCard.contender.isPlayer)
             {
-                holdingCard.CancelPlay();
+                holdingCard.contender.hand.AddCard(holdingCard);
 
-                if (MouseController.Instance.IsApplyingEffect)
-                    MouseController.Instance.ResetApplyingEffect();
-                else
-                    Board.Instance.HighlightZoneTargets(holdingCard.Stats.type, holdingCard.contender, show: false);
+                if (MouseController.Instance.IsApplyingEffect) MouseController.Instance.ResetApplyingEffect();
+                else if (holdingCard.Stats.type == CardType.ACTION) Board.Instance.RemoveTargetsHighlight();
+                else Board.Instance.RemoveCardZonesHighlight(holdingCard);
 
-                Board.Instance.HighlightTargets(new List<Card>());
                 HidePlayButtons();
                 SetEndTurnButtonInteractable(true);
+                MouseController.Instance.SetHolding(null);
             }
         }
 
@@ -535,6 +567,7 @@ namespace CardGame.Managers
 
         public void MoveBanners()
         {
+            _bannersOn = false;
             Sequence sequence = DOTween.Sequence();
 
             sequence.Join(_playerBanner.transform.DOMoveX(-20, 2f));

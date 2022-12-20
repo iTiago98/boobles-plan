@@ -32,7 +32,7 @@ namespace CardGame.Cards
 
         private bool _clickable;
 
-        private Card _storedTarget;
+        [HideInInspector] public Card storedTarget;
         private bool _swapped;
 
         private CardContainer _container;
@@ -114,8 +114,7 @@ namespace CardGame.Cards
 
                         if (IsArgument || IsField)
                         {
-                            Board.Instance.HighlightZoneTargets(Stats.type, contender, show: true);
-                            UIManager.Instance.SetEndTurnButtonInteractable(false);
+                            Board.Instance.HighlightCardZones(this, show: true);
                         }
                         else
                         {
@@ -203,7 +202,6 @@ namespace CardGame.Cards
                     Board.Instance.HighlightTargets(possibleTargets);
 
                     MouseController.Instance.SetApplyingEffect(this);
-                    UIManager.Instance.SetEndTurnButtonInteractable(false);
                 }
                 else
                 {
@@ -222,7 +220,7 @@ namespace CardGame.Cards
                         Card bestTarget = CardGameManager.Instance.opponentAI.GetBestTarget(effect, possibleTargets);
 
                         Board.Instance.HighlightTargets(new List<Card>() { bestTarget });
-                        _storedTarget = bestTarget;
+                        storedTarget = bestTarget;
                     }
                 }
                 else
@@ -250,43 +248,44 @@ namespace CardGame.Cards
             sequence.Play();
         }
 
-        public void ContinuePlay()
-        {
-            StartCoroutine(ContinuePlayCoroutine());
-        }
+        //public void ContinuePlay()
+        //{
+        //    StartCoroutine(ContinuePlayCoroutine());
+        //}
 
-        private IEnumerator ContinuePlayCoroutine()
-        {
-            TurnManager.Instance.StopFlow();
+        //private IEnumerator ContinuePlayCoroutine()
+        //{
+        //    TurnManager.Instance.StopFlow();
 
-            Stats.SubstractMana();
-            Effects.ApplyEffect();
+        //    Stats.SubstractMana();
+        //    Effects.ApplyEffect();
 
-            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+        //    yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
-            DestroyCard();
-            MouseController.Instance.SetHolding(null);
-            UIManager.Instance.SetEndTurnButtonInteractable(true);
-        }
+        //    DestroyCard();
 
-        public void ContinuePlayOpponent()
-        {
-            Stats.SubstractMana();
+        //    yield return new WaitUntil(() => gameObject == null);
 
-            Effects.ApplyEffect(effect, _storedTarget);
-            DestroyCard();
+        //    MouseController.Instance.SetHolding(null);
+        //    UIManager.Instance.SetEndTurnButtonInteractable(true);
+        //}
 
-            _storedTarget = null;
-            CardGameManager.Instance.opponentAI.enabled = true;
-            MouseController.Instance.SetHolding(null);
-        }
+        //public void ContinuePlayOpponent()
+        //{
+        //    Stats.SubstractMana();
 
-        public void CancelPlay()
-        {
-            // Return card to hand
-            _hand.AddCard(this);
-            MouseController.Instance.SetHolding(null);
-        }
+        //    Effects.ApplyEffect(effect, storedTarget);
+        //    DestroyCard();
+
+        //    storedTarget = null;
+        //    CardGameManager.Instance.opponentAI.enabled = true;
+        //    MouseController.Instance.SetHolding(null);
+        //}
+
+        //public void CancelPlay()
+        //{
+        //    // Return card to hand
+        //}
 
         #endregion
 

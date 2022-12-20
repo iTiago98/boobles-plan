@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CardGame.Dialogues
 {
-    public class PinPonBrosDialogues : InterviewDialogue
+    public class PPBrosDialogues : InterviewDialogue
     {
         [Header("Extra cards")]
         [SerializeField] private Dialogue _paredCardDialogue;

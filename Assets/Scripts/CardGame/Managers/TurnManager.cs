@@ -177,8 +177,6 @@ namespace CardGame.Managers
         private void SetTurn(Turn turn)
         {
             _turn = turn;
-
-            UIManager.Instance.CheckEndTurnButtonState(_turn);
         }
 
         public void StopFlow()

@@ -140,7 +140,7 @@ namespace CardGame.Managers
             _effectCard.Effects.ApplyEffect(targetCard);
 
             UIManager.Instance.HidePlayButtons();
-            Board.Instance.HighlightTargets(new List<Card>());
+            Board.Instance.RemoveTargetsHighlight();
 
             yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 

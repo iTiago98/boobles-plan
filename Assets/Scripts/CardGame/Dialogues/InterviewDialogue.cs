@@ -46,7 +46,7 @@ public abstract class InterviewDialogue : MonoBehaviour
 
     protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null)
     {
-        if (diag == null) return;
+        if (diag == null || _dialogueManager == null) return;
         CardGameManager.Instance.PauseGame();
 
         // _dialogueEnd = false;
