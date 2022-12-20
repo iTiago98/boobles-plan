@@ -9,10 +9,11 @@ namespace Booble.Interactables.Events
 	public class StartInteraction : DialogueEvent
 	{
 		[SerializeField] private Interactable _interactable;
+		[SerializeField] private bool _withinAnimation;
 		
 		public override void Execute()
         {
-			_interactable.StartInteraction();
+			_interactable.StartInteraction(_withinAnimation);
         }
 	}
 }

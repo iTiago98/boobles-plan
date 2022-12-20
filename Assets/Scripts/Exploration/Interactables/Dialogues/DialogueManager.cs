@@ -18,6 +18,7 @@ namespace Booble.Interactables.Dialogues
         private const char SEPARATOR = '|';
 
         public UnityEvent OnEndDialogue { get; private set; }
+        public bool HideBackOption { get; private set; }
 
         [SerializeField] private KeyCode _nextKey;
         [SerializeField] private float _characterDelay;
@@ -41,13 +42,17 @@ namespace Booble.Interactables.Dialogues
             OnEndDialogue = new UnityEvent();
         }
 
-        public void StartDialogue(Dialogue dialogue, List<Option> options = null)
+        public void StartDialogue(Dialogue dialogue, List<Option> options = null, bool hideBackOption = false)
         {
             _staggered = false;
 
             _dialogueRunning = true;
             _currentDialogue = dialogue;
             _options = options ??= new List<Option>();
+            if (options.Count > 0)
+            {
+                HideBackOption = hideBackOption;
+            }
             if (!dialogue.Empty)
             {
                 _dialogueBox.SetActive(true);
@@ -203,7 +208,10 @@ namespace Booble.Interactables.Dialogues
                 t.gameObject.SetActive(false);
             }
 
-            InitializeEndDialogueOption();
+            if (!HideBackOption)
+            {
+                InitializeEndDialogueOption();
+            }
 
             for (int i = 0; i < _options.Count; i++)
             {

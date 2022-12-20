@@ -28,7 +28,7 @@ namespace Booble.Interactables
         
         public static void ReturnToDialogue()
         {
-            DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions);
+            DialogueManager.Instance.StartDialogue(_returnDialogue, _returnOptions, DialogueManager.Instance.HideBackOption);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
             DialogueManager.Instance.OnEndDialogue.AddListener(EndInteraction);
             DialogueManager.Instance.DisplayLastSentence();
@@ -153,7 +153,7 @@ namespace Booble.Interactables
             }
         }
         
-        public void StartInteraction()
+        public void StartInteraction(bool hideBackOption = false)
         {
             _interactionOnGoing = true;
 
@@ -177,7 +177,7 @@ namespace Booble.Interactables
             {
                 Debug.LogError("No Click Dialogue with a satisfied Flag List!");
             }
-            _diagManager.StartDialogue(_dialogue, _options);
+            _diagManager.StartDialogue(_dialogue, _options, hideBackOption);
 
             _returnDialogue = _dialogue;
             _returnOptions = _options;
