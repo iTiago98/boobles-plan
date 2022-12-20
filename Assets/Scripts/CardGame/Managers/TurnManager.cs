@@ -19,12 +19,12 @@ namespace CardGame.Managers
 
         public enum Turn
         {
-            START, PLAYER, OPPONENT, DISCARDING, CLASH, END
+            INTERVIEW_START, ROUND_START, PLAYER, OPPONENT, DISCARDING, CLASH, ROUND_END, INTERVIEW_END
         }
 
         public bool isPlayerTurn => _turn == Turn.PLAYER;
 
-        private Turn _turn = Turn.START;
+        private Turn _turn = Turn.INTERVIEW_START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
 
         #region Turn flow 
@@ -36,17 +36,15 @@ namespace CardGame.Managers
 
         private IEnumerator StartGameCoroutine()
         {
-            // START GAME ANIMATION
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
 
-            // DRAW CARDS
             DrawCards(CardGameManager.Instance.settings.initialCardNumber);
 
             yield return new WaitUntil(() => continueFlow);
 
-            StartRound();
+            ChangeTurn();
         }
 
         private void StartRound()
@@ -56,7 +54,10 @@ namespace CardGame.Managers
 
         private IEnumerator StartRoundCoroutine()
         {
-            // UPDATE HEALTH AND MANA
+            UIManager.Instance.TurnAnimation(turn);
+
+            yield return new WaitUntil(() => continueFlow);
+
             StopFlow();
             CardGameManager.Instance.FillMana();
             UIManager.Instance.UpdateUIStats(startRound: true);
@@ -64,7 +65,6 @@ namespace CardGame.Managers
             yield return new WaitUntil(() => continueFlow);
 
             ChangeTurn();
-            StartTurn();
         }
 
         private void StartTurn()
@@ -74,7 +74,6 @@ namespace CardGame.Managers
 
         private IEnumerator StartTurnCoroutine()
         {
-            // START TURN ANIMATION
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
@@ -97,7 +96,7 @@ namespace CardGame.Managers
             if (skipCombat)
             {
                 skipCombat = false;
-                FinishRound();
+                ChangeTurn();
             }
             else
                 StartCoroutine(StartClashCoroutine());
@@ -105,7 +104,6 @@ namespace CardGame.Managers
 
         private IEnumerator StartClashCoroutine()
         {
-            // CLASH TURN ANIMATION
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
@@ -117,28 +115,31 @@ namespace CardGame.Managers
         {
             if (!CardGameManager.Instance.CheckEnd())
             {
-                ChangeTurn();
                 StartCoroutine(FinishRoundCoroutine());
             }
         }
 
         private IEnumerator FinishRoundCoroutine()
         {
-            // END TURN ANIMATION
             UIManager.Instance.TurnAnimation(turn);
 
             yield return new WaitUntil(() => continueFlow);
 
-            StartCoroutine(ApplyEndTurnEffectsCoroutine(StartRound));
+            StartCoroutine(ApplyEndTurnEffectsCoroutine());
         }
 
         public void ChangeTurn()
         {
             switch (_turn)
             {
-                case Turn.START:
-                case Turn.END:
+                case Turn.INTERVIEW_START:
+                    SetTurn(Turn.ROUND_START);
+                    StartRound();
+                    break;
+
+                case Turn.ROUND_START:
                     SetTurn(Turn.OPPONENT);
+                    StartTurn();
                     break;
 
                 case Turn.OPPONENT:
@@ -159,8 +160,17 @@ namespace CardGame.Managers
                     break;
 
                 case Turn.CLASH:
-                    SetTurn(Turn.END);
+                    SetTurn(Turn.ROUND_END);
+                    FinishRound();
                     break;
+
+                case Turn.ROUND_END:
+                    SetTurn(Turn.ROUND_START);
+                    StartRound();
+                    break;
+
+                case Turn.INTERVIEW_END: break;
+
             }
         }
 
@@ -236,7 +246,7 @@ namespace CardGame.Managers
                 yield return new WaitWhile(() => (playerCardDestroy && playerCard != null) || (opponentCardDestroy && opponentCard != null));
             }
 
-            FinishRound();
+            ChangeTurn();
         }
 
         public void ApplyCombatActions(Card source, object targetObj)
@@ -271,12 +281,9 @@ namespace CardGame.Managers
 
         public void CheckEndMidTurn()
         {
-            if (CardGameManager.Instance.player.life <= 0
-                || CardGameManager.Instance.opponent.life <= 0
-                || CardGameManager.Instance.alternateWinCondition)
+            if (CardGameManager.Instance.CheckEnd())
             {
-                SkipCombat();
-                StartClash();
+                StopFlow();
             }
         }
 
@@ -341,7 +348,7 @@ namespace CardGame.Managers
 
         public void RemoveEndTurnEffect(Action method)
         {
-            if (turn == Turn.END)
+            if (turn == Turn.ROUND_END)
             {
                 _effectsToRemove.Add(_endTurnEffectsActions.IndexOf(method));
             }
@@ -349,7 +356,7 @@ namespace CardGame.Managers
                 _endTurnEffectsActions.Remove(method);
         }
 
-        private IEnumerator ApplyEndTurnEffectsCoroutine(Action followUp)
+        private IEnumerator ApplyEndTurnEffectsCoroutine()
         {
             for (int i = 0; i < _endTurnEffectsActions.Count; i++)
             {
@@ -374,7 +381,7 @@ namespace CardGame.Managers
 
             _effectsToRemove.Clear();
 
-            followUp();
+            ChangeTurn();
         }
 
         #endregion
@@ -420,30 +427,6 @@ namespace CardGame.Managers
         {
             return (contender.isPlayer && _playerMirror) || (!contender.isPlayer && _opponentMirror);
         }
-
-        #endregion
-
-        #region Steal Mana
-
-        //private bool _playerStealMana;
-        //private bool _opponentStealMana;
-
-        //public void SetStealMana(Contender contender)
-        //{
-        //    if (contender.isPlayer) _playerStealMana = true;
-        //    else _opponentStealMana = true;
-        //}
-
-        //public void RemoveStealMana()
-        //{
-        //    _playerStealMana = false;
-        //    _opponentStealMana = false;
-        //}
-
-        //public bool IsStealMana(Contender contender)
-        //{
-        //    return (contender.isPlayer && _playerStealMana) || (!contender.isPlayer && _opponentStealMana);
-        //}
 
         #endregion
 

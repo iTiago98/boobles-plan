@@ -88,7 +88,15 @@ namespace CardGame.Managers
 
         [Header("Turn Animation")]
         [SerializeField] private Image turnAnimationImage;
-        [SerializeField] private TextMeshProUGUI turnAnimationText;
+
+        [SerializeField] private Sprite _interviewStartSprite;
+        [SerializeField] private Sprite _roundStartSprite;
+        [SerializeField] private Sprite _opponentTurnMSprite;
+        [SerializeField] private Sprite _opponentTurnWSprite;
+        [SerializeField] private Sprite _playerTurnSprite;
+        [SerializeField] private Sprite _clashSprite;
+        [SerializeField] private Sprite _roundEndSprite;
+        [SerializeField] private Sprite _interviewEndSprite;
 
         #endregion
 
@@ -111,21 +119,26 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Interview Start
+
+        [Header("Interview Start")]
+        [SerializeField] private GameObject _playerBanner;
+        [SerializeField] private GameObject _opponentBanner;
+
+        #endregion
+
         private Contender _player;
         private Contender _opponent;
 
-        private const string START_TEXT = "Comienza el combate";
-        private const string PLAYER_TURN_TEXT = "Tu turno";
-        private const string OPPONENT_TURN_TEXT = "Turno del oponente";
-        private const string CLASH_TEXT = "Combate";
-        private const string END_TEXT = "Fin de la ronda";
-
-        private const string PLAYER_TURN_BUTTON_TEXT = "Batirse";
-        private const string OPPONENT_TURN_BUTTON_TEXT = "Turno enemigo";
+        private const string INTERVIEW_START_BUTTON_TEXT = "Comienza la entrevista";
+        private const string ROUND_START_BUTTON_TEXT = "Comienzo de ronda";
+        private const string OPPONENTM_TURN_BUTTON_TEXT = "Turno del entrevistado";
+        private const string OPPONENTW_TURN_BUTTON_TEXT = "Turno de la entrevistada";
+        private const string PLAYER_TURN_CLASH_BUTTON_TEXT = "Batirse";
+        private const string PLAYER_TURN_SKIP_BUTTON_TEXT = "Pasar turno";
         private const string DISCARDING_BUTTON_TEXT = "Descartando";
         private const string CLASH_BUTTON_TEXT = "Combate";
         private const string END_BUTTON_TEXT = "Fin de la ronda";
-        private const string SKIP_COMBAT_BUTTON_TEXT = "Pasar turno";
 
         private const string INTERVIEW_WIN_TEXT = "Has ganado";
         private const string INTERVIEW_LOSE_TEXT = "Has perdido";
@@ -147,8 +160,10 @@ namespace CardGame.Managers
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if(cancelPlayButton.activeSelf) OnCancelPlayButtonClick();
+                if (cancelPlayButton.activeSelf) OnCancelPlayButtonClick();
             }
+
+            if (Input.GetMouseButtonUp(0)) MoveBanners();
         }
 
         public void TurnAnimation(Turn turn)
@@ -157,32 +172,39 @@ namespace CardGame.Managers
 
             switch (turn)
             {
-                case Turn.START:
-                    turnAnimationText.text = START_TEXT;
+                case Turn.INTERVIEW_START:
+                    turnAnimationImage.sprite = _interviewStartSprite;
+                    break;
+                case Turn.ROUND_START:
+                    turnAnimationImage.sprite = _roundStartSprite;
                     break;
                 case Turn.PLAYER:
-                    turnAnimationText.text = PLAYER_TURN_TEXT;
+                    turnAnimationImage.sprite = _playerTurnSprite;
                     break;
                 case Turn.OPPONENT:
-                    turnAnimationText.text = OPPONENT_TURN_TEXT;
+                    if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
+                        turnAnimationImage.sprite = _opponentTurnWSprite;
+                    else
+                        turnAnimationImage.sprite = _opponentTurnMSprite;
                     break;
                 case Turn.DISCARDING:
                     break;
                 case Turn.CLASH:
-                    turnAnimationText.text = CLASH_TEXT;
+                    turnAnimationImage.sprite = _clashSprite;
                     break;
-                case Turn.END:
-                    turnAnimationText.text = END_TEXT;
+                case Turn.ROUND_END:
+                    turnAnimationImage.sprite = _roundEndSprite;
+                    break;
+                case Turn.INTERVIEW_END:
+                    turnAnimationImage.sprite = _interviewEndSprite;
                     break;
             }
 
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
-            sequence.Join(turnAnimationText.DOFade(1, 0.5f));
             sequence.AppendInterval(0.5f);
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
-            sequence.Join(turnAnimationText.DOFade(0, 0.5f));
             sequence.AppendCallback(() => TurnManager.Instance.ContinueFlow());
 
             sequence.Play();
@@ -314,34 +336,38 @@ namespace CardGame.Managers
 
         public void CheckEndTurnButtonState(Turn turn)
         {
+            endTurnButton.SetInteractable(turn == Turn.PLAYER);
+
             switch (turn)
             {
-                case Turn.START:
-                    endTurnButton.SetInteractable(false);
-                    break;
+                case Turn.INTERVIEW_START:
+                    endTurnButton.SetText(INTERVIEW_START_BUTTON_TEXT); break;
+
+                case Turn.ROUND_START:
+                    endTurnButton.SetText(ROUND_START_BUTTON_TEXT); break;
+
                 case Turn.OPPONENT:
-                    endTurnButton.SetInteractable(false);
-                    endTurnButton.SetText(OPPONENT_TURN_BUTTON_TEXT);
-                    break;
-                case Turn.PLAYER:
-                    endTurnButton.SetInteractable(true);
-                    if (TurnManager.Instance.GetSkipCombat())
-                        endTurnButton.SetText(SKIP_COMBAT_BUTTON_TEXT);
+                    if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
+                        endTurnButton.SetText(OPPONENTW_TURN_BUTTON_TEXT);
                     else
-                        endTurnButton.SetText(PLAYER_TURN_BUTTON_TEXT);
+                        endTurnButton.SetText(OPPONENTM_TURN_BUTTON_TEXT);
                     break;
+
+                case Turn.PLAYER:
+                    if (TurnManager.Instance.GetSkipCombat())
+                        endTurnButton.SetText(PLAYER_TURN_SKIP_BUTTON_TEXT);
+                    else
+                        endTurnButton.SetText(PLAYER_TURN_CLASH_BUTTON_TEXT);
+                    break;
+
                 case Turn.DISCARDING:
-                    endTurnButton.SetInteractable(false);
-                    endTurnButton.SetText(DISCARDING_BUTTON_TEXT);
-                    break;
+                    endTurnButton.SetText(DISCARDING_BUTTON_TEXT); break;
+
                 case Turn.CLASH:
-                    endTurnButton.SetInteractable(false);
-                    endTurnButton.SetText(CLASH_BUTTON_TEXT);
-                    break;
-                case Turn.END:
-                    endTurnButton.SetInteractable(false);
-                    endTurnButton.SetText(END_BUTTON_TEXT);
-                    break;
+                    endTurnButton.SetText(CLASH_BUTTON_TEXT); break;
+
+                case Turn.ROUND_END:
+                    endTurnButton.SetText(END_BUTTON_TEXT); break;
             }
         }
 
@@ -497,6 +523,27 @@ namespace CardGame.Managers
         //    Instantiate(particleSystem_effectTargetNegative_Prefab, parent);
         //}
 
+
+        #endregion
+
+        #region Interview Start
+
+        public void InitializeBanners(Sprite image)
+        {
+            _opponentBanner.GetComponent<Image>().sprite = image;
+        }
+
+        public void MoveBanners()
+        {
+            Sequence sequence = DOTween.Sequence();
+
+            sequence.Join(_playerBanner.transform.DOMoveX(-20, 2f));
+            sequence.Join(_opponentBanner.transform.DOMoveX(20, 2f));
+
+            sequence.OnComplete(() => CardGameManager.Instance.ThrowStartDialogue());
+
+            sequence.Play();
+        }
 
         #endregion
 

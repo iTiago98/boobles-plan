@@ -48,6 +48,7 @@ MonoBehaviour:
   role: 1
   _deckCards: {fileID: 11400000, guid: ccb157b0aa6638d4f94ef297900796cb, type: 2}
   _cardBack: {fileID: 21300000, guid: 3c25bc3c1eb34004e9460f7b222f0fe9, type: 3}
+  _interviewBanner: {fileID: 21300000, guid: eac88e3e431e6b44aba2d176f260f0a0, type: 3}
   _interviewBackground: {fileID: 21300000, guid: d1942331f146f364b95b4cc9399b7d74, type: 3}
   _interviewDialogue: {fileID: 0}
   _aIScript: {fileID: 7488545381912919283}

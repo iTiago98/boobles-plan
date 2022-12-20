@@ -39,6 +39,7 @@ namespace CardGame
         [SerializeField] private Sprite _cardBack;
 
         [Header("Opponent settings")]
+        [SerializeField] private Sprite _interviewBanner;
         [SerializeField] private Sprite _interviewBackground;
         [SerializeField] private InterviewDialogue _interviewDialogue;
         [SerializeField] private OpponentAI _aIScript;
@@ -123,6 +124,7 @@ namespace CardGame
         public Sprite GetCardBack() { return _cardBack; }
         public InterviewDialogue GetInterviewDialogue() { return _interviewDialogue; }
         public Sprite GetInterviewBackground() { return _interviewBackground; }
+        public Sprite GetInterviewBanner() { return _interviewBanner; }
         public OpponentAI GetAIScript() { return _aIScript; }
     }
 }

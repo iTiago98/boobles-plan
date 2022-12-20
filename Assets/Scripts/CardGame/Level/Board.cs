@@ -60,7 +60,7 @@ namespace CardGame.Level
                 case Turn.OPPONENT:
                     opponentDeck.DrawCards(cardNumber);
                     break;
-                case Turn.START:
+                case Turn.INTERVIEW_START:
                     playerDeck.DrawCards(cardNumber);
                     opponentDeck.DrawCards(cardNumber);
                     break;

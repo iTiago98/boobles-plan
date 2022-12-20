@@ -32,11 +32,6 @@ namespace CardGame.Managers
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
 
-        private void Start()
-        {
-            ThrowStartDialogue();
-        }
-
         #region Initialize
 
         public void Initialize()
@@ -44,6 +39,7 @@ namespace CardGame.Managers
             InitializeOpponent();
             InitializeDialogues();
             Board.Instance.InitializeBackground(opponent.GetInterviewBackground());
+            UIManager.Instance.InitializeBanners(opponent.GetInterviewBanner());
             InitializeDecks();
         }
 
@@ -132,6 +128,7 @@ namespace CardGame.Managers
         public void ThrowStartDialogue()
         {
             _interviewDialogue?.ThrowStartDialogue();
+            if (_interviewDialogue == null) StartGame(); // TEMPORAL
         }
 
         public void ThrowWinDialogue()

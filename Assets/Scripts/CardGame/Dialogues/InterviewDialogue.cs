@@ -1,6 +1,7 @@
 using Booble.Interactables.Dialogues;
 using CardGame.Cards;
 using CardGame.Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,7 @@ public abstract class InterviewDialogue : MonoBehaviour
     abstract public void CheckDialogue(Card cardPlayed);
     public void ThrowStartDialogue()
     {
-        if(_startDialogue != null) ThrowDialogue(_startDialogue);
+        if (_startDialogue != null) ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
     }
 
     public void ThrowWinDialogue()
@@ -43,18 +44,18 @@ public abstract class InterviewDialogue : MonoBehaviour
         if (_loseDialogue != null) ThrowDialogue(_loseDialogue);
     }
 
-    protected void ThrowDialogue(Dialogue diag, List<Option> options = null)
+    protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null)
     {
         if (diag == null) return;
         CardGameManager.Instance.PauseGame();
 
-       // _dialogueEnd = false;
+        // _dialogueEnd = false;
         _dialogueManager.StartDialogue(diag, options);
         _dialogueManager.OnEndDialogue.RemoveAllListeners();
         _dialogueManager.OnEndDialogue.AddListener(() =>
         {
             //_dialogueEnd = true;
-            CardGameManager.Instance.ResumeGame();
+            onEndDialogue();
         });
     }
 }
