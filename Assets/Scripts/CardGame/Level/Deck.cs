@@ -23,6 +23,8 @@ namespace CardGame.Level
 
         public int numCards => _deckCards.Count;
 
+        public bool busy { private set; get; }
+
         private List<Card> _listToAdd = new List<Card>();
         private List<Card> _listToDiscard = new List<Card>();
 
@@ -69,6 +71,8 @@ namespace CardGame.Level
 
         public void DrawCards(int numCardsToAdd)
         {
+            busy = true;
+
             int numCardsStart = numCards;
 
             for (int i = 0; i < numCardsToAdd; i++)
@@ -129,6 +133,7 @@ namespace CardGame.Level
 
             _listToAdd.Clear();
 
+            busy = false;
             TurnManager.Instance.ContinueFlow();
         }
 
@@ -136,8 +141,10 @@ namespace CardGame.Level
 
         #region Discard Cards
 
+
         public void DiscardCards(int numCardsToDiscard)
         {
+            busy = true;
             int numCardsStart = numCards;
 
             for (int i = 0; i < numCardsToDiscard; i++)
@@ -193,7 +200,7 @@ namespace CardGame.Level
             _listToDiscard.Clear();
 
             if (_listToAdd.Count > 0) StartCoroutine(DrawCardsCoroutine(_hand, numCardsStart));
-            else TurnManager.Instance.ContinueFlow();
+            else busy = false;
         }
 
         #endregion
@@ -202,6 +209,7 @@ namespace CardGame.Level
 
         public void AddCards(List<Card> cards)
         {
+            busy = true;
             StartCoroutine(AddCardCoroutine(cards));
         }
 
@@ -229,7 +237,7 @@ namespace CardGame.Level
                 cards.RemoveAt(0);
             }
 
-            TurnManager.Instance.ContinueFlow();
+            busy = false;
         }
 
         #endregion

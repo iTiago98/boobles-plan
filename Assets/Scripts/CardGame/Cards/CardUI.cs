@@ -197,16 +197,19 @@ namespace CardGame.Cards
 
         #region VFX
 
-        public float ShowDamagedAnimation()
+        public void ShowDamagedAnimation()
         {
             _playingAnimation = true;
-            VFX_Animator.Play("VFX_Damage");
-            return damagedClip.length;
+            StartCoroutine(ShowAnimationCoroutine("VFX_Damage", damagedClip.length));
         }
 
-        public void SetPlayingAnimation(bool playing)
+        private IEnumerator ShowAnimationCoroutine(string animationName, float length)
         {
-            _playingAnimation = playing;
+            VFX_Animator.Play(animationName);
+
+            yield return new WaitForSeconds(length);
+
+            _playingAnimation = false;
         }
 
         #endregion

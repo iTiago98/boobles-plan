@@ -142,7 +142,7 @@ namespace CardGame.Managers
             UIManager.Instance.HidePlayButtons();
             Board.Instance.RemoveTargetsHighlight();
 
-            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+            yield return new WaitUntil(() => _effectCard.effect.effectApplied);
 
             _effectCard.DestroyCard();
 

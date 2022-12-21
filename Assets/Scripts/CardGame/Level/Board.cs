@@ -67,31 +67,7 @@ namespace CardGame.Level
             }
         }
 
-        public void WheelEffect()
-        {
-            StartCoroutine(WheelCoroutine());
-        }
-
-        private IEnumerator WheelCoroutine()
-        {
-            Contender player = CardGameManager.Instance.player;
-            Contender opponent = CardGameManager.Instance.opponent;
-
-            int playerNumCards = player.hand.numCards;
-            int opponentNumCards = opponent.hand.numCards;
-
-            player.hand.DiscardAll();
-            opponent.hand.DiscardAll();
-
-            yield return new WaitUntil(() => EmptyHands());
-
-            DrawCards(playerNumCards, Turn.PLAYER);
-            DrawCards(opponentNumCards, Turn.OPPONENT);
-
-            yield return new WaitUntil(() => playerHand.numCards == playerNumCards && opponentHand.numCards == opponentNumCards);
-        }
-
-        private bool EmptyHands()
+        public bool EmptyHands()
         {
             return (playerHand.numCards == 0 || playerHand.HasAlternateWinConditionCard())
                 && (opponentHand.numCards == 0 || opponentHand.HasAlternateWinConditionCard());

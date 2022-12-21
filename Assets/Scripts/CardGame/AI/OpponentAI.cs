@@ -326,7 +326,7 @@ namespace CardGame.AI
 
                                 if (killedCard && oppositeCardStatsSum > bestStats)
                                 {
-                                    bestTarget = oppositeCard;
+                                    bestTarget = card;
                                     bestStats = oppositeCardStatsSum;
                                 }
                                 else if (savedCard && cardStatsSum > bestStats)

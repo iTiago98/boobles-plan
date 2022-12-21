@@ -86,19 +86,19 @@ namespace CardGame
             currentMaxMana += mana;
         }
 
-        public void RestoreMana(int mana, bool continueFlow)
+        public void RestoreMana(int mana)
         {
             currentMana += mana;
             if (currentMana > currentMaxMana) currentMana = currentMaxMana;
-            UIManager.Instance.UpdateUIStats(continueFlow);
+            UIManager.Instance.UpdateUIStats();
         }
 
-        public void SubstractMana(int cost, bool continueFlow)
+        public void SubstractMana(int cost)
         {
-            SubstractMana(cost, continueFlow, false);
+            SubstractMana(cost, false);
         }
 
-        public void SubstractMana(int manaCost, bool continueFlow, bool useFreeMana)
+        public void SubstractMana(int manaCost, bool useFreeMana)
         {
             if (manaCost > 0)
             {
@@ -107,16 +107,16 @@ namespace CardGame
                 {
                     currentMana -= manaCost;
                     if (currentMana < 0) currentMana = 0;
-                    UIManager.Instance.UpdateUIStats(continueFlow);
+                    UIManager.Instance.UpdateUIStats();
 
                 }
             }
         }
 
-        public void RestoreLife(int life, bool continueFlow)
+        public void RestoreLife(int life)
         {
             this.life += life;
-            UIManager.Instance.UpdateUIStats(continueFlow);
+            UIManager.Instance.UpdateUIStats();
         }
 
         public void ReceiveDamage(int strength)

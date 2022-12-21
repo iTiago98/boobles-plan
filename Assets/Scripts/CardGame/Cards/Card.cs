@@ -363,21 +363,21 @@ namespace CardGame.Cards
             return hitSequence;
         }
 
-        public void ReceiveDamage(int strength)
+        public bool ReceiveDamage(int strength)
         {
-            StartCoroutine(ReceiveDamageCoroutine(strength));
+            if (strength > 0) StartCoroutine(ReceiveDamageCoroutine(strength));
+            return Stats.defense <= strength;
         }
 
         private IEnumerator ReceiveDamageCoroutine(int strength)
         {
             bool combat = TurnManager.Instance.combat;
 
-            float length = CardUI.ShowDamagedAnimation();
+            CardUI.ShowDamagedAnimation();
             Stats.ReceiveDamage(strength);
             UpdateStatsUI();
 
-            yield return new WaitForSeconds(length);
-            CardUI.SetPlayingAnimation(false);
+            yield return new WaitWhile(() => CardUI.IsPlayingAnimation);
             if (!combat) CheckDestroy();
         }
 

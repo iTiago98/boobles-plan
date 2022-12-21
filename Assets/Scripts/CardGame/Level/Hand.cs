@@ -14,6 +14,7 @@ namespace CardGame.Level
     {
         public Contender contender { private set; get; }
         public bool isDiscarding { private set; get; }
+        public bool busy { private set; get; }
 
         private List<Card> _listToDiscard = new List<Card>();
 
@@ -29,6 +30,8 @@ namespace CardGame.Level
 
         public void DiscardCards(int cardNumber)
         {
+            busy = true;
+
             int number = (cardNumber <= numCards) ? cardNumber : numCards;
             System.Random random = new System.Random();
             for (int i = 0; i < number; i++)
@@ -51,6 +54,8 @@ namespace CardGame.Level
 
         public void DiscardAll()
         {
+            busy = true;
+
             for (int i = 0; i < numCards; i++)
             {
                 Card card = cards[i].GetComponent<Card>();
@@ -77,7 +82,7 @@ namespace CardGame.Level
             }
 
             _listToDiscard.Clear();
-            TurnManager.Instance.ContinueFlow();
+            busy = false;
         }
 
         public Card StealCard()

@@ -219,6 +219,8 @@ namespace CardGame.Managers
 
         #region Stats
 
+        public bool statsUpdated { private set; get; }
+
         public void UpdateUIStats()
         {
             UpdateUIStats(startRound: false);
@@ -229,8 +231,10 @@ namespace CardGame.Managers
             StartCoroutine(UpdateUIStatsCoroutine(startRound));
         }
 
-        private IEnumerator UpdateUIStatsCoroutine(bool continueFlow)
+        private IEnumerator UpdateUIStatsCoroutine(bool startRound)
         {
+            statsUpdated = false;
+
             int loops = Mathf.Max(
                 Mathf.Abs(_player.life - _shownPlayerLife),
                 Mathf.Abs(_player.currentMana - _shownPlayerMana),
@@ -250,7 +254,7 @@ namespace CardGame.Managers
                 _shownPlayerLife == _player.life && _shownPlayerMana == _player.currentMana
                 && _shownOpponentLife == _opponent.life && _shownOpponentMana == _opponent.currentMana);
 
-            if (continueFlow) TurnManager.Instance.ContinueFlow();
+            statsUpdated = true;
         }
 
         private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
@@ -436,12 +440,10 @@ namespace CardGame.Managers
 
         private IEnumerator ContinuePlayCoroutine(Card card, Action applyEffect, Action onDestroy)
         {
-            TurnManager.Instance.StopFlow();
-
             card.Stats.SubstractMana();
             applyEffect();
 
-            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+            yield return new WaitUntil(() => card.effect.effectApplied);
 
             card.DestroyCard();
 
@@ -488,12 +490,15 @@ namespace CardGame.Managers
 
         #region Steal Cards From Deck
 
+        public bool stealing { private set; get; }
+
         private List<int> cardsToSteal = new List<int>();
         private int _numCardsToSteal;
         private Deck _deckToSteal;
 
         public void ShowStealCardsFromDeck(Deck deck, int numCards)
         {
+            stealing = true;
             stealCardsFromDeckGameObj.SetActive(true);
             stealCardsFromDeckButton.SetActive(false);
 
@@ -534,6 +539,7 @@ namespace CardGame.Managers
             stealCardsFromDeckGameObj.SetActive(false);
             _deckToSteal.StealCards(cardsToSteal);
             MouseController.Instance.SetSelecting();
+            stealing = false;
         }
 
         #endregion

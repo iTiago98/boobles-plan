@@ -99,7 +99,7 @@ namespace CardGame.Cards.DataModel.Effects
 
         public SubType cardParameter_Effect;
 
-        private int _storedValue = -1;
+        public bool effectApplied { private set; get; }
 
         private EffectType GetTypeFromSubType(SubType subType)
         {
@@ -126,14 +126,17 @@ namespace CardGame.Cards.DataModel.Effects
             return EffectType.DEFENSIVE;
         }
 
+        public void SetEffectApplied()
+        {
+            effectApplied = true;
+        }
+
         #region Apply
 
         public void Apply(Card source, object target)
         {
-            //Debug.Log(type + " " + subType + " effect applied");
-
-            if (target != null && target is Card)
-                ((Card)target).ShowHighlight(false);
+            effectApplied = false;
+            CardEffectsManager.Instance.SetCurrentEffect(this);
 
             switch (type)
             {
@@ -155,26 +158,6 @@ namespace CardGame.Cards.DataModel.Effects
                     ApplyAlternateWinCondition(source, target);
                     break;
             }
-
-            switch (subType)
-            {
-                case SubType.INCREASE_MAX_MANA:
-                case SubType.DEAL_DAMAGE:
-                case SubType.STAT_BOOST:
-                case SubType.STAT_DECREASE:
-                case SubType.ADD_EFFECT:
-                case SubType.SWAP_POSITION:
-                case SubType.SWAP_CONTENDER:
-                case SubType.RETURN_CARD:
-                case SubType.FREE_MANA:
-                case SubType.SKIP_COMBAT:
-                case SubType.MIRROR:
-                case SubType.STEAL_MANA:
-                case SubType.STEAL_CARD_FROM_HAND:
-                case SubType.CREATE_CARD:
-                case SubType.DUPLICATE_CARD:
-                    TurnManager.Instance.ContinueFlow(); break;
-            }
         }
 
         private void ApplyDefensiveEffect(Card source, object target)
@@ -183,15 +166,15 @@ namespace CardGame.Cards.DataModel.Effects
             {
                 case SubType.NONE:
                     break;
+
                 case SubType.RESTORE_LIFE:
-                    source.contender.RestoreLife(intParameter1, continueFlow: true);
-                    break;
+                    CardEffectsManager.Instance.RestoreLife(intParameter1, source.contender); break;
+
                 case SubType.INCREASE_MAX_MANA:
-                    source.contender.IncreaseMaxMana(intParameter1);
-                    break;
+                    CardEffectsManager.Instance.IncreaseMaxMana(intParameter1, source.contender); break;
+
                 case SubType.STEAL_REWARD:
-                    source.contender.RestoreLife(source.contender.stolenCards * 5, continueFlow: true);
-                    break;
+                    CardEffectsManager.Instance.RestoreLife(source.contender.stolenCards * 5, source.contender); break;
             }
         }
 
@@ -202,60 +185,13 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.DESTROY_CARD:
-                    switch (targetType)
-                    {
-                        case Target.ENEMY:
-                        case Target.CARD:
-                            ((Card)target).DestroyCard();
-                            break;
-
-                        case Target.AENEMY: Board.Instance.DestroyCards(CardGameManager.Instance.otherPlayer); break;
-                        case Target.ACARD: Board.Instance.DestroyAll(); break;
-
-                        case Target.FIELDCARD:
-                            CardGameManager.Instance.otherPlayer.fieldCardZone.GetCard()?.DestroyCard();
-                            break;
-                    }
-                    break;
+                    CardEffectsManager.Instance.DestroyCard(source, target, targetType); break;
 
                 case SubType.DEAL_DAMAGE:
-                    switch (targetType)
-                    {
-                        case Target.ENEMY: ((Card)target).ReceiveDamage(intParameter1); break;
-                        case Target.PLAYER: CardGameManager.Instance.otherPlayer.ReceiveDamage(intParameter1); break;
-                        case Target.SELF: CardGameManager.Instance.currentPlayer.ReceiveDamage(intParameter1); break;
-
-                        case Target.ALL:
-                            {
-                                Contender player = CardGameManager.Instance.player;
-                                Contender opponent = CardGameManager.Instance.opponent;
-
-                                if (source.name != "¡Va a llover!" || !Board.Instance.HasCard(player, "Abro paraguas"))
-                                {
-                                    Board.Instance.HitCards(player, intParameter1);
-                                    player.ReceiveDamage(intParameter1);
-                                }
-
-                                if (source.name != "¡Va a llover!" || !Board.Instance.HasCard(opponent, "Abro paraguas"))
-                                {
-                                    Board.Instance.HitCards(opponent, intParameter1);
-                                    opponent.ReceiveDamage(intParameter1);
-                                }
-                            }
-                            break;
-                    }
-                    break;
+                    CardEffectsManager.Instance.DealDamage(source, target, targetType, intParameter1); break;
 
                 case SubType.DECREASE_MANA:
-                    Contender otherPlayer = CardGameManager.Instance.otherPlayer;
-                    int manaValue = intParameter1;
-                    if (intParameter1 == 0)
-                    {
-                        manaValue = otherPlayer.currentMana;
-                    }
-
-                    otherPlayer.SubstractMana(manaValue, continueFlow: true);
-                    break;
+                    CardEffectsManager.Instance.DecreaseMana(source, intParameter1); break;
             }
         }
 
@@ -266,160 +202,38 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.LIFELINK:
-                    {
-                        int lifeValue = 0;
-                        if (target is Card)
-                        {
-                            Card targetCard = (Card)target;
-                            lifeValue = Mathf.Min(source.Stats.strength, targetCard.Stats.defense);
-                        }
-                        else if (target is Contender)
-                        {
-                            lifeValue = source.Stats.strength;
-                        }
-                        source.contender.RestoreLife(lifeValue, continueFlow: false);
-                    }
-                    break;
+                    CardEffectsManager.Instance.Lifelink(source, target); break;
 
                 case SubType.REBOUND:
-                    {
-                        if (target is Card)
-                        {
-                            Card targetCard = (Card)target;
-                            int reboundValue = Mathf.Min(source.Stats.defense, targetCard.Stats.strength);
-
-                            if (targetCard.Effects.HasEffect(SubType.REBOUND))
-                            {
-                                if (_storedValue == -1)
-                                    _storedValue = reboundValue + source.Stats.strength;
-                                else
-                                {
-                                    targetCard.ReceiveDamage(reboundValue + source.Stats.strength);
-                                    source.ReceiveDamage(_storedValue);
-                                    _storedValue = -1;
-                                }
-                            }
-                            else
-                            {
-                                targetCard.ReceiveDamage(reboundValue + source.Stats.strength);
-                                source.ReceiveDamage(targetCard.Stats.strength);
-                            }
-
-                            if (source.IsPlayerCard)
-                            {
-                                CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
-                            }
-                        }
-                    }
-                    break;
+                    CardEffectsManager.Instance.Rebound(source, target); break;
 
                 case SubType.TRAMPLE:
-                    {
-                        if (target is Card)
-                        {
-                            Card targetCard = (Card)target;
-                            int lifeValue = source.Stats.strength - targetCard.Stats.defense;
-                            CardGameManager.Instance.otherPlayer.ReceiveDamage(lifeValue);
-                        }
-                    }
-                    break;
-
-                case SubType.COMPARTMENTALIZE:
-
-                    if (target is Contender)
-                    {
-                        ((Contender)target).deck.DiscardCards(source.Stats.strength);
-                    }
-                    break;
+                    CardEffectsManager.Instance.Trample(source, target); break;
 
                 case SubType.SPONGE:
-
-                    source.Hit(target);
-                    if (target is Card)
-                    {
-                        Card targetCard = (Card)target;
-                        targetCard.Hit(source);
-                        source.BoostStats(targetCard.Stats.strength, 0);
-                    }
-                    break;
-
-                case SubType.STAT_BOOST:
-                    switch (targetType)
-                    {
-                        case Target.ALLY:
-                        case Target.ENEMY: ((Card)target).BoostStats(intParameter1, intParameter2); break;
-                        
-                        case Target.AALLY:
-                            foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
-                            {
-                                card.BoostStats(intParameter1, intParameter2);
-                            }
-                            break;
-
-                        case Target.AENEMY:
-                            foreach (Card card in Board.Instance.GetCardsOnTable(CardGameManager.Instance.GetOtherContender(source.contender)))
-                            {
-                                card.BoostStats(intParameter1, intParameter2);
-                            }
-                            break;
-
-                        case Target.SELF:
-                            source.BoostStats(intParameter1, intParameter2);
-                            break;
-                    }
-                    break;
-
-                case SubType.STAT_DECREASE:
-                    switch (targetType)
-                    {
-                        case Target.ALLY:
-                        case Target.ENEMY: ((Card)target).DecreaseStats(intParameter1, intParameter2); break;
-
-                        case Target.AALLY:
-                            foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
-                            {
-                                card.DecreaseStats(intParameter1, intParameter2);
-                            }
-                            break;
-
-                        case Target.AENEMY:
-                            foreach (Card card in Board.Instance.GetCardsOnTable(CardGameManager.Instance.GetOtherContender(source.contender)))
-                            {
-                                card.DecreaseStats(intParameter1, intParameter2);
-                            }
-                            break;
-
-                        case Target.SELF:
-                            source.DecreaseStats(intParameter1, intParameter2);
-                            break;
-                    }
-                    break;
-
-                case SubType.ADD_EFFECT:
-                    CardEffect effect = new CardEffect();
-                    effect.type = EffectType.BOOST;
-                    effect.subType = cardParameter_Effect;
-                    effect.applyTime = ApplyTime.COMBAT;
-
-                    switch (targetType)
-                    {
-                        case Target.ALLY:
-                        case Target.ENEMY:
-                        case Target.CARD:
-                            ((Card)target).Effects.AddEffect(effect);
-                            break;
-                        case Target.AALLY:
-                            foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
-                            {
-                                card.Effects.AddEffect(effect);
-                            }
-                            break;
-                    }
-                    break;
+                    CardEffectsManager.Instance.Sponge(source, target); break;
 
                 case SubType.GUARD:
-                    TurnManager.Instance.SetGuardCard(source);
-                    break;
+                    TurnManager.Instance.SetGuardCard(source); break;
+
+                case SubType.COMPARTMENTALIZE:
+                    CardEffectsManager.Instance.Compartmentalize(source, target); break;
+
+                case SubType.STAT_BOOST:
+                    CardEffectsManager.Instance.StatBoost(source, target, targetType, intParameter1, intParameter2); break;
+
+                case SubType.STAT_DECREASE:
+                    CardEffectsManager.Instance.StatDecrease(source, target, targetType, intParameter1, intParameter2); break;
+
+                case SubType.ADD_EFFECT:
+                    CardEffect effect = new CardEffect()
+                    {
+                        type = EffectType.BOOST,
+                        subType = cardParameter_Effect,
+                        applyTime = ApplyTime.COMBAT
+                    };
+
+                    CardEffectsManager.Instance.AddEffect(source, target, targetType, effect); break;
             }
         }
 
@@ -430,176 +244,57 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.CREATE_CARD:
-                    {
-                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
-                        if (emptyCardZone != null)
-                        {
-                            Card card = InstantiateCard(source.contender, source.transform.position, GetDataFromParameters(), cardRevealed: true);
-                            emptyCardZone.AddCard(card);
-                        }
-                    }
-                    break;
+                    CardEffectsManager.Instance.CreateCard(source, target, GetDataFromParameters()); break;
 
                 case SubType.DUPLICATE_CARD:
-                    {
-                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
-                        if (emptyCardZone != null)
-                        {
-                            Card card = InstantiateCard(source.contender, source.transform.position, ((Card)target).data, cardRevealed: true);
-                            emptyCardZone.AddCard(card);
-                        }
-                    }
-                    break;
+                    CardsData data = ((Card)target).data;
+                    CardEffectsManager.Instance.CreateCard(source, target, data); break;
 
                 case SubType.SWAP_POSITION:
-                    SwapPosition((Card)target);
-                    break;
+                    CardEffectsManager.Instance.SwapPosition(target, targetType); break;
 
                 case SubType.SWAP_CONTENDER:
-                    if (targetType == Target.SELF)
-                    {
-                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.GetOtherContender(source.contender));
-                        if (emptyCardZone != null) SwapContender(source, source, emptyCardZone);
-                    }
-                    break;
+                    CardEffectsManager.Instance.SwapContender(source, targetType); break;
 
                 case SubType.DRAW_CARD:
-                    Board.Instance.DrawCards(intParameter1, TurnManager.Instance.turn);
-                    break;
+                    CardEffectsManager.Instance.DrawCard(intParameter1, source.contender); break;
 
                 case SubType.DISCARD_CARD:
-                    CardGameManager.Instance.otherPlayer.hand.DiscardCards(intParameter1);
-                    break;
+                    CardEffectsManager.Instance.DiscardCard(intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
 
                 case SubType.RETURN_CARD:
-                    ((Card)target).ReturnToHand();
-                    break;
+                    CardEffectsManager.Instance.ReturnCard(target); break;
 
                 case SubType.FREE_MANA:
-                    source.contender.SetFreeMana(true);
-                    break;
+                    CardEffectsManager.Instance.FreeMana(source.contender); break;
 
                 case SubType.WHEEL:
-                    Board.Instance.WheelEffect();
-                    break;
+                    CardEffectsManager.Instance.Wheel(); break;
 
                 case SubType.SKIP_COMBAT:
-                    TurnManager.Instance.SkipCombat();
-                    break;
+                    CardEffectsManager.Instance.SkipCombat(); break;
 
                 case SubType.MIRROR:
-                    TurnManager.Instance.SetMirror(source.contender, true);
-                    break;
+                    CardEffectsManager.Instance.Mirror(source.contender); break;
 
                 case SubType.STEAL_MANA:
-                    {
-                        Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
-                        int manaValue = otherContender.currentMana;
-
-                        otherContender.SubstractMana(manaValue, continueFlow: false);
-                        source.contender.RestoreMana(manaValue, continueFlow: true);
-                    }
-                    break;
+                    CardEffectsManager.Instance.StealMana(source.contender); break;
 
                 case SubType.ADD_CARD_TO_DECK:
-                    {
-                        int number = source.Stats.manaCost;
-                        if (source.Stats.manaCost == 0)
-                        {
-                            number = source.contender.currentMana;
-                            source.contender.SubstractMana(number, continueFlow: false);
-                        }
-                        AddCardToDeck(source, GetDataFromParameters(), number);
-                    }
-                    break;
+                    CardEffectsManager.Instance.AddCardToDeck(source, GetDataFromParameters()); break;
 
                 case SubType.DISCARD_CARD_FROM_DECK:
-                    {
-                        int number = intParameter1;
-                        if (HasTarget()) number = ((Card)target).Stats.manaCost;
-
-                        CardGameManager.Instance.GetOtherContender(source.contender).deck.DiscardCards(number);
-                    }
-                    break;
+                    CardEffectsManager.Instance.DiscardCardFromDeck(target, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
 
                 case SubType.STEAL_CARD:
-                    if (target is Card)
-                    {
-                        Card targetCard = (Card)target;
-                        CardZone dest = null;
-
-                        if (applyTime == ApplyTime.COMBAT && targetCard.Stats.strength >= source.Stats.defense)
-                        {
-                            int position = Board.Instance.GetPositionFromCard(source);
-                            dest = source.contender.cardZones[position];
-                        }
-                        else if (source.IsAction)
-                        {
-                            dest = Board.Instance.GetEmptyCardZone(source.contender);
-                        }
-
-                        if (dest != null)
-                        {
-                            SwapContender(source, targetCard, dest);
-                            source.contender.stolenCards++;
-                        }
-                    }
-                    break;
+                    CardEffectsManager.Instance.StealCard(source, target); break;
 
                 case SubType.STEAL_CARD_FROM_HAND:
-                    {
-                        Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
-                        int loops = Mathf.Min(intParameter1, otherContender.hand.numCards);
-
-                        for (int i = 0; i < loops; i++)
-                        {
-                            Card card = otherContender.hand.StealCard();
-                            Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.IsPlayerCard);
-                            source.contender.hand.AddCard(newCard);
-                            source.contender.stolenCards++;
-                            card.DestroyCard(instant: true);
-                        }
-                    }
-                    break;
+                    CardEffectsManager.Instance.StealCardFromHand(source, intParameter1); break;
 
                 case SubType.STEAL_CARD_FROM_DECK:
-                    {
-                        Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
-                        UIManager.Instance.ShowStealCardsFromDeck(otherContender.deck, intParameter1);
-                    }
-                    break;
+                    CardEffectsManager.Instance.StealCardFromDeck(source, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
             }
-        }
-
-        private void AddCardToDeck(Card source, CardsData data, int number)
-        {
-            List<Card> cards = new List<Card>();
-
-            Contender owner = source.contender;
-            GameObject cardPrefab = owner.deck.GetCardPrefab(data.type);
-
-            for (int i = 0; i < number; i++)
-            {
-                GameObject cardObj = UnityEngine.Object.Instantiate(cardPrefab, source.transform.position, cardPrefab.transform.rotation);
-                cardObj.SetActive(false);
-
-                CardsData newData = new CardsData(data);
-                Card card = cardObj.GetComponent<Card>();
-                card.Initialize(owner, newData, cardRevealed: true);
-                cards.Add(card);
-            }
-
-            owner.deck.AddCards(cards);
-        }
-
-        private Card InstantiateCard(Contender newOwner, Vector3 position, CardsData data, bool cardRevealed)
-        {
-            GameObject cardPrefab = newOwner.deck.GetCardPrefab(data.type);
-            GameObject cardObj = UnityEngine.Object.Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
-            CardsData newData = new CardsData(data);
-            Card card = cardObj.GetComponent<Card>();
-            card.Initialize(newOwner, newData, cardRevealed);
-            return card;
         }
 
         private CardsData GetDataFromParameters()
@@ -626,83 +321,6 @@ namespace CardGame.Cards.DataModel.Effects
             return data;
         }
 
-        private void SwapPosition(Card target)
-        {
-            if (targetType == Target.CARD)
-            {
-                // Get origin position
-                int pos = Board.Instance.GetPositionFromCard(target);
-
-                // Get destination
-                List<int> possibleCardZones = new List<int>();
-                if (pos > 0) possibleCardZones.Add(pos - 1);
-                if (pos < 3) possibleCardZones.Add(pos + 1);
-
-                int dest = possibleCardZones[UnityEngine.Random.Range(0, possibleCardZones.Count)];
-
-                Swap(pos, dest, target.contender);
-            }
-            else if (targetType == Target.AENEMY)
-            {
-                Contender contender = CardGameManager.Instance.otherPlayer;
-                List<CardZone> cardZones = contender.cardZones;
-                int pos = -1;
-
-                // Find any card
-                foreach (CardZone cardZone in cardZones)
-                {
-                    if (cardZone.isNotEmpty)
-                    {
-                        pos = cardZones.IndexOf(cardZone);
-                        break;
-                    }
-                }
-
-                List<int> possibleCardZones = new List<int> { 0, 1, 2, 3 };
-                possibleCardZones.Remove(pos);
-                int dest = possibleCardZones[UnityEngine.Random.Range(0, possibleCardZones.Count)];
-
-                Swap(pos, dest, contender);
-            }
-        }
-
-        private void SwapContender(Card source, Card target, CardZone dest)
-        {
-            // Get origin card zone
-            int position = Board.Instance.GetPositionFromCard(target);
-            CardZone originCardZone = target.contender.cardZones[position];
-
-            // Create card with other prefab 
-            Card newCard = InstantiateCard(source.contender, target.transform.position, target.data, cardRevealed: true);
-
-            // Empty destination zone
-            if (dest.isNotEmpty)
-                dest.GetCard().RemoveFromContainer();
-
-            // Destroy original
-            Card originCard = originCardZone.GetCard();
-            originCard.DestroyCard(instant: true);
-
-            dest.AddCard(newCard);
-
-            newCard.Effects.ManageEffects();
-        }
-
-        private void Swap(int pos1, int pos2, Contender contender)
-        {
-            CardZone originCardZone = contender.cardZones[pos1];
-            CardZone destCardZone = contender.cardZones[pos2];
-
-            Card originCard = originCardZone.GetCard();
-            originCardZone.RemoveCard(originCard.gameObject);
-            if (destCardZone.isNotEmpty)
-            {
-                Card temp = destCardZone.GetCard();
-                destCardZone.RemoveCard(temp.gameObject);
-                originCardZone.AddCard(temp);
-            }
-            destCardZone.AddCard(originCard);
-        }
 
         private void ApplyAlternateWinCondition(Card source, object target)
         {

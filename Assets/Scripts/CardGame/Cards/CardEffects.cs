@@ -122,7 +122,7 @@ namespace CardGame.Cards
                     {
                         Action action = new Action(ApplyEndTurnEffect);
                         _endTurnEffects.Add(action);
-                        TurnManager.Instance.AddEndTurnEffect(action, _card.data.name);
+                        TurnManager.Instance.AddEndTurnEffect(action, _card);
                     }
                     else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {

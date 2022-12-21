@@ -62,7 +62,7 @@ namespace CardGame.Managers
             CardGameManager.Instance.FillMana();
             UIManager.Instance.UpdateUIStats(startRound: true);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
             ChangeTurn();
         }
@@ -333,15 +333,15 @@ namespace CardGame.Managers
 
         #region End Turn Effects
 
-        private List<string> _endTurnEffectsNames = new List<string>();
+        private List<Card> _endTurnEffectsCards = new List<Card>();
         private List<Action> _endTurnEffectsActions = new List<Action>();
         private List<int> _effectsToRemove = new List<int>();
 
-        public void AddEndTurnEffect(Action method, string name)
+        public void AddEndTurnEffect(Action method, Card card)
         {
             Debug.Log("End turn effect added");
             _endTurnEffectsActions.Add(method);
-            _endTurnEffectsNames.Add(name);
+            _endTurnEffectsCards.Add(card);
         }
 
         public void RemoveEndTurnEffect(Action method)
@@ -360,21 +360,20 @@ namespace CardGame.Managers
             {
                 if (_effectsToRemove.Contains(i))
                 {
-                    Debug.Log(_endTurnEffectsNames[i] + " to be removed");
+                    Debug.Log(_endTurnEffectsCards[i].data.name + " to be removed");
                     continue;
                 }
 
-                StopFlow();
                 Action endTurnEffect = _endTurnEffectsActions[i];
                 endTurnEffect();
-                Debug.Log(_endTurnEffectsNames[i] + " applied");
-                yield return new WaitUntil(() => continueFlow);
+                Debug.Log(_endTurnEffectsCards[i].data.name + " applied");
+                yield return new WaitUntil(() => _endTurnEffectsCards[i].effect.effectApplied);
             }
 
             for (int i = _effectsToRemove.Count - 1; i >= 0; i--)
             {
                 _endTurnEffectsActions.RemoveAt(i);
-                _endTurnEffectsNames.RemoveAt(i);
+                _endTurnEffectsCards.RemoveAt(i);
             }
 
             _effectsToRemove.Clear();

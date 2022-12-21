@@ -25,6 +25,8 @@ public abstract class InterviewDialogue : MonoBehaviour
     public void ThrowStartDialogue()
     {
         if (_startDialogue != null) ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
+        if (_startDialogue == null) CardGameManager.Instance.StartGame(); // TEMPORAL
+
     }
 
     public void ThrowWinDialogue()
