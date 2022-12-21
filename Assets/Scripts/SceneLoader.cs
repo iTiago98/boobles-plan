@@ -82,7 +82,13 @@ namespace Booble.Managers
     public void LoadNelaOffice1()
     {
         LoadScene(Scenes.NELA_OFFICE_1);
+    } 
+    
+    public void LoadNelaOffice2()
+    {
+        LoadScene(Scenes.NELA_OFFICE_2);
     }
+    
     public void LoadCanteenScene0()
     {
         LoadScene(Scenes.CANTEEN_0);
@@ -107,8 +113,13 @@ namespace Booble.Managers
     {
         LoadScene(Scenes.LOUNGE_1);
     }
-
-        #endregion
+    
+    public void LoadLoungeScene2()
+    {
+        LoadScene(Scenes.LOUNGE_2);
+    }
+    
+    #endregion
 
         #region Interview
 

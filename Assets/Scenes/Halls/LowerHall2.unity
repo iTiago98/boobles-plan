@@ -950,7 +950,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 787064143}
         m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
-        m_MethodName: LoadNelaOffice1
+        m_MethodName: LoadNelaOffice2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

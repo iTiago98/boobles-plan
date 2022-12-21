@@ -59,7 +59,7 @@ public class NelaOffice2Animation : MonoBehaviour
         }
         else
         {
-            SceneLoader.Instance.LoadLowerHall1();
+            SceneLoader.Instance.LoadLowerHall2();
         }
     }
 

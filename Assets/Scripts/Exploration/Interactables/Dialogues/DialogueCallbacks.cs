@@ -25,6 +25,11 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadLoungeScene1();
     }
 
+    public void LoadLounge2()
+    {
+        SceneLoader.Instance.LoadLoungeScene2();
+    }
+    
     public void LoadLowerHall1()
     {
         SceneLoader.Instance.LoadLowerHall1();
@@ -40,6 +45,11 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadNelaOffice1();
     }
 
+    public void LoadNelaOffice2()
+    {
+        SceneLoader.Instance.LoadNelaOffice2();
+    }
+    
     public void LoadComedor2()
     {
         SceneLoader.Instance.LoadCanteenScene2();
