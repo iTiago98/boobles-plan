@@ -9,7 +9,7 @@ namespace Booble.Interactables.Dialogues
 	[CreateAssetMenu(fileName = "NewDialogue", menuName = "Scriptables/Dialogue")]
 	public class Dialogue : ScriptableObject
 	{
-		private const int MAX_CHAR_COUNT = 100;
+		private const int MAX_CHAR_COUNT = 130;
 		
 		[System.Serializable]
 		public class Sentence
@@ -32,7 +32,12 @@ namespace Booble.Interactables.Dialogues
 			[SerializeField] private string _content;
 			//[SerializeField] private string _speaker;
 			[SerializeField] private CharacterList.Name _closeUp;
-
+			
+			public Sentence(string content, CharacterList.Name closeUp)
+			{
+				_content = content;
+				_closeUp = closeUp;
+			}
 			//public string PrintSentence()
    //         {
 			//	return (_speaker != "" ? (_speaker + ": ") : "") + _content;
@@ -89,10 +94,17 @@ namespace Booble.Interactables.Dialogues
 			{
 				if (_sentences[i].Content.Length > MAX_CHAR_COUNT)
 				{
-					_sentences.Insert(i+1, _sentences[i]);
 					int separatorIndex = FindSeparatorIndex(_sentences[i].Content);
-					_sentences[i].Content = _sentences[i].Content.Substring(0, separatorIndex+1);
-					_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 1);
+					if (separatorIndex < 0)
+					{
+						Debug.Log(i + ": " + _sentences[i].Content.Length);
+					}
+					else
+					{
+						_sentences.Insert(i+1, new Sentence(_sentences[i].Content, _sentences[i].CloseUp));
+						_sentences[i].Content = _sentences[i].Content.Substring(0, separatorIndex+1);
+						_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 1);
+					}	
 				}
 
 				i++;
@@ -102,7 +114,7 @@ namespace Booble.Interactables.Dialogues
 		private int FindSeparatorIndex(string content)
 		{
 			int i = MAX_CHAR_COUNT-1;
-			while (content[i] != '.' && content[i] != '!' && content[i] != '?')
+			while (i >= 0 && content[i] != '.' && content[i] != '!' && content[i] != '?')
 			{
 				i--;
 			}
