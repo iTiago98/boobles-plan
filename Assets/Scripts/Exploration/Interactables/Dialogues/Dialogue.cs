@@ -86,13 +86,13 @@ namespace Booble.Interactables.Dialogues
 					int separatorIndex = FindSeparatorIndex(_sentences[i].Content);
 					if (separatorIndex < 0)
 					{
-						Debug.Log(i + ": " + _sentences[i].Content.Length);
+						Debug.Log(i + ": (" + _sentences[i].Content.Length + ") " + _sentences[i].Content);
 					}
 					else
 					{
 						_sentences.Insert(i+1, new Sentence(_sentences[i].Content, _sentences[i].CloseUp));
 						_sentences[i].Content = _sentences[i].Content.Substring(0, separatorIndex+1);
-						_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 1);
+						_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 2);
 					}	
 				}
 

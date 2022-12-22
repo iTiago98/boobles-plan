@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Pobres
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Hortensia Pinar y Lucrecia Ponzano.
+    _closeUp: 4
+  - _content: "Est\xE1s de co\xF1a, \xBFno? \xBF\xA1Incesto!?"
+    _closeUp: 1
+  - _content: Jajajaja, no mujer. Se casaron con lo/as hermano/as de cada uno/a.
+    _closeUp: 4
+  - _content: "\xBFPodr\xEDas explic\xE1rmelo mejor? Sin usar tanto lo /barra/ as."
+    _closeUp: 1
+  - _content: "A ver, Pedro Pinar se cas\xF3 con Lucrecia, la hermana de Pablo Ponzano.
+      Y \xE9ste a su vez se cas\xF3 con Hortensia, la hermana de su amigo Pedro Pinar."
+    _closeUp: 4
+  - _content: "Pensaba que eso s\xF3lo pasaba en las telenovelas."
+    _closeUp: 1

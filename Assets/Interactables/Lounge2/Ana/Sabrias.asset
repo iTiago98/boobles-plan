@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Sabrias
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFPor control remoto, temporizador, a distancia, activada por radar
+      o por presi\xF3n?"
+    _closeUp: 2
+  - _content: "Vale, parece que controlas del tema. S\xF3lo quiero hacer que una
+      pelota de ping pong explote."
+    _closeUp: 1
+  - _content: "\xBFQue explote metralla, clavos, veneno o s\xF3lo sea una contusi\xF3n?
+      Tienes que ser un poco m\xE1s espec\xEDfica, hay varios tipos de explosi\xF3n."
+    _closeUp: 2
+  - _content: "\xA1No, no! Nada de eso, bueno quiz\xE1 contusi\xF3n. Estoy intentando
+      parar el partido de ping pong e intentar hacer entrar en raz\xF3n a esos obsesos."
+    _closeUp: 1
+  - _content: "Ah bueno, una pelota explosiva, \xA1haberlo dicho antes! Hac\xEDa
+      muchas de chica para asustar a la gente que llevara guantes."
+    _closeUp: 2
+  - _content: "\xBFGuantes? \xBFA qu\xE9 viene ese odio por la gente con guantes?"
+    _closeUp: 1
+  - _content: "\xA1Porque algo esconden! A saber esas manos en qu\xE9 se habr\xE1n
+      metido o d\xF3nde."
+    _closeUp: 2
+  - _content: "Madre m\xEDa Ana, qu\xE9 demonio tuviste que ser de peque\xF1a\u2026"
+    _closeUp: 1

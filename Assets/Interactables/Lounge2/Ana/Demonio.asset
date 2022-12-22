@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Demonio
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Pues nada, un petard\xEDn. Siempre tengo uno para abrir los aparatos
+      o cajones que se atascan. A ver que busque por aqu\xED."
+    _closeUp: 2
+  - _content: "Ay Ana, \xA1qu\xE9 har\xEDamos sin t\xED!"
+    _closeUp: 1
+  - _content: Menos piropos y adulaciones, que parece que me los he dejado en los
+      otros pantalones.
+    _closeUp: 2
+  - _content: "Bueno, \xBFy con qu\xE9 podr\xEDamos hacerlo? Seguro que esas pelotas
+      explosivas que hac\xEDas de chica ser\xEDan caseras."
+    _closeUp: 1
+  - _content: "Nada m\xE1s que estas cositas: p\xF3lvora, goma 2 y una pajita."
+    _closeUp: 2
+  - _content: "\xA1Eres un cielo! Ahora mismo te lo traigo todo."
+    _closeUp: 1

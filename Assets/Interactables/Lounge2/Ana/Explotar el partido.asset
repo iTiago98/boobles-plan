@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Explotar el partido
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Ay no s\xE9, Nellita. Llevo un rato observ\xE1ndolos y parece que
+      no hacen da\xF1o a nadie. Se les ve tan concentrados, no me gustar\xEDa acabar
+      enfad\xE1ndolos."
+    _closeUp: 2
+  - _content: "No est\xE1n concentrados, aqu\xED hay gato encerrado, sus mujeres
+      dicen que no los reconocen, que no parecen ellos mismos. \xA1Hay que parar
+      el partido antes de que los echen los de seguridad! Creo que ese petardo es
+      su \xFAnica oportunidad de salvarse."
+    _closeUp: 1
+  - _content: "No pienso hacer nada sin pruebas de que aqu\xED pasa algo."
+    _closeUp: 2

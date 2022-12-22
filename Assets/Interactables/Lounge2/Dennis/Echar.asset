@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Echar
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Qu\xE9 me est\xE1s contando, \xBFtan crueles son? Yo solo quer\xEDa
+      que me dejaran jugar, \xA1no que los echen!"
+    _closeUp: 4
+  - _content: "Tranquilo, no ha sido por ti. Con tantos meses sin trabajar, y delante
+      de las narices de sus jefes, sus despidos est\xE1n m\xE1s que justificados."
+    _closeUp: 1
+  - _content: "Y acu\xE9rdate de sus familias, lo que les estar\xE1n haciendo sufrir
+      estos enajenados."
+    _closeUp: 4
