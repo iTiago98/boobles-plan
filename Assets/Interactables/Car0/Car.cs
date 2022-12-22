@@ -22,7 +22,7 @@ namespace Booble.Animations
         private void Start()
         {
             int i = 0;
-            while (i < _dialogues.Count && !FlagManager.Instance.GetFlag(_dialogues[i].FlagRef))
+            while (i < _dialogues.Count && FlagManager.Instance.GetFlag(_dialogues[i].FlagRef))
             {
                 i++;
             }
