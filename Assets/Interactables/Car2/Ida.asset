@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Ida
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Muy buenos d\xEDas. \xBFQu\xE9 tal se ha levantado nuestra defensora
+      de la tiran\xEDa?"
+    _closeUp: 9
+  - _content: "Pues no muy bien, me han mandado un documento oficial para que eche
+      a dos trabajadores a la vez, \xBFqu\xE9 se creen que soy, una picadora de carne?"
+    _closeUp: 1
+  - _content: "\xBFA dos a la vez? \xBFTan grave es lo que han hecho?"
+    _closeUp: 9
+  - _content: "Supuestamente por jugar al ping pong en la mesa de ping pong, \xBFentonces
+      qu\xE9 sentido tiene que la pongan en el Lounge?"
+    _closeUp: 1
+  - _content: "Espera un momento, \xA1\xBF\xA1\xBFme est\xE1s diciendo que van a
+      echar a los Pinponbros?!?!"
+    _closeUp: 9
+  - _content: "\xBFLos qui\xE9n?"
+    _closeUp: 1
+  - _content: "No me digas que no conoces a Pedro Pinar y Pablo Ponzano, los \xEDdolos
+      de BooTube. Su partido infinito tiene m\xE1s visualizaciones que el Mundial
+      de F\xFAtbol de Hitlerlandia."
+    _closeUp: 9
+  - _content: "Ah, \xA1\xBFpero es que al final le dieron la sede al Cuarto Reich?!"
+    _closeUp: 1
+  - _content: "Bueno, fue uno de los mayores esc\xE1ndalos de corrupci\xF3n de la
+      historia, y no s\xF3lo del mundo del deporte. El presidente de la FAFA tuvo
+      que dimitir y todo. Por m\xED deber\xEDa estar en la c\xE1rcel."
+    _closeUp: 9
+  - _content: "No ten\xEDa ni idea, \xBFy lo est\xE1n celebrando ahora y nadie se
+      ha quejado?"
+    _closeUp: 1
+  - _content: "\xBFEn el mundo del f\xFAtbol? \xBFQui\xE9n se va a quejar? \xBFLos
+      aficionados con media neurona? \xBFLos futbolistas sonados autistas de tanto
+      dopaje? El f\xFAtbol siempre ha estado en manos de la peor cala\xF1a, que se
+      aprovecha de la ignorancia para hacer millones."
+    _closeUp: 9
+  - _content: "Qu\xE9 raz\xF3n tienes, Anselmo. El caso es que este despido s\xED
+      que lo veo bastante s\xF3lido. Por lo visto llevan meses sin trabajar, rebot\xE1ndose
+      la pelotita."
+    _closeUp: 1
+  - _content: "\xBFTrabajar los Pinponbros? Si todas las mejores marcas del mundo
+      intentan patrocinarlos, esos \xEDdolos son pr\xE1cticamente millonarios si
+      no fuera por lo obsesionados que est\xE1n en rebotarse esa pelotita."
+    _closeUp: 9
+  - _content: "Tendr\xE9 que investigarlo. Anda ya hemos llegado, \xA1hasta luego
+      Anselmo!"
+    _closeUp: 1
+  - _content: "\xA1Que tengas un buen d\xEDa!"
+    _closeUp: 9

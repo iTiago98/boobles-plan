@@ -700,7 +700,7 @@ MonoBehaviour:
   - _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
     _trueFlags: 
     _falseFlags: 32000000
-    _setFlags: 
+    _setFlags: 32000000
   - _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
     _trueFlags: 
     _falseFlags: 
