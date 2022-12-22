@@ -213,6 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactable: {fileID: 2846568}
+  _withinAnimation: 0
 --- !u!1 &61643963
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,6 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactable: {fileID: 324579753}
+  _withinAnimation: 0
 --- !u!1 &328877700
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,7 +978,7 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1762413272}
-  - _optionText: Pasillo de despachos
+  - _optionText: Despachos (Planta X21)
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 212771589}

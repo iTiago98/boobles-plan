@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/NelaOffice/NelaOffice0.unity
     guid: 11dd5c551e93fe9409874b41308cb3b1
   - enabled: 1
-    path: Assets/Scenes/Canteen0.unity
+    path: Assets/Scenes/Canteen/Canteen0.unity
     guid: 77ba4cbb2885d2d4bbce9d29ef87673e
   - enabled: 1
     path: Assets/Scenes/Halls/LowerHall1.unity

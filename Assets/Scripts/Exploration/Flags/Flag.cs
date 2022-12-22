@@ -74,7 +74,8 @@ namespace Booble.Flags
             LaPalaDeNocobichObtenida,
             GomuGomuNoObtenida,
             PelotaBombaObtenida,
-            LlaveMencionada
+            LlaveMencionada,
+            FerranGritaPolvora
         }
 
         [SerializeField] private Reference _flagReference;
