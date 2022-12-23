@@ -2,23 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Booble.Characters;
+using UnityEditor;
 
 namespace Booble.Interactables.Dialogues
 {
 	[CreateAssetMenu(fileName = "NewDialogue", menuName = "Scriptables/Dialogue")]
 	public class Dialogue : ScriptableObject
 	{
+		private const int MAX_CHAR_COUNT = 130;
+		
 		[System.Serializable]
 		public class Sentence
         {
-			public string Content => _content;
+	        public string Content
+	        {
+		        get
+		        {
+			        return _content;
+		        }
+		        
+		        set
+		        {
+			        _content = value;
+		        }
+	        }
 			public CharacterList.Name CloseUp => _closeUp;
 
 			[TextArea]
 			[SerializeField] private string _content;
 			//[SerializeField] private string _speaker;
 			[SerializeField] private CharacterList.Name _closeUp;
-
+			
+			public Sentence(string content, CharacterList.Name closeUp)
+			{
+				_content = content;
+				_closeUp = closeUp;
+			}
 			//public string PrintSentence()
    //         {
 			//	return (_speaker != "" ? (_speaker + ": ") : "") + _content;
@@ -66,5 +85,41 @@ namespace Booble.Interactables.Dialogues
 			character = _characters.GetCharacter(_sentences[_currentIndex].CloseUp);
 			return _sentences[_currentIndex].Content;
         }
+
+		[MenuItem("Assets/Dialogue/Break Apart")]
+		public void BreakApart()
+		{
+			int i = 0;
+			while (i < _sentences.Count)
+			{
+				if (_sentences[i].Content.Length > MAX_CHAR_COUNT)
+				{
+					int separatorIndex = FindSeparatorIndex(_sentences[i].Content);
+					if (separatorIndex < 0)
+					{
+						Debug.Log(i + ": " + _sentences[i].Content.Length);
+					}
+					else
+					{
+						_sentences.Insert(i+1, new Sentence(_sentences[i].Content, _sentences[i].CloseUp));
+						_sentences[i].Content = _sentences[i].Content.Substring(0, separatorIndex+1);
+						_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 1);
+					}	
+				}
+
+				i++;
+			}
+		}
+
+		private int FindSeparatorIndex(string content)
+		{
+			int i = MAX_CHAR_COUNT-1;
+			while (i >= 0 && content[i] != '.' && content[i] != '!' && content[i] != '?')
+			{
+				i--;
+			}
+
+			return i;
+		}
 	}
 }
