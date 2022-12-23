@@ -24,7 +24,10 @@ namespace CardGame.Cards
 
         [Header("Animations")]
         [SerializeField] private Animator VFX_Animator;
+        [SerializeField] private AnimationClip effectClip;
         [SerializeField] private AnimationClip damagedClip;
+        [SerializeField] private AnimationClip boostClip;
+        [SerializeField] private AnimationClip decreaseClip;
 
         private Sprite cardBack;
         private bool _cardFront = true;
@@ -197,10 +200,28 @@ namespace CardGame.Cards
 
         #region VFX
 
+        public void ShowEffectAnimation()
+        {
+            _playingAnimation = true;
+            StartCoroutine(ShowAnimationCoroutine("VFX_Effect", effectClip.length));
+        }
+
         public void ShowDamagedAnimation()
         {
             _playingAnimation = true;
             StartCoroutine(ShowAnimationCoroutine("VFX_Damage", damagedClip.length));
+        }
+
+        public void ShowBoostAnimation()
+        {
+            _playingAnimation = true;
+            StartCoroutine(ShowAnimationCoroutine("VFX_Boost", boostClip.length));
+        }
+
+        public void ShowDecreaseAnimation()
+        {
+            _playingAnimation = true;
+            StartCoroutine(ShowAnimationCoroutine("VFX_Decrease", decreaseClip.length));
         }
 
         private IEnumerator ShowAnimationCoroutine(string animationName, float length)

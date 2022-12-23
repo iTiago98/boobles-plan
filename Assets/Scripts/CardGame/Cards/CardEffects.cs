@@ -14,16 +14,7 @@ namespace CardGame.Cards
         public CardEffect firstEffect => effectsList[0];
         public bool hasEffect => effectsList.Count > 0;
 
-        private Action _playArgumentEffect;
-        private List<Action> _endTurnEffects;
-        private Deck.DrawCardEffects _drawCardEffect;
-
         private Card _card;
-
-        private void Start()
-        {
-            _endTurnEffects = new List<Action>();
-        }
 
         public void Initialize(Card card)
         {
@@ -32,7 +23,7 @@ namespace CardGame.Cards
 
         public void AddEffect(CardEffect effect)
         {
-            if(!HasEffect(effect.subType))
+            if (!HasEffect(effect.subType))
             {
                 effectsList.Add(effect);
                 _card.CardUI.UpdateDescriptionText();
@@ -41,9 +32,9 @@ namespace CardGame.Cards
 
         public bool HasEffect(SubType subType)
         {
-            foreach(CardEffect effect in effectsList)
+            foreach (CardEffect effect in effectsList)
             {
-                if(effect.subType == subType) return true;
+                if (effect.subType == subType) return true;
             }
 
             return false;
@@ -68,7 +59,7 @@ namespace CardGame.Cards
 
         public void ApplyEffect(CardEffect effect, object target)
         {
-            if (effect.IsAppliable()) effect.Apply(_card, target);
+            if (effect.IsAppliable(_card)) effect.Apply(_card, target);
         }
 
         #region Combat
@@ -120,19 +111,18 @@ namespace CardGame.Cards
                     }
                     else if (effect.applyTime == ApplyTime.END)
                     {
-                        Action action = new Action(ApplyEndTurnEffect);
-                        _endTurnEffects.Add(action);
-                        TurnManager.Instance.AddEndTurnEffect(action, _card);
+                        Action endTurnEffect = new Action(ApplyEndTurnEffect);
+                        CardEffectsManager.Instance.AddEndTurnEffect(endTurnEffect, _card);
                     }
                     else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {
-                        _drawCardEffect = new Deck.DrawCardEffects(ApplyEffect);
-                        _card.contender.deck.AddDrawCardEffects(_drawCardEffect);
+                        Action drawCardEffect = new Action(ApplyEffect);
+                        CardEffectsManager.Instance.AddDrawCardEffect(drawCardEffect, _card);
                     }
                     else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
                     {
-                        _playArgumentEffect = new Action(ApplyEffect);
-                        TurnManager.Instance.AddPlayArgumentEffects(_playArgumentEffect);
+                        Action playArgumentEffect = new Action(ApplyEffect);
+                        CardEffectsManager.Instance.AddPlayArgumentEffect(playArgumentEffect, _card);
                     }
                 }
             }
@@ -146,6 +136,7 @@ namespace CardGame.Cards
                 {
                     if (effect.applyTime == ApplyTime.DESTROY && !_card.IsInHand)
                     {
+                        CardEffectsManager.Instance.SetEffectApplied();
                         ApplyEffect(effect);
                     }
                 }
@@ -160,19 +151,19 @@ namespace CardGame.Cards
                 foreach (CardEffect effect in effectsList)
                 {
                     // End Turn Effects
-                    if (effect.applyTime == ApplyTime.END && _endTurnEffects?.Count > 0)
+                    if (effect.applyTime == ApplyTime.END)
                     {
-                        TurnManager.Instance.RemoveEndTurnEffect(_endTurnEffects[_endTurnEffects.Count - 1]);
+                        CardEffectsManager.Instance.RemoveEndTurnEffect(_card);
                     }
                     // Draw Card Effects
-                    else if (effect.applyTime == ApplyTime.DRAW_CARD && _drawCardEffect != null)
+                    else if (effect.applyTime == ApplyTime.DRAW_CARD)
                     {
-                        contender.deck.RemoveDrawCardEffect(_drawCardEffect);
+                        CardEffectsManager.Instance.RemoveDrawCardEffect(_card);
                     }
                     // Play Argument Effects
-                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT && _playArgumentEffect != null)
+                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
                     {
-                        TurnManager.Instance.RemovePlayArgumentEffect(_playArgumentEffect);
+                        CardEffectsManager.Instance.RemovePlayArgumentEffect(_card);
                     }
 
                     // Guard Card
@@ -196,10 +187,26 @@ namespace CardGame.Cards
                 {
                     if (effect.subType == SubType.GUARD) TurnManager.Instance.SetGuardCard(_card);
                     else if (effect.subType == SubType.MIRROR) TurnManager.Instance.SetMirror(_card.contender, true);
+
+                    else if (effect.applyTime == ApplyTime.END)
+                    {
+                        Action endTurnEffect = new Action(ApplyEndTurnEffect);
+                        CardEffectsManager.Instance.AddEndTurnEffect(endTurnEffect, _card);
+                    }
+
+                    else if (effect.applyTime == ApplyTime.DRAW_CARD)
+                    {
+                        Action drawCardEffect = new Action(ApplyEffect);
+                        CardEffectsManager.Instance.AddDrawCardEffect(drawCardEffect, _card);
+                    }
+
+                    else if (effect.applyTime == ApplyTime.PLAY_ARGUMENT)
+                    {
+                        Action playArgumentEffect = new Action(ApplyEffect);
+                        CardEffectsManager.Instance.AddPlayArgumentEffect(playArgumentEffect, _card);
+                    }
                 }
             }
         }
-
     }
-
 }

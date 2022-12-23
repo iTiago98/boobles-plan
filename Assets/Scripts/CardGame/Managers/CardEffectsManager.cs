@@ -7,20 +7,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardGame.Managers.TurnManager;
 
 namespace CardGame.Managers
 {
     public class CardEffectsManager : Singleton<CardEffectsManager>
     {
         private CardEffect _currentEffect;
-        private int _storedValue;
+        private int _storedValue = -1;
 
         public void SetCurrentEffect(CardEffect effect)
         {
+            if (_currentEffect != null)
+                SetEffectApplied();
+
             _currentEffect = effect;
         }
 
-        private void SetEffectApplied()
+        public void SetEffectApplied()
         {
             _currentEffect.SetEffectApplied();
         }
@@ -102,7 +106,7 @@ namespace CardGame.Managers
                     break;
             }
 
-            yield return new WaitUntil(() => aux == null);
+            yield return new WaitUntil(() => aux.destroyed);
 
             SetEffectApplied();
         }
@@ -146,10 +150,10 @@ namespace CardGame.Managers
                     Card card = (Card)target;
                     card.ReceiveDamage(value);
 
+                    yield return new WaitWhile(() => card.CardUI.IsPlayingAnimation);
+
                     if (card.Stats.defense == 0)
-                        yield return new WaitUntil(() => card == null);
-                    else
-                        yield return new WaitWhile(() => card.CardUI.IsPlayingAnimation);
+                        yield return new WaitUntil(() => card.destroyed);
 
                     break;
 
@@ -181,7 +185,12 @@ namespace CardGame.Managers
                             opponent.ReceiveDamage(value);
                         }
 
-                        if (aux != null) yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
+                        if (aux != null)
+                        {
+                            yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
+                            if (aux.Stats.defense == 0)
+                                yield return new WaitUntil(() => aux.destroyed);
+                        }
                         break;
                     }
             }
@@ -310,7 +319,7 @@ namespace CardGame.Managers
 
                 if (aux == null) aux = source;
 
-                if (destroy) yield return new WaitUntil(() => aux == null);
+                if (destroy) yield return new WaitUntil(() => aux.destroyed);
                 else yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
             }
 
@@ -818,7 +827,7 @@ namespace CardGame.Managers
             for (int i = 0; i < number; i++)
             {
                 GameObject cardObj = Instantiate(cardPrefab, source.transform.position, cardPrefab.transform.rotation);
-                cardObj.SetActive(false);   
+                cardObj.SetActive(false);
 
                 CardsData newData = new CardsData(data);
                 Card card = cardObj.GetComponent<Card>();
@@ -961,7 +970,9 @@ namespace CardGame.Managers
             CardZone originCardZone = target.contender.cardZones[position];
 
             //Create card with other prefab
-            Card newCard = InstantiateCard(source.contender, target.transform.position, target.data, cardRevealed: true);
+            Card newCard = InstantiateCard(CardGameManager.Instance.GetOtherContender(source.contender), target.transform.position, target.data, cardRevealed: true);
+            newCard.Effects.ManageEffects();
+            //newCard.SwapContender();
 
             // Empty destination zone
             if (dest.isNotEmpty)
@@ -972,11 +983,190 @@ namespace CardGame.Managers
             originCard.DestroyCard(instant: true);
 
             dest.AddCard(newCard);
-
-            newCard.Effects.ManageEffects();
         }
 
         #endregion
 
+        #region Permanent Effects
+
+        private struct PermanentEffect
+        {
+            public Action effect;
+            public Card card;
+        }
+
+        private void AddPermanentEffect(Action method, Card card, ref List<PermanentEffect> effectsList, ref List<PermanentEffect> effectsToAdd)
+        {
+            PermanentEffect effect = new PermanentEffect();
+            effect.effect = method;
+            effect.card = card;
+
+            if (TurnManager.Instance.turn == Turn.ROUND_END) effectsToAdd.Add(effect);
+            else effectsList.Add(effect);
+        }
+
+        private void RemovePermanentEffect(Card card, ref List<PermanentEffect> effectsList, ref List<int> effectsToRemove)
+        {
+            int index = GetIndex(effectsList, card);
+            if (TurnManager.Instance.turn == Turn.ROUND_END) effectsToRemove.Add(index);
+            else effectsList.RemoveAt(index);
+        }
+
+        private int GetIndex(List<PermanentEffect> effects, Card card)
+        {
+            for (int i = 0; i < effects.Count; i++)
+            {
+                if (effects[i].card == card) return i;
+            }
+
+            return -1;
+        }
+
+        private bool effectsApplied;
+
+        private void UpdateEffectsToRemove(List<PermanentEffect> effectsList, List<int> effectsToRemove)
+        {
+            effectsToRemove.Sort();
+            effectsToRemove.Reverse();
+            for (int i = 0; i < effectsToRemove.Count; i++)
+            {
+                effectsList.RemoveAt(effectsToRemove[i]);
+            }
+            effectsToRemove.Clear();
+        }
+
+        private void UpdateEffectsToAdd(List<PermanentEffect> effectsList, List<PermanentEffect> effectsToAdd)
+        {
+            foreach (PermanentEffect effect in effectsToAdd)
+            {
+                effectsList.Add(effect);
+            }
+            effectsToAdd.Clear();
+        }
+
+        private IEnumerator ApplyPermanentEffectsCoroutine(List<PermanentEffect> effectsList, List<PermanentEffect> effectsToAdd, List<int> effectsToRemove)
+        {
+            if (effectsList.Count > 0)
+            {
+                for (int i = 0; i < effectsList.Count; i++)
+                {
+                    if (effectsToRemove.Contains(i)) continue;
+
+                    PermanentEffect permanentEffect = effectsList[i];
+                    permanentEffect.effect();
+                    //Debug.Log(permanentEffect.card.data.name + " applied");
+                    yield return new WaitUntil(() => permanentEffect.card.effect.effectApplied);
+                }
+            }
+
+            effectsApplied = true;
+
+            if (effectsToRemove.Count > 0) UpdateEffectsToRemove(effectsList, effectsToRemove);
+            if (effectsToAdd.Count > 0) UpdateEffectsToAdd(effectsList, effectsToAdd);
+        }
+
+        #region End Turn Effects
+
+        private List<PermanentEffect> _endTurnEffects = new List<PermanentEffect>();
+
+        private List<PermanentEffect> _endTurnEffectsToAdd = new List<PermanentEffect>();
+        private List<int> _endTurnEffectsToRemove = new List<int>();
+
+        public void AddEndTurnEffect(Action method, Card card)
+        {
+            AddPermanentEffect(method, card, ref _endTurnEffects, ref _endTurnEffectsToAdd);
+        }
+
+        public void RemoveEndTurnEffect(Card card)
+        {
+            RemovePermanentEffect(card, ref _endTurnEffects, ref _endTurnEffectsToRemove);
+        }
+
+        public void ApplyEndTurnEffects()
+        {
+            StartCoroutine(ApplyEndTurnEffectsCoroutine());
+        }
+
+        private IEnumerator ApplyEndTurnEffectsCoroutine()
+        {
+            StartCoroutine(ApplyPermanentEffectsCoroutine(_endTurnEffects, _endTurnEffectsToAdd, _endTurnEffectsToRemove));
+            yield return new WaitUntil(() => effectsApplied);
+
+            TurnManager.Instance.ChangeTurn();
+        }
+
+        #endregion
+
+        #region Play Argument Effects
+
+        private List<PermanentEffect> _playArgumentEffects = new List<PermanentEffect>();
+
+        private List<PermanentEffect> _playArgumentEffectsToAdd = new List<PermanentEffect>();
+        private List<int> _playArgumentEffectsToRemove = new List<int>();
+
+        public void AddPlayArgumentEffect(Action method, Card card)
+        {
+            AddPermanentEffect(method, card, ref _playArgumentEffects, ref _playArgumentEffectsToAdd);
+        }
+
+        public void RemovePlayArgumentEffect(Card card)
+        {
+            RemovePermanentEffect(card, ref _playArgumentEffects, ref _playArgumentEffectsToRemove);
+        }
+
+        public void ApplyPlayArgumentEffects()
+        {
+            StartCoroutine(ApplyPlayArgumentEffectsCoroutine());
+        }
+
+        private IEnumerator ApplyPlayArgumentEffectsCoroutine()
+        {
+            UIManager.Instance.SetEndTurnButtonInteractable(false);
+
+            StartCoroutine(ApplyPermanentEffectsCoroutine(_playArgumentEffects, _playArgumentEffectsToAdd, _playArgumentEffectsToRemove));
+            yield return new WaitUntil(() => effectsApplied);
+
+            UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
+        }
+
+
+        #endregion
+
+        #region Draw Card Effects
+
+        private List<PermanentEffect> _drawCardEffects = new List<PermanentEffect>();
+
+        private List<PermanentEffect> __drawCardEffectsToAdd = new List<PermanentEffect>();
+        private List<int> _drawCardEffectsToRemove = new List<int>();
+
+        public void AddDrawCardEffect(Action method, Card card)
+        {
+            AddPermanentEffect(method, card, ref _drawCardEffects, ref __drawCardEffectsToAdd);
+        }
+
+        public void RemoveDrawCardEffect(Card card)
+        {
+            RemovePermanentEffect(card, ref _drawCardEffects, ref _drawCardEffectsToRemove);
+        }
+
+        public void ApplyDrawCardEffects()
+        {
+            StartCoroutine(ApplyDrawCardEffectsCoroutine());
+        }
+
+        private IEnumerator ApplyDrawCardEffectsCoroutine()
+        {
+            bool previousState = UIManager.Instance.IsEndTurnButtonInteractable();
+            UIManager.Instance.SetEndTurnButtonInteractable(false);
+
+            StartCoroutine(ApplyPermanentEffectsCoroutine(_drawCardEffects, __drawCardEffectsToAdd, _drawCardEffectsToRemove));
+            yield return new WaitUntil(() => effectsApplied);
+
+            UIManager.Instance.SetEndTurnButtonInteractable(previousState);
+        }
+
+        #endregion
+
+        #endregion
     }
 }

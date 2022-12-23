@@ -202,7 +202,7 @@ namespace CardGame.Level
                 fieldCard.DestroyCard();
             }
 
-            yield return new WaitUntil(() => aux == null);
+            yield return new WaitUntil(() => aux.destroyed);
             TurnManager.Instance.ContinueFlow();
         }
 

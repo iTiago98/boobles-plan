@@ -332,7 +332,7 @@ namespace CardGame.Cards.DataModel.Effects
 
         #region IsAppliable
 
-        public bool IsAppliable()
+        public bool IsAppliable(Card source)
         {
             if (type == EffectType.ALTERNATE_WIN_CONDITION)
             {
@@ -353,37 +353,39 @@ namespace CardGame.Cards.DataModel.Effects
             }
             else
             {
+                Contender contender = source.contender;
+                Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
 
-                bool currentPlayerHasCards = Board.Instance.AreCardsOnTable(CardGameManager.Instance.currentPlayer);
-                bool otherPlayerHasCards = Board.Instance.AreCardsOnTable(CardGameManager.Instance.otherPlayer);
+                bool contenderHasCards = Board.Instance.AreCardsOnTable(contender);
+                bool otherContenderHasCards = Board.Instance.AreCardsOnTable(otherContender);
 
                 switch (targetType)
                 {
                     case Target.ALLY:
                     case Target.AALLY:
-                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.currentPlayer);
+                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(contender);
                         if (subType == SubType.DUPLICATE_CARD)
-                            return emptyCardZone != null && currentPlayerHasCards;
+                            return emptyCardZone != null && contenderHasCards;
                         else if (subType == SubType.CREATE_CARD)
                             return emptyCardZone;
                         else
-                            return currentPlayerHasCards;
+                            return contenderHasCards;
 
                     case Target.ENEMY:
                     case Target.AENEMY:
                         if (subType == SubType.SWAP_POSITION)
-                            return otherPlayerHasCards;
+                            return otherContenderHasCards;
                         else
-                            return otherPlayerHasCards || CardGameManager.Instance.otherPlayer.fieldCardZone.isNotEmpty;
+                            return otherContenderHasCards || otherContender.fieldCardZone.isNotEmpty;
 
                     case Target.CARD:
                     case Target.ACARD:
-                        return currentPlayerHasCards || otherPlayerHasCards
-                            || CardGameManager.Instance.player.fieldCardZone.isNotEmpty
-                            || CardGameManager.Instance.opponent.fieldCardZone.isNotEmpty;
+                        return contenderHasCards || otherContenderHasCards
+                            || contender.fieldCardZone.isNotEmpty
+                            || otherContender.fieldCardZone.isNotEmpty;
 
                     case Target.FIELDCARD:
-                        return CardGameManager.Instance.otherPlayer.fieldCardZone.isNotEmpty;
+                        return otherContender.fieldCardZone.isNotEmpty;
 
                     case Target.NONE:
                     case Target.PLAYER:
@@ -549,6 +551,9 @@ namespace CardGame.Cards.DataModel.Effects
                     case ApplyTime.PLAY_ARGUMENT:
                         s += "Al jugar un argumento, ";
                         break;
+                    case ApplyTime.DESTROY:
+                        s += "Al destruirse, ";
+                        break;
                 }
             }
             switch (subType)
@@ -579,6 +584,7 @@ namespace CardGame.Cards.DataModel.Effects
                         case Target.ENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al argumento objetivo."; break;
                         case Target.AENEMY: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a todos los argumentos del oponente."; break;
                         case Target.PLAYER: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al oponente."; break;
+                        case Target.SELF: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño al jugador."; break;
                         case Target.ALL: s += "inflige " + intParameter1 + ((intParameter1 > 1) ? " puntos" : " punto") + " de daño a cartas y jugadores."; break;
                     }
                     break;
@@ -603,9 +609,10 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.STAT_DECREASE:
                     switch (targetType)
                     {
-                        case Target.SELF: s += "reduce los parámetros en " + intParameter1 + " / " + intParameter2 + " al final del turno."; break;
+                        case Target.SELF: s += "reduce los parámetros en " + intParameter1 + " / " + intParameter2 + "."; break;
                         case Target.ALLY: s += "el objetivo reduce sus parámetros en " + intParameter1 + " / " + intParameter2 + "."; break;
-                        case Target.AALLY: s += "todos los argumentos aliados reduce sus parámetros en " + intParameter1 + "/" + intParameter2 + "."; break;
+                        case Target.AALLY: s += "todos los argumentos aliados reducen sus parámetros en " + intParameter1 + "/" + intParameter2 + "."; break;
+                        case Target.AENEMY: s += "todos los argumentos del oponente reducen sus parámetros en " + intParameter1 + "/" + intParameter2 + "."; break;
                     }
                     break;
                 case SubType.ADD_EFFECT:

@@ -18,9 +18,12 @@ namespace CardGame.Level
 
         private List<Card> _listToDiscard = new List<Card>();
 
+        private int _handCapacity;
+
         public void Initialize(Contender contender)
         {
             this.contender = contender;
+            _handCapacity = CardGameManager.Instance.settings.handCapacity;
         }
 
         public void AddCard(Card card)
@@ -76,7 +79,7 @@ namespace CardGame.Level
                 Card card = _listToDiscard[0];
                 card.DestroyCard();
 
-                if (!wheelEffect) yield return new WaitUntil(() => card == null);
+                if (!wheelEffect) yield return new WaitUntil(() => card.destroyed);
 
                 _listToDiscard.RemoveAt(0);
             }
@@ -107,46 +110,57 @@ namespace CardGame.Level
             return false;
         }
 
+        private int _discardingNumber;
+
+        private void SetDiscardingNumber(int number)
+        {
+            _discardingNumber = number;
+        }
+
+        public void SubstractDiscarding()
+        {
+            _discardingNumber--;
+        }
+
+        public bool CheckStartDiscarding()
+        {
+            SetDiscardingNumber(numCards);
+
+            if (_discardingNumber > _handCapacity)
+            {
+                isDiscarding = true;
+                ChangeScale(CardGameManager.Instance.settings.highlightScale);
+            }
+
+            return isDiscarding;
+        }
+
         public void CheckDiscarding()
         {
-            StartCoroutine(CheckDiscardingCoroutine(numCards));
+            StartCoroutine(CheckDiscardingCoroutine());
         }
 
-        public void CheckDiscarding(int numCards)
+        private IEnumerator CheckDiscardingCoroutine()
         {
-            StartCoroutine(CheckDiscardingCoroutine(numCards));
-        }
-
-        private IEnumerator CheckDiscardingCoroutine(int numCards)
-        {
-            int handCapacity = CardGameManager.Instance.settings.handCapacity;
-            if (numCards > handCapacity)
+            if (contender.isPlayer)
             {
-                if (contender.isPlayer)
+                if (_discardingNumber == _handCapacity && isDiscarding)
                 {
-                    if (!isDiscarding)
-                    {
-                        isDiscarding = true;
-                        ChangeScale(CardGameManager.Instance.settings.highlightScale);
-                    }
-                }
-                else
-                {
-                    DiscardCards(numCards - handCapacity);
+                    isDiscarding = false;
+                    ChangeScale(CardGameManager.Instance.settings.defaultScale);
+
+                    yield return new WaitUntil(() => numCards == _handCapacity);
+
+                    TurnManager.Instance.ChangeTurn();
                 }
             }
             else
             {
-                if (contender.isPlayer)
+                int number = numCards - _handCapacity;
+                if (number > 0)
                 {
-                    if (isDiscarding)
-                    {
-                        isDiscarding = false;
-                        ChangeScale(CardGameManager.Instance.settings.defaultScale);
-
-                        yield return new WaitUntil(() => this.numCards == numCards);
-                    }
-
+                    DiscardCards(number);
+                    yield return new WaitWhile(() => busy);
                     TurnManager.Instance.ChangeTurn();
                 }
             }

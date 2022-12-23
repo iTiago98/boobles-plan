@@ -121,7 +121,7 @@ namespace CardGame.Level
                 hand.AddCard(card);
 
                 // Apply end round effects
-                drawCardEffectsDelegate?.Invoke();
+                CardEffectsManager.Instance.ApplyDrawCardEffects();
 
                 UpdateRemainingCards(--numCardsStart);
                 CheckDeckSprite();
@@ -192,7 +192,7 @@ namespace CardGame.Level
                 UpdateRemainingCards(--numCardsStart);
                 CheckDeckSprite();
 
-                yield return new WaitUntil(() => card == null);
+                yield return new WaitUntil(() => card.destroyed);
 
                 _listToDiscard.RemoveAt(0);
             }
@@ -232,7 +232,7 @@ namespace CardGame.Level
                 card.DestroyCard();
                 UpdateRemainingCards();
 
-                yield return new WaitUntil(() => card == null);
+                yield return new WaitUntil(() => card.destroyed);
 
                 cards.RemoveAt(0);
             }
@@ -263,7 +263,7 @@ namespace CardGame.Level
                 // Instantiate card
                 GameObject cardPrefab = GetCardPrefab(data.type);
                 cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
-                
+
                 // Add card to list
                 Card card = cardObj.GetComponent<Card>();
                 card.Initialize(otherContender, data, cardRevealed: false);
@@ -273,30 +273,6 @@ namespace CardGame.Level
             }
 
             StartCoroutine(DrawCardsCoroutine(otherContender.hand, numCardsStart));
-        }
-
-        #endregion
-
-        #region Draw Card Effects
-
-        public delegate void DrawCardEffects();
-        private DrawCardEffects drawCardEffectsDelegate;
-
-        public void AddDrawCardEffects(DrawCardEffects method)
-        {
-            if (drawCardEffectsDelegate == null)
-            {
-                drawCardEffectsDelegate = method;
-            }
-            else
-            {
-                drawCardEffectsDelegate += method;
-            }
-        }
-
-        public void RemoveDrawCardEffect(DrawCardEffects method)
-        {
-            drawCardEffectsDelegate -= method;
         }
 
         #endregion

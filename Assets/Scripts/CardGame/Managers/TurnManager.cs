@@ -22,7 +22,7 @@ namespace CardGame.Managers
             INTERVIEW_START, ROUND_START, PLAYER, OPPONENT, DISCARDING, CLASH, ROUND_END, INTERVIEW_END
         }
 
-        public bool isPlayerTurn => _turn == Turn.PLAYER;
+        public bool IsPlayerTurn => _turn == Turn.PLAYER;
 
         private Turn _turn = Turn.INTERVIEW_START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
@@ -125,7 +125,7 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => continueFlow);
 
-            StartCoroutine(ApplyEndTurnEffectsCoroutine());
+            CardEffectsManager.Instance.ApplyEndTurnEffects();
         }
 
         public void ChangeTurn()
@@ -151,7 +151,10 @@ namespace CardGame.Managers
 
                 case Turn.PLAYER:
                     SetTurn(Turn.DISCARDING);
-                    CardGameManager.Instance.player.hand.CheckDiscarding();
+                    if (!CardGameManager.Instance.player.hand.CheckStartDiscarding())
+                    {
+                        ChangeTurn();
+                    }
                     break;
 
                 case Turn.DISCARDING:
@@ -214,12 +217,13 @@ namespace CardGame.Managers
 
             for (int index = 0; index < 4; index++)
             {
-                combat = true;
-
                 Card playerCard = player.cardZones[index].GetCard();
                 Card opponentCard = opponent.cardZones[index].GetCard();
 
-                if (playerCard == null && opponentCard == null) continue;
+                if ((playerCard == null || playerCard.Stats.strength == 0)
+                    && (opponentCard == null || opponentCard.Stats.strength == 0)) continue;
+
+                combat = true;
 
                 object playerTarget = GetTarget(opponent, _opponentGuardCard, opponentCard);
                 object opponentTarget = GetTarget(player, _playerGuardCard, playerCard);
@@ -306,82 +310,6 @@ namespace CardGame.Managers
         {
             return skipCombat;
         }
-
-        #region Play Argument Effects
-
-        private List<Action> playArgumentEffectsActions = new List<Action>();
-
-        public void AddPlayArgumentEffects(Action method)
-        {
-            playArgumentEffectsActions.Add(method);
-        }
-
-        public void RemovePlayArgumentEffect(Action method)
-        {
-            playArgumentEffectsActions.Remove(method);
-        }
-
-        public void ApplyPlayArgumentEffects()
-        {
-            foreach (Action action in playArgumentEffectsActions)
-            {
-                action();
-            }
-        }
-
-        #endregion
-
-        #region End Turn Effects
-
-        private List<Card> _endTurnEffectsCards = new List<Card>();
-        private List<Action> _endTurnEffectsActions = new List<Action>();
-        private List<int> _effectsToRemove = new List<int>();
-
-        public void AddEndTurnEffect(Action method, Card card)
-        {
-            Debug.Log("End turn effect added");
-            _endTurnEffectsActions.Add(method);
-            _endTurnEffectsCards.Add(card);
-        }
-
-        public void RemoveEndTurnEffect(Action method)
-        {
-            if (turn == Turn.ROUND_END)
-            {
-                _effectsToRemove.Add(_endTurnEffectsActions.IndexOf(method));
-            }
-            else
-                _endTurnEffectsActions.Remove(method);
-        }
-
-        private IEnumerator ApplyEndTurnEffectsCoroutine()
-        {
-            for (int i = 0; i < _endTurnEffectsActions.Count; i++)
-            {
-                if (_effectsToRemove.Contains(i))
-                {
-                    Debug.Log(_endTurnEffectsCards[i].data.name + " to be removed");
-                    continue;
-                }
-
-                Action endTurnEffect = _endTurnEffectsActions[i];
-                endTurnEffect();
-                Debug.Log(_endTurnEffectsCards[i].data.name + " applied");
-                yield return new WaitUntil(() => _endTurnEffectsCards[i].effect.effectApplied);
-            }
-
-            for (int i = _effectsToRemove.Count - 1; i >= 0; i--)
-            {
-                _endTurnEffectsActions.RemoveAt(i);
-                _endTurnEffectsCards.RemoveAt(i);
-            }
-
-            _effectsToRemove.Clear();
-
-            ChangeTurn();
-        }
-
-        #endregion
 
         #region Guard Cards
 

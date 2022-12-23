@@ -98,13 +98,13 @@ namespace CardGame.Cards
             {
                 if (_hand.isDiscarding)
                 {
-                    int numCards = _hand.numCards - 1;
+                    _hand.SubstractDiscarding();
                     DestroyCard();
-                    _hand.CheckDiscarding(numCards);
+                    _hand.CheckDiscarding();
                 }
-                else if (TurnManager.Instance.isPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
+                else if (TurnManager.Instance.IsPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
-                    if (IsAction && !effect.IsAppliable()) return;
+                    if (IsAction && !effect.IsAppliable(this)) return;
 
                     if (EnoughMana())
                     {
@@ -176,11 +176,12 @@ namespace CardGame.Cards
                     Stats.SubstractMana();
                     AddToContainer(cardZone);
                     Effects.CheckEffect();
-                    TurnManager.Instance.ApplyPlayArgumentEffects();
+                    CardEffectsManager.Instance.ApplyPlayArgumentEffects();
                     break;
 
                 case CardType.FIELD:
                     Stats.SubstractMana();
+                    if (cardZone.isNotEmpty) cardZone.GetCard().DestroyCard();
                     AddToContainer(cardZone);
                     Effects.CheckEffect();
                     break;
@@ -247,45 +248,6 @@ namespace CardGame.Cards
 
             sequence.Play();
         }
-
-        //public void ContinuePlay()
-        //{
-        //    StartCoroutine(ContinuePlayCoroutine());
-        //}
-
-        //private IEnumerator ContinuePlayCoroutine()
-        //{
-        //    TurnManager.Instance.StopFlow();
-
-        //    Stats.SubstractMana();
-        //    Effects.ApplyEffect();
-
-        //    yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
-
-        //    DestroyCard();
-
-        //    yield return new WaitUntil(() => gameObject == null);
-
-        //    MouseController.Instance.SetHolding(null);
-        //    UIManager.Instance.SetEndTurnButtonInteractable(true);
-        //}
-
-        //public void ContinuePlayOpponent()
-        //{
-        //    Stats.SubstractMana();
-
-        //    Effects.ApplyEffect(effect, storedTarget);
-        //    DestroyCard();
-
-        //    storedTarget = null;
-        //    CardGameManager.Instance.opponentAI.enabled = true;
-        //    MouseController.Instance.SetHolding(null);
-        //}
-
-        //public void CancelPlay()
-        //{
-        //    // Return card to hand
-        //}
 
         #endregion
 
@@ -378,12 +340,17 @@ namespace CardGame.Cards
             UpdateStatsUI();
 
             yield return new WaitWhile(() => CardUI.IsPlayingAnimation);
-            if (!combat) CheckDestroy();
+            if (!combat)
+            {
+                CheckDestroy();
+            }
         }
 
         #endregion
 
         #region Destroy
+
+        public bool destroyed { private set; get; }
 
         public void DestroyCard()
         {
@@ -392,20 +359,17 @@ namespace CardGame.Cards
 
         public void DestroyCard(bool instant)
         {
-            //Play destroy animation
-            Debug.Log(name + " destroyed");
-            StartCoroutine(DestroyCardCoroutine(instant));
-        }
+            //Debug.Log(name + " destroyed");
 
-        private IEnumerator DestroyCardCoroutine(bool instant)
-        {
             _clickable = false;
             HideExtendedDescription();
 
-            Effects.CheckDelegateEffects();
-            if (!instant) Effects.CheckDestroyEffects();
-
-            if (!IsInHand) RemoveFromContainer();
+            if (!IsInHand)
+            {
+                RemoveFromContainer();
+                Effects.CheckDelegateEffects();
+                if (!instant) Effects.CheckDestroyEffects();
+            }
 
             Sequence destroySequence = DOTween.Sequence();
 
@@ -415,12 +379,11 @@ namespace CardGame.Cards
             destroySequence.AppendCallback(() =>
             {
                 if (IsInHand) RemoveFromContainer();
+                destroyed = true;
                 Destroy(gameObject);
             });
 
             destroySequence.Play();
-
-            yield return new WaitUntil(() => this == null);
         }
 
         public bool CheckDestroy()
@@ -501,8 +464,8 @@ namespace CardGame.Cards
             if (_swapped) SwapContender();
 
             _hand.AddCard(this);
-            CardUI.ReturnToHand();
             Stats.ReturnToHand();
+            CardUI.ReturnToHand();
         }
 
         #endregion

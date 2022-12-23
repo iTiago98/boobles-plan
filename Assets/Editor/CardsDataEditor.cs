@@ -22,8 +22,7 @@ namespace CardGame.Cards.DataModel
 
         private void OnEnable()
         {
-            cardsData = serializedObject.FindProperty("cards");
-            cardsDataContainer = (CardsDataContainer)cardsData.serializedObject.targetObject;
+            cardsDataContainer = (CardsDataContainer)target;
             cards = cardsDataContainer.cards;
             if (cards == null) cards = new List<CardsData>();
 

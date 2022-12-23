@@ -136,17 +136,17 @@ namespace CardGame.Managers
 
         private IEnumerator ApplyEffectCoroutine(Card targetCard)
         {
-            _effectCard.Stats.SubstractMana();
-            _effectCard.Effects.ApplyEffect(targetCard);
-
             UIManager.Instance.HidePlayButtons();
             Board.Instance.RemoveTargetsHighlight();
+
+            _effectCard.Stats.SubstractMana();
+            _effectCard.Effects.ApplyEffect(targetCard);
 
             yield return new WaitUntil(() => _effectCard.effect.effectApplied);
 
             _effectCard.DestroyCard();
 
-            yield return new WaitUntil(() => _effectCard == null);
+            yield return new WaitUntil(() => _effectCard.destroyed);
 
             ResetApplyingEffect();
         }

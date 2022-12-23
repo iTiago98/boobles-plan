@@ -329,6 +329,8 @@ namespace CardGame.Managers
             TurnManager.Instance.FinishTurn();
         }
 
+        public bool IsEndTurnButtonInteractable() { return endTurnButton.IsInteractable(); }
+
         public void SetEndTurnButtonInteractable(bool interactable)
         {
             endTurnButton.SetInteractable(interactable);
@@ -409,12 +411,12 @@ namespace CardGame.Managers
 
         public void OnContinuePlayButtonClick()
         {
+            Board.Instance.RemoveTargetsHighlight();
+            HidePlayButtons();
+
             Card card = MouseController.Instance.holdingCard;
             if (card.IsPlayerCard) ContinuePlay(card);
             else ContinuePlayOpponent(card);
-
-            Board.Instance.RemoveTargetsHighlight();
-            HidePlayButtons();
         }
 
         private void ContinuePlay(Card card)
@@ -422,7 +424,8 @@ namespace CardGame.Managers
             StartCoroutine(ContinuePlayCoroutine(
                 card,
                 card.Effects.ApplyEffect,
-                () => {
+                () =>
+                {
                     SetEndTurnButtonInteractable(true);
                 }));
         }
@@ -432,7 +435,8 @@ namespace CardGame.Managers
             StartCoroutine(ContinuePlayCoroutine(
                 card,
                 () => card.Effects.ApplyEffect(card.storedTarget),
-                () => {
+                () =>
+                {
                     card.storedTarget = null;
                     CardGameManager.Instance.opponentAI.enabled = true;
                 }));
@@ -447,7 +451,7 @@ namespace CardGame.Managers
 
             card.DestroyCard();
 
-            yield return new WaitUntil(() => card == null);
+            yield return new WaitUntil(() => card.destroyed);
 
             onDestroy();
 
@@ -569,6 +573,9 @@ namespace CardGame.Managers
         public void InitializeBanners(Sprite image)
         {
             _opponentBanner.GetComponent<Image>().sprite = image;
+
+            _playerBanner.SetActive(true);
+            _opponentBanner.SetActive(true);
         }
 
         public void MoveBanners()
@@ -579,7 +586,13 @@ namespace CardGame.Managers
             sequence.Join(_playerBanner.transform.DOMoveX(-20, 2f));
             sequence.Join(_opponentBanner.transform.DOMoveX(20, 2f));
 
-            sequence.OnComplete(() => CardGameManager.Instance.ThrowStartDialogue());
+            sequence.OnComplete(() =>
+            {
+                _playerBanner.SetActive(false);
+                _opponentBanner.SetActive(false);
+
+                CardGameManager.Instance.ThrowStartDialogue();
+            });
 
             sequence.Play();
         }

@@ -23,8 +23,8 @@ namespace CardGame.Managers
 
         private InterviewDialogue _interviewDialogue;
 
-        public Contender currentPlayer => (TurnManager.Instance.isPlayerTurn) ? player : opponent;
-        public Contender otherPlayer => (TurnManager.Instance.isPlayerTurn) ? opponent : player;
+        public Contender currentPlayer => (TurnManager.Instance.IsPlayerTurn) ? player : opponent;
+        public Contender otherPlayer => (TurnManager.Instance.IsPlayerTurn) ? opponent : player;
 
         private bool _gameStarted;
         public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
@@ -111,13 +111,13 @@ namespace CardGame.Managers
 
         public void PauseGame()
         {
-            if (!TurnManager.Instance.isPlayerTurn) opponentAI.enabled = false;
+            if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = false;
             MouseController.Instance.enabled = false;
         }
 
         public void ResumeGame()
         {
-            if (!TurnManager.Instance.isPlayerTurn) opponentAI.enabled = true;
+            if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = true;
             MouseController.Instance.enabled = true;
         }
 

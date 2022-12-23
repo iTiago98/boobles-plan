@@ -10,11 +10,13 @@ namespace Booble.MainMenu
     {
         [SerializeField] private GameObject _canvas;
         [SerializeField] private GameObject _eventSystem;
+		[SerializeField] private GameObject _background;
 
 		[SerializeField] private RectTransform _mainMenu;
 		[SerializeField] private RectTransform _credits;
         [SerializeField] private RectTransform _cardGameMenu;
 		[SerializeField] private float _duration;
+
 
 		private bool _onTween;
 
@@ -83,7 +85,8 @@ namespace Booble.MainMenu
 			{
 				Camera.main.gameObject,
 				_canvas,
-				_eventSystem
+				_eventSystem,
+				_background
 			});
 		}
 

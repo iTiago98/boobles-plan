@@ -147,7 +147,7 @@ namespace CardGame.AI
 
         private bool IsAppliable(Card action)
         {
-            return action.HasEffect && action.effect.IsAppliable();
+            return action.HasEffect && action.effect.IsAppliable(action);
         }
 
         private void SkipTurn()
