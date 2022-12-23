@@ -11,7 +11,7 @@ namespace Booble.Managers
     {
         public static SceneLoader Instance { get; private set; }
 
-        [SerializeField] private FadeIn _fadeScreen;
+    [SerializeField] private Fader _fadeScreen;
 
         public bool InMainMenu => _currentScene == Scenes.MAIN_MENU;
         public bool InInterview => _currentScene == Scenes.INTERVIEW;
@@ -185,17 +185,17 @@ namespace Booble.Managers
 
 
 
-        private void OnSceneLoaded(AsyncOperation op)
-        {
-            _fadeScreen.FadeIn2();
-        }
+    private void OnSceneLoaded(AsyncOperation op)
+    {
+        _fadeScreen.FadeIn();
+    }
 
-        private void OnLoungeSceneLoaded(AsyncOperation op)
-        {
-            //RestoreMainCamera(op);
-            Controller.Instance.enabled = true;
-            _fadeScreen.FadeIn2();
-        }
+    private void OnLoungeSceneLoaded(AsyncOperation op)
+    {
+        //RestoreMainCamera(op);
+        Controller.Instance.enabled = true;
+        _fadeScreen.FadeIn();
+    }
 
         private void OnInterviewLoaded(AsyncOperation op)
         {

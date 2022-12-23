@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace Booble.UI
 {
-	public class FadeIn : MonoBehaviour
+	public class Fader : MonoBehaviour
 	{
         [field: SerializeField] public float FadeDuration { get; private set; }
         [SerializeField] private Image _fadeScreen;
@@ -16,9 +16,14 @@ namespace Booble.UI
             _fadeScreen.DOFade(1, FadeDuration).From();
         }
 
-        public void FadeIn2()
+        public void FadeIn()
         {
-            _fadeScreen.DOFade(0, FadeDuration);
+            _fadeScreen.DOFade(0, FadeDuration).OnComplete(null);
+        }
+
+        public void FadeIn(TweenCallback callback)
+        {
+            _fadeScreen.DOFade(0, FadeDuration).OnComplete(callback);
         }
 
         public void FadeOut()

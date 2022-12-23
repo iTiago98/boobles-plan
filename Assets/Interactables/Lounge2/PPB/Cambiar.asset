@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Cambiar
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Pero bueno Pablo, \xBFque haces vestido como un fantoche? \xBFY c\xF3mo
+      es que est\xE1s tan delgado?"
+    _closeUp: 10
+  - _content: "La hostia Pedro, \xA1t\xFA tambi\xE9n pareces haber perdido unos kilos!
+      \xBFQu\xE9 hacemos en la mesa de ping pong?"
+    _closeUp: 11
+  - _content: "La \xFAltima vez que jugamos creo que ni hab\xEDamos hecho la comuni\xF3n."
+    _closeUp: 11
+  - _content: "Nosajod\xEDo, si yo llevo sin hacer deporte desde que \xD1ocobich
+      colg\xF3 la pala."
+    _closeUp: 10
+  - _content: "\xA1Atiza, ya ni me acordaba! Qu\xE9 bien que estuvo ese partido homenaje."
+    _closeUp: 11
+  - _content: "Ya te digo, Rodrigo. \xBFTe acuerdas que nos dio la pelota de recuerdo?"
+    _closeUp: 10
+  - _content: "\xA1Redi\xF3s! \xA1La que se hab\xEDa tragado y todo!"
+    _closeUp: 11
+  - _content: "\xA1Que le hicimos un altar y todo! \xBFTodav\xEDa la tenemos, no?"
+    _closeUp: 10
+  - _content: "Ah\xED sigue en la estanter\xEDa del despacho. \xA1Con todas las babas
+      del figura!"
+    _closeUp: 11
+  - _content: "Ah\xED sigue en la estanter\xEDa del despacho. \xA1Con todas las babas
+      del figura!"
+    _closeUp: 11
+  - _content: "\xA1AH\xCD NO EST\xC1! \xA1D\xD3NDE LA HAB\xC9IS PUESTO, MENTECATOS!"
+    _closeUp: 4

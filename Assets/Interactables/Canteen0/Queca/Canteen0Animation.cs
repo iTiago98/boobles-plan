@@ -47,7 +47,7 @@ namespace Booble.Interactables.Queca
         [SerializeField] private float _emilinSpawnDuration;
         [SerializeField] private float _moveSpeed;
         [SerializeField] private Controller _nelaController;
-        [SerializeField] private FadeIn _fade;
+        [SerializeField] private Fader _fade;
         [SerializeField] private GameObject _food;
         
         private DialogueManager _diagMng;
@@ -124,7 +124,7 @@ namespace Booble.Interactables.Queca
             _quecaAnim.transform.position = _sit2.position;
             _quecaAnim.SetBool("Sitting", true);
             _nelaAnim.gameObject.SetActive(false);
-            _fade.FadeIn2();
+            _fade.FadeIn();
             yield return new WaitForSeconds(_fade.FadeDuration);
             
             ThrowDialogue(_sitDialogue);
@@ -167,7 +167,7 @@ namespace Booble.Interactables.Queca
             _nelaAnim.gameObject.SetActive(true);
             _food.SetActive(false);
             _emilinAnim.SetTrigger("Reset");
-            _fade.FadeIn2();
+            _fade.FadeIn();
             yield return new WaitForSeconds(_fade.FadeDuration);
             
             ThrowDialogue(_finalDialogue);

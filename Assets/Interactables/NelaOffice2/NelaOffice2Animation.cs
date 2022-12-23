@@ -9,7 +9,7 @@ using UnityEngine;
 public class NelaOffice2Animation : MonoBehaviour
 {
     [SerializeField] private Controller _nelaController;
-    [SerializeField] private FadeIn _fade;
+    [SerializeField] private Fader _fade;
     [SerializeField] private Dialogue _officeDialogue;
     [SerializeField] private List<Option> _options;
     

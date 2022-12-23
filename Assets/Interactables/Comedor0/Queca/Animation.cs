@@ -45,7 +45,7 @@ public class Animation : MonoBehaviour
     [SerializeField] private float _emilinSpawnDuration;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private Controller _nelaController;
-    [SerializeField] private FadeIn _fade;
+    [SerializeField] private Fader _fade;
     [SerializeField] private GameObject _food;
     [SerializeField] private Transform _foodPosition0;
     [SerializeField] private Transform _foodPosition1;
@@ -124,7 +124,7 @@ public class Animation : MonoBehaviour
         _quecaAnim.SetBool("Sitting", true);
         _quecaAnim.transform.position = _sit2.position;
         _quecaAnim.GetComponent<SpriteRenderer>().sortingOrder = -4;
-        _fade.FadeIn2();
+        _fade.FadeIn();
         yield return new WaitForSeconds(_fade.FadeDuration);
         
         ThrowDialogue(_sitDialogue);
@@ -167,7 +167,7 @@ public class Animation : MonoBehaviour
         _quecaAnim.SetBool("Sitting", false);
         _food.SetActive(false);
         _emilinAnim.SetTrigger("Reset");
-        _fade.FadeIn2();
+        _fade.FadeIn();
         yield return new WaitForSeconds(_fade.FadeDuration);
         
         ThrowDialogue(_finalDialogue);

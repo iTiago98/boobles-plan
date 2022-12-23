@@ -11,6 +11,7 @@ using UnityEngine.Rendering.Universal;
 public class DennisWalk : MonoBehaviour
 {
         [SerializeField] private Vector3 _finalDennisPos;
+        [SerializeField] private Vector3 _cinematicPos;
         [SerializeField] private Dialogue _dialogue;
         
         private FlagManager _flagManager;
@@ -50,6 +51,7 @@ public class DennisWalk : MonoBehaviour
                                 .SetEase(Ease.Linear)
                                 .OnComplete(() =>
                                 {
+                                        transform.position = _cinematicPos;
                                         gameObject.SetActive(false);
                                         Interactable.EndInteraction();
                                 });

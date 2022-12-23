@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Cambiar2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: No me gusta nada esa risa tan malvada. Suena a toxicidad, ahora mismo
+      te llevo a los de seguridad.
+    _closeUp: 2
+  - _content: "\xA1Nadie puede pararme, tengo el poder de controlar las mentes!"
+    _closeUp: 4
+  - _content: "Claro que s\xED, Profesor Xavier. Parece que se te han acabado esos
+      poderes, gualtrapa."
+    _closeUp: 11
+  - _content: "S\xED,ll\xE9vatelo, Ana. Pedro, Pablo, siento todo lo ocurrido, pero
+      todav\xEDa tenemos que hacer la entrevista. A la vista de los hechos, intentar\xE9
+      defenderos todo lo posible ante el consejo de administraci\xF3n."
+    _closeUp: 1
