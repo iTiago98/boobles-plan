@@ -136,7 +136,6 @@ namespace CardGame.Cards.DataModel.Effects
         public void Apply(Card source, object target)
         {
             effectApplied = false;
-            CardEffectsManager.Instance.SetCurrentEffect(this);
 
             switch (type)
             {
@@ -168,13 +167,13 @@ namespace CardGame.Cards.DataModel.Effects
                     break;
 
                 case SubType.RESTORE_LIFE:
-                    CardEffectsManager.Instance.RestoreLife(intParameter1, source.contender); break;
+                    CardEffectsManager.Instance.RestoreLife(this, intParameter1, source.contender); break;
 
                 case SubType.INCREASE_MAX_MANA:
-                    CardEffectsManager.Instance.IncreaseMaxMana(intParameter1, source.contender); break;
+                    CardEffectsManager.Instance.IncreaseMaxMana(this, intParameter1, source.contender); break;
 
                 case SubType.STEAL_REWARD:
-                    CardEffectsManager.Instance.RestoreLife(source.contender.stolenCards * 5, source.contender); break;
+                    CardEffectsManager.Instance.RestoreLife(this, source.contender.stolenCards * 5, source.contender); break;
             }
         }
 
@@ -185,13 +184,13 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.DESTROY_CARD:
-                    CardEffectsManager.Instance.DestroyCard(source, target, targetType); break;
+                    CardEffectsManager.Instance.DestroyCard(this, source, target, targetType); break;
 
                 case SubType.DEAL_DAMAGE:
-                    CardEffectsManager.Instance.DealDamage(source, target, targetType, intParameter1); break;
+                    CardEffectsManager.Instance.DealDamage(this, source, target, targetType, intParameter1); break;
 
                 case SubType.DECREASE_MANA:
-                    CardEffectsManager.Instance.DecreaseMana(source, intParameter1); break;
+                    CardEffectsManager.Instance.DecreaseMana(this, source, intParameter1); break;
             }
         }
 
@@ -202,28 +201,28 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.LIFELINK:
-                    CardEffectsManager.Instance.Lifelink(source, target); break;
+                    CardEffectsManager.Instance.Lifelink(this, source, target); break;
 
                 case SubType.REBOUND:
-                    CardEffectsManager.Instance.Rebound(source, target); break;
+                    CardEffectsManager.Instance.Rebound(this, source, target); break;
 
                 case SubType.TRAMPLE:
-                    CardEffectsManager.Instance.Trample(source, target); break;
+                    CardEffectsManager.Instance.Trample(this, source, target); break;
 
                 case SubType.SPONGE:
-                    CardEffectsManager.Instance.Sponge(source, target); break;
+                    CardEffectsManager.Instance.Sponge(this, source, target); break;
 
                 case SubType.GUARD:
                     TurnManager.Instance.SetGuardCard(source); break;
 
                 case SubType.COMPARTMENTALIZE:
-                    CardEffectsManager.Instance.Compartmentalize(source, target); break;
+                    CardEffectsManager.Instance.Compartmentalize(this, source, target); break;
 
                 case SubType.STAT_BOOST:
-                    CardEffectsManager.Instance.StatBoost(source, target, targetType, intParameter1, intParameter2); break;
+                    CardEffectsManager.Instance.StatBoost(this, source, target, targetType, intParameter1, intParameter2); break;
 
                 case SubType.STAT_DECREASE:
-                    CardEffectsManager.Instance.StatDecrease(source, target, targetType, intParameter1, intParameter2); break;
+                    CardEffectsManager.Instance.StatDecrease(this, source, target, targetType, intParameter1, intParameter2); break;
 
                 case SubType.ADD_EFFECT:
                     CardEffect effect = new CardEffect()
@@ -233,7 +232,7 @@ namespace CardGame.Cards.DataModel.Effects
                         applyTime = ApplyTime.COMBAT
                     };
 
-                    CardEffectsManager.Instance.AddEffect(source, target, targetType, effect); break;
+                    CardEffectsManager.Instance.AddEffect(this, source, target, targetType, effect); break;
             }
         }
 
@@ -244,32 +243,32 @@ namespace CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.CREATE_CARD:
-                    CardEffectsManager.Instance.CreateCard(source, target, GetDataFromParameters()); break;
+                    CardEffectsManager.Instance.CreateCard(this, source, target, GetDataFromParameters()); break;
 
                 case SubType.DUPLICATE_CARD:
                     CardsData data = ((Card)target).data;
-                    CardEffectsManager.Instance.CreateCard(source, target, data); break;
+                    CardEffectsManager.Instance.CreateCard(this, source, target, data); break;
 
                 case SubType.SWAP_POSITION:
-                    CardEffectsManager.Instance.SwapPosition(target, targetType); break;
+                    CardEffectsManager.Instance.SwapPosition(this, target, targetType); break;
 
                 case SubType.SWAP_CONTENDER:
-                    CardEffectsManager.Instance.SwapContender(source, targetType); break;
+                    CardEffectsManager.Instance.SwapContender(this, source, targetType); break;
 
                 case SubType.DRAW_CARD:
-                    CardEffectsManager.Instance.DrawCard(intParameter1, source.contender); break;
+                    CardEffectsManager.Instance.DrawCard(this, intParameter1, source.contender); break;
 
                 case SubType.DISCARD_CARD:
-                    CardEffectsManager.Instance.DiscardCard(intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
+                    CardEffectsManager.Instance.DiscardCard(this, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
 
                 case SubType.RETURN_CARD:
-                    CardEffectsManager.Instance.ReturnCard(target); break;
+                    CardEffectsManager.Instance.ReturnCard(this, target); break;
 
                 case SubType.FREE_MANA:
                     CardEffectsManager.Instance.FreeMana(source.contender); break;
 
                 case SubType.WHEEL:
-                    CardEffectsManager.Instance.Wheel(); break;
+                    CardEffectsManager.Instance.Wheel(this); break;
 
                 case SubType.SKIP_COMBAT:
                     CardEffectsManager.Instance.SkipCombat(); break;
@@ -278,22 +277,22 @@ namespace CardGame.Cards.DataModel.Effects
                     CardEffectsManager.Instance.Mirror(source.contender); break;
 
                 case SubType.STEAL_MANA:
-                    CardEffectsManager.Instance.StealMana(source.contender); break;
+                    CardEffectsManager.Instance.StealMana(this, source.contender); break;
 
                 case SubType.ADD_CARD_TO_DECK:
-                    CardEffectsManager.Instance.AddCardToDeck(source, GetDataFromParameters()); break;
+                    CardEffectsManager.Instance.AddCardToDeck(this, source, GetDataFromParameters()); break;
 
                 case SubType.DISCARD_CARD_FROM_DECK:
-                    CardEffectsManager.Instance.DiscardCardFromDeck(target, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
+                    CardEffectsManager.Instance.DiscardCardFromDeck(this, target, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
 
                 case SubType.STEAL_CARD:
-                    CardEffectsManager.Instance.StealCard(source, target); break;
+                    CardEffectsManager.Instance.StealCard(this, source, target); break;
 
                 case SubType.STEAL_CARD_FROM_HAND:
-                    CardEffectsManager.Instance.StealCardFromHand(source, intParameter1); break;
+                    CardEffectsManager.Instance.StealCardFromHand(this, source, intParameter1); break;
 
                 case SubType.STEAL_CARD_FROM_DECK:
-                    CardEffectsManager.Instance.StealCardFromDeck(source, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
+                    CardEffectsManager.Instance.StealCardFromDeck(this, source, intParameter1, CardGameManager.Instance.GetOtherContender(source.contender)); break;
             }
         }
 
@@ -320,7 +319,6 @@ namespace CardGame.Cards.DataModel.Effects
 
             return data;
         }
-
 
         private void ApplyAlternateWinCondition(Card source, object target)
         {

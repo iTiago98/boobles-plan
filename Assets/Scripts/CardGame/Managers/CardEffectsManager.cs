@@ -13,56 +13,42 @@ namespace CardGame.Managers
 {
     public class CardEffectsManager : Singleton<CardEffectsManager>
     {
-        private CardEffect _currentEffect;
         private int _storedValue = -1;
-
-        public void SetCurrentEffect(CardEffect effect)
-        {
-            if (_currentEffect != null)
-                SetEffectApplied();
-
-            _currentEffect = effect;
-        }
-
-        public void SetEffectApplied()
-        {
-            _currentEffect.SetEffectApplied();
-        }
 
         #region Deffensive Effects
 
         #region Restore Life
 
-        public void RestoreLife(int life, Contender contender)
+        public void RestoreLife(CardEffect effect, int life, Contender contender)
         {
-            StartCoroutine(RestoreLifeCoroutine(life, contender));
+            StartCoroutine(RestoreLifeCoroutine(effect, life, contender));
         }
 
-        private IEnumerator RestoreLifeCoroutine(int life, Contender contender)
+        private IEnumerator RestoreLifeCoroutine(CardEffect effect, int life, Contender contender)
         {
             contender.RestoreLife(life);
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Increase Max Mana
 
-        public void IncreaseMaxMana(int mana, Contender contender)
+        public void IncreaseMaxMana(CardEffect effect, int mana, Contender contender)
         {
-            StartCoroutine(IncreaseMaxManaCoroutine(mana, contender));
+            StartCoroutine(IncreaseMaxManaCoroutine(effect, mana, contender));
         }
 
-        private IEnumerator IncreaseMaxManaCoroutine(int mana, Contender contender)
+        private IEnumerator IncreaseMaxManaCoroutine(CardEffect effect, int mana, Contender contender)
         {
             contender.IncreaseMaxMana(mana);
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -73,12 +59,12 @@ namespace CardGame.Managers
 
         #region Destroy Card
 
-        public void DestroyCard(Card source, object target, Target targetType)
+        public void DestroyCard(CardEffect effect, Card source, object target, Target targetType)
         {
-            StartCoroutine(DestroyCardCoroutine(source, target, targetType));
+            StartCoroutine(DestroyCardCoroutine(effect, source, target, targetType));
         }
 
-        private IEnumerator DestroyCardCoroutine(Card source, object target, Target targetType)
+        private IEnumerator DestroyCardCoroutine(CardEffect effect, Card source, object target, Target targetType)
         {
             Card aux = null;
             Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
@@ -108,7 +94,7 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => aux.destroyed);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         private Card DestroyCards(Contender contender)
@@ -137,12 +123,12 @@ namespace CardGame.Managers
 
         #region Deal Damage
 
-        public void DealDamage(Card source, object target, Target targetType, int value)
+        public void DealDamage(CardEffect effect, Card source, object target, Target targetType, int value)
         {
-            StartCoroutine(DealDamageCoroutine(source, target, targetType, value));
+            StartCoroutine(DealDamageCoroutine(effect, source, target, targetType, value));
         }
 
-        private IEnumerator DealDamageCoroutine(Card source, object target, Target targetType, int value)
+        private IEnumerator DealDamageCoroutine(CardEffect effect, Card source, object target, Target targetType, int value)
         {
             switch (targetType)
             {
@@ -195,7 +181,7 @@ namespace CardGame.Managers
                     }
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         private bool HasParaguas(Card source, Contender contender)
@@ -225,12 +211,12 @@ namespace CardGame.Managers
 
         #region Decrease Mana
 
-        public void DecreaseMana(Card source, int value)
+        public void DecreaseMana(CardEffect effect, Card source, int value)
         {
-            StartCoroutine(DecreaseManaCoroutine(source, value));
+            StartCoroutine(DecreaseManaCoroutine(effect, source, value));
         }
 
-        private IEnumerator DecreaseManaCoroutine(Card source, int value)
+        private IEnumerator DecreaseManaCoroutine(CardEffect effect, Card source, int value)
         {
             Contender contender = CardGameManager.Instance.GetOtherContender(source.contender);
             if (value == 0) value = contender.currentMana;
@@ -239,7 +225,7 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -252,12 +238,12 @@ namespace CardGame.Managers
 
         #region Lifelink
 
-        public void Lifelink(Card source, object target)
+        public void Lifelink(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(LifelinkCoroutine(source, target));
+            StartCoroutine(LifelinkCoroutine(effect, source, target));
         }
 
-        private IEnumerator LifelinkCoroutine(Card source, object target)
+        private IEnumerator LifelinkCoroutine(CardEffect effect, Card source, object target)
         {
             int value = 0;
             if (target is Card)
@@ -273,19 +259,19 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Rebound
 
-        public void Rebound(Card source, object target)
+        public void Rebound(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(ReboundCoroutine(source, target));
+            StartCoroutine(ReboundCoroutine(effect, source, target));
         }
 
-        private IEnumerator ReboundCoroutine(Card source, object target)
+        private IEnumerator ReboundCoroutine(CardEffect effect, Card source, object target)
         {
             if (target is Card)
             {
@@ -323,7 +309,7 @@ namespace CardGame.Managers
                 else yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         private void SetDestroy(ref Card aux, ref bool destroy, Card card)
@@ -336,12 +322,12 @@ namespace CardGame.Managers
 
         #region Trample
 
-        public void Trample(Card source, object target)
+        public void Trample(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(TrampleCoroutine(source, target));
+            StartCoroutine(TrampleCoroutine(effect, source, target));
         }
 
-        private IEnumerator TrampleCoroutine(Card source, object target)
+        private IEnumerator TrampleCoroutine(CardEffect effect, Card source, object target)
         {
             if (target is Card)
             {
@@ -352,19 +338,19 @@ namespace CardGame.Managers
                 yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
             }
 
-            SetEffectApplied();
+           effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Sponge
 
-        public void Sponge(Card source, object target)
+        public void Sponge(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(SpongeCoroutine(source, target));
+            StartCoroutine(SpongeCoroutine(effect, source, target));
         }
 
-        private IEnumerator SpongeCoroutine(Card source, object target)
+        private IEnumerator SpongeCoroutine(CardEffect effect, Card source, object target)
         {
             source.Hit(target);
             if (target is Card)
@@ -376,19 +362,19 @@ namespace CardGame.Managers
 
             yield return new WaitWhile(() => source.CardUI.IsPlayingAnimation);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Compartmentalize
 
-        public void Compartmentalize(Card source, object target)
+        public void Compartmentalize(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(CompartmentalizeCoroutine(source, target));
+            StartCoroutine(CompartmentalizeCoroutine(effect, source, target));
         }
 
-        private IEnumerator CompartmentalizeCoroutine(Card source, object target)
+        private IEnumerator CompartmentalizeCoroutine(CardEffect effect, Card source, object target)
         {
             if (target is Contender)
             {
@@ -398,7 +384,7 @@ namespace CardGame.Managers
                 yield return new WaitWhile(() => contender.deck.busy);
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -407,12 +393,12 @@ namespace CardGame.Managers
 
         #region Stat Boost
 
-        public void StatBoost(Card source, object target, Target targetType, int strengthValue, int defenseValue)
+        public void StatBoost(CardEffect effect, Card source, object target, Target targetType, int strengthValue, int defenseValue)
         {
-            StartCoroutine(StatBoostCoroutine(source, target, targetType, strengthValue, defenseValue));
+            StartCoroutine(StatBoostCoroutine(effect, source, target, targetType, strengthValue, defenseValue));
         }
 
-        private IEnumerator StatBoostCoroutine(Card source, object target, Target targetType, int strengthValue, int defenseValue)
+        private IEnumerator StatBoostCoroutine(CardEffect effect, Card source, object target, Target targetType, int strengthValue, int defenseValue)
         {
             Card aux = null;
 
@@ -449,19 +435,19 @@ namespace CardGame.Managers
 
             if (aux != null) yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Stat Decrease
 
-        public void StatDecrease(Card source, object target, Target targetType, int strengthValue, int defenseValue)
+        public void StatDecrease(CardEffect effect, Card source, object target, Target targetType, int strengthValue, int defenseValue)
         {
-            StartCoroutine(StatDecreaseCoroutine(source, target, targetType, strengthValue, defenseValue));
+            StartCoroutine(StatDecreaseCoroutine(effect, source, target, targetType, strengthValue, defenseValue));
         }
 
-        private IEnumerator StatDecreaseCoroutine(Card source, object target, Target targetType, int strengthValue, int defenseValue)
+        private IEnumerator StatDecreaseCoroutine(CardEffect effect, Card source, object target, Target targetType, int strengthValue, int defenseValue)
         {
             Card aux = null;
 
@@ -498,19 +484,19 @@ namespace CardGame.Managers
 
             if (aux != null) yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Add Effect
 
-        public void AddEffect(Card source, object target, Target targetType, CardEffect effect)
+        public void AddEffect(CardEffect effect, Card source, object target, Target targetType, CardEffect effectParameter)
         {
-            StartCoroutine(AddEffectCoroutine(source, target, targetType, effect));
+            StartCoroutine(AddEffectCoroutine(effect, source, target, targetType, effect));
         }
 
-        private IEnumerator AddEffectCoroutine(Card source, object target, Target targetType, CardEffect effect)
+        private IEnumerator AddEffectCoroutine(CardEffect effect, Card source, object target, Target targetType, CardEffect effectParameter)
         {
             Card aux = null;
 
@@ -520,13 +506,13 @@ namespace CardGame.Managers
                 case Target.ENEMY:
                 case Target.CARD:
                     aux = (Card)target;
-                    aux.Effects.AddEffect(effect);
+                    aux.Effects.AddEffect(effectParameter);
                     break;
 
                 case Target.AALLY:
                     foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
                     {
-                        card.Effects.AddEffect(effect);
+                        card.Effects.AddEffect(effectParameter);
                         if (aux == null) aux = card;
                     }
                     break;
@@ -534,7 +520,7 @@ namespace CardGame.Managers
 
             if (aux != null) yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -545,12 +531,12 @@ namespace CardGame.Managers
 
         #region Create Card
 
-        public void CreateCard(Card source, object target, CardsData data)
+        public void CreateCard(CardEffect effect, Card source, object target, CardsData data)
         {
-            StartCoroutine(CreateCardCoroutine(source, target, data));
+            StartCoroutine(CreateCardCoroutine(effect, source, target, data));
         }
 
-        private IEnumerator CreateCardCoroutine(Card source, object target, CardsData data)
+        private IEnumerator CreateCardCoroutine(CardEffect effect, Card source, object target, CardsData data)
         {
             CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
             if (emptyCardZone != null)
@@ -561,19 +547,19 @@ namespace CardGame.Managers
                 yield return new WaitUntil(() => emptyCardZone.cardsAtPosition);
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Swap Position
 
-        public void SwapPosition(object target, Target targetType)
+        public void SwapPosition(CardEffect effect, object target, Target targetType)
         {
-            StartCoroutine(SwapPositionCoroutine(target, targetType));
+            StartCoroutine(SwapPositionCoroutine(effect, target, targetType));
         }
 
-        private IEnumerator SwapPositionCoroutine(object target, Target targetType)
+        private IEnumerator SwapPositionCoroutine(CardEffect effect, object target, Target targetType)
         {
             CardZone aux = null;
 
@@ -620,7 +606,7 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => aux.cardsAtPosition);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         private void Swap(int pos1, int pos2, Contender contender)
@@ -643,12 +629,12 @@ namespace CardGame.Managers
 
         #region Swap Contender
 
-        public void SwapContender(Card source, Target targetType)
+        public void SwapContender(CardEffect effect, Card source, Target targetType)
         {
-            StartCoroutine(SwapContenderCoroutine(source, targetType));
+            StartCoroutine(SwapContenderCoroutine(effect, source, targetType));
         }
 
-        private IEnumerator SwapContenderCoroutine(Card source, Target targetType)
+        private IEnumerator SwapContenderCoroutine(CardEffect effect, Card source, Target targetType)
         {
             if (targetType == Target.SELF)
             {
@@ -661,55 +647,55 @@ namespace CardGame.Managers
                 }
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Draw Card
 
-        public void DrawCard(int value, Contender contender)
+        public void DrawCard(CardEffect effect, int value, Contender contender)
         {
-            StartCoroutine(DrawCardCoroutine(value, contender));
+            StartCoroutine(DrawCardCoroutine(effect, value, contender));
         }
 
-        private IEnumerator DrawCardCoroutine(int value, Contender contender)
+        private IEnumerator DrawCardCoroutine(CardEffect effect, int value, Contender contender)
         {
             contender.deck.DrawCards(value);
 
             yield return new WaitWhile(() => contender.deck.busy);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Discard Card
 
-        public void DiscardCard(int value, Contender contender)
+        public void DiscardCard(CardEffect effect, int value, Contender contender)
         {
-            StartCoroutine(DiscardCardCoroutine(value, contender));
+            StartCoroutine(DiscardCardCoroutine(effect, value, contender));
         }
 
-        private IEnumerator DiscardCardCoroutine(int value, Contender contender)
+        private IEnumerator DiscardCardCoroutine(CardEffect effect, int value, Contender contender)
         {
             contender.hand.DiscardCards(value);
 
             yield return new WaitWhile(() => contender.hand.busy);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Return Card
 
-        public void ReturnCard(object target)
+        public void ReturnCard(CardEffect effect, object target)
         {
-            StartCoroutine(ReturnCardCoroutine(target));
+            StartCoroutine(ReturnCardCoroutine(effect, target));
         }
 
-        private IEnumerator ReturnCardCoroutine(object target)
+        private IEnumerator ReturnCardCoroutine(CardEffect effect, object target)
         {
             if (target is Card)
             {
@@ -719,7 +705,7 @@ namespace CardGame.Managers
                 yield return new WaitUntil(() => card.contender.hand.cardsAtPosition);
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -735,12 +721,12 @@ namespace CardGame.Managers
 
         #region Wheel
 
-        public void Wheel()
+        public void Wheel(CardEffect effect)
         {
-            StartCoroutine(WheelCoroutine());
+            StartCoroutine(WheelCoroutine(effect));
         }
 
-        private IEnumerator WheelCoroutine()
+        private IEnumerator WheelCoroutine(CardEffect effect)
         {
             Contender player = CardGameManager.Instance.player;
             Contender opponent = CardGameManager.Instance.opponent;
@@ -758,7 +744,7 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => player.hand.numCards == playerNumCards && opponent.hand.numCards == opponentNumCards);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -783,12 +769,12 @@ namespace CardGame.Managers
 
         #region Steal Mana
 
-        public void StealMana(Contender contender)
+        public void StealMana(CardEffect effect, Contender contender)
         {
-            StartCoroutine(StealManaCoroutine(contender));
+            StartCoroutine(StealManaCoroutine(effect, contender));
         }
 
-        private IEnumerator StealManaCoroutine(Contender contender)
+        private IEnumerator StealManaCoroutine(CardEffect effect, Contender contender)
         {
             Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
             int manaValue = otherContender.currentMana;
@@ -798,19 +784,19 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Add Card To Deck
 
-        public void AddCardToDeck(Card source, CardsData data)
+        public void AddCardToDeck(CardEffect effect, Card source, CardsData data)
         {
-            StartCoroutine(AddCardToDeckCoroutine(source, data));
+            StartCoroutine(AddCardToDeckCoroutine(effect, source, data));
         }
 
-        private IEnumerator AddCardToDeckCoroutine(Card source, CardsData data)
+        private IEnumerator AddCardToDeckCoroutine(CardEffect effect, Card source, CardsData data)
         {
             Contender owner = source.contender;
 
@@ -840,19 +826,19 @@ namespace CardGame.Managers
 
             yield return new WaitWhile(() => owner.deck.busy);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Discard Card From Deck
 
-        public void DiscardCardFromDeck(object target, int value, Contender contender)
+        public void DiscardCardFromDeck(CardEffect effect, object target, int value, Contender contender)
         {
-            StartCoroutine(DiscardCardFromDeckCoroutine(target, value, contender));
+            StartCoroutine(DiscardCardFromDeckCoroutine(effect, target, value, contender));
         }
 
-        private IEnumerator DiscardCardFromDeckCoroutine(object target, int value, Contender contender)
+        private IEnumerator DiscardCardFromDeckCoroutine(CardEffect effect, object target, int value, Contender contender)
         {
             int number = value;
             if (target != null) number = ((Card)target).Stats.manaCost;
@@ -861,19 +847,19 @@ namespace CardGame.Managers
 
             yield return new WaitWhile(() => contender.deck.busy);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Steal Card
 
-        public void StealCard(Card source, object target)
+        public void StealCard(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(StealCardCoroutine(source, target));
+            StartCoroutine(StealCardCoroutine(effect, source, target));
         }
 
-        private IEnumerator StealCardCoroutine(Card source, object target)
+        private IEnumerator StealCardCoroutine(CardEffect effect, Card source, object target)
         {
             if (target is Card)
             {
@@ -899,19 +885,19 @@ namespace CardGame.Managers
                 }
             }
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Steal Card From Hand
 
-        public void StealCardFromHand(Card source, int value)
+        public void StealCardFromHand(CardEffect effect, Card source, int value)
         {
-            StartCoroutine(StealCardFromHandCoroutine(source, value));
+            StartCoroutine(StealCardFromHandCoroutine(effect, source, value));
         }
 
-        private IEnumerator StealCardFromHandCoroutine(Card source, int value)
+        private IEnumerator StealCardFromHandCoroutine(CardEffect effect, Card source, int value)
         {
             Contender otherContender = CardGameManager.Instance.GetOtherContender(source.contender);
             int loops = Mathf.Min(value, otherContender.hand.numCards);
@@ -929,26 +915,26 @@ namespace CardGame.Managers
 
             yield return new WaitUntil(() => source.contender.hand.numCards == finalValue && source.contender.hand.cardsAtPosition);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Steal Card From Deck
 
-        public void StealCardFromDeck(Card source, int value, Contender contender)
+        public void StealCardFromDeck(CardEffect effect, Card source, int value, Contender contender)
         {
-            StartCoroutine(StealCardFromDeckCoroutine(source, value, contender));
+            StartCoroutine(StealCardFromDeckCoroutine(effect, source, value, contender));
         }
 
-        private IEnumerator StealCardFromDeckCoroutine(Card source, int value, Contender otherContender)
+        private IEnumerator StealCardFromDeckCoroutine(CardEffect effect, Card source, int value, Contender otherContender)
         {
             UIManager.Instance.ShowStealCardsFromDeck(otherContender.deck, value);
 
             yield return new WaitWhile(() => UIManager.Instance.stealing);
             yield return new WaitWhile(() => source.contender.deck.busy);
 
-            SetEffectApplied();
+            effect.SetEffectApplied();
         }
 
         #endregion

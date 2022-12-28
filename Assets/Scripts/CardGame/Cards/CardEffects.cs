@@ -136,7 +136,6 @@ namespace CardGame.Cards
                 {
                     if (effect.applyTime == ApplyTime.DESTROY && !_card.IsInHand)
                     {
-                        CardEffectsManager.Instance.SetEffectApplied();
                         ApplyEffect(effect);
                     }
                 }
