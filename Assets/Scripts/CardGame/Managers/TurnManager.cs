@@ -38,11 +38,11 @@ namespace CardGame.Managers
         {
             UIManager.Instance.TurnAnimation(turn);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             DrawCards(CardGameManager.Instance.settings.initialCardNumber);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             ChangeTurn();
         }
@@ -56,7 +56,7 @@ namespace CardGame.Managers
         {
             UIManager.Instance.TurnAnimation(turn);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             StopFlow();
             CardGameManager.Instance.FillMana();
@@ -76,11 +76,11 @@ namespace CardGame.Managers
         {
             UIManager.Instance.TurnAnimation(turn);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             DrawCards(1);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             if (turn == Turn.OPPONENT)
                 CardGameManager.Instance.opponentAI.enabled = true;
@@ -106,7 +106,7 @@ namespace CardGame.Managers
         {
             UIManager.Instance.TurnAnimation(turn);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             Clash();
         }
@@ -123,7 +123,7 @@ namespace CardGame.Managers
         {
             UIManager.Instance.TurnAnimation(turn);
 
-            yield return new WaitUntil(() => continueFlow);
+            yield return new WaitUntil(() => GetContinueFlow());
 
             CardEffectsManager.Instance.ApplyEndTurnEffects();
         }
@@ -190,6 +190,11 @@ namespace CardGame.Managers
         public void ContinueFlow()
         {
             continueFlow = true;
+        }
+
+        public bool GetContinueFlow()
+        {
+            return continueFlow && !CardGameManager.Instance.gamePaused;
         }
 
         private void DrawCards(int cardNumber)

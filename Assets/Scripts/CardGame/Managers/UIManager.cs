@@ -129,6 +129,13 @@ namespace CardGame.Managers
 
         #endregion
 
+        #region Pause Menu
+
+        [Header("Pause Menu")]
+        [SerializeField] private GameObject _pauseMenu;
+
+        #endregion
+
         private Contender _player;
         private Contender _opponent;
 
@@ -162,7 +169,7 @@ namespace CardGame.Managers
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (cancelPlayButton.activeSelf) OnCancelPlayButtonClick();
+                ShowHidePauseMenu();
             }
 
             if (Input.GetMouseButtonUp(0) && _bannersOn) MoveBanners();
@@ -596,6 +603,35 @@ namespace CardGame.Managers
 
             sequence.Play();
         }
+
+        #endregion
+
+        #region Pause Menu
+
+        private void ShowHidePauseMenu()
+        {
+            if (_pauseMenu.activeSelf)
+            {
+                _pauseMenu.SetActive(false);
+                CardGameManager.Instance.ResumeGame();
+            }
+            else
+            {
+                _pauseMenu.SetActive(true);
+                CardGameManager.Instance.PauseGame();
+            }
+        }
+
+        public void OnResumeButtonClick()
+        {
+            ShowHidePauseMenu();
+        }
+
+        public void OnReturnToMenuButtonClick()
+        {
+            OnEndButtonClick();
+        }
+
 
         #endregion
 

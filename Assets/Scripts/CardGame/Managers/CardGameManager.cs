@@ -1,6 +1,7 @@
 using CardGame.AI;
 using CardGame.Cards;
 using CardGame.Level;
+using DG.Tweening;
 using Santi.Utils;
 using System;
 using System.Collections;
@@ -26,8 +27,7 @@ namespace CardGame.Managers
         public Contender currentPlayer => (TurnManager.Instance.IsPlayerTurn) ? player : opponent;
         public Contender otherPlayer => (TurnManager.Instance.IsPlayerTurn) ? opponent : player;
 
-        private bool _gameStarted;
-        public bool gameStarted { get { return _gameStarted; } private set { _gameStarted = value; } }
+        public bool gamePaused {  private set; get; }
 
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
@@ -104,21 +104,24 @@ namespace CardGame.Managers
 
         public void StartGame()
         {
-            _gameStarted = true;
             InitializeGame();
             TurnManager.Instance.StartGame();
         }
 
         public void PauseGame()
         {
+            gamePaused = true;
             if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = false;
             MouseController.Instance.enabled = false;
+            DOTween.PauseAll();
         }
 
         public void ResumeGame()
         {
+            gamePaused = false;
             if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = true;
             MouseController.Instance.enabled = true;
+            DOTween.PlayAll();
         }
 
         #endregion
