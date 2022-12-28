@@ -167,11 +167,6 @@ namespace CardGame.Managers
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                ShowHidePauseMenu();
-            }
-
             if (Input.GetMouseButtonUp(0) && _bannersOn) MoveBanners();
         }
 
@@ -603,35 +598,6 @@ namespace CardGame.Managers
 
             sequence.Play();
         }
-
-        #endregion
-
-        #region Pause Menu
-
-        private void ShowHidePauseMenu()
-        {
-            if (_pauseMenu.activeSelf)
-            {
-                _pauseMenu.SetActive(false);
-                CardGameManager.Instance.ResumeGame();
-            }
-            else
-            {
-                _pauseMenu.SetActive(true);
-                CardGameManager.Instance.PauseGame();
-            }
-        }
-
-        public void OnResumeButtonClick()
-        {
-            ShowHidePauseMenu();
-        }
-
-        public void OnReturnToMenuButtonClick()
-        {
-            OnEndButtonClick();
-        }
-
 
         #endregion
 

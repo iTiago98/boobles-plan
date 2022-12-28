@@ -18,11 +18,11 @@ namespace Booble
         [SerializeField] private EventReference _interviewMusicReference;
         [SerializeField] private EventReference _mainMenuReference;
 
+        private Bus _masterBus;
+        private Bus _bgmBus;
+        private Bus _sfxBus;
+
         private EventInstance _currentInstance;
-        //
-        // private EventInstance _loungeMusicInstance;
-        // private EventInstance _interviewMusicInstance;
-        // private EventInstance _mainMenuInstance;
 
         private void Awake()
         {
@@ -40,9 +40,21 @@ namespace Booble
 
         private void Start()
         {
-            // PlayMainMenuMusic();
             FlagManager.Instance.ResetFlags();
             PlayMusic(MusicReference.MainMenu);
+            InitializeBuses();
+        }
+
+        private void InitializeBuses()
+        {
+            string masterBusPath = "bus:/";
+            _masterBus = RuntimeManager.GetBus(masterBusPath);
+
+            string bgmBusPath = "bus:/BGM";
+            _bgmBus = RuntimeManager.GetBus(bgmBusPath);
+
+            string sfxBusPath = "bus:/SFX";
+            _sfxBus = RuntimeManager.GetBus(sfxBusPath);
         }
 
         public void PlayMusic(MusicReference reference)
@@ -67,7 +79,22 @@ namespace Booble
             _currentInstance.start();
             _currentInstance.release();
         }
-        
+
+        public void ChangeGeneralMusicVolume(float value)
+        {
+            _masterBus.setVolume(value);
+        }
+
+        public void ChangeBackgroundMusicVolume(float value)
+        {
+            _bgmBus.setVolume(value);
+        }
+
+        public void ChangeSFXVolume(float value)
+        {
+            _sfxBus.setVolume(value);
+        }
+
         // public void PlayMainMenuMusic()
         // {
         //     
