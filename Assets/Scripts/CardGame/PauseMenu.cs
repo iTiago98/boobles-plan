@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardGame
+namespace Booble.UI
 {
     public class PauseMenu : MonoBehaviour
     {
+        public static PauseMenu Instance { get; private set; }
+
         [SerializeField] private GameObject _pauseMenu;
 
         [SerializeField] private GameObject _mainMenu;
@@ -18,23 +20,30 @@ namespace CardGame
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
 
-        private void Update()
+        private void Awake()
         {
-            if (Input.GetKeyUp(KeyCode.Escape)) ShowHidePauseMenu();
+            DontDestroyOnLoad(this.gameObject);
+
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
 
-        private void ShowHidePauseMenu()
+        public void ShowHidePauseMenu()
         {
             if (_pauseMenu.activeSelf)
             {
                 OnBackButtonClick();
                 _pauseMenu.SetActive(false);
-                CardGameManager.Instance.ResumeGame();
             }
             else
             {
                 _pauseMenu.SetActive(true);
-                CardGameManager.Instance.PauseGame();
             }
         }
 

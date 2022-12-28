@@ -129,13 +129,6 @@ namespace CardGame.Managers
 
         #endregion
 
-        #region Pause Menu
-
-        [Header("Pause Menu")]
-        [SerializeField] private GameObject _pauseMenu;
-
-        #endregion
-
         private Contender _player;
         private Contender _opponent;
 

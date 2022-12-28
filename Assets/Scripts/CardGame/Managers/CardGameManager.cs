@@ -1,3 +1,4 @@
+using Booble.UI;
 using CardGame.AI;
 using CardGame.Cards;
 using CardGame.Level;
@@ -31,6 +32,16 @@ namespace CardGame.Managers
 
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseMenu.Instance.ShowHidePauseMenu();
+                if (gamePaused) ResumeGame();
+                else PauseGame();
+            }
+        }
 
         #region Initialize
 

@@ -4992,6 +4992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvas: {fileID: 2043816564}
   _eventSystem: {fileID: 1287878188}
+  _background: {fileID: 750023622}
   _mainMenu: {fileID: 1534448345}
   _credits: {fileID: 390264416}
   _cardGameMenu: {fileID: 172151442}
