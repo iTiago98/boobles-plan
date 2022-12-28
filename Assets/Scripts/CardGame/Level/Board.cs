@@ -176,44 +176,6 @@ namespace CardGame.Level
 
         #endregion
 
-        #region Destroy
-
-        public void DestroyCards(Contender contender)
-        {
-            StartCoroutine(DestroyCardsCoroutine(contender));
-        }
-
-        private IEnumerator DestroyCardsCoroutine(Contender contender)
-        {
-            Card aux = null;
-            foreach (CardZone zone in contender.cardZones)
-            {
-                if (zone.isNotEmpty)
-                {
-                    Card card = zone.GetCard();
-                    aux = card;
-                    card.DestroyCard();
-                }
-            }
-            if (contender.fieldCardZone.isNotEmpty)
-            {
-                Card fieldCard = contender.fieldCardZone.GetCard();
-                aux = fieldCard;
-                fieldCard.DestroyCard();
-            }
-
-            yield return new WaitUntil(() => aux.destroyed);
-            TurnManager.Instance.ContinueFlow();
-        }
-
-        public void DestroyAll()
-        {
-            DestroyCards(CardGameManager.Instance.player);
-            DestroyCards(CardGameManager.Instance.opponent);
-        }
-
-        #endregion
-
         #region Highlight
 
         public void RemoveTargetsHighlight()
