@@ -1,9 +1,6 @@
-using CardGame.Managers;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Booble.CardGame.Managers;
 
-namespace CardGame
+namespace Booble.CardGame
 {
     public interface IClickable
     {

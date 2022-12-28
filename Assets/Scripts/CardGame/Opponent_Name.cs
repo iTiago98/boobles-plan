@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace CardGame
+namespace Booble.CardGame
 {
     public enum Opponent_Name 
     {

@@ -1,15 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using CardGame.Managers;
-using CardGame.Level;
-using CardGame.Cards.DataModel;
-using TMPro;
-using CardGame.Cards.DataModel.Effects;
 using System.Collections;
-using System;
+using Booble.CardGame.Level;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Managers;
 
-namespace CardGame.Cards
+namespace Booble.CardGame.Cards
 {
     public class Card : MonoBehaviour, IClickable
     {

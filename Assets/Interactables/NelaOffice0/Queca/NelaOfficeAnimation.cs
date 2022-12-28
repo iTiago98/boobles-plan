@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Booble.CardGame;
 using Booble.Characters;
 using Booble.Interactables.Dialogues;
+using Booble.Managers;
 using Booble.Player;
 using Booble.UI;
-using CardGame.Level;
 using UnityEngine;
 
 namespace Booble.Interactables.Queca
@@ -46,7 +47,7 @@ namespace Booble.Interactables.Queca
             yield return new WaitForSeconds(_fade.FadeDuration);
             
             _fade.FadeIn2();
-            DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Tutorial);
+            DeckManager.Instance.SetOpponent(Opponent_Name.Tutorial);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);

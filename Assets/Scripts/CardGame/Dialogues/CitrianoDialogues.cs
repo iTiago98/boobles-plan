@@ -1,11 +1,8 @@
+using Booble.CardGame.Cards;
 using Booble.Interactables.Dialogues;
-using CardGame.Cards;
-using CardGame.Managers;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace CardGame.Dialogues
+namespace Booble.CardGame.Dialogues
 {
     public class CitrianoDialogues : InterviewDialogue
     {

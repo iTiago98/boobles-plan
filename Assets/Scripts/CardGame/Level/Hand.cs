@@ -1,14 +1,11 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using CardGame.Managers;
-using CardGame.Cards;
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Managers;
 
-namespace CardGame.Level
+namespace Booble.CardGame.Level
 {
     public class Hand : CardContainer
     {

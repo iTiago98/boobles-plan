@@ -1,15 +1,15 @@
+using Booble.CardGame.AI;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Dialogues;
+using Booble.CardGame.Level;
+using Booble.Managers;
 using Booble.UI;
-using CardGame.AI;
-using CardGame.Cards;
-using CardGame.Level;
 using DG.Tweening;
 using Santi.Utils;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CardGame.Managers
+namespace Booble.CardGame.Managers
 {
     public class CardGameManager : Singleton<CardGameManager>
     {

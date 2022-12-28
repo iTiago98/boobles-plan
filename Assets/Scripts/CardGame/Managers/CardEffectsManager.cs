@@ -1,15 +1,15 @@
-using CardGame.Cards;
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Level;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Level;
 using Santi.Utils;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static CardGame.Managers.TurnManager;
+using static Booble.CardGame.Managers.TurnManager;
 
-namespace CardGame.Managers
+namespace Booble.CardGame.Managers
 {
     public class CardEffectsManager : Singleton<CardEffectsManager>
     {

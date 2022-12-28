@@ -1,12 +1,8 @@
-using CardGame.Cards;
-using CardGame.Level;
-using CardGame.Managers;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Level;
+using Booble.CardGame.Managers;
 
-
-namespace CardGame.AI
+namespace Booble.CardGame.AI
 {
     public class SecretaryAI : OpponentAI
     {

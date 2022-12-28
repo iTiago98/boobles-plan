@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Collections.Generic;
+using Booble.CardGame;
+using Booble.Managers;
 
 namespace Booble.MainMenu
 {
@@ -42,14 +44,14 @@ namespace Booble.MainMenu
 
 		public void TutorialCardsButton()
         {
-			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Tutorial);
+			DeckManager.Instance.SetOpponent(Opponent_Name.Tutorial);
 			DeckManager.Instance.RemoveExtraCards();
 			LoadInterview();
         }
 
 		public void CitrianoCardsButton()
         {
-			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Citriano);
+			DeckManager.Instance.SetOpponent(Opponent_Name.Citriano);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddCitrianoCards();
 			LoadInterview();
@@ -57,7 +59,7 @@ namespace Booble.MainMenu
 
 		public void PingPongBrosCardsButton()
         {
-			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.PingPongBros);
+			DeckManager.Instance.SetOpponent(Opponent_Name.PingPongBros);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddPPBrosCards();
 			LoadInterview();
@@ -65,7 +67,7 @@ namespace Booble.MainMenu
 
 		public void SecretaryCardsButton()
         {
-			DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Secretary);
+			DeckManager.Instance.SetOpponent(Opponent_Name.Secretary);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddSecretaryCards();
 			LoadInterview();

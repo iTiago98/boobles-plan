@@ -1,14 +1,12 @@
-using CardGame.AI;
-using CardGame.Cards.DataModel;
-using CardGame.Level;
-using CardGame.Managers;
-using System;
-using System.Collections;
+using Booble.CardGame.AI;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Dialogues;
+using Booble.CardGame.Level;
+using Booble.CardGame.Managers;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace CardGame
+namespace Booble.CardGame
 {
     public class Contender : MonoBehaviour
     {

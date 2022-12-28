@@ -1,9 +1,7 @@
-using CardGame.Cards.DataModel.Effects;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace CardGame.Cards.DataModel
+namespace Booble.CardGame.Cards.DataModel
 {
     [Serializable]
     public class CardsDataSimple

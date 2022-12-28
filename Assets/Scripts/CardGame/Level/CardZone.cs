@@ -1,8 +1,10 @@
-using CardGame.Cards;
-using CardGame.Managers;
+using Booble.CardGame;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Level;
+using Booble.CardGame.Managers;
 using UnityEngine;
 
-namespace CardGame.Level
+namespace Booble.CardGame.Level
 {
     public class CardZone : CardContainer, IClickable
     {

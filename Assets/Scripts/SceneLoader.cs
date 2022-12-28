@@ -1,173 +1,173 @@
+using Booble.CardGame.Managers;
 using Booble.Player;
 using Booble.UI;
-using Santi.Utils;
-using System.Collections;
 using System.Collections.Generic;
-using Booble;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using CardGame.Managers;
 
-public class SceneLoader : MonoBehaviour
+namespace Booble.Managers
 {
-    public static SceneLoader Instance { get; private set; }
-
-    [SerializeField] private FadeIn _fadeScreen;
-
-    private string _currentScene;
-    private string _previousScene;
-    private Camera _mainCamera;
-
-    private List<GameObject> _disabledObjects;
-    //[SerializeField] private Controller _explorationPlayerController;
-
-    private void Awake()
+    public class SceneLoader : MonoBehaviour
     {
-        DontDestroyOnLoad(this.gameObject);
+        public static SceneLoader Instance { get; private set; }
 
-        if (Instance == null)
+        [SerializeField] private FadeIn _fadeScreen;
+
+        private string _currentScene;
+        private string _previousScene;
+        private Camera _mainCamera;
+
+        private List<GameObject> _disabledObjects;
+        //[SerializeField] private Controller _explorationPlayerController;
+
+        private void Awake()
         {
-            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        private void Start()
         {
-            Destroy(gameObject);
+            _currentScene = Scenes.MAIN_MENU;
+            _disabledObjects = new List<GameObject>();
         }
-    }
 
-    private void Start()
-    {
-        _currentScene = Scenes.MAIN_MENU;
-        _disabledObjects = new List<GameObject>();
-    }
-
-    public void LoadMainMenuScene()
-    {
-        _currentScene = Scenes.MAIN_MENU;
-
-        MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
-        _fadeScreen.FadeOut(() =>
+        public void LoadMainMenuScene()
         {
-            var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU);
-            async.completed += OnSceneLoaded;
-        });
-    }
+            _currentScene = Scenes.MAIN_MENU;
 
-    public void LoadScene(string scene)
-    {
-        _currentScene = scene;
+            MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+            _fadeScreen.FadeOut(() =>
+            {
+                var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU);
+                async.completed += OnSceneLoaded;
+            });
+        }
 
-        _fadeScreen.FadeOut(() =>
+        public void LoadScene(string scene)
         {
-            var async = SceneManager.LoadSceneAsync(scene);
-            async.completed += OnLoungeSceneLoaded;
-        });
-    }
+            _currentScene = scene;
 
-    #region Quick Access
+            _fadeScreen.FadeOut(() =>
+            {
+                var async = SceneManager.LoadSceneAsync(scene);
+                async.completed += OnLoungeSceneLoaded;
+            });
+        }
 
-    public void LoadLoungeScene0()
-    {
-        LoadScene(Scenes.LOUNGE_0);
-    }
+        #region Quick Access
 
-    public void LoadNelaOffice0()
-    {
-        LoadScene(Scenes.NELA_OFFICE_0);
-    }
-
-    public void LoadNelaOffice1()
-    {
-        LoadScene(Scenes.NELA_OFFICE_1);
-    }
-    public void LoadCanteenScene0()
-    {
-        LoadScene(Scenes.CANTEEN_0);
-    }
-
-    public void LoadLowerHall1()
-    {
-        LoadScene(Scenes.LOWER_HALL_1);
-    }
-
-    public void LoadLoungeScene1()
-    {
-        LoadScene(Scenes.LOUNGE_1);
-    }
-
-    #endregion
-
-    #region Interview
-
-    public void LoadInterviewScene()
-    {
-        LoadInterviewScene(new List<GameObject>() { Camera.main.gameObject });
-    }
-
-    public void LoadInterviewScene(List<GameObject> objects)
-    {
-        _previousScene = _currentScene;
-        _currentScene = Scenes.INTERVIEW;
-
-        MusicManager.Instance.PlayMusic(MusicReference.Interview);
-        _fadeScreen.FadeOut(() =>
+        public void LoadLoungeScene0()
         {
-            _disabledObjects = objects;
-            EnableObjects(objects, false);
-            if (_previousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
+            LoadScene(Scenes.LOUNGE_0);
+        }
 
-            var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW, LoadSceneMode.Additive);
-            async.completed += OnSceneLoaded;
-            async.completed += OnInterviewLoaded;
-        });
-    }
-
-    public void UnloadInterviewScene()
-    {
-        _currentScene = _previousScene;
-
-        if (_previousScene == Scenes.MAIN_MENU) MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
-        else MusicManager.Instance.PlayMusic(MusicReference.Lounge);
-
-        _fadeScreen.FadeOut(() =>
+        public void LoadNelaOffice0()
         {
-            EnableObjects(_disabledObjects, true);
-            if (_previousScene != Scenes.MAIN_MENU)
-                Controller.Instance.enabled = true;
+            LoadScene(Scenes.NELA_OFFICE_0);
+        }
 
-            var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
-            async.completed += OnSceneLoaded;
+        public void LoadNelaOffice1()
+        {
+            LoadScene(Scenes.NELA_OFFICE_1);
+        }
+        public void LoadCanteenScene0()
+        {
+            LoadScene(Scenes.CANTEEN_0);
+        }
+
+        public void LoadLowerHall1()
+        {
+            LoadScene(Scenes.LOWER_HALL_1);
+        }
+
+        public void LoadLoungeScene1()
+        {
+            LoadScene(Scenes.LOUNGE_1);
+        }
+
+        #endregion
+
+        #region Interview
+
+        public void LoadInterviewScene()
+        {
+            LoadInterviewScene(new List<GameObject>() { Camera.main.gameObject });
+        }
+
+        public void LoadInterviewScene(List<GameObject> objects)
+        {
+            _previousScene = _currentScene;
+            _currentScene = Scenes.INTERVIEW;
+
+            MusicManager.Instance.PlayMusic(MusicReference.Interview);
+            _fadeScreen.FadeOut(() =>
+            {
+                _disabledObjects = objects;
+                EnableObjects(objects, false);
+                if (_previousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
+
+                var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW, LoadSceneMode.Additive);
+                async.completed += OnSceneLoaded;
+                async.completed += OnInterviewLoaded;
+            });
+        }
+
+        public void UnloadInterviewScene()
+        {
+            _currentScene = _previousScene;
+
+            if (_previousScene == Scenes.MAIN_MENU) MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+            else MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+
+            _fadeScreen.FadeOut(() =>
+            {
+                EnableObjects(_disabledObjects, true);
+                if (_previousScene != Scenes.MAIN_MENU)
+                    Controller.Instance.enabled = true;
+
+                var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
+                async.completed += OnSceneLoaded;
             //async.completed += RestoreMainCamera;
-        });
-    }
-
-    #endregion
-
-    
-
-    private void OnSceneLoaded(AsyncOperation op)
-    {
-        _fadeScreen.FadeIn2();
-    }
-
-    private void OnLoungeSceneLoaded(AsyncOperation op)
-    {
-        //RestoreMainCamera(op);
-        Controller.Instance.enabled = true;
-        _fadeScreen.FadeIn2();
-    }
-
-    private void OnInterviewLoaded(AsyncOperation op)
-    {
-        CardGameManager.Instance.Initialize();
-    }
-
-    private void EnableObjects(List<GameObject> objects, bool enable)
-    {
-        foreach (GameObject obj in objects)
-        {
-            obj.SetActive(enable);
+            });
         }
-    }
 
+        #endregion
+
+
+
+        private void OnSceneLoaded(AsyncOperation op)
+        {
+            _fadeScreen.FadeIn2();
+        }
+
+        private void OnLoungeSceneLoaded(AsyncOperation op)
+        {
+            //RestoreMainCamera(op);
+            Controller.Instance.enabled = true;
+            _fadeScreen.FadeIn2();
+        }
+
+        private void OnInterviewLoaded(AsyncOperation op)
+        {
+            CardGameManager.Instance.Initialize();
+        }
+
+        private void EnableObjects(List<GameObject> objects, bool enable)
+        {
+            foreach (GameObject obj in objects)
+            {
+                obj.SetActive(enable);
+            }
+        }
+
+    }
 }

@@ -1,6 +1,6 @@
-using CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Cards.DataModel.Effects;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;

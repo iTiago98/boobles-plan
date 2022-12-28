@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Booble.Interactables.Events;
-using CardGame.Level;
+using Booble.Managers;
 using UnityEngine;
 
 public class ObtainGranFinal : DialogueEvent

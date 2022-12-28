@@ -1,7 +1,4 @@
-using Booble;
-using CardGame.Managers;
-using System.Collections;
-using System.Collections.Generic;
+using Booble.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 

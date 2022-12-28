@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardGame.Utils
+namespace Booble.CardGame.Utils
 {
     public class MyButton : MonoBehaviour
     {

@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using CardGame.Cards;
+using Booble.CardGame.Cards;
 
-namespace CardGame.Level
+namespace Booble.CardGame.Level
 {
     public class CardContainer : MonoBehaviour
     {

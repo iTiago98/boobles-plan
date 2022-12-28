@@ -8,7 +8,7 @@ using Booble.Flags;
 using UnityEngine;
 using STOP_MODE = FMOD.Studio.STOP_MODE;
 
-namespace Booble
+namespace Booble.Managers
 {
     public class MusicManager : MonoBehaviour
     {

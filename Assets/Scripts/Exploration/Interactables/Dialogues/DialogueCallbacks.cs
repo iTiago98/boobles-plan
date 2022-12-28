@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using Booble.CardGame;
+using Booble.Managers;
 using UnityEngine;
 
 public class DialogueCallbacks : MonoBehaviour
@@ -11,7 +11,7 @@ public class DialogueCallbacks : MonoBehaviour
 
     public void PinPon()
     {
-        DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.PingPongBros);
+        DeckManager.Instance.SetOpponent(Opponent_Name.PingPongBros);
         SceneLoader.Instance.LoadInterviewScene();
     }
 

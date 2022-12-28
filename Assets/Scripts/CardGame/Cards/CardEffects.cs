@@ -1,12 +1,11 @@
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Level;
-using CardGame.Managers;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Managers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CardGame.Cards
+namespace Booble.CardGame.Cards
 {
     public class CardEffects : MonoBehaviour
     {

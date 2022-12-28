@@ -1,4 +1,4 @@
-﻿namespace CardGame.Cards.DataModel
+﻿namespace Booble.CardGame.Cards.DataModel
 {
     public enum CardType
     {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Booble.Flags;
 using Booble.Interactables;
 using Booble.Interactables.Dialogues;
+using Booble.Managers;
 using Booble.Player;
 using Booble.UI;
 using UnityEngine;

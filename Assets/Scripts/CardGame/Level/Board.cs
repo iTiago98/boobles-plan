@@ -1,13 +1,12 @@
-using CardGame.Cards;
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Managers;
-using System.Collections;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Managers;
 using System.Collections.Generic;
 using UnityEngine;
-using static CardGame.Managers.TurnManager;
+using static Booble.CardGame.Managers.TurnManager;
 
-namespace CardGame.Level
+namespace Booble.CardGame.Level
 {
     public class Board : MonoBehaviour
     {

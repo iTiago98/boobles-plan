@@ -1,14 +1,13 @@
-using CardGame;
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Managers;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardGame.Cards
+namespace Booble.CardGame.Cards
 {
     public class CardImageUI : MonoBehaviour
     {

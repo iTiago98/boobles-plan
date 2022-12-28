@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Booble.CardGame;
 using Booble.Flags;
 using Booble.Interactables;
 using Booble.Interactables.Dialogues;
+using Booble.Managers;
 using Booble.Player;
 using Booble.UI;
 using DG.Tweening;
@@ -85,7 +87,7 @@ public class NelaOffice1Animation : MonoBehaviour
 
         if (_interview)
         {
-            DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Citriano);
+            DeckManager.Instance.SetOpponent(Opponent_Name.Citriano);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);

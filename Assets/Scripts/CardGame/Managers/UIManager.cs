@@ -1,18 +1,18 @@
-using CardGame.Cards;
-using CardGame.Cards.DataModel;
-using CardGame.Level;
-using CardGame.Utils;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Level;
+using Booble.CardGame.Utils;
+using Booble.Managers;
 using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static CardGame.Managers.TurnManager;
+using static Booble.CardGame.Managers.TurnManager;
 
-namespace CardGame.Managers
+namespace Booble.CardGame.Managers
 {
     public class UIManager : MonoBehaviour
     {

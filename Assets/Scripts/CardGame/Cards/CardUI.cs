@@ -1,14 +1,12 @@
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Level;
-using CardGame.Managers;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Level;
+using Booble.CardGame.Managers;
 using DG.Tweening;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace CardGame.Cards
+namespace Booble.CardGame.Cards
 {
     public class CardUI : MonoBehaviour
     {

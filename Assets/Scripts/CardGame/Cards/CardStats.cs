@@ -1,11 +1,7 @@
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Managers;
-using System.Collections;
-using System.Collections.Generic;
+using Booble.CardGame.Cards.DataModel;
 using UnityEngine;
 
-namespace CardGame.Cards
+namespace Booble.CardGame.Cards
 {
     public class CardStats : MonoBehaviour
     {

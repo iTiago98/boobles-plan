@@ -1,12 +1,12 @@
-using CardGame.Cards;
-using CardGame.Cards.DataModel;
-using CardGame.Cards.DataModel.Effects;
-using CardGame.Level;
-using CardGame.Managers;
+using Booble.CardGame.Cards;
+using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Level;
+using Booble.CardGame.Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CardGame.AI
+namespace Booble.CardGame.AI
 {
     abstract public class OpponentAI : MonoBehaviour
     {

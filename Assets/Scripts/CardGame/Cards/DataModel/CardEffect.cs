@@ -1,12 +1,10 @@
-using CardGame.Level;
-using CardGame.Managers;
-using DG.Tweening;
+using Booble.CardGame.Level;
+using Booble.CardGame.Managers;
+using Booble.Managers;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-namespace CardGame.Cards.DataModel.Effects
+namespace Booble.CardGame.Cards.DataModel.Effects
 {
     #region Enums
 
