@@ -626,8 +626,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CardGame.PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 642055712581269086}
+        m_TargetAssemblyTypeName: Booble.UI.PauseMenu, Assembly-CSharp
         m_MethodName: OnBackButtonClick
         m_Mode: 1
         m_Arguments:

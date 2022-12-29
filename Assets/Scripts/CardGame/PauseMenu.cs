@@ -17,6 +17,9 @@ namespace Booble.UI
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
 
+        private bool _hide;
+        public bool hide => _hide;
+
         private void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -37,6 +40,7 @@ namespace Booble.UI
             {
                 OnBackButtonClick();
                 _pauseMenu.SetActive(false);
+                _hide = false;
             }
             else
             {
@@ -46,7 +50,7 @@ namespace Booble.UI
 
         public void OnResumeButtonClick()
         {
-            ShowHidePauseMenu();
+            _hide = true;
         }
 
         public void OnOptionsButtonClick()
@@ -57,6 +61,7 @@ namespace Booble.UI
 
         public void OnReturnToMenuButtonClick()
         {
+            ShowHidePauseMenu();
             SceneLoader.Instance.UnloadInterviewScene();
         }
 

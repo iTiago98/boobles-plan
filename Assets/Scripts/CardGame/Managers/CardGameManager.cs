@@ -28,14 +28,16 @@ namespace Booble.CardGame.Managers
         public Contender currentPlayer => (TurnManager.Instance.IsPlayerTurn) ? player : opponent;
         public Contender otherPlayer => (TurnManager.Instance.IsPlayerTurn) ? opponent : player;
 
-        public bool gamePaused {  private set; get; }
+        public bool gamePaused { private set; get; }
+
+        [HideInInspector] public bool playingCard;
 
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide)
             {
                 PauseMenu.Instance.ShowHidePauseMenu();
                 if (gamePaused) ResumeGame();
@@ -52,6 +54,7 @@ namespace Booble.CardGame.Managers
             Board.Instance.InitializeBackground(opponent.GetInterviewBackground());
             UIManager.Instance.InitializeBanners(opponent.GetInterviewBanner());
             InitializeDecks();
+            InitializeContenders();
         }
 
         private void InitializeOpponent()
@@ -73,11 +76,6 @@ namespace Booble.CardGame.Managers
         private void InitializeDecks()
         {
             Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
-        }
-
-        public void InitializeGame()
-        {
-            InitializeContenders();
         }
 
         private void InitializeContenders()
@@ -115,7 +113,6 @@ namespace Booble.CardGame.Managers
 
         public void StartGame()
         {
-            InitializeGame();
             TurnManager.Instance.StartGame();
         }
 
