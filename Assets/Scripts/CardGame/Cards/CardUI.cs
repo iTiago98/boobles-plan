@@ -25,7 +25,8 @@ namespace Booble.CardGame.Cards
         [SerializeField] private AnimationClip effectClip;
         [SerializeField] private AnimationClip damagedClip;
         [SerializeField] private AnimationClip boostClip;
-        [SerializeField] private AnimationClip decreaseClip;
+        [SerializeField] private AnimationClip boostEffectClip;
+        [SerializeField] private AnimationClip nerfClip;
 
         private Sprite cardBack;
         private bool _cardFront = true;
@@ -216,10 +217,16 @@ namespace Booble.CardGame.Cards
             StartCoroutine(ShowAnimationCoroutine("VFX_Boost", boostClip.length));
         }
 
+        public void ShowBoostEffectAnimation()
+        {
+            _playingAnimation = true;
+            StartCoroutine(ShowAnimationCoroutine("VFX_BoostEffect", boostEffectClip.length));
+        }
+
         public void ShowDecreaseAnimation()
         {
             _playingAnimation = true;
-            StartCoroutine(ShowAnimationCoroutine("VFX_Decrease", decreaseClip.length));
+            StartCoroutine(ShowAnimationCoroutine("VFX_Nerf", nerfClip.length));
         }
 
         private IEnumerator ShowAnimationCoroutine(string animationName, float length)

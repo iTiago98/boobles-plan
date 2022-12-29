@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 48d243e1337469d4aa82ae9e014011ad
+guid: f7f3be7368b12f747a4dff67fe507c89
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,127 +117,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: VFX Sprite Sheet_0
+      name: SpriteSheet Boost_Amarillo_0
       rect:
         serializedVersion: 2
-        x: 60
-        y: 740
-        width: 125
-        height: 170
+        x: 0
+        y: 1026
+        width: 375
+        height: 510
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b175a254af226a048b6476b2d23f351c
-      internalID: 301776989
+      spriteID: d84d2c44ced669547ac3fad29ff628de
+      internalID: 176621719
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VFX Sprite Sheet_1
+      name: SpriteSheet Boost_Amarillo_1
       rect:
         serializedVersion: 2
-        x: 232
-        y: 740
-        width: 125
-        height: 170
+        x: 375
+        y: 1026
+        width: 375
+        height: 510
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5d34aff0d028df49a2d1d8fbe5c1ecc
-      internalID: 1619666320
+      spriteID: c6821dba81c91da4b94a4e7caad70bf6
+      internalID: -1956411799
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VFX Sprite Sheet_2
+      name: SpriteSheet Boost_Amarillo_2
       rect:
         serializedVersion: 2
-        x: 440
-        y: 740
-        width: 125
-        height: 170
+        x: 750
+        y: 1026
+        width: 375
+        height: 510
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5c0f4a0d289e6a4ea2ca46e9aa770c8
-      internalID: 745296357
+      spriteID: ba4adafb8ed213a498327ea00b121c31
+      internalID: -1348888742
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VFX Sprite Sheet_3
+      name: SpriteSheet Boost_Amarillo_3
       rect:
         serializedVersion: 2
-        x: 56
-        y: 530
-        width: 125
-        height: 170
+        x: 0
+        y: 516
+        width: 375
+        height: 510
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14a03b0ffc3d48741bf59385ff39a326
-      internalID: 1352397322
+      spriteID: a8bd9db28fea26947961fa772b82a21e
+      internalID: -1985612333
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VFX Sprite Sheet_4
+      name: SpriteSheet Boost_Amarillo_4
       rect:
         serializedVersion: 2
-        x: 244
-        y: 530
-        width: 125
-        height: 170
+        x: 375
+        y: 516
+        width: 375
+        height: 510
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1f6e979cf0277f14d9a2469a64dfe952
-      internalID: -861873626
+      spriteID: b59d1edb4e415084d83b54b3f47ae9fe
+      internalID: -2106633403
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: VFX Sprite Sheet_5
+      name: SpriteSheet Boost_Amarillo_5
       rect:
         serializedVersion: 2
-        x: 444
-        y: 530
-        width: 125
-        height: 170
+        x: 750
+        y: 516
+        width: 375
+        height: 510
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2848a782ff693b48ba71403519256db
-      internalID: 1796217977
+      spriteID: 352cab27ce1ad0046992bf86ca182779
+      internalID: -988449575
       vertices: []
       indices: 
       edges: []
@@ -253,34 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      VFX Sprite Sheet_21: -1031260708
-      VFX Sprite Sheet_3: 1352397322
-      VFX Sprite Sheet_11: 782928711
-      VFX Sprite Sheet_4: -861873626
-      VFX Sprite Sheet_24: 1428355916
-      VFX Sprite Sheet_2: 745296357
-      VFX Sprite Sheet_15: 1253853983
-      VFX Sprite Sheet_25: 1237702893
-      VFX Sprite Sheet_9: -421659418
-      VFX Sprite Sheet_7: -1174192972
-      VFX Sprite Sheet_14: 477999665
-      VFX Sprite Sheet_18: 400019338
-      VFX Sprite Sheet_16: 2041048671
-      VFX Sprite Sheet_6: 1638858925
-      VFX Sprite Sheet_8: 1179567638
-      VFX Sprite Sheet_23: -1594634821
-      VFX Sprite Sheet_12: 1693523728
-      VFX Sprite Sheet_13: 929963810
-      VFX Sprite Sheet_17: -2113651316
-      VFX Sprite Sheet_1: 1619666320
-      VFX Sprite Sheet_20: -1446134060
-      VFX Sprite Sheet_5: 1796217977
-      VFX Sprite Sheet_10: 1518551894
-      VFX Sprite Sheet_0: 301776989
-      VFX Sprite Sheet_27: 873057490
-      VFX Sprite Sheet_19: 1862426547
-      VFX Sprite Sheet_26: -1306930273
-      VFX Sprite Sheet_22: -1918338533
+      SpriteSheet Boost_Amarillo_3: -1985612333
+      SpriteSheet Boost_Amarillo_4: -2106633403
+      SpriteSheet Boost_Amarillo_5: -988449575
+      SpriteSheet Boost_Amarillo_1: -1956411799
+      SpriteSheet Boost_Amarillo_2: -1348888742
+      SpriteSheet Boost_Amarillo_0: 176621719
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
