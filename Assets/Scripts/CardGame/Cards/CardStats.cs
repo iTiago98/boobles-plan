@@ -1,4 +1,5 @@
 using Booble.CardGame.Cards.DataModel;
+using System.Collections;
 using UnityEngine;
 
 namespace Booble.CardGame.Cards

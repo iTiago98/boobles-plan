@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using UnityEngine;
 using Booble.CardGame;
 using Booble.CardGame.Cards.DataModel;
@@ -21,8 +21,6 @@ namespace Booble.Managers
 
         private List<CardsData> _playerDeck;
         private List<CardsData> _opponentDeck;
-
-        private OpponentAI _opponentAI;
 
         private Opponent_Name _opponentName;
 
@@ -50,25 +48,9 @@ namespace Booble.Managers
             _playerDeck.Add(cardsData);
         }
 
-        public List<CardsData> GetPlayerCards()
-        {
-            return _playerDeck;
-        }
-
-        public List<CardsData> GetOpponentCards()
-        {
-            return _opponentDeck;
-        }
-
-        public OpponentAI GetOpponentAI()
-        {
-            return _opponentAI;
-        }
-
-        public Opponent_Name GetOpponentName()
-        {
-            return _opponentName;
-        }
+        public List<CardsData> GetPlayerCards() => _playerDeck;
+        public List<CardsData> GetOpponentCards() => _opponentDeck;
+        public Opponent_Name GetOpponentName() => _opponentName;
 
         public void SetPlayerCards()
         {

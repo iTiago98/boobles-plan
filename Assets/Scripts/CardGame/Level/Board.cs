@@ -160,21 +160,6 @@ namespace Booble.CardGame.Level
             return false;
         }
 
-        #region Hit
-
-        public void HitCards(Contender contender, int damage)
-        {
-            foreach (CardZone cardZone in contender.cardZones)
-            {
-                if (cardZone.isNotEmpty)
-                {
-                    cardZone.GetCard().ReceiveDamage(damage);
-                }
-            }
-        }
-
-        #endregion
-
         #region Highlight
 
         public void RemoveTargetsHighlight()
