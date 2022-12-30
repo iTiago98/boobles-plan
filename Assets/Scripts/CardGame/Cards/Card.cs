@@ -395,6 +395,17 @@ namespace Booble.CardGame.Cards
 
         #region Effects
 
+        public bool AddEffect(CardEffect effect)
+        {
+            if (Effects.AddEffect(effect))
+            {
+                CardUI.ShowBoostEffectAnimation();
+                CardUI.UpdateDescriptionText();
+                return true;
+            }
+            return false;
+        }
+
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
             CardUI.ShowBoostAnimation();
