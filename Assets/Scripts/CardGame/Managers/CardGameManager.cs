@@ -30,14 +30,15 @@ namespace Booble.CardGame.Managers
 
         public bool gamePaused { private set; get; }
 
-        [HideInInspector] public bool playingCard;
+        public bool playingCard { private set; get; }
+
 
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide)
+            if (Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide)
             {
                 PauseMenu.Instance.ShowHidePauseMenu();
                 if (gamePaused) ResumeGame();
@@ -81,26 +82,26 @@ namespace Booble.CardGame.Managers
         private void InitializeContenders()
         {
             player.Initialize(
-                Board.Instance.playerHand, 
-                Board.Instance.playerDeck, 
-                Board.Instance.playerCardZone, 
+                Board.Instance.playerHand,
+                Board.Instance.playerDeck,
+                Board.Instance.playerCardZone,
                 Board.Instance.playerFieldCardZone);
 
             player.InitializeStats(
-                settings.initialLife, 
-                settings.initialManaCounter, 
+                settings.initialLife,
+                settings.initialManaCounter,
                 settings.maxManaCounter);
 
 
             opponent.Initialize(
-                Board.Instance.opponentHand, 
+                Board.Instance.opponentHand,
                 Board.Instance.opponentDeck,
-                Board.Instance.opponentCardZone, 
+                Board.Instance.opponentCardZone,
                 Board.Instance.opponentFieldCardZone);
 
             opponent.InitializeStats(
-                settings.initialLife, 
-                settings.initialManaCounter, 
+                settings.initialLife,
+                settings.initialManaCounter,
                 settings.maxManaCounter);
 
             opponentAI = opponent.GetAIScript();
@@ -144,7 +145,7 @@ namespace Booble.CardGame.Managers
 
         public void ThrowWinDialogue()
         {
-            _interviewDialogue?.ThrowWinDialogue(); 
+            _interviewDialogue?.ThrowWinDialogue();
         }
 
         public void ThrowLoseDialogue()
@@ -209,6 +210,14 @@ namespace Booble.CardGame.Managers
         {
             player.FillMana();
             opponent.FillMana();
+        }
+
+        public void SetPlayingCard(bool value)
+        {
+            playingCard = value;
+
+            if (playingCard) UIManager.Instance.SetEndTurnButtonInteractable(false);
+            else UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
         }
     }
 }

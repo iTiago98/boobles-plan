@@ -29,6 +29,7 @@ namespace Booble.CardGame.AI
         {
             if (_contender == null) return;
             if (!TurnManager.Instance.continueFlow) return;
+            if (CardGameManager.Instance.playingCard) return;
 
             _timer += Time.deltaTime;
             if (_timer > _waitTime)

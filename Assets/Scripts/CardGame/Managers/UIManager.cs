@@ -418,7 +418,7 @@ namespace Booble.CardGame.Managers
         {
             StartCoroutine(ContinuePlayCoroutine(
                 card,
-                card.Effects.ApplyEffect,
+                () => card.Effects.ApplyFirstEffect(null),
                 () =>
                 {
                     SetEndTurnButtonInteractable(true);
@@ -429,7 +429,7 @@ namespace Booble.CardGame.Managers
         {
             StartCoroutine(ContinuePlayCoroutine(
                 card,
-                () => card.Effects.ApplyEffect(card.storedTarget),
+                () => card.Effects.ApplyFirstEffect(card.storedTarget),
                 () =>
                 {
                     card.storedTarget = null;
@@ -451,6 +451,7 @@ namespace Booble.CardGame.Managers
             onDestroy();
 
             MouseController.Instance.SetHolding(null);
+            CardGameManager.Instance.SetPlayingCard(false);
         }
 
         public void OnCancelPlayButtonClick()
@@ -461,12 +462,13 @@ namespace Booble.CardGame.Managers
                 holdingCard.contender.hand.AddCard(holdingCard);
 
                 if (MouseController.Instance.IsApplyingEffect) MouseController.Instance.ResetApplyingEffect();
-                else if (holdingCard.Stats.type == CardType.ACTION) Board.Instance.RemoveTargetsHighlight();
+                if (holdingCard.Stats.type == CardType.ACTION) Board.Instance.RemoveTargetsHighlight();
                 else Board.Instance.RemoveCardZonesHighlight(holdingCard);
 
                 HidePlayButtons();
                 SetEndTurnButtonInteractable(true);
                 MouseController.Instance.SetHolding(null);
+                CardGameManager.Instance.SetPlayingCard(false);
             }
         }
 

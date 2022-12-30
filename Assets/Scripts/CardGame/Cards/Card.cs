@@ -91,6 +91,7 @@ namespace Booble.CardGame.Cards
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
             if (!_clickable) return;
+            if (CardGameManager.Instance.playingCard) return;
 
             if (IsInHand)
             {
@@ -162,6 +163,7 @@ namespace Booble.CardGame.Cards
         {
             if (!IsPlayerCard) CardUI.FlipCard();
 
+            CardGameManager.Instance.SetPlayingCard(true);
             PlayCard(cardZone);
             CardGameManager.Instance.CheckDialogue(this);
         }
@@ -171,23 +173,45 @@ namespace Booble.CardGame.Cards
             switch (Stats.type)
             {
                 case CardType.ARGUMENT:
-                    Stats.SubstractMana();
-                    AddToContainer(cardZone);
-                    Effects.CheckEffect();
-                    CardEffectsManager.Instance.ApplyPlayArgumentEffects();
-                    break;
-
                 case CardType.FIELD:
-                    Stats.SubstractMana();
-                    if (cardZone.isNotEmpty) cardZone.GetCard().DestroyCard();
-                    AddToContainer(cardZone);
-                    Effects.CheckEffect();
+                    PlayArgumentOrField(cardZone);
                     break;
 
                 case CardType.ACTION:
                     PlayAction();
                     break;
             }
+        }
+
+        private void PlayArgumentOrField(CardZone cardZone)
+        {
+            StartCoroutine(PlayArgumentOrFieldCoroutine(cardZone));
+        }
+
+        private IEnumerator PlayArgumentOrFieldCoroutine(CardZone cardZone)
+        {
+            Stats.SubstractMana();
+            Effects.CheckEffects();
+
+            if (Stats.type == CardType.FIELD && cardZone.isNotEmpty) cardZone.GetCard().DestroyCard();
+
+            AddToContainer(cardZone);
+
+            yield return new WaitUntil(() => cardZone.cardsAtPosition);
+
+            if (Effects.hasEnterEffects)
+            {
+                Effects.ApplyEnterEffects();
+                yield return new WaitWhile(() => Effects.applyingEffects);
+            }
+
+            if (Stats.type == CardType.ARGUMENT)
+            {
+                CardEffectsManager.Instance.ApplyPlayArgumentEffects();
+                yield return new WaitUntil(() => CardEffectsManager.Instance.effectsApplied);
+            }
+
+            CardGameManager.Instance.SetPlayingCard(false);
         }
 
         private void PlayAction()
@@ -430,7 +454,7 @@ namespace Booble.CardGame.Cards
                 contender = CardGameManager.Instance.player;
 
             _hand = contender.hand;
-            _swapped = !_swapped;
+            //_swapped = !_swapped;
         }
 
         public bool IsAlternateWinConditionCard()
