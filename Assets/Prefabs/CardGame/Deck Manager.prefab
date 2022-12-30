@@ -51,8 +51,6 @@ MonoBehaviour:
     cost: 5
     strength: 3
     defense: 2
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -74,13 +72,11 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 5
       subType: 23
-      applyTime: 0
+      applyTime: 1
       targetType: 0
       intParameter1: 0
       intParameter2: 0
@@ -96,8 +92,6 @@ MonoBehaviour:
     cost: 4
     strength: 4
     defense: 4
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -118,8 +112,6 @@ MonoBehaviour:
     cost: 3
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 2
     effects:
     - type: 1
@@ -140,8 +132,6 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 5
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 4
@@ -163,13 +153,11 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 5
       subType: 24
-      applyTime: 0
+      applyTime: 1
       targetType: 0
       intParameter1: 0
       intParameter2: 0
@@ -185,8 +173,6 @@ MonoBehaviour:
     cost: 4
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 2
     effects:
     - type: 3
@@ -207,8 +193,6 @@ MonoBehaviour:
     cost: 3
     strength: 0
     defense: 15
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -229,13 +213,11 @@ MonoBehaviour:
     cost: 2
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 3
       subType: 10
-      applyTime: 0
+      applyTime: 1
       targetType: 1
       intParameter1: 0
       intParameter2: 0
@@ -251,8 +233,6 @@ MonoBehaviour:
     cost: 1
     strength: 0
     defense: 7
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 4
@@ -287,13 +267,11 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 5
       subType: 25
-      applyTime: 0
+      applyTime: 1
       targetType: 0
       intParameter1: 0
       intParameter2: 0
@@ -309,13 +287,11 @@ MonoBehaviour:
     cost: 0
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 4
       subType: 27
-      applyTime: 0
+      applyTime: 1
       targetType: 0
       intParameter1: 0
       intParameter2: 0
@@ -331,8 +307,6 @@ MonoBehaviour:
     cost: 5
     strength: 5
     defense: 5
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 3
@@ -353,13 +327,11 @@ MonoBehaviour:
     cost: 2
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 4
       subType: 28
-      applyTime: 0
+      applyTime: 1
       targetType: 3
       intParameter1: 0
       intParameter2: 0
@@ -376,13 +348,11 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 1
       subType: 1
-      applyTime: 0
+      applyTime: 1
       targetType: 0
       intParameter1: 30
       intParameter2: 0
@@ -398,13 +368,11 @@ MonoBehaviour:
     cost: 5
     strength: 0
     defense: 15
-    defaultStrength: 0
-    defaultDefense: 0
     type: 0
     effects:
     - type: 3
       subType: 11
-      applyTime: 0
+      applyTime: 2
       targetType: 0
       intParameter1: 0
       intParameter2: 0
@@ -417,7 +385,7 @@ MonoBehaviour:
       cardParameter_Effect: 0
     - type: 3
       subType: 7
-      applyTime: 0
+      applyTime: 2
       targetType: 0
       intParameter1: 30
       intParameter2: 0
@@ -433,13 +401,11 @@ MonoBehaviour:
     cost: 1
     strength: 0
     defense: 0
-    defaultStrength: 0
-    defaultDefense: 0
     type: 1
     effects:
     - type: 4
       subType: 35
-      applyTime: 0
+      applyTime: 1
       targetType: 0
       intParameter1: 3
       intParameter2: 0

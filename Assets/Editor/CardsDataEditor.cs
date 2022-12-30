@@ -271,7 +271,6 @@ namespace CardGame.Cards.DataModel
                 }
                 else
                 {
-                    // TODO: This switch only works for tutorial deck
                     switch (cardEffect.subType)
                     {
                         case SubType.NONE:
@@ -280,19 +279,21 @@ namespace CardGame.Cards.DataModel
                         case SubType.DISCARD_CARD:
                         case SubType.INCREASE_MAX_MANA:
                         case SubType.FREE_MANA:
-                        case SubType.GUARD:
-                            cardEffect.applyTime = ApplyTime.ENTER;
-                            break;
+                            cardEffect.applyTime = ApplyTime.ENTER; break;
+
                         case SubType.LIFELINK:
                         case SubType.REBOUND:
                         case SubType.TRAMPLE:
                         case SubType.COMPARTMENTALIZE:
                         case SubType.SPONGE:
-                            cardEffect.applyTime = ApplyTime.COMBAT;
-                            break;
+                            cardEffect.applyTime = ApplyTime.COMBAT; break;
+
+                        case SubType.MIRROR:
+                        case SubType.GUARD:
+                            cardEffect.applyTime = ApplyTime.PERMANENT; break;
+
                         default:
-                            cardEffect.applyTime = (ApplyTime)EditorGUILayout.EnumPopup("Apply time", cardEffect.applyTime);
-                            break;
+                            cardEffect.applyTime = (ApplyTime)EditorGUILayout.EnumPopup("Apply time", cardEffect.applyTime); break;
                     }
                 }
             }
