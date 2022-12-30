@@ -33,6 +33,7 @@ public class PPBCinematic : MonoBehaviour
                         .SetEase(Ease.Linear)
                         .OnComplete(() =>
                         {
+                            _anaAnim.GetComponent<SpriteRenderer>().flipX = false;
                             _anaAnim.SetBool("Walking", false);
                             DialogueManager.Instance.StartDialogue(_dialogue2);
                             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
