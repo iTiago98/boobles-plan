@@ -3,6 +3,7 @@ using Booble.CardGame.Managers;
 using Booble.Managers;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Booble.CardGame.Cards.DataModel.Effects
 {
@@ -54,7 +55,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
     public enum ApplyTime
     {
-        NONE, /*START,*/ ENTER, COMBAT, END, DRAW_CARD, PLAY_ARGUMENT, DESTROY
+        NONE, /*START,*/ ENTER, COMBAT, END, DRAW_CARD, PLAY_ARGUMENT, DESTROY, PERMANENT
     }
 
     // ALLY - ally card
@@ -126,14 +127,19 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
         public void SetEffectApplied()
         {
-            effectApplied = true;
+            SetEffectApplied(true);
+        }
+
+        public void SetEffectApplied(bool value)
+        {
+            effectApplied = value;
         }
 
         #region Apply
 
         public void Apply(Card source, object target)
         {
-            effectApplied = false;
+            SetEffectApplied(false);
 
             switch (type)
             {
@@ -199,22 +205,16 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.LIFELINK:
-                    CardEffectsManager.Instance.Lifelink(this, source, target); break;
-
                 case SubType.REBOUND:
-                    CardEffectsManager.Instance.Rebound(this, source, target); break;
-
                 case SubType.TRAMPLE:
-                    CardEffectsManager.Instance.Trample(this, source, target); break;
-
                 case SubType.SPONGE:
-                    CardEffectsManager.Instance.Sponge(this, source, target); break;
-
-                case SubType.GUARD:
-                    TurnManager.Instance.SetGuardCard(source); break;
+                    CardEffectsManager.Instance.CombatEffects(this, source, target); break;
 
                 case SubType.COMPARTMENTALIZE:
                     CardEffectsManager.Instance.Compartmentalize(this, source, target); break;
+
+                case SubType.GUARD:
+                    TurnManager.Instance.SetGuardCard(source); break;
 
                 case SubType.STAT_BOOST:
                     CardEffectsManager.Instance.StatBoost(this, source, target, targetType, intParameter1, intParameter2); break;
@@ -263,16 +263,16 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     CardEffectsManager.Instance.ReturnCard(this, target); break;
 
                 case SubType.FREE_MANA:
-                    CardEffectsManager.Instance.FreeMana(source.contender); break;
+                    CardEffectsManager.Instance.FreeMana(this, source.contender); break;
 
                 case SubType.WHEEL:
                     CardEffectsManager.Instance.Wheel(this); break;
 
                 case SubType.SKIP_COMBAT:
-                    CardEffectsManager.Instance.SkipCombat(); break;
+                    CardEffectsManager.Instance.SkipCombat(this); break;
 
                 case SubType.MIRROR:
-                    CardEffectsManager.Instance.Mirror(source.contender); break;
+                    CardEffectsManager.Instance.Mirror(this, source.contender); break;
 
                 case SubType.STEAL_MANA:
                     CardEffectsManager.Instance.StealMana(this, source.contender); break;
@@ -311,11 +311,25 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                 {
                     type = GetTypeFromSubType(cardParameter_Effect),
                     subType = cardParameter_Effect,
-                    applyTime = ApplyTime.COMBAT //TODO other effects not combat
+                    applyTime = GetApplyTimeFromSubType(cardParameter_Effect)
                 });
             }
 
             return data;
+        }
+
+        private ApplyTime GetApplyTimeFromSubType(SubType subType)
+        {
+            switch (subType)
+            {
+                case SubType.LIFELINK:
+                    return ApplyTime.COMBAT;
+
+                case SubType.INCOMPARTMENTABLE:
+                    return ApplyTime.NONE;
+            }
+
+            return ApplyTime.NONE;
         }
 
         private void ApplyAlternateWinCondition(Card source, object target)
@@ -500,6 +514,8 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     return "Rueda";
                 case SubType.COMPARTMENTALIZE:
                     return "Compartimentar";
+                case SubType.INCOMPARTMENTABLE:
+                    return "Incompartimentable";
                 case SubType.SKIP_COMBAT:
                     return "Omitir combate";
                 case SubType.MIRROR:

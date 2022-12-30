@@ -137,7 +137,7 @@ namespace Booble.CardGame.Managers
             Board.Instance.RemoveTargetsHighlight();
 
             _effectCard.Stats.SubstractMana();
-            _effectCard.Effects.ApplyEffect(targetCard);
+            _effectCard.Effects.ApplyFirstEffect(targetCard);
 
             yield return new WaitUntil(() => _effectCard.effect.effectApplied);
 

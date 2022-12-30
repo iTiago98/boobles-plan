@@ -13,8 +13,6 @@ namespace Booble.CardGame.Managers
 {
     public class CardEffectsManager : Singleton<CardEffectsManager>
     {
-        private int _storedValue = -1;
-
         #region Deffensive Effects
 
         #region Restore Life
@@ -130,17 +128,14 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator DealDamageCoroutine(CardEffect effect, Card source, object target, Target targetType, int value)
         {
+            Card aux = null;
+
             switch (targetType)
             {
                 case Target.ENEMY:
                     Card card = (Card)target;
                     card.ReceiveDamage(value);
-
-                    yield return new WaitWhile(() => card.CardUI.IsPlayingAnimation);
-
-                    if (card.Stats.defense == 0)
-                        yield return new WaitUntil(() => card.destroyed);
-
+                    aux = card;
                     break;
 
                 case Target.PLAYER:
@@ -157,7 +152,6 @@ namespace Booble.CardGame.Managers
                     {
                         Contender player = CardGameManager.Instance.player;
                         Contender opponent = CardGameManager.Instance.opponent;
-                        Card aux = null;
 
                         if (!HasParaguas(source, player))
                         {
@@ -171,14 +165,15 @@ namespace Booble.CardGame.Managers
                             opponent.ReceiveDamage(value);
                         }
 
-                        if (aux != null)
-                        {
-                            yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
-                            if (aux.Stats.defense == 0)
-                                yield return new WaitUntil(() => aux.destroyed);
-                        }
                         break;
                     }
+            }
+
+            if (aux != null)
+            {
+                yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
+                if (aux.Stats.defense == 0)
+                    yield return new WaitUntil(() => aux.destroyed);
             }
 
             effect.SetEffectApplied();
@@ -236,136 +231,123 @@ namespace Booble.CardGame.Managers
 
         #region Combat
 
-        #region Lifelink
+        private bool _next = true;
 
-        public void Lifelink(CardEffect effect, Card source, object target)
+        private int _lifeValue = 0;
+        private int _reboundValue = 0;
+        private int _trampleValue = 0;
+        private int _spongeValue = 0;
+
+        private int _storedLifeValue = -1;
+        private int _storedReboundValue = -1;
+        private int _storedTrampleValue = -1;
+        private int _storedSpongeValue = -1;
+
+        public void CombatEffects(CardEffect effect, Card source, object target)
         {
-            StartCoroutine(LifelinkCoroutine(effect, source, target));
+            StartCoroutine(CombatEffectsCoroutine(effect, source, target));
         }
 
-        private IEnumerator LifelinkCoroutine(CardEffect effect, Card source, object target)
+        private IEnumerator CombatEffectsCoroutine(CardEffect effect, Card source, object target)
         {
-            int value = 0;
             if (target is Card)
             {
                 Card targetCard = (Card)target;
-                value = Mathf.Min(source.Stats.strength, targetCard.Stats.defense);
+
+                _next &= targetCard.Effects.hasCombatEffects;
+
+                GetEffectValues(source, targetCard);
+
+                if (_next) _next = false;
+                else
+                {
+                    ApplyEffectValues(source, targetCard);
+                    ResetEffectStoredValues();
+
+                    yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+                }
             }
             else if (target is Contender)
             {
-                value = source.Stats.strength;
-            }
-            source.contender.RestoreLife(value);
-
-            yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
-
-            effect.SetEffectApplied();
-        }
-
-        #endregion
-
-        #region Rebound
-
-        public void Rebound(CardEffect effect, Card source, object target)
-        {
-            StartCoroutine(ReboundCoroutine(effect, source, target));
-        }
-
-        private IEnumerator ReboundCoroutine(CardEffect effect, Card source, object target)
-        {
-            if (target is Card)
-            {
-                Card aux = null;
-                bool destroy = false;
-
-                Card targetCard = (Card)target;
-                int reboundValue = Mathf.Min(source.Stats.defense, targetCard.Stats.strength);
-
-                if (targetCard.Effects.HasEffect(SubType.REBOUND))
+                if (source.Effects.HasEffect(SubType.LIFELINK))
                 {
-                    if (_storedValue == -1)
-                        _storedValue = reboundValue + source.Stats.strength;
-                    else
-                    {
-                        if (targetCard.ReceiveDamage(reboundValue + source.Stats.strength)) SetDestroy(ref aux, ref destroy, targetCard);
-                        if (source.ReceiveDamage(_storedValue)) SetDestroy(ref aux, ref destroy, source);
-                        _storedValue = -1;
-                    }
-                }
-                else
-                {
-                    if (targetCard.ReceiveDamage(reboundValue + source.Stats.strength)) SetDestroy(ref aux, ref destroy, targetCard);
-                    if (source.ReceiveDamage(targetCard.Stats.strength)) SetDestroy(ref aux, ref destroy, source);
-                }
+                    source.contender.RestoreLife(source.Stats.strength);
 
-                if (source.IsPlayerCard)
-                {
-                    CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
+                    yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
                 }
-
-                if (aux == null) aux = source;
-
-                if (destroy) yield return new WaitUntil(() => aux.destroyed);
-                else yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
             }
 
             effect.SetEffectApplied();
         }
 
-        private void SetDestroy(ref Card aux, ref bool destroy, Card card)
+        private void GetEffectValues(Card source, Card target)
         {
-            destroy = true;
-            aux = card;
-        }
+            ResetEffectValues();
 
-        #endregion
-
-        #region Trample
-
-        public void Trample(CardEffect effect, Card source, object target)
-        {
-            StartCoroutine(TrampleCoroutine(effect, source, target));
-        }
-
-        private IEnumerator TrampleCoroutine(CardEffect effect, Card source, object target)
-        {
-            if (target is Card)
+            if (source.Effects.HasEffect(SubType.LIFELINK))
             {
-                Card targetCard = (Card)target;
-                int lifeValue = source.Stats.strength - targetCard.Stats.defense;
-                CardGameManager.Instance.GetOtherContender(source.contender).ReceiveDamage(lifeValue);
-
-                yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+                _lifeValue = Mathf.Min(source.Stats.strength, target.Stats.defense);
+                if (_next && _storedLifeValue == -1) _storedLifeValue = _lifeValue;
             }
 
-           effect.SetEffectApplied();
-        }
-
-        #endregion
-
-        #region Sponge
-
-        public void Sponge(CardEffect effect, Card source, object target)
-        {
-            StartCoroutine(SpongeCoroutine(effect, source, target));
-        }
-
-        private IEnumerator SpongeCoroutine(CardEffect effect, Card source, object target)
-        {
-            source.Hit(target);
-            if (target is Card)
+            if (source.Effects.HasEffect(SubType.REBOUND))
             {
-                Card targetCard = (Card)target;
-                targetCard.Hit(source);
-                source.BoostStats(targetCard.Stats.strength, 0);
+                _reboundValue = Mathf.Min(source.Stats.defense, target.Stats.strength);
+                if (source.IsPlayerCard) CardGameManager.Instance.alternateWinConditionParameter += _reboundValue;
+
+                if (_next && _storedReboundValue == -1) _storedReboundValue = _reboundValue;
             }
 
-            yield return new WaitWhile(() => source.CardUI.IsPlayingAnimation);
+            if (source.Effects.HasEffect(SubType.TRAMPLE))
+            {
+                _trampleValue = source.Stats.strength - target.Stats.defense;
+                if (_next && _storedTrampleValue == -1) _storedTrampleValue = _trampleValue;
+            }
 
-            effect.SetEffectApplied();
+            if (source.Effects.HasEffect(SubType.SPONGE))
+            {
+                _spongeValue = target.Stats.strength;
+                if (_next && _storedSpongeValue == -1) _storedSpongeValue = _spongeValue;
+            }
         }
 
-        #endregion
+        private void ResetEffectValues()
+        {
+            _lifeValue = 0;
+            _reboundValue = 0;
+            _trampleValue = 0;
+            _spongeValue = 0;
+        }
+
+        private void ApplyEffectValues(Card source, Card target)
+        {
+            int sourceHitValue = source.Stats.strength;
+            int targetHitValue = target.Stats.strength;
+
+            if (_lifeValue > 0) source.contender.RestoreLife(_lifeValue);
+            if (_storedLifeValue > 0) target.contender.RestoreLife(_storedLifeValue);
+
+            if (_reboundValue > 0) sourceHitValue += _reboundValue;
+            if (_storedReboundValue > 0) targetHitValue += _storedReboundValue;
+
+            if (_trampleValue > 0) target.contender.ReceiveDamage(_trampleValue);
+            if (_storedTrampleValue > 0) source.contender.ReceiveDamage(_storedTrampleValue);
+
+            if (_spongeValue > 0) source.BoostStats(_spongeValue, 0);
+            if (_storedSpongeValue > 0) target.BoostStats(_storedSpongeValue, 0);
+
+            if (targetHitValue > 0) source.ReceiveDamage(targetHitValue);
+            if (sourceHitValue > 0) target.ReceiveDamage(sourceHitValue);
+        }
+
+        private void ResetEffectStoredValues()
+        {
+            _next = true;
+            _storedLifeValue = -1;
+            _storedReboundValue = -1;
+            _storedTrampleValue = -1;
+            _storedSpongeValue = -1;
+        }
 
         #region Compartmentalize
 
@@ -379,9 +361,17 @@ namespace Booble.CardGame.Managers
             if (target is Contender)
             {
                 Contender contender = (Contender)target;
-                contender.deck.DiscardCards(source.Stats.strength);
 
-                yield return new WaitWhile(() => contender.deck.busy);
+                if (contender.deck.numCards == 0)
+                {
+                    contender.ReceiveDamage(source.Stats.strength);
+                    yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+                }
+                else
+                {
+                    contender.deck.DiscardCards(source.Stats.strength);
+                    yield return new WaitWhile(() => contender.deck.busy);
+                }
             }
 
             effect.SetEffectApplied();
@@ -493,7 +483,7 @@ namespace Booble.CardGame.Managers
 
         public void AddEffect(CardEffect effect, Card source, object target, Target targetType, CardEffect effectParameter)
         {
-            StartCoroutine(AddEffectCoroutine(effect, source, target, targetType, effect));
+            StartCoroutine(AddEffectCoroutine(effect, source, target, targetType, effectParameter));
         }
 
         private IEnumerator AddEffectCoroutine(CardEffect effect, Card source, object target, Target targetType, CardEffect effectParameter)
@@ -505,15 +495,18 @@ namespace Booble.CardGame.Managers
                 case Target.ALLY:
                 case Target.ENEMY:
                 case Target.CARD:
-                    aux = (Card)target;
-                    aux.Effects.AddEffect(effectParameter);
+                    Card targetCard = (Card)target;
+                    if (targetCard.AddEffect(effectParameter))
+                    {
+                        aux = targetCard;
+                    }
                     break;
 
                 case Target.AALLY:
                     foreach (Card card in Board.Instance.GetCardsOnTable(source.contender))
                     {
-                        card.Effects.AddEffect(effectParameter);
-                        if (aux == null) aux = card;
+                        bool added = card.AddEffect(effectParameter);
+                        if (aux == null && added) aux = card;
                     }
                     break;
             }
@@ -542,6 +535,7 @@ namespace Booble.CardGame.Managers
             if (emptyCardZone != null)
             {
                 Card card = InstantiateCard(source.contender, source.transform.position, data, cardRevealed: true);
+                card.Effects.CheckEffects();
                 emptyCardZone.AddCard(card);
 
                 yield return new WaitUntil(() => emptyCardZone.cardsAtPosition);
@@ -641,7 +635,7 @@ namespace Booble.CardGame.Managers
                 CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(CardGameManager.Instance.GetOtherContender(source.contender));
                 if (emptyCardZone != null)
                 {
-                    SwapContender(source, source, emptyCardZone);
+                    SwapContender(source, emptyCardZone);
 
                     yield return new WaitUntil(() => emptyCardZone.cardsAtPosition);
                 }
@@ -712,9 +706,10 @@ namespace Booble.CardGame.Managers
 
         #region FreeMana
 
-        public void FreeMana(Contender contender)
+        public void FreeMana(CardEffect effect, Contender contender)
         {
             contender.SetFreeMana(true);
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -739,6 +734,9 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitUntil(() => Board.Instance.EmptyHands());
 
+            if (player.hand.HasAlternateWinConditionCard()) playerNumCards--;
+            if (opponent.hand.HasAlternateWinConditionCard()) opponentNumCards--;
+
             player.deck.DrawCards(playerNumCards);
             opponent.deck.DrawCards(opponentNumCards);
 
@@ -751,18 +749,20 @@ namespace Booble.CardGame.Managers
 
         #region Skip Combat
 
-        public void SkipCombat()
+        public void SkipCombat(CardEffect effect)
         {
             TurnManager.Instance.SkipCombat();
+            effect.SetEffectApplied();
         }
 
         #endregion
 
         #region Mirror
 
-        public void Mirror(Contender contender)
+        public void Mirror(CardEffect effect, Contender contender)
         {
             TurnManager.Instance.SetMirror(contender, true);
+            effect.SetEffectApplied();
         }
 
         #endregion
@@ -878,7 +878,7 @@ namespace Booble.CardGame.Managers
 
                 if (destCardZone != null)
                 {
-                    SwapContender(source, targetCard, destCardZone);
+                    SwapContender(targetCard, destCardZone);
                     source.contender.stolenCards++;
 
                     yield return new WaitUntil(() => destCardZone.cardsAtPosition);
@@ -949,26 +949,15 @@ namespace Booble.CardGame.Managers
             return card;
         }
 
-        private void SwapContender(Card source, Card target, CardZone dest)
+        private void SwapContender(Card target, CardZone dest)
         {
-            // Get origin card zone
-            int position = Board.Instance.GetPositionFromCard(target);
-            CardZone originCardZone = target.contender.cardZones[position];
-
-            //Create card with other prefab
-            Card newCard = InstantiateCard(CardGameManager.Instance.GetOtherContender(source.contender), target.transform.position, target.data, cardRevealed: true);
-            newCard.Effects.ManageEffects();
-            //newCard.SwapContender();
-
-            // Empty destination zone
             if (dest.isNotEmpty)
                 dest.GetCard().RemoveFromContainer();
 
-            // Destroy original
-            Card originCard = originCardZone.GetCard();
-            originCard.DestroyCard(instant: true);
+            target.RemoveFromContainer();
+            target.SwapContender();
 
-            dest.AddCard(newCard);
+            dest.AddCard(target);
         }
 
         #endregion
@@ -981,14 +970,44 @@ namespace Booble.CardGame.Managers
             public Card card;
         }
 
-        private void AddPermanentEffect(Action method, Card card, ref List<PermanentEffect> effectsList, ref List<PermanentEffect> effectsToAdd)
+        public void AddPermanentEffect(Action method, Card card, ApplyTime applyTime)
         {
             PermanentEffect effect = new PermanentEffect();
             effect.effect = method;
             effect.card = card;
 
+            switch (applyTime)
+            {
+                case ApplyTime.END:
+                    AddPermanentEffect(effect, ref _endTurnEffects, ref _endTurnEffectsToAdd); break;
+
+                case ApplyTime.DRAW_CARD:
+                    AddPermanentEffect(effect, ref _drawCardEffects, ref _drawCardEffectsToAdd); break;
+
+                case ApplyTime.PLAY_ARGUMENT:
+                    AddPermanentEffect(effect, ref _playArgumentEffects, ref _playArgumentEffectsToAdd); break;
+            }
+        }
+
+        private void AddPermanentEffect(PermanentEffect effect, ref List<PermanentEffect> effectsList, ref List<PermanentEffect> effectsToAdd)
+        {
             if (TurnManager.Instance.turn == Turn.ROUND_END) effectsToAdd.Add(effect);
             else effectsList.Add(effect);
+        }
+
+        public void RemovePermanentEffect(Card card, ApplyTime applyTime)
+        {
+            switch (applyTime)
+            {
+                case ApplyTime.END:
+                    RemovePermanentEffect(card, ref _endTurnEffects, ref _endTurnEffectsToRemove); break;
+
+                case ApplyTime.DRAW_CARD:
+                    RemovePermanentEffect(card, ref _drawCardEffects, ref _drawCardEffectsToRemove); break;
+
+                case ApplyTime.PLAY_ARGUMENT:
+                    RemovePermanentEffect(card, ref _playArgumentEffects, ref _playArgumentEffectsToRemove); break;
+            }
         }
 
         private void RemovePermanentEffect(Card card, ref List<PermanentEffect> effectsList, ref List<int> effectsToRemove)
@@ -1008,7 +1027,7 @@ namespace Booble.CardGame.Managers
             return -1;
         }
 
-        private bool effectsApplied;
+        public bool effectsApplied { private set; get; }
 
         private void UpdateEffectsToRemove(List<PermanentEffect> effectsList, List<int> effectsToRemove)
         {
@@ -1039,8 +1058,8 @@ namespace Booble.CardGame.Managers
                     if (effectsToRemove.Contains(i)) continue;
 
                     PermanentEffect permanentEffect = effectsList[i];
+                    permanentEffect.card.effect.SetEffectApplied(false);
                     permanentEffect.effect();
-                    //Debug.Log(permanentEffect.card.data.name + " applied");
                     yield return new WaitUntil(() => permanentEffect.card.effect.effectApplied);
                 }
             }
@@ -1058,16 +1077,6 @@ namespace Booble.CardGame.Managers
         private List<PermanentEffect> _endTurnEffectsToAdd = new List<PermanentEffect>();
         private List<int> _endTurnEffectsToRemove = new List<int>();
 
-        public void AddEndTurnEffect(Action method, Card card)
-        {
-            AddPermanentEffect(method, card, ref _endTurnEffects, ref _endTurnEffectsToAdd);
-        }
-
-        public void RemoveEndTurnEffect(Card card)
-        {
-            RemovePermanentEffect(card, ref _endTurnEffects, ref _endTurnEffectsToRemove);
-        }
-
         public void ApplyEndTurnEffects()
         {
             StartCoroutine(ApplyEndTurnEffectsCoroutine());
@@ -1075,8 +1084,13 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator ApplyEndTurnEffectsCoroutine()
         {
-            StartCoroutine(ApplyPermanentEffectsCoroutine(_endTurnEffects, _endTurnEffectsToAdd, _endTurnEffectsToRemove));
-            yield return new WaitUntil(() => effectsApplied);
+            if (_endTurnEffects.Count > 0)
+            {
+                effectsApplied = false;
+
+                StartCoroutine(ApplyPermanentEffectsCoroutine(_endTurnEffects, _endTurnEffectsToAdd, _endTurnEffectsToRemove));
+                yield return new WaitUntil(() => effectsApplied);
+            }
 
             TurnManager.Instance.ChangeTurn();
         }
@@ -1090,16 +1104,6 @@ namespace Booble.CardGame.Managers
         private List<PermanentEffect> _playArgumentEffectsToAdd = new List<PermanentEffect>();
         private List<int> _playArgumentEffectsToRemove = new List<int>();
 
-        public void AddPlayArgumentEffect(Action method, Card card)
-        {
-            AddPermanentEffect(method, card, ref _playArgumentEffects, ref _playArgumentEffectsToAdd);
-        }
-
-        public void RemovePlayArgumentEffect(Card card)
-        {
-            RemovePermanentEffect(card, ref _playArgumentEffects, ref _playArgumentEffectsToRemove);
-        }
-
         public void ApplyPlayArgumentEffects()
         {
             StartCoroutine(ApplyPlayArgumentEffectsCoroutine());
@@ -1108,6 +1112,7 @@ namespace Booble.CardGame.Managers
         private IEnumerator ApplyPlayArgumentEffectsCoroutine()
         {
             UIManager.Instance.SetEndTurnButtonInteractable(false);
+            effectsApplied = false;
 
             StartCoroutine(ApplyPermanentEffectsCoroutine(_playArgumentEffects, _playArgumentEffectsToAdd, _playArgumentEffectsToRemove));
             yield return new WaitUntil(() => effectsApplied);
@@ -1122,18 +1127,8 @@ namespace Booble.CardGame.Managers
 
         private List<PermanentEffect> _drawCardEffects = new List<PermanentEffect>();
 
-        private List<PermanentEffect> __drawCardEffectsToAdd = new List<PermanentEffect>();
+        private List<PermanentEffect> _drawCardEffectsToAdd = new List<PermanentEffect>();
         private List<int> _drawCardEffectsToRemove = new List<int>();
-
-        public void AddDrawCardEffect(Action method, Card card)
-        {
-            AddPermanentEffect(method, card, ref _drawCardEffects, ref __drawCardEffectsToAdd);
-        }
-
-        public void RemoveDrawCardEffect(Card card)
-        {
-            RemovePermanentEffect(card, ref _drawCardEffects, ref _drawCardEffectsToRemove);
-        }
 
         public void ApplyDrawCardEffects()
         {
@@ -1144,8 +1139,9 @@ namespace Booble.CardGame.Managers
         {
             bool previousState = UIManager.Instance.IsEndTurnButtonInteractable();
             UIManager.Instance.SetEndTurnButtonInteractable(false);
+            effectsApplied = false;
 
-            StartCoroutine(ApplyPermanentEffectsCoroutine(_drawCardEffects, __drawCardEffectsToAdd, _drawCardEffectsToRemove));
+            StartCoroutine(ApplyPermanentEffectsCoroutine(_drawCardEffects, _drawCardEffectsToAdd, _drawCardEffectsToRemove));
             yield return new WaitUntil(() => effectsApplied);
 
             UIManager.Instance.SetEndTurnButtonInteractable(previousState);

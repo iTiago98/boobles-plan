@@ -4,6 +4,7 @@ using Booble.CardGame.Level;
 using DG.Tweening;
 using Santi.Utils;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Booble.CardGame.Managers
@@ -140,7 +141,6 @@ namespace Booble.CardGame.Managers
                     SetTurn(Turn.PLAYER);
                     CardGameManager.Instance.opponentAI.enabled = false;
                     CardGameManager.Instance.opponent.hand.CheckDiscarding();
-                    StartTurn();
                     break;
 
                 case Turn.PLAYER:
@@ -238,8 +238,8 @@ namespace Booble.CardGame.Managers
                 yield return new WaitWhile(() => combat);
                 yield return new WaitUntil(() => continueFlow);
 
-                yield return new WaitWhile(() => (playerCard && playerCard.CardUI.IsPlayingAnimation)
-                    || (opponentCard && opponentCard.CardUI.IsPlayingAnimation));
+                yield return new WaitWhile(() => playerCard && (playerCard.CardUI.IsPlayingAnimation || playerCard.Effects.applyingEffects));
+                yield return new WaitWhile(() => opponentCard && (opponentCard.CardUI.IsPlayingAnimation || opponentCard.Effects.applyingEffects));
 
                 bool playerCardDestroy = playerCard && playerCard.CheckDestroy();
                 bool opponentCardDestroy = opponentCard && opponentCard.CheckDestroy();
@@ -268,12 +268,17 @@ namespace Booble.CardGame.Managers
 
         private bool IsHitManagedByEffect(Card source, object targetObj)
         {
-            return targetObj is Card && (IsEffect(SubType.REBOUND, source, (Card)targetObj) || IsEffect(SubType.SPONGE, source, (Card)targetObj));
-        }
+            if (!(targetObj is Card)) return false;
 
-        private bool IsEffect(SubType subType, Card source, Card target)
-        {
-            return source.Effects.HasEffect(subType) || target.Effects.HasEffect(subType);
+            Card targetCard = (Card)targetObj;
+            List<SubType> subTypes = new List<SubType>() { SubType.LIFELINK, SubType.REBOUND, SubType.TRAMPLE, SubType.SPONGE };
+
+            foreach(SubType subType in subTypes)
+            {
+                if (source.Effects.HasEffect(subType) || targetCard.Effects.HasEffect(subType)) return true;
+            }
+
+            return false;
         }
 
         #endregion

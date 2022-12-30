@@ -255,8 +255,8 @@ namespace Booble.CardGame.Cards
         {
             if (target is Card)
             {
-                Card card = (Card)target;
-                card.ReceiveDamage(Stats.strength);
+                Card targetCard = (Card)target;
+                targetCard.ReceiveDamage(Stats.strength);
             }
             else
             {
@@ -326,7 +326,7 @@ namespace Booble.CardGame.Cards
         public bool ReceiveDamage(int strength)
         {
             if (strength > 0) StartCoroutine(ReceiveDamageCoroutine(strength));
-            return Stats.defense <= strength;
+            return Stats.defense <= strength && !TurnManager.Instance.combat;
         }
 
         private IEnumerator ReceiveDamageCoroutine(int strength)
@@ -365,8 +365,8 @@ namespace Booble.CardGame.Cards
             if (!IsInHand)
             {
                 RemoveFromContainer();
-                Effects.CheckDelegateEffects();
-                if (!instant) Effects.CheckDestroyEffects();
+                Effects.CheckRemoveEffects();
+                if (!instant) Effects.ApplyDestroyEffects();
             }
 
             Sequence destroySequence = DOTween.Sequence();
@@ -397,6 +397,7 @@ namespace Booble.CardGame.Cards
 
         public void BoostStats(int strengthBoost, int defenseBoost)
         {
+            CardUI.ShowBoostAnimation();
             Stats.BoostStats(strengthBoost, defenseBoost);
 
             UpdateStatsUI();
@@ -404,6 +405,7 @@ namespace Booble.CardGame.Cards
 
         public void DecreaseStats(int strengthDecrease, int defenseDecrease)
         {
+            CardUI.ShowDecreaseAnimation();
             Stats.DecreaseStats(strengthDecrease, defenseDecrease);
             UpdateStatsUI();
             CheckDestroy();
@@ -438,10 +440,10 @@ namespace Booble.CardGame.Cards
         public void SetContainer(CardContainer container)
         {
             this._container = container;
-            if (_hand == null && container is Hand)
+            if (_container is Hand)
             {
                 _hand = (Hand)container;
-                if (contender == null) contender = _hand.contender;
+                contender = _hand.contender;
             }
         }
 
@@ -458,7 +460,7 @@ namespace Booble.CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
-            Effects.CheckDelegateEffects();
+            Effects.CheckRemoveEffects();
             if (_swapped) SwapContender();
 
             _hand.AddCard(this);
