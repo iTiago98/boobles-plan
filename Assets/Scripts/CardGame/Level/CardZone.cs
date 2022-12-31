@@ -36,7 +36,6 @@ namespace Booble.CardGame.Level
                 card.Play(this);
                 Board.Instance.RemoveCardZonesHighlight(card);
                 UIManager.Instance.HidePlayButtons();
-                UIManager.Instance.SetEndTurnButtonInteractable(true);
             }
         }
 
