@@ -62,7 +62,7 @@ namespace Booble.CardGame.Managers
             ChangeTurn();
         }
 
-        private void StartTurn()
+        public void StartTurn()
         {
             StartCoroutine(StartTurnCoroutine());
         }

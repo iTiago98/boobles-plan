@@ -127,6 +127,7 @@ namespace Booble.CardGame.Level
             {
                 isDiscarding = true;
                 ChangeScale(CardGameManager.Instance.settings.highlightScale);
+                UIManager.Instance.SetEndTurnButtonInteractable(false);
             }
 
             return isDiscarding;
@@ -158,8 +159,8 @@ namespace Booble.CardGame.Level
                 {
                     DiscardCards(number);
                     yield return new WaitWhile(() => busy);
-                    TurnManager.Instance.ChangeTurn();
                 }
+                TurnManager.Instance.StartTurn();
             }
         }
 
