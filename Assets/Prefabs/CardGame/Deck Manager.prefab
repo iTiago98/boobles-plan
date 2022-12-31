@@ -398,7 +398,7 @@ MonoBehaviour:
       cardParameter_Effect: 0
   - name: "Ha perdido ust\xE9 los papele+"
     sprite: {fileID: 21300000, guid: 164ff933105cfee4abe54e441e35b97f, type: 3}
-    cost: 1
+    cost: 5
     strength: 0
     defense: 0
     type: 1
