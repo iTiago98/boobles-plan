@@ -250,7 +250,9 @@ namespace Booble.CardGame.Level
 
             Contender otherContender = CardGameManager.Instance.GetOtherContender(_contender);
 
-            for (int i = cardsToSteal.Count - 1; i >= 0; i--)
+            cardsToSteal.Sort();
+            cardsToSteal.Reverse();
+            for (int i = 0; i < cardsToSteal.Count; i++)
             {
                 GameObject cardObj;
                 CardsData data;
