@@ -233,15 +233,15 @@ namespace Booble.CardGame.Managers
 
         private bool _next = true;
 
-        private int _lifeValue = 0;
-        private int _reboundValue = 0;
-        private int _trampleValue = 0;
-        private int _spongeValue = 0;
+        //private int _lifeValue = 0;
+        //private int _reboundValue = 0;
+        //private int _trampleValue = 0;
+        //private int _spongeValue = 0;
 
-        private int _storedLifeValue = -1;
-        private int _storedReboundValue = -1;
-        private int _storedTrampleValue = -1;
-        private int _storedSpongeValue = -1;
+        //private int _storedLifeValue = -1;
+        //private int _storedReboundValue = -1;
+        //private int _storedTrampleValue = -1;
+        //private int _storedSpongeValue = -1;
 
         public void CombatEffects(CardEffect effect, Card source, object target)
         {
@@ -254,9 +254,7 @@ namespace Booble.CardGame.Managers
             {
                 Card targetCard = (Card)target;
 
-                _next &= targetCard.Effects.hasCombatEffects;
-
-                GetEffectValues(source, targetCard);
+                _next &= targetCard.Effects.hasAppliableManagedCombatEffects;
 
                 if (_next) _next = false;
                 else
@@ -280,73 +278,44 @@ namespace Booble.CardGame.Managers
             effect.SetEffectApplied();
         }
 
-        private void GetEffectValues(Card source, Card target)
+        public void GetEffectValues(Card source, Card target, ref int lifeValue, ref int reboundValue, ref int trampleValue, ref int spongeValue)
         {
-            ResetEffectValues();
+            lifeValue = 0;
+            reboundValue = 0;
+            trampleValue = 0;
+            spongeValue = 0;
 
             if (source.Effects.HasEffect(SubType.LIFELINK))
             {
-                _lifeValue = Mathf.Min(source.Stats.strength, target.Stats.defense);
-                if (_next && _storedLifeValue == -1) _storedLifeValue = _lifeValue;
+                lifeValue = Mathf.Min(source.Stats.strength, target.Stats.defense);
             }
 
             if (source.Effects.HasEffect(SubType.REBOUND))
             {
-                _reboundValue = Mathf.Min(source.Stats.defense, target.Stats.strength);
-                if (source.IsPlayerCard) CardGameManager.Instance.alternateWinConditionParameter += _reboundValue;
-
-                if (_next && _storedReboundValue == -1) _storedReboundValue = _reboundValue;
+                reboundValue = Mathf.Min(source.Stats.defense, target.Stats.strength);
+                if (source.IsPlayerCard) CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
             }
 
             if (source.Effects.HasEffect(SubType.TRAMPLE))
             {
-                _trampleValue = source.Stats.strength - target.Stats.defense;
-                if (_next && _storedTrampleValue == -1) _storedTrampleValue = _trampleValue;
+                trampleValue = source.Stats.strength - target.Stats.defense;
             }
 
             if (source.Effects.HasEffect(SubType.SPONGE))
             {
-                _spongeValue = target.Stats.strength;
-                if (_next && _storedSpongeValue == -1) _storedSpongeValue = _spongeValue;
+                spongeValue = target.Stats.strength;
             }
-        }
-
-        private void ResetEffectValues()
-        {
-            _lifeValue = 0;
-            _reboundValue = 0;
-            _trampleValue = 0;
-            _spongeValue = 0;
         }
 
         private void ApplyEffectValues(Card source, Card target)
         {
-            int sourceHitValue = source.Stats.strength;
-            int targetHitValue = target.Stats.strength;
-
-            if (_lifeValue > 0) source.contender.RestoreLife(_lifeValue);
-            if (_storedLifeValue > 0) target.contender.RestoreLife(_storedLifeValue);
-
-            if (_reboundValue > 0) sourceHitValue += _reboundValue;
-            if (_storedReboundValue > 0) targetHitValue += _storedReboundValue;
-
-            if (_trampleValue > 0) target.contender.ReceiveDamage(_trampleValue);
-            if (_storedTrampleValue > 0) source.contender.ReceiveDamage(_storedTrampleValue);
-
-            if (_spongeValue > 0) source.BoostStats(_spongeValue, 0);
-            if (_storedSpongeValue > 0) target.BoostStats(_storedSpongeValue, 0);
-
-            if (targetHitValue > 0) source.ReceiveDamage(targetHitValue);
-            if (sourceHitValue > 0) target.ReceiveDamage(sourceHitValue);
+            source.Effects.ApplyEffectValues(target);
+            target.Effects.ApplyEffectValues(source);
         }
 
         private void ResetEffectStoredValues()
         {
             _next = true;
-            _storedLifeValue = -1;
-            _storedReboundValue = -1;
-            _storedTrampleValue = -1;
-            _storedSpongeValue = -1;
         }
 
         #region Compartmentalize

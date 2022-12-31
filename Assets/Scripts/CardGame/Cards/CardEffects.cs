@@ -1,4 +1,5 @@
 using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.CardGame.Level;
 using Booble.CardGame.Managers;
 using System;
 using System.Collections;
@@ -13,6 +14,7 @@ namespace Booble.CardGame.Cards
         public CardEffect firstEffect => effectsList[0];
         public bool hasEnterEffects => _enterEffects.Count > 0;
         public bool hasCombatEffects => _combatEffects.Count > 0;
+        public bool hasDestroyEffects => _destroyEffects.Count > 0;
 
         private Card _card;
 
@@ -50,20 +52,43 @@ namespace Booble.CardGame.Cards
             return false;
         }
 
-        private bool IsManagedCombatEffect(SubType type)
+        #region Combat Effects
+
+        public struct StoredValues
         {
-            return type == SubType.LIFELINK || type == SubType.REBOUND || type == SubType.TRAMPLE || type == SubType.SPONGE;
+            public int lifeValue;
+            public int reboundValue;
+            public int trampleValue;
+            public int spongeValue;
         }
 
-        private bool HasManagedCombatEffect()
-        {
-            foreach(CardEffect effect in _combatEffects)
-            {
-                if (IsManagedCombatEffect(effect.subType)) return true;
-            }
+        private StoredValues storedValues;
 
-            return false;
+        public void GetEffectValues()
+        {
+            storedValues = new StoredValues();
+            Card source = _card;
+            Card target = Board.Instance.GetOppositeCard(source);
+
+            CardEffectsManager.Instance.GetEffectValues(source, target, ref storedValues.lifeValue, ref storedValues.reboundValue,
+                ref storedValues.trampleValue, ref storedValues.spongeValue);
         }
+
+        public void ApplyEffectValues(Card target)
+        {
+            if (storedValues.lifeValue > 0) _card.contender.RestoreLife(storedValues.lifeValue);
+
+            if (storedValues.reboundValue > 0) target.ReceiveDamage(storedValues.reboundValue);
+
+            if (storedValues.trampleValue > 0) target.contender.ReceiveDamage(storedValues.trampleValue);
+
+            if (storedValues.spongeValue > 0) _card.BoostStats(storedValues.spongeValue, 0);
+        }
+
+        public bool hasManagedCombatEffects = false;
+        public bool hasAppliableManagedCombatEffects = false;
+
+        #endregion
 
         #region Apply
 
@@ -97,19 +122,21 @@ namespace Booble.CardGame.Cards
 
         private void ApplyEffects(List<CardEffect> effects, object target)
         {
-            if (effects.Count > 0)
-            {
-                applyingEffects = true;
-                StartCoroutine(ApplyEffectsCoroutine(effects, target));
-            }
+            applyingEffects = true;
+            StartCoroutine(ApplyEffectsCoroutine(effects, target));
         }
+
         private IEnumerator ApplyEffectsCoroutine(List<CardEffect> effects, object target)
         {
-
             foreach (CardEffect effect in effects)
             {
                 if (effect.IsAppliable(_card))
                 {
+                    if (effect.IsManagedCombatEffect())
+                    {
+                        hasAppliableManagedCombatEffects = true;
+                    }
+
                     _card.CardUI.ShowEffectAnimation();
                     yield return new WaitWhile(() => _card.CardUI.IsPlayingAnimation);
 
@@ -148,6 +175,11 @@ namespace Booble.CardGame.Cards
 
         public void CheckEffects()
         {
+            _enterEffects.Clear();
+            _combatEffects.Clear();
+            _permanentEffects.Clear();
+            _destroyEffects.Clear();
+
             foreach (CardEffect effect in effectsList)
             {
                 CheckEffect(effect);
@@ -162,7 +194,12 @@ namespace Booble.CardGame.Cards
                     _enterEffects.Add(effect); break;
 
                 case ApplyTime.COMBAT:
-                    if (!IsManagedCombatEffect(effect.subType) || !HasManagedCombatEffect()) _combatEffects.Add(effect);
+                    bool isManagedCombatEffect = effect.IsManagedCombatEffect();
+                    if (!isManagedCombatEffect || !hasManagedCombatEffects)
+                    {
+                        _combatEffects.Add(effect);
+                        if (isManagedCombatEffect) hasManagedCombatEffects = true;
+                    }
                     break;
 
                 case ApplyTime.DESTROY:

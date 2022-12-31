@@ -135,6 +135,12 @@ namespace Booble.CardGame.Cards.DataModel.Effects
             effectApplied = value;
         }
 
+        public bool IsManagedCombatEffect()
+        {
+            List<SubType> subTypes = new List<SubType>() { SubType.LIFELINK, SubType.REBOUND, SubType.TRAMPLE, SubType.SPONGE };
+            return subTypes.Contains(subType);
+        }
+
         #region Apply
 
         public void Apply(Card source, object target)
@@ -363,46 +369,75 @@ namespace Booble.CardGame.Cards.DataModel.Effects
             }
             else
             {
-                Contender contender = source.contender;
-                Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
-
-                bool contenderHasCards = Board.Instance.AreCardsOnTable(contender);
-                bool otherContenderHasCards = Board.Instance.AreCardsOnTable(otherContender);
-
-                switch (targetType)
+                if (applyTime == ApplyTime.COMBAT)
                 {
-                    case Target.ALLY:
-                    case Target.AALLY:
-                        CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(contender);
-                        if (subType == SubType.DUPLICATE_CARD)
-                            return emptyCardZone != null && contenderHasCards;
-                        else if (subType == SubType.CREATE_CARD)
-                            return emptyCardZone;
-                        else
-                            return contenderHasCards;
+                    Card target = Board.Instance.GetOppositeCard(source);
 
-                    case Target.ENEMY:
-                    case Target.AENEMY:
-                        if (subType == SubType.SWAP_POSITION)
-                            return otherContenderHasCards;
-                        else
-                            return otherContenderHasCards || otherContender.fieldCardZone.isNotEmpty;
+                    switch (subType)
+                    {
+                        case SubType.LIFELINK:
+                            return source.Stats.strength > 0;
 
-                    case Target.CARD:
-                    case Target.ACARD:
-                        return contenderHasCards || otherContenderHasCards
-                            || contender.fieldCardZone.isNotEmpty
-                            || otherContender.fieldCardZone.isNotEmpty;
+                        case SubType.REBOUND:
+                        case SubType.SPONGE:
+                            return target != null && target.Stats.strength > 0;
 
-                    case Target.FIELDCARD:
-                        return otherContender.fieldCardZone.isNotEmpty;
+                        case SubType.TRAMPLE:
+                            return target != null && source.Stats.strength > target.Stats.defense;
 
-                    case Target.NONE:
-                    case Target.PLAYER:
-                    case Target.SELF:
-                    case Target.ALL:
-                    default:
-                        return true;
+                        case SubType.COMPARTMENTALIZE:
+                            return target == null;
+
+                        case SubType.STEAL_CARD:
+                            return target != null;
+
+                        default:
+                            return false;
+                    }
+                }
+                else
+                {
+                    Contender contender = source.contender;
+                    Contender otherContender = CardGameManager.Instance.GetOtherContender(contender);
+
+                    bool contenderHasCards = Board.Instance.AreCardsOnTable(contender);
+                    bool otherContenderHasCards = Board.Instance.AreCardsOnTable(otherContender);
+
+                    switch (targetType)
+                    {
+                        case Target.ALLY:
+                        case Target.AALLY:
+                            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(contender);
+                            if (subType == SubType.DUPLICATE_CARD)
+                                return emptyCardZone != null && contenderHasCards;
+                            else if (subType == SubType.CREATE_CARD)
+                                return emptyCardZone;
+                            else
+                                return contenderHasCards;
+
+                        case Target.ENEMY:
+                        case Target.AENEMY:
+                            if (subType == SubType.SWAP_POSITION)
+                                return otherContenderHasCards;
+                            else
+                                return otherContenderHasCards || otherContender.fieldCardZone.isNotEmpty;
+
+                        case Target.CARD:
+                        case Target.ACARD:
+                            return contenderHasCards || otherContenderHasCards
+                                || contender.fieldCardZone.isNotEmpty
+                                || otherContender.fieldCardZone.isNotEmpty;
+
+                        case Target.FIELDCARD:
+                            return otherContender.fieldCardZone.isNotEmpty;
+
+                        case Target.NONE:
+                        case Target.PLAYER:
+                        case Target.SELF:
+                        case Target.ALL:
+                        default:
+                            return true;
+                    }
                 }
             }
         }
@@ -485,6 +520,8 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     return "Rebote";
                 case SubType.TRAMPLE:
                     return "Arrollar";
+                case SubType.SPONGE:
+                    return "Esponja";
                 case SubType.STAT_BOOST:
                     return "Bonificador de parámetros (" + intParameter1 + "/" + intParameter2 + ")";
                 case SubType.STAT_DECREASE:

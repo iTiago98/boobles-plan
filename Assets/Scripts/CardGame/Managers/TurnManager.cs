@@ -208,11 +208,14 @@ namespace Booble.CardGame.Managers
 
         public bool continueFlow { private set; get; }
         public bool combat;
+        private bool _combatActions;
 
         private IEnumerator ClashCoroutine()
         {
             Contender player = CardGameManager.Instance.player;
             Contender opponent = CardGameManager.Instance.opponent;
+
+            bool hitSequence = false;
 
             for (int index = 0; index < 4; index++)
             {
@@ -229,22 +232,32 @@ namespace Booble.CardGame.Managers
 
                 Sequence sequence = DOTween.Sequence();
 
-                if (playerCard) sequence.Join(playerCard.HitSequence(playerTarget));
-                if (opponentCard) sequence.Join(opponentCard.HitSequence(opponentTarget));
+                bool applyCombatActions = true;
+                if (playerCard)
+                {
+                    sequence.Join(playerCard.HitSequence(playerTarget, applyCombatActions));
+                    applyCombatActions = false;
+                }
+                if (opponentCard)
+                    sequence.Join(opponentCard.HitSequence(opponentTarget, applyCombatActions));
 
-                sequence.AppendCallback(() => combat = false);
+                if (!applyCombatActions) _combatActions = true;
+
+                sequence.AppendCallback(() => hitSequence = false);
+
+                hitSequence = true;
                 sequence.Play();
 
-                yield return new WaitWhile(() => combat);
-                yield return new WaitUntil(() => continueFlow);
+                yield return new WaitWhile(() => hitSequence);
 
-                yield return new WaitWhile(() => playerCard && (playerCard.CardUI.IsPlayingAnimation || playerCard.Effects.applyingEffects));
-                yield return new WaitWhile(() => opponentCard && (opponentCard.CardUI.IsPlayingAnimation || opponentCard.Effects.applyingEffects));
+                if (!applyCombatActions) yield return new WaitWhile(() => _combatActions);
 
                 bool playerCardDestroy = playerCard && playerCard.CheckDestroy();
                 bool opponentCardDestroy = opponentCard && opponentCard.CheckDestroy();
 
                 yield return new WaitWhile(() => (playerCardDestroy && playerCard != null) || (opponentCardDestroy && opponentCard != null));
+
+                combat = false;
             }
 
             ChangeTurn();
@@ -252,11 +265,33 @@ namespace Booble.CardGame.Managers
 
         public void ApplyCombatActions(Card source, object targetObj)
         {
-            source.Effects.ApplyCombatEffects(targetObj);
-            if (IsHitManagedByEffect(source, targetObj))
-                return;
+            StartCoroutine(ApplyCombatActionsCoroutine(source, targetObj));
+        }
+
+        private IEnumerator ApplyCombatActionsCoroutine(Card source, object targetObj)
+        {
+            Card targetCard = null;
+            if (targetObj is Card) targetCard = (Card)targetObj;
+
+            if (targetCard != null)
+            {
+                if (source.Effects.hasManagedCombatEffects) source.Effects.GetEffectValues();
+                if (targetCard.Effects.hasManagedCombatEffects) targetCard.Effects.GetEffectValues();
+            }
 
             source.Hit(targetObj);
+            targetCard?.Hit(source);
+
+            yield return new WaitWhile(() => source.CardUI.IsPlayingAnimation);
+            if (targetCard != null) yield return new WaitWhile(() => targetCard.CardUI.IsPlayingAnimation);
+
+            if (source.Effects.hasCombatEffects) source.Effects.ApplyCombatEffects(targetObj);
+            if (targetCard != null && targetCard.Effects.hasCombatEffects) targetCard?.Effects.ApplyCombatEffects(source);
+
+            yield return new WaitWhile(() => source.Effects.applyingEffects);
+            if (targetCard != null) yield return new WaitWhile(() => targetCard.Effects.applyingEffects);
+
+            _combatActions = false;
         }
 
         private object GetTarget(Contender contender, Card guardCard, Card card)
@@ -264,21 +299,6 @@ namespace Booble.CardGame.Managers
             return (guardCard != null) ? guardCard
                 : (card != null) ? card
                 : contender;
-        }
-
-        private bool IsHitManagedByEffect(Card source, object targetObj)
-        {
-            if (!(targetObj is Card)) return false;
-
-            Card targetCard = (Card)targetObj;
-            List<SubType> subTypes = new List<SubType>() { SubType.LIFELINK, SubType.REBOUND, SubType.TRAMPLE, SubType.SPONGE };
-
-            foreach(SubType subType in subTypes)
-            {
-                if (source.Effects.HasEffect(subType) || targetCard.Effects.HasEffect(subType)) return true;
-            }
-
-            return false;
         }
 
         #endregion

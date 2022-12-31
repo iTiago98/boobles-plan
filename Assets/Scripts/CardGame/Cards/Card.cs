@@ -295,7 +295,7 @@ namespace Booble.CardGame.Cards
             }
         }
 
-        public Sequence HitSequence(object target)
+        public Sequence HitSequence(object target, bool combatActions)
         {
             Sequence hitSequence = DOTween.Sequence();
 
@@ -330,7 +330,7 @@ namespace Booble.CardGame.Cards
                 hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
 
                 // Hit callback
-                hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
+                if (combatActions) hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
 
                 // Back
                 hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
@@ -341,7 +341,7 @@ namespace Booble.CardGame.Cards
             {
                 hitSequence.AppendInterval(0.7f);
                 // Hit callback
-                hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
+                if (combatActions) hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
             }
 
             return hitSequence;
@@ -355,17 +355,13 @@ namespace Booble.CardGame.Cards
 
         private IEnumerator ReceiveDamageCoroutine(int strength)
         {
-            bool combat = TurnManager.Instance.combat;
-
             CardUI.ShowDamagedAnimation();
             Stats.ReceiveDamage(strength);
             UpdateStatsUI();
 
             yield return new WaitWhile(() => CardUI.IsPlayingAnimation);
-            if (!combat)
-            {
-                CheckDestroy();
-            }
+
+            if (!TurnManager.Instance.combat) CheckDestroy();
         }
 
         #endregion
@@ -390,7 +386,7 @@ namespace Booble.CardGame.Cards
             {
                 RemoveFromContainer();
                 Effects.CheckRemoveEffects();
-                if (!instant) Effects.ApplyDestroyEffects();
+                if (!instant && Effects.hasDestroyEffects) Effects.ApplyDestroyEffects();
             }
 
             Sequence destroySequence = DOTween.Sequence();
@@ -440,10 +436,18 @@ namespace Booble.CardGame.Cards
 
         public void DecreaseStats(int strengthDecrease, int defenseDecrease)
         {
+            StartCoroutine(DecreaseStatsCoroutine(strengthDecrease, defenseDecrease));
+        }
+
+        private IEnumerator DecreaseStatsCoroutine(int strengthDecrease, int defenseDecrease)
+        {
             CardUI.ShowDecreaseAnimation();
             Stats.DecreaseStats(strengthDecrease, defenseDecrease);
             UpdateStatsUI();
-            CheckDestroy();
+
+            yield return new WaitWhile(() => CardUI.IsPlayingAnimation);
+
+            if (!TurnManager.Instance.combat) CheckDestroy();
         }
 
         public void SwapContender()
