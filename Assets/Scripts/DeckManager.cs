@@ -59,6 +59,7 @@ namespace Booble.Managers
 
         public void SetOpponent(Opponent_Name opponentName)
         {
+            _previousOpponent = _opponentName;
             _opponentName = opponentName;
         }
 
@@ -94,6 +95,7 @@ namespace Booble.Managers
         }
 
         List<int> indexToRemove = new List<int>();
+        Opponent_Name _previousOpponent;
 
         public void RemoveExtraCards()
         {
@@ -119,6 +121,8 @@ namespace Booble.Managers
 
         public void AddCitrianoCards()
         {
+            if (_previousOpponent == Opponent_Name.Citriano) return;
+
             AddHipervitaminado();
             AddNuevaCepaDelEscorbuto();
             AddExprimirLaVerdad();
@@ -159,6 +163,8 @@ namespace Booble.Managers
 
         public void AddPPBrosCards()
         {
+            if (_previousOpponent == Opponent_Name.PingPongBros) return;
+
             AddVictoriaPorDesgaste();
             AddPared();
             AddPalaDeNocobich();
@@ -205,6 +211,8 @@ namespace Booble.Managers
 
         public void AddSecretaryCards()
         {
+            if (_previousOpponent == Opponent_Name.Secretary) return;
+
             AddHaPerdidoUsteLosPapele();
             AddTraigoLosAnexosCorrespondientes();
             AddAfidavit();
@@ -245,6 +253,8 @@ namespace Booble.Managers
 
         public void AddBossCards()
         {
+            if (_previousOpponent == Opponent_Name.Boss) return;
+
             AddHipervitaminadoPlus();
             AddVictoriaPorDesgastePlus();
             AddHaPerdidoUsteLosPapelePlus();
