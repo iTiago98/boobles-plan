@@ -50,6 +50,7 @@ namespace Booble.CardGame.Cards
             strength -= strengthDecrease;
             defense -= defenseDecrease;
             if (strength < 0) strength = 0;
+            if (defense < 0) defense = 0;
         }
 
         public bool IsBoosted()
