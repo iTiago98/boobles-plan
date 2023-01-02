@@ -8,8 +8,6 @@ namespace Booble.CardGame.Level
 {
     public class CardZone : CardContainer, IClickable
     {
-        //public Transform cardsPosition;
-
         [SerializeField] private bool _isFieldZone;
 
         private SpriteRenderer _highlightSprite;
@@ -50,11 +48,6 @@ namespace Booble.CardGame.Level
         }
 
         #endregion
-
-        public void AddCard(Card card)
-        {
-            AddCard(card, transform);
-        }
 
         public Card GetCard()
         {

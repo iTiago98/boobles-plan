@@ -103,10 +103,7 @@ namespace Booble.CardGame.Managers
         #region Steal Cards From Deck
 
         [Header("Steal Cards From Deck")]
-        [SerializeField] private GameObject stealCardsFromDeckGameObj;
-        [SerializeField] private Transform stealCardsFromDeckParent;
         [SerializeField] private GameObject stealCardsFromDeckButton;
-        [SerializeField] private GameObject cardImagePrefab;
 
         #endregion
 
@@ -459,7 +456,7 @@ namespace Booble.CardGame.Managers
             Card holdingCard = MouseController.Instance.holdingCard;
             if (holdingCard != null && holdingCard.contender.isPlayer)
             {
-                holdingCard.contender.hand.AddCard(holdingCard);
+                holdingCard.contender.hand.AddCard(holdingCard.gameObject);
 
                 if (MouseController.Instance.IsApplyingEffect) MouseController.Instance.ResetApplyingEffect();
                 if (holdingCard.Stats.type == CardType.ACTION) Board.Instance.RemoveTargetsHighlight();
@@ -493,54 +490,18 @@ namespace Booble.CardGame.Managers
 
         public bool stealing { private set; get; }
 
-        private List<int> cardsToSteal = new List<int>();
-        private int _numCardsToSteal;
-        private Deck _deckToSteal;
+        public void SetStealing() { stealing = true; }
 
-        public void ShowStealCardsFromDeck(Deck deck, int numCards)
+        public void ShowStealCardsFromDeckButton(bool show)
         {
-            stealing = true;
-            stealCardsFromDeckGameObj.SetActive(true);
-            stealCardsFromDeckButton.SetActive(false);
-
-            MouseController.Instance.SetStealing();
-
-            _numCardsToSteal = (deck.numCards >= numCards) ? numCards : deck.numCards;
-            _deckToSteal = deck;
-
-            List<CardsData> deckCards = deck.GetDeckCards();
-
-            foreach (CardsData cardData in deckCards)
-            {
-                GameObject cardObj = Instantiate(cardImagePrefab, stealCardsFromDeckParent);
-                CardImageUI cardImageUI = cardObj.GetComponent<CardImageUI>();
-                cardImageUI.Initialize(cardData, deckCards.IndexOf(cardData));
-            }
-        }
-
-        public void AddStolenCard(int index)
-        {
-            if (cardsToSteal.Count == _numCardsToSteal) return;
-
-            cardsToSteal.Add(index);
-            if (cardsToSteal.Count == _numCardsToSteal)
-            {
-                stealCardsFromDeckButton.SetActive(true);
-            }
-        }
-
-        public void RemoveStolenCard(int index)
-        {
-            cardsToSteal.Remove(index);
-            stealCardsFromDeckButton.SetActive(false);
+            stealCardsFromDeckButton.SetActive(show);
         }
 
         public void OnStealCardsFromDeckButtonClick()
         {
-            stealCardsFromDeckGameObj.SetActive(false);
-            _deckToSteal.StealCards(cardsToSteal);
-            MouseController.Instance.SetSelecting();
             stealing = false;
+            MouseController.Instance.SetSelecting();
+            ShowStealCardsFromDeckButton(false);
         }
 
         #endregion

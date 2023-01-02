@@ -187,6 +187,7 @@ namespace Booble.CardGame.Managers
         private Card HitCards(Contender contender, int value)
         {
             Card aux = null;
+            bool found = false;
 
             foreach (CardZone cardZone in contender.cardZones)
             {
@@ -195,7 +196,11 @@ namespace Booble.CardGame.Managers
                     Card card = cardZone.GetCard();
                     bool destroy = card.ReceiveDamage(value);
 
-                    if (aux == null || destroy) aux = card;
+                    if (!found || destroy)
+                    {
+                        aux = card;
+                        found = true;
+                    }
                 }
             }
 
@@ -263,6 +268,8 @@ namespace Booble.CardGame.Managers
                     ResetEffectStoredValues();
 
                     yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+                    yield return new WaitWhile(() => source.CardUI.IsPlayingAnimation);
+                    yield return new WaitWhile(() => targetCard.CardUI.IsPlayingAnimation);
                 }
             }
             else if (target is Contender)
@@ -505,7 +512,7 @@ namespace Booble.CardGame.Managers
             {
                 Card card = InstantiateCard(source.contender, source.transform.position, data, cardRevealed: true);
                 card.Effects.CheckEffects();
-                emptyCardZone.AddCard(card);
+                emptyCardZone.AddCard(card.gameObject);
 
                 yield return new WaitUntil(() => emptyCardZone.cardsAtPosition);
             }
@@ -583,9 +590,9 @@ namespace Booble.CardGame.Managers
             {
                 Card temp = destCardZone.GetCard();
                 destCardZone.RemoveCard(temp.gameObject);
-                originCardZone.AddCard(temp);
+                originCardZone.AddCard(temp.gameObject);
             }
-            destCardZone.AddCard(originCard);
+            destCardZone.AddCard(originCard.gameObject);
         }
 
         #endregion
@@ -877,7 +884,7 @@ namespace Booble.CardGame.Managers
             {
                 Card card = otherContender.hand.StealCard();
                 Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.IsPlayerCard);
-                source.contender.hand.AddCard(newCard);
+                source.contender.hand.AddCard(newCard.gameObject);
                 source.contender.stolenCards++;
                 card.DestroyCard(instant: true);
             }
@@ -891,6 +898,13 @@ namespace Booble.CardGame.Managers
 
         #region Steal Card From Deck
 
+        [SerializeField] private GameObject _stealCardsFromDeckObj;
+        [SerializeField] private CardContainer _stealCardsFromDeckContainer;
+        [SerializeField] private GameObject _cardStealPrefab;
+
+        private List<int> _cardsToSteal = new List<int>();
+        private int _numCardsToSteal;
+
         public void StealCardFromDeck(CardEffect effect, Card source, int value, Contender contender)
         {
             StartCoroutine(StealCardFromDeckCoroutine(effect, source, value, contender));
@@ -898,12 +912,51 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator StealCardFromDeckCoroutine(CardEffect effect, Card source, int value, Contender otherContender)
         {
-            UIManager.Instance.ShowStealCardsFromDeck(otherContender.deck, value);
+            Deck deck = otherContender.deck;
+
+            _stealCardsFromDeckObj.SetActive(true);
+            UIManager.Instance.SetStealing();
+            MouseController.Instance.SetStealing();
+
+            _numCardsToSteal = (deck.numCards >= value) ? value : deck.numCards;
+
+            List<CardsData> deckCards = deck.GetDeckCards();
+
+            foreach (CardsData cardData in deckCards)
+            {
+                GameObject cardObj = Instantiate(_cardStealPrefab, Vector3.zero, Quaternion.identity);
+                CardSteal cardImageUI = cardObj.GetComponent<CardSteal>();
+                cardImageUI.Initialize(cardData, deckCards.IndexOf(cardData));
+                _stealCardsFromDeckContainer.AddCard(cardObj);
+            }
 
             yield return new WaitWhile(() => UIManager.Instance.stealing);
+
+            deck.StealCards(_cardsToSteal);
+            _stealCardsFromDeckObj.SetActive(false);
+
             yield return new WaitWhile(() => source.contender.deck.busy);
 
             effect.SetEffectApplied();
+        }
+
+        public bool AddStolenCard(int index)
+        {
+            if (_cardsToSteal.Count == _numCardsToSteal) return false;
+
+            _cardsToSteal.Add(index);
+            if (_cardsToSteal.Count == _numCardsToSteal)
+            {
+                UIManager.Instance.ShowStealCardsFromDeckButton(true);
+            }
+            return true;
+        }
+
+        public bool RemoveStolenCard(int index)
+        {
+            _cardsToSteal.Remove(index);
+            UIManager.Instance.ShowStealCardsFromDeckButton(false);
+            return false;
         }
 
         #endregion
@@ -926,7 +979,7 @@ namespace Booble.CardGame.Managers
             target.RemoveFromContainer();
             target.SwapContender();
 
-            dest.AddCard(target);
+            dest.AddCard(target.gameObject);
         }
 
         #endregion

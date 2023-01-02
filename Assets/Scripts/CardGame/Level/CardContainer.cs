@@ -5,9 +5,9 @@ using Booble.CardGame.Cards;
 
 namespace Booble.CardGame.Level
 {
-    public class CardContainer : MonoBehaviour
+    abstract public class CardContainer : MonoBehaviour
     {
-        [SerializeField] private float cardSeparationX;
+        [SerializeField] protected float cardSeparationX;
         [SerializeField] private float animationTime;
 
         public bool cardsAtPosition { private set; get; }
@@ -23,13 +23,15 @@ namespace Booble.CardGame.Level
             cards = new List<GameObject>();
         }
 
-        public void AddCard(Card card, Transform parent)
+        public void AddCard(GameObject cardObj)
         {
             cardsAtPosition = false;
-            card.transform.parent = transform;
-            card.SetContainer(this);
+            cardObj.transform.parent = transform;
 
-            cards.Add(card.gameObject);
+            Card card = cardObj.GetComponent<Card>();
+            if (card != null) card.SetContainer(this);
+
+            cards.Add(cardObj);
             UpdateCardsPosition();
         }
 
@@ -44,7 +46,7 @@ namespace Booble.CardGame.Level
 
         private void UpdateCardsPosition()
         {
-            float posX = CalculateInitialPosition();
+            float initialX = CalculateInitialPosition();
             float posZ = 0f;
 
             if (updateCardsPositionSequence != null)
@@ -56,9 +58,10 @@ namespace Booble.CardGame.Level
 
             for (int i = 0; i < cards.Count; i++)
             {
-                posX += cardSeparationX;
+                float posX = GetXPosition(i, initialX);
+                float posY = GetYPosition(i);
 
-                MoveCard(updateCardsPositionSequence, cards[i], new Vector3(posX, 0, posZ), i == cards.Count - 1);
+                MoveCard(updateCardsPositionSequence, cards[i], new Vector3(posX, posY, posZ), i == cards.Count - 1);
             }
 
             updateCardsPositionSequence.OnComplete(() =>
@@ -70,6 +73,18 @@ namespace Booble.CardGame.Level
             updateCardsPositionSequence.Play();
         }
 
+        virtual protected float GetXPosition(int index, float initialPosition)
+        {
+            return initialPosition + cardSeparationX * index;
+        }
+
+        virtual protected float GetYPosition(int index) { return 0f; }
+
+        virtual protected float CalculateInitialPosition()
+        {
+            return -((float)numCards - 1) / 2 * cardSeparationX;
+        }
+
         private void MoveCard(Sequence seq, GameObject card, Vector3 pos, bool last)
         {
             seq.Join(card.transform.DOLocalMoveX(pos.x, animationTime));
@@ -77,11 +92,5 @@ namespace Booble.CardGame.Level
             if (last) seq.Append(card.transform.DOLocalMoveZ(pos.z, animationTime));
             else seq.Join(card.transform.DOLocalMoveZ(pos.z, animationTime));
         }
-
-        private float CalculateInitialPosition()
-        {
-            return -(cardSeparationX * (numCards - 1) / 2) - cardSeparationX;
-        }
-
     }
 }

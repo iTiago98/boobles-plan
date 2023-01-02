@@ -23,11 +23,6 @@ namespace Booble.CardGame.Level
             _handCapacity = CardGameManager.Instance.settings.handCapacity;
         }
 
-        public void AddCard(Card card)
-        {
-            AddCard(card, transform);
-        }
-
         public void DiscardCards(int cardNumber)
         {
             busy = true;

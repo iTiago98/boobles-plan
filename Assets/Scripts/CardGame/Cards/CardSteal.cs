@@ -9,12 +9,18 @@ using UnityEngine.UI;
 
 namespace Booble.CardGame.Cards
 {
-    public class CardImageUI : MonoBehaviour
+    public class CardSteal : MonoBehaviour, IClickable
     {
-        [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI descText;
-        [SerializeField] private TextMeshProUGUI strengthText;
-        [SerializeField] private TextMeshProUGUI defenseText;
+        [SerializeField] private TextMeshPro nameText;
+        [SerializeField] private TextMeshPro descText;
+        [SerializeField] private TextMeshPro strengthText;
+        [SerializeField] private TextMeshPro defenseText;
+
+        [SerializeField] private Color _selectedColor;
+        [SerializeField] private Color _selectedHoverColor;
+        [SerializeField] private Color _unselectedColor;
+        [SerializeField] private Color _unselectedHoverColor;
+
 
         private CardType _type;
         private List<CardEffect> _effects;
@@ -22,11 +28,13 @@ namespace Booble.CardGame.Cards
 
         private bool _selected;
 
-        public bool clickable { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private SpriteRenderer _spriteRenderer;
 
         public void Initialize(CardsData data, int index)
         {
-            GetComponent<Image>().sprite = data.sprite;
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer.sprite = data.sprite;
+            SetColor(false);
 
             nameText.text = data.name;
 
@@ -43,30 +51,48 @@ namespace Booble.CardGame.Cards
             _index = index;
         }
 
-        public void OnMouseLeftClickUp()
+        public void OnMouseLeftClickUp(MouseController mouseController)
         {
             if (_selected)
             {
-                GetComponent<Image>().color = Color.white;
-                UIManager.Instance.RemoveStolenCard(_index);
+                _selected = CardEffectsManager.Instance.RemoveStolenCard(_index);
             }
             else
             {
-                GetComponent<Image>().color = Color.grey;
-                UIManager.Instance.AddStolenCard(_index);
+                _selected = CardEffectsManager.Instance.AddStolenCard(_index);
             }
 
-            _selected = !_selected;
+            SetColor(true);
         }
 
         public void OnMouseHoverEnter()
         {
             UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
+            SetColor(true);
         }
 
         public void OnMouseHoverExit()
         {
             UIManager.Instance.HideExtendedDescription();
+            SetColor(false);
+        }
+
+        private void SetColor(bool enter)
+        {
+            _spriteRenderer.color = GetColor(enter);
+        }
+
+        private Color GetColor(bool enter)
+        {
+            if(enter) {
+                if (_selected) return _selectedHoverColor;
+                else return _unselectedHoverColor; 
+            }
+            else
+            {
+                if (_selected) return _selectedColor;
+                else return _unselectedColor;
+            }
         }
 
         private string GetDescriptionText()

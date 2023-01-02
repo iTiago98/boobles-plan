@@ -472,7 +472,7 @@ namespace Booble.CardGame.Cards
 
         private void AddToContainer(CardZone cardZone)
         {
-            cardZone.AddCard(this);
+            cardZone.AddCard(gameObject);
             transform.DOScale(CardUI.defaultScale, 0.2f);
         }
 
@@ -502,7 +502,7 @@ namespace Booble.CardGame.Cards
             Effects.CheckRemoveEffects();
             if (_swapped) SwapContender();
 
-            _hand.AddCard(this);
+            _hand.AddCard(gameObject);
             Stats.ReturnToHand();
             CardUI.ReturnToHand();
         }

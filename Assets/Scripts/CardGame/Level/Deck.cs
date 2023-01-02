@@ -118,7 +118,7 @@ namespace Booble.CardGame.Level
             {
                 Card card = _listToAdd[0];
                 card.gameObject.SetActive(true);
-                hand.AddCard(card);
+                hand.AddCard(card.gameObject);
 
                 // Apply end round effects
                 CardEffectsManager.Instance.ApplyDrawCardEffects();
@@ -246,6 +246,8 @@ namespace Booble.CardGame.Level
 
         public void StealCards(List<int> cardsToSteal)
         {
+            busy = true;
+
             int numCardsStart = numCards;
 
             Contender otherContender = CardGameManager.Instance.GetOtherContender(_contender);
