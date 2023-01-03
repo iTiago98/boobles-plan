@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Booble.Flags;
 using Booble.Interactables;
 using Booble.Interactables.Dialogues;
+using Booble.UI;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -13,10 +14,11 @@ public class DennisWalk : MonoBehaviour
         [SerializeField] private Vector3 _finalDennisPos;
         [SerializeField] private Vector3 _cinematicPos;
         [SerializeField] private Dialogue _dialogue;
+        [SerializeField] private Fader _fader;
         
         private FlagManager _flagManager;
         private DialogueManager _diagManager;
-        private Animator _dennisAnim;
+        // private Animator _dennisAnim;
 
         private void Awake()
         {
@@ -30,7 +32,7 @@ public class DennisWalk : MonoBehaviour
                         return;
                 }
 
-                _dennisAnim = GetComponent<Animator>();
+                // _dennisAnim = GetComponent<Animator>();
         }
 
         public void WalkAway()
@@ -46,15 +48,23 @@ public class DennisWalk : MonoBehaviour
                 _diagManager.OnEndDialogue.RemoveAllListeners();
                 _diagManager.OnEndDialogue.AddListener(() =>
                 {
-                        _dennisAnim.SetTrigger("Walk");
-                        transform.DOMove(_finalDennisPos, 2)
-                                .SetEase(Ease.Linear)
-                                .OnComplete(() =>
-                                {
-                                        transform.position = _cinematicPos;
-                                        gameObject.SetActive(false);
-                                        Interactable.EndInteraction();
-                                });
+                        
+                        _fader.FadeOut(() =>
+                        {
+                                gameObject.SetActive(false);
+                                transform.position = _cinematicPos;
+                                _fader.FadeIn(Interactable.EndInteraction);
+                        });
+                        
+                        // _dennisAnim.SetTrigger("Walk");
+                        // transform.DOMove(_finalDennisPos, 2)
+                        //         .SetEase(Ease.Linear)
+                        //         .OnComplete(() =>
+                        //         {
+                        //                 transform.position = _cinematicPos;
+                        //                 gameObject.SetActive(false);
+                        //                 Interactable.EndInteraction();
+                        //         });
                 });
         }
 }

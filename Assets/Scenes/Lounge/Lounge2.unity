@@ -1857,12 +1857,8 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1737888737}
-  - _optionText: "\xBFY se puede saber qui\xE9nes son estos personajes?"
-    _trueFlags: 
-    _falseFlags: 
-    _dialogueOption: {fileID: 1755683918}
-  - _optionText: "\xBFSabes c\xF3mo puedo hacer para que me hagan caso? \xA1Si no
-      les hago entrar en raz\xF3n y que vuelvan a trabajar los van a echar hoy mismo!"
+  - _optionText: Pues parece que les va a costar el no dar palo al agua. Me han mandado
+      que los despida.
     _trueFlags: 08000000
     _falseFlags: 
     _dialogueOption: {fileID: 324579752}
@@ -1897,6 +1893,7 @@ MonoBehaviour:
   _finalDennisPos: {x: -9, y: -3.49, z: 0}
   _cinematicPos: {x: -14, y: -4, z: 0}
   _dialogue: {fileID: 11400000, guid: 771f7f94d30cbc945b431cd7e9094f78, type: 2}
+  _fader: {fileID: 474731467}
 --- !u!1 &928461886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2620,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1270625314}
   - component: {fileID: 1270625317}
-  - component: {fileID: 1270625316}
   - component: {fileID: 1270625315}
   - component: {fileID: 1270625318}
   m_Layer: 0
@@ -2661,35 +2657,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flags: 39000000
---- !u!114 &1270625316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1270625313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 0d7a34566a447834db18ce13f206a83f, type: 2}
-  _onEnd: 3
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1270625318}
-        m_TargetAssemblyTypeName: PPBCinematic, Assembly-CSharp
-        m_MethodName: StartCinematic
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1270625317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2715,10 +2682,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fader: {fileID: 474731467}
-  _dialogue1: {fileID: 11400000, guid: 57e17aafdc9358f4d82d3dd872790ad1, type: 2}
-  _dialogue2: {fileID: 11400000, guid: fe20a0762f17b4849a2a7707a26a7a42, type: 2}
+  _dialogue0: {fileID: 11400000, guid: cd247b449f9755048bb40b5e6aeb0049, type: 2}
+  _dialogue1: {fileID: 11400000, guid: 0d7a34566a447834db18ce13f206a83f, type: 2}
+  _dialogue2: {fileID: 11400000, guid: 57e17aafdc9358f4d82d3dd872790ad1, type: 2}
+  _dialogue3: {fileID: 11400000, guid: fe20a0762f17b4849a2a7707a26a7a42, type: 2}
   _dennis: {fileID: 927801214}
   _anaT: {fileID: 1919805946}
+  _ppbAnim: {fileID: 1526305641}
   _anaAnim: {fileID: 1919805948}
   _anaXPos: -12
 --- !u!1 &1279426788
@@ -3125,7 +3095,7 @@ MonoBehaviour:
     _falseFlags: 0a000000
     _dialogueOption: {fileID: 1893814061}
   - _optionText: (Cambiar la pelota con la que juegan por la pelota bomba)
-    _trueFlags: 
+    _trueFlags: 38000000
     _falseFlags: 39000000
     _dialogueOption: {fileID: 1270625317}
 --- !u!95 &1526305641
@@ -4546,7 +4516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1919805946
 Transform:
   m_ObjectHideFlags: 0
