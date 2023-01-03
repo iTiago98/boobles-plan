@@ -40,7 +40,7 @@ namespace Booble.Managers
 
         private void Start()
         {
-            FlagManager.Instance.ResetFlags();
+            // FlagManager.Instance.ResetFlags();
             PlayMusic(MusicReference.MainMenu);
             InitializeBuses();
         }

@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f54498bcf77384ea243d710f964ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deleteSaveFileOnAwake: 0
+  _deleteSaveFileOnAwake: 1
 --- !u!1 &7735595118630851184
 GameObject:
   m_ObjectHideFlags: 0

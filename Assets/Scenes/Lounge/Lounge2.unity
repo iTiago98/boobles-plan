@@ -621,16 +621,11 @@ MonoBehaviour:
     _falseFlags: 
     _setFlags: 
   _options:
-  - _optionText: (Revisar el dispensador de devoluciones.)
-    _trueFlags: 
-    _falseFlags: 0e000000
-    _dialogueOption: {fileID: 943273818}
   - _optionText: "Un momento, aqu\xED puede que haya pajitas. Coger\xE9 una."
     _trueFlags: 2f000000
     _falseFlags: 30000000
     _dialogueOption: {fileID: 328877704}
-  - _optionText: "Paso de malgastar m\xE1s pajitas. Con un mundo tan contaminado
-      no es plan de ir haciendo m\xE1s pajas."
+  - _optionText: "Hay m\xE1s pajitas... \xBFcojo otra?"
     _trueFlags: 2f00000030000000
     _falseFlags: 
     _dialogueOption: {fileID: 774643060}
@@ -897,7 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: a497668ffad1b8b4383c2d4af236c792, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -1457,7 +1452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: 243a76ecf8ec3024fb611c46d4ed85c4, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
