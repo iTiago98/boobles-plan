@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Booble.Interactables;
@@ -21,7 +22,13 @@ public class PPBCinematic : DialogueEvent
     [SerializeField] private float _anaXPos;
 
     private bool _continue;
-    
+    private Transform _camera;
+
+    private void Awake()
+    {
+        _camera = Camera.main.transform;
+    }
+
     public override void Execute()
     {
         StartCoroutine(Animation());
@@ -36,6 +43,13 @@ public class PPBCinematic : DialogueEvent
         yield return new WaitUntil(() => _continue);
         _continue = false;
 
+        _ppbAnim.SetTrigger("boom");
+        _camera.DOShakePosition(5, 1, 10, 90, false, true)
+            .OnComplete(Continue);
+        
+        yield return new WaitUntil(() => _continue);
+        _continue = false;
+        
         DialogueManager.Instance.StartDialogue(_dialogue1);
         DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
         DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
