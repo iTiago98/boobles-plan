@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Booble.CardGame;
 using Booble.Interactables;
 using Booble.Interactables.Dialogues;
+using Booble.Managers;
 using Booble.Player;
 using Booble.UI;
 using UnityEngine;
@@ -51,7 +53,7 @@ public class NelaOffice2Animation : MonoBehaviour
 
         if (_interview)
         {
-            DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.PingPongBros);
+            DeckManager.Instance.SetOpponent(Opponent_Name.PingPongBros);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);
