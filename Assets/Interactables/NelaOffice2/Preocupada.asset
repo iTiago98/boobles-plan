@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Preocupada
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Eso era en los primeros meses, ahora ya estoy aburrida.
+    _closeUp: 0
+  - _content: "Pero bueno, \xBFes que no piensan hacer nada por recuperar a sus maridos?"
+    _closeUp: 1
+  - _content: "\xA1Pero si no nos dejan entrar ni a la entrada! Estuvimos yendo todos
+      los d\xEDas durante meses, de repente no nos dejaban entrar. Dec\xEDan que
+      era la nueva pol\xEDtica de la empresa o algo as\xED."
+    _closeUp: 0
+  - _content: "Eso suena muy raro\u2026 Llevo poco tiempo, pero no me suena esa nueva
+      pol\xEDtica de impedir la entrada a las familias. Perm\xEDtame que lo investigue."
+    _closeUp: 1

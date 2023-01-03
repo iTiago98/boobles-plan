@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: 905401cbe957a5644a1debe92e77881c, type: 2}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: 1fe7e057e4e583943ab47c44d308b4fb, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: 702cc2612c415fa46b79d4b8c4f17275, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: 905401cbe957a5644a1debe92e77881c, type: 2}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -1048,7 +1048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  _dialogue: {fileID: 11400000, guid: 725d795a42e286b47920d912bc0e0cb0, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -1588,7 +1588,7 @@ MonoBehaviour:
   _unclickable: 1
   _interactDistance: 0
   _clickDialogues:
-  - _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
+  - _dialogue: {fileID: 11400000, guid: 0818ae8469438fa49ad58d0d76d1676b, type: 2}
     _trueFlags: 
     _falseFlags: 
     _setFlags: 

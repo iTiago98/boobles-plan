@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Despedido
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xC9se no es mi marido. Est\xE1 muy conseguido el parecido, pero no
+      he visto a Pablo moverse as\xED en toda nuestra vida juntos."
+    _closeUp: 0
+  - _content: "Pero si es muy atl\xE9tico y flexible, no hay bola a la que no llegue."
+    _closeUp: 1
+  - _content: "La \xFAnica bola a la que le he visto llegar es a una alb\xF3ndiga.
+      \xC9l y su compinche siempre han estado rebolondos. Los tipos delgados esos
+      con la cara de nuestros maridos no los reconozco."
+    _closeUp: 0
+  - _content: No me lo creo.
+    _closeUp: 1
+  - _content: "Compru\xE9belo usted misma viendo las fotos de su despacho. En una
+      tuvieron que usar una c\xE1mara-gr\xFAa s\xF3lo para que los dos salieran juntos
+      en la foto."
+    _closeUp: 0
+  - _content: "\xA1\xBFEn serio?!"
+    _closeUp: 1
+  - _content: Lo que oye, mire en el felpudo a ver si sigue la copia de la llave.
+    _closeUp: 0

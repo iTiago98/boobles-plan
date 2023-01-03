@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Lucrecia
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFQui\xE9n es?"
+    _closeUp: 0
+  - _content: "Buenas tardes, soy Nella Laphant. \xBFEs usted Lucrecia Ponzano, la
+      mujer de Pablo Pinar?"
+    _closeUp: 1
+  - _content: "S\xED, soy yo. \xBFSe ha desmayado ya mi marido?"
+    _closeUp: 0
+  - _content: "No, no se\xF1ora. Aqu\xED sigue en el lounge."
+    _closeUp: 1
+  - _content: Entonces no me moleste, estoy viendo la telenovela.
+    _closeUp: 0

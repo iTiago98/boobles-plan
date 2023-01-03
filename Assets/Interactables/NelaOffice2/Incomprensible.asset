@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Incomprensible
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Por fin! Todo el mundo parece que est\xE1 encantado con esta locura,
+      pero no podemos m\xE1s con esta incertidumbre."
+    _closeUp: 0
+  - _content: "\xA1Esos dos no son nuestros maridos!"
+    _closeUp: 0
+  - _content: "\xBFA qu\xE9 se refiere?"
+    _closeUp: 1
+  - _content: "Quiero decir que f\xEDsicamente puede que sean nuestros maridos. Pero
+      nunca se han movido as\xED y han estado tan concentrados en la vida. Siempre
+      han sido unos despistados. \xA1Si hasta dejan una copia de la tarjeta magn\xE9tica
+      de su despacho al lado de la puerta por si se les ha olvidado!"
+    _closeUp: 0
