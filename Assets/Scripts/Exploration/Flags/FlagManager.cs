@@ -22,6 +22,7 @@ namespace Booble.Flags
 #endif
         }
 
+        [ContextMenu("Reset Flags")]
         public void ResetFlags()
         {
 	        Debug.Log("RESET FLAGS"); 
