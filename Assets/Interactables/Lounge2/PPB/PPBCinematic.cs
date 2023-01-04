@@ -47,13 +47,13 @@ public class PPBCinematic : DialogueEvent
 
         _ppbAnim.SetTrigger("boom");
         
-        _boomRT.gameObject.SetActive(true);
-        _boomRT.DOScale(Vector3.zero, 5).SetEase(Ease.OutExpo).From();
+        // _boomRT.gameObject.SetActive(true);
+        // _boomRT.DOScale(Vector3.zero, 5).SetEase(Ease.OutExpo).From();
         _camera.DOShakePosition(5, 1, 10, 90, false, true)
             .OnComplete(Continue);
-
-            yield return new WaitForSeconds(2);
-            _boomRT.GetComponent<Image>().DOFade(0, 3);
+            //
+            // yield return new WaitForSeconds(2);
+            // _boomRT.GetComponent<Image>().DOFade(0, 3);
         
         yield return new WaitUntil(() => _continue);
         _continue = false;
