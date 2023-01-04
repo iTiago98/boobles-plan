@@ -510,12 +510,12 @@ namespace Booble.CardGame.Managers
 
         #region Create Card
 
-        public void CreateCard(CardEffect effect, Card source, object target, CardsData data)
+        public void CreateCard(CardEffect effect, Card source, CardsData data)
         {
-            StartCoroutine(CreateCardCoroutine(effect, source, target, data));
+            StartCoroutine(CreateCardCoroutine(effect, source, data));
         }
 
-        private IEnumerator CreateCardCoroutine(CardEffect effect, Card source, object target, CardsData data)
+        private IEnumerator CreateCardCoroutine(CardEffect effect, Card source, CardsData data)
         {
             CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(source.contender);
             if (emptyCardZone != null)
@@ -893,10 +893,12 @@ namespace Booble.CardGame.Managers
             for (int i = 0; i < loops; i++)
             {
                 Card card = otherContender.hand.StealCard();
-                Card newCard = InstantiateCard(source.contender, card.transform.position, card.data, source.IsPlayerCard);
-                source.contender.hand.AddCard(newCard.gameObject);
+                card.CardUI.FlipCard();
+
+                card.RemoveFromContainer();
+                source.contender.hand.AddCard(card.gameObject);
+
                 source.contender.stolenCards++;
-                card.DestroyCard(instant: true);
             }
 
             yield return new WaitUntil(() => source.contender.hand.numCards == finalValue && source.contender.hand.cardsAtPosition);

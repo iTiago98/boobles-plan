@@ -372,26 +372,24 @@ namespace Booble.CardGame.Cards
 
         public void DestroyCard()
         {
-            DestroyCard(instant: false);
+            StartCoroutine(DestroyCardCoroutine());
         }
 
-        public void DestroyCard(bool instant)
+        private IEnumerator DestroyCardCoroutine()
         {
-            //Debug.Log(name + " destroyed");
-
             _clickable = false;
             HideExtendedDescription();
 
             if (!IsInHand)
             {
                 RemoveFromContainer();
-                Effects.CheckRemoveEffects();
-                if (!instant && Effects.hasDestroyEffects) Effects.ApplyDestroyEffects();
+                Effects.CheckRemoveEffects(contender);
+                if (Effects.hasDestroyEffects) Effects.ApplyDestroyEffects();
+
+                yield return new WaitWhile(() => Effects.applyingEffects);
             }
 
             Sequence destroySequence = DOTween.Sequence();
-
-            if (instant) destroySequence.AppendCallback(() => gameObject.SetActive(false));
 
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
@@ -452,12 +450,16 @@ namespace Booble.CardGame.Cards
 
         public void SwapContender()
         {
+            Effects.CheckRemoveEffects(contender);
+
             if (IsPlayerCard)
                 contender = CardGameManager.Instance.opponent;
             else
                 contender = CardGameManager.Instance.player;
 
             _hand = contender.hand;
+
+            Effects.CheckEffects();
             //_swapped = !_swapped;
         }
 
@@ -499,7 +501,7 @@ namespace Booble.CardGame.Cards
         public void ReturnToHand()
         {
             RemoveFromContainer();
-            Effects.CheckRemoveEffects();
+            Effects.CheckRemoveEffects(contender);
             if (_swapped) SwapContender();
 
             _hand.AddCard(gameObject);

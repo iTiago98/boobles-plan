@@ -220,7 +220,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     CardEffectsManager.Instance.Compartmentalize(this, source, target); break;
 
                 case SubType.GUARD:
-                    TurnManager.Instance.SetGuardCard(source); break;
+                    CardEffectsManager.Instance.Guard(this, source); break;
 
                 case SubType.STAT_BOOST:
                     CardEffectsManager.Instance.StatBoost(this, source, target, targetType, intParameter1, intParameter2); break;
@@ -247,11 +247,11 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                 case SubType.NONE:
                     break;
                 case SubType.CREATE_CARD:
-                    CardEffectsManager.Instance.CreateCard(this, source, target, GetDataFromParameters()); break;
+                    CardEffectsManager.Instance.CreateCard(this, source, GetDataFromParameters()); break;
 
                 case SubType.DUPLICATE_CARD:
                     CardsData data = ((Card)target).data;
-                    CardEffectsManager.Instance.CreateCard(this, source, target, data); break;
+                    CardEffectsManager.Instance.CreateCard(this, source, data); break;
 
                 case SubType.SWAP_POSITION:
                     CardEffectsManager.Instance.SwapPosition(this, target, targetType); break;
