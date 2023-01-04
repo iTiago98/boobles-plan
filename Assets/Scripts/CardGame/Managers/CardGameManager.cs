@@ -32,9 +32,15 @@ namespace Booble.CardGame.Managers
 
         public bool playingCard { private set; get; }
 
-
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
+
+        private bool _playerWin;
+
+        private void Start()
+        {
+            Initialize();
+        }
 
         private void Update()
         {
@@ -142,15 +148,10 @@ namespace Booble.CardGame.Managers
             _interviewDialogue?.ThrowStartDialogue();
             if (_interviewDialogue == null) StartGame(); // TEMPORAL
         }
-
-        public void ThrowWinDialogue()
+        
+        public void ThrowEndDialogue()
         {
-            _interviewDialogue?.ThrowWinDialogue();
-        }
-
-        public void ThrowLoseDialogue()
-        {
-            _interviewDialogue?.ThrowLoseDialogue();
+            _interviewDialogue?.ThrowEndDialogue(_playerWin);
         }
 
         public void CheckDialogue(Card cardPlayed)
@@ -174,24 +175,16 @@ namespace Booble.CardGame.Managers
                 UIManager.Instance.ShowEndButton(true);
                 MouseController.Instance.enabled = false;
 
-                if (alternateWinCondition) OnInterviewWin();
-                else if (player.life <= 0) OnInterviewLose();
-                else if (opponent.life <= 0) OnInterviewWin();
+                _playerWin = alternateWinCondition || (player.life > 0 && opponent.life <= 0);
+                OnInterviewEnd();
                 return true;
             }
             else return false;
         }
 
-        private void OnInterviewWin()
+        private void OnInterviewEnd()
         {
-            UIManager.Instance.SetInterviewWinText(true);
-            ThrowWinDialogue();
-        }
-
-        private void OnInterviewLose()
-        {
-            UIManager.Instance.SetInterviewWinText(false);
-            ThrowLoseDialogue();
+            UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
         }
 
         #endregion

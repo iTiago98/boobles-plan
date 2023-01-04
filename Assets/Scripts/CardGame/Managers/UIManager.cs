@@ -97,6 +97,8 @@ namespace Booble.CardGame.Managers
         [SerializeField] private Sprite _clashSprite;
         [SerializeField] private Sprite _roundEndSprite;
         [SerializeField] private Sprite _interviewEndSprite;
+        [SerializeField] private Sprite _interviewWinSprite;
+        [SerializeField] private Sprite _interviewLoseSprite;
 
         #endregion
 
@@ -160,53 +162,62 @@ namespace Booble.CardGame.Managers
             if (Input.GetMouseButtonUp(0) && _bannersOn) MoveBanners();
         }
 
+
         public void TurnAnimation(Turn turn)
         {
             TurnManager.Instance.StopFlow();
 
+            Sprite sprite = null;
+
             switch (turn)
             {
                 case Turn.INTERVIEW_START:
-                    turnAnimationImage.sprite = _interviewStartSprite;
+                    sprite = _interviewStartSprite;
                     break;
                 case Turn.ROUND_START:
-                    turnAnimationImage.sprite = _roundStartSprite;
+                    sprite = _roundStartSprite;
                     break;
                 case Turn.PLAYER:
-                    turnAnimationImage.sprite = _playerTurnSprite;
+                    sprite = _playerTurnSprite;
                     break;
                 case Turn.OPPONENT:
                     if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
-                        turnAnimationImage.sprite = _opponentTurnWSprite;
+                        sprite = _opponentTurnWSprite;
                     else
-                        turnAnimationImage.sprite = _opponentTurnMSprite;
+                        sprite = _opponentTurnMSprite;
                     break;
                 case Turn.DISCARDING:
                     break;
                 case Turn.CLASH:
-                    turnAnimationImage.sprite = _clashSprite;
+                    sprite = _clashSprite;
                     break;
                 case Turn.ROUND_END:
-                    turnAnimationImage.sprite = _roundEndSprite;
+                    sprite = _roundEndSprite;
                     break;
                 case Turn.INTERVIEW_END:
-                    turnAnimationImage.sprite = _interviewEndSprite;
+                    sprite = _interviewEndSprite;
                     break;
             }
 
+            TurnAnimation(sprite, turn, TurnManager.Instance.ContinueFlow);
+            SetEndTurnButtonText(turn);
+        }
+
+        public void TurnAnimation(Sprite sprite, Turn turn, TweenCallback endCallback)
+        {
+            turnAnimationImage.sprite = sprite;
+            
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
             sequence.AppendInterval(0.5f);
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
-            sequence.AppendCallback(() => TurnManager.Instance.ContinueFlow());
+            sequence.AppendCallback(endCallback);
 
             if (turn == Turn.PLAYER) sequence.AppendCallback(() => SetEndTurnButtonInteractable(true));
             else SetEndTurnButtonInteractable(false);
 
             sequence.Play();
-
-            SetEndTurnButtonText(turn);
         }
 
         #region Stats
@@ -559,10 +570,10 @@ namespace Booble.CardGame.Managers
 
         #region Game End
 
-        public void SetInterviewWinText(bool win)
+        public void InterviewEndAnimation(bool win, TweenCallback endCallback)
         {
-            if (win) interviewEndText.text = INTERVIEW_WIN_TEXT;
-            else interviewEndText.text = INTERVIEW_LOSE_TEXT;
+            if (win) TurnAnimation(_interviewWinSprite, Turn.INTERVIEW_END, endCallback);
+            else TurnAnimation(_interviewLoseSprite, Turn.INTERVIEW_END, endCallback);
         }
 
         public void ShowEndButton(bool show)

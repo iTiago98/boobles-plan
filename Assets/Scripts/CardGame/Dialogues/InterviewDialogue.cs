@@ -1,6 +1,8 @@
 using Booble.CardGame.Cards;
 using Booble.CardGame.Managers;
 using Booble.Interactables.Dialogues;
+using Booble.Managers;
+using Booble.UI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Booble.CardGame.Dialogues
     public abstract class InterviewDialogue : MonoBehaviour
     {
         //private bool _dialogueEnd;
-        private DialogueManager _dialogueManager;
+        protected DialogueManager _dialogueManager;
 
         [SerializeField] protected Dialogue _startDialogue;
         [SerializeField] protected Dialogue _winDialogue;
@@ -23,28 +25,28 @@ namespace Booble.CardGame.Dialogues
         }
 
         abstract public void CheckDialogue(Card cardPlayed);
-        public void ThrowStartDialogue()
+        virtual public void ThrowStartDialogue()
         {
-            if (_startDialogue != null) ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
-            if (_startDialogue == null) CardGameManager.Instance.StartGame(); // TEMPORAL
-
-        }
-
-        public void ThrowWinDialogue()
-        {
-            if (CardGameManager.Instance.alternateWinCondition)
-            {
-                if (_alternateWinDialogue != null) ThrowDialogue(_alternateWinDialogue);
-            }
+            if (_startDialogue != null && _dialogueManager != null) ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
             else
-            {
-                if (_winDialogue != null) ThrowDialogue(_winDialogue);
-            }
+                CardGameManager.Instance.StartGame(); // TEMPORAL
         }
 
-        public void ThrowLoseDialogue()
+        public void ThrowEndDialogue(bool playerWin)
         {
-            if (_loseDialogue != null) ThrowDialogue(_loseDialogue);
+            Action onEndDialogue = SceneLoader.Instance.UnloadInterviewScene;
+
+            Dialogue dialogue = null;
+
+            if (CardGameManager.Instance.alternateWinCondition)
+                dialogue = _alternateWinDialogue;
+            else if (playerWin)
+                dialogue = _winDialogue;
+            else
+                dialogue = _loseDialogue;
+
+            if (dialogue != null) ThrowDialogue(dialogue, onEndDialogue);
+            else onEndDialogue();
         }
 
         protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null)
@@ -57,8 +59,9 @@ namespace Booble.CardGame.Dialogues
             _dialogueManager.OnEndDialogue.RemoveAllListeners();
             _dialogueManager.OnEndDialogue.AddListener(() =>
             {
-            //_dialogueEnd = true;
+                //_dialogueEnd = true;
                 onEndDialogue();
+                CardGameManager.Instance.ResumeGame();
             });
         }
     }

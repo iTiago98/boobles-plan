@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a965d290eb0d2d0418b7bba45721ee86
+guid: 3d52d9a4694e46c45b464e153ce2dc49
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,127 +117,211 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Props tablero_0
+      name: Ganado y perdido_0
       rect:
         serializedVersion: 2
-        x: 21
-        y: 57
-        width: 357
-        height: 24
+        x: 63
+        y: 825
+        width: 477
+        height: 189
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 45f50d7533e4e5b4fa448348b43ff189
-      internalID: 718609823
+      spriteID: 460519aeacf525f409173e50306ca7fc
+      internalID: -1670450467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props tablero_1
+      name: Ganado y perdido_1
       rect:
         serializedVersion: 2
-        x: 417
-        y: 48
-        width: 33
-        height: 45
+        x: 609
+        y: 825
+        width: 477
+        height: 189
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b89af929c6e1f03458194fd0d97dedc1
-      internalID: 1862835975
+      spriteID: 1a4daf81408e5c34081f41d988c282fb
+      internalID: -1547044455
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props tablero_2
+      name: Ganado y perdido_2
       rect:
         serializedVersion: 2
-        x: 21
-        y: 15
-        width: 357
-        height: 24
+        x: 1167
+        y: 825
+        width: 708
+        height: 189
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3146c22d73b3c60479a7059bd3a68b0e
-      internalID: -1090155946
+      spriteID: 34565105a0b87074084bbdeca32d6f84
+      internalID: 407901647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props tablero_3
+      name: Ganado y perdido_3
       rect:
         serializedVersion: 2
-        x: 390
-        y: 3
-        width: 33
-        height: 45
+        x: 171
+        y: 564
+        width: 708
+        height: 189
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4f8a8a83d74fd748a229aa102047158
-      internalID: 1482803665
+      spriteID: 908f9c2242415524abbe8fbb9c7a3a0c
+      internalID: -420314318
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props tablero_4
+      name: Ganado y perdido_4
       rect:
         serializedVersion: 2
-        x: 444
-        y: 3
-        width: 33
-        height: 45
+        x: 1041
+        y: 564
+        width: 708
+        height: 189
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 066ac9e41eaa63946ab504643337b18b
-      internalID: 785031068
+      spriteID: f81595e1635ccf3448c15f788217ffed
+      internalID: -1030304167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Props tablero_5
+      name: Ganado y perdido_5
       rect:
         serializedVersion: 2
-        x: 382
-        y: 50
-        width: 33
-        height: 45
+        x: 96
+        y: 285
+        width: 783
+        height: 189
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b93435c085dac544b5b41bca4d30f85
-      internalID: -1825781344
+      spriteID: 0dea059904955484a90455c6b15be33c
+      internalID: 989669273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ganado y perdido_6
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 285
+        width: 783
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5f2e7194ce4258488a9e81eb8c2994e
+      internalID: 1634947669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ganado y perdido_7
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 39
+        width: 477
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1f963919f9e0894095be4819320699c
+      internalID: -713615373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ganado y perdido_8
+      rect:
+        serializedVersion: 2
+        x: 726
+        y: 30
+        width: 477
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d0ecef6d3e1e94e96b4e4953d07a24
+      internalID: -164684604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ganado y perdido_9
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 39
+        width: 477
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: feff07a1ab209a54f800780ffa6d7fe8
+      internalID: -1104082579
       vertices: []
       indices: 
       edges: []
@@ -253,12 +337,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Props tablero_5: -1825781344
-      Props tablero_1: 1862835975
-      Props tablero_4: 785031068
-      Props tablero_2: -1090155946
-      Props tablero_0: 718609823
-      Props tablero_3: 1482803665
+      Ganado y perdido_4: -1030304167
+      Ganado y perdido_5: 989669273
+      Ganado y perdido_9: -1104082579
+      Ganado y perdido_0: -1670450467
+      Ganado y perdido_7: -713615373
+      Ganado y perdido_8: -164684604
+      Ganado y perdido_3: -420314318
+      Ganado y perdido_2: 407901647
+      Ganado y perdido_6: 1634947669
+      Ganado y perdido_1: -1547044455
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

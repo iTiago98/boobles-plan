@@ -1,5 +1,153 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &143771533805236906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2791592805082716776}
+  - component: {fileID: 6261508961269405121}
+  - component: {fileID: 6278582037774259906}
+  m_Layer: 0
+  m_Name: TutorialYesOption
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2791592805082716776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143771533805236906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2915721158407989347}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6261508961269405121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143771533805236906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6278582037774259906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143771533805236906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 70cb7bfc0854dc244819c39c3c4963c3, type: 2}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8665003492863464097}
+        m_TargetAssemblyTypeName: Booble.CardGame.Dialogues.TutorialDialogue, Assembly-CSharp
+        m_MethodName: ThrowTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1 &1717227068575185958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563222745432977994}
+  - component: {fileID: 5743557249393822207}
+  - component: {fileID: 2729761174981078023}
+  m_Layer: 0
+  m_Name: TutorialNoOption
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1563222745432977994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717227068575185958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2915721158407989347}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5743557249393822207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717227068575185958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2729761174981078023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1717227068575185958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: bad3869f7ab91e34db14d3706364b3e8, type: 2}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8665003492863464097}
+        m_TargetAssemblyTypeName: Booble.CardGame.Dialogues.TutorialDialogue, Assembly-CSharp
+        m_MethodName: ThrowPostTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6184705350052988801
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,6 +159,7 @@ GameObject:
   - component: {fileID: 2915721158407989347}
   - component: {fileID: 8086245598359039438}
   - component: {fileID: 8497510795866418018}
+  - component: {fileID: 8665003492863464097}
   m_Layer: 0
   m_Name: TutorialContender
   m_TagString: Untagged
@@ -29,7 +178,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2791592805082716776}
+  - {fileID: 1563222745432977994}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +201,7 @@ MonoBehaviour:
   _cardBack: {fileID: 21300000, guid: f633ec062ec47374ab8db96df637c09f, type: 3}
   _interviewBanner: {fileID: 21300000, guid: e4ae0f64af2d07141bdf846f0607ad67, type: 3}
   _interviewBackground: {fileID: 21300000, guid: d69c06e265bea624881cf7466eee7b11, type: 3}
-  _interviewDialogue: {fileID: 0}
+  _interviewDialogue: {fileID: 8665003492863464097}
   _aIScript: {fileID: 8497510795866418018}
   stolenCards: 0
 --- !u!114 &8497510795866418018
@@ -65,3 +216,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8427ad399b5da3a47b90e4bb7ce60cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8665003492863464097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184705350052988801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc3f295c5807c0348b17618e30517ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDialogue: {fileID: 11400000, guid: 3af3c88e9b10b844e9fd56f784d600d3, type: 2}
+  _winDialogue: {fileID: 0}
+  _alternateWinDialogue: {fileID: 0}
+  _loseDialogue: {fileID: 0}
+  _tutorialDialogue: {fileID: 11400000, guid: 273fb4541e3eb824b97dc8f68c9ab584, type: 2}
+  _postTutorialDialogue: {fileID: 11400000, guid: a378035c8862338459e09b663e234aee, type: 2}
+  _tutorialOptions:
+  - _optionText: Ya he hecho mis pinitos en esto de los RRHH.
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 5743557249393822207}
+  - _optionText: "Mejor asegurarse de c\xF3mo trabaj\xE1is aqu\xED."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 6261508961269405121}
+  _postTutorialOptions:
+  - _optionText: "Rep\xEDtemelo, por favor."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 6261508961269405121}
+  - _optionText: "Todo clar\xEDsimo."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 5743557249393822207}
+  _granFinalDialogue: {fileID: 0}
