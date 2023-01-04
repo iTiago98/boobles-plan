@@ -32,8 +32,10 @@ MonoBehaviour:
   - _content: "Pues si no puedo coger la pelota podr\xEDamos meter otra."
     _closeUp: 1
   - _content: "\xBFY arriesgarnos a que jueguen con las dos a la vez y se convierta
-      en un r\xE9cord Guinness? Creo que la \xFAnica pelota que puede entrar ah\xED
-      tiene que explotar, m\xEDnimo."
+      en un r\xE9cord Guinness?"
+    _closeUp: 4
+  - _content: "Creo que la \xFAnica pelota que puede entrar ah\xED tiene que explotar,
+      m\xEDnimo."
     _closeUp: 4
   - _content: "Oye pues eso no es mala idea. Alguien de por aqu\xED que sea manitas
       seguro que sabe c\xF3mo hacerla."

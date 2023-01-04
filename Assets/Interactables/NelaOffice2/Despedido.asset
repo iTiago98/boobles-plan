@@ -20,14 +20,16 @@ MonoBehaviour:
   - _content: "Pero si es muy atl\xE9tico y flexible, no hay bola a la que no llegue."
     _closeUp: 1
   - _content: "La \xFAnica bola a la que le he visto llegar es a una alb\xF3ndiga.
-      \xC9l y su compinche siempre han estado rebolondos. Los tipos delgados esos
-      con la cara de nuestros maridos no los reconozco."
+      \xC9l y su compinche siempre han estado rebolondos."
+    _closeUp: 0
+  - _content: Los tipos delgados esos con la cara de nuestros maridos no los reconozco.
     _closeUp: 0
   - _content: No me lo creo.
     _closeUp: 1
-  - _content: "Compru\xE9belo usted misma viendo las fotos de su despacho. En una
-      tuvieron que usar una c\xE1mara-gr\xFAa s\xF3lo para que los dos salieran juntos
-      en la foto."
+  - _content: "Compru\xE9belo usted misma viendo las fotos de su despacho."
+    _closeUp: 0
+  - _content: "En una tuvieron que usar una c\xE1mara-gr\xFAa s\xF3lo para que los
+      dos salieran juntos en la foto."
     _closeUp: 0
   - _content: "\xA1\xBFEn serio?!"
     _closeUp: 1

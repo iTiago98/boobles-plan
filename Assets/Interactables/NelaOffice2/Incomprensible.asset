@@ -21,8 +21,11 @@ MonoBehaviour:
     _closeUp: 0
   - _content: "\xBFA qu\xE9 se refiere?"
     _closeUp: 1
-  - _content: "Quiero decir que f\xEDsicamente puede que sean nuestros maridos. Pero
-      nunca se han movido as\xED y han estado tan concentrados en la vida. Siempre
-      han sido unos despistados. \xA1Si hasta dejan una copia de la tarjeta magn\xE9tica
-      de su despacho al lado de la puerta por si se les ha olvidado!"
+  - _content: "Quiero decir que f\xEDsicamente puede que sean nuestros maridos."
+    _closeUp: 0
+  - _content: "Pero nunca se han movido as\xED y han estado tan concentrados en la
+      vida. Siempre han sido unos despistados."
+    _closeUp: 0
+  - _content: "\xA1Si hasta dejan una copia de la tarjeta magn\xE9tica de su despacho
+      al lado de la puerta por si se les ha olvidado!"
     _closeUp: 0

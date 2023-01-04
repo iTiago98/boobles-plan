@@ -20,11 +20,14 @@ MonoBehaviour:
   - _content: "Vale, parece que controlas del tema. S\xF3lo quiero hacer que una
       pelota de ping pong explote."
     _closeUp: 1
-  - _content: "\xBFQue explote metralla, clavos, veneno o s\xF3lo sea una contusi\xF3n?
-      Tienes que ser un poco m\xE1s espec\xEDfica, hay varios tipos de explosi\xF3n."
+  - _content: "\xBFQue explote metralla, clavos, veneno o s\xF3lo sea una contusi\xF3n?"
     _closeUp: 2
-  - _content: "\xA1No, no! Nada de eso, bueno quiz\xE1 contusi\xF3n. Estoy intentando
-      parar el partido de ping pong e intentar hacer entrar en raz\xF3n a esos obsesos."
+  - _content: "Tienes que ser un poco m\xE1s espec\xEDfica, hay varios tipos de explosi\xF3n."
+    _closeUp: 2
+  - _content: "\xA1No, no! Nada de eso, bueno quiz\xE1 contusi\xF3n."
+    _closeUp: 1
+  - _content: "Estoy intentando parar el partido de ping pong e intentar hacer entrar
+      en raz\xF3n a esos obsesos."
     _closeUp: 1
   - _content: "Ah bueno, una pelota explosiva, \xA1haberlo dicho antes! Hac\xEDa
       muchas de chica para asustar a la gente que llevara guantes."

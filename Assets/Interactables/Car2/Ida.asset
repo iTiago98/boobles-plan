@@ -17,8 +17,10 @@ MonoBehaviour:
   - _content: "Muy buenos d\xEDas. \xBFQu\xE9 tal se ha levantado nuestra defensora
       de la tiran\xEDa?"
     _closeUp: 9
-  - _content: "Pues no muy bien, me han mandado un documento oficial para que eche
-      a dos trabajadores a la vez. \xBFQu\xE9 se creen que soy, una picadora de carne?"
+  - _content: Pues no muy bien, me han mandado un documento oficial para que eche
+      a dos trabajadores a la vez.
+    _closeUp: 1
+  - _content: "\xBFQu\xE9 se creen que soy, una picadora de carne?"
     _closeUp: 1
   - _content: "\xBFA dos a la vez? \xBFTan grave es lo que han hecho?"
     _closeUp: 9
@@ -62,9 +64,10 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "\xBFTrabajar los Pinponbros?"
     _closeUp: 9
-  - _content: "Si todas las mejores marcas del mundo intentan patrocinarlos. Esos
-      \xEDdolos son pr\xE1cticamente millonarios si no fuera por lo obsesionados
-      que est\xE1n en rebotarse esa pelotita."
+  - _content: Si todas las mejores marcas del mundo intentan patrocinarlos.
+    _closeUp: 9
+  - _content: "Esos \xEDdolos son pr\xE1cticamente millonarios si no fuera por lo
+      obsesionados que est\xE1n en rebotarse esa pelotita."
     _closeUp: 9
   - _content: "Tendr\xE9 que investigarlo. Anda ya hemos llegado, \xA1hasta luego
       Anselmo!"

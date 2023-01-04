@@ -17,8 +17,10 @@ MonoBehaviour:
   - _content: "Pero bueno, \xA1\xBFqu\xE9 est\xE1s gritando ah\xED como un poseso?!"
     _closeUp: 1
   - _content: "Nada, lo t\xEDpico que se dec\xEDa en los mercados tras la Cuarta
-      Guerra Carlista. Se dispar\xF3 tanto en esa guerra que todo el pa\xEDs acab\xF3
-      literalmente impregnado de p\xF3lvora."
+      Guerra Carlista."
+    _closeUp: 8
+  - _content: "Se dispar\xF3 tanto en esa guerra que todo el pa\xEDs acab\xF3 literalmente
+      impregnado de p\xF3lvora."
     _closeUp: 8
   - _content: "\xBFY eso qu\xE9 tiene que ver?"
     _closeUp: 8
@@ -26,13 +28,17 @@ MonoBehaviour:
       todos dec\xEDan que no les sab\xEDa a nada."
     _closeUp: 8
   - _content: "Muchos estudios confirman que tras una guerra un pa\xEDs entero puede
-      sufrir S\xEDndrome de Estr\xE9s Postraum\xE1tico. La gente puede acabar un
-      poco loca\u2026"
+      sufrir S\xEDndrome de Estr\xE9s Postraum\xE1tico."
     _closeUp: 1
-  - _content: "\xBFY eso qu\xE9 tiene que ver? Esto era que se hab\xEDan acostumbrado
-      tanto a la p\xF3lvora, que hasta su sabor se hab\xEDa convertido en imprescindible
-      en la comida. Ahora se usa como condimento, tanto o m\xE1s que la pimienta
-      y casi como la sal."
+  - _content: "La gente puede acabar un poco loca\u2026"
+    _closeUp: 1
+  - _content: "\xBFY eso qu\xE9 tiene que ver?"
+    _closeUp: 8
+  - _content: "Esto era que se hab\xEDan acostumbrado tanto a la p\xF3lvora, que
+      hasta su sabor se hab\xEDa convertido en imprescindible en la comida."
+    _closeUp: 8
+  - _content: "Ahora se usa como condimento, tanto o m\xE1s que la pimienta y casi
+      como la sal."
     _closeUp: 8
   - _content: "Incre\xEDble\u2026 \xBFOye y no tendr\xE1s un poco por ah\xED? Es
       para una amiga, claro."

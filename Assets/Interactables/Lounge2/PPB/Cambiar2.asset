@@ -23,7 +23,9 @@ MonoBehaviour:
       vida."
     _closeUp: 11
   - _content: "\xA1Fue en ese mismo partido homenaje en Villanueva Del Trabuco! \xA1\xC9sa
-      pelota me corresponde por derecho! \xA1Yo fui el que le salv\xF3 la vida!"
+      pelota me corresponde por derecho!"
+    _closeUp: 4
+  - _content: "\xA1Yo fui el que le salv\xF3 la vida!"
     _closeUp: 4
   - _content: "Tranqui, tronco. Espera, ya me acuerdo de ti. T\xFA eras el chaval
       que le salt\xF3 a \xD1ocobich nada m\xE1s terminar el partido, \xBFno?"
@@ -39,12 +41,15 @@ MonoBehaviour:
   - _content: "\xBF\xBFQUE QU\xC9??"
     _closeUp: 4
   - _content: La he usado para parar el partido y veo que por fin lo he conseguido.
-      Necesito hablar con Pedro y con Pablo antes de que los despidan, la entrevista
-      para hacerlo es en pocos minutos.
+    _closeUp: 1
+  - _content: Necesito hablar con Pedro y con Pablo antes de que los despidan, la
+      entrevista para hacerlo es en pocos minutos.
     _closeUp: 1
   - _content: "\xA1Por fin se acerca el gran momento! \xA1Por fin mi plan de venganza
-      se har\xE1 realidad! En pocos minutos perder\xE9is toda vuestra pensi\xF3n,
-      ser\xE9is unos pu**s parados!"
+      se har\xE1 realidad!"
+    _closeUp: 4
+  - _content: "En pocos minutos perder\xE9is toda vuestra pensi\xF3n, ser\xE9is unos
+      pu**s parados!"
     _closeUp: 4
   - _content: "Lo que en realidad son, unas v\xEDctimas de un desvariado que los
       ten\xEDa controlados de alguna manera."

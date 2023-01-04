@@ -23,6 +23,8 @@ MonoBehaviour:
       poderes, gualtrapa."
     _closeUp: 11
   - _content: "S\xED,ll\xE9vatelo, Ana. Pedro, Pablo, siento todo lo ocurrido, pero
-      todav\xEDa tenemos que hacer la entrevista. A la vista de los hechos, intentar\xE9
-      defenderos todo lo posible ante el consejo de administraci\xF3n."
+      todav\xEDa tenemos que hacer la entrevista."
+    _closeUp: 1
+  - _content: "A la vista de los hechos, intentar\xE9 defenderos todo lo posible
+      ante el consejo de administraci\xF3n."
     _closeUp: 1
