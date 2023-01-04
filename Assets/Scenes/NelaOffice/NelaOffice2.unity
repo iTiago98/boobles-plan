@@ -733,19 +733,19 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 909252549}
-  - _optionText: "\xBFNo est\xE1 preocupada por su marido?"
-    _trueFlags: 
-    _falseFlags: 
-    _dialogueOption: {fileID: 1864503533}
-  - _optionText: "\xBFQu\xE9 telenovela est\xE1 viendo?"
-    _trueFlags: 
-    _falseFlags: 
-    _dialogueOption: {fileID: 453249551}
   - _optionText: "\xBFEn serio piensa quedarse viendo la tele estando su marido a
       punto de ser despedido?"
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 601610809}
+  - _optionText: "\xBFQu\xE9 telenovela est\xE1 viendo?"
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 453249551}
+  - _optionText: "\xBFNo est\xE1 preocupada por su marido?"
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 1864503533}
 --- !u!114 &1066056389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1597,22 +1597,20 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 335023538}
+  - _optionText: "Le prometo que har\xE9 todo lo posible por traer a sus maridos
+      de vuelta, se\xF1ora."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 2055491801}
+  - _optionText: "Esta situaci\xF3n es, desde luego, incomprensible. Por eso la llamo,
+      para investigar a fondo el asunto."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 1671757669}
   - _optionText: "\xBFDespechadas? \xBFA su edad?"
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 859864396}
-  - _optionText: "La verdad es que toda esta situaci\xF3n es bastante incomprensible.
-      Por eso la llamo, para investigar todo lo posible sobre el tema. Y ll\xE1meme
-      Nella, por favor."
-    _trueFlags: 
-    _falseFlags: 
-    _dialogueOption: {fileID: 1671757669}
-  - _optionText: "Entiendo que tiene que ser muy doloroso estar tanto tiempo sin
-      ver a sus maridos. Le prometo que har\xE9 todo lo posible por traerlos de vuelta,
-      se\xF1ora."
-    _trueFlags: 
-    _falseFlags: 
-    _dialogueOption: {fileID: 2055491801}
 --- !u!114 &1282262458008004107
 MonoBehaviour:
   m_ObjectHideFlags: 0
