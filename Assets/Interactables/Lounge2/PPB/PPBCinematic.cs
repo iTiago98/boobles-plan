@@ -7,6 +7,7 @@ using Booble.Interactables.Events;
 using Booble.UI;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PPBCinematic : DialogueEvent
 {
@@ -17,6 +18,7 @@ public class PPBCinematic : DialogueEvent
     [SerializeField] private Dialogue _dialogue3;
     [SerializeField] private GameObject _dennis;
     [SerializeField] private Transform _anaT;
+    [SerializeField] private RectTransform _boomRT;
     [SerializeField] private Animator _ppbAnim;
     [SerializeField] private Animator _anaAnim;
     [SerializeField] private float _anaXPos;
@@ -44,8 +46,14 @@ public class PPBCinematic : DialogueEvent
         _continue = false;
 
         _ppbAnim.SetTrigger("boom");
+        
+        _boomRT.gameObject.SetActive(true);
+        _boomRT.DOScale(Vector3.zero, 5).SetEase(Ease.OutExpo).From();
         _camera.DOShakePosition(5, 1, 10, 90, false, true)
             .OnComplete(Continue);
+
+            yield return new WaitForSeconds(2);
+            _boomRT.GetComponent<Image>().DOFade(0, 3);
         
         yield return new WaitUntil(() => _continue);
         _continue = false;
