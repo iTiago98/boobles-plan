@@ -295,9 +295,11 @@ namespace Booble.CardGame.Cards
             }
         }
 
-        public Sequence HitSequence(object target, bool combatActions)
+        public Sequence HitSequence(object target, bool combatActionsApplied)
         {
             Sequence hitSequence = DOTween.Sequence();
+
+            if (!combatActionsApplied) TurnManager.Instance.GetClashManager().SetCombatActionsApplied();
 
             if (Stats.strength != 0)
             {
@@ -330,7 +332,7 @@ namespace Booble.CardGame.Cards
                 hitSequence.Append(transform.DOMove(targetDir, 0.2f).SetRelative());
 
                 // Hit callback
-                if (combatActions) hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
+                if (!combatActionsApplied) hitSequence.AppendCallback(TurnManager.Instance.ApplyCombatActions);
 
                 // Back
                 hitSequence.Append(transform.DOLocalMove(Vector3.zero, 0.2f));
@@ -341,19 +343,19 @@ namespace Booble.CardGame.Cards
             {
                 hitSequence.AppendInterval(0.7f);
                 // Hit callback
-                if (combatActions) hitSequence.AppendCallback(() => TurnManager.Instance.ApplyCombatActions(this, target));
+                if (!combatActionsApplied) hitSequence.AppendCallback(TurnManager.Instance.ApplyCombatActions);
             }
 
             return hitSequence;
         }
 
-        public bool ReceiveDamage(int strength)
+        public bool ReceiveDamage(int strength, bool checkDestroy = false)
         {
-            if (strength > 0) StartCoroutine(ReceiveDamageCoroutine(strength));
-            return Stats.defense <= strength && !TurnManager.Instance.combat;
+            if (strength > 0) StartCoroutine(ReceiveDamageCoroutine(strength, checkDestroy));
+            return Stats.defense <= strength && checkDestroy;
         }
 
-        private IEnumerator ReceiveDamageCoroutine(int strength)
+        private IEnumerator ReceiveDamageCoroutine(int strength, bool checkDestroy)
         {
             CardUI.ShowDamagedAnimation();
             Stats.ReceiveDamage(strength);
@@ -361,7 +363,7 @@ namespace Booble.CardGame.Cards
 
             yield return new WaitWhile(() => CardUI.IsPlayingAnimation);
 
-            if (!TurnManager.Instance.combat) CheckDestroy();
+            if (checkDestroy) CheckDestroy();
         }
 
         #endregion

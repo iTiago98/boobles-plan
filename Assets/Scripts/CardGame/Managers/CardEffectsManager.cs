@@ -134,7 +134,7 @@ namespace Booble.CardGame.Managers
             {
                 case Target.ENEMY:
                     Card card = (Card)target;
-                    card.ReceiveDamage(value);
+                    card.ReceiveDamage(value, checkDestroy: true);
                     aux = card;
                     break;
 
@@ -194,7 +194,7 @@ namespace Booble.CardGame.Managers
                 if (cardZone.isNotEmpty)
                 {
                     Card card = cardZone.GetCard();
-                    bool destroy = card.ReceiveDamage(value);
+                    bool destroy = card.ReceiveDamage(value, checkDestroy: true);
 
                     if (!found || destroy)
                     {
@@ -238,16 +238,6 @@ namespace Booble.CardGame.Managers
 
         private bool _next = true;
 
-        //private int _lifeValue = 0;
-        //private int _reboundValue = 0;
-        //private int _trampleValue = 0;
-        //private int _spongeValue = 0;
-
-        //private int _storedLifeValue = -1;
-        //private int _storedReboundValue = -1;
-        //private int _storedTrampleValue = -1;
-        //private int _storedSpongeValue = -1;
-
         public void CombatEffects(CardEffect effect, Card source, object target)
         {
             StartCoroutine(CombatEffectsCoroutine(effect, source, target));
@@ -260,6 +250,8 @@ namespace Booble.CardGame.Managers
                 Card targetCard = (Card)target;
 
                 _next &= targetCard.Effects.hasAppliableManagedCombatEffects;
+
+                //if (source.Effects.singleHit) _next = false;
 
                 if (_next) _next = false;
                 else
@@ -317,7 +309,7 @@ namespace Booble.CardGame.Managers
         private void ApplyEffectValues(Card source, Card target)
         {
             source.Effects.ApplyEffectValues(target);
-            target.Effects.ApplyEffectValues(source);
+            target.Effects.ApplyEffectValues(source, source.Effects.singleHit);
         }
 
         private void ResetEffectStoredValues()

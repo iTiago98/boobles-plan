@@ -348,7 +348,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
         #region IsAppliable
 
-        public bool IsAppliable(Card source)
+        public bool IsAppliable(Card source, object targetObj = null)
         {
             if (type == EffectType.ALTERNATE_WIN_CONDITION)
             {
@@ -371,7 +371,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
             {
                 if (applyTime == ApplyTime.COMBAT)
                 {
-                    Card target = Board.Instance.GetOppositeCard(source);
+                    Card target = (targetObj is Card) ? (Card)targetObj : null;
 
                     switch (subType)
                     {

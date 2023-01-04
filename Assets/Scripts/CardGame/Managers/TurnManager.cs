@@ -22,6 +22,15 @@ namespace Booble.CardGame.Managers
         private Turn _turn = Turn.INTERVIEW_START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
 
+        public bool continueFlow { private set; get; }
+
+        [SerializeField] private ClashManager _clash;
+        public ClashManager GetClashManager() => _clash;
+
+        public bool combat => _clash.combat;
+
+        public void ApplyCombatActions() { _clash.ApplyCombatActions(); }
+
         #region Turn flow 
 
         public void StartGame()
@@ -103,7 +112,7 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitUntil(() => GetContinueFlow());
 
-            Clash();
+            _clash.Clash();
         }
 
         private void FinishRound()
@@ -195,110 +204,6 @@ namespace Booble.CardGame.Managers
         {
             StopFlow();
             Board.Instance.DrawCards(cardNumber, _turn);
-        }
-
-        #endregion
-
-        #region Clash
-
-        private void Clash()
-        {
-            StartCoroutine(ClashCoroutine());
-        }
-
-        public bool continueFlow { private set; get; }
-        public bool combat;
-        private bool _combatActions;
-
-        private IEnumerator ClashCoroutine()
-        {
-            Contender player = CardGameManager.Instance.player;
-            Contender opponent = CardGameManager.Instance.opponent;
-
-            bool hitSequence = false;
-
-            for (int index = 0; index < 4; index++)
-            {
-                Card playerCard = player.cardZones[index].GetCard();
-                Card opponentCard = opponent.cardZones[index].GetCard();
-
-                if ((playerCard == null || playerCard.Stats.strength == 0)
-                    && (opponentCard == null || opponentCard.Stats.strength == 0)) continue;
-
-                combat = true;
-
-                object playerTarget = GetTarget(opponent, _opponentGuardCard, opponentCard);
-                object opponentTarget = GetTarget(player, _playerGuardCard, playerCard);
-
-                Sequence sequence = DOTween.Sequence();
-
-                bool applyCombatActions = true;
-                if (playerCard)
-                {
-                    sequence.Join(playerCard.HitSequence(playerTarget, applyCombatActions));
-                    applyCombatActions = false;
-                }
-                if (opponentCard)
-                    sequence.Join(opponentCard.HitSequence(opponentTarget, applyCombatActions));
-
-                if (!applyCombatActions) _combatActions = true;
-
-                sequence.AppendCallback(() => hitSequence = false);
-
-                hitSequence = true;
-                sequence.Play();
-
-                yield return new WaitWhile(() => hitSequence);
-
-                if (!applyCombatActions) yield return new WaitWhile(() => _combatActions);
-
-                bool playerCardDestroy = playerCard && playerCard.CheckDestroy();
-                bool opponentCardDestroy = opponentCard && opponentCard.CheckDestroy();
-
-                yield return new WaitWhile(() => (playerCardDestroy && playerCard != null) || (opponentCardDestroy && opponentCard != null));
-
-                combat = false;
-            }
-
-            ChangeTurn();
-        }
-
-        public void ApplyCombatActions(Card source, object targetObj)
-        {
-            StartCoroutine(ApplyCombatActionsCoroutine(source, targetObj));
-        }
-
-        private IEnumerator ApplyCombatActionsCoroutine(Card source, object targetObj)
-        {
-            Card targetCard = null;
-            if (targetObj is Card) targetCard = (Card)targetObj;
-
-            if (targetCard != null)
-            {
-                if (source.Effects.hasManagedCombatEffects) source.Effects.GetEffectValues();
-                if (targetCard.Effects.hasManagedCombatEffects) targetCard.Effects.GetEffectValues();
-            }
-
-            source.Hit(targetObj);
-            targetCard?.Hit(source);
-
-            yield return new WaitWhile(() => source.CardUI.IsPlayingAnimation);
-            if (targetCard != null) yield return new WaitWhile(() => targetCard.CardUI.IsPlayingAnimation);
-
-            if (source.Effects.hasCombatEffects) source.Effects.ApplyCombatEffects(targetObj);
-            if (targetCard != null && targetCard.Effects.hasCombatEffects) targetCard?.Effects.ApplyCombatEffects(source);
-
-            yield return new WaitWhile(() => source.Effects.applyingEffects);
-            if (targetCard != null) yield return new WaitWhile(() => targetCard.Effects.applyingEffects);
-
-            _combatActions = false;
-        }
-
-        private object GetTarget(Contender contender, Card guardCard, Card card)
-        {
-            return (guardCard != null) ? guardCard
-                : (card != null) ? card
-                : contender;
         }
 
         #endregion
