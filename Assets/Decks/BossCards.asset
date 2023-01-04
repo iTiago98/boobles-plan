@@ -90,7 +90,7 @@ MonoBehaviour:
     effects:
     - type: 4
       subType: 32
-      applyTime: 1
+      applyTime: 7
       targetType: 0
       intParameter1: 0
       intParameter2: 0
