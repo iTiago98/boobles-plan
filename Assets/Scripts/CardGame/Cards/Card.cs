@@ -288,7 +288,7 @@ namespace Booble.CardGame.Cards
 
                 if (Effects.HasEffect(SubType.COMPARTMENTALIZE) && targetContender.deck.numCards > 0) return;
 
-                if (TurnManager.Instance.IsMirror(targetContender))
+                if (targetContender.hasMirrorCards)
                     contender.ReceiveDamage(Stats.strength);
                 else
                     targetContender.ReceiveDamage(Stats.strength);

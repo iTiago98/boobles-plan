@@ -1,4 +1,5 @@
 using Booble.CardGame.AI;
+using Booble.CardGame.Cards;
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Dialogues;
 using Booble.CardGame.Level;
@@ -50,6 +51,35 @@ namespace Booble.CardGame
         [HideInInspector]
         public int stolenCards;
 
+        #region Guard Cards
+
+        public bool hasGuardCards => _guardCards.Count > 0;
+        public Card GetGuardCard() => _guardCards[0];
+
+        private List<Card> _guardCards = new List<Card>();
+
+        public void AddGuardCard(Card card)
+        {
+            _guardCards.Add(card);
+        }
+
+        public void RemoveGuardCard(Card card)
+        {
+            _guardCards.Remove(card);
+        }
+
+        #endregion
+
+        #region Mirror
+
+        public bool hasMirrorCards => _mirrorCards > 0;
+        private int _mirrorCards;
+
+        public void AddMirrorCard() { _mirrorCards++; }
+
+        public void RemoveMirrorCard() { _mirrorCards--; }
+        #endregion
+
         public void Initialize(Hand hand, Deck deck, List<CardZone> cardZones, CardZone fieldCardZone)
         {
             this.hand = hand;
@@ -67,6 +97,7 @@ namespace Booble.CardGame
             _maxMana = maxManaCounter;
         }
 
+        #region Stats
         public void FillMana()
         {
             if (currentMaxMana < _maxMana)
@@ -106,7 +137,6 @@ namespace Booble.CardGame
                     currentMana -= manaCost;
                     if (currentMana < 0) currentMana = 0;
                     UIManager.Instance.UpdateUIStats();
-
                 }
             }
         }
@@ -130,6 +160,8 @@ namespace Booble.CardGame
             freeMana = state;
             // Show in UI
         }
+
+        #endregion
 
         public CardsDataContainer GetDeckCards() { return _deckCards; }
         public Sprite GetCardBack() { return _cardBack; }

@@ -335,50 +335,6 @@ namespace Booble.CardGame.Managers
             return skipCombat;
         }
 
-        #region Guard Cards
-
-        private Card _playerGuardCard;
-        private Card _opponentGuardCard;
-
-        public void SetGuardCard(Card guardCard)
-        {
-            if (guardCard.contender.isPlayer)
-            {
-                _playerGuardCard = guardCard;
-            }
-            else
-            {
-                _opponentGuardCard = guardCard;
-            }
-        }
-
-        public void RemoveGuardCard(Contender contender)
-        {
-            if (contender.isPlayer)
-                _playerGuardCard = null;
-            else
-                _opponentGuardCard = null;
-        }
-
-        #endregion
-
-        #region Mirror
-
-        private bool _playerMirror;
-        private bool _opponentMirror;
-
-        public void SetMirror(Contender contender, bool state)
-        {
-            if (contender.isPlayer) _playerMirror = state;
-            else _opponentMirror = state;
-        }
-        public bool IsMirror(Contender contender)
-        {
-            return (contender.isPlayer && _playerMirror) || (!contender.isPlayer && _opponentMirror);
-        }
-
-        #endregion
-
         #endregion
     }
 }

@@ -357,6 +357,16 @@ namespace Booble.CardGame.Managers
 
         #endregion
 
+        #region Guard
+
+        public void Guard(CardEffect effect, Card source)
+        {
+            source.contender.AddGuardCard(source);
+            effect.SetEffectApplied();
+        }
+
+        #endregion
+
         #region Stat Boost
 
         public void StatBoost(CardEffect effect, Card source, object target, Target targetType, int strengthValue, int defenseValue)
@@ -737,7 +747,7 @@ namespace Booble.CardGame.Managers
 
         public void Mirror(CardEffect effect, Contender contender)
         {
-            TurnManager.Instance.SetMirror(contender, true);
+            contender.AddMirrorCard();
             effect.SetEffectApplied();
         }
 
