@@ -3,6 +3,7 @@ using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Level;
 using Booble.CardGame.Utils;
 using Booble.Managers;
+using Booble.UI;
 using DG.Tweening;
 using System;
 using System.Collections;
@@ -77,10 +78,17 @@ namespace Booble.CardGame.Managers
         [SerializeField] private GameObject continuePlayButton;
         [SerializeField] private GameObject cancelPlayButton;
 
-        [SerializeField] private TextMeshProUGUI interviewEndText;
-        [SerializeField] private MyButton interviewEndButton;
-
         [SerializeField] private MyButton endTurnButton;
+
+        private const string INTERVIEW_START_BUTTON_TEXT = "Comienza la entrevista";
+        private const string ROUND_START_BUTTON_TEXT = "Comienzo de ronda";
+        private const string OPPONENTM_TURN_BUTTON_TEXT = "Turno del entrevistado";
+        private const string OPPONENTW_TURN_BUTTON_TEXT = "Turno de la entrevistada";
+        private const string PLAYER_TURN_CLASH_BUTTON_TEXT = "Batirse";
+        private const string PLAYER_TURN_SKIP_BUTTON_TEXT = "Pasar turno";
+        private const string DISCARDING_BUTTON_TEXT = "Descartando";
+        private const string CLASH_BUTTON_TEXT = "Combate";
+        private const string END_BUTTON_TEXT = "Fin de la ronda";
 
         #endregion
 
@@ -128,21 +136,15 @@ namespace Booble.CardGame.Managers
 
         #endregion
 
-        private Contender _player;
-        private Contender _opponent;
+        #region Lose Menu
 
-        private const string INTERVIEW_START_BUTTON_TEXT = "Comienza la entrevista";
-        private const string ROUND_START_BUTTON_TEXT = "Comienzo de ronda";
-        private const string OPPONENTM_TURN_BUTTON_TEXT = "Turno del entrevistado";
-        private const string OPPONENTW_TURN_BUTTON_TEXT = "Turno de la entrevistada";
-        private const string PLAYER_TURN_CLASH_BUTTON_TEXT = "Batirse";
-        private const string PLAYER_TURN_SKIP_BUTTON_TEXT = "Pasar turno";
-        private const string DISCARDING_BUTTON_TEXT = "Descartando";
-        private const string CLASH_BUTTON_TEXT = "Combate";
-        private const string END_BUTTON_TEXT = "Fin de la ronda";
+        [Header("Lose Menu")]
+        [SerializeField] private GameObject _loseMenu;
 
-        private const string INTERVIEW_WIN_TEXT = "Has ganado";
-        private const string INTERVIEW_LOSE_TEXT = "Has perdido";
+        public bool loseMenuActive => _loseMenu.activeSelf;
+
+        #endregion
+
 
         private void Awake()
         {
@@ -151,17 +153,35 @@ namespace Booble.CardGame.Managers
 
         private void Start()
         {
-            _player = CardGameManager.Instance.player;
-            _opponent = CardGameManager.Instance.opponent;
             _defaultMaxLife = CardGameManager.Instance.settings.initialLife;
             _defaultMaxMana = CardGameManager.Instance.settings.maxManaCounter;
         }
 
         private void Update()
         {
+            CheckMoveBanners();
+            CheckPauseMenu();
+        }
+
+        #region Inputs
+
+        private void CheckMoveBanners()
+        {
             if (Input.GetMouseButtonUp(0) && _bannersOn) MoveBanners();
         }
 
+        private void CheckPauseMenu()
+        {
+            if ((Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide) && !loseMenuActive)
+            {
+                PauseMenu.Instance.ShowHidePauseMenu();
+                CardGameManager.Instance.SwitchGameState();
+            }
+        }
+
+        #endregion
+
+        #region Turn Animation
 
         public void TurnAnimation(Turn turn)
         {
@@ -206,7 +226,7 @@ namespace Booble.CardGame.Managers
         public void TurnAnimation(Sprite sprite, Turn turn, TweenCallback endCallback)
         {
             turnAnimationImage.sprite = sprite;
-            
+
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
@@ -219,6 +239,8 @@ namespace Booble.CardGame.Managers
 
             sequence.Play();
         }
+
+        #endregion
 
         #region Stats
 
@@ -236,26 +258,29 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator UpdateUIStatsCoroutine(bool startRound)
         {
+            Contender player = CardGameManager.Instance.player;
+            Contender opponent = CardGameManager.Instance.opponent;
+
             statsUpdated = false;
 
             int loops = Mathf.Max(
-                Mathf.Abs(_player.life - _shownPlayerLife),
-                Mathf.Abs(_player.currentMana - _shownPlayerMana),
-                Mathf.Abs(_opponent.life - _shownOpponentLife),
-                Mathf.Abs(_opponent.currentMana - _shownOpponentMana)
+                Mathf.Abs(player.life - _shownPlayerLife),
+                Mathf.Abs(player.currentMana - _shownPlayerMana),
+                Mathf.Abs(opponent.life - _shownOpponentLife),
+                Mathf.Abs(opponent.currentMana - _shownOpponentMana)
                 );
 
             for (int i = 0; i < loops; i++)
             {
-                SetStats(_player.life, _player.currentMana, _player.currentMaxMana, _player.extraMana,
-                    _opponent.life, _opponent.currentMana, _opponent.currentMaxMana, _opponent.extraMana);
+                SetStats(player.life, player.currentMana, player.currentMaxMana, player.extraMana,
+                    opponent.life, opponent.currentMana, opponent.currentMaxMana, opponent.extraMana);
 
                 yield return new WaitForSeconds(0.1f);
             }
 
             yield return new WaitUntil(() =>
-                _shownPlayerLife == _player.life && _shownPlayerMana == _player.currentMana
-                && _shownOpponentLife == _opponent.life && _shownOpponentMana == _opponent.currentMana);
+                _shownPlayerLife == player.life && _shownPlayerMana == player.currentMana
+                && _shownOpponentLife == opponent.life && _shownOpponentMana == opponent.currentMana);
 
             statsUpdated = true;
         }
@@ -580,14 +605,14 @@ namespace Booble.CardGame.Managers
             else TurnAnimation(_interviewLoseSprite, Turn.INTERVIEW_END, endCallback);
         }
 
-        public void ShowEndButton(bool show)
+        public void ShowLoseMenu()
         {
-            interviewEndButton.gameObject.SetActive(show);
+            _loseMenu.SetActive(true);
         }
 
-        public void OnEndButtonClick()
+        public void OnRetryButtonClick()
         {
-            SceneLoader.Instance.UnloadInterviewScene();
+            SceneLoader.Instance.ReloadInterview();
         }
 
         #endregion
