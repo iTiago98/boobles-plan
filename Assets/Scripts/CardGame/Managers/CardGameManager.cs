@@ -15,6 +15,8 @@ namespace Booble.CardGame.Managers
     {
         public CardGameSettings settings;
 
+        #region Contenders
+
         [Header("Contenders")]
         public Contender player;
         [HideInInspector] public Contender opponent;
@@ -28,34 +30,38 @@ namespace Booble.CardGame.Managers
         public Contender currentPlayer => (TurnManager.Instance.IsPlayerTurn) ? player : opponent;
         public Contender otherPlayer => (TurnManager.Instance.IsPlayerTurn) ? opponent : player;
 
-        public bool gamePaused { private set; get; }
+        #endregion
 
-        public bool playingCard { private set; get; }
+        #region Interview End Parameters
 
         public bool alternateWinCondition { private set; get; }
         public int alternateWinConditionParameter { get; set; }
 
         private bool _playerWin;
 
+        #endregion
+
+        public bool gamePaused { private set; get; }
+        public bool playingCard { private set; get; }
+
+        private bool _initialized;
+        private bool _playingStoryMode;
+        public bool playingStoryMode => _playingStoryMode;
+
+        public bool dialogueEnd => (_interviewDialogue != null) ? _interviewDialogue.GetDialogueEnd() : false;
+
         private void Start()
         {
-            Initialize();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide)
-            {
-                PauseMenu.Instance.ShowHidePauseMenu();
-                if (gamePaused) ResumeGame();
-                else PauseGame();
-            }
+            if (!_initialized) Initialize(false);
         }
 
         #region Initialize
 
-        public void Initialize()
+        public void Initialize(bool playingStoryMode)
         {
+            _initialized = true;
+            _playingStoryMode = playingStoryMode;
+
             InitializeOpponent();
             InitializeDialogues();
             Board.Instance.InitializeBackground(opponent.GetInterviewBackground());
@@ -123,19 +129,49 @@ namespace Booble.CardGame.Managers
             TurnManager.Instance.StartGame();
         }
 
+        public void SwitchGameState()
+        {
+            if (gamePaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+
+        private bool _mouseControllerPreviousState;
+        private bool _opponentAIPreviousState;
+        private bool _endTurnButtonPreviousState;
+
         public void PauseGame()
         {
             gamePaused = true;
-            if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = false;
+            
+            _mouseControllerPreviousState = MouseController.Instance.enabled;
+            _endTurnButtonPreviousState = UIManager.Instance.IsEndTurnButtonInteractable();
+
+            if (!TurnManager.Instance.IsPlayerTurn)
+            {
+                _opponentAIPreviousState = opponentAI.enabled;
+                opponentAI.enabled = false;
+            }
+
             MouseController.Instance.enabled = false;
+            UIManager.Instance.SetEndTurnButtonInteractable(false);
+
             DOTween.PauseAll();
         }
 
         public void ResumeGame()
         {
             gamePaused = false;
-            if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = true;
-            MouseController.Instance.enabled = true;
+
+            if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = _opponentAIPreviousState;
+            MouseController.Instance.enabled = _mouseControllerPreviousState;
+            UIManager.Instance.SetEndTurnButtonInteractable(_endTurnButtonPreviousState);
+
             DOTween.PlayAll();
         }
 
@@ -148,7 +184,7 @@ namespace Booble.CardGame.Managers
             _interviewDialogue?.ThrowStartDialogue();
             if (_interviewDialogue == null) StartGame(); // TEMPORAL
         }
-        
+
         public void ThrowEndDialogue()
         {
             _interviewDialogue?.ThrowEndDialogue(_playerWin);
@@ -172,7 +208,6 @@ namespace Booble.CardGame.Managers
         {
             if (player.life <= 0 || opponent.life <= 0 || alternateWinCondition)
             {
-                UIManager.Instance.ShowEndButton(true);
                 MouseController.Instance.enabled = false;
 
                 _playerWin = alternateWinCondition || (player.life > 0 && opponent.life <= 0);
