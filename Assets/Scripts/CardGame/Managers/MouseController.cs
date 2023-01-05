@@ -128,7 +128,7 @@ namespace Booble.CardGame.Managers
                 || !targetCard.CardUI.IsHighlighted)
                 return;
 
-            _effectCard.ContinueAction();
+            _effectCard.ContinueAction(targetCard);
         }
 
         public void ResetApplyingEffect()

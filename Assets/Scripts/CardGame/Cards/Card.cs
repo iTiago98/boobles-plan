@@ -6,6 +6,7 @@ using Booble.CardGame.Level;
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Cards.DataModel.Effects;
 using Booble.CardGame.Managers;
+using System;
 
 namespace Booble.CardGame.Cards
 {
@@ -98,8 +99,7 @@ namespace Booble.CardGame.Cards
                 if (_hand.isDiscarding)
                 {
                     _hand.SubstractDiscarding();
-                    DestroyCard();
-                    _hand.CheckDiscarding();
+                    DestroyCard(_hand.CheckDiscarding);
                 }
                 else if (TurnManager.Instance.IsPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
                 {
@@ -252,7 +252,6 @@ namespace Booble.CardGame.Cards
                 }
 
                 MoveToWaitingSpot();
-                CardGameManager.Instance.opponentAI.enabled = false;
                 UIManager.Instance.ShowContinuePlayButton();
             }
         }
@@ -278,14 +277,16 @@ namespace Booble.CardGame.Cards
 
             yield return new WaitUntil(() => CardGameManager.Instance.dialogueEnd);
 
-            DestroyCard();
+            DestroyCard(ContinueActionPost);
 
             yield return new WaitUntil(() => destroyed);
+        }
 
+        private void ContinueActionPost()
+        {
             storedTarget = null;
             CardGameManager.Instance.SetPlayingCard(false);
             MouseController.Instance.ResetApplyingEffect();
-            UIManager.Instance.SetEndTurnButtonInteractable(IsPlayerCard);
         }
 
         private void MoveToWaitingSpot()
@@ -403,12 +404,12 @@ namespace Booble.CardGame.Cards
 
         public bool destroyed { private set; get; }
 
-        public void DestroyCard()
+        public void DestroyCard(Action onDestroy = null)
         {
-            StartCoroutine(DestroyCardCoroutine());
+            StartCoroutine(DestroyCardCoroutine(onDestroy));
         }
 
-        private IEnumerator DestroyCardCoroutine()
+        private IEnumerator DestroyCardCoroutine(Action onDestroy)
         {
             _clickable = false;
             HideExtendedDescription();
@@ -427,6 +428,8 @@ namespace Booble.CardGame.Cards
             destroySequence.Append(transform.DOScale(0, 1));
             destroySequence.AppendCallback(() =>
             {
+                if (onDestroy != null) onDestroy();
+
                 if (IsInHand) RemoveFromContainer();
                 destroyed = true;
                 Destroy(gameObject);
