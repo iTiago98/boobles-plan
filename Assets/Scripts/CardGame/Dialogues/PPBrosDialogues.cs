@@ -13,13 +13,39 @@ namespace Booble.CardGame.Dialogues
         [SerializeField] private Dialogue _pelotaBombaCardDialogue;
         [SerializeField] private Dialogue _matarLaBolaCardDialogue;
 
+        private bool _paredCardDialogueShown;
+        private bool _palaCardDialogueShown;
+        private bool _gomuCardDialogueShown;
+        private bool _pelotaBombaCardDialogueShown;
+        private bool _matarLaBolaCardDialogueShown;
+
         override public void CheckDialogue(Card cardPlayed)
         {
-            if (cardPlayed.name.Contains("Pared")) ThrowDialogue(_paredCardDialogue);
-            if (cardPlayed.name.Contains("La pala de Ñocobich")) ThrowDialogue(_palaCardDialogue);
-            if (cardPlayed.name.Contains("Gomu Gomu no")) ThrowDialogue(_gomuCardDialogue);
-            if (cardPlayed.name.Contains("Pelota bomba")) ThrowDialogue(_pelotaBombaCardDialogue);
-            if (cardPlayed.name.Contains("Matar la bola")) ThrowDialogue(_matarLaBolaCardDialogue);
+            if (cardPlayed.name.Contains("Pared") && !_paredCardDialogueShown)
+            {
+                ThrowDialogue(_paredCardDialogue);
+                _paredCardDialogueShown = true;
+            }
+            if (cardPlayed.name.Contains("La pala de Ñocobich") && !_palaCardDialogueShown)
+            {
+                ThrowDialogue(_palaCardDialogue);
+                _palaCardDialogueShown = true;
+            }
+            if (cardPlayed.name.Contains("Gomu Gomu no") && !_gomuCardDialogueShown)
+            {
+                ThrowDialogue(_gomuCardDialogue);
+                _gomuCardDialogueShown = true;
+            }
+            if (cardPlayed.name.Contains("Pelota bomba") && !_pelotaBombaCardDialogueShown)
+            {
+                ThrowDialogue(_pelotaBombaCardDialogue);
+                _pelotaBombaCardDialogueShown = true;
+            }
+            if (cardPlayed.name.Contains("Matar la bola") && !_matarLaBolaCardDialogueShown)
+            {
+                ThrowDialogue(_matarLaBolaCardDialogue);
+                _matarLaBolaCardDialogueShown = true;
+            }
         }
     }
 }

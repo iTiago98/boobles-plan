@@ -17,7 +17,9 @@ namespace Booble.CardGame.Dialogues
         [SerializeField] private List<Option> _postTutorialOptions;
 
         [Header("Extra cards")]
-        [SerializeField] private Dialogue _granFinalDialogue;
+        [SerializeField] private Dialogue _granFinalCardDialogue;
+
+        private bool _granFinalCardDialogueShown;
 
         public override void ThrowStartDialogue()
         {
@@ -43,7 +45,11 @@ namespace Booble.CardGame.Dialogues
 
         override public void CheckDialogue(Card cardPlayed)
         {
-            if (cardPlayed.name.Contains("Gran final")) ThrowDialogue(_granFinalDialogue);
+            if (cardPlayed.name.Contains("Gran final") && !_granFinalCardDialogueShown)
+            {
+                ThrowDialogue(_granFinalCardDialogue);
+                _granFinalCardDialogueShown = true;
+            }
         }
     }
 }
