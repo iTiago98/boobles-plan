@@ -87,7 +87,7 @@ namespace Booble.CardGame.Managers
             yield return new WaitUntil(() => GetContinueFlow());
 
             if (turn == Turn.OPPONENT)
-                CardGameManager.Instance.opponentAI.enabled = true;
+                CardGameManager.Instance.EnableOpponentAI();
         }
 
         public void FinishTurn()
@@ -148,7 +148,7 @@ namespace Booble.CardGame.Managers
 
                 case Turn.OPPONENT:
                     SetTurn(Turn.PLAYER);
-                    CardGameManager.Instance.opponentAI.enabled = false;
+                    CardGameManager.Instance.DisableOpponentAI();
                     CardGameManager.Instance.opponent.hand.CheckDiscarding();
                     break;
 

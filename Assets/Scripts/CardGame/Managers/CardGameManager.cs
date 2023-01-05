@@ -20,7 +20,11 @@ namespace Booble.CardGame.Managers
         [Header("Contenders")]
         public Contender player;
         [HideInInspector] public Contender opponent;
-        [HideInInspector] public OpponentAI opponentAI;
+        private OpponentAI _opponentAI;
+
+        public OpponentAI opponentAI => _opponentAI;
+        public void EnableOpponentAI() => _opponentAI.enabled = true;
+        public void DisableOpponentAI() => _opponentAI.enabled = false;
 
         [SerializeField] private Transform _opponentParent;
         [SerializeField] private List<GameObject> _opponents;
@@ -116,8 +120,8 @@ namespace Booble.CardGame.Managers
                 settings.initialManaCounter,
                 settings.maxManaCounter);
 
-            opponentAI = opponent.GetAIScript();
-            opponentAI.Initialize(opponent);
+            _opponentAI = opponent.GetAIScript();
+            _opponentAI.Initialize(opponent);
         }
 
         #endregion
@@ -154,8 +158,8 @@ namespace Booble.CardGame.Managers
 
             if (!TurnManager.Instance.IsPlayerTurn)
             {
-                _opponentAIPreviousState = opponentAI.enabled;
-                opponentAI.enabled = false;
+                _opponentAIPreviousState = _opponentAI.enabled;
+                DisableOpponentAI();
             }
 
             MouseController.Instance.enabled = false;
@@ -168,7 +172,7 @@ namespace Booble.CardGame.Managers
         {
             gamePaused = false;
 
-            if (!TurnManager.Instance.IsPlayerTurn) opponentAI.enabled = _opponentAIPreviousState;
+            if (!TurnManager.Instance.IsPlayerTurn) _opponentAI.enabled = _opponentAIPreviousState;
             MouseController.Instance.enabled = _mouseControllerPreviousState;
             UIManager.Instance.SetEndTurnButtonInteractable(_endTurnButtonPreviousState);
 
@@ -246,6 +250,8 @@ namespace Booble.CardGame.Managers
 
             if (playingCard) UIManager.Instance.SetEndTurnButtonInteractable(false);
             else UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
+
+            if(!TurnManager.Instance.IsPlayerTurn) _opponentAI.enabled = !value;
         }
     }
 }
