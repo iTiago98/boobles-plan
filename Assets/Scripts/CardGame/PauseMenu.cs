@@ -1,3 +1,4 @@
+using Booble.CardGame.Managers;
 using Booble.Managers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,6 +64,7 @@ namespace Booble.UI
         {
             ShowHidePauseMenu();
             SceneLoader.Instance.UnloadInterviewScene();
+            if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
         }
 
         public void OnBackButtonClick()
