@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: StartDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Buenas tardes, se\xF1ores Pinar y Ponzano, vamos a proceder a la entrevista
+      que decidir\xE1 si se quedan o se van de la empresa."
+    _closeUp: 1
+  - _content: "Les notifico que el Consejo De Administraci\xF3n ha decidido que no
+      seguir\xE1n en la empresa "
+    _closeUp: 1
+  - _content: debido a su prolongada ausencia del puesto de trabajo, uso excesivo
+      del material del lounge
+    _closeUp: 1
+  - _content: y mala publicidad de la empresa en las redes sociales.
+    _closeUp: 1
+  - _content: "La hostia, Perico, \xBFqu\xE9 hacemos en este zulo?\r"
+    _closeUp: 1
+  - _content: "A m\xED no me mires, Pep\xEDn, que s\xE9 de esto menos que un koala."
+    _closeUp: 1
+  - _content: Bueno, vamos a comenzar la entrevista.
+    _closeUp: 1

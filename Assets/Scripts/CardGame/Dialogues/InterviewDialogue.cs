@@ -11,13 +11,15 @@ namespace Booble.CardGame.Dialogues
 {
     public abstract class InterviewDialogue : MonoBehaviour
     {
-        //private bool _dialogueEnd;
         protected DialogueManager _dialogueManager;
 
         [SerializeField] protected Dialogue _startDialogue;
         [SerializeField] protected Dialogue _winDialogue;
         [SerializeField] protected Dialogue _alternateWinDialogue;
         [SerializeField] protected Dialogue _loseDialogue;
+
+        private bool _dialogueEnd;
+        public bool GetDialogueEnd() => _dialogueEnd;
 
         private void Awake()
         {
@@ -27,41 +29,50 @@ namespace Booble.CardGame.Dialogues
         abstract public void CheckDialogue(Card cardPlayed);
         virtual public void ThrowStartDialogue()
         {
-            if (_startDialogue != null && _dialogueManager != null) ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
-            else
-                CardGameManager.Instance.StartGame(); // TEMPORAL
+            ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
         }
 
         public void ThrowEndDialogue(bool playerWin)
         {
-            Action onEndDialogue = SceneLoader.Instance.UnloadInterviewScene;
-
             Dialogue dialogue = null;
+            Action onEndDialogue = null;
 
             if (CardGameManager.Instance.alternateWinCondition)
+            {
                 dialogue = _alternateWinDialogue;
+                onEndDialogue = SceneLoader.Instance.UnloadInterviewScene;
+            }
             else if (playerWin)
+            {
                 dialogue = _winDialogue;
+                onEndDialogue = SceneLoader.Instance.UnloadInterviewScene;
+            }
             else
+            {
                 dialogue = _loseDialogue;
+                onEndDialogue = UIManager.Instance.ShowLoseMenu;
+            }
 
-            if (dialogue != null) ThrowDialogue(dialogue, onEndDialogue);
-            else onEndDialogue();
+            ThrowDialogue(dialogue, onEndDialogue);
         }
 
         protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null)
         {
-            if (diag == null || _dialogueManager == null) return;
+            if (diag == null || _dialogueManager == null)
+            {
+                if (onEndDialogue != null) onEndDialogue();
+                return;
+            }
+            _dialogueEnd = false;
             CardGameManager.Instance.PauseGame();
 
-            // _dialogueEnd = false;
             _dialogueManager.StartDialogue(diag, options);
             _dialogueManager.OnEndDialogue.RemoveAllListeners();
             _dialogueManager.OnEndDialogue.AddListener(() =>
             {
-                //_dialogueEnd = true;
-                onEndDialogue();
+                if (onEndDialogue != null) onEndDialogue();
                 CardGameManager.Instance.ResumeGame();
+                _dialogueEnd = true;
             });
         }
     }

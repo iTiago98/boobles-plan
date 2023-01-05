@@ -78,10 +78,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428529aa0d017ea4cbbc142ee10b25b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startDialogue: {fileID: 0}
-  _winDialogue: {fileID: 0}
-  _alternateWinDialogue: {fileID: 0}
-  _loseDialogue: {fileID: 0}
-  _nuevaCepaCardDialogue: {fileID: 0}
-  _exprimirCardDialogue: {fileID: 0}
-  _maquinaDeZumosCardDialogue: {fileID: 0}
+  _startDialogue: {fileID: 11400000, guid: 8285fc100ad09d14e8b8bd22bbb139c2, type: 2}
+  _winDialogue: {fileID: 11400000, guid: d64d221f117cf694f8f81e1468cb783f, type: 2}
+  _alternateWinDialogue: {fileID: 11400000, guid: 19dbcc12162a058499bd44d8a1028221, type: 2}
+  _loseDialogue: {fileID: 11400000, guid: bd3cf1d10092fff41a280a36ad8fb68f, type: 2}
+  _nuevaCepaCardDialogue: {fileID: 11400000, guid: ddc210baf9d330f489e00239a9ade24e, type: 2}
+  _exprimirCardDialogue: {fileID: 11400000, guid: a2bbde73e2bce5e4e90a9b5fd58326c6, type: 2}
+  _maquinaDeZumosCardDialogue: {fileID: 11400000, guid: a69afd3c23a36f049ae04d442bd2f8c5, type: 2}

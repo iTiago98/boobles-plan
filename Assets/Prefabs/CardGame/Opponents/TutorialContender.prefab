@@ -229,9 +229,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startDialogue: {fileID: 11400000, guid: 3af3c88e9b10b844e9fd56f784d600d3, type: 2}
-  _winDialogue: {fileID: 0}
+  _winDialogue: {fileID: 11400000, guid: 54083ad6978ec134d8744162fd3ced5e, type: 2}
   _alternateWinDialogue: {fileID: 0}
-  _loseDialogue: {fileID: 0}
+  _loseDialogue: {fileID: 11400000, guid: 237369726d013d945938ee435598524f, type: 2}
   _tutorialDialogue: {fileID: 11400000, guid: 273fb4541e3eb824b97dc8f68c9ab584, type: 2}
   _postTutorialDialogue: {fileID: 11400000, guid: a378035c8862338459e09b663e234aee, type: 2}
   _tutorialOptions:
@@ -252,4 +252,4 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 5743557249393822207}
-  _granFinalDialogue: {fileID: 0}
+  _granFinalDialogue: {fileID: 11400000, guid: 08465fdd43458fa44aed69ab0251919f, type: 2}

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: WinDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Anda, pues no es tan dif\xEDcil. Sin explicarlo parec\xEDa tan complejo
+      como jugar a las MAGIC(R) sin instrucciones.\r"
+    _closeUp: 1
+  - _content: "\xBFLas qu\xE9? Mira, te pones de un friki cuando te vienes arriba\u2026
+      Bueno, pues eso, \xBFves qu\xE9 f\xE1cil? \r"
+    _closeUp: 6
+  - _content: "Pues ya estar\xEDa por hoy, llama a Anselmo cuando quieras irte, precios\xEDsima.\r"
+    _closeUp: 6
+  - _content: "Hasta luego, Queca, y gracias por todo, la verdad es que me est\xE1s
+      ayudando mucho.\r"
+    _closeUp: 1
+  - _content: "\xBFPara qu\xE9 estamos las BFFitas si no?\r"
+    _closeUp: 6

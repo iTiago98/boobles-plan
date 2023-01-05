@@ -11,7 +11,7 @@ public class DialogueCallbacks : MonoBehaviour
 
     public void PinPon()
     {
-        DeckManager.Instance.SetOpponent(Opponent_Name.PingPongBros);
+        DeckManager.Instance.SetOpponent(Opponent_Name.PPBros);
         SceneLoader.Instance.LoadInterviewScene();
     }
 

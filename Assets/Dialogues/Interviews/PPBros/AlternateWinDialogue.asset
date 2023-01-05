@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: AlternateWinDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Bueno, dej\xE9monos de protocolos y tonter\xEDas, est\xE1 claro que
+      no sois los culpables de toda esta trama."
+    _closeUp: 1
+  - _content: "Al final Dennis se ha desenmascarado \xE9l solito."
+    _closeUp: 1
+  - _content: Cuidau el figura... Menuda somanta de hostias le pienso dar en cuanto
+      lo vea.
+    _closeUp: 1
+  - _content: Tranquilo, Conan, que ese es capaz de denunciarnos y to.
+    _closeUp: 1
+  - _content: "No os preocup\xE9is, ya se lo ha llevado la polic\xEDa. Todo pinta
+      a que a partir de ahora vais a ser el menor de sus problemas."
+    _closeUp: 1
+  - _content: "Bueno, y ahora qu\xE9, chatina, \xBFnos vas a echar o qu\xE9? Porque
+      con tantos a\xF1os que llevamos aqu\xED el finiquito va a ser de \xF3rdago."
+    _closeUp: 1
+  - _content: "Y vaya si os lo vais a llevar, pero de iros al paro nada. Me vais
+      a ayudar a desenredar esta conspiraci\xF3n."
+    _closeUp: 1
+  - _content: "Porque esa m\xE1quina de control mental que dijo Dennis no ha salido
+      nunca de esta empresa..."
+    _closeUp: 1

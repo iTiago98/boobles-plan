@@ -358,7 +358,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                         return DeckManager.Instance.GetOpponentName() == Opponent_Name.Citriano
                             && CardGameManager.Instance.player.life >= 30;
                     case SubType.PINPONBROS_WIN_CONDITION:
-                        return DeckManager.Instance.GetOpponentName() == Opponent_Name.PingPongBros
+                        return DeckManager.Instance.GetOpponentName() == Opponent_Name.PPBros
                             && CardGameManager.Instance.alternateWinConditionParameter >= 15;
                     case SubType.SECRETARY_WIN_CONDITION:
                         return DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary

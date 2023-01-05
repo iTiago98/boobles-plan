@@ -59,7 +59,7 @@ namespace Booble.MainMenu
 
 		public void PingPongBrosCardsButton()
         {
-			DeckManager.Instance.SetOpponent(Opponent_Name.PingPongBros);
+			DeckManager.Instance.SetOpponent(Opponent_Name.PPBros);
 			DeckManager.Instance.RemoveExtraCards();
 			DeckManager.Instance.AddPPBrosCards();
 			LoadInterview();

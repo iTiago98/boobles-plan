@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: WinDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Lo siento mucho, Citriano, pero no tengo pruebas suficientes para que
+      no te despidan. La entrevista ha acabado.
+    _closeUp: 1
+  - _content: "\xBF\xA1Que lo sientes?! \xBFNo sientes que eres parte del sistema?
+      \xA1T\xFA eres ya una de ellos! \xA1Eres su brazo ejecutor! "
+    _closeUp: 3
+  - _content: "Los de seguridad est\xE1n aqu\xED para acompa\xF1arte a que recojas
+      tus cosas. Buena suerte en tu futuro."
+    _closeUp: 1
+  - _content: "No pienso irme de aqu\xED hasta que... Eh, no me toques, gorila, \xA1su\xE9ltame!\r\n"
+    _closeUp: 3
+  - _content: "\xA1Podr\xE9is doblegarme a m\xED, pero nunca doblegar\xE9is al poder
+      de L A S   N A R A N J A A A A A A A A A Aaaaaaaaasssss!\r\n"
+    _closeUp: 3

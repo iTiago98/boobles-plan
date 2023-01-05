@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: StartDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Buenas tardes, Citriano. El Consejo de Administraci\xF3n ha decidido
+      prescindir de tus servicios debido a las acusaciones de: "
+    _closeUp: 1
+  - _content: Falta reiterada del puesto de trabajo, crecimiento de vegetales sin
+      permiso en su despacho,
+    _closeUp: 1
+  - _content: "desperfectos estructurales en el edificio a causa de la acusaci\xF3n
+      anterior,"
+    _closeUp: 1
+  - _content: entorpecimiento de las labores de mantenimiento, enrarecer la convivencia
+      de las zonas comunes,
+    _closeUp: 1
+  - _content: falta de aseo personal y llevar un jersey de pellejos de naranja.
+    _closeUp: 1
+  - _content: Comenzamos la entrevista.
+    _closeUp: 1

@@ -10,18 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: StartDialogue
+  m_Name: PelotaBombaDialogue
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno, guapi, vamos a hacer un simulacro de entrevista. Pero antes
-      te voy a contar c\xF3mo se hace."
-    _closeUp: 6
-  - _content: "\xBFTe crees que iba a ser tan tonti de no contarte nadita? \r"
-    _closeUp: 6
-  - _content: "Hombre, ser\xEDa bastante cruel que no me hicieras ni siquiera un
-      tutorial..."
+  - _content: "Mira, ricura, porque mas pillau concentrao en la otra bola, que si
+      no te devolv\xEDa el petardito ese en to la jeta."
     _closeUp: 1
-  - _content: No te preocupes, cari, que te voy a explicar el Protocolo de Entrevista
-      de Despidos Obligatorios.
-    _closeUp: 6
+  - _content: "No os preocup\xE9is, que aqu\xED tengo otra. Ana, la de mantenimiento,
+      me ha hecho otra por si os volv\xEDais a poner tontos."
+    _closeUp: 1

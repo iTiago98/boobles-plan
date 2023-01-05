@@ -165,7 +165,6 @@ namespace Booble.CardGame.Cards
 
             CardGameManager.Instance.SetPlayingCard(true);
             PlayCard(cardZone);
-            CardGameManager.Instance.CheckDialogue(this);
         }
 
         private void PlayCard(CardZone cardZone)
@@ -212,6 +211,7 @@ namespace Booble.CardGame.Cards
             }
 
             CardGameManager.Instance.SetPlayingCard(false);
+            CardGameManager.Instance.CheckDialogue(this);
         }
 
         private void PlayAction()
@@ -255,6 +255,37 @@ namespace Booble.CardGame.Cards
                 CardGameManager.Instance.opponentAI.enabled = false;
                 UIManager.Instance.ShowContinuePlayButton();
             }
+        }
+
+        public void ContinueAction(Card target = null)
+        {
+            StartCoroutine(ContinueActionCoroutine(target));
+        }
+
+        private IEnumerator ContinueActionCoroutine(Card target)
+        {
+            UIManager.Instance.HidePlayButtons();
+            Board.Instance.RemoveTargetsHighlight();
+
+            if (target == null) target = storedTarget;
+
+            Stats.SubstractMana();
+            Effects.ApplyFirstEffect(target);
+
+            yield return new WaitUntil(() => effect.effectApplied);
+
+            CardGameManager.Instance.CheckDialogue(this);
+
+            yield return new WaitUntil(() => CardGameManager.Instance.dialogueEnd);
+
+            DestroyCard();
+
+            yield return new WaitUntil(() => destroyed);
+
+            storedTarget = null;
+            CardGameManager.Instance.SetPlayingCard(false);
+            MouseController.Instance.ResetApplyingEffect();
+            UIManager.Instance.SetEndTurnButtonInteractable(IsPlayerCard);
         }
 
         private void MoveToWaitingSpot()

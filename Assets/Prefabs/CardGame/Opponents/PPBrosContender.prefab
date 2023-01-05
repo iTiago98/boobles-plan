@@ -78,10 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba41f789ea57fca49a0971e6c0bbee55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startDialogue: {fileID: 0}
-  _winDialogue: {fileID: 0}
-  _alternateWinDialogue: {fileID: 0}
-  _loseDialogue: {fileID: 0}
-  _paredCardDialogue: {fileID: 0}
-  _palaCardDialogue: {fileID: 0}
-  _gomuCardDialogue: {fileID: 0}
+  _startDialogue: {fileID: 11400000, guid: 03b3243516c753c4e9845383082b1502, type: 2}
+  _winDialogue: {fileID: 11400000, guid: 53abafbd0cf274343886ea6381dfdeb9, type: 2}
+  _alternateWinDialogue: {fileID: 11400000, guid: e0185abdb66bfe84a83b08928b0159f4, type: 2}
+  _loseDialogue: {fileID: 11400000, guid: 7faaca70d5a69434da78693adeee38ce, type: 2}
+  _paredCardDialogue: {fileID: 11400000, guid: 6038cba3e78cb3940bab869d9c8948ae, type: 2}
+  _palaCardDialogue: {fileID: 11400000, guid: 462fe8d984b530849a46a520d6b31848, type: 2}
+  _gomuCardDialogue: {fileID: 11400000, guid: 42fac723e6c04674ab34b5566aee0b6d, type: 2}
+  _pelotaBombaCardDialogue: {fileID: 11400000, guid: 502d918a3cba8664586fded24b691afd, type: 2}
+  _matarLaBolaCardDialogue: {fileID: 11400000, guid: 1eb90b090887a15439739a1ad593a148, type: 2}

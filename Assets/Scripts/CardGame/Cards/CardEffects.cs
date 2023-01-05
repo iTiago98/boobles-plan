@@ -260,7 +260,8 @@ namespace Booble.CardGame.Cards
                         case ApplyTime.END:
                         case ApplyTime.DRAW_CARD:
                         case ApplyTime.PLAY_ARGUMENT:
-                            CardEffectsManager.Instance.RemovePermanentEffect(_card, effect.applyTime); break;
+                            CardEffectsManager.Instance.RemovePermanentEffect(_card, effect.applyTime); 
+                            break;
 
                         case ApplyTime.PERMANENT:
                             if (effect.subType == SubType.GUARD) contender.RemoveGuardCard(_card);
@@ -268,6 +269,8 @@ namespace Booble.CardGame.Cards
                             break;
                     }
                 }
+
+                _permanentEffects.Clear();
             }
         }
 

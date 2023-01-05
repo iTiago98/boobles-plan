@@ -100,7 +100,7 @@ namespace Booble.Managers
         public void RemoveExtraCards()
         {
             if (_opponentName != Opponent_Name.Citriano) RemoveCitrianoCards();
-            if (_opponentName != Opponent_Name.PingPongBros) RemovePPBrosCards();
+            if (_opponentName != Opponent_Name.PPBros) RemovePPBrosCards();
             if (_opponentName != Opponent_Name.Secretary) RemoveSecretaryCards();
             RemoveCards();
         }
@@ -163,7 +163,7 @@ namespace Booble.Managers
 
         public void AddPPBrosCards()
         {
-            if (_previousOpponent == Opponent_Name.PingPongBros) return;
+            if (_previousOpponent == Opponent_Name.PPBros) return;
 
             AddVictoriaPorDesgaste();
             AddPared();

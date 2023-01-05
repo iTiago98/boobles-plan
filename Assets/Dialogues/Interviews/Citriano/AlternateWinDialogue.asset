@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: AlternateWinDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Acabo de descubrir que tienes raz\xF3n, algo huele a podrido en Booble,
+      y t\xFA me vas a ayudar a descubrirlo."
+    _closeUp: 1
+  - _content: "\xA1Por fin alguien que no me habla como a un loco! \xA1Vamos a desenmascararlos
+      como que me llamo Citriano Jos\xE9 De Nepomuceno!\r"
+    _closeUp: 3
+  - _content: "T\xFA estate tranquilo, que vas a seguir teniendo trabajo para rato.
+      Olv\xEDdate de seguir al servicio de esta gente."
+    _closeUp: 1
+  - _content: "A partir de ahora trabajar\xE1s para m\xED extraoficialmente."
+    _closeUp: 1
+  - _content: "\xBFEst\xE1s rimando como Ana? Jajaja"
+    _closeUp: 3
+  - _content: "Anda, pues no me hab\xEDa dado cuenta. \xA1Si es que esa mujer habla
+      de forma muy pegadiza!\r"
+    _closeUp: 1

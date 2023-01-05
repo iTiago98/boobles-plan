@@ -414,53 +414,57 @@ namespace Booble.CardGame.Managers
 
         public void OnContinuePlayButtonClick()
         {
-            Board.Instance.RemoveTargetsHighlight();
-            HidePlayButtons();
-
             Card card = MouseController.Instance.holdingCard;
-            if (card.IsPlayerCard) ContinuePlay(card);
-            else ContinuePlayOpponent(card);
+            card.ContinueAction();
         }
 
-        private void ContinuePlay(Card card)
-        {
-            StartCoroutine(ContinuePlayCoroutine(
-                card,
-                () => card.Effects.ApplyFirstEffect(null),
-                () =>
-                {
-                    SetEndTurnButtonInteractable(true);
-                }));
-        }
+        //private void ContinuePlay(Card card)
+        //{
+        //    card.ContinueAction(null);
 
-        private void ContinuePlayOpponent(Card card)
-        {
-            StartCoroutine(ContinuePlayCoroutine(
-                card,
-                () => card.Effects.ApplyFirstEffect(card.storedTarget),
-                () =>
-                {
-                    card.storedTarget = null;
-                    CardGameManager.Instance.opponentAI.enabled = true;
-                }));
-        }
+        //    //StartCoroutine(ContinuePlayCoroutine(
+        //    //    card,
+        //    //    () => card.Effects.ApplyFirstEffect(null),
+        //    //    () =>
+        //    //    {
+        //    //        SetEndTurnButtonInteractable(true);
+        //    //    }));
+        //}
 
-        private IEnumerator ContinuePlayCoroutine(Card card, Action applyEffect, Action onDestroy)
-        {
-            card.Stats.SubstractMana();
-            applyEffect();
+        //private void ContinuePlayOpponent(Card card)
+        //{
+        //    card.ContinueAction(card.storedTarget);
 
-            yield return new WaitUntil(() => card.effect.effectApplied);
+        //    //StartCoroutine(ContinuePlayCoroutine(
+        //    //    card,
+        //    //    () => card.Effects.ApplyFirstEffect(card.storedTarget),
+        //    //    () =>
+        //    //    {
+        //    //        card.storedTarget = null;
+        //    //        CardGameManager.Instance.opponentAI.enabled = true;
+        //    //    }));
+        //}
 
-            card.DestroyCard();
+        //private IEnumerator ContinuePlayCoroutine(Card card, Action applyEffect, Action onDestroy)
+        //{
+        //    //card.Stats.SubstractMana();
+        //    //applyEffect();
 
-            yield return new WaitUntil(() => card.destroyed);
+        //    //yield return new WaitUntil(() => card.effect.effectApplied);
 
-            onDestroy();
+        //    CardGameManager.Instance.CheckDialogue(card);
 
-            MouseController.Instance.SetHolding(null);
-            CardGameManager.Instance.SetPlayingCard(false);
-        }
+        //    yield return new WaitUntil(() => CardGameManager.Instance.dialogueEnd);
+
+        //    card.DestroyCard();
+
+        //    yield return new WaitUntil(() => card.destroyed);
+
+        //    onDestroy();
+
+        //    MouseController.Instance.SetHolding(null);
+        //    CardGameManager.Instance.SetPlayingCard(false);
+        //}
 
         public void OnCancelPlayButtonClick()
         {

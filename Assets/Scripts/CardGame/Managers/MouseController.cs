@@ -128,31 +128,14 @@ namespace Booble.CardGame.Managers
                 || !targetCard.CardUI.IsHighlighted)
                 return;
 
-            StartCoroutine(ApplyEffectCoroutine(targetCard));
-        }
-
-        private IEnumerator ApplyEffectCoroutine(Card targetCard)
-        {
-            UIManager.Instance.HidePlayButtons();
-            Board.Instance.RemoveTargetsHighlight();
-
-            _effectCard.Stats.SubstractMana();
-            _effectCard.Effects.ApplyFirstEffect(targetCard);
-
-            yield return new WaitUntil(() => _effectCard.effect.effectApplied);
-
-            _effectCard.DestroyCard();
-
-            yield return new WaitUntil(() => _effectCard.destroyed);
-
-            ResetApplyingEffect();
+            _effectCard.ContinueAction();
         }
 
         public void ResetApplyingEffect()
         {
+            holdingCard = null;
             _effectCard = null;
             SetMask(selectingLayerMask);
-            UIManager.Instance.SetEndTurnButtonInteractable(true);
         }
 
         #endregion
