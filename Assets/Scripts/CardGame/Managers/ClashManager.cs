@@ -90,6 +90,7 @@ namespace Booble.CardGame.Managers
         private ClashInfo _playerClashInfo, _opponentClashInfo;
 
         private Card _playerCard, _opponentCard;
+        private bool _playerCardDestroy, _opponentCardDestroy;
 
         public void Clash()
         {
@@ -131,9 +132,9 @@ namespace Booble.CardGame.Managers
 
                 yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
-                _playerClashInfo.GetCardDestroy();
-                _opponentClashInfo.GetCardDestroy();
-
+                _playerCardDestroy = _playerCard && _playerCard.CheckDestroy();
+                _opponentCardDestroy = _opponentCard && _opponentCard.CheckDestroy();
+                
                 yield return new WaitWhile(DestroyingCards);
 
                 combat = false;
@@ -235,7 +236,7 @@ namespace Booble.CardGame.Managers
 
         private bool DestroyingCards()
         {
-            return _playerClashInfo.GetCardDestroying() || _opponentClashInfo.GetCardDestroying();
+            return (_playerCardDestroy && !_playerCard.destroyed) || (_opponentCardDestroy && !_opponentCard.destroyed);
         }
 
         public void ApplyCombatActions()
