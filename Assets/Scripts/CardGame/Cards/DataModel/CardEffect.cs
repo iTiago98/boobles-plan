@@ -477,6 +477,16 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     break;
             }
 
+            if(subType == SubType.ADD_EFFECT)
+            {
+                int index = 0;
+                while(index < possibleTargets.Count)
+                {
+                    if (possibleTargets[index].Effects.HasEffect(cardParameter_Effect)) possibleTargets.RemoveAt(index);
+                    else index++;
+                }
+            }
+
             return possibleTargets;
         }
 
