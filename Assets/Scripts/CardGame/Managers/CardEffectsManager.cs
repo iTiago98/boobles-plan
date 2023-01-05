@@ -712,13 +712,17 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitUntil(() => Board.Instance.EmptyHands());
 
-            if (player.hand.HasAlternateWinConditionCard()) playerNumCards--;
-            if (opponent.hand.HasAlternateWinConditionCard()) opponentNumCards--;
+            if (player.hand.HasAlternateWinConditionCard())
+                player.deck.DrawCards(playerNumCards - 1);
+            else
+                player.deck.DrawCards(playerNumCards);
 
-            player.deck.DrawCards(playerNumCards);
-            opponent.deck.DrawCards(opponentNumCards);
+            if (opponent.hand.HasAlternateWinConditionCard())
+                opponent.deck.DrawCards(opponentNumCards - 1);
+            else
+                opponent.deck.DrawCards(opponentNumCards);
 
-            yield return new WaitUntil(() => player.hand.numCards == playerNumCards && opponent.hand.numCards == opponentNumCards);
+            yield return new WaitUntil(() => !player.hand.busy && !opponent.hand.busy);
 
             effect.SetEffectApplied();
         }
