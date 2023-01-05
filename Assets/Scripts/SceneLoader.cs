@@ -88,6 +88,11 @@ namespace Booble.Managers
     {
         LoadScene(Scenes.NELA_OFFICE_2);
     }
+
+    public void LoadUpperHall2()
+    {
+        LoadScene(Scenes.UPPER_HALL_2);
+    }
     
     public void LoadCanteenScene0()
     {
@@ -209,6 +214,5 @@ namespace Booble.Managers
                 obj.SetActive(enable);
             }
         }
-
     }
 }

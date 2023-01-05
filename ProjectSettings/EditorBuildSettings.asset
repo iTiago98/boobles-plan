@@ -41,4 +41,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lounge/Lounge2.unity
     guid: 8c010b2da89e828489eb62e4bf839805
+  - enabled: 1
+    path: Assets/Scenes/Halls/UpperHall2.unity
+    guid: 7756203aa9cea9440b9d8bd5847b0504
+  - enabled: 1
+    path: Assets/Scenes/Canteen/Canteen2.unity
+    guid: 85420fee04e8bd140b731d89082ebd2e
   m_configObjects: {}
