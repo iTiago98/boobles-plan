@@ -443,54 +443,6 @@ namespace Booble.CardGame.Managers
             card.ContinueAction();
         }
 
-        //private void ContinuePlay(Card card)
-        //{
-        //    card.ContinueAction(null);
-
-        //    //StartCoroutine(ContinuePlayCoroutine(
-        //    //    card,
-        //    //    () => card.Effects.ApplyFirstEffect(null),
-        //    //    () =>
-        //    //    {
-        //    //        SetEndTurnButtonInteractable(true);
-        //    //    }));
-        //}
-
-        //private void ContinuePlayOpponent(Card card)
-        //{
-        //    card.ContinueAction(card.storedTarget);
-
-        //    //StartCoroutine(ContinuePlayCoroutine(
-        //    //    card,
-        //    //    () => card.Effects.ApplyFirstEffect(card.storedTarget),
-        //    //    () =>
-        //    //    {
-        //    //        card.storedTarget = null;
-        //    //        CardGameManager.Instance.opponentAI.enabled = true;
-        //    //    }));
-        //}
-
-        //private IEnumerator ContinuePlayCoroutine(Card card, Action applyEffect, Action onDestroy)
-        //{
-        //    //card.Stats.SubstractMana();
-        //    //applyEffect();
-
-        //    //yield return new WaitUntil(() => card.effect.effectApplied);
-
-        //    CardGameManager.Instance.CheckDialogue(card);
-
-        //    yield return new WaitUntil(() => CardGameManager.Instance.dialogueEnd);
-
-        //    card.DestroyCard();
-
-        //    yield return new WaitUntil(() => card.destroyed);
-
-        //    onDestroy();
-
-        //    MouseController.Instance.SetHolding(null);
-        //    CardGameManager.Instance.SetPlayingCard(false);
-        //}
-
         public void OnCancelPlayButtonClick()
         {
             Card holdingCard = MouseController.Instance.holdingCard;

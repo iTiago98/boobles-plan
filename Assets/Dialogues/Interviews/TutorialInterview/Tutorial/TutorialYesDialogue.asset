@@ -10,16 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: ParedDialogue
+  m_Name: TutorialYesDialogue
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Se\xF1or Ponzano, seg\xFAn su mujer siempre han sido bastante despistados."
-    _closeUp: 1
-  - _content: De hecho, he encontrado su tarjeta de repuesto al lado de la puerta
-      de su despacho.
-    _closeUp: 1
-  - _content: "\xA1Te lo dije, Pedri, que mejor haberla puesto en la alfombrilla!"
-    _closeUp: 1
-  - _content: Sea lo que sea, no parece que tengan mucho que decir contra mis argumentos...
-    _closeUp: 1
+  - _content: Vamos a ver.
+    _closeUp: 6
