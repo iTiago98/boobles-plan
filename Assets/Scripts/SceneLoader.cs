@@ -13,6 +13,8 @@ namespace Booble.Managers
 
         [SerializeField] private FadeIn _fadeScreen;
 
+        public bool InMainMenu => _currentScene == Scenes.MAIN_MENU;
+
         private string _currentScene;
         private string _previousScene;
         private Camera _mainCamera;
