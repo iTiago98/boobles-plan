@@ -40,8 +40,13 @@ namespace Booble.CardGame.Level
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = contender.GetCardBack();
 
+            InitializeCards(deckCards);
+        }
+
+        private void InitializeCards(List<CardsData> deckCards)
+        {
             CopyCardsList(deckCards);
-            UIManager.Instance.ShowRemainingCards(contender);
+            UIManager.Instance.ShowRemainingCards(_contender);
             UpdateRemainingCards();
         }
 
@@ -68,6 +73,42 @@ namespace Booble.CardGame.Level
         #endregion
 
         #region Draw Cards
+
+        public void DrawCards(List<string> names)
+        {
+            busy = true;
+            int numCardsStart = numCards;
+
+            foreach(string name in names)
+            {
+                int index = GetIndexFromName(name);
+                CardsData data = _deckCards[index];
+                _deckCards.RemoveAt(index);
+
+                GameObject cardPrefab = GetCardPrefab(data.type);
+                GameObject cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+
+                Card card = cardObj.GetComponent<Card>();
+                card.Initialize(_contender, data, cardRevealed: false);
+                card.gameObject.SetActive(false);
+
+                _listToAdd.Add(card);
+            }
+
+            StartCoroutine(DrawCardsCoroutine(_hand, numCardsStart));
+        }
+
+        private int GetIndexFromName(string name)
+        {
+            for (int i = 0; i < numCards; i++)
+            {
+                CardsData data = _deckCards[i];
+
+                if (data.name == name) return i;
+            }
+
+            return -1;
+        }
 
         public void DrawCards(int numCardsToAdd)
         {

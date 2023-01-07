@@ -6,6 +6,7 @@ using Booble.Managers;
 using Booble.UI;
 using DG.Tweening;
 using Santi.Utils;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,6 +53,13 @@ namespace Booble.CardGame.Managers
         private bool _playingStoryMode;
         public bool playingStoryMode => _playingStoryMode;
 
+        public bool tutorial { private set; get; }
+        public void StartTutorial() => tutorial = true;
+        public void FinishTutorial() => tutorial = false;
+
+        public void EnableMouseController() => MouseController.Instance.enabled = true;
+        public void DisableMouseController() => MouseController.Instance.enabled = false;
+
         public bool dialogueEnd => (_interviewDialogue != null) ? _interviewDialogue.GetDialogueEnd() : false;
 
         private void Start()
@@ -90,7 +98,7 @@ namespace Booble.CardGame.Managers
             _interviewDialogue = opponent.GetInterviewDialogue();
         }
 
-        private void InitializeDecks()
+        public void InitializeDecks()
         {
             Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
         }
@@ -103,22 +111,11 @@ namespace Booble.CardGame.Managers
                 Board.Instance.playerCardZone,
                 Board.Instance.playerFieldCardZone);
 
-            player.InitializeStats(
-                settings.initialLife,
-                settings.initialManaCounter,
-                settings.maxManaCounter);
-
-
             opponent.Initialize(
                 Board.Instance.opponentHand,
                 Board.Instance.opponentDeck,
                 Board.Instance.opponentCardZone,
                 Board.Instance.opponentFieldCardZone);
-
-            opponent.InitializeStats(
-                settings.initialLife,
-                settings.initialManaCounter,
-                settings.maxManaCounter);
 
             _opponentAI = opponent.GetAIScript();
             _opponentAI.Initialize(opponent);
@@ -128,21 +125,16 @@ namespace Booble.CardGame.Managers
 
         #region Game Flow 
 
-        public void StartGame()
+        public void StartInterview()
         {
-            TurnManager.Instance.StartGame();
+            if (_interviewDialogue != null && playingStoryMode) ThrowStartDialogue();
+            else StartGame();
         }
 
-        public void SwitchGameState()
+        public void StartGame()
         {
-            if (gamePaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
+            EnableMouseController();
+            TurnManager.Instance.StartGame();
         }
 
         private bool _mouseControllerPreviousState;
@@ -152,31 +144,32 @@ namespace Booble.CardGame.Managers
         public void PauseGame()
         {
             gamePaused = true;
-            
+
             _mouseControllerPreviousState = MouseController.Instance.enabled;
             _endTurnButtonPreviousState = UIManager.Instance.IsEndTurnButtonInteractable();
 
-            if (!TurnManager.Instance.IsPlayerTurn)
+            if (TurnManager.Instance.IsOpponentTurn)
             {
                 _opponentAIPreviousState = _opponentAI.enabled;
                 DisableOpponentAI();
             }
 
-            MouseController.Instance.enabled = false;
+            DisableMouseController();
             UIManager.Instance.SetEndTurnButtonInteractable(false);
 
-            DOTween.PauseAll();
+            //DOTween.PauseAll();
         }
 
         public void ResumeGame()
         {
             gamePaused = false;
 
-            if (!TurnManager.Instance.IsPlayerTurn) _opponentAI.enabled = _opponentAIPreviousState;
-            MouseController.Instance.enabled = _mouseControllerPreviousState;
+            if (TurnManager.Instance.IsOpponentTurn) _opponentAI.enabled = _opponentAIPreviousState;
+            if (_mouseControllerPreviousState) EnableMouseController();
+            else DisableMouseController();
             UIManager.Instance.SetEndTurnButtonInteractable(_endTurnButtonPreviousState);
 
-            DOTween.PlayAll();
+            //DOTween.PlayAll();
         }
 
         #endregion
@@ -185,18 +178,18 @@ namespace Booble.CardGame.Managers
 
         public void ThrowStartDialogue()
         {
-            _interviewDialogue?.ThrowStartDialogue();
-            if (_interviewDialogue == null) StartGame(); // TEMPORAL
+            _interviewDialogue.ThrowStartDialogue();
         }
 
         public void ThrowEndDialogue()
         {
-            _interviewDialogue?.ThrowEndDialogue(_playerWin);
+            _interviewDialogue.ThrowEndDialogue(_playerWin, GetOnEndAction());
         }
 
-        public void CheckDialogue(Card cardPlayed)
+        public bool CheckDialogue(Card cardPlayed)
         {
-            _interviewDialogue?.CheckDialogue(cardPlayed);
+            if (_interviewDialogue == null) return false;
+            return _interviewDialogue.CheckDialogue(cardPlayed);
         }
 
         #endregion
@@ -212,7 +205,7 @@ namespace Booble.CardGame.Managers
         {
             if (player.life <= 0 || opponent.life <= 0 || alternateWinCondition)
             {
-                MouseController.Instance.enabled = false;
+                DisableMouseController();
 
                 _playerWin = alternateWinCondition || (player.life > 0 && opponent.life <= 0);
                 OnInterviewEnd();
@@ -223,7 +216,13 @@ namespace Booble.CardGame.Managers
 
         private void OnInterviewEnd()
         {
-            UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
+            if (_interviewDialogue != null) UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
+            else GetOnEndAction()();
+        }
+
+        private Action GetOnEndAction()
+        {
+            return (alternateWinCondition || _playerWin) ? SceneLoader.Instance.UnloadInterviewScene : UIManager.Instance.ShowLoseMenu;
         }
 
         #endregion
@@ -251,7 +250,7 @@ namespace Booble.CardGame.Managers
             if (playingCard) UIManager.Instance.SetEndTurnButtonInteractable(false);
             else UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
 
-            if(!TurnManager.Instance.IsPlayerTurn) _opponentAI.enabled = !value;
+            if (TurnManager.Instance.IsOpponentTurn && !tutorial) _opponentAI.enabled = !value;
         }
     }
 }

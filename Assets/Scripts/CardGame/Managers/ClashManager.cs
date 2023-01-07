@@ -74,6 +74,7 @@ namespace Booble.CardGame.Managers
             }
         }
 
+        public bool clash { private set; get; }
         public bool combat { private set; get; }
 
         private bool _combatActionsApplied;
@@ -92,12 +93,12 @@ namespace Booble.CardGame.Managers
         private Card _playerCard, _opponentCard;
         private bool _playerCardDestroy, _opponentCardDestroy;
 
-        public void Clash()
+        public void Clash(bool changeTurn = true)
         {
-            StartCoroutine(ClashCoroutine());
+            StartCoroutine(ClashCoroutine(changeTurn));
         }
 
-        private IEnumerator ClashCoroutine()
+        private IEnumerator ClashCoroutine(bool changeTurn)
         {
             Contender player = CardGameManager.Instance.player;
             Contender opponent = CardGameManager.Instance.opponent;
@@ -105,6 +106,7 @@ namespace Booble.CardGame.Managers
             _playerClashInfo = new ClashInfo();
             _opponentClashInfo = new ClashInfo();
 
+            clash = true;
             _hitSequence = false;
 
             int index = 0;
@@ -134,7 +136,7 @@ namespace Booble.CardGame.Managers
 
                 _playerCardDestroy = _playerCard && _playerCard.CheckDestroy();
                 _opponentCardDestroy = _opponentCard && _opponentCard.CheckDestroy();
-                
+
                 yield return new WaitWhile(DestroyingCards);
 
                 combat = false;
@@ -142,7 +144,8 @@ namespace Booble.CardGame.Managers
                 if (!_firstHit) index++;
             }
 
-            TurnManager.Instance.ChangeTurn();
+            clash = false;
+            if (changeTurn) TurnManager.Instance.ChangeTurn();
         }
 
         private void GetTargets()

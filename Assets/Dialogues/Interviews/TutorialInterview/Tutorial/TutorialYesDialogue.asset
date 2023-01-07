@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: Vamos a ver.
+  - _content: No te preocupes, cari, que te voy a explicar el Protocolo de Entrevista
+      de Despidos Obligatorios.
     _closeUp: 6

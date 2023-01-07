@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: StartDialogue
+  m_Name: 2_ManaCounterExplanation
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno, guapi, vamos a hacer un simulacro de entrevista. Pero antes
-      te voy a contar c\xF3mo se hace."
+  - _content: "Estos son tus cristales de man\xE1."
     _closeUp: 6
-  - _content: "\xBFTe crees que iba a ser tan tonti de no contarte nadita? "
+  - _content: "Te servir\xE1n para invocar tus argumentos y para lanzar tus acciones."
+    _closeUp: 6
+  - _content: "Comenzar\xE9is los dos con 1 cristal. A cada ronda se recuperar\xE1n
+      los cristales vac\xEDos y aumentar\xE1 el n\xFAmero m\xE1ximo en 1."
     _closeUp: 6

@@ -127,7 +127,6 @@ namespace Booble.CardGame.AI
 
         private void PlayCard(Card card, CardZone cardZone)
         {
-            card.RemoveFromContainer(); // Remove from hand
             card.Play(cardZone);
         }
 

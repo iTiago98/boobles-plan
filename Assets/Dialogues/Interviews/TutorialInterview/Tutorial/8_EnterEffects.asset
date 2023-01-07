@@ -10,12 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: StartDialogue
+  m_Name: 8_EnterEffects
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno, guapi, vamos a hacer un simulacro de entrevista. Pero antes
-      te voy a contar c\xF3mo se hace."
+  - _content: Hay argumentos que aplican su efecto al entrar en el campo.
     _closeUp: 6
-  - _content: "\xBFTe crees que iba a ser tan tonti de no contarte nadita? "
+  - _content: '"Y por ende" te permite robar una carta de esa manera.'
     _closeUp: 6

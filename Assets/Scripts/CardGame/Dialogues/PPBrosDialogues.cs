@@ -19,33 +19,40 @@ namespace Booble.CardGame.Dialogues
         private bool _pelotaBombaCardDialogueShown;
         private bool _matarLaBolaCardDialogueShown;
 
-        override public void CheckDialogue(Card cardPlayed)
+        override public bool CheckDialogue(Card cardPlayed)
         {
             if (cardPlayed.name.Contains("Pared") && !_paredCardDialogueShown)
             {
                 ThrowDialogue(_paredCardDialogue);
                 _paredCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("La pala de Ñocobich") && !_palaCardDialogueShown)
+            else if (cardPlayed.name.Contains("La pala de Ñocobich") && !_palaCardDialogueShown)
             {
                 ThrowDialogue(_palaCardDialogue);
                 _palaCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("Gomu Gomu no") && !_gomuCardDialogueShown)
+            else if (cardPlayed.name.Contains("Gomu Gomu no") && !_gomuCardDialogueShown)
             {
                 ThrowDialogue(_gomuCardDialogue);
                 _gomuCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("Pelota bomba") && !_pelotaBombaCardDialogueShown)
+            else if (cardPlayed.name.Contains("Pelota bomba") && !_pelotaBombaCardDialogueShown)
             {
                 ThrowDialogue(_pelotaBombaCardDialogue);
                 _pelotaBombaCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("Matar la bola") && !_matarLaBolaCardDialogueShown)
+            else if (cardPlayed.name.Contains("Matar la bola") && !_matarLaBolaCardDialogueShown)
             {
                 ThrowDialogue(_matarLaBolaCardDialogue);
                 _matarLaBolaCardDialogueShown = true;
+                return true;
             }
+
+            return false;
         }
     }
 }

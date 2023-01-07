@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 907505c125536b34687fe0bc40d65b53
+guid: 66b01eb87372a10458c6df7a107c1968
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tablero SIN skipbutton_0
+      name: Tablero SIN skipbutton 2_0
       rect:
         serializedVersion: 2
-        x: 87
-        y: 720
-        width: 198
-        height: 294
+        x: 1464
+        y: 972
+        width: 363
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,92 +131,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0e1278e3de696f54abc1393aa1a37a8c
-      internalID: 1417433965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tablero SIN skipbutton_1
-      rect:
-        serializedVersion: 2
-        x: 261
-        y: 72
-        width: 1398
-        height: 936
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3caf2932b551f734489cab5a6206695c
-      internalID: -1890628146
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tablero SIN skipbutton_2
-      rect:
-        serializedVersion: 2
-        x: 1428
-        y: 921
-        width: 468
-        height: 132
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aa68cceffbb470d41b70c643214f8591
-      internalID: -1507699526
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tablero SIN skipbutton_3
-      rect:
-        serializedVersion: 2
-        x: 87
-        y: 57
-        width: 198
-        height: 294
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 52d76ac592c50234a80fee517ba30377
-      internalID: -1177387251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Tablero SIN skipbutton_4
-      rect:
-        serializedVersion: 2
-        x: 1428
-        y: 27
-        width: 468
-        height: 132
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f73e72929fc1a940a8c4dcc0010bf63
-      internalID: 1769849530
+      spriteID: aef3547ae69fc8942b5a0f20b8504e27
+      internalID: 1001205853
       vertices: []
       indices: 
       edges: []
@@ -232,11 +148,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Tablero SIN skipbutton_3: -1177387251
-      Tablero SIN skipbutton_1: -1890628146
-      Tablero SIN skipbutton_4: 1769849530
-      Tablero SIN skipbutton_0: 1417433965
-      Tablero SIN skipbutton_2: -1507699526
+      Tablero SIN skipbutton 2_0: 1001205853
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

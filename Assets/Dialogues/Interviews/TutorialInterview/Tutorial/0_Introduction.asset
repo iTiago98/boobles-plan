@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: StartDialogue
+  m_Name: 0_Introduction
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno, guapi, vamos a hacer un simulacro de entrevista. Pero antes
-      te voy a contar c\xF3mo se hace."
+  - _content: "En este tablero expondr\xE9is cada uno vuestros argumentos."
     _closeUp: 6
-  - _content: "\xBFTe crees que iba a ser tan tonti de no contarte nadita? "
+  - _content: "Empezar\xE1 el entrevistado, por lo que t\xFA podr\xE1s responder
+      despu\xE9s. Al acabar tu turno, los argumentos se enfrentar\xE1n."
+    _closeUp: 6
+  - _content: "Despu\xE9s del combate, empezar\xE1 la siguiente ronda, y volver\xE1
+      a ser el turno del entrevistado."
     _closeUp: 6

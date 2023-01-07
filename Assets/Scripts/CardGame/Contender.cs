@@ -87,14 +87,18 @@ namespace Booble.CardGame
             this.deck = deck;
             this.cardZones = cardZones;
             this.fieldCardZone = fieldCardZone;
+
+            InitializeStats();
         }
 
-        public void InitializeStats(int initialEloquence, int initialManaCounter, int maxManaCounter)
+        public void InitializeStats()
         {
-            life = initialEloquence;
-            currentMaxMana = initialManaCounter;
+            CardGameSettings settings = CardGameManager.Instance.settings;
+
+            life = settings.initialLife;
+            currentMaxMana = settings.initialManaCounter;
             currentMana = currentMaxMana;
-            _maxMana = maxManaCounter;
+            _maxMana = settings.maxManaCounter;
         }
 
         #region Stats
@@ -159,6 +163,18 @@ namespace Booble.CardGame
         {
             freeMana = state;
             // Show in UI
+        }
+
+        public void SetMana(int mana)
+        {
+            currentMaxMana = mana;
+            currentMana = currentMaxMana;
+        }
+
+        public void SetFullMana()
+        {
+            currentMaxMana = _maxMana;
+            currentMana = currentMaxMana;
         }
 
         #endregion

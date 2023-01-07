@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 8086245598359039438}
   - component: {fileID: 8497510795866418018}
   - component: {fileID: 8665003492863464097}
+  - component: {fileID: 5768362711112348340}
   m_Layer: 0
   m_Name: TutorialContender
   m_TagString: Untagged
@@ -181,6 +182,7 @@ Transform:
   m_Children:
   - {fileID: 2791592805082716776}
   - {fileID: 1563222745432977994}
+  - {fileID: 8553120701257542565}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -232,24 +234,130 @@ MonoBehaviour:
   _winDialogue: {fileID: 11400000, guid: 54083ad6978ec134d8744162fd3ced5e, type: 2}
   _alternateWinDialogue: {fileID: 0}
   _loseDialogue: {fileID: 11400000, guid: 237369726d013d945938ee435598524f, type: 2}
+  _tutorialAnimation: {fileID: 5768362711112348340}
   _tutorialDialogue: {fileID: 11400000, guid: 273fb4541e3eb824b97dc8f68c9ab584, type: 2}
   _postTutorialDialogue: {fileID: 11400000, guid: a378035c8862338459e09b663e234aee, type: 2}
   _tutorialOptions:
-  - _optionText: Ya he hecho mis pinitos en esto de los RRHH.
+  - _optionText: "No hace falta, ya s\xE9 c\xF3mo se juega."
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 5743557249393822207}
-  - _optionText: "Mejor asegurarse de c\xF3mo trabaj\xE1is aqu\xED."
+  - _optionText: "Hombre, ser\xEDa bastante cruel que no me hicieras ni siquiera
+      un tutorial..."
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 6261508961269405121}
   _postTutorialOptions:
-  - _optionText: "Rep\xEDtemelo, por favor."
+  - _optionText: Todo, todo, no, la verdad.
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 6261508961269405121}
-  - _optionText: "Todo clar\xEDsimo."
+  - _optionText: No te ralles, ya lo he pillado.
     _trueFlags: 
     _falseFlags: 
-    _dialogueOption: {fileID: 5743557249393822207}
-  _granFinalDialogue: {fileID: 11400000, guid: 08465fdd43458fa44aed69ab0251919f, type: 2}
+    _dialogueOption: {fileID: 1848023148002365933}
+  _granFinalCardDialogue: {fileID: 11400000, guid: 08465fdd43458fa44aed69ab0251919f, type: 2}
+--- !u!114 &5768362711112348340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6184705350052988801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41e74d0bb04a4594487f2fcb84e8d462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _introduction: {fileID: 11400000, guid: 7907cc0b1ca36a340a1bb7048b944356, type: 2}
+  _healthBarExplanation: {fileID: 11400000, guid: b0c49fb3e0df0524dadf612d0129e3ed, type: 2}
+  _manaCounterExplanation: {fileID: 11400000, guid: 79e42c421a8cc1843a3b329c7a622d84, type: 2}
+  _drawCardExplanation: {fileID: 11400000, guid: e46979d0afc16be4dbadc9b5b256e3ae, type: 2}
+  _drawCardExplanation2: {fileID: 11400000, guid: 5ef003806c179524fa7c4d3ded7eaca8, type: 2}
+  _drawCardExplanation3: {fileID: 11400000, guid: 3da2a4cea0f1c614db7cdf1e4ce21c92, type: 2}
+  _drawCardExplanation4: {fileID: 11400000, guid: 78942e00364155e4998cd576f6c085e4, type: 2}
+  _playCardExplanation: {fileID: 11400000, guid: fddefdcc1f0405f4e9b8879d088e99bc, type: 2}
+  _playCardExplanation2: {fileID: 11400000, guid: 1958df04493c48d46980abc1d0479248, type: 2}
+  _clashExplanation: {fileID: 11400000, guid: 7de35793714bcd24ba973fbefe9e968d, type: 2}
+  _combatEffectsExplanation: {fileID: 11400000, guid: bb5151fd6f541e5408f6ff703e5867bb, type: 2}
+  _betterCardsExplanation: {fileID: 11400000, guid: e1ab624fbcff2cd488eae17e08da3c15, type: 2}
+  _enterEffectsExplanation: {fileID: 11400000, guid: c53a3d48feb9cae4381b641e09fa2552, type: 2}
+  _actionsExplanation: {fileID: 11400000, guid: 03eafe0fa45ed7748a31ab83b672b000, type: 2}
+  _actionsExplanation2: {fileID: 11400000, guid: 571f0df282b9fd0438c2e50794a125b8, type: 2}
+  _fieldCardsExplanation: {fileID: 11400000, guid: 36a19704d57187e4bb9ec59c306ad9dd, type: 2}
+  _fieldCardsExplanation2: {fileID: 11400000, guid: 79cb8edd65b62cd4984f997c66bf2787, type: 2}
+  _endExplanation: {fileID: 11400000, guid: bed28e5d9c9fda844847c720ea58d47a, type: 2}
+--- !u!1 &8957468635603919203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8553120701257542565}
+  - component: {fileID: 1848023148002365933}
+  - component: {fileID: 7601183702595873031}
+  m_Layer: 0
+  m_Name: TutorialStopOption
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8553120701257542565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957468635603919203}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2915721158407989347}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848023148002365933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957468635603919203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7601183702595873031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8957468635603919203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 554e565662687064c84aeb1f21964ecf, type: 2}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8665003492863464097}
+        m_TargetAssemblyTypeName: Booble.CardGame.Dialogues.TutorialDialogue, Assembly-CSharp
+        m_MethodName: ThrowPostTutorial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

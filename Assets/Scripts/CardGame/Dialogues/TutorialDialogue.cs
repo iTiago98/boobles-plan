@@ -1,6 +1,8 @@
 using Booble.CardGame.Cards;
 using Booble.CardGame.Managers;
 using Booble.Interactables.Dialogues;
+using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +10,8 @@ namespace Booble.CardGame.Dialogues
 {
     public class TutorialDialogue : InterviewDialogue
     {
+        [SerializeField] private TutorialAnimation _tutorialAnimation;
+
         [Header("Extra dialogues")]
         [SerializeField] private Dialogue _tutorialDialogue;
         [SerializeField] private Dialogue _postTutorialDialogue;
@@ -21,19 +25,23 @@ namespace Booble.CardGame.Dialogues
 
         private bool _granFinalCardDialogueShown;
 
+
         public override void ThrowStartDialogue()
         {
-            if (_startDialogue != null && _dialogueManager != null)
-            {
-                ThrowDialogue(_startDialogue, null, _tutorialOptions);
-            }
-            else
-                CardGameManager.Instance.StartGame(); // TEMPORAL
+            ThrowDialogue(_startDialogue, null, _tutorialOptions);
         }
 
         public void ThrowTutorial()
         {
             Debug.Log("Tutorial");
+            StartCoroutine(ThrowTutorialCoroutine());
+        }
+
+        private IEnumerator ThrowTutorialCoroutine()
+        {
+            _tutorialAnimation.StartTutorial();
+            yield return new WaitWhile(() => CardGameManager.Instance.tutorial);
+
             ThrowDialogue(_tutorialDialogue, null, _postTutorialOptions);
         }
 
@@ -43,13 +51,16 @@ namespace Booble.CardGame.Dialogues
             ThrowDialogue(_postTutorialDialogue, CardGameManager.Instance.StartGame);
         }
 
-        override public void CheckDialogue(Card cardPlayed)
+        override public bool CheckDialogue(Card cardPlayed)
         {
             if (cardPlayed.name.Contains("Gran final") && !_granFinalCardDialogueShown)
             {
                 ThrowDialogue(_granFinalCardDialogue);
                 _granFinalCardDialogueShown = true;
+                return true;
             }
+
+            return false;
         }
     }
 }

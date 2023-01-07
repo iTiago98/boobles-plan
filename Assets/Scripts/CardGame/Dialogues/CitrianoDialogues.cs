@@ -17,28 +17,34 @@ namespace Booble.CardGame.Dialogues
         private bool _maquinaDeZumosCardDialogueShown;
         private bool _5PiezasCardDialogueShown;
 
-        override public void CheckDialogue(Card cardPlayed)
+        override public bool CheckDialogue(Card cardPlayed)
         {
             if (cardPlayed.name.Contains("Nueva cepa del escorbuto") && !_nuevaCepaCardDialogueShown)
             {
                 ThrowDialogue(_nuevaCepaCardDialogue);
                 _nuevaCepaCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("Exprimir la verdad") && !_exprimirCardDialogueShown)
+            else if (cardPlayed.name.Contains("Exprimir la verdad") && !_exprimirCardDialogueShown)
             {
                 ThrowDialogue(_exprimirCardDialogue);
                 _exprimirCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("La máquina de zumo de los supermercados") && !_maquinaDeZumosCardDialogueShown)
+            else if (cardPlayed.name.Contains("La máquina de zumo de los supermercados") && !_maquinaDeZumosCardDialogueShown)
             {
                 ThrowDialogue(_maquinaDeZumosCardDialogue);
                 _maquinaDeZumosCardDialogueShown = true;
+                return true;
             }
-            if (cardPlayed.name.Contains("5 piezas de fruta al día") && !_5PiezasCardDialogueShown)
+            else if (cardPlayed.name.Contains("5 piezas de fruta al día") && !_5PiezasCardDialogueShown)
             {
                 ThrowDialogue(_5PiezasCardDialogue);
                 _5PiezasCardDialogueShown = true;
+                return true;
             }
+
+            return false;
         }
     }
 }

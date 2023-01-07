@@ -18,6 +18,7 @@ namespace Booble.CardGame.Managers
         }
 
         public bool IsPlayerTurn => _turn == Turn.PLAYER;
+        public bool IsOpponentTurn => _turn == Turn.OPPONENT;
 
         private Turn _turn = Turn.INTERVIEW_START;
         public Turn turn { get { return _turn; } private set { _turn = value; } }
@@ -64,7 +65,7 @@ namespace Booble.CardGame.Managers
 
             StopFlow();
             CardGameManager.Instance.FillMana();
-            UIManager.Instance.UpdateUIStats(startRound: true);
+            UIManager.Instance.UpdateUIStats();
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 

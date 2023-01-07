@@ -23,6 +23,8 @@ namespace Booble.CardGame.Level
             _handCapacity = CardGameManager.Instance.settings.handCapacity;
         }
 
+        #region Discard Cards
+
         public void DiscardCards(int cardNumber)
         {
             busy = true;
@@ -80,6 +82,10 @@ namespace Booble.CardGame.Level
             busy = false;
         }
 
+        #endregion
+
+        #region Steal Cards
+
         public Card StealCard()
         {
             System.Random random = new System.Random();
@@ -91,16 +97,9 @@ namespace Booble.CardGame.Level
             return card;
         }
 
-        public bool HasAlternateWinConditionCard()
-        {
-            foreach (GameObject cardObj in cards)
-            {
-                Card card = cardObj.GetComponent<Card>();
-                if (card.IsAlternateWinConditionCard()) return true;
-            }
+        #endregion
 
-            return false;
-        }
+        #region Check Discarding
 
         private int _discardingNumber;
 
@@ -165,6 +164,32 @@ namespace Booble.CardGame.Level
             {
                 cardObj.transform.DOScale(scale, 0.2f);
             }
+        }
+
+        #endregion
+
+        public bool HasAlternateWinConditionCard()
+        {
+            foreach (GameObject cardObj in cards)
+            {
+                Card card = cardObj.GetComponent<Card>();
+                if (card.IsAlternateWinConditionCard()) return true;
+            }
+
+            return false;
+        }
+
+        public Card GetCard(string name)
+        {
+            foreach(GameObject cardObj in cards)
+            {
+                Card card = cardObj.GetComponent<Card>();
+                if(card.data.name == name)
+                {
+                    return card;
+                }
+            }
+            return null;
         }
     }
 }

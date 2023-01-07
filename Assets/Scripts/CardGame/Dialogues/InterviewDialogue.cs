@@ -18,7 +18,7 @@ namespace Booble.CardGame.Dialogues
         [SerializeField] protected Dialogue _alternateWinDialogue;
         [SerializeField] protected Dialogue _loseDialogue;
 
-        private bool _dialogueEnd;
+        protected bool _dialogueEnd;
         public bool GetDialogueEnd() => _dialogueEnd;
 
         private void Awake()
@@ -26,34 +26,18 @@ namespace Booble.CardGame.Dialogues
             _dialogueManager = DialogueManager.Instance;
         }
 
-        abstract public void CheckDialogue(Card cardPlayed);
+        abstract public bool CheckDialogue(Card cardPlayed);
         virtual public void ThrowStartDialogue()
         {
             ThrowDialogue(_startDialogue, CardGameManager.Instance.StartGame);
         }
 
-        public void ThrowEndDialogue(bool playerWin)
+        public void ThrowEndDialogue(bool playerWin, Action onEndAction)
         {
-            Dialogue dialogue = null;
-            Action onEndDialogue = null;
+            Dialogue dialogue = CardGameManager.Instance.alternateWinCondition ? _alternateWinDialogue :
+                playerWin ? _winDialogue : _loseDialogue;
 
-            if (CardGameManager.Instance.alternateWinCondition)
-            {
-                dialogue = _alternateWinDialogue;
-                onEndDialogue = SceneLoader.Instance.UnloadInterviewScene;
-            }
-            else if (playerWin)
-            {
-                dialogue = _winDialogue;
-                onEndDialogue = SceneLoader.Instance.UnloadInterviewScene;
-            }
-            else
-            {
-                dialogue = _loseDialogue;
-                onEndDialogue = UIManager.Instance.ShowLoseMenu;
-            }
-
-            ThrowDialogue(dialogue, onEndDialogue);
+            ThrowDialogue(dialogue, onEndAction);
         }
 
         protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null)
@@ -70,8 +54,8 @@ namespace Booble.CardGame.Dialogues
             _dialogueManager.OnEndDialogue.RemoveAllListeners();
             _dialogueManager.OnEndDialogue.AddListener(() =>
             {
-                if (onEndDialogue != null) onEndDialogue();
                 CardGameManager.Instance.ResumeGame();
+                if (onEndDialogue != null) onEndDialogue();
                 _dialogueEnd = true;
             });
         }

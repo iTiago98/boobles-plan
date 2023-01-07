@@ -22,6 +22,8 @@ namespace Booble.CardGame.Cards
         public bool IsInHand => _container == _hand;
         public bool IsPlayerCard => contender.isPlayer;
 
+        public bool IsInWaitingSpot => MouseController.Instance.holdingCard == this;
+
         public bool IsArgument => Stats.type == CardType.ARGUMENT;
         public bool IsAction => Stats.type == CardType.ACTION;
         public bool IsField => Stats.type == CardType.FIELD;
@@ -94,6 +96,15 @@ namespace Booble.CardGame.Cards
             if (!_clickable) return;
             if (CardGameManager.Instance.playingCard) return;
 
+            if (CardGameManager.Instance.tutorial)
+            {
+                if (IsInHand && !mouseController.IsHoldingCard && data.name == "Afirmación reconfortante")
+                {
+                    MoveToWaitingSpot();
+                }
+                return;
+            }
+
             if (IsInHand)
             {
                 if (_hand.isDiscarding)
@@ -108,7 +119,6 @@ namespace Booble.CardGame.Cards
                     if (EnoughMana())
                     {
                         // Deattach from parent
-                        RemoveFromContainer();
                         MoveToWaitingSpot();
 
                         if (IsArgument || IsField)
@@ -189,6 +199,8 @@ namespace Booble.CardGame.Cards
 
         private IEnumerator PlayArgumentOrFieldCoroutine(CardZone cardZone)
         {
+            RemoveFromContainer();
+            
             Stats.SubstractMana();
             Effects.CheckEffects();
 
@@ -273,9 +285,10 @@ namespace Booble.CardGame.Cards
 
             yield return new WaitUntil(() => effect.effectApplied);
 
-            CardGameManager.Instance.CheckDialogue(this);
+            bool dialogue = false;
+            dialogue = CardGameManager.Instance.CheckDialogue(this);
 
-            yield return new WaitUntil(() => CardGameManager.Instance.dialogueEnd);
+            if (dialogue) yield return new WaitUntil(() => CardGameManager.Instance.dialogueEnd);
 
             DestroyCard(ContinueActionPost);
 
@@ -289,8 +302,10 @@ namespace Booble.CardGame.Cards
             MouseController.Instance.ResetApplyingEffect();
         }
 
-        private void MoveToWaitingSpot()
+        public void MoveToWaitingSpot()
         {
+            RemoveFromContainer();
+
             Transform dest = Board.Instance.waitingSpot;
             MouseController.Instance.SetHolding(this);
             UIManager.Instance.SetEndTurnButtonInteractable(false);

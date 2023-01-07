@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: StartDialogue
+  m_Name: 4_PlayCardExplanation2
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno, guapi, vamos a hacer un simulacro de entrevista. Pero antes
-      te voy a contar c\xF3mo se hace."
+  - _content: Al seleccionar el argumento, este se mueve a la zona de espera.
     _closeUp: 6
-  - _content: "\xBFTe crees que iba a ser tan tonti de no contarte nadita? "
+  - _content: Las zonas iluminadas indican que podemos colocar el argumento.
+    _closeUp: 6
+  - _content: "Colocaremos la \"Afirmaci\xF3n reconfortante\" delante de la \"Premisa\"."
     _closeUp: 6

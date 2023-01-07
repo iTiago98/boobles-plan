@@ -23,6 +23,9 @@ namespace Booble.CardGame.Managers
 
         [Header("Contenders Stats")]
 
+        [SerializeField] private GameObject playerHealthBar;
+        [SerializeField] private GameObject playerManaCounter;
+
         [SerializeField] private Image playerHealthImage;
         [SerializeField] private Image playerExtraHealthImage;
         [SerializeField] private Image playerExtraHealthImage2;
@@ -36,6 +39,7 @@ namespace Booble.CardGame.Managers
         [SerializeField] private Sprite fullManaCristal;
         [SerializeField] private Sprite emptyManaCristal;
         [SerializeField] private Sprite fullExtraManaCristal;
+        [SerializeField] private Sprite noManaCristal;
 
         private int _shownPlayerLife;
         private int _shownPlayerMana;
@@ -160,7 +164,6 @@ namespace Booble.CardGame.Managers
         private void Update()
         {
             CheckMoveBanners();
-            CheckPauseMenu();
         }
 
         #region Inputs
@@ -170,21 +173,13 @@ namespace Booble.CardGame.Managers
             if (Input.GetMouseButtonUp(0) && _bannersOn) MoveBanners();
         }
 
-        private void CheckPauseMenu()
-        {
-            if ((Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide) && !loseMenuActive)
-            {
-                PauseMenu.Instance.ShowHidePauseMenu();
-                CardGameManager.Instance.SwitchGameState();
-            }
-        }
-
         #endregion
 
         #region Turn Animation
 
         public void TurnAnimation(Turn turn)
         {
+            Debug.Log(turn);
             TurnManager.Instance.StopFlow();
 
             Sprite sprite = null;
@@ -244,19 +239,19 @@ namespace Booble.CardGame.Managers
 
         #region Stats
 
+        public GameObject GetPlayerHealthBar() => playerHealthBar;
+        public GameObject GetPlayerManaCounter() => playerManaCounter;
+
         public bool statsUpdated { private set; get; }
+        private bool _hideEmptyCristals;
 
-        public void UpdateUIStats()
+        public void UpdateUIStats(bool hideEmptyCristals = false)
         {
-            UpdateUIStats(startRound: false);
+            _hideEmptyCristals = hideEmptyCristals;
+            StartCoroutine(UpdateUIStatsCoroutine());
         }
 
-        public void UpdateUIStats(bool startRound)
-        {
-            StartCoroutine(UpdateUIStatsCoroutine(startRound));
-        }
-
-        private IEnumerator UpdateUIStatsCoroutine(bool startRound)
+        private IEnumerator UpdateUIStatsCoroutine()
         {
             Contender player = CardGameManager.Instance.player;
             Contender opponent = CardGameManager.Instance.opponent;
@@ -331,7 +326,7 @@ namespace Booble.CardGame.Managers
                 if (IsExtraMana(extraMana, currentMaxMana, shownMana)) index = _defaultMaxMana + (shownMana - currentMaxMana + extraMana);
                 else index = shownMana;
 
-                manaList[index].sprite = emptyManaCristal;
+                manaList[index].sprite = _hideEmptyCristals ? noManaCristal : emptyManaCristal;
             }
         }
 
@@ -541,7 +536,7 @@ namespace Booble.CardGame.Managers
                 _playerBanner.SetActive(false);
                 _opponentBanner.SetActive(false);
 
-                CardGameManager.Instance.ThrowStartDialogue();
+                CardGameManager.Instance.StartInterview();
             });
 
             sequence.Play();

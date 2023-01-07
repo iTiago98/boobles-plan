@@ -479,7 +479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  m_Sprite: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  m_Sprite: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2839,7 +2839,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  m_Sprite: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7089,6 +7089,7 @@ MonoBehaviour:
   fullManaCristal: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   emptyManaCristal: {fileID: 785031068, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   fullExtraManaCristal: {fileID: 1482803665, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  noManaCristal: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   extendedDescriptionPanel: {fileID: 1670671383}
   extendedDescriptionName: {fileID: 384659097}
   extendedDescriptionType: {fileID: 255739507}
@@ -7490,7 +7491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  m_Sprite: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -8402,7 +8403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1862835975, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
+  m_Sprite: {fileID: -1825781344, guid: a965d290eb0d2d0418b7bba45721ee86, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

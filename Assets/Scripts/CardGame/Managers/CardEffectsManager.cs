@@ -1107,12 +1107,12 @@ namespace Booble.CardGame.Managers
         private List<PermanentEffect> _endTurnEffectsToAdd = new List<PermanentEffect>();
         private List<int> _endTurnEffectsToRemove = new List<int>();
 
-        public void ApplyEndTurnEffects()
+        public void ApplyEndTurnEffects(bool changeTurn = true)
         {
-            StartCoroutine(ApplyEndTurnEffectsCoroutine());
+            StartCoroutine(ApplyEndTurnEffectsCoroutine(changeTurn));
         }
 
-        private IEnumerator ApplyEndTurnEffectsCoroutine()
+        private IEnumerator ApplyEndTurnEffectsCoroutine(bool changeTurn)
         {
             if (_endTurnEffects.Count > 0)
             {
@@ -1122,7 +1122,7 @@ namespace Booble.CardGame.Managers
                 yield return new WaitUntil(() => effectsApplied);
             }
 
-            TurnManager.Instance.ChangeTurn();
+            if (changeTurn) TurnManager.Instance.ChangeTurn();
         }
 
         #endregion
