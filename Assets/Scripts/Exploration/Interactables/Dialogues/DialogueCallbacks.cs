@@ -1,4 +1,5 @@
 using Booble.CardGame;
+using Booble.CardGame.Level;
 using Booble.Managers;
 using UnityEngine;
 
@@ -83,5 +84,30 @@ public class DialogueCallbacks : MonoBehaviour
     public void AddHipervitaminado()
     {
         DeckManager.Instance.AddHipervitaminado();
+    }
+
+    public void AddPared()
+    {
+        DeckManager.Instance.AddPared();
+    }
+
+    public void AddPalaDeNocobich()
+    {
+        DeckManager.Instance.AddPalaDeNocobich();
+    }
+    
+    public void AddGomuGomuNo()
+    {
+        DeckManager.Instance.AddGomuGomuNo();
+    }
+
+    public void AddPelotaBomba()
+    {
+        DeckManager.Instance.AddPelotaBomba();
+    }
+    
+    public void AddVictoriaPorDesgaste()
+    {
+        DeckManager.Instance.AddVictoriaPorDesgaste();
     }
 }
