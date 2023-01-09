@@ -60,6 +60,11 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadCanteenScene2();
     }
 
+    public void LoadPPBOffice()
+    {
+        SceneLoader.Instance.LoadPPBOffice();
+    }
+    
     public void AddEscorbuto()
     {
         DeckManager.Instance.AddNuevaCepaDelEscorbuto();    

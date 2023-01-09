@@ -123,6 +123,11 @@ namespace Booble.Managers
     {
         LoadScene(Scenes.LOUNGE_2);
     }
+
+    public void LoadPPBOffice()
+    {
+        LoadScene(Scenes.PPB_OFFICE);
+    }
     
     #endregion
 
