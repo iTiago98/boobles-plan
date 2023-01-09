@@ -17,3 +17,6 @@ MonoBehaviour:
   - _content: "Al comenzar la entrevista, robar\xE9is cada uno 4 cartas. Y al comienzo
       de cada turno robar\xE9is 1 carta."
     _closeUp: 6
+  - _content: "El m\xE1ximo de cartas en la mano es de 5. Si pasas el turno con m\xE1s
+      de 5 cartas en la mano tendr\xE1s que descartar alguna."
+    _closeUp: 6
