@@ -18,9 +18,6 @@ namespace Booble.UI
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
 
-        private bool _hide;
-        public bool hide => _hide;
-
         private void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -41,7 +38,6 @@ namespace Booble.UI
             {
                 OnBackButtonClick();
                 _pauseMenu.SetActive(false);
-                _hide = false;
             }
             else
             {
@@ -51,7 +47,7 @@ namespace Booble.UI
 
         public void OnResumeButtonClick()
         {
-            _hide = true;
+            GameManager.Instance.ResumeGame();
         }
 
         public void OnOptionsButtonClick()
@@ -62,9 +58,14 @@ namespace Booble.UI
 
         public void OnReturnToMenuButtonClick()
         {
-            ShowHidePauseMenu();
-            SceneLoader.Instance.UnloadInterviewScene();
-            if (CardGameManager.Instance == null || CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            GameManager.Instance.ResumeGame();
+
+            if (SceneLoader.Instance.InInterview)
+            {
+                SceneLoader.Instance.UnloadInterviewScene();
+                if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            }
+            else if (SceneLoader.Instance.InExploration) SceneLoader.Instance.LoadMainMenuScene();
         }
 
         public void OnBackButtonClick()
