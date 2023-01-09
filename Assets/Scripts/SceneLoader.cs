@@ -54,6 +54,16 @@ namespace Booble.Managers
             });
         }
 
+        public void LoadEndScene()
+        {
+            MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+            _fadeScreen.FadeOut(() =>
+            {
+                var async = SceneManager.LoadSceneAsync(Scenes.END_SCENE);
+                async.completed += OnSceneLoaded;
+            });
+        }
+
         public void LoadScene(string scene)
         {
             _currentScene = scene;

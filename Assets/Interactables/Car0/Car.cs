@@ -22,6 +22,8 @@ namespace Booble.Animations
 
         private void Start()
         {
+            SceneLoader.Instance.LoadLoungeScene0();
+            
             int i = 0;
             while (i < _dialogues.Count && FlagManager.Instance.GetFlag(_dialogues[i].FlagRef))
             {

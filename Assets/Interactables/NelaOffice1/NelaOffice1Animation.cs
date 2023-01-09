@@ -91,7 +91,7 @@ public class NelaOffice1Animation : MonoBehaviour
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);
-            SceneLoader.Instance.LoadMainMenuScene();
+            SceneLoader.Instance.LoadEndScene();
         }
         else
         {

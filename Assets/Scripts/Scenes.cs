@@ -19,6 +19,7 @@ namespace Booble
         public static string BOSS_HALL_1 = "BossHall1";
         public static string CANTEEN_0 = "Canteen0";
         public static string MAIN_MENU = "MainMenu";
+        public static string END_SCENE = "EndScene";
         public static string HOME_0 = "Home0";
 
     }

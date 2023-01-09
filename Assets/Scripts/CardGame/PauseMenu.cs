@@ -62,9 +62,16 @@ namespace Booble.UI
 
         public void OnReturnToMenuButtonClick()
         {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+			Application.Quit();
+#endif
+            
+            return;
             ShowHidePauseMenu();
             SceneLoader.Instance.UnloadInterviewScene();
-            if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            if (CardGameManager.Instance == null || CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
         }
 
         public void OnBackButtonClick()
