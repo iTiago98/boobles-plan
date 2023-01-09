@@ -64,7 +64,7 @@ namespace Booble.UI
         {
             ShowHidePauseMenu();
             SceneLoader.Instance.UnloadInterviewScene();
-            if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            if (CardGameManager.Instance == null || CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
         }
 
         public void OnBackButtonClick()

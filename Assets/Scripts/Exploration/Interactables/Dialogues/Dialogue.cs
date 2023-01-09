@@ -86,7 +86,6 @@ namespace Booble.Interactables.Dialogues
 			return _sentences[_currentIndex].Content;
         }
 
-		[MenuItem("Assets/Dialogue/Break Apart")]
 		public void BreakApart()
 		{
 			int i = 0;
