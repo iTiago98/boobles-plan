@@ -82,7 +82,7 @@ namespace Booble.CardGame.Cards
             CardUI.HideExtendedDescription();
         }
 
-        public void ShowHighlight(bool show)
+        public void ShowHighlight(bool show = true)
         {
             CardUI.ShowHighlight(show);
         }
@@ -96,14 +96,8 @@ namespace Booble.CardGame.Cards
             if (!_clickable) return;
             if (CardGameManager.Instance.playingCard) return;
 
-            if (CardGameManager.Instance.tutorial)
-            {
-                if (IsInHand && !mouseController.IsHoldingCard && data.name == "Afirmación reconfortante")
-                {
-                    MoveToWaitingSpot();
-                }
-                return;
-            }
+            bool isTutorial = CardGameManager.Instance.tutorial;
+            if (isTutorial && data.name != mouseController.GetTutorialCard()) return;
 
             if (IsInHand)
             {
@@ -112,8 +106,10 @@ namespace Booble.CardGame.Cards
                     _hand.SubstractDiscarding();
                     DestroyCard(_hand.CheckDiscarding);
                 }
-                else if (TurnManager.Instance.IsPlayerTurn && IsPlayerCard && !mouseController.IsHoldingCard)
+                else if (TurnManager.Instance.IsPlayerTurn || isTutorial)
                 {
+                    if (mouseController.IsHoldingCard) return;
+                    if (!IsPlayerCard) return;
                     if (IsAction && !effect.IsAppliable(this)) return;
 
                     if (EnoughMana())
@@ -200,11 +196,11 @@ namespace Booble.CardGame.Cards
         private IEnumerator PlayArgumentOrFieldCoroutine(CardZone cardZone)
         {
             RemoveFromContainer();
-            
+
             Stats.SubstractMana();
             Effects.CheckEffects();
 
-            if (Stats.type == CardType.FIELD && cardZone.isNotEmpty) cardZone.GetCard().DestroyCard();
+            if (IsField && cardZone.isNotEmpty) cardZone.GetCard().DestroyCard();
 
             AddToContainer(cardZone);
 
@@ -216,7 +212,7 @@ namespace Booble.CardGame.Cards
                 yield return new WaitWhile(() => Effects.applyingEffects);
             }
 
-            if (Stats.type == CardType.ARGUMENT)
+            if (IsArgument)
             {
                 CardEffectsManager.Instance.ApplyPlayArgumentEffects();
                 yield return new WaitUntil(() => CardEffectsManager.Instance.effectsApplied);

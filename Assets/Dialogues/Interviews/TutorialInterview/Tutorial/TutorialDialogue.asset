@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Y eso ser\xEDa el tutorial. \xBFLo has entendido todo?"
+  - _content: "\xBFLo has entendido todo?"
     _closeUp: 6

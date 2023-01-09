@@ -23,6 +23,7 @@ namespace Booble.CardGame.Dialogues
         [SerializeField] private Dialogue _playCardExplanation;
         [SerializeField] private Dialogue _playCardExplanation2;
         [SerializeField] private Dialogue _clashExplanation;
+        [SerializeField] private Dialogue _clashExplanation2;
         [SerializeField] private Dialogue _combatEffectsExplanation;
         [SerializeField] private Dialogue _betterCardsExplanation;
         [SerializeField] private Dialogue _enterEffectsExplanation;
@@ -40,13 +41,22 @@ namespace Booble.CardGame.Dialogues
         private bool _continue;
         private bool _coroutine;
 
-        private void Continue() => _continue = true;
+        public void Continue() => _continue = true;
 
-        private List<Card> _cards = new List<Card>();
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                StopAllCoroutines();
+                StartCoroutine(EndCoroutine());
+            }
+        }
 
         public void StartTutorial()
         {
             _dialogueManager = DialogueManager.Instance;
+            _player = CardGameManager.Instance.player;
+            _opponent = CardGameManager.Instance.opponent;
 
             CardGameManager.Instance.StartTutorial();
 
@@ -55,9 +65,6 @@ namespace Booble.CardGame.Dialogues
 
         private IEnumerator TutorialCoroutine()
         {
-            _player = CardGameManager.Instance.player;
-            _opponent = CardGameManager.Instance.opponent;
-
             _coroutine = true;
             StartCoroutine(IntroductionCoroutine());
             yield return new WaitWhile(() => _coroutine);
@@ -67,7 +74,8 @@ namespace Booble.CardGame.Dialogues
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
-            StartCoroutine(PlayCardCoroutine());
+            StartCoroutine(TurnCoroutine(_player, "Razonamiento coherente", "Afirmación reconfortante", 1,
+                _playCardExplanation, _playCardExplanation2, _clashExplanation, _clashExplanation2));
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
@@ -75,23 +83,11 @@ namespace Booble.CardGame.Dialogues
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
-            StartCoroutine(TurnCoroutine(_opponent, "Razonamiento coherente", "Afirmación reconfortante", 3));
+            StartCoroutine(TurnCoroutine(_opponent, "Razonamiento coherente", "Afirmación reconfortante", 2));
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
-            StartCoroutine(TurnCoroutine(_player, "Técnicamente correcto", "Técnicamente correcto", 2, _betterCardsExplanation));
-            yield return new WaitWhile(() => _coroutine);
-
-            _coroutine = true;
-            StartCoroutine(ClashCoroutine());
-            yield return new WaitWhile(() => _coroutine);
-
-            _coroutine = true;
-            StartCoroutine(TurnCoroutine(_opponent, "Y por ende...", "Y por ende...", 1, null, null, _enterEffectsExplanation));
-            yield return new WaitWhile(() => _coroutine);
-
-            _coroutine = true;
-            StartCoroutine(TurnCoroutine(_player, "Tu argumento claritamente es inválido", "Tu argumento claritamente es inválido", 1, _actionsExplanation, _actionsExplanation2));
+            StartCoroutine(TurnCoroutine(_player, "Técnicamente correcto", "Técnicamente correcto", 1, _betterCardsExplanation));
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
@@ -99,7 +95,19 @@ namespace Booble.CardGame.Dialogues
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
-            StartCoroutine(TurnCoroutine(_opponent, "Técnicamente correcto", "Técnicamente correcto", 4));
+            StartCoroutine(TurnCoroutine(_opponent, "Y por ende...", "Y por ende...", 0, null, null, _enterEffectsExplanation));
+            yield return new WaitWhile(() => _coroutine);
+
+            _coroutine = true;
+            StartCoroutine(TurnCoroutine(_player, "Tu argumento claritamente es inválido", "Tu argumento claritamente es inválido", 0, _actionsExplanation, _actionsExplanation2));
+            yield return new WaitWhile(() => _coroutine);
+
+            _coroutine = true;
+            StartCoroutine(ClashCoroutine());
+            yield return new WaitWhile(() => _coroutine);
+
+            _coroutine = true;
+            StartCoroutine(TurnCoroutine(_opponent, "Técnicamente correcto", "Técnicamente correcto", 3));
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
@@ -110,30 +118,7 @@ namespace Booble.CardGame.Dialogues
             StartCoroutine(ClashCoroutine(null, _fieldCardsExplanation2));
             yield return new WaitWhile(() => _coroutine);
 
-            _player.InitializeStats();
-            _opponent.InitializeStats();
-            UIManager.Instance.UpdateUIStats(hideEmptyCristals: true);
-
-            CardGameManager.Instance.InitializeDecks();
-
-            Card card = _player.cardZones[1].GetCard();
-            card.DestroyCard();
-            _player.fieldCardZone.GetCard().DestroyCard();
-            _opponent.cardZones[2].GetCard().DestroyCard();
-            _opponent.cardZones[3].GetCard().DestroyCard();
-
-            _player.hand.DiscardAll();
-            _opponent.hand.DiscardAll();
-
-            yield return new WaitUntil(() => card.destroyed);
-            yield return new WaitWhile(() => _player.hand.busy || _opponent.hand.busy);
-            yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
-
-            StartDialogue(_endExplanation);
-            yield return new WaitUntil(() => _continue);
-            yield return new WaitForSeconds(0.5f);
-
-            CardGameManager.Instance.FinishTutorial();
+            StartCoroutine(EndCoroutine());
         }
 
         private IEnumerator IntroductionCoroutine()
@@ -235,69 +220,21 @@ namespace Booble.CardGame.Dialogues
             _player.hand.GetCard("Hablar con convencimiento").transform.DOScale(0.41f, 0.5f);
             yield return new WaitForSeconds(1f);
 
-            CardZone cardZone = PlayCard(_opponent.hand.GetCard("Premisa"), 2);
+            CardZone cardZone = PlayCard(_opponent.hand.GetCard("Premisa"), 1);
             yield return new WaitWhile(() => CardGameManager.Instance.playingCard);
-
-            _coroutine = false;
-        }
-
-        private IEnumerator PlayCardCoroutine()
-        {
-            UIManager.Instance.TurnAnimation(TurnManager.Turn.PLAYER);
-            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
-
-            _player.deck.DrawCards(new List<string>() { "Razonamiento coherente" });
-            yield return new WaitWhile(() => _player.deck.busy);
-
-            StartDialogue(_playCardExplanation);
-            yield return new WaitUntil(() => _continue);
-            yield return new WaitForSeconds(0.5f);
-
-            CardGameManager.Instance.EnableMouseController();
-            
-            Card card = _player.hand.GetCard("Afirmación reconfortante");
-            card.transform.DOScale(0.5f, 0.5f);
-
-            yield return new WaitUntil(() => card.IsInWaitingSpot);
-
-            CardGameManager.Instance.DisableMouseController();
-
-            card.transform.DOScale(0.41f, 0.5f);
-            _player.cardZones[1].ShowHighlight(true);
-
-            StartDialogue(_playCardExplanation2);
-            yield return new WaitUntil(() => _continue);
-            yield return new WaitForSeconds(0.5f);
-
-            CardGameManager.Instance.EnableMouseController();
-
-            yield return new WaitWhile(() => MouseController.Instance.IsHoldingCard);
-            
-            _player.cardZones[1].ShowHighlight(false);
-            CardGameManager.Instance.DisableMouseController();
-
-            yield return new WaitWhile(() => CardGameManager.Instance.playingCard);
-
-            StartDialogue(_clashExplanation);
-            yield return new WaitUntil(() => _continue);
-            yield return new WaitForSeconds(0.5f);
 
             _coroutine = false;
         }
 
         private IEnumerator TurnCoroutine(Contender contender, string cardDrawed, string cardPlayed, int zone,
-            Dialogue dialogueAfterDraw = null, Dialogue dialogueAfterWaitingSpot = null, Dialogue dialogueAfterPlay = null)
+            Dialogue dialogueAfterDraw = null, Dialogue dialogueAfterWaitingSpot = null, Dialogue dialogueAfterPlay = null, Dialogue dialogueBeforeClash = null)
         {
             if (contender.isPlayer) UIManager.Instance.TurnAnimation(TurnManager.Turn.PLAYER);
             else UIManager.Instance.TurnAnimation(TurnManager.Turn.OPPONENT);
 
             yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
-            contender.deck.DrawCards(new List<string>()
-            {
-                cardDrawed
-            });
-
+            contender.deck.DrawCards(new List<string>() { cardDrawed });
             yield return new WaitWhile(() => contender.deck.busy);
 
             if (dialogueAfterDraw != null)
@@ -309,37 +246,51 @@ namespace Booble.CardGame.Dialogues
 
             Card card = contender.hand.GetCard(cardPlayed);
 
-            if (dialogueAfterWaitingSpot != null)
+            if (contender.isPlayer)
             {
-                card.MoveToWaitingSpot();
-                if (card.IsArgument || card.IsField)
-                    Board.Instance.HighlightCardZones(card, true);
-                else
-                    Board.Instance.HighlightTargets(card.effect.FindPossibleTargets());
+                MouseController.Instance.SetTutorialCard(cardPlayed);
+                CardGameManager.Instance.EnableMouseController();
 
-                yield return new WaitForSeconds(1f);
-                yield return new WaitUntil(() => contender.hand.cardsAtPosition);
+                card.transform.DOScale(0.5f, 0.5f);
 
-                StartDialogue(dialogueAfterWaitingSpot);
-                yield return new WaitUntil(() => _continue);
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitUntil(() => card.IsInWaitingSpot);
 
-                if (card.IsArgument || card.IsField)
-                    Board.Instance.RemoveCardZonesHighlight(card);
-                else
-                    Board.Instance.RemoveTargetsHighlight();
-            }
+                card.OnMouseHoverExit();
+                UIManager.Instance.HidePlayButtons();
+                CardGameManager.Instance.DisableMouseController();
+                MouseController.Instance.RemoveTutorialCard();
 
-            if (card.IsArgument || card.IsField)
-            {
-                CardZone cardZone = PlayCard(card, zone);
+                if (card.IsArgument)
+                {
+                    Board.Instance.RemoveHighlight(card);
+                    contender.cardZones[zone].ShowHighlight(true);
+                }
+                else if (card.IsAction)
+                {
+                    Board.Instance.RemoveHighlight(card);
+                    _opponent.cardZones[zone].GetCard().ShowHighlight();
+                }
+
+                if (dialogueAfterWaitingSpot != null)
+                {
+                    StartDialogue(dialogueAfterWaitingSpot);
+                    yield return new WaitUntil(() => _continue);
+                    yield return new WaitForSeconds(0.5f);
+                }
+
+                CardGameManager.Instance.EnableMouseController();
+
+                yield return new WaitWhile(() => MouseController.Instance.IsHoldingCard);
+
+                Board.Instance.RemoveHighlight(card);
+                CardGameManager.Instance.DisableMouseController();
+
                 yield return new WaitWhile(() => CardGameManager.Instance.playingCard);
             }
             else
             {
-                Card target = CardGameManager.Instance.GetOtherContender(contender).cardZones[zone - 1].GetCard();
-                card.ContinueAction(target);
-                yield return new WaitUntil(() => card.destroyed);
+                CardZone cardZone = PlayCard(card, zone);
+                yield return new WaitWhile(() => CardGameManager.Instance.playingCard);
             }
 
             if (dialogueAfterPlay != null)
@@ -347,6 +298,23 @@ namespace Booble.CardGame.Dialogues
                 StartDialogue(dialogueAfterPlay);
                 yield return new WaitUntil(() => _continue);
                 yield return new WaitForSeconds(0.5f);
+            }
+
+            if (contender.isPlayer)
+            {
+                UIManager.Instance.SetEndTurnButtonInteractable(true);
+
+                _continue = false;
+                yield return new WaitUntil(() => _continue);
+
+                UIManager.Instance.SetEndTurnButtonInteractable(false);
+
+                if (dialogueBeforeClash != null)
+                {
+                    StartDialogue(dialogueBeforeClash);
+                    yield return new WaitUntil(() => _continue);
+                    yield return new WaitForSeconds(0.5f);
+                }
             }
 
             _coroutine = false;
@@ -390,6 +358,30 @@ namespace Booble.CardGame.Dialogues
             _coroutine = false;
         }
 
+        private IEnumerator EndCoroutine()
+        {
+            _player.InitializeStats();
+            _opponent.InitializeStats();
+            UIManager.Instance.UpdateUIStats(hideEmptyCristals: true);
+
+            CardGameManager.Instance.InitializeDecks();
+
+            Card aux = Board.Instance.DestroyCards();
+            
+            _player.hand.DiscardAll();
+            _opponent.hand.DiscardAll();
+
+            if (aux != null) yield return new WaitUntil(() => aux.destroyed);
+            yield return new WaitWhile(() => _player.hand.busy || _opponent.hand.busy);
+            yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+
+            StartDialogue(_endExplanation);
+            yield return new WaitUntil(() => _continue);
+            yield return new WaitForSeconds(0.5f);
+
+            CardGameManager.Instance.FinishTutorial();
+        }
+
         private void StartDialogue(Dialogue dialogue)
         {
             _continue = false;
@@ -402,13 +394,11 @@ namespace Booble.CardGame.Dialogues
         {
             CardZone cardZone;
             if (zone == -1) cardZone = card.contender.fieldCardZone;
-            else cardZone = card.contender.cardZones[zone - 1];
+            else cardZone = card.contender.cardZones[zone];
 
             card.Play(cardZone);
 
             return cardZone;
         }
-
-
     }
 }

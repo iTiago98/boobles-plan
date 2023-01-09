@@ -29,6 +29,18 @@ namespace Booble.CardGame.Managers
 
         private IClickable _hovering;
 
+        #region Tutorial
+
+        private string _tutorialCardName;
+        public void SetTutorialCard(string name)
+        {
+            _tutorialCardName = name;
+        }
+        public void RemoveTutorialCard() => _tutorialCardName = "";
+        public string GetTutorialCard() => _tutorialCardName;
+
+        #endregion
+
         private void Start()
         {
             SetMask(selectingLayerMask);

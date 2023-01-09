@@ -12,12 +12,16 @@ namespace Booble.CardGame.Dialogues
     {
         [SerializeField] private TutorialAnimation _tutorialAnimation;
 
+        public TutorialAnimation GetTutorialAnimation() => _tutorialAnimation;
+
         [Header("Extra dialogues")]
         [SerializeField] private Dialogue _tutorialDialogue;
+        [SerializeField] private Dialogue _repeatTutorialDialogue;
         [SerializeField] private Dialogue _postTutorialDialogue;
 
         [Header("Options")]
         [SerializeField] private List<Option> _tutorialOptions;
+        [SerializeField] private List<Option> _repeatTutorialOptions;
         [SerializeField] private List<Option> _postTutorialOptions;
 
         [Header("Extra cards")]
@@ -43,6 +47,12 @@ namespace Booble.CardGame.Dialogues
             yield return new WaitWhile(() => CardGameManager.Instance.tutorial);
 
             ThrowDialogue(_tutorialDialogue, null, _postTutorialOptions);
+        }
+
+        public void ThrowRepeatTutorial()
+        {
+            Debug.Log("RepeatTutorial");
+            ThrowDialogue(_repeatTutorialDialogue, null, _repeatTutorialOptions);
         }
 
         public void ThrowPostTutorial()

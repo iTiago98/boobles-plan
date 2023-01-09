@@ -56,6 +56,14 @@ namespace Booble.CardGame.Managers
         public bool tutorial { private set; get; }
         public void StartTutorial() => tutorial = true;
         public void FinishTutorial() => tutorial = false;
+        public TutorialDialogue GetTutorial()
+        {
+            if(_interviewDialogue != null && _interviewDialogue is TutorialDialogue)
+            {
+                return (TutorialDialogue)_interviewDialogue;
+            }
+            return null;
+        }
 
         public void EnableMouseController() => MouseController.Instance.enabled = true;
         public void DisableMouseController() => MouseController.Instance.enabled = false;
@@ -247,10 +255,12 @@ namespace Booble.CardGame.Managers
         {
             playingCard = value;
 
+            if (tutorial) return;
+            
             if (playingCard) UIManager.Instance.SetEndTurnButtonInteractable(false);
             else UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
 
-            if (TurnManager.Instance.IsOpponentTurn && !tutorial) _opponentAI.enabled = !value;
+            if (TurnManager.Instance.IsOpponentTurn) _opponentAI.enabled = !value;
         }
     }
 }

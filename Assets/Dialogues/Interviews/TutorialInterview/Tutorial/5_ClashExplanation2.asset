@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: 5_ClashExplanation
+  m_Name: 5_ClashExplanation2
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Al quedarte sin man\xE1, o en el caso de que no quieras realizar m\xE1s
-      jugadas, pulsa el bot\xF3n de final de turno para comenzar el combate."
+  - _content: "En el combate, los argumentos chocar\xE1n con el argumento que tengan
+      delante."
+    _closeUp: 6
+  - _content: "En el caso de que no haya un argumento delante, atacar\xE1n directamente
+      al oponente, haciendo mella a su vida."
     _closeUp: 6

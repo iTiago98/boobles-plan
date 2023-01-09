@@ -1,5 +1,6 @@
 using Booble.CardGame.Cards;
 using Booble.CardGame.Cards.DataModel;
+using Booble.CardGame.Dialogues;
 using Booble.CardGame.Level;
 using Booble.CardGame.Utils;
 using Booble.Managers;
@@ -229,8 +230,11 @@ namespace Booble.CardGame.Managers
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
             sequence.AppendCallback(endCallback);
 
-            if (turn == Turn.PLAYER) sequence.AppendCallback(() => SetEndTurnButtonInteractable(true));
-            else SetEndTurnButtonInteractable(false);
+            if (!CardGameManager.Instance.tutorial)
+            {
+                if (turn == Turn.PLAYER) sequence.AppendCallback(() => SetEndTurnButtonInteractable(true));
+                else SetEndTurnButtonInteractable(false);
+            }
 
             sequence.Play();
         }
@@ -349,7 +353,13 @@ namespace Booble.CardGame.Managers
 
         public void OnEndTurnButtonClick()
         {
-            TurnManager.Instance.FinishTurn();
+            if (CardGameManager.Instance.tutorial)
+            {
+                TutorialDialogue t = CardGameManager.Instance.GetTutorial();
+                if (t != null) t.GetTutorialAnimation().Continue();
+            }
+            else
+                TurnManager.Instance.FinishTurn();
         }
 
         public bool IsEndTurnButtonInteractable() { return endTurnButton.IsInteractable(); }
@@ -441,12 +451,12 @@ namespace Booble.CardGame.Managers
         public void OnCancelPlayButtonClick()
         {
             Card holdingCard = MouseController.Instance.holdingCard;
-            if (holdingCard != null && holdingCard.contender.isPlayer)
+            if (holdingCard != null && holdingCard.IsPlayerCard)
             {
                 holdingCard.contender.hand.AddCard(holdingCard.gameObject);
 
                 if (MouseController.Instance.IsApplyingEffect) MouseController.Instance.ResetApplyingEffect();
-                if (holdingCard.Stats.type == CardType.ACTION) Board.Instance.RemoveTargetsHighlight();
+                if (holdingCard.IsAction) Board.Instance.RemoveTargetsHighlight();
                 else Board.Instance.RemoveCardZonesHighlight(holdingCard);
 
                 HidePlayButtons();

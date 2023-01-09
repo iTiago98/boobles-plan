@@ -160,7 +160,42 @@ namespace Booble.CardGame.Level
             return false;
         }
 
+        public Card DestroyCards()
+        {
+            Contender player = CardGameManager.Instance.player;
+            Contender opponent = CardGameManager.Instance.opponent;
+            
+            Card aux = null;
+            foreach (CardZone cardZone in player.cardZones)
+            {
+                if (cardZone.isNotEmpty)
+                {
+                    if (aux == null) cardZone.GetCard();
+                    cardZone.GetCard().DestroyCard();
+                }
+            }
+            if (player.fieldCardZone.isNotEmpty) player.fieldCardZone.GetCard().DestroyCard();
+
+            foreach (CardZone cardZone in opponent.cardZones)
+            {
+                if (cardZone.isNotEmpty)
+                {
+                    if (aux == null) cardZone.GetCard();
+                    cardZone.GetCard().DestroyCard();
+                }
+            }
+            if (opponent.fieldCardZone.isNotEmpty) opponent.fieldCardZone.GetCard().DestroyCard();
+
+            return aux;
+        }
+
         #region Highlight
+
+        public void RemoveHighlight(Card card)
+        {
+            if (card.IsAction) RemoveTargetsHighlight();
+            else RemoveCardZonesHighlight(card);
+        }
 
         public void RemoveTargetsHighlight()
         {
@@ -219,7 +254,7 @@ namespace Booble.CardGame.Level
                 if (cardZone.isNotEmpty)
                 {
                     Card card = cardZone.GetCard();
-                    card.ShowHighlight(true);
+                    card.ShowHighlight();
                 }
             }
         }
