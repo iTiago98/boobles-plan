@@ -104,7 +104,8 @@ namespace Booble.CardGame.Cards
                 if (_hand.isDiscarding)
                 {
                     _hand.SubstractDiscarding();
-                    DestroyCard(_hand.CheckDiscarding);
+                    _hand.CheckDiscarding(this);
+                    DestroyCard();
                 }
                 else if (TurnManager.Instance.IsPlayerTurn || isTutorial)
                 {

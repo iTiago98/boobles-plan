@@ -127,12 +127,12 @@ namespace Booble.CardGame.Level
             return isDiscarding;
         }
 
-        public void CheckDiscarding()
+        public void CheckDiscarding(Card card = null)
         {
-            StartCoroutine(CheckDiscardingCoroutine());
+            StartCoroutine(CheckDiscardingCoroutine(card));
         }
 
-        private IEnumerator CheckDiscardingCoroutine()
+        private IEnumerator CheckDiscardingCoroutine(Card card)
         {
             if (contender.isPlayer)
             {
@@ -141,7 +141,8 @@ namespace Booble.CardGame.Level
                     isDiscarding = false;
                     ChangeScale(CardGameManager.Instance.settings.defaultScale);
 
-                    yield return new WaitUntil(() => numCards == _handCapacity);
+                    yield return new WaitUntil(() => card.destroyed);
+                    yield return new WaitUntil(() => cardsAtPosition);
 
                     TurnManager.Instance.ChangeTurn();
                 }
