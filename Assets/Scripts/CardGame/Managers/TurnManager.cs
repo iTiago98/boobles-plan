@@ -89,6 +89,8 @@ namespace Booble.CardGame.Managers
 
             if (turn == Turn.OPPONENT)
                 CardGameManager.Instance.EnableOpponentAI();
+            else
+                UIManager.Instance.SetEndTurnButtonInteractable(true);
         }
 
         public void FinishTurn()

@@ -230,13 +230,8 @@ namespace Booble.CardGame.Managers
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
             sequence.AppendCallback(endCallback);
 
-            if (!CardGameManager.Instance.tutorial)
-            {
-                if (turn == Turn.PLAYER) sequence.AppendCallback(() => SetEndTurnButtonInteractable(true));
-                else SetEndTurnButtonInteractable(false);
-            }
-
             sequence.Play();
+            SetEndTurnButtonInteractable(false);
         }
 
         #endregion

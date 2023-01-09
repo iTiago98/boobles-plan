@@ -95,6 +95,7 @@ namespace Booble.CardGame.Cards
         {
             if (!_clickable) return;
             if (CardGameManager.Instance.playingCard) return;
+            if (!TurnManager.Instance.continueFlow) return;
 
             bool isTutorial = CardGameManager.Instance.tutorial;
             if (isTutorial && data.name != mouseController.GetTutorialCard()) return;
