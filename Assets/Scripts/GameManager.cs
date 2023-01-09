@@ -35,7 +35,7 @@ namespace Booble.Managers
 
         private void CheckPauseMenu()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) || PauseMenu.Instance.hide)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (SceneLoader.Instance != null && SceneLoader.Instance.InMainMenu) return;
                 if (UIManager.Instance != null && UIManager.Instance.loseMenuActive) return;
@@ -45,7 +45,7 @@ namespace Booble.Managers
             }
         }
 
-        private void ResumeGame()
+        public void ResumeGame()
         {
             gamePaused = false;
 

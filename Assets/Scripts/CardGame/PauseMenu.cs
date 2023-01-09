@@ -18,9 +18,6 @@ namespace Booble.UI
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
 
-        private bool _hide;
-        public bool hide => _hide;
-
         private void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -41,7 +38,6 @@ namespace Booble.UI
             {
                 OnBackButtonClick();
                 _pauseMenu.SetActive(false);
-                _hide = false;
             }
             else
             {
@@ -51,20 +47,29 @@ namespace Booble.UI
 
         public void OnResumeButtonClick()
         {
-            _hide = true;
+            GameManager.Instance.ResumeGame();
         }
 
         public void OnOptionsButtonClick()
         {
             _mainMenu.SetActive(false);
             _optionsMenu.SetActive(true);
+
+            _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
+            _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
+            _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
         }
 
         public void OnReturnToMenuButtonClick()
         {
-            ShowHidePauseMenu();
-            SceneLoader.Instance.UnloadInterviewScene();
-            if (CardGameManager.Instance == null || CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            GameManager.Instance.ResumeGame();
+
+            if (SceneLoader.Instance.InInterview)
+            {
+                SceneLoader.Instance.UnloadInterviewScene();
+                if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            }
+            else if (SceneLoader.Instance.InExploration) SceneLoader.Instance.LoadMainMenuScene();
         }
 
         public void OnBackButtonClick()
@@ -73,19 +78,19 @@ namespace Booble.UI
             _optionsMenu.SetActive(false);
         }
 
-        public void OnGeneralMusicValueChanged()
+        public void OnGeneralMusicValueChanged(System.Single value)
         {
-            MusicManager.Instance.ChangeGeneralMusicVolume(_generalMusicSlider.value);
+            MusicManager.Instance.ChangeGeneralMusicVolume(value);
         }
 
-        public void OnBackgroundMusicSliderValueChanged()
+        public void OnBackgroundMusicSliderValueChanged(System.Single value)
         {
-            MusicManager.Instance.ChangeBackgroundMusicVolume(_backgroundMusicSlider.value);
+            MusicManager.Instance.ChangeBackgroundMusicVolume(value);
         }
 
-        public void OnSFXMusicSliderValueChanged()
+        public void OnSFXMusicSliderValueChanged(System.Single value)
         {
-            MusicManager.Instance.ChangeSFXVolume(_sfxMusicSlider.value);
+            MusicManager.Instance.ChangeSFXVolume(value);
         }
     }
 }
