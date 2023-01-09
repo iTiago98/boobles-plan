@@ -53,7 +53,7 @@ public class NelaOffice2Animation : MonoBehaviour
 
         if (_interview)
         {
-            DeckManager.Instance.SetOpponent(Opponent_Name.PingPongBros);
+            DeckManager.Instance.SetOpponent(Opponent_Name.PPBros);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);

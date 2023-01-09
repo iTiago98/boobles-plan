@@ -17,8 +17,10 @@ MonoBehaviour:
   - _content: "Qu\xE9 me est\xE1s contando, \xBFtan crueles son? Yo solo quer\xEDa
       que me dejaran jugar, \xA1no que los echen!"
     _closeUp: 4
-  - _content: "Tranquilo, no ha sido por ti. Con tantos meses sin trabajar, y delante
-      de las narices de sus jefes, sus despidos est\xE1n m\xE1s que justificados."
+  - _content: Tranquilo, no ha sido por ti.
+    _closeUp: 1
+  - _content: "Con tantos meses sin trabajar, y delante de las narices de sus jefes,
+      sus despidos est\xE1n m\xE1s que justificados."
     _closeUp: 1
   - _content: "Y acu\xE9rdate de sus familias, lo que les estar\xE1n haciendo sufrir
       estos enajenados."

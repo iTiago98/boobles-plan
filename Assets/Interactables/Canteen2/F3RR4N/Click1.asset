@@ -23,7 +23,7 @@ MonoBehaviour:
       impregnado de p\xF3lvora."
     _closeUp: 8
   - _content: "\xBFY eso qu\xE9 tiene que ver?"
-    _closeUp: 8
+    _closeUp: 1
   - _content: "Una vez se reconstruy\xF3 todo la gente empez\xF3 a dejar de comer,
       todos dec\xEDan que no les sab\xEDa a nada."
     _closeUp: 8
@@ -35,7 +35,7 @@ MonoBehaviour:
   - _content: "\xBFY eso qu\xE9 tiene que ver?"
     _closeUp: 8
   - _content: "Esto era que se hab\xEDan acostumbrado tanto a la p\xF3lvora, que
-      hasta su sabor se hab\xEDa convertido en imprescindible en la comida."
+      su sabor se hab\xEDa convertido en imprescindible en la comida."
     _closeUp: 8
   - _content: "Ahora se usa como condimento, tanto o m\xE1s que la pimienta y casi
       como la sal."

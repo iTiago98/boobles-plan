@@ -1862,8 +1862,8 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1737888737}
-  - _optionText: Pues parece que les va a costar el no dar palo al agua. Me han mandado
-      que los despida.
+  - _optionText: Pues parece que les va a costar caro el no dar palo al agua. Me
+      han mandado que los despida.
     _trueFlags: 08000000
     _falseFlags: 
     _dialogueOption: {fileID: 324579752}
