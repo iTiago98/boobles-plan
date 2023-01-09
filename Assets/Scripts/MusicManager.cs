@@ -80,75 +80,38 @@ namespace Booble.Managers
             _currentInstance.release();
         }
 
+        public float GetGeneralMusicVolume()
+        {
+            float volume;
+            _masterBus.getVolume(out volume);
+            return volume;
+        }
         public void ChangeGeneralMusicVolume(float value)
         {
             _masterBus.setVolume(value);
         }
 
+        public float GetBackgroundMusicVolume()
+        {
+            float volume;
+            _bgmBus.getVolume(out volume);
+            return volume;
+        }
         public void ChangeBackgroundMusicVolume(float value)
         {
             _bgmBus.setVolume(value);
         }
 
+        public float GetSFXMusicVolume()
+        {
+            float volume;
+            _sfxBus.getVolume(out volume);
+            return volume;
+        }
         public void ChangeSFXVolume(float value)
         {
             _sfxBus.setVolume(value);
         }
-
-        // public void PlayMainMenuMusic()
-        // {
-        //     
-        //     _currentInstance = RuntimeManager.CreateInstance(_mainMenuReference);
-        //     _currentInstance.start();
-        //     _mainMenuInstance = RuntimeManager.CreateInstance(_mainMenuReference);
-        //     _mainMenuInstance.start();
-        // }
-        //
-        // public void PlayLoungeMusic()
-        // {
-        //     _loungeMusicInstance = RuntimeManager.CreateInstance(_loungeMusicReference);
-        //     _loungeMusicInstance.start();
-        // }
-        //
-        // public void PlayInterviewMusic()
-        // {
-        //     _interviewMusicInstance = RuntimeManager.CreateInstance(_interviewMusicReference);
-        //     _interviewMusicInstance.start();
-        // }
-        //
-        // public void StopMusic()
-        // {
-        //     PLAYBACK_STATE playbackState;
-        //     foreach (EventInstance instance in _eventInstances)
-        //     {
-        //         instance.getPlaybackState(out playbackState);
-        //         if (playbackState == PLAYBACK_STATE.PLAYING) instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        //     }
-        // }
-        //
-        // // public void StopMainMenuMusic()
-        // // {
-        // //     PLAYBACK_STATE playbackState;
-        // //     _mainMenuInstance.getPlaybackState(out playbackState);
-        // //
-        // //     if (playbackState == PLAYBACK_STATE.PLAYING) _mainMenuInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        // // }
-        // //
-        // // public void StopLoungeMusic()
-        // // {
-        // //     PLAYBACK_STATE playbackState;
-        // //     _loungeMusicInstance.getPlaybackState(out playbackState);
-        // //
-        // //     if (playbackState == PLAYBACK_STATE.PLAYING) _loungeMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        // // }
-        // //
-        // // public void StopInterviewMusic()
-        // // {
-        // //     PLAYBACK_STATE playbackState;
-        // //     _interviewMusicInstance.getPlaybackState(out playbackState);
-        // //
-        // //     if (playbackState == PLAYBACK_STATE.PLAYING) _interviewMusicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        // // }
     }
 
     public enum MusicReference

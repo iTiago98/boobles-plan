@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using Booble.CardGame;
 using Booble.Managers;
+using UnityEngine.UI;
 
 namespace Booble.MainMenu
 {
@@ -16,9 +17,13 @@ namespace Booble.MainMenu
 
 		[SerializeField] private RectTransform _mainMenu;
 		[SerializeField] private RectTransform _credits;
+		[SerializeField] private RectTransform _options;
         [SerializeField] private RectTransform _cardGameMenu;
 		[SerializeField] private float _duration;
 
+		[SerializeField] private Slider _generalMusicSlider;
+		[SerializeField] private Slider _backgroundMusicSlider;
+		[SerializeField] private Slider _sfxMusicSlider;
 
 		private bool _onTween;
 
@@ -100,6 +105,20 @@ namespace Booble.MainMenu
 			_onTween = true;
 			_mainMenu.DOMoveX(_credits.position.x, _duration);
 			_credits.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
+		}
+		
+		public void OptionsOnOffButton()
+		{
+			if(_onTween)
+				return;
+
+			_onTween = true;
+			_mainMenu.DOMoveX(_options.position.x, _duration);
+			_options.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
+
+			_generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
+			_backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
+			_sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
 		}
 
 		public void QuitButton()

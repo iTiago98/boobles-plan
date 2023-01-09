@@ -54,6 +54,10 @@ namespace Booble.UI
         {
             _mainMenu.SetActive(false);
             _optionsMenu.SetActive(true);
+
+            _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
+            _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
+            _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
         }
 
         public void OnReturnToMenuButtonClick()
@@ -74,19 +78,19 @@ namespace Booble.UI
             _optionsMenu.SetActive(false);
         }
 
-        public void OnGeneralMusicValueChanged()
+        public void OnGeneralMusicValueChanged(System.Single value)
         {
-            MusicManager.Instance.ChangeGeneralMusicVolume(_generalMusicSlider.value);
+            MusicManager.Instance.ChangeGeneralMusicVolume(value);
         }
 
-        public void OnBackgroundMusicSliderValueChanged()
+        public void OnBackgroundMusicSliderValueChanged(System.Single value)
         {
-            MusicManager.Instance.ChangeBackgroundMusicVolume(_backgroundMusicSlider.value);
+            MusicManager.Instance.ChangeBackgroundMusicVolume(value);
         }
 
-        public void OnSFXMusicSliderValueChanged()
+        public void OnSFXMusicSliderValueChanged(System.Single value)
         {
-            MusicManager.Instance.ChangeSFXVolume(_sfxMusicSlider.value);
+            MusicManager.Instance.ChangeSFXVolume(value);
         }
     }
 }
