@@ -292,8 +292,16 @@ namespace Booble.CardGame.AI
                     case SubType.RETURN_CARD:
                         {
                             int temp = 0;
-                            if (card.Stats.IsBoosted()) temp += card.Stats.GetBoost();
-                            if (card.Stats.IsDamaged()) temp -= card.Stats.GetDamage();
+                            if (card.Stats.IsBoosted())
+                            {
+                                if (card.IsPlayerCard) temp += card.Stats.GetBoost();
+                                else temp -= card.Stats.GetBoost();
+                            }
+                            if (card.Stats.IsDamaged())
+                            {
+                                if (card.IsPlayerCard) temp -= card.Stats.GetDamage();
+                                else temp += card.Stats.GetDamage();
+                            }
 
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
                             if (oppositeCard != null) temp -= 3;
