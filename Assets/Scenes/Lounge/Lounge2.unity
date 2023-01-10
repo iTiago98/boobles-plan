@@ -2126,7 +2126,7 @@ GameObject:
   - component: {fileID: 1096582214}
   - component: {fileID: 1096582215}
   m_Layer: 0
-  m_Name: TENGO LA BOMBA
+  m_Name: Bomba
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2156,8 +2156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8e16c4583898c4f41ad39283e5f07750, type: 2}
-  _onEnd: 1
+  _dialogue: {fileID: 11400000, guid: 891d67a7456b405418cd36bbf5edca1d, type: 2}
+  _onEnd: 2
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -2341,7 +2341,7 @@ MonoBehaviour:
     _trueFlags: 3600000037000000
     _falseFlags: 38000000
     _dialogueOption: {fileID: 1366052901}
-  - _optionText: TENGO LA BOMBA
+  - _optionText: "\xBFC\xF3mo uso la bomba?"
     _trueFlags: 38000000
     _falseFlags: 39000000
     _dialogueOption: {fileID: 1096582214}
@@ -2626,6 +2626,7 @@ GameObject:
   - component: {fileID: 1270625314}
   - component: {fileID: 1270625317}
   - component: {fileID: 1270625315}
+  - component: {fileID: 1270625319}
   - component: {fileID: 1270625318}
   m_Layer: 0
   m_Name: Cambiar
@@ -2697,6 +2698,33 @@ MonoBehaviour:
   _ppbAnim: {fileID: 1526305641}
   _anaAnim: {fileID: 1919805948}
   _anaXPos: -12
+--- !u!114 &1270625319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270625313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 498324086}
+        m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
+        m_MethodName: AddVictoriaPorDesgaste
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1279426788
 GameObject:
   m_ObjectHideFlags: 0
@@ -2914,6 +2942,7 @@ GameObject:
   - component: {fileID: 1366052901}
   - component: {fileID: 1366052900}
   - component: {fileID: 1366052899}
+  - component: {fileID: 1366052902}
   m_Layer: 0
   m_Name: Guarrada
   m_TagString: Untagged
@@ -2978,6 +3007,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1366052902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366052897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 498324086}
+        m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
+        m_MethodName: AddPelotaBomba
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1488464207
 GameObject:
   m_ObjectHideFlags: 0
