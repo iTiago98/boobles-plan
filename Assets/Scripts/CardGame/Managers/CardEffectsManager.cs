@@ -852,6 +852,7 @@ namespace Booble.CardGame.Managers
                 {
                     int position = Board.Instance.GetPositionFromCard(source);
                     destCardZone = source.contender.cardZones[position];
+                    source.transform.position = source.transform.position + new Vector3(0, 0, 0.01f);
                 }
                 else if (source.IsAction)
                 {
