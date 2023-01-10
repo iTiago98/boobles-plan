@@ -2187,6 +2187,7 @@ GameObject:
   - component: {fileID: 1174065277}
   - component: {fileID: 1174065276}
   - component: {fileID: 1174065278}
+  - component: {fileID: 1174065282}
   - component: {fileID: 1174065280}
   - component: {fileID: 1174065281}
   m_Layer: 0
@@ -2381,6 +2382,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.087910175, y: 1.8285652}
   m_Size: {x: 1.3074617, y: 3.6571305}
   m_Direction: 0
+--- !u!114 &1174065282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174065275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 425503f300173334aada81743608c6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1184045879
 GameObject:
   m_ObjectHideFlags: 0
@@ -5160,6 +5173,7 @@ GameObject:
   - component: {fileID: 2118701042}
   - component: {fileID: 2118701040}
   - component: {fileID: 2118701041}
+  - component: {fileID: 2118701043}
   m_Layer: 0
   m_Name: Pruebas
   m_TagString: Untagged
@@ -5211,6 +5225,19 @@ Transform:
   m_Father: {fileID: 1174065277}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2118701043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118701039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5149773778c81af49beedd8c0a431381, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flags: 36000000
 --- !u!1 &2121053232
 GameObject:
   m_ObjectHideFlags: 0

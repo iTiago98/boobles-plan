@@ -29,6 +29,7 @@ public class DennisWalk : MonoBehaviour
                     _flagManager.GetFlag(Flag.Reference.DennisMencionaFamilias))
                 {
                         gameObject.SetActive(false);
+                        transform.position = _cinematicPos;
                         return;
                 }
 
