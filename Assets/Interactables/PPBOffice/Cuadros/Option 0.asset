@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Pero si aqu\xED hay varias de Pedro y Pablo! Es verdad que estaban
+      bastante entrados en carnes, pero esas caras son inconfundibles."
+    _closeUp: 1
+  - _content: "Hay hasta una de los dos en plano cenital, \xA1pensaba que Lucrecia
+      estaba contando un chiste!"
+    _closeUp: 1
+  - _content: "Eh, un momento, los ni\xF1os de esta foto me suenan."
+    _closeUp: 1
+  - _content: "Por el parecido s\xE9 que estos otros dos son Pedro y Pablo, pero
+      el ni\xF1o del centro, \xBFde qu\xE9 me suena?"
+    _closeUp: 1
+  - _content: "\xA1Ostras, pero si es Dennis, con su impaciente levantamiento de
+      pie tan caracter\xEDstico!"
+    _closeUp: 1
+  - _content: "\xBFPero si ya los conoc\xEDa por qu\xE9 no me ha dicho nada? \xC9sto
+      cada vez tiene menos sentido\u2026 Creo que Dennis sabe m\xE1s de lo que parece."
+    _closeUp: 1
