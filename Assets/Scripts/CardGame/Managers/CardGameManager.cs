@@ -225,7 +225,7 @@ namespace Booble.CardGame.Managers
         private void OnInterviewEnd()
         {
             if (_interviewDialogue != null) UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
-            else GetOnEndAction()();
+            else UIManager.Instance.InterviewEndAnimation(_playerWin, GetOnEndAction());
         }
 
         private Action GetOnEndAction()

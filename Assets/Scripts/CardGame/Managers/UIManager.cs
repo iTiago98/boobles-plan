@@ -219,7 +219,7 @@ namespace Booble.CardGame.Managers
             SetEndTurnButtonText(turn);
         }
 
-        public void TurnAnimation(Sprite sprite, Turn turn, TweenCallback endCallback)
+        public void TurnAnimation(Sprite sprite, Turn turn, Action endCallback)
         {
             turnAnimationImage.sprite = sprite;
 
@@ -228,7 +228,7 @@ namespace Booble.CardGame.Managers
             sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
             sequence.AppendInterval(0.5f);
             sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
-            sequence.AppendCallback(endCallback);
+            sequence.AppendCallback(() => endCallback());
 
             sequence.Play();
             SetEndTurnButtonInteractable(false);
@@ -551,7 +551,7 @@ namespace Booble.CardGame.Managers
 
         #region Game End
 
-        public void InterviewEndAnimation(bool win, TweenCallback endCallback)
+        public void InterviewEndAnimation(bool win, Action endCallback)
         {
             if (win) TurnAnimation(_interviewWinSprite, Turn.INTERVIEW_END, endCallback);
             else TurnAnimation(_interviewLoseSprite, Turn.INTERVIEW_END, endCallback);
