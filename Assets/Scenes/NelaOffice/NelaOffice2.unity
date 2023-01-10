@@ -1435,6 +1435,7 @@ MonoBehaviour:
   _nelaController: {fileID: 2063433067}
   _fade: {fileID: 2063433066}
   _officeDialogue: {fileID: 11400000, guid: 138becfebdb38a345a19c944e1e1340e, type: 2}
+  _postInterviewDialogue: {fileID: 11400000, guid: 70c0b7dec4072354d87801a6f4cb24b1, type: 2}
   _options:
   - _optionText: Empezar la entrevista con los PinPonBros.
     _trueFlags: 
@@ -1442,11 +1443,11 @@ MonoBehaviour:
     _dialogueOption: {fileID: 1282262457016336834}
   - _optionText: (Llamar a Hortensia Pinar)
     _trueFlags: 3a000000
-    _falseFlags: 
+    _falseFlags: 39000000
     _dialogueOption: {fileID: 1282262458008004102}
   - _optionText: (Llamar a Lucrecia Ponzano)
     _trueFlags: 3a000000
-    _falseFlags: 
+    _falseFlags: 39000000
     _dialogueOption: {fileID: 1066056391}
 --- !u!114 &1282262457016336834
 MonoBehaviour:
@@ -1472,7 +1473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 704e0b6449a63b24b94f5dec611e9b8e, type: 2}
+  _dialogue: {fileID: 11400000, guid: 76b7a7106582c124584e835ce9b929d7, type: 2}
   _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
@@ -1623,7 +1624,7 @@ MonoBehaviour:
   _options:
   - _optionText: "(Colgar el tel\xE9fono)"
     _trueFlags: 
-    _falseFlags: 
+    _falseFlags: 39000000
     _dialogueOption: {fileID: 335023538}
   - _optionText: "Le prometo que har\xE9 todo lo posible por traer a sus maridos
       de vuelta, se\xF1ora."

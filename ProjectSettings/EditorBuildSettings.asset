@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PPBOffice.unity
     guid: c2ea2e2d5eab1624a972afd65e1fdc77
+  - enabled: 1
+    path: Assets/Scenes/Home/Home2.unity
+    guid: 309d2b388e480aa4199a940a2d072bcf
   m_configObjects: {}

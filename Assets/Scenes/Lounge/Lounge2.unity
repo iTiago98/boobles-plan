@@ -3228,6 +3228,10 @@ MonoBehaviour:
   _unclickable: 0
   _interactDistance: 6
   _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: d56dbba53f91fd24da24ac3ffcc41a81, type: 2}
+    _trueFlags: 39000000
+    _falseFlags: 
+    _setFlags: 
   - _dialogue: {fileID: 11400000, guid: e20c587393e1a5548948752fe654235b, type: 2}
     _trueFlags: 2e000000
     _falseFlags: 
@@ -3243,7 +3247,7 @@ MonoBehaviour:
   _options:
   - _optionText: (Rebuscar en los bolsillos de Pineda)
     _trueFlags: 08000000
-    _falseFlags: 0a000000
+    _falseFlags: 0a00000039000000
     _dialogueOption: {fileID: 1893814061}
   - _optionText: (Cambiar la pelota con la que juegan por la pelota bomba)
     _trueFlags: 38000000

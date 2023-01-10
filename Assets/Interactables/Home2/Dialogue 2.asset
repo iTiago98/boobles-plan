@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFPero qu\xE9 mosca le habr\xE1 picado? Ha sido ver a Queca y cambi\xE1rsele
+      la cara. Hasta se ha dejado su bufanda, qu\xE9 cosa m\xE1s rara\u2026"
+    _closeUp: 1
+  - _content: "Bueno... yo mejor me voy a dormir. Ten\xEDa pensado ver un poco la
+      tele, pero esto ya ha sido el remate de los tomates."
+    _closeUp: 1
+  - _content: "Estoy demasiado cansada, ma\xF1ana ser\xE1 otro d\xEDa."
+    _closeUp: 1

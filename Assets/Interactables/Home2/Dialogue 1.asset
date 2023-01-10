@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue 1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Muy buenas Rosalinda! Pasa, pasa, t\xFA como en tu casa."
+    _closeUp: 1
+  - _content: "Qu\xE9 buen gusto tienes para decorarla, \xA1me encanta!"
+    _closeUp: 13
+  - _content: "Ya ves t\xFA, si casi no he tenido tiempo de desempaquetar toda la
+      mudanza, s\xF3lo he colocado los libros y un par de fotos."
+    _closeUp: 1
+  - _content: "Anda, pero si tienes los 100 vol\xFAmenes de la versi\xF3n extendida
+      de Cien A\xF1os De Soledad. \xA1Es mi novela favorita!"
+    _closeUp: 13
+  - _content: "Y la m\xEDa, la saga de los Buend\xEDa me apasiona."
+    _closeUp: 1
+  - _content: "Bueno, vamos a sentarnos, que me gustar\xEDa que me contaras m\xE1s
+      cosas del se\xF1or Romu\xE1ldez."
+    _closeUp: 1
+  - _content: "\xA1Pero qui\xE9n es esta cosita tan mona disfrazada de la Rana Pepe!"
+    _closeUp: 13
+  - _content: "Jajaja, ya ves t\xFA, eso es en la guarder\xEDa, mis padres eran muy
+      memeros en esa \xE9poca."
+    _closeUp: 1
+  - _content: "\xBFY qui\xE9n es la ni\xF1a rubia que sale contigo en casi todas
+      las fotos? \xBFTu hermana?"
+    _closeUp: 13
+  - _content: "Llev\xE1is hasta las mismas pulseras de la amistad en todas."
+    _closeUp: 13
+  - _content: "Y a\xFAn las llevamos. \xBFNo la reconoces? Es Queca, \xBFno est\xE1
+      en tu departamento?"
+    _closeUp: 1
+  - _content: "\xBFMe est\xE1s diciendo que eres amiga de Queca Loraze? En estas
+      fotos parece tan inocente\u2026"
+    _closeUp: 13
+  - _content: "\xBFC\xF3mo dices? \xBFQueca?"
+    _closeUp: 1
+  - _content: Aunque creo que ya no lleva esa pulsera, siempre lleva una de Booble.
+    _closeUp: 13
+  - _content: "\xBFAh, s\xED? No me he fijado, la verdad. Hac\xEDa a\xF1os que no
+      nos ve\xEDamos. Anda pasa y si\xE9ntate, Rosalinda."
+    _closeUp: 1
+  - _content: "\xBFQu\xE9 hora es?"
+    _closeUp: 13
+  - _content: "Las 9:15. \xBFPor?"
+    _closeUp: 1
+  - _content: "\xBFLas 9 y\u2026? \xA1Ay que se me hab\xEDa olvidado por completo!
+      Me tengo que ir."
+    _closeUp: 13
+  - _content: "Pero si acabas de llegar, \xBFno dec\xEDas que estabas libre?"
+    _closeUp: 1
+  - _content: "Claro, pero no me acordaba de que ten\xEDa cita con el dentista a
+      las 9:30. \xA1Me voy que no llego!"
+    _closeUp: 13

@@ -49,3 +49,9 @@ MonoBehaviour:
   - _name: Pedro
     _identifier: 11
     _closeUp: {fileID: 21300000, guid: 806373f1b2ef73949ace2540f80237f4, type: 3}
+  - _name: Romualdez
+    _identifier: 12
+    _closeUp: {fileID: 21300000, guid: 9618e136d6ea05e4da049cde467a269f, type: 3}
+  - _name: Rosalinda
+    _identifier: 13
+    _closeUp: {fileID: 21300000, guid: d3233484850394c40b64daf0c10832d2, type: 3}

@@ -13,6 +13,7 @@ public class NelaOffice2Animation : MonoBehaviour
     [SerializeField] private Controller _nelaController;
     [SerializeField] private Fader _fade;
     [SerializeField] private Dialogue _officeDialogue;
+    [SerializeField] private Dialogue _postInterviewDialogue;
     [SerializeField] private List<Option> _options;
     
     private Camera _cam;
@@ -57,7 +58,10 @@ public class NelaOffice2Animation : MonoBehaviour
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);
-            SceneLoader.Instance.LoadMainMenuScene();
+            yield return new WaitForSeconds(_fade.FadeDuration);
+            DialogueManager.Instance.StartDialogue(_postInterviewDialogue);
+            DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+            DialogueManager.Instance.OnEndDialogue.AddListener(SceneLoader.Instance.LoadHome2);
         }
         else
         {

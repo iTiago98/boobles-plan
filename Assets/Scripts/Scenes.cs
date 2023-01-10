@@ -26,5 +26,6 @@ namespace Booble
         public static string PPB_OFFICE = "PPBOffice";
         public static string MAIN_MENU = "MainMenu";
         public static string HOME_0 = "Home0";
+        public static string HOME_2 = "Home2";
     }
 }

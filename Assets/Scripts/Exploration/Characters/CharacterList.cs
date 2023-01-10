@@ -19,7 +19,9 @@ namespace Booble.Characters
 			F3RR4N,
 			Anselmo,
 			Pedro,
-			Pablo
+			Pablo,
+			Romualdez,
+			Rosalinda
         }
 		
 		[System.Serializable]

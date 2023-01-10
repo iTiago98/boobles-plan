@@ -128,6 +128,11 @@ namespace Booble.Managers
     {
         LoadScene(Scenes.PPB_OFFICE);
     }
+
+    public void LoadHome2()
+    {
+        LoadScene(Scenes.HOME_2);
+    }
     
     #endregion
 

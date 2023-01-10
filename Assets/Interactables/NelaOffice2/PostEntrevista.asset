@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: PostEntrevista
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Pues ya est\xE1, misi\xF3n cumplida."
+    _closeUp: 1
+  - _content: "Deber\xEDa pasarme por el comedor, lo que estaba cocinando F33R4N
+      ten\xEDa muy buena pinta..."
+    _closeUp: 1
+  - _content: Pero estoy demasiado cansada, creo que me voy a ir directamente a mi
+      casa.
+    _closeUp: 1
