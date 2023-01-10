@@ -2,6 +2,7 @@ using Booble.CardGame.Cards;
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Cards.DataModel.Effects;
 using Booble.CardGame.Level;
+using DG.Tweening;
 using Santi.Utils;
 using System;
 using System.Collections;
@@ -923,12 +924,14 @@ namespace Booble.CardGame.Managers
         {
             Deck deck = otherContender.deck;
 
-            _stealCardsFromDeckObj.SetActive(true);
             UIManager.Instance.SetStealing();
             MouseController.Instance.SetStealing();
 
             _numCardsToSteal = (deck.numCards >= value) ? value : deck.numCards;
 
+            _stealCardsFromDeckObj.transform.DOScale(1, 0.5f);
+            yield return new WaitForSeconds(0.5f);
+            
             List<CardsData> deckCards = deck.GetDeckCards();
 
             foreach (CardsData cardData in deckCards)
@@ -941,10 +944,11 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitWhile(() => UIManager.Instance.stealing);
 
-            deck.StealCards(_cardsToSteal);
-            _stealCardsFromDeckObj.SetActive(false);
+            _stealCardsFromDeckObj.transform.DOScale(0, 0.5f);
+            yield return new WaitForSeconds(0.5f);
 
-            yield return new WaitWhile(() => source.contender.deck.busy);
+            deck.StealCards(_cardsToSteal);
+            yield return new WaitWhile(() => source.contender.deck.busy || otherContender.deck.busy);
 
             effect.SetEffectApplied();
         }

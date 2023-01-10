@@ -246,7 +246,7 @@ namespace Booble.CardGame.Level
 
         #endregion
 
-        #region AddCards
+        #region Add Cards
 
         public void AddCards(List<Card> cards)
         {
@@ -289,10 +289,9 @@ namespace Booble.CardGame.Level
         {
             busy = true;
 
-            int numCardsStart = numCards;
-
             Contender otherContender = CardGameManager.Instance.GetOtherContender(_contender);
-
+            List<Card> cardsToAdd = new List<Card>();
+            
             cardsToSteal.Sort();
             cardsToSteal.Reverse();
             for (int i = 0; i < cardsToSteal.Count; i++)
@@ -307,17 +306,19 @@ namespace Booble.CardGame.Level
 
                 // Instantiate card
                 GameObject cardPrefab = GetCardPrefab(data.type);
-                cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation, _hand.transform);
+                cardObj = Instantiate(cardPrefab, transform.position, cardPrefab.transform.rotation);
 
                 // Add card to list
                 Card card = cardObj.GetComponent<Card>();
                 card.Initialize(otherContender, data, cardRevealed: false);
                 card.gameObject.SetActive(false);
 
-                _listToAdd.Add(card);
+                cardsToAdd.Add(card);
             }
 
-            StartCoroutine(DrawCardsCoroutine(otherContender.hand, numCardsStart));
+            otherContender.deck.AddCards(cardsToAdd);
+            busy = false;
+            //StartCoroutine(AddCardCoroutine(cardsToAdd));
         }
 
         #endregion
