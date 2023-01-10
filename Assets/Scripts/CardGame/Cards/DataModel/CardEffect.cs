@@ -727,7 +727,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     s += "roba " + intParameter1 + ((intParameter1 > 1) ? " cartas" : " carta") + " de la mano del oponente."; break;
                 case SubType.STEAL_CARD_FROM_DECK:
                     s += "selecciona " + intParameter1 + ((intParameter1 > 1) ? " cartas" : " carta") + " de la baraja del oponente y "
-                        + ((intParameter1 > 1) ? "añádelas" : "añádela") + " tu mano."; break;
+                        + ((intParameter1 > 1) ? "añádelas" : "añádela") + " a tu mazo."; break;
 
                 case SubType.CITRIANO_WIN_CONDITION:
                     s += "si tienes 30 o más vidas, ganas la partida. (" + CardGameManager.Instance.player.life + "/30)"; break;
