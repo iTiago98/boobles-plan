@@ -32,6 +32,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Backspin
     sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
@@ -51,6 +52,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Backspin
     sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
@@ -70,6 +72,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Backspin
     sprite: {fileID: 21300000, guid: b66ad8e4bfe62c2468b3f2ac19ba29fe, type: 3}
@@ -89,6 +92,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Matar la bola
     sprite: {fileID: 21300000, guid: 4236a030ed3801545a6950caa70b9934, type: 3}
@@ -108,6 +112,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Dejadita
     sprite: {fileID: 21300000, guid: 04243b82fdcb57249ab9d2ac00d3dc48, type: 3}
@@ -127,6 +132,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: La cinta de Fereder
     sprite: {fileID: 21300000, guid: 4516b933abd7a994787fef4e82cf184d, type: 3}
@@ -146,6 +152,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: La cinta de Fereder
     sprite: {fileID: 21300000, guid: 4516b933abd7a994787fef4e82cf184d, type: 3}
@@ -165,9 +172,10 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Piel de pl\xE1tano de Rafa Nadar"
-    sprite: {fileID: 21300000, guid: fdaf7659b9b8c5f4abe89bd9fc08ef41, type: 3}
+    sprite: {fileID: 21300000, guid: db4c9bf58a587ea469c99a6c63be40ef, type: 3}
     cost: 2
     strength: 2
     defense: 3
@@ -184,9 +192,10 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Piel de pl\xE1tano de Rafa Nadar"
-    sprite: {fileID: 21300000, guid: fdaf7659b9b8c5f4abe89bd9fc08ef41, type: 3}
+    sprite: {fileID: 21300000, guid: db4c9bf58a587ea469c99a6c63be40ef, type: 3}
     cost: 2
     strength: 2
     defense: 3
@@ -203,6 +212,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Saque en t\xE1ndem"
     sprite: {fileID: 21300000, guid: 09483202f04be834ca70715f2b4cf65c, type: 3}
@@ -222,6 +232,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Saque en t\xE1ndem"
     sprite: {fileID: 21300000, guid: 09483202f04be834ca70715f2b4cf65c, type: 3}
@@ -241,6 +252,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Devolver un globo
     sprite: {fileID: 21300000, guid: 77b152946c4c6374b9b4789c403977cc, type: 3}
@@ -260,6 +272,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Devolver un globo
     sprite: {fileID: 21300000, guid: 77b152946c4c6374b9b4789c403977cc, type: 3}
@@ -279,6 +292,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Empe\xF1ar la bola"
     sprite: {fileID: 21300000, guid: 0ce3ae323789daa44aa86a9eadd2bb28, type: 3}
@@ -298,6 +312,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Bola trucada
     sprite: {fileID: 21300000, guid: ed610b1328d1152419f30037b793fdcb, type: 3}
@@ -317,6 +332,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Son dos
     sprite: {fileID: 21300000, guid: cc6b8f28c41844246a04c0ab64c50812, type: 3}
@@ -336,6 +352,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: Son dos
     sprite: {fileID: 21300000, guid: cc6b8f28c41844246a04c0ab64c50812, type: 3}
@@ -355,6 +372,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Apurando la l\xEDnea"
     sprite: {fileID: 21300000, guid: ecf5ad46fc0f04b4db7d4e95ddb6639d, type: 3}
@@ -374,6 +392,7 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
   - name: "Compa\xF1erismo"
     sprite: {fileID: 21300000, guid: ef48c4a2ef3948b4cb85fbf065aaf5ae, type: 3}
@@ -393,4 +412,5 @@ MonoBehaviour:
         sprite: {fileID: 0}
         strength: 0
         defense: 0
+        manaCost: 0
       cardParameter_Effect: 0
