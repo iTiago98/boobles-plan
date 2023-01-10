@@ -1,4 +1,5 @@
 using Booble.CardGame.Cards;
+using Booble.CardGame.Cards.DataModel.Effects;
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
@@ -255,9 +256,10 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitWhile(IsPlayingAnimation);
 
-            ApplyCombatEffects();
+            _applyingCombatEffects = true;
+            StartCoroutine(ApplyCombatEffects());
 
-            yield return new WaitWhile(ApplyingEffects);
+            yield return new WaitWhile(() => _applyingCombatEffects);
 
             _combatActions = false;
         }
@@ -277,13 +279,11 @@ namespace Booble.CardGame.Managers
             {
                 object target = _opponentCard ? _opponentCard : _playerClashInfo.target;
                 _playerCard.Hit(target);
-                //_opponentCard.CardUI.SetPlayingAnimation();
             }
             else if ((_firstHit && !_playerFirstHit) || (_secondHit && _playerFirstHit))
             {
                 object target = _playerCard ? _playerCard : _opponentClashInfo.target;
                 _opponentCard.Hit(target);
-                //_playerCard.CardUI.SetPlayingAnimation();
             }
             else
             {
@@ -292,25 +292,68 @@ namespace Booble.CardGame.Managers
             }
         }
 
-        private void ApplyCombatEffects()
+        private bool _applyingCombatEffects;
+
+        private IEnumerator ApplyCombatEffects()
         {
             bool playerCardHasCombatEffects = _playerCard && _playerCard.Effects.hasCombatEffects;
             bool opponentCardHasCombatEffects = _opponentCard && _opponentCard.Effects.hasCombatEffects;
 
-            if (playerCardHasCombatEffects)
+            bool playerCardHasStealCard = _playerCard && _playerCard.Effects.HasEffect(SubType.STEAL_CARD);
+            bool opponentCardHasStealCard = _opponentCard && _opponentCard.Effects.HasEffect(SubType.STEAL_CARD);
+
+            if (playerCardHasStealCard)
             {
-                bool singleHit = (_opponentCard != _opponentClashInfo.card) || (_playerFirstHit && _firstHit) || (!_playerFirstHit && _secondHit);
-                object target = _opponentCard ? _opponentCard : _playerClashInfo.target;
-                _playerCard.Effects.ApplyCombatEffects(target, singleHit);
-                //_playerCard.Effects.SetApplyingEffects();
+                if (opponentCardHasCombatEffects)
+                {
+                    ApplyCombatEffects(_opponentCard);
+                    yield return new WaitWhile(ApplyingEffects);
+                }
+                if (playerCardHasCombatEffects)
+                {
+                    ApplyCombatEffects(_playerCard);
+                    yield return new WaitWhile(ApplyingEffects);
+                }
             }
-            if (opponentCardHasCombatEffects)
+            else if (opponentCardHasStealCard)
             {
-                bool singleHit = (_playerCard != _playerClashInfo.card) || (_playerFirstHit && _secondHit) || (!_playerFirstHit && _firstHit);
-                object target = _playerCard ? _playerCard : _opponentClashInfo.target;
-                _opponentCard.Effects.ApplyCombatEffects(target, singleHit);
-                //_opponentCard.Effects.SetApplyingEffects();
+                if (playerCardHasCombatEffects)
+                {
+                    ApplyCombatEffects(_playerCard);
+                    yield return new WaitWhile(ApplyingEffects);
+                }
+                if (opponentCardHasCombatEffects)
+                {
+                    ApplyCombatEffects(_opponentCard);
+                    yield return new WaitWhile(ApplyingEffects);
+                }
             }
+            else
+            {
+                if (playerCardHasCombatEffects) ApplyCombatEffects(_playerCard);
+                if (opponentCardHasCombatEffects) ApplyCombatEffects(_opponentCard);
+
+                yield return new WaitWhile(ApplyingEffects);
+            }
+
+            _applyingCombatEffects = false;
+        }
+
+        private void ApplyCombatEffects(Card card)
+        {
+            bool isPlayer = card.IsPlayerCard;
+
+            Card oppositeCard = isPlayer ? _opponentCard : _playerCard;
+            ClashInfo clashInfo = isPlayer ? _playerClashInfo : _opponentClashInfo;
+            ClashInfo oppositeClashInfo = isPlayer ? _opponentClashInfo : _playerClashInfo;
+
+            bool hit = isPlayer
+                ? (_playerFirstHit && _firstHit) || (!_playerFirstHit && _secondHit)
+                : (_playerFirstHit && _secondHit) || (!_playerFirstHit && _firstHit);
+
+            bool singleHit = (oppositeCard != oppositeClashInfo.card) || hit;
+            object target = oppositeCard ? oppositeCard : clashInfo.target;
+            card.Effects.ApplyCombatEffects(target, singleHit);
         }
 
         private bool IsPlayingAnimation()
