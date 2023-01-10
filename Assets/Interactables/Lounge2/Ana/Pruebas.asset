@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Pruebas
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Y si trabaja aqu\xED, \xBFqu\xE9 hace siempre en el lounge al lado
+      de la mesa de ping pong, es que \xE9l no trabaja?"
+    _closeUp: 1
+  - _content: Parece que los controla de alguna manera.
+    _closeUp: 1
+  - _content: "Adem\xE1s, el lounge est\xE1 cerca de la entrada, \xA1\xBFpuede haber
+      sido \xE9l el que le impidi\xF3 la entrada a las PinPonSis?!"
+    _closeUp: 1
+  - _content: "Sus mujeres me dijeron que no les dejaron entrar cada vez que ven\xEDan,
+      y ya sabes que aqu\xED puede venir todo el mundo."
+    _closeUp: 1
+  - _content: "Creo que este despido doble va a acabar rebot\xE1ndole a otra persona\u2026"
+    _closeUp: 1
+  - _content: "Pero bueno, \xA1si est\xE1s hecha toda una detective! \xBFHay algo
+      que Nella Holmes no investigue? \xA1Vamos a parar este partido!"
+    _closeUp: 2
+  - _content: Pero espera, necesitamos una pelota, un recipiente donde poner lo que
+      explota.
+    _closeUp: 2

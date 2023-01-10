@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: PinPonBros - Explotaos
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Lo siento por haberos explotado una bomba en el careto... pero era
+      la \xFAnica manera que se me ocurri\xF3 para parar el partido."
+    _closeUp: 1
+  - _content: "Nada, nada. Si no hubiera sido por ti, a\xFAn seguir\xEDamos d\xE1ndole
+      a la maldita pelotita."
+    _closeUp: 10
+  - _content: No te puedes creer lo mucho que me duele el brazo derecho de tanto
+      mover la pala.
+    _closeUp: 11
+  - _content: Lo peor es que me han ordenado que os despida...
+    _closeUp: 1
+  - _content: "Ahora que sabemos la verdad, claramente no deber\xEDais perder vuestro
+      trabajo, pero si no os despido yo, me despidir\xE1n ellos a m\xED."
+    _closeUp: 1
+  - _content: No te preocupes, es normal que no quieras perder tu trabajo.
+    _closeUp: 10
+  - _content: "\xA1No es por eso! Ayer tambi\xE9n tuve que despedir a un compa\xF1ero
+      que parec\xEDa que se hab\xEDa vuelto loco como vosotros."
+    _closeUp: 1
+  - _content: Citriano se llamaba.
+    _closeUp: 1
+  - _content: "\xBFTuviste que despedir al mandarinas? No hombre no... con lo gracioso
+      que era tenerlo por aqu\xED."
+    _closeUp: 11
+  - _content: "Yo solo s\xE9 que en Booble se est\xE1 cociendo algo muy gordo..."
+    _closeUp: 1
+  - _content: "Si mantengo mi puesto, tal vez tenga una posibilidad de pillar a quien
+      sea que est\xE9 detr\xE1s de todo esto."
+    _closeUp: 1
+  - _content: "Y as\xED evitar que lleve a cabo su plan, sea cual sea..."
+    _closeUp: 1
+  - _content: "Ll\xE1manos a tu despacho en cuanto est\xE9s lista. Nos haremos los
+      indignados delante de las c\xE1maras para que no sospechen."
+    _closeUp: 10
+  - _content: Pero no temas, sabemos perfectamente que lo haces por alcanzar un bien
+      mayor.
+    _closeUp: 11
+  - _content: "Muchas gracias chicos, intentar\xE9 que acab\xE9is bien parados de
+      todo esto."
+    _closeUp: 1

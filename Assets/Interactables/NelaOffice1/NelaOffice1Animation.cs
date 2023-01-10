@@ -16,7 +16,7 @@ using UnityEngine.UI;
 public class NelaOffice1Animation : MonoBehaviour
 {
     [SerializeField] private Controller _nelaController;
-    [SerializeField] private FadeIn _fade;
+    [SerializeField] private Fader _fade;
     [SerializeField] private Image _image;
     [SerializeField] private Dialogue _dialogue;
     [SerializeField] private Flag.Reference _day1;

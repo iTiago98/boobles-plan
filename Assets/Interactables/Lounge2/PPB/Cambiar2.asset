@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Cambiar2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFY t\xFA qui\xE9n diantres eres?"
+    _closeUp: 10
+  - _content: "\xA1Soy Dennis, Dennis Demmessa, el chico al que le arruinasteis el
+      mejor momento de su vida!"
+    _closeUp: 4
+  - _content: "\xBFPero qu\xE9 me est\xE1s container? Yo a ti no te he visto en mi
+      vida."
+    _closeUp: 11
+  - _content: "\xA1Fue en ese mismo partido homenaje en Villanueva Del Trabuco! \xA1\xC9sa
+      pelota me corresponde por derecho!"
+    _closeUp: 4
+  - _content: "\xA1Yo fui el que le salv\xF3 la vida!"
+    _closeUp: 4
+  - _content: "Tranqui, tronco. Espera, ya me acuerdo de ti. T\xFA eras el chaval
+      que le salt\xF3 a \xD1ocobich nada m\xE1s terminar el partido, \xBFno?"
+    _closeUp: 10
+  - _content: "\xA1Le estaba haciendo la maniobra Heimlich, se estaba ahogando!"
+    _closeUp: 4
+  - _content: "\xA1Sapristi! \xBFPor eso la bola tiene hasta una de sus cuerdas vocales?"
+    _closeUp: 11
+  - _content: "\xA1ESA BOLA ES M\xCDA! \xA1D\xD3NDE EST\xC1!"
+    _closeUp: 4
+  - _content: "Est\xE1 en todas partes, es la que acaba de explotar."
+    _closeUp: 1
+  - _content: "\xBF\xBFQUE QU\xC9??"
+    _closeUp: 4
+  - _content: La he usado para parar el partido y veo que por fin lo he conseguido.
+    _closeUp: 1
+  - _content: Necesito hablar con Pedro y con Pablo antes de que los despidan, la
+      entrevista para hacerlo es en pocos minutos.
+    _closeUp: 1
+  - _content: "\xA1Por fin se acerca el gran momento! \xA1Por fin mi plan de venganza
+      se har\xE1 realidad!"
+    _closeUp: 4
+  - _content: "En pocos minutos perder\xE9is toda vuestra pensi\xF3n, ser\xE9is unos
+      pu**s parados!"
+    _closeUp: 4
+  - _content: "Lo que en realidad son, unas v\xEDctimas de un desvariado que los
+      ten\xEDa controlados de alguna manera."
+    _closeUp: 1
+  - _content: "\xA1Pues claro que los ten\xEDa controlados! \xBFT\xFA crees que estos
+      dos vacaburras se iban a mover as\xED?"
+    _closeUp: 4
+  - _content: "No te pases, rayos l\xE1ser. Que te meto as\xED con la pala y te dejo
+      mo\xF1eco, payaso."
+    _closeUp: 10
+  - _content: "Los mu\xF1ecos hab\xE9is sido vosotros todo este tiempo, \xA1jajajajaja!"
+    _closeUp: 4

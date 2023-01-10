@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Por fin en casa... vaya d\xEDa m\xE1s movidito..."
+    _closeUp: 1
+  - _content: (Buzz Buzz)
+    _closeUp: 0
+  - _content: "\xBFMe llaman al m\xF3vil? \xBFQui\xE9n ser\xE1 a estas horas? \xBFe-Mil\xEDn?
+      Qu\xE9 raro\u2026"
+    _closeUp: 1
+  - _content: "\xBFDiga?"
+    _closeUp: 1
+  - _content: "\xA1Sabes que llevo a\xF1os esperando ese puesto, Romu\xE1ldez, me
+      lo debes!"
+    _closeUp: 6
+  - _content: "No s\xE9 de qu\xE9 me hablas, Queca, yo no le debo nada a nadie, he
+      llegado hasta aqu\xED por m\xED mismo, sin ayuda de nadie."
+    _closeUp: 12
+  - _content: "Jajajajaja, no me hagas re\xEDr, ricura, s\xE9 perfectamente c\xF3mo
+      has llegado hasta aqu\xED."
+    _closeUp: 6
+  - _content: "Y si no quieres que lo sepa m\xE1s gente, m\xE1s te vale darme ese
+      ascenso."
+    _closeUp: 6
+  - _content: "No pienso que me chantajee nadie, y menos una\u2026"
+    _closeUp: 12
+  - _content: "Vaya, se ha cortado. Creo que esta llamada no era para m\xED, llamar\xE9
+      a e-Mil\xEDn otra vez."
+    _closeUp: 1
+  - _content: ...
+    _closeUp: 0
+  - _content: "Residencia Loraze, d\xEDgame."
+    _closeUp: 7
+  - _content: "e-Mil\xEDn, \xBFme acabas de llamar?"
+    _closeUp: 1
+  - _content: "\xBFQui\xE9n, yo? No s\xE9 de qu\xE9 me hablas."
+    _closeUp: 7
+  - _content: "S\xED, s\xED, desde tu m\xF3vil. O lo que lleves incorporado que hace
+      llamadas."
+    _closeUp: 1
+  - _content: "\xBFQuieres ver lo que llevo incorporado? Lo tengo aqu\xED colgad\u2026"
+    _closeUp: 7
+  - _content: "D\xE9jate de tonter\xEDas, e-Mil\xEDn. \xBFQu\xE9 conversaci\xF3n
+      era \xE9sa? Era muy raro, como una discusi\xF3n entre Queca y el jefe."
+    _closeUp: 1
+  - _content: "\xBFEl jefe? \xBFQue no soy telefonista, mentiendes? Si quieres hablar
+      con \xE9l llama a su secretaria."
+    _closeUp: 7
+  - _content: "No me vaciles, trasto in\xFAtil, que como te vea, pienso cogerte del\u2026"
+    _closeUp: 1
+  - _content: "\xBFMe ha colgado? \xBFe-Mil\xEDn? \xA1Ser\xE1 maleducado!"
+    _closeUp: 1
+  - _content: ...
+    _closeUp: 0
+  - _content: "Vaya, ahora no lo coge, menudo mont\xF3n de chatarra, molestarme a
+      estas horas."
+    _closeUp: 1
+  - _content: "Aunque esa conversaci\xF3n me ha dejado intrigada, nunca hab\xEDa
+      o\xEDdo a Queca hablarle as\xED a nadie. No parece la Queca de siempre."
+    _closeUp: 1
+  - _content: Creo que le voy a tener que hacer caso a esa tostadora con ruedas y
+      llamar a su secretaria.
+    _closeUp: 1
+  - _content: ...
+    _closeUp: 0
+  - _content: "\xBFD\xEDgame?"
+    _closeUp: 13
+  - _content: "\xBFRosalinda? Soy Nella, la nueva de Recursos Humanos. Buenas noches
+      y perdona que te moleste fuera del trabajo."
+    _closeUp: 1
+  - _content: "Me gustar\xEDa hablar contigo sobre tu jefe, la verdad es que llevo
+      ya tres d\xEDas en la empresa y todav\xEDa no lo he conocido."
+    _closeUp: 1
+  - _content: "\xA1Ah, hola Nella! \xA1Qu\xE9 alegr\xEDa de o\xEDrte! Para nada es
+      molestia, mujer. Cuando quieras quedamos y te cuento lo que quieras."
+    _closeUp: 13
+  - _content: "\xBFTe viene bien que nos veamos ma\xF1ana en mi casa? A estas horas
+      entiendo que estar\xE1s con tu familia."
+    _closeUp: 1
+  - _content: No te preocupes, no estoy haciendo nada, si quieres quedamos ahora.
+    _closeUp: 13
+  - _content: "\xBFS\xED? Me sabe mal hacerte venir y siendo tan tarde."
+    _closeUp: 1
+  - _content: "Yo encantada, \xA1por fin podr\xE9 ver la casa de una de mis hero\xEDnas!"
+    _closeUp: 13
+  - _content: "Jajaja, qu\xE9 cosas dices. Bueno, pues si no te importa nos vemos
+      ahora, \xBFsabes d\xF3nde vivo?"
+    _closeUp: 1
+  - _content: "\xBFAvenida Crash Bandicoot, 6, 7\xBAG, no? Una buena secretaria se
+      sabe bien los datos de sus compa\xF1eros, jaja."
+    _closeUp: 13
+  - _content: "\xA1Ah\xED mismo! Perfecto, pues ahora nos vemos, gracias Rosalinda!"
+    _closeUp: 1

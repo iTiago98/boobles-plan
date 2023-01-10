@@ -15,7 +15,7 @@ namespace Booble.Interactables.Queca
     {
         [SerializeField] private Dialogue _beforeInterviewDialogue;
         [SerializeField] private Dialogue _afterInterviewDialogue;
-        [SerializeField] private FadeIn _fade;
+        [SerializeField] private Fader _fade;
         [SerializeField] private Controller _nelaController;
 
         private Camera _cam;
@@ -46,8 +46,8 @@ namespace Booble.Interactables.Queca
             _fade.FadeOut();
             yield return new WaitForSeconds(_fade.FadeDuration);
             
-            _fade.FadeIn2();
-            DeckManager.Instance.SetOpponent(Opponent_Name.Tutorial);
+            _fade.FadeIn();
+            DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Tutorial);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);

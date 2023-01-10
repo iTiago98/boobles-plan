@@ -15,7 +15,7 @@ namespace Booble.Animations
     public class Car : MonoBehaviour
     {
         [SerializeField] private Controller _nelaController;
-        [SerializeField] private FadeIn _fade;
+        [SerializeField] private Fader _fade;
         [SerializeField] private List<Pair> _dialogues;
         
         private bool _dialogueEnd;

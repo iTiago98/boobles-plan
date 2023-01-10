@@ -187,7 +187,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 787064143}
         m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
-        m_MethodName: LoadLounge1
+        m_MethodName: LoadLounge2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -269,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 40bf9c1540426d5428ddd646ac7c5dbe, type: 2}
@@ -732,6 +733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: fcbf655fb54dd3f4287d73f1515692d9, type: 2}
@@ -872,6 +874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _unclickable: 0
   _interactDistance: 1
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 927ed5805be4a9143bc08fcc93926703, type: 2}

@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/NelaOffice/NelaOffice0.unity
     guid: 11dd5c551e93fe9409874b41308cb3b1
   - enabled: 1
-    path: Assets/Scenes/Canteen0.unity
+    path: Assets/Scenes/Canteen/Canteen0.unity
     guid: 77ba4cbb2885d2d4bbce9d29ef87673e
   - enabled: 1
     path: Assets/Scenes/Halls/LowerHall1.unity
@@ -32,4 +32,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NelaOffice/NelaOffice1.unity
     guid: a44ecbc336f0b4444bc8c0c4cd9e1304
+  - enabled: 1
+    path: Assets/Scenes/Halls/LowerHall2.unity
+    guid: 0d42495efd5d3a246a9a9a1b37096974
+  - enabled: 1
+    path: Assets/Scenes/NelaOffice/NelaOffice2.unity
+    guid: a8817ead245a0dc4787c639eedd2b9bd
+  - enabled: 1
+    path: Assets/Scenes/Lounge/Lounge2.unity
+    guid: 8c010b2da89e828489eb62e4bf839805
+  - enabled: 1
+    path: Assets/Scenes/Halls/UpperHall2.unity
+    guid: 7756203aa9cea9440b9d8bd5847b0504
+  - enabled: 1
+    path: Assets/Scenes/Canteen/Canteen2.unity
+    guid: 85420fee04e8bd140b731d89082ebd2e
+  - enabled: 1
+    path: Assets/Scenes/PPBOffice.unity
+    guid: c2ea2e2d5eab1624a972afd65e1fdc77
+  - enabled: 1
+    path: Assets/Scenes/Home/Home2.unity
+    guid: 309d2b388e480aa4199a940a2d072bcf
   m_configObjects: {}

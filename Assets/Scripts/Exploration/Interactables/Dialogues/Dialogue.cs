@@ -30,7 +30,6 @@ namespace Booble.Interactables.Dialogues
 
 			[TextArea]
 			[SerializeField] private string _content;
-			//[SerializeField] private string _speaker;
 			[SerializeField] private CharacterList.Name _closeUp;
 			
 			public Sentence(string content, CharacterList.Name closeUp)
@@ -38,10 +37,6 @@ namespace Booble.Interactables.Dialogues
 				_content = content;
 				_closeUp = closeUp;
 			}
-			//public string PrintSentence()
-   //         {
-			//	return (_speaker != "" ? (_speaker + ": ") : "") + _content;
-   //         }
         }
 
 		public bool Empty => _sentences.Count == 0;
@@ -64,19 +59,14 @@ namespace Booble.Interactables.Dialogues
 
 			if(_currentIndex < _sentences.Count)
             {
-				//CharacterList _characters = ScriptableObject.CreateInstance<CharacterList>();
 				character = _characters.GetCharacter(_sentences[_currentIndex].CloseUp);
-				
 				sentence = _sentences[_currentIndex].Content;
-				
 				return true;
             }
-			else
-            {
-				sentence = "END OF DIALOGUE";
-				character = null;
-				return false;
-            }
+
+			sentence = "END OF DIALOGUE";
+			character = null;
+			return false;
 		}
 
 		public string GetLastSentence(out CharacterList.Character character)
@@ -96,13 +86,13 @@ namespace Booble.Interactables.Dialogues
 					int separatorIndex = FindSeparatorIndex(_sentences[i].Content);
 					if (separatorIndex < 0)
 					{
-						Debug.Log(i + ": " + _sentences[i].Content.Length);
+						Debug.Log(i + ": (" + _sentences[i].Content.Length + ") " + _sentences[i].Content);
 					}
 					else
 					{
 						_sentences.Insert(i+1, new Sentence(_sentences[i].Content, _sentences[i].CloseUp));
 						_sentences[i].Content = _sentences[i].Content.Substring(0, separatorIndex+1);
-						_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 1);
+						_sentences[i + 1].Content = _sentences[i + 1].Content.Substring(separatorIndex + 2);
 					}	
 				}
 

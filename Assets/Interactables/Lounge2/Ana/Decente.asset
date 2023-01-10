@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Decente
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "No me refiero a profesionales de uniforme, digo a los que van por
+      la calle ah\xED con las manos tapadas. \xA1Algo esconden!"
+    _closeUp: 2
+  - _content: "\xBFDesde cu\xE1ndo esa fijaci\xF3n con los que llevan guantes?"
+    _closeUp: 1
+  - _content: "Desde siempre, nunca me han gustado los secretos, \xA1son malsanos!.
+      Hazme caso, desconf\xEDa de la gente que no ense\xF1a sus manos."
+    _closeUp: 2
+  - _content: "Vale, lo tendr\xE9 en cuenta Ana."
+    _closeUp: 1
