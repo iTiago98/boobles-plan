@@ -308,6 +308,8 @@ namespace Booble.CardGame.Cards
             MouseController.Instance.SetHolding(this);
             UIManager.Instance.SetEndTurnButtonInteractable(false);
 
+            DOTween.Kill(transform);
+
             Sequence sequence = DOTween.Sequence();
 
             sequence.Append(transform.DOMove(dest.position, 0.5f));
