@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Buenos d\xEDas se\xF1ora Laphant, me llamo Anselmo Ndongo. Soy su
-      nuevo ch\xF3fer, espero que su carrera en esta empresa sea fruct\xEDfera."
+  - _content: "Buenos d\xEDas, se\xF1ora Laphant, me llamo Anselmo Ndongo. Soy su
+      nuevo ch\xF3fer."
     _closeUp: 9
-  - _content: "Buenos d\xEDas, puedes llamarme Nella, y tut\xE9ame hombre, que soy
-      m\xE1s joven que t\xFA. Gracias, yo tambi\xE9n lo espero. \xBFDe d\xF3nde eres,
-      Anselmo?"
+  - _content: "Espero que su carrera en esta empresa sea fruct\xEDfera."
+    _closeUp: 9
+  - _content: "Buenos d\xEDas. Puedes llamarme Nella, y tut\xE9ame, hombre, que soy
+      m\xE1s joven que t\xFA."
+    _closeUp: 1
+  - _content: "Gracias, yo tambi\xE9n lo espero. \xBFDe d\xF3nde eres, Anselmo?"
     _closeUp: 1
   - _content: "Soy de Barbate, en C\xE1diz."
     _closeUp: 9
@@ -32,7 +35,7 @@ MonoBehaviour:
   - _content: Aunque con las inundaciones del sur tuvimos que venirnos a la gran
       ciudad.
     _closeUp: 9
-  - _content: "Las inundaciones, \xA1menuda cat\xE1strofe! Todas esas ciudades hundidas\u2026"
+  - _content: "Las inundaciones, \xA1menuda cat\xE1strofe! Todas esas ciudades hundidas..."
     _closeUp: 1
   - _content: La verdad es que mi familia ha estado siempre de un lado a otro.
     _closeUp: 9
@@ -41,7 +44,7 @@ MonoBehaviour:
     _closeUp: 9
   - _content: Normal que acabarais en la costa de Madrid.
     _closeUp: 1
-  - _content: "Bueno aqu\xED no hay mucho que pescar debido a la contaminaci\xF3n,
+  - _content: "Bueno, aqu\xED no hay mucho que pescar debido a la contaminaci\xF3n,
       por lo que yo acab\xE9 montando un negocio de transporte personal."
     _closeUp: 9
   - _content: Y parece que de los buenos, no todo el mundo se puede permitir un Maclaren-Dacia.
@@ -50,7 +53,7 @@ MonoBehaviour:
       La verdad es que estoy muy orgulloso de mi b\xF3lido."
     _closeUp: 9
   - _content: "Y que lo digas, es uno de los coches m\xE1s lujosos del mundo, \xA1y
-      seguros! dicen que Putin Jr. Jr. no sale de su fortaleza si no es en uno."
+      seguros! Dicen que Putin Jr. Jr. no sale de su fortaleza si no es en uno."
     _closeUp: 1
   - _content: "Bueno Nela, ya hemos llegado, \xA1que tengas un muy buen primer d\xEDa!"
     _closeUp: 9

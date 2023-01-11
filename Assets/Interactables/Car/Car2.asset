@@ -24,7 +24,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "\xBFA dos a la vez? \xBFTan grave es lo que han hecho?"
     _closeUp: 9
-  - _content: "Supuestamente por jugar al ping pong en la mesa de ping pong, \xBFentonces
+  - _content: "Supuestamente por jugar al ping pong en la mesa de ping pong. \xBFEntonces
       qu\xE9 sentido tiene que la pongan en el Lounge?"
     _closeUp: 1
   - _content: "Espera un momento, \xA1\xBF\xA1\xBFme est\xE1s diciendo que van a
@@ -64,10 +64,10 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "\xBFTrabajar los Pinponbros?"
     _closeUp: 9
-  - _content: Si todas las mejores marcas del mundo intentan patrocinarlos.
+  - _content: Si las mejores marcas del mundo intentan patrocinarlos.
     _closeUp: 9
-  - _content: "Esos \xEDdolos son pr\xE1cticamente millonarios si no fuera por lo
-      obsesionados que est\xE1n en rebotarse esa pelotita."
+  - _content: "Esos \xEDdolos ser\xEDan pr\xE1cticamente millonarios si no fuera
+      por lo obsesionados que est\xE1n en rebotarse esa pelotita."
     _closeUp: 9
   - _content: "Tendr\xE9 que investigarlo. Anda ya hemos llegado, \xA1hasta luego
       Anselmo!"
