@@ -18,6 +18,7 @@ namespace Booble.UI
         [SerializeField] private GameObject _mainMenuPanel;
 
         [Header("Cards Menu")]
+        [SerializeField] private Button _cardMenuButton;
         [SerializeField] private GameObject _cardsMenuPanel;
         [SerializeField] private CardMenu _cardMenu;
         [SerializeField] private ExtendedDescriptionPanel _extendedDescription;
@@ -53,6 +54,7 @@ namespace Booble.UI
             else
             {
                 _pauseMenu.SetActive(true);
+                _cardMenuButton.interactable = SceneLoader.Instance.InExploration;
             }
         }
 
