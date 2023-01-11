@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Por como hablas, t\xFA debes ser la Sra. Phant, la nueva directora
+  - _content: "Por como hablas, t\xFA debes ser la Sra. Laphant, la nueva directora
       de Recursos Humanos. \xBFMe equivoco?"
     _closeUp: 4
   - _content: Me presento, mi nombre es Dionisio Demmessa, pero puedes llamarme Dennis.
