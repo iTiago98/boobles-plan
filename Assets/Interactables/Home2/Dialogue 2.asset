@@ -15,7 +15,7 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "\xBFPero qu\xE9 mosca le habr\xE1 picado? Ha sido ver a Queca y cambi\xE1rsele
-      la cara. Hasta se ha dejado su bufanda, qu\xE9 cosa m\xE1s rara\u2026"
+      la cara. Hasta se ha dejado su bufanda, qu\xE9 cosa m\xE1s rara..."
     _closeUp: 1
   - _content: "Bueno... yo mejor me voy a dormir. Ten\xEDa pensado ver un poco la
       tele, pero esto ya ha sido el remate de los tomates."

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "\xA1Muy buenas Rosalinda! Pasa, pasa, t\xFA como en tu casa."
+  - _content: "\xA1Muy buenas, Rosalinda! Pasa, pasa, t\xFA como en tu casa."
     _closeUp: 1
   - _content: "Qu\xE9 buen gusto tienes para decorarla, \xA1me encanta!"
     _closeUp: 13
@@ -39,7 +39,7 @@ MonoBehaviour:
     _closeUp: 13
   - _content: "Llev\xE1is hasta las mismas pulseras de la amistad en todas."
     _closeUp: 13
-  - _content: "Y a\xFAn las llevamos. \xBFNo la reconoces? Es Queca, \xBFno est\xE1
+  - _content: "Y a\xFAn las llevamos. \xBFNo la reconoces? Es Queca. \xBFNo est\xE1
       en tu departamento?"
     _closeUp: 1
   - _content: "\xBFMe est\xE1s diciendo que eres amiga de Queca Loraze? En estas
@@ -50,16 +50,16 @@ MonoBehaviour:
   - _content: Aunque creo que ya no lleva esa pulsera, siempre lleva una de Booble.
     _closeUp: 13
   - _content: "\xBFAh, s\xED? No me he fijado, la verdad. Hac\xEDa a\xF1os que no
-      nos ve\xEDamos. Anda pasa y si\xE9ntate, Rosalinda."
+      nos ve\xEDamos. Anda, pasa y si\xE9ntate, Rosalinda."
     _closeUp: 1
   - _content: "\xBFQu\xE9 hora es?"
     _closeUp: 13
   - _content: "Las 9:15. \xBFPor?"
     _closeUp: 1
-  - _content: "\xBFLas 9 y\u2026? \xA1Ay que se me hab\xEDa olvidado por completo!
+  - _content: "\xBFLas 9 y\u2026? \xA1Ay, que se me hab\xEDa olvidado por completo!
       Me tengo que ir."
     _closeUp: 13
-  - _content: "Pero si acabas de llegar, \xBFno dec\xEDas que estabas libre?"
+  - _content: "Pero si acabas de llegar. \xBFNo dec\xEDas que estabas libre?"
     _closeUp: 1
   - _content: "Claro, pero no me acordaba de que ten\xEDa cita con el dentista a
       las 9:30. \xA1Me voy que no llego!"
