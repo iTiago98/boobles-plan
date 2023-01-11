@@ -22,7 +22,7 @@ MonoBehaviour:
   - _content: "Y tanto que s\xED. Atenta, que te explico c\xF3mo va la cosa."
     _closeUp: 6
   - _content: "Cada ma\xF1ana se te dir\xE1 a qu\xE9 individuo te toca investigar
-      ese d\xEDa, y cual es tu objetivo; que suele ser despedirlo."
+      ese d\xEDa, y cu\xE1l es tu objetivo; que suele ser despedirlo."
     _closeUp: 6
   - _content: "\xBFSobre todo despidos? En mi antiguo puesto sol\xEDa encargarme
       m\xE1s de las contrataciones."
@@ -40,7 +40,7 @@ MonoBehaviour:
   - _content: "\xBFLa entrevista?"
     _closeUp: 1
   - _content: "As\xED es, una vez que creas que ya sabes lo suficiente sobre el individuo,
-      b\xFAscalo y dile que te acompa\xF1e a tu despacho."
+      ven a tu despacho y dile que se presente."
     _closeUp: 6
   - _content: Voy a parecer la directora del colegio...
     _closeUp: 1

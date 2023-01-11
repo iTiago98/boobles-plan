@@ -20,10 +20,10 @@ MonoBehaviour:
   - _content: "\xBFPero c\xF3mo voy a echar a mi mejor amiga de un trabajo que ella
       misma me ha contratado?"
     _closeUp: 1
-  - _content: "Oye y muchas gracias otra vez por el enchufe, la verdad es que est\xE1bamos
+  - _content: "Oye, y muchas gracias otra vez por el enchufe. La verdad es que est\xE1bamos
       cada vez m\xE1s apurados, perdiendo clientes a las megaempresas."
     _closeUp: 1
-  - _content: "Si el favor nos lo hac\xE9is a nosotros, no sabes cu\xE1nto\u2026"
+  - _content: "Si el favor nos lo hac\xE9is a nosotros, no sabes cu\xE1nto..."
     _closeUp: 6
   - _content: ...
     _closeUp: 1
