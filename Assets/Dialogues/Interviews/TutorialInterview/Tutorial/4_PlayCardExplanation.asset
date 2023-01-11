@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: El entrevistado ha jugado una "Premisa". Esta argumento tiene un coste
+  - _content: El entrevistado ha jugado una "Premisa". Este argumento tiene un coste
       bajo pero no tiene demasiado peso.
     _closeUp: 6
   - _content: "Jugaremos una \"Afirmaci\xF3n reconfortante\" para defendernos. Esta

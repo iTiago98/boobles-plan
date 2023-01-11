@@ -20,10 +20,3 @@ MonoBehaviour:
   - _content: "\xBFLas qu\xE9? Mira, te pones de un friki cuando te vienes arriba\u2026
       Bueno, pues eso, \xBFves qu\xE9 f\xE1cil? \r"
     _closeUp: 6
-  - _content: "Pues ya estar\xEDa por hoy, llama a Anselmo cuando quieras irte, precios\xEDsima.\r"
-    _closeUp: 6
-  - _content: "Hasta luego, Queca, y gracias por todo, la verdad es que me est\xE1s
-      ayudando mucho.\r"
-    _closeUp: 1
-  - _content: "\xBFPara qu\xE9 estamos las BFFitas si no?\r"
-    _closeUp: 6
