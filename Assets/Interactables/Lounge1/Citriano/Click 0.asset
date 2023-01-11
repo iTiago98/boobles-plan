@@ -18,7 +18,7 @@ MonoBehaviour:
       la m\xE1quina de zumos?"
     _closeUp: 1
   - _content: "\xA1Ojal\xE1! Lo que estoy haciendo es vigilar la m\xE1quina. Por
-      mi nombre que es Citriano, nadie m\xE1s la toca hasta que la arreglen."
+      mi nombre, que es Citriano, nadie m\xE1s la toca hasta que la arreglen."
     _closeUp: 3
   - _content: "\xBFC\xF3mo que la est\xE1 vigilando? \xBFCree que alguien la ha roto
       a prop\xF3sito?"
@@ -26,8 +26,9 @@ MonoBehaviour:
   - _content: "No, se\xF1orita, no lo creo. LO S\xC9. Ayer mismo estaba la m\xE1quina
       funcionando perfectamente."
     _closeUp: 3
-  - _content: "Y esta ma\xF1ana, de buenas a primeras... PAFF... la m\xE1quina ya
-      no funcionaba."
+  - _content: "Y esta ma\xF1ana, de buenas a primeras... PAFF... "
+    _closeUp: 3
+  - _content: "La m\xE1quina ya no funcionaba."
     _closeUp: 3
   - _content: "Bueno, tampoco se enoje. Y baje un poco el tono, que me va a perforar
       un t\xEDmpano."

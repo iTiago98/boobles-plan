@@ -14,14 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno Citriano... Booble me ha encargado la tarea de despedirte, y
-      ahora seguramente sabemos por qu\xE9."
+  - _content: "Bueno, Citriano... Booble me ha encargado la tarea de despedirte,
+      y ahora seguramente sabemos por qu\xE9."
     _closeUp: 1
   - _content: "Pero no ir\xE1s a despedirme... \xBFverdad? Despu\xE9s de todo lo
       que hemos pasado juntos..."
     _closeUp: 3
-  - _content: "No me gustar\xEDa, la verdad. Pero voy a serte sincera... va a ser
-      complicado."
+  - _content: "No me gustar\xEDa, la verdad. Pero voy a serte sincera, va a ser complicado."
     _closeUp: 1
   - _content: "Voy a hacer todo lo que pueda por ti, pero si Booble no est\xE1 contento
       con mi trabajo, me echar\xE1n."
@@ -30,15 +29,15 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "\xBFQui\xE9n sabe cu\xE1ntos otros tejemanejes se traen entre manos? "
     _closeUp: 1
-  - _content: "Estoy en muy buena posici\xF3n ahora para desentramarlos... y no lo
+  - _content: "Estoy en muy buena posici\xF3n ahora para desentramarlos, y no lo
       quiero desaprovechar."
     _closeUp: 1
-  - _content: "Admiro tu determinaci\xF3n, Nela. Si llegado el momento, no tienes
+  - _content: "Admiro tu determinaci\xF3n, Nela. Si llegado el momento no tienes
       m\xE1s remedio que despedirme, hazlo sin remordimientos."
     _closeUp: 3
   - _content: "Mant\xE9n tu posici\xF3n y DESARMA A ESTA EMPRESA DESDE DENTRO."
     _closeUp: 3
-  - _content: "\xA1Shh! Pero no grites, animal. Como nos oigan, nos despiden a los
+  - _content: "\xA1Shh! Pero no grites, animal. Como nos oigan nos despiden a los
       dos, cenutrio."
     _closeUp: 1
   - _content: "S\xED, s\xED... perd\xF3n... es que me emociono..."

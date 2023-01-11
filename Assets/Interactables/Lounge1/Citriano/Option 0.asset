@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "\xBFC\xF3mo que si importante? ACASO LE IMPORTA A USTED RESPIRAR."
+  - _content: "\xBFC\xF3mo que si es importante? ACASO LE IMPORTA A USTED RESPIRAR."
     _closeUp: 3
   - _content: Ya empezamos a levantar otra vez la voz. Haga el favor de calmarse.
     _closeUp: 1

@@ -49,7 +49,7 @@ MonoBehaviour:
     _closeUp: 3
   - _content: "No me lo puedo creer... He estado enga\xF1ado todo este tiempo..."
     _closeUp: 3
-  - _content: "Pero... no lo entiendo... \xA1El sabor es distinto! \xA1Y la concentraci\xF3n
+  - _content: "Pero no lo entiendo... \xA1El sabor es distinto! \xA1Y la concentraci\xF3n
       en vitaminas tambi\xE9n!"
     _closeUp: 3
   - _content: "\xA1De verdad! \xA1Se lo aseguro!"
@@ -57,5 +57,5 @@ MonoBehaviour:
   - _content: "A lo mejor el motivo no es la m\xE1quina, si no otra cosa distinta..."
     _closeUp: 1
   - _content: "\xA1Anda! \xA1Hab\xEDa una carta detr\xE1s de la m\xE1quina! \"M\xE1quina
-      de Zumos del Supermercado\"."
+      de zumos del supermercado\"."
     _closeUp: 1
