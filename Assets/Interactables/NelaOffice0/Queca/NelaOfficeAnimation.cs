@@ -42,11 +42,7 @@ namespace Booble.Interactables.Queca
             
             ThrowDialogue(_beforeInterviewDialogue);
             yield return new WaitUntil(() => _dialogueEnd);
-            
-            _fade.FadeOut();
-            yield return new WaitForSeconds(_fade.FadeDuration);
-            
-            _fade.FadeIn();
+
             DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Tutorial);
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
