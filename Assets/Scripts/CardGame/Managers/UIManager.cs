@@ -78,37 +78,7 @@ namespace Booble.CardGame.Managers
 
         [SerializeField] private GameObject continuePlayButton;
         [SerializeField] private GameObject cancelPlayButton;
-
-        [SerializeField] private MyButton endTurnButton;
-
-        private const string INTERVIEW_START_BUTTON_TEXT = "Comienza la entrevista";
-        private const string ROUND_START_BUTTON_TEXT = "Comienzo de ronda";
-        private const string OPPONENTM_TURN_BUTTON_TEXT = "Turno del entrevistado";
-        private const string OPPONENTW_TURN_BUTTON_TEXT = "Turno de la entrevistada";
-        private const string PLAYER_TURN_CLASH_BUTTON_TEXT = "Batirse";
-        private const string PLAYER_TURN_SKIP_BUTTON_TEXT = "Pasar turno";
-        private const string DISCARDING_BUTTON_TEXT = "Descartando";
-        private const string CLASH_BUTTON_TEXT = "Combate";
-        private const string END_BUTTON_TEXT = "Fin de la ronda";
-
-        #endregion
-
-        #region Turn Animation
-
-        [Header("Turn Animation")]
-        [SerializeField] private Image turnAnimationImage;
-
-        [SerializeField] private Sprite _interviewStartSprite;
-        [SerializeField] private Sprite _roundStartSprite;
-        [SerializeField] private Sprite _opponentTurnMSprite;
-        [SerializeField] private Sprite _opponentTurnWSprite;
-        [SerializeField] private Sprite _playerTurnSprite;
-        [SerializeField] private Sprite _clashSprite;
-        [SerializeField] private Sprite _roundEndSprite;
-        [SerializeField] private Sprite _interviewEndSprite;
-        [SerializeField] private Sprite _interviewWinSprite;
-        [SerializeField] private Sprite _interviewLoseSprite;
-
+        [SerializeField] private EndTurnButton _endTurnButton;
         #endregion
 
         #region Steal Cards From Deck
@@ -176,58 +146,8 @@ namespace Booble.CardGame.Managers
 
         public void TurnAnimation(Turn turn)
         {
-            Debug.Log(turn);
-            TurnManager.Instance.StopFlow();
-
-            Sprite sprite = null;
-
-            switch (turn)
-            {
-                case Turn.INTERVIEW_START:
-                    sprite = _interviewStartSprite;
-                    break;
-                case Turn.ROUND_START:
-                    sprite = _roundStartSprite;
-                    break;
-                case Turn.PLAYER:
-                    sprite = _playerTurnSprite;
-                    break;
-                case Turn.OPPONENT:
-                    if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
-                        sprite = _opponentTurnWSprite;
-                    else
-                        sprite = _opponentTurnMSprite;
-                    break;
-                case Turn.DISCARDING:
-                    break;
-                case Turn.CLASH:
-                    sprite = _clashSprite;
-                    break;
-                case Turn.ROUND_END:
-                    sprite = _roundEndSprite;
-                    break;
-                case Turn.INTERVIEW_END:
-                    sprite = _interviewEndSprite;
-                    break;
-            }
-
-            TurnAnimation(sprite, turn, TurnManager.Instance.ContinueFlow);
+            _turnAnimation.SetTurnAnimation(turn);
             SetEndTurnButtonText(turn);
-        }
-
-        public void TurnAnimation(Sprite sprite, Turn turn, Action endCallback)
-        {
-            turnAnimationImage.sprite = sprite;
-
-            Sequence sequence = DOTween.Sequence();
-
-            sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
-            sequence.AppendInterval(0.5f);
-            sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
-            sequence.AppendCallback(() => endCallback());
-
-            sequence.Play();
-            SetEndTurnButtonInteractable(false);
         }
 
         #endregion
