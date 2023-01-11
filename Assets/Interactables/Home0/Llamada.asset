@@ -41,7 +41,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: '[...]'
     _closeUp: 6
-  - _content: "\xA1Me da igual c\xF3mo huela! A ver, c\xF3mo se llama."
+  - _content: "\xA1Me da igual c\xF3mo huela! A ver, \xBFc\xF3mo se llama?"
     _closeUp: 1
   - _content: '[...]'
     _closeUp: 6
