@@ -15,7 +15,7 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "\xC9se no es mi marido. Est\xE1 muy conseguido el parecido, pero no
-      he visto a Pablo moverse as\xED en toda nuestra vida juntos."
+      he visto a Pepe moverse as\xED en toda nuestra vida juntos."
     _closeUp: 0
   - _content: "Pero si es muy atl\xE9tico y flexible, no hay bola a la que no llegue."
     _closeUp: 1
