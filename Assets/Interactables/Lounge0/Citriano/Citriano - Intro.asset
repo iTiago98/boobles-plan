@@ -16,5 +16,7 @@ MonoBehaviour:
   _sentences:
   - _content: "\xA1Oiga! \xBFAcaso no me ha visto? \xA1Que yo voy primero!"
     _closeUp: 3
-  - _content: "(Como para no verlo) Ah, perdone, no le hab\xEDa visto..."
+  - _content: (Como para no verlo).
+    _closeUp: 1
+  - _content: "Ah, perdone, no le hab\xEDa visto..."
     _closeUp: 1

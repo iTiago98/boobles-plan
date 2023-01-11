@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Si yo te contase... dicen que llevan jugando un mes entero aqu\xED
+  - _content: "Si yo te contase... Dicen que llevan jugando un mes entero aqu\xED
       sin parar."
     _closeUp: 4
   - _content: "La mesa era el \xFAnico sitio del lounge donde desentumecer los m\xFAsculos

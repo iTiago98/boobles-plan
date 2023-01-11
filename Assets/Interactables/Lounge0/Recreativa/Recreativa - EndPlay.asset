@@ -18,7 +18,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: ...
     _closeUp: 1
-  - _content: "Espera... hay algo saliendo del expendedor de la m\xE1quina."
+  - _content: "Espera, hay algo saliendo del expendedor de la m\xE1quina."
     _closeUp: 1
   - _content: "\xA1Una carta! Parece que se llama \"Gran final\". \xBFY para qu\xE9
       quiero yo esto?"

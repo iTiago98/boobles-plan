@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "A ver si esta es la \xFAltima, y por fin te lo pasas. No te preocupes,
+  - _content: "A ver si esta es la \xFAltima y por fin te lo pasas. No te preocupes,
       que me voy para no desconcentrarte."
     _closeUp: 1
   - _content: "No. Qu\xE9date."
@@ -22,8 +22,8 @@ MonoBehaviour:
   - _content: "\xBFQue me quede? Pero si llevas todo el d\xEDa dici\xE9ndome que
       te pones nervioso si te miran jugar."
     _closeUp: 1
-  - _content: "Mientras buscabas la moneda, he estado meditando, y he conseguido
-      alcanzar un estado de concentraci\xF3n absoluta."
+  - _content: "Mientras buscabas la moneda he estado meditando, y he conseguido alcanzar
+      un estado de concentraci\xF3n absoluta."
     _closeUp: 5
   - _content: "\xBFPerd\xF3n...?"
     _closeUp: 1
@@ -39,7 +39,8 @@ MonoBehaviour:
   - _content: "(\xBFPero este t\xEDo, cuando llega a casa, cu\xE1ntas horas le dedica
       a ver anime?)"
     _closeUp: 1
-  - _content: Permanece, y contempla a un ser superior hacer alarde de sus habilidades|Play|.
+  - _content: Permanece, y contempla a un ser superior hacer alarde de sus habilidades.
+      |Play|
     _closeUp: 5
   - _content: (Vaya flipao...)
     _closeUp: 1
@@ -68,17 +69,17 @@ MonoBehaviour:
   - _content: "\xA1\xBFC\xF3mo?! \xA1\xBFDesde cuando est\xE1 eso en el juego?! \xBFA
       ver que lo pruebe?"
     _closeUp: 5
-  - _content: '|Lose|...'
+  - _content: '|Win|'
     _closeUp: 5
-  - _content: '|Wait|Pues es verdad... he derrotado incluso al boss...'
+  - _content: Pues es verdad... He derrotado incluso al boss...
     _closeUp: 5
   - _content: "\xBFY para esto he estado yo sufriendo tanto tiempo?"
     _closeUp: 5
   - _content: "Si llego a saber esto antes, \xA1me hubiera pasado el juego hace much\xEDsimo!"
     _closeUp: 5
-  - _content: "Ultra-instinto... anda y aparta de ah\xED, friki, que le toca a una
+  - _content: "Ultra-instinto... Anda y aparta de ah\xED, friki, que le toca a una
       profesional."
     _closeUp: 1
-  - _content: "Izquierda y derecha a la vez... \xBFpero qui\xE9n en su sano juicio
+  - _content: "Izquierda y derecha a la vez... \xBFPero qui\xE9n en su sano juicio
       descubre eso?"
     _closeUp: 5

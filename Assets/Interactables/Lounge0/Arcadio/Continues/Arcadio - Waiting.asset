@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Hasta que no te vayas, no meto la moneda en la m\xE1quina."
+  - _content: "Hasta que no te vayas no meto la moneda en la m\xE1quina."
     _closeUp: 5
   - _content: "Madre m\xEDa, qu\xE9 dram\xE1tico. Que s\xED, que s\xED, que ya me
       iba..."

@@ -22,6 +22,6 @@ MonoBehaviour:
     _closeUp: 6
   - _content: "\xBFO prefieres seguir explorando un poco?"
     _closeUp: 6
-  - _content: "Ten en cuenta que si vamos ahora, despu\xE9s vas a estar demasiado
+  - _content: "Ten en cuenta que, si vamos ahora, despu\xE9s vas a estar demasiado
       cansada como para seguir explorando."
     _closeUp: 6

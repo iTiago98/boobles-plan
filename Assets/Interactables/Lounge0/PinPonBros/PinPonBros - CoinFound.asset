@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "(\xA1Hay una moneda en el bolsillo de Pineda! Coges la moneda...)"
+  - _content: "(\xA1Hay una moneda en el bolsillo de Pineda!)."
+    _closeUp: 1
+  - _content: '*Coges la moneda*'
     _closeUp: 1

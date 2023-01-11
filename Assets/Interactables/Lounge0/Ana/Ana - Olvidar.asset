@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "No s\xE9, ni siquiera me acordar\xEDa de que las olvid\xE9, si no
-      fuera porque mi Josito que me ama me las canta cada noche para llevarme a la
-      cama."
+  - _content: "No s\xE9, ni siquiera me acordar\xEDa de que las olvid\xE9 si no fuera
+      porque mi Josito, que me ama, me las canta cada noche para llevarme a la cama."
     _closeUp: 2
   - _content: "\xA1Qu\xE9 rom\xE1ntico!"
     _closeUp: 1

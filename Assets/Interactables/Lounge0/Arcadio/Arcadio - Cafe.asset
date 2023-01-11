@@ -17,13 +17,13 @@ MonoBehaviour:
   - _content: "Pues s\xED, necesito la cafe\xEDna para desbloquear el ultra-instinto.
       Es mi secreto gamer."
     _closeUp: 5
-  - _content: "\xBFUltra-instinto? Suena a super poder de protagonista de anime."
+  - _content: "\xBFUltra-instinto? Suena a superpoder de protagonista de anime."
     _closeUp: 1
-  - _content: "\xBFA que mola? Pues es de mi propia invenci\xF3n, \xA1soy un genio!"
+  - _content: "\xBFA que mola? Pues es de mi propia invenci\xF3n. \xA1Soy un genio!"
     _closeUp: 5
-  - _content: "Claro, claro... (estoy casi segura de haber escuchado ese t\xE9rmino
+  - _content: "Claro, claro... (Estoy casi segura de haber escuchado ese t\xE9rmino
       anteriormente...)"
     _closeUp: 1
-  - _content: "Bueno... que hasta que no me pase el juego, no se puede desmantelar
+  - _content: "Bueno... Que hasta que no me pase el juego no se puede desmantelar
       la m\xE1quina del caf\xE9."
     _closeUp: 5

@@ -19,10 +19,10 @@ MonoBehaviour:
   - _content: Los que me dan guerra son los de la empresa. Me tienen arreglando cacharros
       de un lao' pa' otro, corriendo como pollo sin cabesa.
     _closeUp: 2
-  - _content: "Vaya con estos de Booble... muchas tecnolog\xEDas punteras pero luego
+  - _content: "Vaya con estos de Booble... Muchas tecnolog\xEDas punteras pero luego
       en la oficina llevan con las mismas m\xE1quinas desde hace d\xE9cadas."
     _closeUp: 1
-  - _content: Por cierto, soy Daniela, pero todos  me llaman Nela.
+  - _content: Por cierto, soy Daniela, pero todos me llaman Nela.
     _closeUp: 1
   - _content: "Yo me llamo Ana, es un nombre elegante, tanto pa' tr\xE1s como pa'
       lante, jeje."

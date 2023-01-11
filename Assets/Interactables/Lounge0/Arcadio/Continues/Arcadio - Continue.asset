@@ -16,6 +16,6 @@ MonoBehaviour:
   _sentences:
   - _content: "\xBFTienes un momento?"
     _closeUp: 1
-  - _content: Bueno, tampoco me desconcentres mucho, que si pierdo, tengo que volver
+  - _content: Bueno, tampoco me desconcentres mucho, que si pierdo tengo que volver
       a pagar para seguir jugando.
     _closeUp: 5

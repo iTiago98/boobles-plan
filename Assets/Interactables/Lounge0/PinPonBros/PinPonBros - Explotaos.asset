@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Lo siento por haberos explotado una bomba en el careto... pero era
-      la \xFAnica manera que se me ocurri\xF3 para parar el partido."
+  - _content: "Lo siento por haberos explotado una bomba en el careto, pero era la
+      \xFAnica manera que se me ocurri\xF3 para parar el partido."
     _closeUp: 1
   - _content: "Nada, nada. Si no hubiera sido por ti, a\xFAn seguir\xEDamos d\xE1ndole
       a la maldita pelotita."
@@ -35,7 +35,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: Citriano se llamaba.
     _closeUp: 1
-  - _content: "\xBFTuviste que despedir al mandarinas? No hombre no... con lo gracioso
+  - _content: "\xBFTuviste que despedir al mandarinas? No, hombre, no... Con lo gracioso
       que era tenerlo por aqu\xED."
     _closeUp: 11
   - _content: "Yo solo s\xE9 que en Booble se est\xE1 cociendo algo muy gordo..."
@@ -51,6 +51,6 @@ MonoBehaviour:
   - _content: Pero no temas, sabemos perfectamente que lo haces por alcanzar un bien
       mayor.
     _closeUp: 11
-  - _content: "Muchas gracias chicos, intentar\xE9 que acab\xE9is bien parados de
+  - _content: "Muchas gracias, chicos. Intentar\xE9 que acab\xE9is bien parados de
       todo esto."
     _closeUp: 1

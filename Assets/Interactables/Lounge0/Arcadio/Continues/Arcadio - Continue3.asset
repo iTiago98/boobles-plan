@@ -20,13 +20,12 @@ MonoBehaviour:
     _closeUp: 5
   - _content: "\xBFY por qu\xE9 no est\xE1s jugando?"
     _closeUp: 1
-  - _content: Porque he vuelto a perder... se me ha quedado el final boss a uno de
+  - _content: Porque he vuelto a perder... Se me ha quedado el final boss a uno de
       vida...
     _closeUp: 5
   - _content: "Ahora ser\xE1 tambi\xE9n mi culpa."
     _closeUp: 1
-  - _content: "No... no... es culpa m\xEDa... pero estaba tan cerca... ESTOY tan
-      cerca..."
+  - _content: "No, no... Es culpa m\xEDa... Pero estaba tan cerca... ESTOY tan cerca..."
     _closeUp: 5
   - _content: No puedes hacerme parar de jugar ahora...
     _closeUp: 5

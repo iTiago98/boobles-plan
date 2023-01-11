@@ -15,5 +15,5 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "(Est\xE1n completamente absortos en la partida, es como si ni siquiera
-      supiesen que estoy aqu\xED)"
+      supiesen que estoy aqu\xED)."
     _closeUp: 1

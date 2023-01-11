@@ -15,7 +15,7 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "Por como hablas, t\xFA debes ser la Sra. Phant, la nueva directora
-      de Recursos Humanos, \xBFme equivoco?"
+      de Recursos Humanos. \xBFMe equivoco?"
     _closeUp: 4
   - _content: Me presento, mi nombre es Dionisio Demmessa, pero puedes llamarme Dennis.
     _closeUp: 4
@@ -30,5 +30,5 @@ MonoBehaviour:
   - _content: "De hecho, yo le cojo monedas del bolsillo a Pineda para pagarme los
       caf\xE9s..."
     _closeUp: 4
-  - _content: "Oiga pues eso tampoco est\xE1 bien..."
+  - _content: "Oiga, pues eso tampoco est\xE1 bien..."
     _closeUp: 1
