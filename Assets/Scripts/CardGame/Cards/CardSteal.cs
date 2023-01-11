@@ -21,7 +21,7 @@ namespace Booble.CardGame.Cards
         [SerializeField] private Color _unselectedColor;
         [SerializeField] private Color _unselectedHoverColor;
 
-
+        private CardsData _data;
         private CardType _type;
         private List<CardEffect> _effects;
         private int _index;
@@ -32,21 +32,21 @@ namespace Booble.CardGame.Cards
 
         public void Initialize(CardsData data, int index)
         {
+            _data = data;
+
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _spriteRenderer.sprite = data.sprite;
             SetColor(false);
 
             nameText.text = data.name;
 
-            _type = data.type;
             if (_type == CardType.ARGUMENT)
             {
                 strengthText.text = data.strength.ToString();
                 defenseText.text = data.defense.ToString();
             }
 
-            _effects = data.effects;
-            descText.text = GetDescriptionText();
+            descText.text = data.GetDescriptionText();
 
             _index = index;
         }
@@ -67,7 +67,7 @@ namespace Booble.CardGame.Cards
 
         public void OnMouseHoverEnter()
         {
-            UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
+            UIManager.Instance.ShowExtendedDescription(_data);
             SetColor(true);
         }
 
@@ -93,39 +93,6 @@ namespace Booble.CardGame.Cards
                 if (_selected) return _selectedColor;
                 else return _unselectedColor;
             }
-        }
-
-        private string GetDescriptionText()
-        {
-            string temp = "";
-
-            foreach (CardEffect effect in _effects)
-            {
-                temp += effect.ToString() + "\n";
-            }
-
-            return temp;
-        }
-
-        public string NameToString()
-        {
-            return name.ToUpper();
-        }
-
-        public string TypeToString()
-        {
-            return "TIPO: " + _type.ToString();
-        }
-
-        public string DescriptionToString()
-        {
-            string s = "";
-            foreach (CardEffect effect in _effects)
-            {
-                s += effect.ToStringExtended(_type) + "\n";
-            }
-
-            return s;
         }
     }
 }

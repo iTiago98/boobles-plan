@@ -56,14 +56,10 @@ namespace Booble.CardGame.Managers
         #region Extended Description Parameters
 
         [Header("Extended Description")]
+        [SerializeField] private ExtendedDescriptionPanel _extendedDescriptionPanel;
 
-        [SerializeField] private GameObject extendedDescriptionPanel;
-
-        [SerializeField] private TextMeshProUGUI extendedDescriptionName;
-        [SerializeField] private TextMeshProUGUI extendedDescriptionType;
-        [SerializeField] private TextMeshProUGUI extendedDescriptionText;
-
-        #endregion
+        [Header("Turn Animation")]
+        [SerializeField] private TurnAnimation _turnAnimation;
 
         #region Deck Remaining Cards Parameters
 
@@ -403,17 +399,14 @@ namespace Booble.CardGame.Managers
 
         #region Extended Description
 
-        public void ShowExtendedDescription(string name, string type, string description)
+        public void ShowExtendedDescription(CardsData data)
         {
-            extendedDescriptionName.text = name;
-            extendedDescriptionType.text = type;
-            extendedDescriptionText.text = description;
-            extendedDescriptionPanel.SetActive(true);
+            _extendedDescriptionPanel.Show(data);
         }
 
         public void HideExtendedDescription()
         {
-            extendedDescriptionPanel.SetActive(false);
+            _extendedDescriptionPanel.Hide();
         }
 
         #endregion

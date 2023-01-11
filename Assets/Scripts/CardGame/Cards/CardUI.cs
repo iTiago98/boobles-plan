@@ -63,8 +63,8 @@ namespace Booble.CardGame.Cards
         {
             _card = card;
 
-            nameText.text = _card.data.name;
-            descriptionText.text = GetDescriptionText();
+            nameText.text = _card.data.GetNameText();
+            UpdateDescriptionText();
 
             cardBack = _card.contender.GetCardBack();
 
@@ -119,20 +119,9 @@ namespace Booble.CardGame.Cards
 
         public void UpdateDescriptionText()
         {
-            descriptionText.text = GetDescriptionText();
+            descriptionText.text = _card.data.GetDescriptionText();
         }
 
-        private string GetDescriptionText()
-        {
-            string temp = "";
-
-            foreach (CardEffect effect in _card.Effects.effectsList)
-            {
-                temp += effect.ToString() + "\n";
-            }
-
-            return temp;
-        }
 
         #endregion
 
@@ -140,33 +129,12 @@ namespace Booble.CardGame.Cards
 
         public void ShowExtendedDescription()
         {
-            if (_cardFront) UIManager.Instance.ShowExtendedDescription(NameToString(), TypeToString(), DescriptionToString());
+            if (_cardFront) UIManager.Instance.ShowExtendedDescription(_card.data);
         }
 
         public void HideExtendedDescription()
         {
             UIManager.Instance.HideExtendedDescription();
-        }
-
-        private string NameToString()
-        {
-            return name.ToUpper();
-        }
-
-        private string TypeToString()
-        {
-            return "TIPO: " + _card.Stats.type.ToString();
-        }
-
-        private string DescriptionToString()
-        {
-            string s = "";
-            foreach (CardEffect effect in _card.Effects.effectsList)
-            {
-                s += effect.ToStringExtended(_card.Stats.type) + "\n";
-            }
-
-            return s;
         }
 
         #endregion
