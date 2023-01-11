@@ -20,13 +20,13 @@ MonoBehaviour:
   - _content: "Pues algo habr\xE1 que hacer para pararlo, porque si no acabar\xE1n
       haci\xE9ndolo los de seguridad."
     _closeUp: 1
-  - _content: "La verdad es que no s\xE9 c\xF3mo se suspende un partido de ping pong,
-      por lluvia no puede ser."
+  - _content: "La verdad es que no s\xE9 c\xF3mo se suspende un partido de ping pong.
+      Por lluvia no puede ser."
     _closeUp: 4
   - _content: "Aqu\xED dentro no podemos esperar al mal tiempo, algo habr\xE1 que
       hacer. Voy a coger la pelota ahora mismo y ya est\xE1."
     _closeUp: 1
-  - _content: "\xBF\xA1Est\xE1s loca!? El mundo entero est\xE1 vi\xE9ndonos, si paras
+  - _content: "\xBF\xA1Est\xE1s loca!? El mundo entero est\xE1 vi\xE9ndonos. Si paras
       el partido acabar\xE1s linchada por youtubers. \xBFQuieres morir como elxokas?"
     _closeUp: 4
   - _content: "Pues si no puedo coger la pelota podr\xEDamos meter otra."
@@ -37,6 +37,6 @@ MonoBehaviour:
   - _content: "Creo que la \xFAnica pelota que puede entrar ah\xED tiene que explotar,
       m\xEDnimo."
     _closeUp: 4
-  - _content: "Oye pues eso no es mala idea. Alguien de por aqu\xED que sea manitas
+  - _content: "Oye, pues eso no es mala idea. Alguien de por aqu\xED que sea manitas
       seguro que sabe c\xF3mo hacerla."
     _closeUp: 1

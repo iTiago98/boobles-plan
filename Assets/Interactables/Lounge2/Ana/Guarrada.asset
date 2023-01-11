@@ -15,12 +15,13 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "\xA1Santo Cristo de Nepomecano! \xBF\xC9so es una pelota o el ojo
-      del Monstruo Del Pantano? Trae, si total, va a explotar en un momento."
+      del Monstruo Del Pantano?"
     _closeUp: 2
-  - _content: Vigila si por la esfera ves algo de movimiento.
+  - _content: Trae, si total va a explotar en un momento. Vigila si por la esfera
+      ves algo de movimiento.
     _closeUp: 2
   - _content: "Te juro que algo se mov\xEDa cuando la cog\xED, qu\xE9 ascazo."
     _closeUp: 1
-  - _content: "Tranquila ya est\xE1 montado el petardo. Vamos, el aroma de la p\xF3lvora
+  - _content: "Tranquila, ya est\xE1 montado el petardo. Vamos, el aroma de la p\xF3lvora
       tapa un poco el olor del bolardo."
     _closeUp: 2

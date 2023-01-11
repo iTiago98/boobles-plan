@@ -24,12 +24,12 @@ MonoBehaviour:
     _closeUp: 2
   - _content: "Tienes que ser un poco m\xE1s espec\xEDfica, hay varios tipos de explosi\xF3n."
     _closeUp: 2
-  - _content: "\xA1No, no! Nada de eso, bueno quiz\xE1 contusi\xF3n."
+  - _content: "\xA1No, no! Nada de eso. Bueno, quiz\xE1 una contusi\xF3n."
     _closeUp: 1
   - _content: "Estoy intentando parar el partido de ping pong e intentar hacer entrar
       en raz\xF3n a esos obsesos."
     _closeUp: 1
-  - _content: "Ah bueno, una pelota explosiva, \xA1haberlo dicho antes! Hac\xEDa
+  - _content: "Ah, bueno, una pelota explosiva. \xA1Haberlo dicho antes! Hac\xEDa
       muchas de chica para asustar a la gente que llevara guantes."
     _closeUp: 2
   - _content: "\xBFGuantes? \xBFA qu\xE9 viene ese odio por la gente con guantes?"
@@ -37,5 +37,5 @@ MonoBehaviour:
   - _content: "\xA1Porque algo esconden! A saber esas manos en qu\xE9 se habr\xE1n
       metido o d\xF3nde."
     _closeUp: 2
-  - _content: "Madre m\xEDa Ana, qu\xE9 demonio tuviste que ser de peque\xF1a\u2026"
+  - _content: "Madre m\xEDa, Ana, qu\xE9 demonio tuviste que ser de peque\xF1a..."
     _closeUp: 1

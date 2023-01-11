@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: No me gusta nada esa risa tan malvada. Suena a toxicidad, ahora mismo
+  - _content: No me gusta nada esa risa tan malvada. Suena a toxicidad. Ahora mismo
       te llevo a los de seguridad.
     _closeUp: 2
   - _content: "\xA1Nadie puede pararme, tengo el poder de controlar las mentes!"
@@ -22,7 +22,7 @@ MonoBehaviour:
   - _content: "Claro que s\xED, Profesor Xavier. Parece que se te han acabado esos
       poderes, gualtrapa."
     _closeUp: 11
-  - _content: "S\xED,ll\xE9vatelo, Ana. Pedro, Pablo, siento todo lo ocurrido, pero
+  - _content: "S\xED, ll\xE9vatelo, Ana. Pedro, Pepe, siento todo lo ocurrido, pero
       todav\xEDa tenemos que hacer la entrevista."
     _closeUp: 1
   - _content: "A la vista de los hechos, intentar\xE9 defenderos todo lo posible

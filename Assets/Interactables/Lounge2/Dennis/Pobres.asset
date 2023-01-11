@@ -18,14 +18,14 @@ MonoBehaviour:
     _closeUp: 4
   - _content: "Est\xE1s de co\xF1a, \xBFno? \xBF\xA1Incesto!?"
     _closeUp: 1
-  - _content: Jajajaja, no mujer. Se casaron con lo/as hermano/as de cada uno/a.
+  - _content: Jajajaja, no, mujer. Se casaron con lo/as hermano/as de cada uno/a.
     _closeUp: 4
   - _content: "\xBFPodr\xEDas explic\xE1rmelo mejor? Sin usar tanto lo /barra/ as."
     _closeUp: 1
-  - _content: "A ver, Pedro Pinar se cas\xF3 con Lucrecia, la hermana de Pablo Ponzano."
+  - _content: "A ver, Pepe Pinar se cas\xF3 con Lucrecia, la hermana de Pedro Ponzano."
     _closeUp: 4
   - _content: "Y \xE9ste a su vez se cas\xF3 con Hortensia, la hermana de su amigo
-      Pedro Pinar."
+      Pepe Pinar."
     _closeUp: 4
   - _content: "Pensaba que eso s\xF3lo pasaba en las telenovelas."
     _closeUp: 1

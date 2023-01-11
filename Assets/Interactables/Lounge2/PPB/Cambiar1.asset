@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Pero bueno Pablo, \xBFque haces vestido como un fantoche? \xBFY c\xF3mo
-      es que est\xE1s tan delgado?"
+  - _content: "Pero bueno, Pepe, \xBFqu\xE9 haces vestido como un fantoche? \xBFY
+      c\xF3mo es que est\xE1s tan delgado?"
     _closeUp: 10
-  - _content: "La hostia Pedro, \xA1t\xFA tambi\xE9n pareces haber perdido unos kilos!
-      \xBFQu\xE9 hacemos en la mesa de ping pong?"
+  - _content: "La hostia, Pedro, \xA1t\xFA tambi\xE9n pareces haber perdido unos
+      kilos! \xBFQu\xE9 hacemos en la mesa de ping pong?"
     _closeUp: 11
   - _content: "La \xFAltima vez que jugamos creo que ni hab\xEDamos hecho la comuni\xF3n."
     _closeUp: 11
@@ -29,15 +29,12 @@ MonoBehaviour:
     _closeUp: 11
   - _content: "Ya te digo, Rodrigo. \xBFTe acuerdas que nos dio la pelota de recuerdo?"
     _closeUp: 10
-  - _content: "\xA1Redi\xF3s! \xA1La que se hab\xEDa tragado y todo!"
+  - _content: "\xA1Redi\xF3s! \xA1La que se hab\xEDa tragado!"
     _closeUp: 11
   - _content: "\xA1Que le hicimos un altar y todo! \xBFTodav\xEDa la tenemos, no?"
     _closeUp: 10
   - _content: "Ah\xED sigue en la estanter\xEDa del despacho. \xA1Con todas las babas
       del figura!"
     _closeUp: 11
-  - _content: "Ah\xED sigue en la estanter\xEDa del despacho. \xA1Con todas las babas
-      del figura!"
-    _closeUp: 11
-  - _content: "\xA1AH\xCD NO EST\xC1! \xA1D\xD3NDE LA HAB\xC9IS PUESTO, MENTECATOS!"
+  - _content: "\xA1AH\xCD NO EST\xC1! \xA1\xBFD\xD3NDE LA HAB\xC9IS PUESTO, MENTECATOS?!"
     _closeUp: 4
