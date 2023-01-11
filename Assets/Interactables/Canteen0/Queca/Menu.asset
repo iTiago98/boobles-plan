@@ -15,7 +15,9 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "Anda, \xA1hoy hay hamburguesa doble en el men\xFA! Est\xE1n deliciosas,
-      con su salsa de trufa y setas. \xBFVamos a esa mesa al lado de la ventana?"
+      con su salsa de trufa y setas."
+    _closeUp: 6
+  - _content: "\xBFVamos a esa mesa al lado de la ventana?"
     _closeUp: 6
   - _content: "Oh, y adem\xE1s tienen salmorejo de primero, ya s\xE9 lo que voy a
       pedir."

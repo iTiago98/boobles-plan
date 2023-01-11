@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: Pensaba que un robot de cocina era como una termomix, yo es que soy
+  - _content: Pensaba que un robot de cocina era como una termomix. Yo es que soy
       de cocinar todo yo misma.
     _closeUp: 1
   - _content: "S\xED, son cartuchos de ingredientes que luego imprimo en 3D siguiendo

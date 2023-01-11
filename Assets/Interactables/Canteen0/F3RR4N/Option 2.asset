@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: Claro, planos de los platos, como las recetas de toda la vida, pero
+  - _content: Claro, planos de los platos. Como las recetas de toda la vida, pero
       para imprimir.
     _closeUp: 8

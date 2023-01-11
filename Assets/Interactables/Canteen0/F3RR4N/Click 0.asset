@@ -17,5 +17,5 @@ MonoBehaviour:
   - _content: "Qu\xE9 buenas estaban las hamburguesas, F3RR4N. Le felicito."
     _closeUp: 1
   - _content: "Gracias, se\xF1orita. Aunque todo el m\xE9rito es de los cartuchos
-      de carne, pan y otras materias primas de la empresa, y del blueprint, claro."
+      de carne, pan y otras materias primas de la empresa. Y del blueprint, claro."
     _closeUp: 8

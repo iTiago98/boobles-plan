@@ -17,5 +17,7 @@ MonoBehaviour:
   - _content: "Bueno, yo me vuelvo a mi despacho, que tengo mucho curro todav\xEDa."
     _closeUp: 6
   - _content: "T\xFA por hoy ya puedes irte a casa. S\xF3lo tienes que ir al GARAJE
-      para que te recoja Anselmo. \xA1Cha\xEDto!"
+      para que te recoja Anselmo."
+    _closeUp: 6
+  - _content: "\xA1Cha\xEDto!"
     _closeUp: 6

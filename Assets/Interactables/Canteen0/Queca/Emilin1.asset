@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Buenas tardes, se\xF1oritas, \xBFdesean algo?"
+  - _content: "Buenas tardes, se\xF1oritas. \xBFDesean algo?"
     _closeUp: 7
   - _content: "\xBFNo es una pocholada? Es la versi\xF3n deluxe, con frac de Armani
       y bandeja de plata de ley. Si fuera humano me casar\xEDa con \xE9l, f\xEDjate

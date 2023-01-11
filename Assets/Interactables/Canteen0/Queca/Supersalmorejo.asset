@@ -16,8 +16,8 @@ MonoBehaviour:
   _sentences:
   - _content: "\xBFSuperSalmorejo?"
     _closeUp: 1
-  - _content: "Claro, lleva SuperJam\xF3n, nuestro jam\xF3n estrella, \xA1m\xE1s
+  - _content: "Claro, lleva SuperJam\xF3n, nuestro jam\xF3n estrella. \xA1M\xE1s
       grande y sabroso que un 5 Jotas!"
     _closeUp: 6
   - _content: "\xA1Qu\xE9 lujo!"
-    _closeUp: 6
+    _closeUp: 1
