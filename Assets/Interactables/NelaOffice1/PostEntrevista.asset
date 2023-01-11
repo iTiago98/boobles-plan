@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: PostEntrevista
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Qu\xE9 mala sensaci\xF3n se me queda siempre despu\xE9s de haber tenido
+      que despedir a alguien..."
+    _closeUp: 1
+  - _content: "Y mira que llevo a\xF1os trabajando en recursos humanos, pero a m\xED
+      lo que se me dan bien son las contrataciones."
+    _closeUp: 1
+  - _content: "Es una pena que mi primera tarea con Booble haya sido un despido...
+      pero bueno, ya mejorar\xE1n las cosas."
+    _closeUp: 1
+  - _content: Ahora a casa, no tengo ni hambre para pasarme por el comedor.
+    _closeUp: 1
