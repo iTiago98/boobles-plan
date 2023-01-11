@@ -82,7 +82,7 @@ namespace Booble.Interactables.Queca
             
             _nelaAnim.SetBool(WL, false);
             _quecaAnim.SetBool(WL, false);
-            ThrowDialogue(_drinksDialogue, _drinksOptions);
+            ThrowDialogue(_drinksDialogue, _drinksOptions, hideBackOption: true);
             yield return new WaitUntil(() => _dialogueEnd);
             
             _quecaAnim.SetBool(WL, true);
@@ -183,11 +183,11 @@ namespace Booble.Interactables.Queca
             Interactable.EndInteraction();
         }
 
-        private void ThrowDialogue(Dialogue diag, List<Option> options = null)
+        private void ThrowDialogue(Dialogue diag, List<Option> options = null, bool hideBackOption = false)
         {
             _dialogueEnd = false;
             options?.ForEach(op => op.DialogueOption.DoOnSelect.AddListener(() => _dialogueEnd = true));
-            _diagMng.StartDialogue(diag, options);
+            _diagMng.StartDialogue(diag, options, hideBackOption);
             _diagMng.OnEndDialogue.RemoveAllListeners();
             _diagMng.OnEndDialogue.AddListener(() => _dialogueEnd = true);
         }

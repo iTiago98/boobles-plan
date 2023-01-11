@@ -68,7 +68,7 @@ namespace Booble.Interactables.Dialogues
                 StopAllCoroutines();
                 StartCoroutine(TypeSentence(_currentSentence));
             }
-            else if (_options.Count > 0)
+            else if (/*_options.Count > 0 && */_options.Exists(op => op.FlagsSatisfied()))
             {
                 _optionsBox.SetActive(true);
                 InitializeAllOptions();
