@@ -262,58 +262,9 @@ namespace Booble.CardGame.Managers
 
         #region End Turn Button
 
-        public void OnEndTurnButtonClick()
-        {
-            if (CardGameManager.Instance.tutorial)
-            {
-                TutorialDialogue t = CardGameManager.Instance.GetTutorial();
-                if (t != null) t.GetTutorialAnimation().Continue();
-            }
-            else
-                TurnManager.Instance.FinishTurn();
-        }
-
-        public bool IsEndTurnButtonInteractable() { return endTurnButton.IsInteractable(); }
-
-        public void SetEndTurnButtonInteractable(bool interactable)
-        {
-            endTurnButton.SetInteractable(interactable);
-        }
-
-        private void SetEndTurnButtonText(Turn turn)
-        {
-            switch (turn)
-            {
-                case Turn.INTERVIEW_START:
-                    endTurnButton.SetText(INTERVIEW_START_BUTTON_TEXT); break;
-
-                case Turn.ROUND_START:
-                    endTurnButton.SetText(ROUND_START_BUTTON_TEXT); break;
-
-                case Turn.OPPONENT:
-                    if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
-                        endTurnButton.SetText(OPPONENTW_TURN_BUTTON_TEXT);
-                    else
-                        endTurnButton.SetText(OPPONENTM_TURN_BUTTON_TEXT);
-                    break;
-
-                case Turn.PLAYER:
-                    if (TurnManager.Instance.GetSkipCombat())
-                        endTurnButton.SetText(PLAYER_TURN_SKIP_BUTTON_TEXT);
-                    else
-                        endTurnButton.SetText(PLAYER_TURN_CLASH_BUTTON_TEXT);
-                    break;
-
-                case Turn.DISCARDING:
-                    endTurnButton.SetText(DISCARDING_BUTTON_TEXT); break;
-
-                case Turn.CLASH:
-                    endTurnButton.SetText(CLASH_BUTTON_TEXT); break;
-
-                case Turn.ROUND_END:
-                    endTurnButton.SetText(END_BUTTON_TEXT); break;
-            }
-        }
+        private void SetEndTurnButtonText(Turn turn) { _endTurnButton.SetEndTurnButtonText(turn); }
+        public void SetEndTurnButtonInteractable(bool value = true) { _endTurnButton.SetEndTurnButtonInteractable(value); }
+        public bool IsEndTurnButtonInteractable() => _endTurnButton.IsEndTurnButtonInteractable();
 
         #endregion
 
@@ -368,7 +319,7 @@ namespace Booble.CardGame.Managers
                 else Board.Instance.RemoveCardZonesHighlight(holdingCard);
 
                 HidePlayButtons();
-                SetEndTurnButtonInteractable(true);
+                SetEndTurnButtonInteractable();
                 MouseController.Instance.SetHolding(null);
                 CardGameManager.Instance.SetPlayingCard(false);
             }
@@ -466,8 +417,7 @@ namespace Booble.CardGame.Managers
 
         public void InterviewEndAnimation(bool win, Action endCallback)
         {
-            if (win) TurnAnimation(_interviewWinSprite, Turn.INTERVIEW_END, endCallback);
-            else TurnAnimation(_interviewLoseSprite, Turn.INTERVIEW_END, endCallback);
+            _turnAnimation.SetInterviewEndAnimation(win, endCallback);
         }
 
         public void ShowLoseMenu()
