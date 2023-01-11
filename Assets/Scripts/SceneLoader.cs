@@ -139,6 +139,11 @@ namespace Booble.Managers
             LoadScene(Scenes.HOME_0);
         }
 
+        public void LoadHome1()
+        {
+            LoadScene(Scenes.HOME_1);
+        }
+
         public void LoadHome2()
         {
             LoadScene(Scenes.HOME_2);

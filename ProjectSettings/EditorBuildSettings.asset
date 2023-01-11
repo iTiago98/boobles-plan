@@ -59,4 +59,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Halls/UpperHall1.unity
     guid: 4e73d560132f47c4ba1d4e229ed05b43
+  - enabled: 1
+    path: Assets/Scenes/Home/Home1.unity
+    guid: f196089aca7e42c4288397ec8971b2a1
   m_configObjects: {}
