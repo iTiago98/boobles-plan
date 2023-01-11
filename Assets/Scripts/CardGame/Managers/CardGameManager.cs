@@ -75,6 +75,14 @@ namespace Booble.CardGame.Managers
             if (!_initialized) Initialize(false);
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                SceneLoader.Instance.UnloadInterviewScene();
+            }
+        }
+
         #region Initialize
 
         public void Initialize(bool playingStoryMode)

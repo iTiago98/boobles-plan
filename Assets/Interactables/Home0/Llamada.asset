@@ -14,13 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Qu\xE9 pasa, \xBFque despu\xE9s de todo el d\xEDa no te has cansado
-      de verme?"
+  - _content: "\xA1Por fin en casa!"
+    _closeUp: 1
+  - _content: "Bueno, el primer d\xEDa no ha sido muy dif\xEDcil, pero con los nervios
+      al final s\xED que estoy algo cansada."
+    _closeUp: 1
+  - _content: "Ahora a ver un rato la tele y a acostarse, que ma\xF1ana es mi primer
+      d\xEDa y hay que estar a tope."
+    _closeUp: 1
+  - _content: (Buzz Buzz)
+    _closeUp: 0
+  - _content: "\xA1Anda! \xA1Una llamada de Queca! Voy a cogerlo a ver qu\xE9 quiere."
+    _closeUp: 1
+  - _content: "\xBFQueca? Qu\xE9 pasa, \xBFque despu\xE9s de todo el d\xEDa no te
+      has cansado de verme?"
     _closeUp: 1
   - _content: '[...]'
     _closeUp: 6
-  - _content: "Pero bueno, \xBFno pod\xEDas hab\xE9rmelo dicho esta ma\xF1ana, Queca?
-      Ahora no tengo tiempo para prepararme nada."
+  - _content: "Pero bueno, \xBFno pod\xEDas hab\xE9rmelo dicho esta ma\xF1ana? Ahora
+      no tengo tiempo para prepararme nada."
     _closeUp: 1
   - _content: '[...]'
     _closeUp: 6
@@ -46,5 +58,5 @@ MonoBehaviour:
     _closeUp: 1
   - _content: '[...]'
     _closeUp: 6
-  - _content: "Lo que t\xFA digas, Queca. Hasta ma\xF1ana."
+  - _content: "Lo que t\xFA digas. Hasta ma\xF1ana."
     _closeUp: 1

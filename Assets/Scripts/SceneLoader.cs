@@ -11,7 +11,7 @@ namespace Booble.Managers
     {
         public static SceneLoader Instance { get; private set; }
 
-    [SerializeField] private Fader _fadeScreen;
+        [SerializeField] private Fader _fadeScreen;
 
         public bool InMainMenu => _currentScene == Scenes.MAIN_MENU;
         public bool InInterview => _currentScene == Scenes.INTERVIEW;
@@ -79,62 +79,67 @@ namespace Booble.Managers
             LoadScene(Scenes.NELA_OFFICE_0);
         }
 
-    public void LoadNelaOffice1()
-    {
-        LoadScene(Scenes.NELA_OFFICE_1);
-    } 
-    
-    public void LoadNelaOffice2()
-    {
-        LoadScene(Scenes.NELA_OFFICE_2);
-    }
-
-    public void LoadUpperHall2()
-    {
-        LoadScene(Scenes.UPPER_HALL_2);
-    }
-    
-    public void LoadCanteenScene0()
-    {
-        LoadScene(Scenes.CANTEEN_0);
-    }
-    
-    public void LoadCanteenScene2()
-    {
-        LoadScene(Scenes.CANTEEN_2);
-    }
-
-        public void LoadLowerHall1()
+        public void LoadNelaOffice1()
         {
-            LoadScene(Scenes.LOWER_HALL_1);
+            LoadScene(Scenes.NELA_OFFICE_1);
+        } 
+        
+        public void LoadNelaOffice2()
+        {
+            LoadScene(Scenes.NELA_OFFICE_2);
         }
 
-    public void LoadLowerHall2()
-    {
-        LoadScene(Scenes.LOWER_HALL_2);
-    }
-    
-    public void LoadLoungeScene1()
-    {
-        LoadScene(Scenes.LOUNGE_1);
-    }
-    
-    public void LoadLoungeScene2()
-    {
-        LoadScene(Scenes.LOUNGE_2);
-    }
+        public void LoadUpperHall2()
+        {
+            LoadScene(Scenes.UPPER_HALL_2);
+        }
+        
+        public void LoadCanteenScene0()
+        {
+            LoadScene(Scenes.CANTEEN_0);
+        }
+        
+        public void LoadCanteenScene2()
+        {
+            LoadScene(Scenes.CANTEEN_2);
+        }
 
-    public void LoadPPBOffice()
-    {
-        LoadScene(Scenes.PPB_OFFICE);
-    }
+            public void LoadLowerHall1()
+            {
+                LoadScene(Scenes.LOWER_HALL_1);
+            }
 
-    public void LoadHome2()
-    {
-        LoadScene(Scenes.HOME_2);
-    }
-    
-    #endregion
+        public void LoadLowerHall2()
+        {
+            LoadScene(Scenes.LOWER_HALL_2);
+        }
+        
+        public void LoadLoungeScene1()
+        {
+            LoadScene(Scenes.LOUNGE_1);
+        }
+        
+        public void LoadLoungeScene2()
+        {
+            LoadScene(Scenes.LOUNGE_2);
+        }
+
+        public void LoadPPBOffice()
+        {
+            LoadScene(Scenes.PPB_OFFICE);
+        }
+
+        public void LoadHome0()
+        {
+            LoadScene(Scenes.HOME_0);
+        }
+
+        public void LoadHome2()
+        {
+            LoadScene(Scenes.HOME_2);
+        }
+        
+        #endregion
 
         #region Interview
 
@@ -198,19 +203,17 @@ namespace Booble.Managers
 
         #endregion
 
+        private void OnSceneLoaded(AsyncOperation op)
+        {
+            _fadeScreen.FadeIn();
+        }
 
-
-    private void OnSceneLoaded(AsyncOperation op)
-    {
-        _fadeScreen.FadeIn();
-    }
-
-    private void OnLoungeSceneLoaded(AsyncOperation op)
-    {
-        //RestoreMainCamera(op);
-        Controller.Instance.enabled = true;
-        _fadeScreen.FadeIn();
-    }
+        private void OnLoungeSceneLoaded(AsyncOperation op)
+        {
+            //RestoreMainCamera(op);
+            Controller.Instance.enabled = true;
+            _fadeScreen.FadeIn();
+        }
 
         private void OnInterviewLoaded(AsyncOperation op)
         {
