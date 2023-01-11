@@ -14,18 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: (Buscar el nombre en el historial)
+  - _content: '*Buscas el nombre en el historial*'
     _closeUp: 1
   - _content: Claro, en una noticia que he visto antes sobre Booble.
     _closeUp: 1
   - _content: '"BOOBLE COMPRA JUGUILEO, LA MAYOR EMPRESA DE ZUMOS DEL MUNDO"'
     _closeUp: 1
-  - _content: "\"...adem\xE1s, entre las marcas de zumos internacionales de la empresa,
+  - _content: "\"... Adem\xE1s, entre las marcas de zumos internacionales de la empresa,
       est\xE1 la espa\xF1ola Jugosol, l\xEDder absoluto de las m\xE1quinas de zumos...\""
     _closeUp: 1
-  - _content: "\"...seg\xFAn declaraciones de Batracio Cimbrel, jefe de producci\xF3n
-      de Booble Ib\xE9rica, piensan mejorar todas las m\xE1quinas que adquieran.
-      Ante la pregunta de c\xF3mo piensan hacerlo, el se\xF1or Cimbrel se ha mostrado
-      bastante misterioso al afirmar que todo se lo debemos a la modificaci\xF3n
-      7878994, un n\xFAmero que salvar\xE1 muchas vidas porque...\""
+  - _content: "\"... Seg\xFAn declaraciones de Batracio Cimbrel, jefe de producci\xF3n
+      de Booble Ib\xE9rica, piensan mejorar todas las m\xE1quinas que adquieran..."
+    _closeUp: 1
+  - _content: "\"... Ante la pregunta de c\xF3mo piensan hacerlo, el se\xF1or Cimbrel
+      se ha mostrado bastante misterioso al afirmar que todo se lo debemos a la modificaci\xF3n
+      7878994...\""
     _closeUp: 1

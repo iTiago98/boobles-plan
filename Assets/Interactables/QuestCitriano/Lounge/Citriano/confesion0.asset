@@ -40,23 +40,23 @@ MonoBehaviour:
   - _content: "Madre del amor hermoso. \xBFTiene esto algo que ver con el patio de
       los naranjos que te has montado en tu despacho?"
     _closeUp: 1
-  - _content: "Por eso empec\xE9 a plantar naranjos en mi despacho, me ayudaron unos
+  - _content: "Por eso empec\xE9 a plantar naranjos en mi despacho. Me ayudaron unos
       chicos simpatiqu\xEDsimos. "
     _closeUp: 3
   - _content: "Son especialistas en plantaciones de interiores, muy majos, aunque
       muy sentimentales. Siempre parec\xEDa que hab\xEDan llorado antes de venir."
     _closeUp: 3
-  - _content: "Est\xE1s fatal Citriano, pero eres buena persona. \xBFC\xF3mo hacemos
+  - _content: "Est\xE1s fatal, Citriano, pero eres buena persona. \xBFC\xF3mo hacemos
       ahora que ya le han hecho la modificaci\xF3n a esta m\xE1quina?"
     _closeUp: 1
-  - _content: " \xA1Sin vitamina C acabaremos toos con escorbuto en menos de una
+  - _content: "\xA1Sin vitamina C acabaremos todos con escorbuto en menos de una
       semana!"
     _closeUp: 1
   - _content: "\xBFAna, est\xE1s por ah\xED? \xBFPor casualidad no tendr\xE1s por
       ah\xED la pieza que le quitaste a la m\xE1quina de zumos?"
     _closeUp: 3
-  - _content: "Ay pues claro que s\xED, mandariniano, ahora mismo te la coloco. Os
-      he o\xEDdo y no me gusta nada lo que trama el coco."
+  - _content: "Ay, pues claro que s\xED, mandariniano, ahora mismo te la coloco.
+      Os he o\xEDdo y no me gusta nada lo que trama el coco."
     _closeUp: 2
   - _content: "\xA1Much\xEDsimas gracias! \xA1Acabas de salvar la vida a toda la
       oficina!"
@@ -66,6 +66,8 @@ MonoBehaviour:
     _closeUp: 2
   - _content: "\xA1Brindo por vosotros dos, los reyes de la vitamina! "
     _closeUp: 1
-  - _content: "Anda, pero si hab\xEDa una carta en el fondo del vaso.: \"Hipervitaminado\".
-      Qu\xE9 raro, \xBFpor qu\xE9 aparecen tantas cartas cuando celebro algo?"
+  - _content: '*Consigues "Hipervitaminado"*'
+    _closeUp: 0
+  - _content: "Qu\xE9 raro, \xBFpor qu\xE9 aparecen tantas cartas cuando celebro
+      algo?"
     _closeUp: 1

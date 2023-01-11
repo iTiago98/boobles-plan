@@ -17,17 +17,17 @@ MonoBehaviour:
   - _content: "\xA1Ah, claro, Eufrasio Patali\xE9brez, el famoso Premio Nobel de
       Metamedicina! Voy a llamarlo ahora mismo."
     _closeUp: 1
-  - _content: (Ring ring)
+  - _content: '*Ring ring*'
     _closeUp: 0
   - _content: "Dr. Patali\xE9brez: \xA1Dejen de acosarme, pienso llamar a la polic\xEDa!"
     _closeUp: 0
-  - _content: "Perdone, \xBFes usted el Doctor Patali\xE9brez? Me llamo Nella y no
-      deseo molestarle, s\xF3lo quiero preguntarle sobre su investigaci\xF3n. "
+  - _content: "Perdone, \xBFes usted el Doctor Patali\xE9brez? Me llamo Nella, y
+      no deseo molestarle. S\xF3lo quiero preguntarle sobre su investigaci\xF3n. "
     _closeUp: 1
   - _content: "Dr. Patali\xE9brez: Perdone, desde que publiqu\xE9 ese maldito estudio
       me han arruinado la vida."
     _closeUp: 0
-  - _content: "Dr. Patali\xE9brez: Antes sal\xEDa en programas de la 2, ahora estoy
+  - _content: "Dr. Patali\xE9brez: Antes sal\xEDa en programas de la 2, y ahora estoy
       hasta en el S\xE1lvame Aguacate."
     _closeUp: 0
   - _content: "\xBFSabe d\xF3nde podr\xEDa encontrar esa publicaci\xF3n?"
@@ -52,7 +52,7 @@ MonoBehaviour:
   - _content: "\xA1Much\xEDsimas gracias! Le mantendr\xE9 al tanto de todo, me da
       a m\xED que esto es m\xE1s grande de lo que creemos."
     _closeUp: 1
-  - _content: (Clic)
+  - _content: '*Clic*'
     _closeUp: 0
   - _content: "Parece que Eufrasio me ha mandado ya el fax. A ver qu\xE9 pone..."
     _closeUp: 1
@@ -61,7 +61,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "Jugosol... Me suena haber le\xEDdo ese nombre antes en el ordenador."
     _closeUp: 1
-  - _content: "A ver.. \xBFd\xF3nde era? Voy a mirar mi historial..."
+  - _content: "A ver... \xBFd\xF3nde era? Voy a mirar mi historial..."
     _closeUp: 1
   - _content: "\xA1Aqu\xED! Una noticia que le\xED antes sobre Booble."
     _closeUp: 1
@@ -84,6 +84,7 @@ MonoBehaviour:
   - _content: "\xA1Anda! \xBFY esto? En el fax ven\xEDa adjunto una especie de marca
       p\xE1ginas."
     _closeUp: 1
-  - _content: "En realidad, \xA1parece m\xE1s bien una carta! Tiene nombre y todo:
-      \"Nueva Cepa del Escorbuto\"."
+  - _content: "En realidad, \xA1parece m\xE1s bien una carta!"
     _closeUp: 1
+  - _content: '*Consigues "Nueva cepa del escorbuto"*'
+    _closeUp: 0

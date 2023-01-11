@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: (Buscar la marca)
+  - _content: '*Buscas la marca*'
     _closeUp: 1
   - _content: "Aqu\xED est\xE1, Zumos\xF3n. No me suena de nada esa marca. Creo que
       necesitar\xE9 ayuda experta..."

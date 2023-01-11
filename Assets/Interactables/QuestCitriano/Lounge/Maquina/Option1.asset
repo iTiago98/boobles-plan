@@ -33,10 +33,12 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "Creo que he visto algo por la parte de atr\xE1s, ay\xFAdame a moverla."
     _closeUp: 3
-  - _content: "Vaya Citriano, eres mucho m\xE1s fuerte de lo que parece."
+  - _content: "Vaya, Citriano, eres mucho m\xE1s fuerte de lo que parece."
     _closeUp: 1
   - _content: Uno que sabe estar bien hipervitaminado.
     _closeUp: 1
   - _content: "\xA1Lo sab\xEDa! Es de la marca Jugosol, \xBFves? Anda, \xBFy esta
       carta?"
     _closeUp: 1
+  - _content: "*Consigues \"La m\xE1quina de zumo de los supermercados\"*"
+    _closeUp: 0

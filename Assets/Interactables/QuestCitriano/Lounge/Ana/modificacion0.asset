@@ -25,5 +25,7 @@ MonoBehaviour:
   - _content: "Anda, mira, hab\xEDa una cartita de esas que coleccionas detr\xE1s
       de uno de los componentes de esta maquinona."
     _closeUp: 2
-  - _content: "\xA1Otra carta! \"Exprimir Toda la Verdad\""
+  - _content: "\xA1Otra carta!"
     _closeUp: 1
+  - _content: '*Consigues "Exprimir la verdad"*'
+    _closeUp: 0
