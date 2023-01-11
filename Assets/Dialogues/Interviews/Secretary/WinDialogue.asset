@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: WinDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Pues ya hemos terminado, Rosalinda. Te has quedado sin m\xE1s argumentos
+      que echarme a la cara para distraerme."
+    _closeUp: 1
+  - _content: "\xA1\xBFDistraerte?!"
+    _closeUp: 13
+  - _content: "Estoy intentando hacerte ver que todo esto no es m\xE1s que un golpe
+      de estado, \xA1esto es una traici\xF3n digna de un capo!"
+    _closeUp: 13
+  - _content: "Yo solo cumplo \xF3rdenes."
+    _closeUp: 1
+  - _content: "\xBF\xD3rdenes? \xA1\xBFDe qui\xE9n?! Te han convertido en una marioneta,
+      \xA1no eres m\xE1s que su mu\xF1eca de trapo!"
+    _closeUp: 13
+  - _content: "S\xF3lo intento hacer mi trabajo. Por favor, sal de mi despacho."
+    _closeUp: 1

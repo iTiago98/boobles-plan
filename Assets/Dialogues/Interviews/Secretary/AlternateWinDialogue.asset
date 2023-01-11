@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: AlternateWinDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Vaya, resulta que ya no puedes seguir mareando sin argumentos. Apuesto
+      a que nunca te hab\xEDan parado los pies de esta manera."
+    _closeUp: 1
+  - _content: "De nunca, de nunca me hab\xEDan parao a m\xED. He ven\xEDo siempre
+      con ciento y pico de anexos en afid\xE1vits."
+    _closeUp: 13
+  - _content: "Y ahora mi colega, por verlo con el aparato de cont... que l\xE1 costao
+      un dineral."
+    _closeUp: 13
+  - _content: A ver que lo ha sacao de vender mosquitas, la cosita, tal y cual...
+    _closeUp: 13
+  - _content: "Y que tiene amenaz\xE1 a to la Polic\xEDa Nacional de Alicante, \xA1y
+      van tos detr\xE1s de \xE9l!"
+    _closeUp: 13
+  - _content: "\xBFDe qu\xE9 est\xE1s hablando, Rosalinda? \xBFEst\xE1s bien?"
+    _closeUp: 1
+  - _content: "La verdad es que no. Llevo tantos a\xF1os compartimentando mi casa
+      y mi trabajo que ya no s\xE9 nada de m\xED misma."
+    _closeUp: 13
+  - _content: He visto tanta crueldad y elitismo, que ahora soy dos personas distintas.
+    _closeUp: 13
+  - _content: "\xA1No recuerdo nada de mi vida personal en el trabajo y viceversa! "
+    _closeUp: 13
+  - _content: "No te preocupes, Rosalinda, me has ayudado mucho m\xE1s de lo que
+      piensas. Tranquila, que te ir\xE1s de aqu\xED, pero te vienes conmigo."
+    _closeUp: 1
+  - _content: "Adem\xE1s, vas a tener que contarme m\xE1s sobre ese colega y su aparato..."
+    _closeUp: 1
+  - _content: "\xA1Qu\xE9 obscena! Jajajaja"
+    _closeUp: 13
