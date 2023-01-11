@@ -301,7 +301,7 @@ namespace Booble.CardGame.Dialogues
 
             if (contender.isPlayer)
             {
-                UIManager.Instance.SetEndTurnButtonInteractable(true);
+                UIManager.Instance.SetEndTurnButtonInteractable();
 
                 _continue = false;
                 yield return new WaitUntil(() => _continue);

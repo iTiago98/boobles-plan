@@ -49,5 +49,53 @@ namespace Booble.CardGame.Cards.DataModel
         {
             effects.Add(effect);
         }
+
+        public string GetNameText()
+        {
+            return name;
+        }
+
+        public string GetTypeText()
+        {
+            string s = "Tipo: ";
+            switch (type)
+            {
+                case CardType.ARGUMENT: 
+                    s += "Argumento";
+                    break;
+                case CardType.ACTION:
+                    s += "Acción";
+                    break;
+                case CardType.FIELD:
+                    s += "Campo";
+                    break;
+            }
+
+            return s;
+        }
+
+        public string GetDescriptionText()
+        {
+            string s = "";
+            foreach (CardEffect effect in effects)
+            {
+                s += effect.ToString() + "\n";
+            }
+
+            return s;
+        }
+
+        public string GetExtendedDescriptionText()
+        {
+            string s = "";
+            foreach (CardEffect effect in effects)
+            {
+                s += effect.ToStringExtended(type) + "\n";
+            }
+
+            return s;
+        }
+
+      
     }
 }

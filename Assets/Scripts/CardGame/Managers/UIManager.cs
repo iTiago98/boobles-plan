@@ -2,6 +2,7 @@ using Booble.CardGame.Cards;
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Dialogues;
 using Booble.CardGame.Level;
+using Booble.CardGame.UI;
 using Booble.CardGame.Utils;
 using Booble.Managers;
 using Booble.UI;
@@ -20,50 +21,14 @@ namespace Booble.CardGame.Managers
     {
         public static UIManager Instance { private set; get; }
 
-        #region Stats Parameters
-
-        [Header("Contenders Stats")]
-
-        [SerializeField] private GameObject playerHealthBar;
-        [SerializeField] private GameObject playerManaCounter;
-
-        [SerializeField] private Image playerHealthImage;
-        [SerializeField] private Image playerExtraHealthImage;
-        [SerializeField] private Image playerExtraHealthImage2;
-        [SerializeField] private List<Image> playerManaList;
-
-        [SerializeField] private Image opponentHealthImage;
-        [SerializeField] private Image opponentExtraHealthImage;
-        [SerializeField] private Image opponentExtraHealthImage2;
-        [SerializeField] private List<Image> opponentManaList;
-
-        [SerializeField] private Sprite fullManaCristal;
-        [SerializeField] private Sprite emptyManaCristal;
-        [SerializeField] private Sprite fullExtraManaCristal;
-        [SerializeField] private Sprite noManaCristal;
-
-        private int _shownPlayerLife;
-        private int _shownPlayerMana;
-
-        private int _shownOpponentLife;
-        private int _shownOpponentMana;
-
-        private int _defaultMaxLife;
-        private int _defaultMaxMana;
-
-        #endregion
-
-        #region Extended Description Parameters
+        [Header("Stats")]
+        [SerializeField] private StatsUI _statsUI;
 
         [Header("Extended Description")]
+        [SerializeField] private ExtendedDescriptionPanel _extendedDescriptionPanel;
 
-        [SerializeField] private GameObject extendedDescriptionPanel;
-
-        [SerializeField] private TextMeshProUGUI extendedDescriptionName;
-        [SerializeField] private TextMeshProUGUI extendedDescriptionType;
-        [SerializeField] private TextMeshProUGUI extendedDescriptionText;
-
-        #endregion
+        [Header("Turn Animation")]
+        [SerializeField] private TurnAnimation _turnAnimation;
 
         #region Deck Remaining Cards Parameters
 
@@ -82,37 +47,7 @@ namespace Booble.CardGame.Managers
 
         [SerializeField] private GameObject continuePlayButton;
         [SerializeField] private GameObject cancelPlayButton;
-
-        [SerializeField] private MyButton endTurnButton;
-
-        private const string INTERVIEW_START_BUTTON_TEXT = "Comienza la entrevista";
-        private const string ROUND_START_BUTTON_TEXT = "Comienzo de ronda";
-        private const string OPPONENTM_TURN_BUTTON_TEXT = "Turno del entrevistado";
-        private const string OPPONENTW_TURN_BUTTON_TEXT = "Turno de la entrevistada";
-        private const string PLAYER_TURN_CLASH_BUTTON_TEXT = "Batirse";
-        private const string PLAYER_TURN_SKIP_BUTTON_TEXT = "Pasar turno";
-        private const string DISCARDING_BUTTON_TEXT = "Descartando";
-        private const string CLASH_BUTTON_TEXT = "Combate";
-        private const string END_BUTTON_TEXT = "Fin de la ronda";
-
-        #endregion
-
-        #region Turn Animation
-
-        [Header("Turn Animation")]
-        [SerializeField] private Image turnAnimationImage;
-
-        [SerializeField] private Sprite _interviewStartSprite;
-        [SerializeField] private Sprite _roundStartSprite;
-        [SerializeField] private Sprite _opponentTurnMSprite;
-        [SerializeField] private Sprite _opponentTurnWSprite;
-        [SerializeField] private Sprite _playerTurnSprite;
-        [SerializeField] private Sprite _clashSprite;
-        [SerializeField] private Sprite _roundEndSprite;
-        [SerializeField] private Sprite _interviewEndSprite;
-        [SerializeField] private Sprite _interviewWinSprite;
-        [SerializeField] private Sprite _interviewLoseSprite;
-
+        [SerializeField] private EndTurnButton _endTurnButton;
         #endregion
 
         #region Steal Cards From Deck
@@ -156,12 +91,6 @@ namespace Booble.CardGame.Managers
             Instance = this;
         }
 
-        private void Start()
-        {
-            _defaultMaxLife = CardGameManager.Instance.settings.initialLife;
-            _defaultMaxMana = CardGameManager.Instance.settings.maxManaCounter;
-        }
-
         private void Update()
         {
             CheckMoveBanners();
@@ -180,240 +109,41 @@ namespace Booble.CardGame.Managers
 
         public void TurnAnimation(Turn turn)
         {
-            Debug.Log(turn);
-            TurnManager.Instance.StopFlow();
-
-            Sprite sprite = null;
-
-            switch (turn)
-            {
-                case Turn.INTERVIEW_START:
-                    sprite = _interviewStartSprite;
-                    break;
-                case Turn.ROUND_START:
-                    sprite = _roundStartSprite;
-                    break;
-                case Turn.PLAYER:
-                    sprite = _playerTurnSprite;
-                    break;
-                case Turn.OPPONENT:
-                    if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
-                        sprite = _opponentTurnWSprite;
-                    else
-                        sprite = _opponentTurnMSprite;
-                    break;
-                case Turn.DISCARDING:
-                    break;
-                case Turn.CLASH:
-                    sprite = _clashSprite;
-                    break;
-                case Turn.ROUND_END:
-                    sprite = _roundEndSprite;
-                    break;
-                case Turn.INTERVIEW_END:
-                    sprite = _interviewEndSprite;
-                    break;
-            }
-
-            TurnAnimation(sprite, turn, TurnManager.Instance.ContinueFlow);
+            _turnAnimation.SetTurnAnimation(turn);
             SetEndTurnButtonText(turn);
-        }
-
-        public void TurnAnimation(Sprite sprite, Turn turn, Action endCallback)
-        {
-            turnAnimationImage.sprite = sprite;
-
-            Sequence sequence = DOTween.Sequence();
-
-            sequence.Append(turnAnimationImage.DOFade(1, 0.5f));
-            sequence.AppendInterval(0.5f);
-            sequence.Append(turnAnimationImage.DOFade(0, 0.5f));
-            sequence.AppendCallback(() => endCallback());
-
-            sequence.Play();
-            SetEndTurnButtonInteractable(false);
         }
 
         #endregion
 
         #region Stats
 
-        public GameObject GetPlayerHealthBar() => playerHealthBar;
-        public GameObject GetPlayerManaCounter() => playerManaCounter;
+        public GameObject GetPlayerHealthBar() => _statsUI.GetPlayerHealthBar();
+        public GameObject GetPlayerManaCounter() => _statsUI.GetPlayerManaCounter();
 
-        public bool statsUpdated { private set; get; }
-        private bool _hideEmptyCristals;
-
-        public void UpdateUIStats(bool hideEmptyCristals = false)
-        {
-            _hideEmptyCristals = hideEmptyCristals;
-            StartCoroutine(UpdateUIStatsCoroutine());
-        }
-
-        private IEnumerator UpdateUIStatsCoroutine()
-        {
-            Contender player = CardGameManager.Instance.player;
-            Contender opponent = CardGameManager.Instance.opponent;
-
-            statsUpdated = false;
-
-            int loops = Mathf.Max(
-                Mathf.Abs(player.life - _shownPlayerLife),
-                Mathf.Abs(player.currentMana - _shownPlayerMana),
-                Mathf.Abs(opponent.life - _shownOpponentLife),
-                Mathf.Abs(opponent.currentMana - _shownOpponentMana)
-                );
-
-            for (int i = 0; i < loops; i++)
-            {
-                SetStats(player.life, player.currentMana, player.currentMaxMana, player.extraMana,
-                    opponent.life, opponent.currentMana, opponent.currentMaxMana, opponent.extraMana);
-
-                yield return new WaitForSeconds(0.1f);
-            }
-
-            yield return new WaitUntil(() =>
-                _shownPlayerLife == player.life && _shownPlayerMana == player.currentMana
-                && _shownOpponentLife == opponent.life && _shownOpponentMana == opponent.currentMana);
-
-            statsUpdated = true;
-        }
-
-        private void SetStats(int playerCurrentLife, int playerCurrentMana, int playerCurrentMaxMana, int playerExtraMana,
-            int opponentCurrentLife, int opponentCurrentMana, int opponentCurrentMaxMana, int opponentExtraMana)
-        {
-            if (_shownPlayerLife != playerCurrentLife)
-                SetHealth(playerHealthImage, playerExtraHealthImage, playerExtraHealthImage2, ref _shownPlayerLife, playerCurrentLife);
-            if (_shownOpponentLife != opponentCurrentLife)
-                SetHealth(opponentHealthImage, opponentExtraHealthImage, opponentExtraHealthImage2, ref _shownOpponentLife, opponentCurrentLife);
-
-            if (_shownPlayerMana != playerCurrentMana)
-                SetMana(playerManaList, ref _shownPlayerMana, playerCurrentMana, playerCurrentMaxMana, playerExtraMana);
-            if (_shownOpponentMana != opponentCurrentMana)
-                SetMana(opponentManaList, ref _shownOpponentMana, opponentCurrentMana, opponentCurrentMaxMana, opponentExtraMana);
-        }
-
-        private void SetHealth(Image healthImage, Image extraHealthImage, Image extraHealthImage2, ref int shownLife, int currentLife)
-        {
-            if (shownLife < currentLife) shownLife++;
-            else shownLife--;
-
-            healthImage.fillAmount = (float)shownLife / _defaultMaxLife;
-
-            if (shownLife >= _defaultMaxLife) extraHealthImage.fillAmount = (float)(shownLife - _defaultMaxLife) / _defaultMaxLife;
-            if (shownLife >= (_defaultMaxLife * 2)) extraHealthImage2.fillAmount = (float)(shownLife - (_defaultMaxLife * 2)) / _defaultMaxLife;
-        }
-
-        private void SetMana(List<Image> manaList, ref int shownMana, int currentMana, int currentMaxMana, int extraMana)
-        {
-            //Debug.Log("Shown Mana: " + shownMana + " - CurrentMana: " + currentMana);
-            if (shownMana < currentMana)
-            {
-                //Debug.Log("1: Mana " + (shownMana) + " full");
-                if (IsExtraMana(extraMana, currentMaxMana, shownMana))
-                    manaList[_defaultMaxMana + (shownMana - currentMaxMana + extraMana)].sprite = fullExtraManaCristal;
-
-                else manaList[shownMana].sprite = fullManaCristal;
-
-                shownMana++;
-            }
-            else
-            {
-                //Debug.Log("2: Mana " + (shownMana - 1) + " empty");
-                shownMana--;
-                int index;
-                if (IsExtraMana(extraMana, currentMaxMana, shownMana)) index = _defaultMaxMana + (shownMana - currentMaxMana + extraMana);
-                else index = shownMana;
-
-                manaList[index].sprite = _hideEmptyCristals ? noManaCristal : emptyManaCristal;
-            }
-        }
-
-        private bool IsExtraMana(int extraMana, int currentMaxMana, int shownMana)
-        {
-            return extraMana > 0
-                && (currentMaxMana - shownMana) <= extraMana
-                && (currentMaxMana - extraMana) <= _defaultMaxMana;
-        }
-
-        public void UpdateMaxMana(Contender contender, int newMaxMana)
-        {
-            List<Image> manaList = (contender.role == Contender.Role.PLAYER) ? playerManaList : opponentManaList;
-            manaList[newMaxMana - 1].sprite = emptyManaCristal;
-        }
+        public bool statsUpdated => _statsUI.statsUpdated;
+        public void UpdateUIStats(bool hideEmptyCristals = false) { _statsUI.UpdateUIStats(hideEmptyCristals); }
+        public void UpdateMaxMana(Contender contender, int mana) { _statsUI.UpdateMaxMana(contender, mana); }
 
         #endregion
 
         #region End Turn Button
 
-        public void OnEndTurnButtonClick()
-        {
-            if (CardGameManager.Instance.tutorial)
-            {
-                TutorialDialogue t = CardGameManager.Instance.GetTutorial();
-                if (t != null) t.GetTutorialAnimation().Continue();
-            }
-            else
-                TurnManager.Instance.FinishTurn();
-        }
-
-        public bool IsEndTurnButtonInteractable() { return endTurnButton.IsInteractable(); }
-
-        public void SetEndTurnButtonInteractable(bool interactable)
-        {
-            endTurnButton.SetInteractable(interactable);
-        }
-
-        private void SetEndTurnButtonText(Turn turn)
-        {
-            switch (turn)
-            {
-                case Turn.INTERVIEW_START:
-                    endTurnButton.SetText(INTERVIEW_START_BUTTON_TEXT); break;
-
-                case Turn.ROUND_START:
-                    endTurnButton.SetText(ROUND_START_BUTTON_TEXT); break;
-
-                case Turn.OPPONENT:
-                    if (DeckManager.Instance.GetOpponentName() == Opponent_Name.Secretary)
-                        endTurnButton.SetText(OPPONENTW_TURN_BUTTON_TEXT);
-                    else
-                        endTurnButton.SetText(OPPONENTM_TURN_BUTTON_TEXT);
-                    break;
-
-                case Turn.PLAYER:
-                    if (TurnManager.Instance.GetSkipCombat())
-                        endTurnButton.SetText(PLAYER_TURN_SKIP_BUTTON_TEXT);
-                    else
-                        endTurnButton.SetText(PLAYER_TURN_CLASH_BUTTON_TEXT);
-                    break;
-
-                case Turn.DISCARDING:
-                    endTurnButton.SetText(DISCARDING_BUTTON_TEXT); break;
-
-                case Turn.CLASH:
-                    endTurnButton.SetText(CLASH_BUTTON_TEXT); break;
-
-                case Turn.ROUND_END:
-                    endTurnButton.SetText(END_BUTTON_TEXT); break;
-            }
-        }
+        private void SetEndTurnButtonText(Turn turn) { _endTurnButton.SetEndTurnButtonText(turn); }
+        public void SetEndTurnButtonInteractable(bool value = true) { _endTurnButton.SetEndTurnButtonInteractable(value); }
+        public bool IsEndTurnButtonInteractable() => _endTurnButton.IsEndTurnButtonInteractable();
 
         #endregion
 
         #region Extended Description
 
-        public void ShowExtendedDescription(string name, string type, string description)
+        public void ShowExtendedDescription(CardsData data)
         {
-            extendedDescriptionName.text = name;
-            extendedDescriptionType.text = type;
-            extendedDescriptionText.text = description;
-            extendedDescriptionPanel.SetActive(true);
+            _extendedDescriptionPanel.Show(data);
         }
 
         public void HideExtendedDescription()
         {
-            extendedDescriptionPanel.SetActive(false);
+            _extendedDescriptionPanel.Hide();
         }
 
         #endregion
@@ -455,7 +185,7 @@ namespace Booble.CardGame.Managers
                 else Board.Instance.RemoveCardZonesHighlight(holdingCard);
 
                 HidePlayButtons();
-                SetEndTurnButtonInteractable(true);
+                SetEndTurnButtonInteractable();
                 MouseController.Instance.SetHolding(null);
                 CardGameManager.Instance.SetPlayingCard(false);
             }
@@ -498,26 +228,6 @@ namespace Booble.CardGame.Managers
 
         #endregion
 
-        #region Particle Systems 
-
-        //public GameObject ShowParticlesEffectApply(Transform parent)
-        //{
-        //    return Instantiate(particleSystem_effectApply_Prefab, parent);
-        //}
-
-        //public void ShowParticlesEffectTargetPositive(Transform parent)
-        //{
-        //    Instantiate(particleSystem_effectTargetPositive_Prefab, parent);
-        //}
-
-        //public void ShowParticlesEffectTargetNegative(Transform parent)
-        //{
-        //    Instantiate(particleSystem_effectTargetNegative_Prefab, parent);
-        //}
-
-
-        #endregion
-
         #region Interview Start
 
         public void InitializeBanners(Sprite image)
@@ -553,8 +263,7 @@ namespace Booble.CardGame.Managers
 
         public void InterviewEndAnimation(bool win, Action endCallback)
         {
-            if (win) TurnAnimation(_interviewWinSprite, Turn.INTERVIEW_END, endCallback);
-            else TurnAnimation(_interviewLoseSprite, Turn.INTERVIEW_END, endCallback);
+            _turnAnimation.SetInterviewEndAnimation(win, endCallback);
         }
 
         public void ShowLoseMenu()
