@@ -1,5 +1,9 @@
+using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Managers;
+using Booble.Flags;
 using Booble.Managers;
+using DG.Tweening;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +15,15 @@ namespace Booble.UI
 
         [SerializeField] private GameObject _pauseMenu;
 
-        [SerializeField] private GameObject _mainMenu;
-        [SerializeField] private GameObject _optionsMenu;
+        [SerializeField] private GameObject _mainMenuPanel;
 
+        [Header("Cards Menu")]
+        [SerializeField] private GameObject _cardsMenuPanel;
+        [SerializeField] private CardMenu _cardMenu;
+        [SerializeField] private ExtendedDescriptionPanel _extendedDescription;
+
+        [Header("Options Menu")]
+        [SerializeField] private GameObject _optionsMenuPanel;
         [SerializeField] private Slider _generalMusicSlider;
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
@@ -36,7 +46,8 @@ namespace Booble.UI
         {
             if (_pauseMenu.activeSelf)
             {
-                OnBackButtonClick();
+                OnOptionsBackButtonClick();
+                OnCardsBackButtonClick();
                 _pauseMenu.SetActive(false);
             }
             else
@@ -50,32 +61,44 @@ namespace Booble.UI
             GameManager.Instance.ResumeGame();
         }
 
+        #region Cards Menu
+
+        public void OnCardsButtonClick()
+        {
+            _mainMenuPanel.SetActive(false);
+            _cardsMenuPanel.SetActive(true);
+
+            _cardMenu.SetCardsMenu();
+        }
+
+        public void OnCardsBackButtonClick()
+        {
+            _cardsMenuPanel.SetActive(false);
+            _mainMenuPanel.SetActive(true);
+        }
+
+        public void ShowExtendedDescription(CardsData data)
+        {
+            _extendedDescription.Show(data);
+        }
+
+        public void HideExtendedDescription()
+        {
+            _extendedDescription.Hide();
+        }
+
+        #endregion
+
+        #region Options Menu
+
         public void OnOptionsButtonClick()
         {
-            _mainMenu.SetActive(false);
-            _optionsMenu.SetActive(true);
+            _mainMenuPanel.SetActive(false);
+            _optionsMenuPanel.SetActive(true);
 
             _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
             _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
             _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
-        }
-
-        public void OnReturnToMenuButtonClick()
-        {
-            GameManager.Instance.ResumeGame();
-
-            if (SceneLoader.Instance.InInterview)
-            {
-                SceneLoader.Instance.UnloadInterviewScene();
-                if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
-            }
-            else if (SceneLoader.Instance.InExploration) SceneLoader.Instance.LoadMainMenuScene();
-        }
-
-        public void OnBackButtonClick()
-        {
-            _mainMenu.SetActive(true);
-            _optionsMenu.SetActive(false);
         }
 
         public void OnGeneralMusicValueChanged(System.Single value)
@@ -91,6 +114,26 @@ namespace Booble.UI
         public void OnSFXMusicSliderValueChanged(System.Single value)
         {
             MusicManager.Instance.ChangeSFXVolume(value);
+        }
+
+        public void OnOptionsBackButtonClick()
+        {
+            _mainMenuPanel.SetActive(true);
+            _optionsMenuPanel.SetActive(false);
+        }
+
+        #endregion
+
+        public void OnReturnToMenuButtonClick()
+        {
+            GameManager.Instance.ResumeGame();
+
+            if (SceneLoader.Instance.InInterview)
+            {
+                SceneLoader.Instance.UnloadInterviewScene();
+                if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+            }
+            else if (SceneLoader.Instance.InExploration) SceneLoader.Instance.LoadMainMenuScene();
         }
     }
 }

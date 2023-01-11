@@ -1,4 +1,4 @@
- using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using Booble.CardGame;
 using Booble.CardGame.Cards.DataModel;
@@ -90,7 +90,6 @@ namespace Booble.Managers
 
         public void AddGranFinal()
         {
-            Debug.Log("ADD1");
             AddCard(playerExtraCards[0]);
         }
 
@@ -273,6 +272,164 @@ namespace Booble.Managers
         public void AddHaPerdidoUsteLosPapelePlus()
         {
             AddCard(bossExtraCards[2]);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Get Extra Cards
+
+        public CardsData GetGranFinal()
+        {
+            if (_playerDeck.Contains(playerExtraCards[0])) return playerExtraCards[0];
+            return null;
+        }
+
+        #region Citriano
+
+        public List<CardsData> GetCitrianoExtraCards()
+        {
+            List<CardsData> cards = new List<CardsData>()
+            {
+                GetHipervitaminado(),
+                GetNuevaCepaDelEscorbuto(),
+                GetExprimirLaVerdad(),
+                GetMaquinaDeZumos()
+            };
+
+            return cards;
+        }
+        private CardsData GetHipervitaminado()
+        {
+            if (_playerDeck.Contains(citrianoExtraCards[0])) return citrianoExtraCards[0];
+            else return null;
+        }
+        private CardsData GetNuevaCepaDelEscorbuto()
+        {
+            if (_playerDeck.Contains(citrianoExtraCards[1])) return citrianoExtraCards[1];
+            else return null;
+        }
+        private CardsData GetExprimirLaVerdad()
+        {
+            if (_playerDeck.Contains(citrianoExtraCards[2])) return citrianoExtraCards[2];
+            else return null;
+        }
+        private CardsData GetMaquinaDeZumos()
+        {
+            if (_playerDeck.Contains(citrianoExtraCards[3])) return citrianoExtraCards[3];
+            else return null;
+        }
+
+        #endregion
+        
+        #region PPBros
+
+        public List<CardsData> GetPPBrosExtraCards()
+        {
+            List<CardsData> cards = new List<CardsData>()
+            {
+                GetVictoriaPorDesgaste(),
+                GetPared(),
+                GetPalaDeNocobich(),
+                GetGomuGomuNo(),
+                GetPelotaBomba()
+            };
+
+            return cards;
+        }
+        private CardsData GetVictoriaPorDesgaste()
+        {
+            if (_playerDeck.Contains(ppBrosExtraCards[0])) return ppBrosExtraCards[0];
+            else return null;
+        }
+        private CardsData GetPared()
+        {
+            if (_playerDeck.Contains(ppBrosExtraCards[1])) return ppBrosExtraCards[1];
+            else return null;
+        }
+        private CardsData GetPalaDeNocobich()
+        {
+            if (_playerDeck.Contains(ppBrosExtraCards[2])) return ppBrosExtraCards[2];
+            else return null;
+        }
+        private CardsData GetGomuGomuNo()
+        {
+            if (_playerDeck.Contains(ppBrosExtraCards[3])) return ppBrosExtraCards[3];
+            else return null;
+        }
+        private CardsData GetPelotaBomba()
+        {
+            if (_playerDeck.Contains(ppBrosExtraCards[4])) return ppBrosExtraCards[4];
+            else return null;
+        }
+
+        #endregion
+
+        #region Secretary
+
+        public List<CardsData> GetSecretaryExtraCards()
+        {
+            List<CardsData> cards = new List<CardsData>()
+            {
+                GetHaPerdidoUsteLosPapele(),
+                GetTraigoLosAnexosCorrespondientes(),
+                GetAfidavit(),
+                GetResaltarUnaContradicción()
+            };
+
+            return cards;
+        }
+        private CardsData GetHaPerdidoUsteLosPapele()
+        {
+            if (_playerDeck.Contains(secretaryExtraCards[0])) return secretaryExtraCards[0];
+            else return null;
+        }
+        private CardsData GetTraigoLosAnexosCorrespondientes()
+        {
+            if (_playerDeck.Contains(secretaryExtraCards[1])) return secretaryExtraCards[1];
+            else return null;
+        }
+        private CardsData GetAfidavit()
+        {
+            if (_playerDeck.Contains(secretaryExtraCards[2])) return secretaryExtraCards[2];
+            else return null;
+        }
+        private CardsData GetResaltarUnaContradicción()
+        {
+            if (_playerDeck.Contains(secretaryExtraCards[3])) return secretaryExtraCards[3];
+            else return null;
+        }
+
+        #endregion
+        
+        #region Boss
+
+        public List<CardsData> GetBossExtraCards()
+        {
+            List<CardsData> cards = new List<CardsData>()
+            {
+                GetHipervitaminadoPlus(),
+                GetVictoriaPorDesgastePlus(),
+                GetHaPerdidoUsteLosPapelePlus(),
+            };
+
+            return cards;
+        }
+        private CardsData GetHipervitaminadoPlus()
+        {
+            if (_playerDeck.Contains(bossExtraCards[0])) return bossExtraCards[0];
+            else return null;
+        }
+        private CardsData GetVictoriaPorDesgastePlus()
+        {
+            if (_playerDeck.Contains(bossExtraCards[1])) return bossExtraCards[1];
+            else return null;
+        }
+        private CardsData GetHaPerdidoUsteLosPapelePlus()
+        {
+            if (_playerDeck.Contains(bossExtraCards[2])) return bossExtraCards[2];
+            else return null;
         }
 
         #endregion

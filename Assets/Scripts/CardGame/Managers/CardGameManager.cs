@@ -56,6 +56,7 @@ namespace Booble.CardGame.Managers
         public bool tutorial { private set; get; }
         public void StartTutorial() => tutorial = true;
         public void FinishTutorial() => tutorial = false;
+        public void ContinueTutorial() => GetTutorial()?.GetTutorialAnimation().Continue();
         public TutorialDialogue GetTutorial()
         {
             if(_interviewDialogue != null && _interviewDialogue is TutorialDialogue)
