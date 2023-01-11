@@ -24,13 +24,13 @@ MonoBehaviour:
     _closeUp: 8
   - _content: "\xBFY eso qu\xE9 tiene que ver?"
     _closeUp: 1
-  - _content: "Una vez se reconstruy\xF3 todo la gente empez\xF3 a dejar de comer,
-      todos dec\xEDan que no les sab\xEDa a nada."
+  - _content: "Una vez se reconstruy\xF3 todo, la gente empez\xF3 a dejar de comer.
+      Todos dec\xEDan que no les sab\xEDa a nada."
     _closeUp: 8
   - _content: "Muchos estudios confirman que tras una guerra un pa\xEDs entero puede
       sufrir S\xEDndrome de Estr\xE9s Postraum\xE1tico."
     _closeUp: 1
-  - _content: "La gente puede acabar un poco loca\u2026"
+  - _content: La gente puede acabar un poco loca...
     _closeUp: 1
   - _content: "\xBFY eso qu\xE9 tiene que ver?"
     _closeUp: 8
@@ -40,12 +40,13 @@ MonoBehaviour:
   - _content: "Ahora se usa como condimento, tanto o m\xE1s que la pimienta y casi
       como la sal."
     _closeUp: 8
-  - _content: "Incre\xEDble\u2026 \xBFOye y no tendr\xE1s un poco por ah\xED? Es
-      para una amiga, claro."
+  - _content: "Incre\xEDble... \xBFOye y no tendr\xE1s un poco por ah\xED? Es para
+      una amiga, claro."
     _closeUp: 1
-  - _content: "S\xED, s\xED, todos dicen lo mismo. \xA1Pero luego vuelven a por m\xE1s!
-      Toma."
-    _closeUp: 1
+  - _content: "S\xED, s\xED, todos dicen lo mismo. \xA1Pero luego vuelven a por m\xE1s!"
+    _closeUp: 8
+  - _content: Toma.
+    _closeUp: 8
   - _content: "Ah, \xA1pero si lo que gritabas era la marca! [P\xD3LVORA(R) \u201CLo
       mejor que hay\u201D]"
     _closeUp: 1
