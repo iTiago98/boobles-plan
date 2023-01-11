@@ -16,14 +16,14 @@ MonoBehaviour:
   _sentences:
   - _content: "Hortensia Pinar al aparato, \xBFd\xEDgame?"
     _closeUp: 0
-  - _content: "Buenas tardes Do\xF1a Hortensia, me llamo Daniella Laphant. Soy compa\xF1era
-      de su marido Pedro Ponzano."
+  - _content: "Buenas tardes, do\xF1a Hortensia, me llamo Daniella Laphant. Soy compa\xF1era
+      de su marido, Pedro Ponzano."
     _closeUp: 1
   - _content: "\xBFPedro, ese botarate? Yo lo maldigo, a \xE9l y a su compa\xF1ero
-      de correr\xEDas Pablo."
+      de correr\xEDas Pepe."
     _closeUp: 0
   - _content: "Tienen que estar usted y la se\xF1ora Ponzano muy preocupadas."
     _closeUp: 1
-  - _content: "Mire se\xF1orita Laphant, eso ya pas\xF3, ahora solo estamos despechadas,
+  - _content: "Mire, se\xF1orita Laphant, eso ya pas\xF3. Ahora solo estamos despechadas,
       desconsoladas y desubicadas."
     _closeUp: 0

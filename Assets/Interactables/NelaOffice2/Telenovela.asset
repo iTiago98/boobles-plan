@@ -16,7 +16,7 @@ MonoBehaviour:
   _sentences:
   - _content: F***ar En Tiempos Remuertos. Es mi favorita.
     _closeUp: 0
-  - _content: "Ah s\xED, mi abuela la ve\xEDa. \xBFEs que siguen reponi\xE9ndola?"
+  - _content: "Ah, s\xED, mi abuela la ve\xEDa. \xBFEs que siguen reponi\xE9ndola?"
     _closeUp: 1
   - _content: "\xA1Qu\xE9 va! Si es el cap\xEDtulo de hoy, el n\xFAmero 1239732189490."
     _closeUp: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
   - _content: "Tiene un plan maestro para destruir a la familia de Don Aureliano
       Mald\xEDa."
     _closeUp: 0
-  - _content: "Me estoy perdiendo, \xBFpero a ella de qu\xE9 familia es?"
+  - _content: "Me estoy perdiendo. \xBFPero ella de qu\xE9 familia es?"
     _closeUp: 1
   - _content: "\xA1Ella es tataranieta de Don Aureliano! Ha cogido el apellido Pleistoceno
       para ganar aliados contra los Mald\xEDa."

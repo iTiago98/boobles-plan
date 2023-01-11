@@ -17,5 +17,5 @@ MonoBehaviour:
   - _content: "Much\xEDsimas gracias por su colaboraci\xF3n, la mantendr\xE9 al tanto
       si consigo averiguar algo."
     _closeUp: 1
-  - _content: (Click)
+  - _content: '*Cuelga*'
     _closeUp: 1

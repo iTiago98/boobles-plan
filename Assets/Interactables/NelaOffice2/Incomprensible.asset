@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "\xA1Por fin! Todo el mundo parece que est\xE1 encantado con esta locura,
-      pero no podemos m\xE1s con esta incertidumbre."
+  - _content: "\xA1Por fin! Todo el mundo parece encantado con esta locura, pero
+      no podemos m\xE1s con esta incertidumbre."
     _closeUp: 0
   - _content: "\xA1Esos dos no son nuestros maridos!"
     _closeUp: 0

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Muchas gracias bonita, pero primero que se duchen, \xA1que tienen
+  - _content: "Muchas gracias, bonita. Pero primero que se duchen, \xA1que tienen
       que oler a zorruno!"
     _closeUp: 0

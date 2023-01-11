@@ -18,12 +18,12 @@ MonoBehaviour:
     _closeUp: 0
   - _content: "Pero bueno, \xBFes que no piensan hacer nada por recuperar a sus maridos?"
     _closeUp: 1
-  - _content: "\xA1Pero si no nos dejan entrar ni a la entrada! Estuvimos yendo todos
-      los d\xEDas durante meses, de repente no nos dejaban entrar."
+  - _content: "\xA1Pero si no nos dejan llegar ni a la entrada! Estuvimos yendo todos
+      los d\xEDas durante meses, pero no nos dejaban pasar."
     _closeUp: 0
   - _content: "Dec\xEDan que era la nueva pol\xEDtica de la empresa o algo as\xED."
     _closeUp: 0
-  - _content: "Eso suena muy raro\u2026 Llevo poco tiempo, pero no me suena esa nueva
+  - _content: "Eso suena muy raro... Llevo poco tiempo, pero no me suena esa nueva
       pol\xEDtica de impedir la entrada a las familias."
     _closeUp: 1
   - _content: "Perm\xEDtame que lo investigue."

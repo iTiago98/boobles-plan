@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: '"PEDRO PINAR Y PABLO PONZANO, ACUDAN A MI DESPUACHO"'
+  - _content: '"PEDRO PINAR Y PABLO PONZANO, ACUDAN A MI DESPACHO".'
     _closeUp: 1
   - _content: Ya le dije yo a Queca que iba a parecer la Dire del cole...
     _closeUp: 1
