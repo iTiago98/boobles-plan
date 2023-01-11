@@ -15,5 +15,5 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "\xA1Mira, aqu\xED est\xE1 la llave! Un momento, si esta empresa ahora
-      usa tarjetas magn\xE9ticas\u2026"
+      usa tarjetas magn\xE9ticas..."
     _closeUp: 1
