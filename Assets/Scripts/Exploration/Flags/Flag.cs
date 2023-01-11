@@ -79,7 +79,9 @@ namespace Booble.Flags
             TarjetaObtenida,
             LlaveObtenida,
             GuanteMencionado,
-            GuanteObtenido
+            GuanteObtenido,
+            Car2,
+            Car3
         }
 
         [SerializeField] private Reference _flagReference;

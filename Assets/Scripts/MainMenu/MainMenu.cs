@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System.Collections.Generic;
 using Booble.CardGame;
+using Booble.Interactables.Dialogues;
 using Booble.Managers;
+using UnityEditor;
 using UnityEngine.UI;
 
 namespace Booble.MainMenu
@@ -42,10 +44,40 @@ namespace Booble.MainMenu
         {
             if (_onTween)
                 return;
-
-            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            
             SceneLoader.Instance.LoadScene(Scenes.CAR_0);
             MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+        }
+
+        [ContextMenu("Start Day 0")]
+        public void StartDay0()
+        {
+            Debug.Log("0: " + FlagManager.Instance.GetFlag(Flag.Reference.Car0));
+            Debug.Log("1: " + FlagManager.Instance.GetFlag(Flag.Reference.Car1));
+            Debug.Log("2: " + FlagManager.Instance.GetFlag(Flag.Reference.Car2));
+            SceneLoader.Instance.LoadScene(Scenes.CAR_0);
+            MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+        }
+
+        [ContextMenu("Start Day 1")]
+        public void StartDay1()
+        {
+            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            StartDay0();
+        }
+        
+        [ContextMenu("Start Day 2")]
+        public void StartDay2()
+        {
+            FlagManager.Instance.SetFlag(Flag.Reference.Car1);
+            StartDay1();
+        }
+        
+        [ContextMenu("Start Day 3")]
+        public void StartDay3()
+        {
+            FlagManager.Instance.SetFlag(Flag.Reference.Car2);
+            StartDay2();
         }
 
         #region Card Game
