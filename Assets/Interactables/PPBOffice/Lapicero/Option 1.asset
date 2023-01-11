@@ -17,5 +17,5 @@ MonoBehaviour:
   - _content: "Goma de borrar Mil\xE1n Nata 2... Pues eso, goma 2. Yo se la llevo,
       vaya a ser."
     _closeUp: 1
-  - _content: (Coges la goma 2)
+  - _content: '*Coges la goma 2*'
     _closeUp: 1

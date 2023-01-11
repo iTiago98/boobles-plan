@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Las fotos de varios j\xF3venes. Bastante guapos todos de hecho."
+  - _content: "Las fotos de varios j\xF3venes. Bastante guapos todos, de hecho."
     _closeUp: 1
-  - _content: "Ufff... pero sin ninguna duda el m\xE1s guapo de todos es este de
+  - _content: "Ufff... Pero sin ninguna duda el m\xE1s guapo de todos es este de
       aqu\xED abajo a la derecha."
     _closeUp: 1
-  - _content: "\xA1Pero bueno qui\xE9n es esta preciosidad, si parece un angelito!"
+  - _content: "\xA1Pero bueno, qui\xE9n es esta preciosidad, si parece un angelito!"
     _closeUp: 1
   - _content: "No, Nela, c\xE9ntrate, no es momento de distraerse con chavales supermon\xEDsimos."
     _closeUp: 1
