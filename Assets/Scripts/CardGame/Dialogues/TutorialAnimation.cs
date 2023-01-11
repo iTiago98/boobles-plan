@@ -115,7 +115,7 @@ namespace Booble.CardGame.Dialogues
             yield return new WaitWhile(() => _coroutine);
 
             _coroutine = true;
-            StartCoroutine(ClashCoroutine(null, _fieldCardsExplanation2));
+            StartCoroutine(ClashCoroutine(null, _fieldCardsExplanation2, true));
             yield return new WaitWhile(() => _coroutine);
 
             StartCoroutine(EndCoroutine());
@@ -260,6 +260,12 @@ namespace Booble.CardGame.Dialogues
                 CardGameManager.Instance.DisableMouseController();
                 MouseController.Instance.RemoveTutorialCard();
 
+                if (dialogueAfterWaitingSpot != null)
+                {
+                    StartDialogue(dialogueAfterWaitingSpot);
+                    yield return new WaitUntil(() => _continue);
+                }
+
                 if (card.IsArgument)
                 {
                     Board.Instance.RemoveHighlight(card);
@@ -269,13 +275,6 @@ namespace Booble.CardGame.Dialogues
                 {
                     Board.Instance.RemoveHighlight(card);
                     _opponent.cardZones[zone].GetCard().ShowHighlight();
-                }
-
-                if (dialogueAfterWaitingSpot != null)
-                {
-                    StartDialogue(dialogueAfterWaitingSpot);
-                    yield return new WaitUntil(() => _continue);
-                    yield return new WaitForSeconds(0.5f);
                 }
 
                 CardGameManager.Instance.EnableMouseController();
@@ -320,7 +319,7 @@ namespace Booble.CardGame.Dialogues
             _coroutine = false;
         }
 
-        private IEnumerator ClashCoroutine(Dialogue dialogueAfterClash = null, Dialogue dialogueAfterRound = null)
+        private IEnumerator ClashCoroutine(Dialogue dialogueAfterClash = null, Dialogue dialogueAfterRound = null, bool end = false)
         {
             UIManager.Instance.TurnAnimation(TurnManager.Turn.CLASH);
             yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
@@ -347,13 +346,17 @@ namespace Booble.CardGame.Dialogues
                 yield return new WaitUntil(() => _continue);
             }
 
-            UIManager.Instance.TurnAnimation(TurnManager.Turn.ROUND_START);
-            yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+            if (!end)
+            {
 
-            CardGameManager.Instance.FillMana();
-            UIManager.Instance.UpdateUIStats();
+                UIManager.Instance.TurnAnimation(TurnManager.Turn.ROUND_START);
+                yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
-            yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+                CardGameManager.Instance.FillMana();
+                UIManager.Instance.UpdateUIStats();
+
+                yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
+            }
 
             _coroutine = false;
         }
