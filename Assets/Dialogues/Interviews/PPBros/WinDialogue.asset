@@ -19,14 +19,14 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "\xBFPero qu\xE9 comportamiento? \xA1Si somos los reyes del BooTube!
       \xA1Les estamos haciendo ganar m\xE1s dinero que cuando trabaj\xE1bamos!"
-    _closeUp: 1
+    _closeUp: 11
   - _content: "Booble no puede permitirse dar esa imagen de vagueza e irresponsabilidad
       laboral. Adem\xE1s, eso para ellos no es dinero."
     _closeUp: 1
   - _content: A ver, chata, que acabas de llegar y no te enteras ni media.
-    _closeUp: 1
+    _closeUp: 10
   - _content: "Te crees que est\xE1s ayudando y solo est\xE1s d\xE1ndoles m\xE1s
       poder para echarnos."
-    _closeUp: 1
+    _closeUp: 10
   - _content: "Anda, v\xE1monos, Pedri, que aqu\xED est\xE1 tol pescau vend\xEDo."
-    _closeUp: 1
+    _closeUp: 11

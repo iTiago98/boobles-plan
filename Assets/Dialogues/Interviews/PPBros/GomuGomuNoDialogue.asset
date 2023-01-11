@@ -18,11 +18,11 @@ MonoBehaviour:
       pl\xE1stico?"
     _closeUp: 1
   - _content: "Atiende, Pepote, que la ni\xF1a se cree que ha descubierto las am\xE9ricas."
-    _closeUp: 1
+    _closeUp: 10
   - _content: "No, si ahora le vas a ense\xF1ar a follar a tu padre. Ay que me troncho."
-    _closeUp: 1
+    _closeUp: 11
   - _content: "Pero si nosotros hac\xEDamos barrenos con las gomas del colegio para
       asustar a los frailes."
-    _closeUp: 1
+    _closeUp: 10
   - _content: Llevamos explotando cosas desde antes de aprender a hablar.
-    _closeUp: 1
+    _closeUp: 10

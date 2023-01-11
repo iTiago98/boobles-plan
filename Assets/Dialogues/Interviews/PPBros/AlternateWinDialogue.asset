@@ -21,15 +21,15 @@ MonoBehaviour:
     _closeUp: 1
   - _content: Cuidau el figura... Menuda somanta de hostias le pienso dar en cuanto
       lo vea.
-    _closeUp: 1
+    _closeUp: 10
   - _content: Tranquilo, Conan, que ese es capaz de denunciarnos y to.
-    _closeUp: 1
+    _closeUp: 11
   - _content: "No os preocup\xE9is, ya se lo ha llevado la polic\xEDa. Todo pinta
       a que a partir de ahora vais a ser el menor de sus problemas."
     _closeUp: 1
   - _content: "Bueno, y ahora qu\xE9, chatina, \xBFnos vas a echar o qu\xE9? Porque
       con tantos a\xF1os que llevamos aqu\xED el finiquito va a ser de \xF3rdago."
-    _closeUp: 1
+    _closeUp: 10
   - _content: "Y vaya si os lo vais a llevar, pero de iros al paro nada. Me vais
       a ayudar a desenredar esta conspiraci\xF3n."
     _closeUp: 1

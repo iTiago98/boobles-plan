@@ -15,11 +15,11 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "\xA1Ole tus huevazos, Pepoide! \xA1Que nos vamos de rositas!"
-    _closeUp: 1
+    _closeUp: 10
   - _content: La verdad es que no veo ninguna manera de rebatir vuestros argumentos.
     _closeUp: 1
   - _content: "Os vais pasando la bola de tal manera que me ten\xE9is mareada."
     _closeUp: 1
   - _content: "\xA1Vamos pal lounge, que todav\xEDa tenemos que acabar el punto,
       Pedr\xF3nimo!"
-    _closeUp: 1
+    _closeUp: 11

@@ -22,7 +22,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "\xBFQui\xE9n, Faf\xEDn? Nosajod\xEDo, es nuestro ahijado, \xA1el hijo
       de Faf\xE1 Nadar, ni m\xE1s ni menos!"
-    _closeUp: 1
+    _closeUp: 10
   - _content: "Y a esa amiga... \xBFle gustan los animales? Porque es de un furro
       el travieso..."
-    _closeUp: 1
+    _closeUp: 11
