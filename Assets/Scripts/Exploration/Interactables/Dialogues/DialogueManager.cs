@@ -10,6 +10,7 @@ using Booble.Characters;
 using System;
 using FMODUnity;
 using Booble.Interactables.Events;
+using Booble.Managers;
 
 namespace Booble.Interactables.Dialogues
 {
@@ -99,6 +100,7 @@ namespace Booble.Interactables.Dialogues
                 _dialogueText.text += letter;
                 RuntimeManager.PlayOneShot(_characterSoundEmitter);
                 yield return new WaitForSecondsRealtime(_characterDelay);
+                yield return new WaitUntil(() => !GameManager.Instance.gamePaused);
             }
 
             _typing = false;
@@ -149,6 +151,9 @@ namespace Booble.Interactables.Dialogues
 
         private void InputUpdate()
         {
+            if(GameManager.Instance.gamePaused)
+                return;
+            
             if (!_staggered)
             {
                 _staggered = true;
