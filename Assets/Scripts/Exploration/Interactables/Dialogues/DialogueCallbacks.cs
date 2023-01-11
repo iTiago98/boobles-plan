@@ -65,6 +65,11 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadPPBOffice();
     }
+
+    public void LoadHome0()
+    {
+        SceneLoader.Instance.LoadHome0();
+    }
     
     public void AddEscorbuto()
     {

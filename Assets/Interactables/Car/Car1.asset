@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Car1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFC\xF3mo se presenta su d\xEDa, Se\xF1orita Nella?"
+    _closeUp: 9
+  - _content: "Pues no muy bien, Anselmo. Resulta que ya quieren que eche a un empleado,
+      \xA1en mi segundo d\xEDa! \xBFTe lo puedes creer?"
+    _closeUp: 1
+  - _content: "Y tanto que me lo creo. Esta empresa ha ido perdiendo su humanidad
+      cuanto m\xE1s grande se ha hecho. Pocos quedamos ya tan veteranos."
+    _closeUp: 9
+  - _content: Los que hemos ido aguantando los excesos de horas, las reducciones
+      de salarios y de derechos, somos muy pocos en la empresa.
+    _closeUp: 9
+  - _content: "\xBFTan mal est\xE1 la cosa?"
+    _closeUp: 1
+  - _content: "\xBFNo se ha fijado que ya no hay gente de mediana edad en la empresa?
+      Ahora son todos peces gordos o becarios."
+    _closeUp: 9
+  - _content: "Y los que quedan en medio no est\xE1n durando mucho."
+    _closeUp: 9
+  - _content: "Madre m\xEDa, \xBFqu\xE9 pas\xF3 con la pol\xEDtica del empleado del
+      mes?"
+    _closeUp: 1
+  - _content: "Les sale m\xE1s barato echar a un empleado modelo y contratar a dos
+      becarios."
+    _closeUp: 9
+  - _content: "Es asombroso que una empresa tan importante no se haya hundido todav\xEDa
+      en manos de tanta gente inexperta."
+    _closeUp: 9
+  - _content: "Dios bendito, este mundo se va al garete. Parece que ya hemos llegado,
+      \xA1des\xE9ame suerte Anselmo!"
+    _closeUp: 1
+  - _content: Que parece que voy directa a la zona de los peces gordos, los despachos.
+    _closeUp: 1
+  - _content: "No le hace falta, Se\xF1orita Nella, usted puede con todo."
+    _closeUp: 9
+  - _content: "Adem\xE1s, no se olvide de que a\xFAn hay gente buena en la empresa,
+      como mi gran amiga Ana."
+    _closeUp: 9
+  - _content: Si alguna vez necesita ayuda, no dude en hablar con ella.
+    _closeUp: 9
+  - _content: "Parece muy eficiente y la verdad es que es muy simp\xE1tica."
+    _closeUp: 1
+  - _content: "\xA1Y tut\xE9ame, hombre, que entre buenas personas no hay que usar
+      las \u201Cbuenas maneras\u201D!"
+    _closeUp: 1
+  - _content: "Lo que usted\u2026 quiero decir lo que quieras. La verdad es que no
+      estoy acostumbrado. \xA1Hasta luego Nella!"
+    _closeUp: 9
+  - _content: Nos vemos luego, Anselmo.
+    _closeUp: 1

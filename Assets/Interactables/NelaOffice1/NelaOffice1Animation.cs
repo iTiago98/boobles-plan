@@ -37,15 +37,15 @@ public class NelaOffice1Animation : MonoBehaviour
     
     private void Start()
     {
-        if (!FlagManager.Instance.GetFlag(_day1))
-        {
-            FlagManager.Instance.SetFlag(_day1);
-            StartCoroutine(Day1AnimationCoroutine());
-        }
-        else
-        {
+        // if (!FlagManager.Instance.GetFlag(_day1))
+        // {
+        //     FlagManager.Instance.SetFlag(_day1);
+        //     StartCoroutine(Day1AnimationCoroutine());
+        // }
+        // else
+        // {
             StartCoroutine(OfficeDialogueCoroutine());
-        }
+        // }
     }
 
     private IEnumerator Day1AnimationCoroutine()
