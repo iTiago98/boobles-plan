@@ -25,9 +25,7 @@ namespace Booble.UI
 
         [Header("Options Menu")]
         [SerializeField] private GameObject _optionsMenuPanel;
-        [SerializeField] private Slider _generalMusicSlider;
-        [SerializeField] private Slider _backgroundMusicSlider;
-        [SerializeField] private Slider _sfxMusicSlider;
+        [SerializeField] private OptionsMenu _optionsMenu;
 
         private void Awake()
         {
@@ -98,24 +96,7 @@ namespace Booble.UI
             _mainMenuPanel.SetActive(false);
             _optionsMenuPanel.SetActive(true);
 
-            _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
-            _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
-            _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
-        }
-
-        public void OnGeneralMusicValueChanged(System.Single value)
-        {
-            MusicManager.Instance.ChangeGeneralMusicVolume(value);
-        }
-
-        public void OnBackgroundMusicSliderValueChanged(System.Single value)
-        {
-            MusicManager.Instance.ChangeBackgroundMusicVolume(value);
-        }
-
-        public void OnSFXMusicSliderValueChanged(System.Single value)
-        {
-            MusicManager.Instance.ChangeSFXVolume(value);
+            _optionsMenu.SetSliderValue();
         }
 
         public void OnOptionsBackButtonClick()
