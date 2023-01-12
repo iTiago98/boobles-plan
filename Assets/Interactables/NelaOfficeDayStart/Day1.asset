@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Day1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Bueno, veamos qu\xE9 dice el reporte oficial sobre el empleado al
+      que tengo que despedir."
+    _closeUp: 1
+  - _content: 'Nombre: Citriano.
+
+      Planta de Despacho: Y21'
+    _closeUp: 0
+  - _content: "Motivo de despido: Abandono reiterado del puesto de trabajo, Destrucci\xF3n
+      del mobiliaro de su despacho e invasi\xF3n en el pasillo."
+    _closeUp: 0
+  - _content: "\xBFDestrucci\xF3n del mobiliaro? \xBFQu\xE9 querr\xE1 decir con eso?
+      Deber\xEDa ver su despacho, seguro que de ah\xED puedo sacar algo en claro."
+    _closeUp: 1
+  - _content: "Y tambi\xE9n deber\xEDa hablar con el propio Citriano, rara vez la
+      gente abandona su puesto de trabajo sin motivo. Lo buscar\xE9 por la oficina."
+    _closeUp: 1
+  - _content: "Venga Nella, que es tu primerito d\xEDa y hay que causar buena impresi\xF3n.
+      \xA1\xC1nimo!"
+    _closeUp: 1

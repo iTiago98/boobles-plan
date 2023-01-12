@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Day2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Otro d\xEDa que empezamos leyendo el reporte de orden de despido.
+      Reporte de orden de despido doble, nada menos."
+    _closeUp: 1
+  - _content: 'Nombres: Pepe Pinar y Pedro Ponzano.
+
+      Planta de Despacho: Y21'
+    _closeUp: 0
+  - _content: 'Motivo de despido: Abandono absoluto del puesto de trabajo. Bloqueo
+      del mobiliario recreativo de tenis de mesa del lounge.'
+    _closeUp: 0
+  - _content: "La verdad que tampoco est\xE1 bien que acaparen la mesa de ping pong
+      para ellos solos. Los dem\xE1s tambi\xE9n tienen derecho a jugar."
+    _closeUp: 1
+  - _content: "Bueno y sin mencionar que aqu\xED pone que no han vuelto a su puesto
+      de trabajo en ning\xFAn momento."
+    _closeUp: 1
+  - _content: "Deber\xEDa hablar con ellos directamente, para cerciorarme de que
+      todo lo que pone aqu\xED es cierto. Estar\xE1n en el lounge jugando."
+    _closeUp: 1
