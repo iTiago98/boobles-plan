@@ -19,16 +19,16 @@ namespace Booble.UI
 
         [Header("Cards Menu")]
         [SerializeField] private Button _cardMenuButton;
-        [SerializeField] private GameObject _cardsMenuPanel;
+        //[SerializeField] private GameObject _cardsMenuPanel;
         [SerializeField] private CardMenu _cardMenu;
         [SerializeField] private ExtendedDescriptionPanel _extendedDescription;
 
         [Header("Options Menu")]
-        [SerializeField] private GameObject _optionsMenuPanel;
+        //[SerializeField] private GameObject _optionsMenuPanel;
         [SerializeField] private OptionsMenu _optionsMenu;
 
-        [Header("Pause Menu Button")]
-        [SerializeField] private GameObject _pauseMenuButton;
+        [Header("Pause Button")]
+        [SerializeField] private PauseButton _pauseButton;
 
         private void Awake()
         {
@@ -50,26 +50,25 @@ namespace Booble.UI
             {
                 _pauseMenu.SetActive(true);
                 _cardMenuButton.interactable = SceneLoader.Instance.InExploration;
-                ShowPauseMenuButton(false);
+                ShowPauseButton(false);
             }
             else
             {
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
                 _pauseMenu.SetActive(false);
-                ShowPauseMenuButton(true);
+                ShowPauseButton(true);
             }
         }
 
-        public void ShowPauseMenuButton(bool value)
+        #region Pause Button
+
+        public void ShowPauseButton(bool value)
         {
-            _pauseMenuButton.SetActive(value);
+            _pauseButton.gameObject.SetActive(value);
         }
 
-        public void OnPauseMenuButtonClick()
-        {
-            GameManager.Instance.SwitchPauseMenu();
-        }
+        #endregion
 
         public void OnResumeButtonClick()
         {
@@ -81,14 +80,14 @@ namespace Booble.UI
         public void OnCardsButtonClick()
         {
             _mainMenuPanel.SetActive(false);
-            _cardsMenuPanel.SetActive(true);
+            _cardMenu.gameObject.SetActive(true);
 
             _cardMenu.SetCardsMenu();
         }
 
         public void OnCardsBackButtonClick()
         {
-            _cardsMenuPanel.SetActive(false);
+            _cardMenu.gameObject.SetActive(false);
             _mainMenuPanel.SetActive(true);
         }
 
@@ -109,7 +108,7 @@ namespace Booble.UI
         public void OnOptionsButtonClick()
         {
             _mainMenuPanel.SetActive(false);
-            _optionsMenuPanel.SetActive(true);
+            _optionsMenu.gameObject.SetActive(true);
 
             _optionsMenu.SetSliderValue();
         }
@@ -117,7 +116,7 @@ namespace Booble.UI
         public void OnOptionsBackButtonClick()
         {
             _mainMenuPanel.SetActive(true);
-            _optionsMenuPanel.SetActive(false);
+            _optionsMenu.gameObject.SetActive(false);
         }
 
         #endregion

@@ -224,19 +224,19 @@ namespace Booble.Managers
 
         private void OnMainMenuSceneLoaded(AsyncOperation op)
         {
-            PauseMenu.Instance.ShowPauseMenuButton(false);
+            PauseMenu.Instance.ShowPauseButton(false);
         }
 
         private void OnLoungeSceneLoaded(AsyncOperation op)
         {
             //RestoreMainCamera(op);
             Controller.Instance.enabled = true;
-            PauseMenu.Instance.ShowPauseMenuButton(true);
+            PauseMenu.Instance.ShowPauseButton(true);
         }
 
         private void OnInterviewLoaded(AsyncOperation op)
         {
-            PauseMenu.Instance.ShowPauseMenuButton(false);
+            PauseMenu.Instance.ShowPauseButton(false);
             CardGameManager.Instance.Initialize(PreviousScene != Scenes.MAIN_MENU);
         }
 
