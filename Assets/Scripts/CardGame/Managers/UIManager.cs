@@ -264,6 +264,7 @@ namespace Booble.CardGame.Managers
         public void InterviewEndAnimation(bool win, Action endCallback)
         {
             _turnAnimation.SetInterviewEndAnimation(win, endCallback);
+            MusicManager.Instance.PlayInterviewEnd(win);
         }
 
         public void ShowLoseMenu()
