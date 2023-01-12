@@ -62,4 +62,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Home/Home1.unity
     guid: f196089aca7e42c4288397ec8971b2a1
+  - enabled: 1
+    path: Assets/Scenes/NelaOfficeDayStart.unity
+    guid: 3e84592b731735f4bbf41a199629df5a
   m_configObjects: {}
