@@ -38,6 +38,11 @@ namespace Booble.Interactables
         {
             _interactionOnGoing = false;
             _mouseOverInteractable = false;
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.collider != null && hit.collider.GetComponent<Interactable>())
+            {
+                UI.Cursor.Instance.ShowActionText(true);
+            }
         }
 
         [SerializeField] private bool _unclickable;
