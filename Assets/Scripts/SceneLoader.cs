@@ -53,6 +53,7 @@ namespace Booble.Managers
             {
                 var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU);
                 async.completed += OnSceneLoaded;
+                async.completed += OnMainMenuSceneLoaded;
             });
         }
 
@@ -63,6 +64,7 @@ namespace Booble.Managers
             _fadeScreen.FadeOut(() =>
             {
                 var async = SceneManager.LoadSceneAsync(scene);
+                async.completed += OnSceneLoaded;
                 async.completed += OnLoungeSceneLoaded;
             });
         }
@@ -82,8 +84,8 @@ namespace Booble.Managers
         public void LoadNelaOffice1()
         {
             LoadScene(Scenes.NELA_OFFICE_1);
-        } 
-        
+        }
+
         public void LoadNelaOffice2()
         {
             LoadScene(Scenes.NELA_OFFICE_2);
@@ -93,37 +95,37 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.UPPER_HALL_1);
         }
-        
+
         public void LoadUpperHall2()
         {
             LoadScene(Scenes.UPPER_HALL_2);
         }
-        
+
         public void LoadCanteenScene0()
         {
             LoadScene(Scenes.CANTEEN_0);
         }
-        
+
         public void LoadCanteenScene2()
         {
             LoadScene(Scenes.CANTEEN_2);
         }
 
-            public void LoadLowerHall1()
-            {
-                LoadScene(Scenes.LOWER_HALL_1);
-            }
+        public void LoadLowerHall1()
+        {
+            LoadScene(Scenes.LOWER_HALL_1);
+        }
 
         public void LoadLowerHall2()
         {
             LoadScene(Scenes.LOWER_HALL_2);
         }
-        
+
         public void LoadLoungeScene1()
         {
             LoadScene(Scenes.LOUNGE_1);
         }
-        
+
         public void LoadLoungeScene2()
         {
             LoadScene(Scenes.LOUNGE_2);
@@ -148,7 +150,7 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.HOME_2);
         }
-        
+
         #endregion
 
         #region Interview
@@ -218,15 +220,21 @@ namespace Booble.Managers
             _fadeScreen.FadeIn();
         }
 
+        private void OnMainMenuSceneLoaded(AsyncOperation op)
+        {
+            PauseMenu.Instance.ShowPauseMenuButton(false);
+        }
+
         private void OnLoungeSceneLoaded(AsyncOperation op)
         {
             //RestoreMainCamera(op);
             Controller.Instance.enabled = true;
-            _fadeScreen.FadeIn();
+            PauseMenu.Instance.ShowPauseMenuButton(true);
         }
 
         private void OnInterviewLoaded(AsyncOperation op)
         {
+            PauseMenu.Instance.ShowPauseMenuButton(false);
             CardGameManager.Instance.Initialize(_previousScene != Scenes.MAIN_MENU);
         }
 

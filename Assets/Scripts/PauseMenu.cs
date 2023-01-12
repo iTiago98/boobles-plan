@@ -27,6 +27,9 @@ namespace Booble.UI
         [SerializeField] private GameObject _optionsMenuPanel;
         [SerializeField] private OptionsMenu _optionsMenu;
 
+        [Header("Pause Menu Button")]
+        [SerializeField] private GameObject _pauseMenuButton;
+
         private void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -41,19 +44,31 @@ namespace Booble.UI
             }
         }
 
-        public void ShowHidePauseMenu()
+        public void ShowPauseMenu(bool value)
         {
-            if (_pauseMenu.activeSelf)
+            if (value)
+            {
+                _pauseMenu.SetActive(true);
+                _cardMenuButton.interactable = SceneLoader.Instance.InExploration;
+                ShowPauseMenuButton(false);
+            }
+            else
             {
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
                 _pauseMenu.SetActive(false);
+                ShowPauseMenuButton(true);
             }
-            else
-            {
-                _pauseMenu.SetActive(true);
-                _cardMenuButton.interactable = SceneLoader.Instance.InExploration;
-            }
+        }
+
+        public void ShowPauseMenuButton(bool value)
+        {
+            _pauseMenuButton.SetActive(value);
+        }
+
+        public void OnPauseMenuButtonClick()
+        {
+            GameManager.Instance.SwitchPauseMenu();
         }
 
         public void OnResumeButtonClick()
