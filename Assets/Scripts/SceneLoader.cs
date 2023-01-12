@@ -13,12 +13,12 @@ namespace Booble.Managers
 
         [SerializeField] private Fader _fadeScreen;
 
-        public bool InMainMenu => _currentScene == Scenes.MAIN_MENU;
-        public bool InInterview => _currentScene == Scenes.INTERVIEW;
+        public bool InMainMenu => CurrentScene == Scenes.MAIN_MENU;
+        public bool InInterview => CurrentScene == Scenes.INTERVIEW;
         public bool InExploration => !InMainMenu && !InInterview;
-
-        private string _currentScene;
-        private string _previousScene;
+        public string CurrentScene { get; private set; }
+        public string PreviousScene { get; private set; }
+        
         private Camera _mainCamera;
 
         private List<GameObject> _disabledObjects;
@@ -40,13 +40,14 @@ namespace Booble.Managers
 
         private void Start()
         {
-            _currentScene = Scenes.MAIN_MENU;
+            CurrentScene = Scenes.MAIN_MENU;
             _disabledObjects = new List<GameObject>();
         }
 
         public void LoadMainMenuScene()
         {
-            _currentScene = Scenes.MAIN_MENU;
+            PreviousScene = CurrentScene;
+            CurrentScene = Scenes.MAIN_MENU;
 
             MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
             _fadeScreen.FadeOut(() =>
@@ -58,7 +59,8 @@ namespace Booble.Managers
 
         public void LoadScene(string scene)
         {
-            _currentScene = scene;
+            PreviousScene = CurrentScene;
+            CurrentScene = scene;
 
             _fadeScreen.FadeOut(() =>
             {
@@ -167,8 +169,8 @@ namespace Booble.Managers
         {
             if (updateCurrentScene)
             {
-                _previousScene = _currentScene;
-                _currentScene = Scenes.INTERVIEW;
+                PreviousScene = CurrentScene;
+                CurrentScene = Scenes.INTERVIEW;
                 _disabledObjects = objects;
             }
 
@@ -176,7 +178,7 @@ namespace Booble.Managers
             _fadeScreen.FadeOut(() =>
             {
                 EnableObjects(objects, false);
-                if (_previousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
+                if (PreviousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
 
                 var async = SceneManager.LoadSceneAsync(Scenes.INTERVIEW, LoadSceneMode.Additive);
                 async.completed += OnSceneLoaded;
@@ -186,15 +188,15 @@ namespace Booble.Managers
 
         public void UnloadInterviewScene()
         {
-            _currentScene = _previousScene;
+            CurrentScene = PreviousScene;
 
-            if (_previousScene == Scenes.MAIN_MENU) MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+            if (PreviousScene == Scenes.MAIN_MENU) MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
             else MusicManager.Instance.PlayMusic(MusicReference.Lounge);
 
             _fadeScreen.FadeOut(() =>
             {
                 EnableObjects(_disabledObjects, true);
-                if (_previousScene != Scenes.MAIN_MENU)
+                if (PreviousScene != Scenes.MAIN_MENU)
                     Controller.Instance.enabled = true;
 
                 var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
@@ -227,7 +229,7 @@ namespace Booble.Managers
 
         private void OnInterviewLoaded(AsyncOperation op)
         {
-            CardGameManager.Instance.Initialize(_previousScene != Scenes.MAIN_MENU);
+            CardGameManager.Instance.Initialize(PreviousScene != Scenes.MAIN_MENU);
         }
 
         private void EnableObjects(List<GameObject> objects, bool enable)
@@ -236,6 +238,11 @@ namespace Booble.Managers
             {
                 obj.SetActive(enable);
             }
+        }
+
+        public bool CheckScenes(string currentScene, string previousScene)
+        {
+            return CurrentScene.StartsWith(currentScene) && PreviousScene.StartsWith(previousScene);
         }
     }
 }

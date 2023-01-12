@@ -69,6 +69,7 @@ namespace Booble.Player
 					return Mathf.Abs(playerX - _wayPoints[_wayPoints.Count-1].position.x) < 0.1f;
 			}
 
+			return false;
 			throw new System.Exception("Unexpected trace in IsPlayerLimit from WayPointList");
         }
 	}

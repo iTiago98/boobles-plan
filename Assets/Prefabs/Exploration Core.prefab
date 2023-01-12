@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1921504878}
   - component: {fileID: 1921504877}
-  - component: {fileID: 1921504879}
   - component: {fileID: 1921504880}
+  - component: {fileID: 1921504879}
+  - component: {fileID: 7724844316161397756}
   m_Layer: 0
   m_Name: Nela
   m_TagString: Untagged
@@ -86,21 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1921504879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921504876}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43c47e7854ff09e4ca99054030b8e7af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveKey: 323
-  _moveSpeed: 4
-  _wayPointsParent: {fileID: 1978971479}
 --- !u!95 &1921504880
 Animator:
   serializedVersion: 4
@@ -121,6 +107,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1921504879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921504876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c47e7854ff09e4ca99054030b8e7af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveKey: 323
+  _moveSpeed: 4
+  _wayPointsParent: {fileID: 1978971479}
+--- !u!114 &7724844316161397756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921504876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd21f2a75c2ac54b8fe95051e664b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 1921504879}
+  _spawnPositions:
+  - <PreviousScene>k__BackingField: NelaOffice
+    <CurrentScene>k__BackingField: LowerHall
+    <SpawnPosition>k__BackingField: {x: 9, y: -4, z: 0}
+  - <PreviousScene>k__BackingField: 
+    <CurrentScene>k__BackingField: LowerHall
+    <SpawnPosition>k__BackingField: {x: 14, y: -4, z: 0}
+  - <PreviousScene>k__BackingField: PPBOffice
+    <CurrentScene>k__BackingField: UpperHall
+    <SpawnPosition>k__BackingField: {x: -8, y: -3.78, z: 0}
+  - <PreviousScene>k__BackingField: 
+    <CurrentScene>k__BackingField: UpperHall
+    <SpawnPosition>k__BackingField: {x: 9, y: -3.78, z: 0}
 --- !u!1 &1978971478
 GameObject:
   m_ObjectHideFlags: 0
