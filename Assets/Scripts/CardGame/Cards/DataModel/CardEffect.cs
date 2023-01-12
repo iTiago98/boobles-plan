@@ -55,7 +55,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
     public enum ApplyTime
     {
-        NONE, /*START,*/ ENTER, COMBAT, END, DRAW_CARD, PLAY_ARGUMENT, DESTROY, PERMANENT
+        NONE, /*START,*/ ENTER, COMBAT, END, DRAW_CARD, PLAY_ARGUMENT, DESTROY, PERSISTENT
     }
 
     // ALLY - ally card

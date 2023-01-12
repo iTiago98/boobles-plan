@@ -34,7 +34,6 @@ namespace Booble.CardGame.Cards
         private bool _clickable;
 
         [HideInInspector] public Card storedTarget;
-        private bool _swapped;
 
         private CardContainer _container;
         private Hand _hand;
@@ -501,7 +500,7 @@ namespace Booble.CardGame.Cards
 
         public void SwapContender()
         {
-            Effects.CheckRemoveEffects(contender);
+            Contender oldContender = contender;
 
             if (IsPlayerCard)
                 contender = CardGameManager.Instance.opponent;
@@ -510,8 +509,7 @@ namespace Booble.CardGame.Cards
 
             _hand = contender.hand;
 
-            Effects.CheckEffects();
-            //_swapped = !_swapped;
+            Effects.CheckPersistentEffects(oldContender, contender);
         }
 
         public bool IsAlternateWinConditionCard()
@@ -553,7 +551,6 @@ namespace Booble.CardGame.Cards
         {
             RemoveFromContainer();
             Effects.CheckRemoveEffects(contender);
-            if (_swapped) SwapContender();
 
             _hand.AddCard(gameObject);
             Stats.ReturnToHand();

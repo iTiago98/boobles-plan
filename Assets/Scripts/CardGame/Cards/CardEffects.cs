@@ -234,7 +234,7 @@ namespace Booble.CardGame.Cards
                 case ApplyTime.DESTROY:
                     _destroyEffects.Add(effect); break;
 
-                case ApplyTime.PERMANENT:
+                case ApplyTime.PERSISTENT:
                     ApplyEffect(effect, null);
                     _permanentEffects.Add(effect);
                     break;
@@ -263,7 +263,7 @@ namespace Booble.CardGame.Cards
                             CardEffectsManager.Instance.RemovePermanentEffect(_card, effect.applyTime); 
                             break;
 
-                        case ApplyTime.PERMANENT:
+                        case ApplyTime.PERSISTENT:
                             if (effect.subType == SubType.GUARD) contender.RemoveGuardCard(_card);
                             else if (effect.subType == SubType.MIRROR) contender.RemoveMirrorCard();
                             break;
@@ -271,6 +271,31 @@ namespace Booble.CardGame.Cards
                 }
 
                 _permanentEffects.Clear();
+            }
+        }
+
+        public void CheckPersistentEffects(Contender oldContender, Contender newContender)
+        {
+            if (_permanentEffects.Count > 0 && !_card.IsInHand)
+            {
+                foreach (CardEffect effect in _permanentEffects)
+                {
+                    switch (effect.applyTime)
+                    {
+                        case ApplyTime.PERSISTENT:
+                            if (effect.subType == SubType.GUARD)
+                            {
+                                oldContender.RemoveGuardCard(_card);
+                                newContender.AddGuardCard(_card);
+                            }
+                            else if (effect.subType == SubType.MIRROR)
+                            {
+                                oldContender.RemoveMirrorCard();
+                                newContender.AddMirrorCard();
+                            }
+                            break;
+                    }
+                }
             }
         }
 

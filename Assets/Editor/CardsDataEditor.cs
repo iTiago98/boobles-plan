@@ -290,7 +290,7 @@ namespace CardGame.Cards.DataModel
 
                         case SubType.MIRROR:
                         case SubType.GUARD:
-                            cardEffect.applyTime = ApplyTime.PERMANENT; break;
+                            cardEffect.applyTime = ApplyTime.PERSISTENT; break;
 
                         default:
                             cardEffect.applyTime = (ApplyTime)EditorGUILayout.EnumPopup("Apply time", cardEffect.applyTime); break;
