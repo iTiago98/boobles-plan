@@ -675,6 +675,20 @@ MonoBehaviour:
       Data3: -1308863092
       Data4: -1331080349
     Path: event:/MainMenuMusic
+  _interviewWinSoundReference:
+    Guid:
+      Data1: 665301546
+      Data2: 1264813632
+      Data3: 2013058205
+      Data4: -371059176
+    Path: event:/InterviewWinSound
+  _interviewLoseSoundReference:
+    Guid:
+      Data1: -2005945659
+      Data2: 1297880824
+      Data3: 1618856595
+      Data4: 984289925
+    Path: event:/InterviewLoseSound
 --- !u!1 &172151441
 GameObject:
   m_ObjectHideFlags: 0

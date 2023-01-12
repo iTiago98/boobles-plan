@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6770467338600570738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InterviewWinSound
+  m_EditorClassIdentifier: 
+  Path: event:/InterviewWinSound
+  Guid:
+    Data1: 665301546
+    Data2: 1264813632
+    Data3: 2013058205
+    Data4: -371059176
+  Banks:
+  - {fileID: 3085250169045378560}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1718
 --- !u!114 &-6496305666384219415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +81,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 45
+--- !u!114 &-3825825079023789048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/InterviewLoseSound
+  m_EditorClassIdentifier: 
+  Path: event:/InterviewLoseSound
+  Guid:
+    Data1: -2005945659
+    Data2: 1297880824
+    Data3: 1618856595
+    Data4: 984289925
+  Banks:
+  - {fileID: 3085250169045378560}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1879
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,12 +128,14 @@ MonoBehaviour:
   - {fileID: 5983137717430831339}
   - {fileID: 6377850964098537914}
   - {fileID: -5130351942351464942}
+  - {fileID: -6770467338600570738}
+  - {fileID: -3825825079023789048}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3085250169045378560}
   StringsBanks:
   - {fileID: 2054331067130349078}
-  cacheTime: 637921057986329456
+  cacheTime: 638091463647592542
   cacheVersion: 131591
 --- !u!114 &2054331067130349078
 MonoBehaviour:
@@ -96,10 +152,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMODProject/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637921057986329456
+  lastModified: 638091463647592542
   FileSizes:
   - Name: Desktop
-    Value: 980
+    Value: 1072
   Exists: 1
 --- !u!114 &3085250169045378560
 MonoBehaviour:
@@ -116,10 +172,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMODProject/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637921057986319478
+  lastModified: 638091463647582573
   FileSizes:
   - Name: Desktop
-    Value: 10293376
+    Value: 10332256
   Exists: 1
 --- !u!114 &5983137717430831339
 MonoBehaviour:
