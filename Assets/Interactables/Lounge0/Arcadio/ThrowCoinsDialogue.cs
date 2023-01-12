@@ -20,7 +20,7 @@ namespace Booble.Interactables.Arcadio
         [SerializeField] private Flag.Reference _coin1;
         [SerializeField] private Flag.Reference _coin2;
         [SerializeField] private Flag.Reference _coin3;
-        //[SerializeField] private Continues _arcCont;
+        [SerializeField] private SecondCoin _secondCoin;
         [SerializeField] private Animator _arcadioAnim;
         [SerializeField] private Collider2D _arcadeCollider;
         [SerializeField] private Vector3 _finalArcadioPos;
@@ -56,6 +56,7 @@ namespace Booble.Interactables.Arcadio
                     break;
                 case 2:
                     _dialogue = _dialogue2;
+                    _secondCoin.SetWaiting();
                     break;
                 case 3:
                     _dialogue = _dialogue3;

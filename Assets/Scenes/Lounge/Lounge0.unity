@@ -1822,6 +1822,7 @@ MonoBehaviour:
   _coin1: 15
   _coin2: 16
   _coin3: 17
+  _secondCoin: {fileID: 2121053234}
   _arcadioAnim: {fileID: 1794732973}
   _arcadeCollider: {fileID: 1774907200}
   _finalArcadioPos: {x: 20.87, y: -4.1, z: 0}
@@ -3111,15 +3112,15 @@ MonoBehaviour:
     _falseFlags: 
     _setFlags: 
   _options:
-  - _optionText: (Meter una moneda.)
+  - _optionText: (Jugar una partida.)
     _trueFlags: 12000000
     _falseFlags: 
     _dialogueOption: {fileID: 2000342840}
-  - _optionText: (Meter una moneda.)
+  - _optionText: (Jugar una partida.)
     _trueFlags: 0e000000
     _falseFlags: 12000000
     _dialogueOption: {fileID: 479277005}
-  - _optionText: (Meter una moneda.)
+  - _optionText: (Jugar una partida.)
     _trueFlags: 
     _falseFlags: 0e000000
     _dialogueOption: {fileID: 2000342840}

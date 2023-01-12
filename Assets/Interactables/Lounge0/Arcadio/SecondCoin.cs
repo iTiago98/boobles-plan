@@ -22,13 +22,20 @@ namespace Booble.Interactables.Arcadio
         {
             if (!_waiting)
                 return;
-
+            
+            Debug.Log(Controller.Instance.transform.position.x);
             if(Controller.Instance.transform.position.x < _threshold)
             {
                 _waiting = false;
                 FlagManager.Instance.SetFlag(_arcadioWaiting, false);
                 _anim.SetTrigger("Wait");
             }
+        }
+
+        public void SetWaiting()
+        {
+            _waiting = true;
+            FlagManager.Instance.SetFlag(_arcadioWaiting);
         }
     }
 }
