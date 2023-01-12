@@ -159,7 +159,7 @@ namespace Booble.CardGame.Managers
         public void UpdateRemainingCards(int remainingCards, int maxCards, Contender contender)
         {
             if (remainingCards < 0) remainingCards = 0;
-            if (contender.role == Contender.Role.PLAYER) playerDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
+            if (contender.isPlayer) playerDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
             else opponentDeckRemainingCardsText.text = remainingCards + " / " + maxCards;
         }
 
