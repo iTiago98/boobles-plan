@@ -70,6 +70,7 @@ namespace Booble.MainMenu
         public void StartDay2()
         {
             FlagManager.Instance.SetFlag(Flag.Reference.Car1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
             StartDay1();
         }
         
@@ -77,6 +78,7 @@ namespace Booble.MainMenu
         public void StartDay3()
         {
             FlagManager.Instance.SetFlag(Flag.Reference.Car2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             StartDay2();
         }
         
