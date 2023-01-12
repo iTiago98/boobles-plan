@@ -10,6 +10,14 @@ namespace Booble.UI
 {
     public class CardMenu : MonoBehaviour
     {
+        [Header("Sprites")]
+        [SerializeField] private Sprite _playerButtonSprite;
+        [SerializeField] private Sprite _citrianoButtonSprite;
+        [SerializeField] private Sprite _ppBrosButtonSprite;
+        [SerializeField] private Sprite _secretaryButtonSprite;
+        [SerializeField] private Sprite _bossButtonSprite;
+        [SerializeField] private Sprite _buttonNotAvailableSprite;
+
         [Header("Player")]
         [SerializeField] private GameObject _playerCardsMenu;
         [SerializeField] private GameObject _playerCardsList;
@@ -94,11 +102,11 @@ namespace Booble.UI
             flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Car2);
             flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Car3);
 
-            SetAvailable(_playerButton, flag0, GetInteractable(_playerCardsMenu));
-            SetAvailable(_citrianoButton, flag1, GetInteractable(_citrianoCardsMenu));
-            SetAvailable(_ppBrosButton, flag2, GetInteractable(_ppBrosCardsMenu));
-            SetAvailable(_secretaryButton, flag3, GetInteractable(_secretaryCardsMenu));
-            SetAvailable(_bossButton, flag3, GetInteractable(_bossCardsMenu));
+            SetAvailable(_playerButton, flag0, GetInteractable(_playerCardsMenu), _playerButtonSprite);
+            SetAvailable(_citrianoButton, flag1, GetInteractable(_citrianoCardsMenu), _citrianoButtonSprite);
+            SetAvailable(_ppBrosButton, flag2, GetInteractable(_ppBrosCardsMenu), _ppBrosButtonSprite);
+            SetAvailable(_secretaryButton, flag3, GetInteractable(_secretaryCardsMenu), _secretaryButtonSprite);
+            SetAvailable(_bossButton, flag3, GetInteractable(_bossCardsMenu), _bossButtonSprite);
         }
 
         private bool GetInteractable(GameObject menu)
@@ -106,16 +114,16 @@ namespace Booble.UI
             return _currentMenu != menu;
         }
 
-        private void SetAvailable(Button button, bool available, bool interactable = false)
+        private void SetAvailable(Button button, bool available, bool interactable, Sprite sprite)
         {
             if (available)
             {
-                button.image.color = Color.white;
+                button.image.sprite = sprite;
                 button.interactable = interactable;
             }
             else
             {
-                button.image.color = Color.black;
+                button.image.sprite = _buttonNotAvailableSprite;
                 button.interactable = false;
             }
         }
