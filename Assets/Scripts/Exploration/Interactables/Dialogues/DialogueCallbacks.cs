@@ -75,6 +75,11 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadHome0();
     }
+
+    public void AddGranFinal()
+    {
+        DeckManager.Instance.AddGranFinal();
+    }
     
     public void AddEscorbuto()
     {
