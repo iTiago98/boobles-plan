@@ -725,8 +725,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 479279704}
-        m_TargetAssemblyTypeName: Booble.UI.PauseMenu, Assembly-CSharp
+      - m_Target: {fileID: 312989407}
+        m_TargetAssemblyTypeName: Booble.CardGame.UI.LoseMenu, Assembly-CSharp
         m_MethodName: OnReturnToMenuButtonClick
         m_Mode: 1
         m_Arguments:
@@ -981,6 +981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 312989406}
+  - component: {fileID: 312989407}
   m_Layer: 0
   m_Name: LoseMenu
   m_TagString: Untagged
@@ -1010,6 +1011,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &312989407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312989405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878728e9b033859459bf8238300a4b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &337627040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2782,17 +2795,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
---- !u!114 &479279704 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 642055712581269086, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
-  m_PrefabInstance: {fileID: 479279703}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74c8d716461d0ee4d8d3ba35f9c6138c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &480872811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3165,7 +3167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &563210734
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7874,8 +7876,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1694284334}
-        m_TargetAssemblyTypeName: Booble.CardGame.Managers.UIManager, Assembly-CSharp
+      - m_Target: {fileID: 312989407}
+        m_TargetAssemblyTypeName: Booble.CardGame.UI.LoseMenu, Assembly-CSharp
         m_MethodName: OnRetryButtonClick
         m_Mode: 1
         m_Arguments:

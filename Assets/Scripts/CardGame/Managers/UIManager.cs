@@ -271,11 +271,6 @@ namespace Booble.CardGame.Managers
             _loseMenu.SetActive(true);
         }
 
-        public void OnRetryButtonClick()
-        {
-            SceneLoader.Instance.ReloadInterview();
-        }
-
         #endregion
     }
 }
