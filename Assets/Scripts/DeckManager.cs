@@ -116,7 +116,7 @@ namespace Booble.Managers
             temp.opponent = name;
             _newCards.Add(temp);
 
-            PauseMenu.Instance.UpdateAlerts();
+            PauseMenu.Instance.UpdateAlerts(true);
         }
 
         public void RemoveNewCard(CardsData data)
@@ -134,7 +134,7 @@ namespace Booble.Managers
             if (indexToRemove != -1)
             {
                 _newCards.RemoveAt(indexToRemove);
-                PauseMenu.Instance.UpdateAlerts();
+                PauseMenu.Instance.UpdateAlerts(false);
             }
         }
 
