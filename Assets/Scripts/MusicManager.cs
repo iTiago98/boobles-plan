@@ -10,10 +10,8 @@ using STOP_MODE = FMOD.Studio.STOP_MODE;
 
 namespace Booble.Managers
 {
-    public class MusicManager : MonoBehaviour
+    public class MusicManager : DontDestroyOnLoad<MusicManager>
     {
-        public static MusicManager Instance { get; private set; }
-
         [Header("Background music")]
         [SerializeField] private EventReference _loungeMusicReference;
         [SerializeField] private EventReference _interviewMusicReference;
@@ -28,20 +26,6 @@ namespace Booble.Managers
         private Bus _sfxBus;
 
         private EventInstance _currentInstance;
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this.gameObject);
-
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         private void Start()
         {

@@ -7,10 +7,8 @@ using Booble.UI;
 
 namespace Booble.Managers
 {
-    public class DeckManager : MonoBehaviour
+    public class DeckManager : DontDestroyOnLoad<DeckManager>
     {
-        public static DeckManager Instance { get; private set; }
-
         [SerializeField] private CardsDataContainer playerDeckBase;
 
         [Header("Extra Cards")]
@@ -25,21 +23,6 @@ namespace Booble.Managers
 
         private Opponent_Name _opponentName;
         private Opponent_Name _previousOpponent;
-
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this.gameObject);
-
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         private void Start()
         {

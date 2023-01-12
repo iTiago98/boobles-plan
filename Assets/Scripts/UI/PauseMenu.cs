@@ -11,10 +11,8 @@ using static Booble.Managers.DeckManager;
 
 namespace Booble.UI
 {
-    public class PauseMenu : MonoBehaviour
+    public class PauseMenu : DontDestroyOnLoad<PauseMenu>
     {
-        public static PauseMenu Instance { get; private set; }
-
         [SerializeField] private GameObject _pauseMenu;
 
         [SerializeField] private GameObject _mainMenuPanel;
@@ -30,20 +28,6 @@ namespace Booble.UI
 
         [Header("Pause Button")]
         [SerializeField] private PauseButton _pauseButton;
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this.gameObject);
-
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         public void InitializeCardMenu()
         {
