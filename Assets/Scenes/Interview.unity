@@ -2020,6 +2020,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3115803564307656068, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3487471863933005444, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -3161,7 +3165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &563210734
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5084,6 +5088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2070848123}
     m_Modifications:
+    - target: {fileID: 2461791328546442289, guid: 82810575771546e4682e8c77c5afa680, type: 3}
+      propertyPath: m_FlipX
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5361708988085911351, guid: 82810575771546e4682e8c77c5afa680, type: 3}
       propertyPath: m_Name
       value: OpponentDeck
@@ -6261,12 +6269,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 907505c125536b34687fe0bc40d65b53, type: 3}
+  m_Sprite: {fileID: -1890628146, guid: 907505c125536b34687fe0bc40d65b53, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 19.2, y: 10.8}
+  m_Size: {x: 1.98, y: 2.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
