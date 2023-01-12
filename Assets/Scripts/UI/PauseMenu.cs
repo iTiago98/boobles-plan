@@ -18,6 +18,7 @@ namespace Booble.UI
         [SerializeField] private GameObject _pauseMenu;
 
         [SerializeField] private GameObject _mainMenuPanel;
+        [SerializeField] private GameObject _cardObtainedText;
 
         [Header("Cards Menu")]
         [SerializeField] private AlertButton _cardMenuButton;
@@ -77,13 +78,15 @@ namespace Booble.UI
             _pauseButton.gameObject.SetActive(value);
         }
 
-        public void UpdateAlerts()
+        public void UpdateAlerts(bool add)
         {
             List<CardData> newCards = DeckManager.Instance.GetNewCards();
             _cardMenu.UpdateExtraCards(newCards);
 
             _pauseButton.ShowAlert(newCards.Count > 0);
             _cardMenuButton.ShowAlert(newCards.Count > 0);
+
+            if (add) ShowCardObtainedText();
         }
 
         #endregion
@@ -147,6 +150,19 @@ namespace Booble.UI
                 if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
             }
             else if (SceneLoader.Instance.InExploration) SceneLoader.Instance.LoadMainMenuScene();
+        }
+
+        public void ShowCardObtainedText()
+        {
+            float initialX = _cardObtainedText.transform.position.x;
+            
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 0.5f));
+            sequence.Append(_cardObtainedText.transform.DOMoveX(0, 1f));
+            sequence.AppendInterval(1f);
+            sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 1f));
+
+            sequence.Play();
         }
     }
 }
