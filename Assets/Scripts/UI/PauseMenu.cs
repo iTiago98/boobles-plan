@@ -58,7 +58,7 @@ namespace Booble.UI
             if (value)
             {
                 _pauseMenu.SetActive(true);
-                //_cardMenuButton.interactable = SceneLoader.Instance.InExploration;
+                _cardMenuButton.SetInteractable(SceneLoader.Instance.InExploration);
                 ShowPauseButton(false);
             }
             else
