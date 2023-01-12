@@ -42,6 +42,8 @@ namespace Booble.UI
         private GameObject _currentMenu;
         private bool _initialized;
 
+        private List<CardsData> _playerBaseCards;
+
         public void SetCardsMenu()
         {
             if (!_initialized) SetPlayerCards();
@@ -50,11 +52,7 @@ namespace Booble.UI
 
         private void SetPlayerCards()
         {
-            List<CardsData> cards = DeckManager.Instance.GetPlayerCards();
-            cards.Add(DeckManager.Instance.GetGranFinal());
-
-            SetCards(null, _playerCardsList, cards, _playerCardBack);
-
+            _playerBaseCards = DeckManager.Instance.GetPlayerBaseCards();
             _currentMenu = _playerCardsMenu;
             _initialized = true;
         }

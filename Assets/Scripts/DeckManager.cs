@@ -54,7 +54,7 @@ namespace Booble.Managers
 
         public void SetPlayerCards()
         {
-            SetDeck(playerDeckBase, ref _playerDeck);
+            SetDeck(playerDeckBase.cards, ref _playerDeck);
         }
 
         public void SetOpponent(Opponent_Name opponentName)
@@ -65,13 +65,13 @@ namespace Booble.Managers
 
         public void SetOpponentCards(CardsDataContainer deck)
         {
-            SetDeck(deck, ref _opponentDeck);
+            SetDeck(deck.cards, ref _opponentDeck);
         }
 
-        private void SetDeck(CardsDataContainer source, ref List<CardsData> dest)
+        private void SetDeck(List<CardsData> source, ref List<CardsData> dest)
         {
             dest = new List<CardsData>();
-            foreach (CardsData data in source.cards)
+            foreach (CardsData data in source)
             {
                 CardsData temp = new CardsData();
                 temp.name = data.name;
@@ -84,6 +84,13 @@ namespace Booble.Managers
 
                 dest.Add(temp);
             }
+        }
+
+        public List<CardsData> GetPlayerBaseCards()
+        {
+            List<CardsData> copy = new List<CardsData>();
+            SetDeck(playerDeckBase.cards, ref copy);
+            return copy;
         }
 
         #region Add Extra Cards
@@ -322,7 +329,7 @@ namespace Booble.Managers
         }
 
         #endregion
-        
+
         #region PPBros
 
         public List<CardsData> GetPPBrosExtraCards()
@@ -402,7 +409,7 @@ namespace Booble.Managers
         }
 
         #endregion
-        
+
         #region Boss
 
         public List<CardsData> GetBossExtraCards()
