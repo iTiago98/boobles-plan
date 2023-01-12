@@ -1,3 +1,4 @@
+using Booble.CardGame;
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Managers;
 using Booble.Flags;
@@ -6,6 +7,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Booble.Managers.DeckManager;
 
 namespace Booble.UI
 {
@@ -19,12 +21,11 @@ namespace Booble.UI
 
         [Header("Cards Menu")]
         [SerializeField] private Button _cardMenuButton;
-        //[SerializeField] private GameObject _cardsMenuPanel;
+        [SerializeField] private GameObject _cardMenuButtonAlert;
         [SerializeField] private CardMenu _cardMenu;
         [SerializeField] private ExtendedDescriptionPanel _extendedDescription;
 
         [Header("Options Menu")]
-        //[SerializeField] private GameObject _optionsMenuPanel;
         [SerializeField] private OptionsMenu _optionsMenu;
 
         [Header("Pause Button")]
@@ -44,12 +45,21 @@ namespace Booble.UI
             }
         }
 
+        public void InitializeCardMenu()
+        {
+            _pauseMenu.SetActive(true);
+            _cardMenu.gameObject.SetActive(true);
+            _cardMenu.SetCardsMenu();
+            _cardMenu.gameObject.SetActive(false);
+            _pauseMenu.SetActive(false);
+        }
+
         public void ShowPauseMenu(bool value)
         {
             if (value)
             {
                 _pauseMenu.SetActive(true);
-                _cardMenuButton.interactable = SceneLoader.Instance.InExploration;
+                //_cardMenuButton.interactable = SceneLoader.Instance.InExploration;
                 ShowPauseButton(false);
             }
             else
@@ -68,6 +78,15 @@ namespace Booble.UI
             _pauseButton.gameObject.SetActive(value);
         }
 
+        public void UpdateAlerts()
+        {
+            List<CardData> newCards = DeckManager.Instance.GetNewCards();
+            _cardMenu.UpdateExtraCards(newCards);
+
+            _pauseButton.ShowPauseButtonAlert(newCards.Count > 0);
+            _cardMenuButtonAlert.SetActive(newCards.Count > 0);
+        }
+
         #endregion
 
         public void OnResumeButtonClick()
@@ -81,8 +100,6 @@ namespace Booble.UI
         {
             _mainMenuPanel.SetActive(false);
             _cardMenu.gameObject.SetActive(true);
-
-            _cardMenu.SetCardsMenu();
         }
 
         public void OnCardsBackButtonClick()
