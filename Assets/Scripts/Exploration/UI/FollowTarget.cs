@@ -37,7 +37,6 @@ namespace Booble.UI
             Vector2 playerScreenPosition = _cam.WorldToScreenPoint(_target.position);
 
             float aux = playerScreenPosition.x.Map(0, Screen.width, 0, _canvasScaler.referenceResolution.x);
-            Debug.Log((aux) + " + " + (_rectTransform.sizeDelta.x + 100) + " <> " + _canvasScaler.referenceResolution.x);
             if (aux + _rectTransform.sizeDelta.x + 100 > _canvasScaler.referenceResolution.x)
             {
                 offset.x = -offset.x;

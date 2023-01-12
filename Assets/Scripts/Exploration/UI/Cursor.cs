@@ -49,7 +49,6 @@ namespace Booble.UI
 			float x = _cursorT.position.x + cursorWidth/2 + offset + backgroundWidth/2;
 			
 			_backgroundT.anchoredPosition = x < Screen.width ? _defaultAnchoredPosition : _alternateAnchoredPosition;
-			Debug.Log(x + " <> " + Screen.width);
 		}
 
 		public void SetApproachText()
