@@ -19,3 +19,19 @@ MonoBehaviour:
   - _content: "\xA1El enajenado este se ha montado el jodido Patio De Los Naranjos
       de la Mezquita De C\xF3rdoba dentro de su propio despacho!"
     _closeUp: 6
+  - _content: "\xBFPero c\xF3mo se le ocurre a ese hombre ponerse a plantar naranjos
+      en su despacho? \xA1Con lo de fuertes que son las ra\xEDces de un naranjo!"
+    _closeUp: 1
+  - _content: "\xA1A m\xED me lo vas a contar!"
+    _closeUp: 6
+  - _content: "T\xFA ver\xE1s cuando se enteren Purificaci\xF3n y Concepci\xF3n.
+      \xA1Se van a tirar hablando de los malditos naranjos toda la semana!"
+    _closeUp: 6
+  - _content: "\xBFPurificaci\xF3n y Concepci\xF3n?"
+    _closeUp: 1
+  - _content: "\xBFNo las has conocido? \xA1Pero si son tus compa\xF1eras de planta!
+      Son unas cotillas, se tiran toda la jornada cont\xE1ndose chismes."
+    _closeUp: 6
+  - _content: "Y adem\xE1s con buena voz, se les escucha a trav\xE9s de la puerta
+      de su despacho."
+    _closeUp: 6

@@ -83,7 +83,8 @@ namespace Booble.Flags
             Car2,
             Car3,
             Day2,
-            Day3
+            Day3,
+            PuriConi
         }
 
         [SerializeField] private Reference _flagReference;
