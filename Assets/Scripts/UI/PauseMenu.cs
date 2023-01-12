@@ -20,8 +20,7 @@ namespace Booble.UI
         [SerializeField] private GameObject _mainMenuPanel;
 
         [Header("Cards Menu")]
-        [SerializeField] private Button _cardMenuButton;
-        [SerializeField] private GameObject _cardMenuButtonAlert;
+        [SerializeField] private AlertButton _cardMenuButton;
         [SerializeField] private CardMenu _cardMenu;
         [SerializeField] private ExtendedDescriptionPanel _extendedDescription;
 
@@ -83,8 +82,8 @@ namespace Booble.UI
             List<CardData> newCards = DeckManager.Instance.GetNewCards();
             _cardMenu.UpdateExtraCards(newCards);
 
-            _pauseButton.ShowPauseButtonAlert(newCards.Count > 0);
-            _cardMenuButtonAlert.SetActive(newCards.Count > 0);
+            _pauseButton.ShowAlert(newCards.Count > 0);
+            _cardMenuButton.ShowAlert(newCards.Count > 0);
         }
 
         #endregion
