@@ -28,7 +28,7 @@ MonoBehaviour:
   - _content: "\xBFC\xF3mo?"
     _closeUp: 1
   - _content: "\xA1No me distraigas ahora mismo! \xA1Que esta parte es muy dif\xEDcil!
-      T\xFA ver\xE1s que por tu culpa voy a... |Lose|"
+      T\xFA ver\xE1s que por tu culpa voy a|Lose|... "
     _closeUp: 5
   - _content: ......................................................................
     _closeUp: 5
@@ -43,7 +43,7 @@ MonoBehaviour:
   - _content: "\xBFA monedas? \xBFAcaso estamos en el siglo XX? \xBFLlevas monedas
       encima en los tiempos que corren?"
     _closeUp: 1
-  - _content: "Pues ah\xED est\xE1 el problema, esta era la \xFAltima que ten\xEDa...
+  - _content: "Pues ah\xED est\xE1 el problema, esta era la \xFAltima que ten\xEDa...|Wait|
       \xA1Y por tu culpa he perdido!"
     _closeUp: 5
   - _content: "\xBFC\xF3mo que por mi culpa?"

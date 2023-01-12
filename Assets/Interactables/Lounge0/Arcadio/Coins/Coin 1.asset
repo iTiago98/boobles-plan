@@ -27,7 +27,7 @@ MonoBehaviour:
   - _content: "\xA1Venga ya! Deja de ser tan quejica y juega de una vez. Adem\xE1s,
       antes has dicho que te faltaba nada para pas\xE1rtelo."
     _closeUp: 1
-  - _content: Bueno, voy, voy... |Play|
+  - _content: 'Bueno, voy, voy|Play|... '
     _closeUp: 5
   - _content: "\xBFA ver c\xF3mo juegas? \xA1Hala! Buen salto. \xA1Cuidado con el
       Triceratops!"
