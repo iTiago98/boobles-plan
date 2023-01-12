@@ -32,7 +32,7 @@ namespace Booble.CardGame.Dialogues
 
         public override void ThrowStartDialogue()
         {
-            ThrowDialogue(_startDialogue, null, _tutorialOptions);
+            ThrowDialogue(_startDialogue, null, _tutorialOptions, hideBackOption: true);
         }
 
         public void ThrowTutorial()
@@ -46,13 +46,13 @@ namespace Booble.CardGame.Dialogues
             _tutorialAnimation.StartTutorial();
             yield return new WaitWhile(() => CardGameManager.Instance.tutorial);
 
-            ThrowDialogue(_tutorialDialogue, null, _postTutorialOptions);
+            ThrowDialogue(_tutorialDialogue, null, _postTutorialOptions, hideBackOption: true);
         }
 
         public void ThrowRepeatTutorial()
         {
             Debug.Log("RepeatTutorial");
-            ThrowDialogue(_repeatTutorialDialogue, null, _repeatTutorialOptions);
+            ThrowDialogue(_repeatTutorialDialogue, null, _repeatTutorialOptions, hideBackOption: true);
         }
 
         public void ThrowPostTutorial()
