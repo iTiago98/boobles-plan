@@ -39,8 +39,7 @@ MonoBehaviour:
   - _content: "(\xBFPero este t\xEDo, cuando llega a casa, cu\xE1ntas horas le dedica
       a ver anime?)"
     _closeUp: 1
-  - _content: Permanece, y contempla a un ser superior hacer alarde de sus habilidades.
-      |Play|
+  - _content: 'Permanece, y contempla a un ser superior hacer alarde de sus habilidades|Play|. '
     _closeUp: 5
   - _content: (Vaya flipao...)
     _closeUp: 1
@@ -69,7 +68,7 @@ MonoBehaviour:
   - _content: "\xA1\xBFC\xF3mo?! \xA1\xBFDesde cuando est\xE1 eso en el juego?! \xBFA
       ver que lo pruebe?"
     _closeUp: 5
-  - _content: '|Win|'
+  - _content: '|Lose|...'
     _closeUp: 5
   - _content: Pues es verdad... He derrotado incluso al boss...
     _closeUp: 5
