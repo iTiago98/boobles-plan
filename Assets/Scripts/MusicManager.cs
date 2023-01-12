@@ -14,9 +14,14 @@ namespace Booble.Managers
     {
         public static MusicManager Instance { get; private set; }
 
+        [Header("Background music")]
         [SerializeField] private EventReference _loungeMusicReference;
         [SerializeField] private EventReference _interviewMusicReference;
         [SerializeField] private EventReference _mainMenuReference;
+
+        [Header("SFX")]
+        [SerializeField] private EventReference _interviewWinSoundReference;
+        [SerializeField] private EventReference _interviewLoseSoundReference;
 
         private Bus _masterBus;
         private Bus _bgmBus;
@@ -80,6 +85,33 @@ namespace Booble.Managers
             _currentInstance.release();
         }
 
+        public void PlaySound(SFXReference reference)
+        {
+            EventReference eventReference;
+            switch (reference)
+            {
+                case SFXReference.InterviewWin:
+                    eventReference = _interviewWinSoundReference;
+                    break;
+                case SFXReference.InterviewLose:
+                    eventReference = _interviewLoseSoundReference;
+                    break;
+                default: return;
+            }
+
+            EventInstance instance = RuntimeManager.CreateInstance(eventReference);
+            instance.start();
+            instance.release();
+        }
+
+        public void PlayInterviewEnd(bool playerWin)
+        {
+            if (playerWin) PlaySound(SFXReference.InterviewWin);
+            else PlaySound(SFXReference.InterviewLose);
+        }
+
+        #region Bus Volume
+
         public float GetGeneralMusicVolume()
         {
             float volume;
@@ -112,6 +144,8 @@ namespace Booble.Managers
         {
             _sfxBus.setVolume(value);
         }
+
+        #endregion
     }
 
     public enum MusicReference
@@ -119,5 +153,11 @@ namespace Booble.Managers
         Lounge,
         Interview,
         MainMenu
+    }
+
+    public enum SFXReference
+    {
+        InterviewWin,
+        InterviewLose
     }
 }
