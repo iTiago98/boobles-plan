@@ -40,7 +40,7 @@ namespace Booble.CardGame.Dialogues
             ThrowDialogue(dialogue, onEndAction);
         }
 
-        protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null)
+        protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null, bool hideBackOption = false)
         {
             if (diag == null || _dialogueManager == null)
             {
@@ -50,7 +50,7 @@ namespace Booble.CardGame.Dialogues
             _dialogueEnd = false;
             CardGameManager.Instance.PauseGame();
 
-            _dialogueManager.StartDialogue(diag, options);
+            _dialogueManager.StartDialogue(diag, options, hideBackOption);
             _dialogueManager.OnEndDialogue.RemoveAllListeners();
             _dialogueManager.OnEndDialogue.AddListener(() =>
             {
