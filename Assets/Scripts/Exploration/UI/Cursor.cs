@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Booble.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using Santi.Utils;
@@ -34,6 +36,15 @@ namespace Booble.UI
 
 		private void Update()
 		{
+			if(!_backgroundT.gameObject.activeSelf)
+				return;
+
+			if (GameManager.Instance.gamePaused)
+			{
+				_backgroundT.gameObject.SetActive(false);
+				return;
+			}
+			
 			_cursorT.anchoredPosition = new Vector2
 			(
 				Input.mousePosition.x.Map(0, Screen.width, -_canvasScaler.referenceResolution.x / 2, _canvasScaler.referenceResolution.x / 2),
