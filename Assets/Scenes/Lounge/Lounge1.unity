@@ -3978,7 +3978,7 @@ MonoBehaviour:
     _falseFlags: 
     _setFlags: 
   _options:
-  - _optionText: "(Rebuscar para encontrar el peri\xF3dico que ley\xF3 Hortensia)"
+  - _optionText: "(Rebuscar para encontrar el peri\xF3dico que ley\xF3 Purita)"
     _trueFlags: 1d000000
     _falseFlags: 
     _dialogueOption: {fileID: 1027637522}
