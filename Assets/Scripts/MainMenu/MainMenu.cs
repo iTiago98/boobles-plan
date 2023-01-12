@@ -79,6 +79,12 @@ namespace Booble.MainMenu
             FlagManager.Instance.SetFlag(Flag.Reference.Car2);
             StartDay2();
         }
+        
+        [ContextMenu("Add Gomu Gomu No")]
+        public void AddNewCard()
+        {
+            DeckManager.Instance.AddGomuGomuNo();
+        }
 
         #region Card Game
 

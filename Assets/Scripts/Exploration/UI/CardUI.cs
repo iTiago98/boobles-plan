@@ -1,5 +1,6 @@
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Cards.DataModel.Effects;
+using Booble.Managers;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -16,46 +17,68 @@ namespace Booble.UI
         [SerializeField] private TextMeshProUGUI strengthText;
         [SerializeField] private TextMeshProUGUI defenseText;
 
-        private CardsData _data;
-        private bool _initialized;
+        [SerializeField] private GameObject alertImage;
 
-        public void Initialize(CardsData data)
+        private CardsData _data;
+        private Image _imageComponent;
+        private bool _front;
+
+        public string GetName() => _data.name;
+
+        public void Initialize(CardsData data, Sprite cardBack)
         {
             _data = data;
-            _initialized = true;
 
-            nameText.text = data.name;
-            descriptionText.text = GetDescriptionText(data);
-
-            if (data.type == CardType.ARGUMENT)
+            _imageComponent = GetComponent<Image>();
+            if (DeckManager.Instance.PlayerHasCard(data))
             {
-                strengthText.text = data.strength.ToString();
-                defenseText.text = data.defense.ToString();
+                SetFront();
             }
-
-            GetComponent<Image>().sprite = data.sprite;
+            else
+            {
+                _imageComponent.sprite = cardBack;
+                _imageComponent.color = Color.white;
+            }
         }
 
-        private string GetDescriptionText(CardsData data)
+        public void SetFront()
         {
-            string temp = "";
+            nameText.text = _data.name;
+            descriptionText.text = _data.GetDescriptionText();
 
-            foreach (CardEffect effect in data.effects)
+            if (_data.type == CardType.ARGUMENT)
             {
-                temp += effect.ToString() + "\n";
+                strengthText.text = _data.strength.ToString();
+                defenseText.text = _data.defense.ToString();
             }
 
-            return temp;
+            _imageComponent.sprite = _data.sprite;
+            _imageComponent.color = Color.white;
+            _front = true;
         }
+
 
         public void OnPointerEnter()
         {
-            if(_initialized) PauseMenu.Instance.ShowExtendedDescription(_data);
+            if (_front)
+            {
+                PauseMenu.Instance.ShowExtendedDescription(_data);
+                if (alertImage.activeSelf)
+                {
+                    ShowAlertImage(false);
+                    DeckManager.Instance.RemoveNewCard(_data);
+                }
+            }
         }
 
         public void OnPointerExit()
         {
-            if (_initialized) PauseMenu.Instance.HideExtendedDescription();
+            if (_front) PauseMenu.Instance.HideExtendedDescription();
+        }
+
+        public void ShowAlertImage(bool value)
+        {
+            alertImage.SetActive(value);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Booble.CardGame;
 using Booble.CardGame.Cards.DataModel;
 using Booble.CardGame.Managers;
 using Booble.Flags;
@@ -6,6 +7,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Booble.Managers.DeckManager;
 
 namespace Booble.UI
 {
@@ -18,16 +20,15 @@ namespace Booble.UI
         [SerializeField] private GameObject _mainMenuPanel;
 
         [Header("Cards Menu")]
-        [SerializeField] private Button _cardMenuButton;
-        [SerializeField] private GameObject _cardsMenuPanel;
+        [SerializeField] private AlertButton _cardMenuButton;
         [SerializeField] private CardMenu _cardMenu;
         [SerializeField] private ExtendedDescriptionPanel _extendedDescription;
 
         [Header("Options Menu")]
-        [SerializeField] private GameObject _optionsMenuPanel;
-        [SerializeField] private Slider _generalMusicSlider;
-        [SerializeField] private Slider _backgroundMusicSlider;
-        [SerializeField] private Slider _sfxMusicSlider;
+        [SerializeField] private OptionsMenu _optionsMenu;
+
+        [Header("Pause Button")]
+        [SerializeField] private PauseButton _pauseButton;
 
         private void Awake()
         {
@@ -43,20 +44,49 @@ namespace Booble.UI
             }
         }
 
-        public void ShowHidePauseMenu()
+        public void InitializeCardMenu()
         {
-            if (_pauseMenu.activeSelf)
+            _pauseMenu.SetActive(true);
+            _cardMenu.gameObject.SetActive(true);
+            _cardMenu.SetCardsMenu();
+            _cardMenu.gameObject.SetActive(false);
+            _pauseMenu.SetActive(false);
+        }
+
+        public void ShowPauseMenu(bool value)
+        {
+            if (value)
+            {
+                _pauseMenu.SetActive(true);
+                _cardMenuButton.SetInteractable(SceneLoader.Instance.InExploration);
+                ShowPauseButton(false);
+            }
+            else
             {
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
                 _pauseMenu.SetActive(false);
-            }
-            else
-            {
-                _pauseMenu.SetActive(true);
-                _cardMenuButton.interactable = SceneLoader.Instance.InExploration;
+                ShowPauseButton(true);
             }
         }
+
+        #region Pause Button
+
+        public void ShowPauseButton(bool value)
+        {
+            _pauseButton.gameObject.SetActive(value);
+        }
+
+        public void UpdateAlerts()
+        {
+            List<CardData> newCards = DeckManager.Instance.GetNewCards();
+            _cardMenu.UpdateExtraCards(newCards);
+
+            _pauseButton.ShowAlert(newCards.Count > 0);
+            _cardMenuButton.ShowAlert(newCards.Count > 0);
+        }
+
+        #endregion
 
         public void OnResumeButtonClick()
         {
@@ -68,14 +98,12 @@ namespace Booble.UI
         public void OnCardsButtonClick()
         {
             _mainMenuPanel.SetActive(false);
-            _cardsMenuPanel.SetActive(true);
-
-            _cardMenu.SetCardsMenu();
+            _cardMenu.gameObject.SetActive(true);
         }
 
         public void OnCardsBackButtonClick()
         {
-            _cardsMenuPanel.SetActive(false);
+            _cardMenu.gameObject.SetActive(false);
             _mainMenuPanel.SetActive(true);
         }
 
@@ -96,32 +124,15 @@ namespace Booble.UI
         public void OnOptionsButtonClick()
         {
             _mainMenuPanel.SetActive(false);
-            _optionsMenuPanel.SetActive(true);
+            _optionsMenu.gameObject.SetActive(true);
 
-            _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
-            _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
-            _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
-        }
-
-        public void OnGeneralMusicValueChanged(System.Single value)
-        {
-            MusicManager.Instance.ChangeGeneralMusicVolume(value);
-        }
-
-        public void OnBackgroundMusicSliderValueChanged(System.Single value)
-        {
-            MusicManager.Instance.ChangeBackgroundMusicVolume(value);
-        }
-
-        public void OnSFXMusicSliderValueChanged(System.Single value)
-        {
-            MusicManager.Instance.ChangeSFXVolume(value);
+            _optionsMenu.SetSliderValue();
         }
 
         public void OnOptionsBackButtonClick()
         {
             _mainMenuPanel.SetActive(true);
-            _optionsMenuPanel.SetActive(false);
+            _optionsMenu.gameObject.SetActive(false);
         }
 
         #endregion

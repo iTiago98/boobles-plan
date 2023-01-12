@@ -677,6 +677,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                 case SubType.ADD_EFFECT:
                     switch (targetType)
                     {
+                        case Target.ALLY: s += "el argumento objetivo obtiene el efecto " + cardParameter_Effect + "."; break;
                         case Target.AALLY: s += "todos los argumentos aliados obtienen el efecto " + cardParameter_Effect + "."; break;
                     }
                     break;

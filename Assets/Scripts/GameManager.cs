@@ -39,10 +39,14 @@ namespace Booble.Managers
             {
                 if (SceneLoader.Instance != null && SceneLoader.Instance.InMainMenu) return;
                 if (UIManager.Instance != null && UIManager.Instance.loseMenuActive) return;
-
-                if (gamePaused) ResumeGame();
-                else PauseGame();
+                SwitchPauseMenu();
             }
+        }
+
+        public void SwitchPauseMenu()
+        {
+            if (gamePaused) ResumeGame();
+            else PauseGame();
         }
 
         public void ResumeGame()
@@ -51,11 +55,10 @@ namespace Booble.Managers
 
             Time.timeScale = _defaultTimeScale;
 
-            PauseMenu.Instance.ShowHidePauseMenu();
+            PauseMenu.Instance.ShowPauseMenu(false);
 
             if (CardGameManager.Instance != null) CardGameManager.Instance.ResumeGame();
         }
-
 
         private void PauseGame()
         {
@@ -64,7 +67,7 @@ namespace Booble.Managers
             _defaultTimeScale = Time.timeScale;
             Time.timeScale = 0;
 
-            PauseMenu.Instance.ShowHidePauseMenu();
+            PauseMenu.Instance.ShowPauseMenu(true);
 
             if (CardGameManager.Instance != null) CardGameManager.Instance.PauseGame();
         }
