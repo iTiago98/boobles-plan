@@ -375,7 +375,7 @@ namespace Booble.Managers
                 GetHaPerdidoUsteLosPapele(),
                 GetTraigoLosAnexosCorrespondientes(),
                 GetAfidavit(),
-                GetResaltarUnaContradicción()
+                GetResaltarUnaContradiccion()
             };
 
             return cards;
@@ -395,7 +395,7 @@ namespace Booble.Managers
             if (_playerDeck.Contains(secretaryExtraCards[2])) return secretaryExtraCards[2];
             else return null;
         }
-        private CardsData GetResaltarUnaContradicción()
+        private CardsData GetResaltarUnaContradiccion()
         {
             if (_playerDeck.Contains(secretaryExtraCards[3])) return secretaryExtraCards[3];
             else return null;
