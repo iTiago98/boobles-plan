@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Booble.UI
 {
-    public class CardMenuButton : MonoBehaviour
+    public class AlertButton : MonoBehaviour
     {
         [SerializeField] private Button button;
         

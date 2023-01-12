@@ -19,7 +19,7 @@ namespace Booble.UI
             public Opponent_Name name;
             public GameObject cardMenu;
             public GameObject cardList;
-            public CardMenuButton cardButton;
+            public AlertButton cardButton;
             public Sprite buttonSprite;
             public Sprite cardBack;
         }
@@ -104,7 +104,7 @@ namespace Booble.UI
             {
                 ContenderInfo contenderInfo = _contendersInfo[(int)newCard.opponent];
 
-                CardMenuButton button = contenderInfo.cardButton;
+                AlertButton button = contenderInfo.cardButton;
                 button.ShowAlert(true);
 
                 foreach (Transform transform in contenderInfo.cardList.transform)
@@ -161,7 +161,7 @@ namespace Booble.UI
             return _currentMenu != menu;
         }
 
-        private void SetAvailable(CardMenuButton button, bool available, bool interactable, Sprite sprite)
+        private void SetAvailable(AlertButton button, bool available, bool interactable, Sprite sprite)
         {
             if (available)
             {
