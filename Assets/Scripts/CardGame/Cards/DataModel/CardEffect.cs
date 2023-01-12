@@ -503,9 +503,9 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
         #region ToString
 
-        public override string ToString()
+        private string ToString(SubType subtype)
         {
-            switch (subType)
+            switch (subtype)
             {
                 case SubType.NONE:
                     return "";
@@ -585,6 +585,11 @@ namespace Booble.CardGame.Cards.DataModel.Effects
             }
 
             return "";
+        }
+
+        public override string ToString()
+        {
+            return ToString(subType);
         }
 
         public string ToStringExtended(CardType type)
@@ -677,8 +682,8 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                 case SubType.ADD_EFFECT:
                     switch (targetType)
                     {
-                        case Target.ALLY: s += "el argumento objetivo obtiene el efecto " + cardParameter_Effect + "."; break;
-                        case Target.AALLY: s += "todos los argumentos aliados obtienen el efecto " + cardParameter_Effect + "."; break;
+                        case Target.ALLY: s += "el argumento objetivo obtiene el efecto " + ToString(cardParameter_Effect) + "."; break;
+                        case Target.AALLY: s += "todos los argumentos aliados obtienen el efecto " + ToString(cardParameter_Effect) + "."; break;
                     }
                     break;
                 case SubType.GUARD:
@@ -742,6 +747,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
             return s;
         }
+
 
         #endregion
     }
