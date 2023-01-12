@@ -1348,6 +1348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1062900681}
+  _heartbeatEffect: 1
 --- !u!1 &383091430
 GameObject:
   m_ObjectHideFlags: 0
@@ -4181,6 +4182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 593482638}
+  _heartbeatEffect: 1
 --- !u!114 &854331680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4923,6 +4925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1629608900}
+  _heartbeatEffect: 1
 --- !u!4 &1062662680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2585460997866550775, guid: ffe57351c68aa1a4f892784516fd2ba0, type: 3}
@@ -5168,7 +5171,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 829, y: -201.6}
-  m_SizeDelta: {x: 233.31, y: 65}
+  m_SizeDelta: {x: 250.13, y: 75.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1099214181
 MonoBehaviour:
@@ -5188,9 +5191,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 4
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_Spacing: 10
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
