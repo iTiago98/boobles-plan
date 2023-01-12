@@ -239,5 +239,10 @@ namespace Booble.Managers
                 obj.SetActive(enable);
             }
         }
+
+        public bool CheckScenes(string currentScene, string previousScene)
+        {
+            return CurrentScene.StartsWith(currentScene) && PreviousScene.StartsWith(previousScene);
+        }
     }
 }
