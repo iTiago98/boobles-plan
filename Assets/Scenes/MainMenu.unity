@@ -4429,7 +4429,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 963602009, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
 --- !u!1 &977923628
 GameObject:

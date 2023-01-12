@@ -6,27 +6,11 @@ using UnityEngine;
 
 namespace Booble.Managers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : DontDestroyOnLoad<GameManager>
     {
-        public static GameManager Instance { get; private set; }
-
         public bool gamePaused { private set; get; }
 
         private float _defaultTimeScale;
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this.gameObject);
-
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         private void Update()
         {

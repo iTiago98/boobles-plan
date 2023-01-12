@@ -5,6 +5,7 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using Booble.Managers;
 
 namespace Booble.CardGame.Utils
 {
@@ -13,7 +14,7 @@ namespace Booble.CardGame.Utils
         public TextMeshProUGUI text;
         public bool _heartbeatEffect;
         
-        private Button _button;
+        protected Button _button;
         private Sequence _heartbeatSequence;
         private RectTransform _rt;
         

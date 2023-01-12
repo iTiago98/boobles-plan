@@ -7,10 +7,8 @@ using UnityEngine.SceneManagement;
 
 namespace Booble.Managers
 {
-    public class SceneLoader : MonoBehaviour
+    public class SceneLoader : DontDestroyOnLoad<SceneLoader>
     {
-        public static SceneLoader Instance { get; private set; }
-
         [SerializeField] private Fader _fadeScreen;
 
         public bool InMainMenu => CurrentScene == Scenes.MAIN_MENU;
@@ -23,20 +21,6 @@ namespace Booble.Managers
 
         private List<GameObject> _disabledObjects;
         //[SerializeField] private Controller _explorationPlayerController;
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this.gameObject);
-
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         private void Start()
         {

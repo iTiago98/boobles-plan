@@ -1,3 +1,4 @@
+using Booble.CardGame.Utils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,8 @@ using UnityEngine.UI;
 
 namespace Booble.UI
 {
-    public class AlertButton : MonoBehaviour
+    public class AlertButton : MyButton
     {
-        [SerializeField] private Button button;
-        
         [SerializeField] private GameObject _newCardAlert;
 
         public void ShowAlert(bool value)
@@ -18,12 +17,7 @@ namespace Booble.UI
 
         public void SetImage(Sprite sprite)
         {
-            button.image.sprite = sprite;
-        }
-
-        public void SetInteractable(bool value)
-        {
-            button.interactable = value;
+            _button.image.sprite = sprite;
         }
     }
 }
