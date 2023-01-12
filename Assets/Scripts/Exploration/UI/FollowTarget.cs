@@ -30,24 +30,23 @@ namespace Booble.UI
             gameObject.SetActive(false);
         }
 
-        private void Update()
+        private void OnEnable()
         {
+            Vector2 offset = _offset;
+
             Vector2 playerScreenPosition = _cam.WorldToScreenPoint(_target.position);
-            _rectTransform.anchoredPosition = _offset + new Vector2
+
+            float aux = playerScreenPosition.x.Map(0, Screen.width, 0, _canvasScaler.referenceResolution.x);
+            Debug.Log((aux) + " + " + (_rectTransform.sizeDelta.x + 100) + " <> " + _canvasScaler.referenceResolution.x);
+            if (aux + _rectTransform.sizeDelta.x + 100 > _canvasScaler.referenceResolution.x)
+            {
+                offset.x = -offset.x;
+            }
+                
+            _rectTransform.anchoredPosition = offset + new Vector2
             (
                 playerScreenPosition.x.Map(0, Screen.width, -_canvasScaler.referenceResolution.x / 2, _canvasScaler.referenceResolution.x / 2),
                 playerScreenPosition.y.Map(0, Screen.height, -_canvasScaler.referenceResolution.y / 2, _canvasScaler.referenceResolution.y / 2)
-            );
-        }
-
-        [ContextMenu("Set Offset")]
-        public void SetOffset()
-        {
-            CanvasScaler cs = GetComponentInParent<CanvasScaler>();
-            Vector2 playerScreenPosition = Camera.main.WorldToScreenPoint(_target.position);
-            _offset = ((RectTransform)transform).anchoredPosition - new Vector2(
-                playerScreenPosition.x.Map(0, Screen.width, -cs.referenceResolution.x / 2, cs.referenceResolution.x / 2),
-                playerScreenPosition.y.Map(0, Screen.height, -cs.referenceResolution.y / 2, cs.referenceResolution.y / 2)
             );
         }
     }
