@@ -11,6 +11,7 @@ using System;
 using FMODUnity;
 using Booble.Interactables.Events;
 using Booble.Managers;
+using UnityEngine.EventSystems;
 
 namespace Booble.Interactables.Dialogues
 {
@@ -168,7 +169,10 @@ namespace Booble.Interactables.Dialogues
                 DisplayLastSentence();
                 return;
             }
-            
+
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+
             if (!Input.GetKeyDown(_nextKey))
                 return;
 
