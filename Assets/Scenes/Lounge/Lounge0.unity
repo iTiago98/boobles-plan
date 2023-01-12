@@ -2312,7 +2312,7 @@ MonoBehaviour:
     _falseFlags: 
     _setFlags: 
   _options:
-  - _optionText: (Rebuscar en los bolsillos de Pineda)
+  - _optionText: (Rebuscar en los bolsillos de Pinar)
     _trueFlags: 08000000
     _falseFlags: 0a000000
     _dialogueOption: {fileID: 1893814061}
@@ -3265,7 +3265,7 @@ MonoBehaviour:
     _trueFlags: 0c00000013000000
     _falseFlags: 1000000014000000
     _dialogueOption: {fileID: 895481880}
-  - _optionText: (Entregar moneda encontrada en el bolsillo de Pineda).
+  - _optionText: (Entregar moneda encontrada en el bolsillo de Pinar).
     _trueFlags: 0a00000013000000
     _falseFlags: 0f00000014000000
     _dialogueOption: {fileID: 2055909458}
