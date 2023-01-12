@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Hortensia: \xA1\xBFTe puedes creer que el escorbuto ha vuelto?!"
+  - _content: "Purificaci\xF3n: \xA1\xBFTe puedes creer que el escorbuto ha vuelto?!"
     _closeUp: 0
-  - _content: "Lucrecia: \xA1Qu\xE9 me dices Maria Hortensia! \xBFLa enfermedad de
-      los piratas? Eso ya son cuentos de viejas."
+  - _content: "Concepci\xF3n: \xA1Qu\xE9 me dices, Purita! \xBFLa enfermedad de los
+      piratas? Eso ya son cuentos de viejas."
     _closeUp: 0
-  - _content: "Hortensia: \xA1Cuentos dice la filindona! No sab\xEDa yo que en el
-      Abec\xE9 publicaran cuentos."
+  - _content: "Purificaci\xF3n: \xA1Cuentos dice la filindona! No sab\xEDa yo que
+      en el Abec\xE9 publicaran cuentos."
     _closeUp: 0
-  - _content: "Lucrecia: \xA1Anda ya! Si lo dice el Abec\xE9 tiene que ser cosa seria.
-      \xA1Madre del amor hermoso, con el escorbuto hemos topado!"
+  - _content: "Concepci\xF3n: \xA1Anda ya! Si lo dice el Abec\xE9 tiene que ser cosa
+      seria. \xA1Madre del amor hermoso, con el escorbuto hemos topado!"
     _closeUp: 0
-  - _content: 'Hortensia: No perdamos el oremus, Maria Lucrecia. '
+  - _content: "Purificaci\xF3n: No perdamos el oremus, Conchita. "
     _closeUp: 0
-  - _content: "Lucrecia: \xBFY d\xF3nde te has encontrado ese peri\xF3dico? \xBFEn
-      los tiempos de la posguerra?"
+  - _content: "Concepci\xF3n: \xBFY d\xF3nde te has encontrado ese peri\xF3dico?
+      \xBFEn los tiempos de la posguerra?"
     _closeUp: 0
-  - _content: "Lucrecia: Aparte, \xBFqu\xE9 haces t\xFA leyendo propaganda fascista?"
+  - _content: "Concepci\xF3n: Aparte, \xBFqu\xE9 haces t\xFA leyendo propaganda fascista?"
     _closeUp: 0
-  - _content: "Hortensia: Pues donde va a ser, en el lounge. Y no te preocupes que
-      lo he tirado en cuanto lo he le\xEDdo."
+  - _content: "Purificaci\xF3n: Pues donde va a ser, en el lounge. Y no te preocupes
+      que lo he tirado a la basura en cuanto lo he le\xEDdo."
     _closeUp: 0

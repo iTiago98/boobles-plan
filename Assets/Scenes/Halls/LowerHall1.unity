@@ -956,6 +956,10 @@ MonoBehaviour:
   _unclickable: 0
   _interactDistance: 1
   _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 8e7af97e5788f3a4bb85b231006ca6bb, type: 2}
+    _trueFlags: 49000000
+    _falseFlags: 
+    _setFlags: 
   - _dialogue: {fileID: 11400000, guid: 927ed5805be4a9143bc08fcc93926703, type: 2}
     _trueFlags: 
     _falseFlags: 
