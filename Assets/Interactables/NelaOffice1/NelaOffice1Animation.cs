@@ -125,5 +125,6 @@ public class NelaOffice1Animation : MonoBehaviour
     public void Interview()
     {
         _interview = true;
+        _throwAgain = false;
     }
 }

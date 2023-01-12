@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Aviso Preentrevista Incompleto
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Todav\xEDa no has investigado a fondo el caso de despido. Puedes intentar
+      realizar la entrevista ahora, pero te faltan pruebas."
+    _closeUp: 0
+  - _content: "\xBFSeguro que quieres empezar con la entrevista? Despu\xE9s de ella
+      estar\xE1s demasiado cansada para seguir investigando por hoy."
+    _closeUp: 0

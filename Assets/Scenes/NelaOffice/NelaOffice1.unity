@@ -359,6 +359,94 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &674732848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 674732849}
+  - component: {fileID: 674732850}
+  - component: {fileID: 674732851}
+  - component: {fileID: 674732852}
+  m_Layer: 0
+  m_Name: Comenzar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &674732849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674732848}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1282262457016336837}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &674732850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674732848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &674732851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674732848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 704e0b6449a63b24b94f5dec611e9b8e, type: 2}
+  _onEnd: 3
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1282262456399842501}
+        m_TargetAssemblyTypeName: NelaOffice1Animation, Assembly-CSharp
+        m_MethodName: DialogueEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &674732852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674732848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e1495feb2e58ce4baa7a94e2ba7b2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 1282262456399842501}
 --- !u!1 &799602777
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +478,7 @@ Transform:
   m_Father: {fileID: 2063433068}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &996095651
+--- !u!1 &888866550
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -398,29 +486,70 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 996095652}
+  - component: {fileID: 888866551}
+  - component: {fileID: 888866552}
+  - component: {fileID: 888866553}
   m_Layer: 0
-  m_Name: Interactables
+  m_Name: Seguir Investigando
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &996095652
+--- !u!4 &888866551
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 996095651}
+  m_GameObject: {fileID: 888866550}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1282262457016336837}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &888866552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888866550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &888866553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 888866550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1282262456399842501}
+        m_TargetAssemblyTypeName: NelaOffice1Animation, Assembly-CSharp
+        m_MethodName: DialogueEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1066474334
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +1004,7 @@ Transform:
   - {fileID: 1282262458008004105}
   - {fileID: 1282262457016336837}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1282262456399842501
 MonoBehaviour:
@@ -922,19 +1051,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1282262457016336832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282262457016336836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1495feb2e58ce4baa7a94e2ba7b2d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _anim: {fileID: 1282262456399842501}
 --- !u!114 &1282262457016336834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,35 +1063,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1282262457016336835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282262457016336836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 704e0b6449a63b24b94f5dec611e9b8e, type: 2}
-  _onEnd: 3
-  _callbackEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1282262456399842501}
-        m_TargetAssemblyTypeName: NelaOffice1Animation, Assembly-CSharp
-        m_MethodName: DialogueEnd
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1282262457016336836
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,8 +1073,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1282262457016336837}
   - component: {fileID: 1282262457016336834}
-  - component: {fileID: 1282262457016336835}
-  - component: {fileID: 1282262457016336832}
+  - component: {fileID: 1282262457016336840}
+  - component: {fileID: 1282262457016336839}
+  - component: {fileID: 1282262457016336838}
   m_Layer: 0
   m_Name: ConvocarCitriano
   m_TagString: Untagged
@@ -1006,10 +1094,71 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 674732849}
+  - {fileID: 888866551}
   m_Father: {fileID: 1282262456399842500}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1282262457016336838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282262457016336836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01fc3dce8a6c6e409f527532ef0b923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _unclickable: 1
+  _interactDistance: 0
+  _clickDialogues:
+  - _dialogue: {fileID: 11400000, guid: 0ec87b41f15d08d4287ab856218d7775, type: 2}
+    _trueFlags: 
+    _falseFlags: 2b000000
+    _setFlags: 
+  - _dialogue: {fileID: 11400000, guid: e8076789c1de8fd46a998c3256fe2932, type: 2}
+    _trueFlags: 
+    _falseFlags: 
+    _setFlags: 
+  _options:
+  - _optionText: "S\xED, estoy segura. Quiero comenzar con la entrevista."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 674732850}
+  - _optionText: "Prefiero seguir investigando antes de que se acabe el d\xEDa."
+    _trueFlags: 
+    _falseFlags: 
+    _dialogueOption: {fileID: 888866552}
+--- !u!114 &1282262457016336839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282262457016336836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2df29dfe0175d44961047781705213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactable: {fileID: 1282262457016336838}
+  _withinAnimation: 1
+--- !u!114 &1282262457016336840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282262457016336836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3343668d5c6d2864cbecbb8bae2426b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 1282262456399842501}
 --- !u!114 &1282262458008004100
 MonoBehaviour:
   m_ObjectHideFlags: 0
