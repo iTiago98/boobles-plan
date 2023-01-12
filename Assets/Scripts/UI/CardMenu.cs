@@ -1,52 +1,33 @@
+using Booble.CardGame;
 using Booble.CardGame.Cards.DataModel;
 using Booble.Flags;
 using Booble.Managers;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Booble.Managers.DeckManager;
 
 namespace Booble.UI
 {
     public class CardMenu : MonoBehaviour
     {
+        [Serializable]
+        public struct ContenderInfo
+        {
+            public Opponent_Name name;
+            public GameObject cardMenu;
+            public GameObject cardList;
+            public CardMenuButton cardButton;
+            public Sprite buttonSprite;
+            public Sprite cardBack;
+        }
+
+        [SerializeField] private List<ContenderInfo> _contendersInfo;
+
         [Header("Sprites")]
-        [SerializeField] private Sprite _playerButtonSprite;
-        [SerializeField] private Sprite _citrianoButtonSprite;
-        [SerializeField] private Sprite _ppBrosButtonSprite;
-        [SerializeField] private Sprite _secretaryButtonSprite;
-        [SerializeField] private Sprite _bossButtonSprite;
         [SerializeField] private Sprite _buttonNotAvailableSprite;
-
-        [Header("Player")]
-        [SerializeField] private GameObject _playerCardsMenu;
-        [SerializeField] private GameObject _playerCardsList;
-        [SerializeField] private Button _playerButton;
-        [SerializeField] private Sprite _playerCardBack;
-
-        [Header("Citriano")]
-        [SerializeField] private GameObject _citrianoCardsMenu;
-        [SerializeField] private GameObject _citrianoCardsList;
-        [SerializeField] private Button _citrianoButton;
-        [SerializeField] private Sprite _citrianoCardBack;
-
-        [Header("PPBros")]
-        [SerializeField] private GameObject _ppBrosCardsMenu;
-        [SerializeField] private GameObject _ppBrosCardsList;
-        [SerializeField] private Button _ppBrosButton;
-        [SerializeField] private Sprite _ppBrosCardBack;
-
-        [Header("Secretary")]
-        [SerializeField] private GameObject _secretaryCardsMenu;
-        [SerializeField] private GameObject _secretaryCardsList;
-        [SerializeField] private Button _secretaryButton;
-        [SerializeField] private Sprite _secretaryCardBack;
-
-        [Header("Boss")]
-        [SerializeField] private GameObject _bossCardsMenu;
-        [SerializeField] private GameObject _bossCardsList;
-        [SerializeField] private Button _bossButton;
-        [SerializeField] private Sprite _bossCardBack;
 
         private GameObject _currentMenu;
         private bool _initialized;
@@ -55,43 +36,92 @@ namespace Booble.UI
 
         public void SetCardsMenu()
         {
-            if (!_initialized) GetPlayerBaseCards();
-            UpdateExtraCards();
-            SetButtonsAvailable();
+            if (!_initialized) Initialize();
+            //SetButtonsAvailable();
+        }
+
+        #region Initialize
+
+        private void Initialize()
+        {
+            GetPlayerBaseCards();
+            InitializeCards();
+
+            _currentMenu = _contendersInfo[0].cardMenu;
+            _initialized = true;
         }
 
         private void GetPlayerBaseCards()
         {
             _playerBaseCards = DeckManager.Instance.GetPlayerBaseCards();
-            _currentMenu = _playerCardsMenu;
-            _initialized = true;
         }
 
-        private void UpdateExtraCards()
+
+        private void InitializeCards()
         {
-            if (_currentMenu == _playerCardsMenu)
+            foreach (ContenderInfo contenderInfo in _contendersInfo)
             {
-                List<CardsData> temp = new List<CardsData>(_playerBaseCards);
-                temp.Add(DeckManager.Instance.GetGranFinal());
-                SetCards(_playerCardsList, temp, _playerCardBack);
-            }
-            else if (_currentMenu == _citrianoCardsMenu)
-            {
-                SetCards(_citrianoCardsList, DeckManager.Instance.GetCitrianoExtraCards(), _citrianoCardBack);
-            }
-            else if (_currentMenu == _ppBrosCardsMenu)
-            {
-                SetCards(_ppBrosCardsList, DeckManager.Instance.GetPPBrosExtraCards(), _ppBrosCardBack);
-            }
-            else if (_currentMenu == _secretaryCardsMenu)
-            {
-                SetCards(_secretaryCardsList, DeckManager.Instance.GetSecretaryExtraCards(), _secretaryCardBack);
-            }
-            else if (_currentMenu == _bossCardsMenu)
-            {
-                SetCards(_bossCardsList, DeckManager.Instance.GetBossExtraCards(), _bossCardBack);
+                List<CardsData> temp;
+
+                if (contenderInfo.name == Opponent_Name.Tutorial)
+                {
+                    temp = new List<CardsData>(_playerBaseCards);
+                    temp.AddRange(DeckManager.Instance.GetExtraCards(contenderInfo.name));
+                }
+                else
+                {
+                    temp = DeckManager.Instance.GetExtraCards(contenderInfo.name);
+                }
+
+                InitializeCardsList(contenderInfo.cardList, temp, contenderInfo.cardBack);
             }
         }
+
+        private void InitializeCardsList(GameObject cardsParent, List<CardsData> cards, Sprite cardBack)
+        {
+            int index = 0;
+            foreach (Transform cardObject in cardsParent.transform)
+            {
+                CardsData cardData = cards[index];
+                cardObject.GetComponent<CardUI>().Initialize(cardData, cardBack);
+
+                index++;
+            }
+        }
+
+        #endregion
+
+        #region Update Cards
+
+        public void UpdateExtraCards(List<CardData> newCards)
+        {
+            foreach (ContenderInfo contenderInfo in _contendersInfo)
+            {
+                contenderInfo.cardButton.ShowAlert(false);
+            }
+
+            foreach (CardData newCard in newCards)
+            {
+                ContenderInfo contenderInfo = _contendersInfo[(int)newCard.opponent];
+
+                CardMenuButton button = contenderInfo.cardButton;
+                button.ShowAlert(true);
+
+                foreach (Transform transform in contenderInfo.cardList.transform)
+                {
+                    CardUI card = transform.GetComponent<CardUI>();
+                    if (card.GetName() == newCard.data.name)
+                    {
+                        card.SetFront();
+                        card.ShowAlertImage(true);
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Buttons 
 
         private void SetButtonsAvailable()
         {
@@ -102,11 +132,28 @@ namespace Booble.UI
             flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Car2);
             flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Car3);
 
-            SetAvailable(_playerButton, flag0, GetInteractable(_playerCardsMenu), _playerButtonSprite);
-            SetAvailable(_citrianoButton, flag1, GetInteractable(_citrianoCardsMenu), _citrianoButtonSprite);
-            SetAvailable(_ppBrosButton, flag2, GetInteractable(_ppBrosCardsMenu), _ppBrosButtonSprite);
-            SetAvailable(_secretaryButton, flag3, GetInteractable(_secretaryCardsMenu), _secretaryButtonSprite);
-            SetAvailable(_bossButton, flag3, GetInteractable(_bossCardsMenu), _bossButtonSprite);
+            foreach (ContenderInfo contenderInfo in _contendersInfo)
+            {
+                bool flag = false;
+                switch (contenderInfo.name)
+                {
+                    case Opponent_Name.Tutorial:
+                        flag = flag0;
+                        break;
+                    case Opponent_Name.Citriano:
+                        flag = flag1;
+                        break;
+                    case Opponent_Name.PPBros:
+                        flag = flag2;
+                        break;
+                    case Opponent_Name.Secretary:
+                    case Opponent_Name.Boss:
+                        flag = flag3;
+                        break;
+                }
+
+                SetAvailable(contenderInfo.cardButton, flag, GetInteractable(contenderInfo.cardMenu), contenderInfo.buttonSprite);
+            }
         }
 
         private bool GetInteractable(GameObject menu)
@@ -114,84 +161,40 @@ namespace Booble.UI
             return _currentMenu != menu;
         }
 
-        private void SetAvailable(Button button, bool available, bool interactable, Sprite sprite)
+        private void SetAvailable(CardMenuButton button, bool available, bool interactable, Sprite sprite)
         {
             if (available)
             {
-                button.image.sprite = sprite;
-                button.interactable = interactable;
+                button.SetImage(sprite);
+                button.SetInteractable(interactable);
             }
             else
             {
-                button.image.sprite = _buttonNotAvailableSprite;
-                button.interactable = false;
-            }
-        }
-
-        private void SetCards(GameObject cardsParent, List<CardsData> cards, Sprite cardBack)
-        {
-            int index = 0;
-            foreach (Transform cardObject in cardsParent.transform)
-            {
-                CardsData cardData = cards[index];
-                Image image = cardObject.GetComponent<Image>();
-
-                if (cardData == null)
-                {
-                    image.color = Color.grey;
-                    image.sprite = cardBack;
-                }
-                else
-                {
-                    image.color = Color.white;
-                    cardObject.GetComponent<CardUI>().Initialize(cardData);
-                }
-
-                index++;
+                button.SetImage(_buttonNotAvailableSprite);
+                button.SetInteractable(false);
             }
         }
 
         #region Buttons Click
-        public void OnPlayerButtonClick()
+
+        private void OnButtonClick(int contender)
         {
+            ContenderInfo contenderInfo = _contendersInfo[contender];
+
             _currentMenu.SetActive(false);
-            _playerCardsMenu.SetActive(true);
-            _currentMenu = _playerCardsMenu;
-            UpdateExtraCards();
+            contenderInfo.cardMenu.SetActive(true);
+            _currentMenu = contenderInfo.cardMenu;
         }
 
-        public void OnCitrianoButtonClick()
-        {
-            _currentMenu.SetActive(false);
-            _citrianoCardsMenu.SetActive(true);
-            _currentMenu = _citrianoCardsMenu;
-            UpdateExtraCards();
-        }
-
-        public void OnPPBrosButtonClick()
-        {
-            _currentMenu.SetActive(false);
-            _ppBrosCardsMenu.SetActive(true);
-            _currentMenu = _ppBrosCardsMenu;
-            UpdateExtraCards();
-        }
-
-        public void OnSecretaryButtonClick()
-        {
-            _currentMenu.SetActive(false);
-            _secretaryCardsMenu.SetActive(true);
-            _currentMenu = _secretaryCardsMenu;
-            UpdateExtraCards();
-        }
-
-        public void OnBossButtonClick()
-        {
-            _currentMenu.SetActive(false);
-            _bossCardsMenu.SetActive(true);
-            _currentMenu = _bossCardsMenu;
-            UpdateExtraCards();
-        }
+        public void OnPlayerButtonClick() { OnButtonClick(0); }
+        public void OnCitrianoButtonClick() { OnButtonClick(1); }
+        public void OnPPBrosButtonClick() { OnButtonClick(2); }
+        public void OnSecretaryButtonClick() { OnButtonClick(3); }
+        public void OnBossButtonClick() { OnButtonClick(4); }
 
         #endregion
+
+        #endregion
+
     }
 }

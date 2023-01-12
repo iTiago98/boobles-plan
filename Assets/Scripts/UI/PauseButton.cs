@@ -9,11 +9,6 @@ namespace Booble.UI
     {
         [SerializeField] private GameObject _newCardAlert;
 
-        public void ShowPauseButton(bool value)
-        {
-            _pauseButton.SetActive(value);
-        }
-
         public void ShowPauseButtonAlert(bool value)
         {
             _newCardAlert.SetActive(value);
