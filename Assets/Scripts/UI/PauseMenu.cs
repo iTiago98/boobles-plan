@@ -140,7 +140,7 @@ namespace Booble.UI
                     SceneLoader.Instance.UnloadInterviewScene();
                 }
             }
-            else if (SceneLoader.Instance.InExploration)
+            else
             {
                 SceneLoader.Instance.LoadMainMenuScene();
             }
