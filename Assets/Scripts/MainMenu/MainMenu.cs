@@ -38,6 +38,8 @@ namespace Booble.MainMenu
         [SerializeField] private Sprite _secretaryBackground;
         [SerializeField] private Sprite _bossBackground;
 
+        [Header("SceneLoad")] [SerializeField] private List<Triplet> _checkPoints;
+        
         private bool _onTween;
 
         public void PlayButton()
@@ -45,16 +47,29 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
             
-            SceneLoader.Instance.LoadScene(Scenes.CAR_0);
-            MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+            // SceneLoader.Instance.LoadScene(Scenes.CAR_0);
+            // MusicManager.Instance.PlayMusic(MusicReference.Lounge);
+
+            int i = 0;
+            while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
+            {
+                i++;
+            }
+
+            if (i < _checkPoints.Count)
+            {
+                SceneLoader.Instance.LoadScene(_checkPoints[i].Scene);
+                MusicManager.Instance.PlayMusic(_checkPoints[i].Music);
+            }
+            else
+            {
+                Debug.Log("Completed the game!");
+            }
         }
 
         [ContextMenu("Start Day 0")]
         public void StartDay0()
         {
-            Debug.Log("0: " + FlagManager.Instance.GetFlag(Flag.Reference.Car0));
-            Debug.Log("1: " + FlagManager.Instance.GetFlag(Flag.Reference.Car1));
-            Debug.Log("2: " + FlagManager.Instance.GetFlag(Flag.Reference.Car2));
             SceneLoader.Instance.LoadScene(Scenes.CAR_0);
             MusicManager.Instance.PlayMusic(MusicReference.Lounge);
         }
@@ -69,7 +84,7 @@ namespace Booble.MainMenu
         [ContextMenu("Start Day 2")]
         public void StartDay2()
         {
-            FlagManager.Instance.SetFlag(Flag.Reference.Car1);
+            // FlagManager.Instance.SetFlag(Flag.Reference.Car1);
             FlagManager.Instance.SetFlag(Flag.Reference.Day1);
             StartDay1();
         }
@@ -77,7 +92,7 @@ namespace Booble.MainMenu
         [ContextMenu("Start Day 3")]
         public void StartDay3()
         {
-            FlagManager.Instance.SetFlag(Flag.Reference.Car2);
+            // FlagManager.Instance.SetFlag(Flag.Reference.Car2);
             FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             StartDay2();
         }
@@ -216,5 +231,26 @@ namespace Booble.MainMenu
 			Application.Quit();
 #endif
         }
+    }
+
+    [System.Serializable]
+    public class Triplet
+    {
+        public bool Satisfied
+        {
+            get
+            {
+                return FlagManager.Instance.GetFlag(FlagRef);
+            }
+            
+            set
+            {
+                FlagManager.Instance.SetFlag(FlagRef, value);
+            }
+        }
+        
+        [field: SerializeField] public string Scene { get; private set; }
+        [field: SerializeField] public Flag.Reference FlagRef { get; private set; }
+        [field: SerializeField] public MusicReference Music { get; private set; }
     }
 }

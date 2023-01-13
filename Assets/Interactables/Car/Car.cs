@@ -30,7 +30,7 @@ namespace Booble.Animations
 
             if (i < _dialogues.Count)
             {
-                FlagManager.Instance.SetFlag(_dialogues[i].FlagRef);
+                // FlagManager.Instance.SetFlag(_dialogues[i].FlagRef);
                 StartCoroutine(DialogueCoroutine(_dialogues[i].Content, _dialogues[i].Scene));
             }
         }

@@ -578,6 +578,7 @@ MonoBehaviour:
   _controller: {fileID: 1197338470}
   _nelaPos: {fileID: 1079636927}
   _dialogue0: {fileID: 11400000, guid: 9e1eef0b9e0e71e46894c36d58a2a222, type: 2}
+  _dataSaved: {fileID: 11400000, guid: c4af6dc503276b54686e094c7815540e, type: 2}
   _fader: {fileID: 1197338468}
 --- !u!1 &2059599563
 GameObject:

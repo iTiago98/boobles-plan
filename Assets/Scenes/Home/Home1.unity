@@ -1017,6 +1017,7 @@ MonoBehaviour:
   _dark: {fileID: 1382230540}
   _light: {fileID: 1336153964}
   _sitNela: {fileID: 505636378}
+  _dataSaved: {fileID: 11400000, guid: c4af6dc503276b54686e094c7815540e, type: 2}
   _dialogue0: {fileID: 11400000, guid: a9937759b23b3ca499df945a8e9b5a2b, type: 2}
   _dialogue1: {fileID: 11400000, guid: b60892b4dc840704897ffe7b73987d19, type: 2}
   _options:

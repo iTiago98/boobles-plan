@@ -20,6 +20,7 @@ public class NelaOffice1Animation : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private Dialogue _dialogue;
     [SerializeField] private Dialogue _postInterview;
+    [SerializeField] private Dialogue _dataSaved;
     [SerializeField] private Flag.Reference _day1;
     [SerializeField] private Dialogue _officeDialogue;
     [SerializeField] private List<Option> _options;
@@ -92,9 +93,16 @@ public class NelaOffice1Animation : MonoBehaviour
             SceneLoader.Instance.LoadInterviewScene();
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);
+
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            yield return new WaitForSeconds(_fade.FadeDuration);
             
             ThrowDialogue(_postInterview);
             yield return new WaitUntil(() => _dialogueEnd);
+            
+            ThrowDialogue(_dataSaved);
+            yield return new WaitUntil(() => _dialogueEnd);
+            
             _fade.FadeOut(SceneLoader.Instance.LoadHome1);
         }
         else

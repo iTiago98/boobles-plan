@@ -216,6 +216,7 @@ MonoBehaviour:
   _dialogue0: {fileID: 11400000, guid: 801b0ca0250e6bb4697e9f3f588df078, type: 2}
   _dialogue1: {fileID: 11400000, guid: c0b39be9ac6300e458d9e005636574c7, type: 2}
   _dialogue2: {fileID: 11400000, guid: 67842f040a0bcf844833165db03fcaca, type: 2}
+  _dataSaved: {fileID: 11400000, guid: c4af6dc503276b54686e094c7815540e, type: 2}
   _fader: {fileID: 1590815142}
 --- !u!1 &729199069
 GameObject:
