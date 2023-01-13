@@ -16,11 +16,8 @@ namespace Booble.Managers
         public bool InExploration => !InMainMenu && !InInterview;
         public string CurrentScene { get; private set; }
         public string PreviousScene { get; private set; }
-        
-        private Camera _mainCamera;
 
         private List<GameObject> _disabledObjects;
-        //[SerializeField] private Controller _explorationPlayerController;
 
         private void Start()
         {
@@ -33,7 +30,6 @@ namespace Booble.Managers
             PreviousScene = CurrentScene;
             CurrentScene = Scenes.MAIN_MENU;
 
-            MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
             _fadeScreen.FadeOut(() =>
             {
                 var async = SceneManager.LoadSceneAsync(Scenes.MAIN_MENU);
@@ -146,11 +142,6 @@ namespace Booble.Managers
             LoadInterviewScene(new List<GameObject>() { Camera.main.gameObject });
         }
 
-        public void LoadInterviewScene(AsyncOperation op)
-        {
-            LoadInterviewScene(new List<GameObject>(), false);
-        }
-
         public void LoadInterviewScene(List<GameObject> objects, bool updateCurrentScene = true)
         {
             if (updateCurrentScene)
@@ -160,7 +151,6 @@ namespace Booble.Managers
                 _disabledObjects = objects;
             }
 
-            MusicManager.Instance.PlayMusic(MusicReference.Interview);
             _fadeScreen.FadeOut(() =>
             {
                 EnableObjects(objects, false);
@@ -176,17 +166,28 @@ namespace Booble.Managers
         {
             CurrentScene = PreviousScene;
 
-            if (PreviousScene == Scenes.MAIN_MENU) MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
-            else MusicManager.Instance.PlayMusic(MusicReference.Lounge);
-
             _fadeScreen.FadeOut(() =>
             {
                 EnableObjects(_disabledObjects, true);
-                if (PreviousScene != Scenes.MAIN_MENU)
-                    Controller.Instance.enabled = true;
 
                 var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
                 async.completed += OnSceneLoaded;
+
+                if (InMainMenu) 
+                    async.completed += OnMainMenuSceneLoaded;
+                else if (InExploration) 
+                    async.completed += OnLoungeSceneLoaded;
+            });
+        }
+
+        public void UnloadInterviewAndLoadScene(string scene)
+        {
+            CurrentScene = scene;
+
+            _fadeScreen.FadeOut(() =>
+            {
+                var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
+                async.completed += OnInterviewUnloaded;
             });
         }
 
@@ -195,7 +196,7 @@ namespace Booble.Managers
             _fadeScreen.FadeOut(() =>
             {
                 var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
-                async.completed += LoadInterviewScene;
+                async.completed += OnReloadInterviewScene;
             });
         }
 
@@ -209,19 +210,40 @@ namespace Booble.Managers
         private void OnMainMenuSceneLoaded(AsyncOperation op)
         {
             PauseMenu.Instance.ShowPauseButton(false);
+            MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
         }
 
         private void OnLoungeSceneLoaded(AsyncOperation op)
         {
-            //RestoreMainCamera(op);
             Controller.Instance.enabled = true;
             PauseMenu.Instance.ShowPauseButton(true);
+            MusicManager.Instance.PlayMusic(MusicReference.Lounge);
         }
 
         private void OnInterviewLoaded(AsyncOperation op)
         {
             PauseMenu.Instance.ShowPauseButton(false);
+            MusicManager.Instance.PlayMusic(MusicReference.Interview);
             CardGameManager.Instance.Initialize(PreviousScene != Scenes.MAIN_MENU);
+        }
+
+        private void OnInterviewUnloaded(AsyncOperation op)
+        {
+            _fadeScreen.FadeOut(() =>
+            {
+                var async = SceneManager.LoadSceneAsync(CurrentScene);
+                async.completed += OnSceneLoaded;
+
+                if (InMainMenu)
+                    async.completed += OnMainMenuSceneLoaded;
+                else if (InExploration)
+                    async.completed += OnLoungeSceneLoaded;
+            });
+        }
+
+        private void OnReloadInterviewScene(AsyncOperation op)
+        {
+            LoadInterviewScene(new List<GameObject>(), false);
         }
 
         private void EnableObjects(List<GameObject> objects, bool enable)
