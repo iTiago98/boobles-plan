@@ -65,4 +65,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NelaOfficeDayStart.unity
     guid: 3e84592b731735f4bbf41a199629df5a
+  - enabled: 1
+    path: Assets/Scenes/Halls/LowerHall3.unity
+    guid: 24f16a7a4a0365e4ba06f342d8bdd89e
+  - enabled: 1
+    path: Assets/Scenes/Halls/BossHall3.unity
+    guid: 26d88d191d3d823459299cfc66bf80f3
   m_configObjects: {}

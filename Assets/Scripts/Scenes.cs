@@ -18,9 +18,11 @@ namespace Booble
         public static string CAR_1 = "Car1";
         public static string LOWER_HALL_1 = "LowerHall1";
         public static string LOWER_HALL_2 = "LowerHall2";
+        public static string LOWER_HALL_3 = "LowerHall3";
         public static string UPPER_HALL_1 = "UpperHall1";
         public static string UPPER_HALL_2 = "UpperHall2";
-        public static string BOSS_HALL_1 = "BossHall1";
+        public static string UPPER_HALL_3 = "UpperHall3";
+        public static string BOSS_HALL_3 = "BossHall3";
         public static string CANTEEN_0 = "Canteen0";
         public static string CANTEEN_2 = "Canteen2";
         public static string PPB_OFFICE = "PPBOffice";
