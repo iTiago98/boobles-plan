@@ -23,7 +23,6 @@ namespace Booble.Interactables.Arcadio
             if (!_waiting)
                 return;
             
-            Debug.Log(Controller.Instance.transform.position.x);
             if(Controller.Instance.transform.position.x < _threshold)
             {
                 _waiting = false;

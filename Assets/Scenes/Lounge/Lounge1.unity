@@ -3643,8 +3643,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1794732972}
   - component: {fileID: 1794732976}
-  - component: {fileID: 1794732975}
   - component: {fileID: 1794732978}
+  - component: {fileID: 1794732975}
   - component: {fileID: 1794732973}
   - component: {fileID: 1794732977}
   m_Layer: 0
@@ -3868,6 +3868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40db5a7b29e70a944b64d143938dd7ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _arcadeCollider: {fileID: 1774907200}
   _anim: {fileID: 1794732973}
   _arcadioPartida: 19
   _coins: 0f0000001100000010000000
