@@ -31,11 +31,11 @@ namespace Booble.Animations
             if (i < _dialogues.Count)
             {
                 // FlagManager.Instance.SetFlag(_dialogues[i].FlagRef);
-                StartCoroutine(DialogueCoroutine(_dialogues[i].Content, _dialogues[i].Scene));
+                StartCoroutine(DialogueCoroutine(_dialogues[i].Content, _dialogues[i].Scene, i==0));
             }
         }
 
-        private IEnumerator DialogueCoroutine(Dialogue dialogue, string scene)
+        private IEnumerator DialogueCoroutine(Dialogue dialogue, string scene, bool habemusPartida)
         {
             _nelaController.enabled = false;
             
@@ -44,7 +44,11 @@ namespace Booble.Animations
             
             ThrowDialogue(dialogue);
             yield return new WaitUntil(() => _dialogueEnd);
-            
+
+            if (habemusPartida)
+            {
+                FlagManager.Instance.SetFlag(Flag.Reference.HabemusPartida);
+            }
             SceneLoader.Instance.LoadScene(scene);
         }
         

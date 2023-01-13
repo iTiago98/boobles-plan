@@ -49,7 +49,7 @@ namespace Booble.MainMenu
 
         private void Start()
         {
-            //_continueButton.SetActive(_checkPoints.Count > 0);
+            _continueButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida));
         }
 
         #region Play

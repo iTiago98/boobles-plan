@@ -88,7 +88,8 @@ namespace Booble.Flags
             Home0,
             Home1,
             Home2,
-            Home3
+            Home3,
+            HabemusPartida
         }
 
         [SerializeField] private Reference _flagReference;
