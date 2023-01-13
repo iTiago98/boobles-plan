@@ -8,6 +8,7 @@ using Booble.Interactables.Dialogues;
 using Booble.Managers;
 using UnityEditor;
 using UnityEngine.UI;
+using Booble.UI;
 
 namespace Booble.MainMenu
 {
@@ -48,7 +49,7 @@ namespace Booble.MainMenu
 
         private void Start()
         {
-            _continueButton.SetActive(_checkPoints.Count > 0);
+            //_continueButton.SetActive(_checkPoints.Count > 0);
         }
 
         #region Play
@@ -58,21 +59,27 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
 
-            int i = 0;
-            while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
-            {
-                i++;
-            }
+            //int i = 0;
+            //while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
+            //{
+            //    i++;
+            //}
 
-            if (i < _checkPoints.Count)
-            {
-                SceneLoader.Instance.LoadScene(_checkPoints[i].Scene);
-                MusicManager.Instance.PlayMusic(_checkPoints[i].Music);
-            }
-            else
-            {
-                Debug.Log("Completed the game!");
-            }
+            //if (i < _checkPoints.Count)
+            //{
+            //    SceneLoader.Instance.LoadScene(_checkPoints[i].Scene);
+            //    MusicManager.Instance.PlayMusic(_checkPoints[i].Music);
+            //}
+            //else
+            //{
+            //    Debug.Log("Completed the game!");
+            //}
+            
+            DeckManager.Instance.SetBaseDeck();
+            PauseMenu.Instance.InitializeCardMenu();
+            DeckManager.Instance.CheckExtraCards();
+
+            SceneLoader.Instance.LoadCar0();
         }
 
         public void NewGameButton()
@@ -80,8 +87,12 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
 
+            DeckManager.Instance.SetBaseDeck();
+            PauseMenu.Instance.InitializeCardMenu();
+
             FlagManager.Instance.ResetFlags();
             _checkPoints.Clear();
+
             SceneLoader.Instance.LoadCar0();
         }
 
@@ -126,40 +137,31 @@ namespace Booble.MainMenu
 
         public void TutorialCardsButton()
         {
-            DeckManager.Instance.SetOpponent(Opponent_Name.Tutorial);
-            DeckManager.Instance.RemoveExtraCards();
+            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Tutorial);
             LoadInterview();
         }
 
         public void CitrianoCardsButton()
         {
-            DeckManager.Instance.SetOpponent(Opponent_Name.Citriano);
-            DeckManager.Instance.RemoveExtraCards();
-            DeckManager.Instance.AddCitrianoCards();
+            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Citriano);
             LoadInterview();
         }
 
         public void PingPongBrosCardsButton()
         {
-            DeckManager.Instance.SetOpponent(Opponent_Name.PPBros);
-            DeckManager.Instance.RemoveExtraCards();
-            DeckManager.Instance.AddPPBrosCards();
+            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.PPBros);
             LoadInterview();
         }
 
         public void SecretaryCardsButton()
         {
-            DeckManager.Instance.SetOpponent(Opponent_Name.Secretary);
-            DeckManager.Instance.RemoveExtraCards();
-            DeckManager.Instance.AddSecretaryCards();
+            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Secretary);
             LoadInterview();
         }
 
         public void BossCardsButton()
         {
-            DeckManager.Instance.SetOpponent(CardGame.Opponent_Name.Boss);
-            DeckManager.Instance.RemoveExtraCards();
-            DeckManager.Instance.AddBossCards();
+            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Boss);
             LoadInterview();
         }
 

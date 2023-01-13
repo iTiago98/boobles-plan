@@ -30,14 +30,12 @@ namespace Booble.UI
         [SerializeField] private Sprite _buttonNotAvailableSprite;
 
         private GameObject _currentMenu;
-        private bool _initialized;
 
         private List<CardsData> _playerBaseCards;
 
         public void SetCardsMenu()
         {
-            if (!_initialized) Initialize();
-            SetButtonsAvailable();
+            Initialize();
         }
 
         public void Refresh()
@@ -51,16 +49,13 @@ namespace Booble.UI
         {
             GetPlayerBaseCards();
             InitializeCards();
-
-            _currentMenu = _contendersInfo[0].cardMenu;
-            _initialized = true;
+            SetPlayerMenuActive();
         }
 
         private void GetPlayerBaseCards()
         {
             _playerBaseCards = DeckManager.Instance.GetPlayerBaseCards();
         }
-
 
         private void InitializeCards()
         {
@@ -94,11 +89,21 @@ namespace Booble.UI
             }
         }
 
+        private void SetPlayerMenuActive()
+        {
+            foreach (ContenderInfo contenderInfo in _contendersInfo)
+            {
+                contenderInfo.cardMenu.SetActive(false);
+            }
+            _contendersInfo[0].cardMenu.SetActive(true);
+            _currentMenu = _contendersInfo[0].cardMenu;
+        }
+
         #endregion
 
         #region Update Cards
 
-        public void UpdateExtraCards(List<CardData> newCards)
+        public void UpdateExtraCards(List<CardData> newCards, bool showAlertIcons)
         {
             foreach (ContenderInfo contenderInfo in _contendersInfo)
             {
@@ -110,7 +115,7 @@ namespace Booble.UI
                 ContenderInfo contenderInfo = _contendersInfo[(int)newCard.opponent];
 
                 AlertButton button = contenderInfo.cardButton;
-                button.ShowAlert(true);
+                button.ShowAlert(showAlertIcons);
 
                 foreach (Transform transform in contenderInfo.cardList.transform)
                 {
@@ -118,7 +123,7 @@ namespace Booble.UI
                     if (card.GetName() == newCard.data.name)
                     {
                         card.SetFront();
-                        card.ShowAlertImage(true);
+                        card.ShowAlertImage(showAlertIcons);
                     }
                 }
             }
@@ -130,11 +135,12 @@ namespace Booble.UI
 
         private void SetButtonsAvailable()
         {
-            bool flag1, flag2, flag3;
+            bool flag0, flag1, flag2, flag3;
 
-            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Day1);
-            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Day2);
-            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Day3);
+            flag0 = FlagManager.Instance.GetFlag(Flag.Reference.Home0);
+            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Home1);
+            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Home2);
+            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Home3);
 
             foreach (ContenderInfo contenderInfo in _contendersInfo)
             {
@@ -145,12 +151,14 @@ namespace Booble.UI
                         flag = true;
                         break;
                     case Opponent_Name.Citriano:
-                        flag = flag1;
+                        flag = flag0;
                         break;
                     case Opponent_Name.PPBros:
-                        flag = flag2;
+                        flag = flag1;
                         break;
                     case Opponent_Name.Secretary:
+                        flag = flag2;
+                        break;
                     case Opponent_Name.Boss:
                         flag = flag3;
                         break;
