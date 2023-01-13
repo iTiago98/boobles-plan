@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _beforeInterviewDialogue: {fileID: 11400000, guid: 0f3a4f95b9180e443ad2de77745674c4, type: 2}
   _afterInterviewDialogue: {fileID: 11400000, guid: 7e785b730e96760449861eda086aacf4, type: 2}
+  _dataSaved: {fileID: 11400000, guid: c4af6dc503276b54686e094c7815540e, type: 2}
   _fade: {fileID: 394802714}
   _nelaController: {fileID: 2063433066}
 --- !u!1 &211933487

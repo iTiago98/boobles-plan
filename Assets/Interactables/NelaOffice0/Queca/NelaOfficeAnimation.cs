@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Booble.CardGame;
 using Booble.Characters;
+using Booble.Flags;
 using Booble.Interactables.Dialogues;
 using Booble.Managers;
 using Booble.Player;
@@ -15,6 +16,7 @@ namespace Booble.Interactables.Queca
     {
         [SerializeField] private Dialogue _beforeInterviewDialogue;
         [SerializeField] private Dialogue _afterInterviewDialogue;
+        [SerializeField] private Dialogue _dataSaved;
         [SerializeField] private Fader _fade;
         [SerializeField] private Controller _nelaController;
 
@@ -48,8 +50,15 @@ namespace Booble.Interactables.Queca
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);
 
+            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            yield return new WaitForSeconds(_fade.FadeDuration);
+            
             ThrowDialogue(_afterInterviewDialogue);
             yield return new WaitUntil(() => _dialogueEnd);
+
+            ThrowDialogue(_dataSaved);
+            yield return new WaitUntil(() => _dialogueEnd);
+            
             SceneLoader.Instance.LoadCanteenScene0();
         }
         

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Booble;
+using Booble.Flags;
 using Booble.Interactables;
 using Booble.Interactables.Dialogues;
 using Booble.Managers;
@@ -19,6 +20,7 @@ public class HomeAnimation1 : MonoBehaviour
     [SerializeField] private GameObject _dark;
     [SerializeField] private GameObject _light;
     [SerializeField] private GameObject _sitNela;
+    [SerializeField] private Dialogue _dataSaved;
     [SerializeField] private Dialogue _dialogue0;
     [SerializeField] private Dialogue _dialogue1;
     [SerializeField] private List<Option> _options;
@@ -83,6 +85,13 @@ public class HomeAnimation1 : MonoBehaviour
             _continue = false;
         } while (!_endScene);
         
+        FlagManager.Instance.SetFlag(Flag.Reference.Home1);
+        DialogueManager.Instance.StartDialogue(_dataSaved);
+        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+        yield return new WaitUntil(() => _continue);
+        _continue = false;
+
         _fader.FadeOut(Continue);
         yield return new WaitUntil(() => _continue);
         _continue = false;
