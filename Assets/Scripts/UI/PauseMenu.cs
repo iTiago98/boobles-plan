@@ -130,10 +130,19 @@ namespace Booble.UI
 
             if (SceneLoader.Instance.InInterview)
             {
-                SceneLoader.Instance.UnloadInterviewScene();
-                if (CardGameManager.Instance.playingStoryMode) SceneLoader.Instance.LoadMainMenuScene();
+                if (CardGameManager.Instance.playingStoryMode)
+                {
+                    SceneLoader.Instance.UnloadInterviewAndLoadScene(Scenes.MAIN_MENU);
+                }
+                else
+                {
+                    SceneLoader.Instance.UnloadInterviewScene();
+                }
             }
-            else if (SceneLoader.Instance.InExploration) SceneLoader.Instance.LoadMainMenuScene();
+            else if (SceneLoader.Instance.InExploration)
+            {
+                SceneLoader.Instance.LoadMainMenuScene();
+            }
         }
 
         public void ShowCardObtainedText()
@@ -147,6 +156,13 @@ namespace Booble.UI
             sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 1f));
 
             sequence.Play();
+        }
+
+
+        [ContextMenu("Lose")]
+        public void Lose()
+        {
+            CardGameManager.Instance.player.ReceiveDamage(50);
         }
     }
 }
