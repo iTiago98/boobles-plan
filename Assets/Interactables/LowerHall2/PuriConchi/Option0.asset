@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Purificaci\xF3n: \xBFTe has enterao Conchita?"
+    _closeUp: 0
+  - _content: "Concepci\xF3n: \xBFDe qu\xE9, Purita?"
+    _closeUp: 0
+  - _content: "Purificaci\xF3n: Lo que ha pasado en la planta Y21. Ese loco de Citriano,
+      que por lo visto se ha dedicado a plantar naranjos."
+    _closeUp: 0
+  - _content: "Concepci\xF3n: Jobar, Purita, ya no puede uno ni dedicarse a la jardiner\xEDa
+      sin que se metan con \xE9l. Dejad que haga lo que quiera."
+    _closeUp: 0
+  - _content: "Concepci\xF3n: Adem\xE1s, \xBFqu\xE9 os molesta que ese pobre hombre
+      pantle lo que quiera plantar?"
+    _closeUp: 0
+  - _content: "Concepci\xF3n: Mientras lo haga en su propio jard\xEDn, por m\xED
+      como si planta un pino."
+    _closeUp: 0
+  - _content: "Purificaci\xF3n: No te est\xE1s enterando, Conchita. Los ha plantado
+      en el despacho."
+    _closeUp: 0
+  - _content: "Concepci\xF3n: \xA1\xBFEn el despacho?! \xA1Ay, madre m\xEDa! Pero
+      con lo fuertes que son las ra\xEDces de los naranjos, \xA1se va a cargar el
+      pasillo!"
+    _closeUp: 0
+  - _content: "Concepci\xF3n: Bueno pero si me lo cuentas es porque lo han pillado,
+      habr\xE1n podido desplantar los \xE1rboles antes de que crezcan."
+    _closeUp: 0
+  - _content: "Purificaci\xF3n: Nada, nada. Si eso es lo preocupante, Conchita. \xA1Los
+      naranjos est\xE1n ya bien crecidos! Asoman por la puerta y todo."
+    _closeUp: 0
+  - _content: "Concepci\xF3n: \xA1\xBFPero c\xF3mo va a ser eso?! \xA1\xBFCon lo
+      que tardan los naranjos en crecer?! Se habr\xEDa dado cuenta alguien antes..."
+    _closeUp: 0
+  - _content: "Purificaci\xF3n: Los de la planta dicen que de la noche a la ma\xF1ana
+      aparecieron las ramas de naranjo asomando por la puerta."
+    _closeUp: 0
+  - _content: "Concepci\xF3n: El Se\xF1or nos coja confesados. \xA1Ave Mar\xEDa pur\xEDsima!"
+    _closeUp: 0
+  - _content: "Purificaci\xF3n: Sin pecado concebida."
+    _closeUp: 0
+  - _content: "Concepci\xF3n: \xA1Oye! \xBFTe crees que eres mi p\xE1rroco ahora
+      o qu\xE9?"
+    _closeUp: 0
+  - _content: "Purificaci\xF3n: \xA1Uy! Perdona bonita. Es que desde que estoy pluriempleada
+      no s\xE9 ni en qu\xE9 trabajo estoy en cada momento."
+    _closeUp: 0
