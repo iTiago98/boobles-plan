@@ -56,9 +56,6 @@ namespace Booble.Interactables.Queca
             ThrowDialogue(_afterInterviewDialogue);
             yield return new WaitUntil(() => _dialogueEnd);
 
-            ThrowDialogue(_dataSaved);
-            yield return new WaitUntil(() => _dialogueEnd);
-            
             SceneLoader.Instance.LoadCanteenScene0();
         }
         

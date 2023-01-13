@@ -99,10 +99,7 @@ public class NelaOffice1Animation : MonoBehaviour
             
             ThrowDialogue(_postInterview);
             yield return new WaitUntil(() => _dialogueEnd);
-            
-            ThrowDialogue(_dataSaved);
-            yield return new WaitUntil(() => _dialogueEnd);
-            
+
             _fade.FadeOut(SceneLoader.Instance.LoadHome1);
         }
         else
