@@ -80,6 +80,7 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
 
+            FlagManager.Instance.ResetFlags();
             _checkPoints.Clear();
             SceneLoader.Instance.LoadCar0();
         }
