@@ -47,9 +47,6 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
             
-            // SceneLoader.Instance.LoadScene(Scenes.CAR_0);
-            // MusicManager.Instance.PlayMusic(MusicReference.Lounge);
-
             int i = 0;
             while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
             {
@@ -71,7 +68,6 @@ namespace Booble.MainMenu
         public void StartDay0()
         {
             SceneLoader.Instance.LoadScene(Scenes.CAR_0);
-            MusicManager.Instance.PlayMusic(MusicReference.Lounge);
         }
 
         [ContextMenu("Start Day 1")]

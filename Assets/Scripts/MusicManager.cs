@@ -26,6 +26,7 @@ namespace Booble.Managers
         private Bus _sfxBus;
 
         private EventInstance _currentInstance;
+        private MusicReference _currentReference;
 
         private void Start()
         {
@@ -48,6 +49,10 @@ namespace Booble.Managers
 
         public void PlayMusic(MusicReference reference)
         {
+            if (reference == _currentReference) return;
+
+            _currentReference = reference;
+
             EventReference eventReference;
             switch (reference)
             {
