@@ -59,6 +59,11 @@ namespace Booble.Managers
             LoadScene(Scenes.MAIN_MENU);
         }
 
+        public void LoadCar0()
+        {
+            LoadScene(Scenes.CAR_0);
+        }
+
         public void LoadLoungeScene0()
         {
             LoadScene(Scenes.LOUNGE_0);

@@ -20,10 +20,14 @@ namespace Booble.MainMenu
 
         [Header("Menu sections")]
         [SerializeField] private RectTransform _mainMenu;
+        [SerializeField] private RectTransform _play;
         [SerializeField] private RectTransform _credits;
         [SerializeField] private RectTransform _options;
         [SerializeField] private RectTransform _cardGameMenu;
         [SerializeField] private float _duration;
+
+        [Header("Play")]
+        [SerializeField] private GameObject _continueButton;
 
         [Header("Options")]
         [SerializeField] private Slider _generalMusicSlider;
@@ -42,11 +46,18 @@ namespace Booble.MainMenu
         
         private bool _onTween;
 
-        public void PlayButton()
+        private void Start()
+        {
+            _continueButton.SetActive(_checkPoints.Count > 0);
+        }
+
+        #region Play
+
+        public void ContinueButton()
         {
             if (_onTween)
                 return;
-            
+
             int i = 0;
             while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
             {
@@ -63,6 +74,17 @@ namespace Booble.MainMenu
                 Debug.Log("Completed the game!");
             }
         }
+
+        public void NewGameButton()
+        {
+            if (_onTween)
+                return;
+
+            _checkPoints.Clear();
+            SceneLoader.Instance.LoadCar0();
+        }
+
+        #endregion
 
         [ContextMenu("Start Day 0")]
         public void StartDay0()
@@ -100,16 +122,6 @@ namespace Booble.MainMenu
         }
 
         #region Card Game
-
-        public void CardGameButton()
-        {
-            if (_onTween)
-                return;
-
-            _onTween = true;
-            _mainMenu.DOMoveX(_cardGameMenu.position.x, _duration);
-            _cardGameMenu.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
-        }
 
         public void TutorialCardsButton()
         {
@@ -192,6 +204,28 @@ namespace Booble.MainMenu
 
         #endregion
 
+        #region Main
+
+        public void PlayOnOffButton()
+        {
+            if (_onTween)
+                return;
+
+            _onTween = true;
+            _mainMenu.DOMoveX(_play.position.x, _duration);
+            _play.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
+        }
+
+        public void CardGameOnOffButton()
+        {
+            if (_onTween)
+                return;
+
+            _onTween = true;
+            _mainMenu.DOMoveX(_cardGameMenu.position.x, _duration);
+            _cardGameMenu.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
+        }
+
         public void CreditsOnOffButton()
         {
             if (_onTween)
@@ -227,6 +261,8 @@ namespace Booble.MainMenu
 			Application.Quit();
 #endif
         }
+
+        #endregion
     }
 
     [System.Serializable]
