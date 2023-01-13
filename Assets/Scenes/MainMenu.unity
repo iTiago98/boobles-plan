@@ -6773,7 +6773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8f54498bcf77384ea243d710f964ccf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _deleteSaveFileOnAwake: 1
+  _deleteSaveFileOnAwake: 0
 --- !u!1 &1229530053
 GameObject:
   m_ObjectHideFlags: 0
@@ -8660,25 +8660,25 @@ MonoBehaviour:
   _secretaryBackground: {fileID: 21300000, guid: 0e4c0f06c87fbc745bbc580074ae3401, type: 3}
   _bossBackground: {fileID: 21300000, guid: 33dd460145821e342b1ef4541260982b, type: 3}
   _checkPoints:
-  - <Scene>k__BackingField: Car0
+  - <Scene>k__BackingField: Lounge0
     <FlagRef>k__BackingField: 44
     <Music>k__BackingField: 2
   - <Scene>k__BackingField: Canteen0
     <FlagRef>k__BackingField: 74
     <Music>k__BackingField: 0
-  - <Scene>k__BackingField: Car0
+  - <Scene>k__BackingField: NelaOfficeDayStart
     <FlagRef>k__BackingField: 37
     <Music>k__BackingField: 2
   - <Scene>k__BackingField: Home1
     <FlagRef>k__BackingField: 75
     <Music>k__BackingField: 2
-  - <Scene>k__BackingField: Car0
+  - <Scene>k__BackingField: NelaOfficeDayStart
     <FlagRef>k__BackingField: 71
     <Music>k__BackingField: 2
   - <Scene>k__BackingField: Home2
     <FlagRef>k__BackingField: 76
     <Music>k__BackingField: 2
-  - <Scene>k__BackingField: Car0
+  - <Scene>k__BackingField: NelaOfficeDayStart
     <FlagRef>k__BackingField: 72
     <Music>k__BackingField: 2
   - <Scene>k__BackingField: Home3
