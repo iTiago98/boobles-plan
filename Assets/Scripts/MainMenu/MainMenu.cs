@@ -91,7 +91,6 @@ namespace Booble.MainMenu
             PauseMenu.Instance.InitializeCardMenu();
 
             FlagManager.Instance.ResetFlags();
-            _checkPoints.Clear();
 
             SceneLoader.Instance.LoadCar0();
         }
