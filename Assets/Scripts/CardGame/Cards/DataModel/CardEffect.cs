@@ -477,10 +477,10 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     break;
             }
 
-            if(subType == SubType.ADD_EFFECT)
+            if (subType == SubType.ADD_EFFECT)
             {
                 int index = 0;
-                while(index < possibleTargets.Count)
+                while (index < possibleTargets.Count)
                 {
                     if (possibleTargets[index].Effects.HasEffect(cardParameter_Effect)) possibleTargets.RemoveAt(index);
                     else index++;
@@ -736,11 +736,22 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                         + ((intParameter1 > 1) ? "añádelas" : "añádela") + " a tu mazo."; break;
 
                 case SubType.CITRIANO_WIN_CONDITION:
-                    s += "si tienes 30 o más vidas, ganas la partida. (" + CardGameManager.Instance.player.life + "/30)"; break;
+                    s += "si tienes 30 o más vidas, ganas la partida.";
+                    if (CardGameManager.Instance != null)
+                        s += " (" + CardGameManager.Instance.player.life + "/30)";
+                    break;
+
                 case SubType.PINPONBROS_WIN_CONDITION:
-                    s += "si has rebotado 15 o más puntos de vida, ganas la partida. (" + CardGameManager.Instance.alternateWinConditionParameter + "/15)"; break;
+                    s += "si has rebotado 15 o más puntos de vida, ganas la partida.";
+                    if (CardGameManager.Instance != null)
+                        s += " (" + CardGameManager.Instance.alternateWinConditionParameter + "/15)";
+                    break;
+
                 case SubType.SECRETARY_WIN_CONDITION:
-                    s += "si el oponente no tiene cartas en el mazo, ganas la partida. (" + CardGameManager.Instance.opponent.deck.numCards + " cartas restantes)"; break;
+                    s += "si el oponente no tiene cartas en el mazo, ganas la partida.";
+                    if (CardGameManager.Instance != null)
+                        s += " (" + CardGameManager.Instance.opponent.deck.numCards + " cartas restantes)";
+                    break;
             }
 
             if (s.Length > 0) s = s[0].ToString().ToUpper() + s.Substring(1, s.Length - 1);
