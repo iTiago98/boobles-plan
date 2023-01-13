@@ -135,11 +135,12 @@ namespace Booble.UI
 
         private void SetButtonsAvailable()
         {
-            bool flag1, flag2, flag3;
+            bool flag0, flag1, flag2, flag3;
 
-            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Day1);
-            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Day2);
-            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Day3);
+            flag0 = FlagManager.Instance.GetFlag(Flag.Reference.Home0);
+            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Home1);
+            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Home2);
+            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Home3);
 
             foreach (ContenderInfo contenderInfo in _contendersInfo)
             {
@@ -150,12 +151,14 @@ namespace Booble.UI
                         flag = true;
                         break;
                     case Opponent_Name.Citriano:
-                        flag = flag1;
+                        flag = flag0;
                         break;
                     case Opponent_Name.PPBros:
-                        flag = flag2;
+                        flag = flag1;
                         break;
                     case Opponent_Name.Secretary:
+                        flag = flag2;
+                        break;
                     case Opponent_Name.Boss:
                         flag = flag3;
                         break;
