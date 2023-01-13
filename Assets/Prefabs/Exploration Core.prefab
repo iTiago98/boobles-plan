@@ -1322,6 +1322,7 @@ MonoBehaviour:
   _target: {fileID: 1921504878}
   _leftLimit: 0
   _rightLimit: 0
+  _lerpFactor: 0.01
 --- !u!1 &4164371401346454127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,7 +3135,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7735595118742988926}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7735595118588094720
 MonoBehaviour:
@@ -3253,8 +3254,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7735595120499871135}
-  - {fileID: 7735595120212334085}
   - {fileID: 7735595118588094721}
   - {fileID: 7735595120511531237}
   m_Father: {fileID: 7735595119079195285}
@@ -5720,71 +5719,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7735595120212334086
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7735595120212334085}
-  - component: {fileID: 7735595120212334084}
-  m_Layer: 0
-  m_Name: Music Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7735595120212334085
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7735595120212334086}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7735595118742988926}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7735595120212334084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7735595120212334086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0566717d27ed9a246831e68e6589b27f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _loungeMusicReference:
-    Guid:
-      Data1: 411743860
-      Data2: 1243321670
-      Data3: -418046034
-      Data4: 2129946959
-    Path: event:/LoungeMusic
-  _interviewMusicReference:
-    Guid:
-      Data1: 1859034673
-      Data2: 1128342749
-      Data3: 1890272702
-      Data4: -526562447
-    Path: event:/InterviewMusic
-  _mainMenuReference:
-    Guid:
-      Data1: 1514793878
-      Data2: 1239756933
-      Data3: -1308863092
-      Data4: -1331080349
-    Path: event:/MainMenuMusic
 --- !u!1 &7735595120235522894
 GameObject:
   m_ObjectHideFlags: 0
@@ -6748,51 +6682,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &7735595120499871128
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7735595120499871135}
-  - component: {fileID: 7735595120499871134}
-  m_Layer: 0
-  m_Name: Scene Loader
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7735595120499871135
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7735595120499871128}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7735595118742988926}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7735595120499871134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7735595120499871128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f47feec8aefd3ed4d8eb80533f5e5c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fadeScreen: {fileID: 7735595120576307438}
 --- !u!1 &7735595120509152194
 GameObject:
   m_ObjectHideFlags: 0
@@ -6966,7 +6855,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7735595118742988926}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7735595120511531259
 MonoBehaviour:

@@ -11,9 +11,12 @@ namespace Booble.MyCamera
 		[SerializeField] private float _leftLimit;
 		[SerializeField] private float _rightLimit;
 
+        [SerializeField] private float _lerpFactor;
+
         private void Update()
         {
-            float newX = Mathf.Clamp(_target.position.x, _leftLimit, _rightLimit);
+            float newX = Mathf.Lerp(transform.position.x, _target.position.x, _lerpFactor);
+            newX = Mathf.Clamp(newX, _leftLimit, _rightLimit);
             transform.SetXPosition(newX);
         }
 
