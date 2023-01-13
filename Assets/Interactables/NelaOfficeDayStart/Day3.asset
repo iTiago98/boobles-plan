@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Day3
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Vamos a ver si sacamos algo en claro del reporte de orden de despido.
+    _closeUp: 1
+  - _content: "Nombre: Eusebio Romu\xE1ldez\nPlanta de Despacho: W441"
+    _closeUp: 0
+  - _content: "Qu\xE9 raro, este reporte no tiene la p\xE1gina de \"Motivo de despido\".
+      Se les habr\xE1 traspapelado."
+    _closeUp: 1
+  - _content: "Pues qu\xE9 bien... no s\xE9 c\xF3mo quieren que haga mi trabajo entonces.
+      Ni siquiera s\xE9 de qu\xE9 se le acusa."
+    _closeUp: 1
+  - _content: "Estoy por llamarlo a mi despacho directamente, sin investigar ni nada.
+      A lo mejor \xE9l mismo me quiere aclarar lo que est\xE1 pasando."
+    _closeUp: 1
+  - _content: "\xA1Uy! \xBFY esto? El micr\xF3fono del sistema de megafon\xEDa no
+      funciona. No se le enciende el pilotito rojo."
+    _closeUp: 1
+  - _content: "\xA1Se le ha roto el cable! Habr\xE9 pasado por encima con una rueda
+      de la silla. Ya podr\xEDa ser inal\xE1mbrico la verdad."
+    _closeUp: 1
+  - _content: "Bueno, pues parece que toca paseo a la planta W441. Si la monta\xF1a
+      no va a Mahoma, Mahoma ir\xE1 a la monta\xF1a."
+    _closeUp: 1
