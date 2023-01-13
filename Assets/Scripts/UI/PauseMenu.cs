@@ -6,6 +6,7 @@ using Booble.Managers;
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using static Booble.Managers.DeckManager;
 
@@ -17,7 +18,8 @@ namespace Booble.UI
 
         [SerializeField] private GameObject _mainMenuPanel;
         [SerializeField] private GameObject _cardObtainedText;
-
+        [SerializeField] private GameObject _savedDataText;
+        
         [Header("Cards Menu")]
         [SerializeField] private AlertButton _cardMenuButton;
         [SerializeField] private CardMenu _cardMenu;
@@ -155,6 +157,25 @@ namespace Booble.UI
             sequence.AppendInterval(1f);
             sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 1f));
 
+            sequence.Play();
+        }
+
+        public void ShowSavedDataText()
+        {
+            ShowSavedDataText(() => {});
+        }
+        
+        public void ShowSavedDataText(TweenCallback callback)
+        {
+            float initialX = _savedDataText.transform.position.x;
+
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(_savedDataText.transform.DOMoveX(initialX, 0.5f));
+            sequence.Append(_savedDataText.transform.DOMoveX(0, 1f));
+            sequence.AppendInterval(1f);
+            sequence.AppendCallback(callback);
+            sequence.Append(_savedDataText.transform.DOMoveX(initialX, 1f));
+                
             sequence.Play();
         }
     }

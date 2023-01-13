@@ -74,10 +74,10 @@ public class HomeAnimation2 : MonoBehaviour
         _continue = false;
         
         FlagManager.Instance.SetFlag(Flag.Reference.Home2);
-        FlagManager.Instance.SetFlag(Flag.Reference.Home1);
-        DialogueManager.Instance.StartDialogue(_dataSaved);
-        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+        // DialogueManager.Instance.StartDialogue(_dataSaved);
+        // DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+        // DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+        PauseMenu.Instance.ShowSavedDataText(Continue);
         yield return new WaitUntil(() => _continue);
         _continue = false;
         

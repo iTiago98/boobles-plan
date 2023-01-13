@@ -61,13 +61,11 @@ public class NelaOffice2Animation : MonoBehaviour
             yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
             yield return new WaitUntil(() => _cam.gameObject.activeSelf);
             
-            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             yield return new WaitForSeconds(_fade.FadeDuration);
             
             DialogueManager.Instance.StartDialogue(_postInterviewDialogue);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-            
-            ThrowDialogue(_dataSaved);
             yield return new WaitUntil(() => _dialogueEnd);
             
             SceneLoader.Instance.LoadHome2();
