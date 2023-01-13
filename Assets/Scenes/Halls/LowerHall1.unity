@@ -1133,7 +1133,7 @@ GameObject:
   - component: {fileID: 1822933806}
   - component: {fileID: 1822933807}
   m_Layer: 0
-  m_Name: Hortensia
+  m_Name: PuriConchi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

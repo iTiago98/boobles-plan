@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Qu\xE9 va! Si son los desplantadores profesionales m\xE1s eficientes
+      que he visto en mi vida."
+    _closeUp: 6
+  - _content: "\xBFDesplantador profesional? \xBFHoy en d\xEDa puede uno ganarse
+      la vida desplantando cosas?"
+    _closeUp: 1
+  - _content: "Ganarse la vida dice. Cinco a\xF1os de carrera y dos de m\xE1ster
+      hacen falta. Y no veas lo que cobran los muy usureros."
+    _closeUp: 6
+  - _content: "Ya, claro, pero despu\xE9s no pueden ni desplantar unos cuantos naranjos...
+      No s\xE9 yo si os est\xE1n timando, \xBFeh?"
+    _closeUp: 1
+  - _content: "\xA1Que no, que no! Los he visto entrar con motosierras y todo. \xA1A
+      uno hasta con un sable l\xE1ser!"
+    _closeUp: 6
+  - _content: "\xA1Venga ya!"
+    _closeUp: 1
+  - _content: "\xA1Que s\xED! Pero salen despavoridos a los pocos minutos gritando
+      que necesitan armas m\xE1s poderosas o algo as\xED."
+    _closeUp: 6
+  - _content: "\xBFArmas? \xBFPara pelearse contra los naranjos?"
+    _closeUp: 1
+  - _content: "Yo qu\xE9 s\xE9, Nella. Algo he escuchado tambi\xE9n de un monstruo-bola
+      naranja, con un cuerno hecho de rama. El xiloceronte, o algo as\xED."
+    _closeUp: 6
+  - _content: Suena a vacile.
+    _closeUp: 1
+  - _content: "Justo eso pens\xE9 yo, que ser\xEDan unos desplantadores con un sentido
+      del humor muy raro."
+    _closeUp: 6
+  - _content: "El caso es que los t\xEDos llevan desde ayer entrando y saliendo del
+      despacho. Y cada vez que entran hacen m\xE1s ruido."
+    _closeUp: 6
+  - _content: "Espero que acabe pronto todo esto, que a lo tonto se me est\xE1 acumulando
+      el trabajo."
+    _closeUp: 6
