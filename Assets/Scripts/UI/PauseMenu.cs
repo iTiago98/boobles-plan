@@ -51,7 +51,7 @@ namespace Booble.UI
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
                 _pauseMenu.SetActive(false);
-                ShowPauseButton(true);
+                if (SceneLoader.Instance.InExploration || SceneLoader.Instance.InCar || SceneLoader.Instance.InHome) ShowPauseButton(true);
             }
         }
 
@@ -62,15 +62,14 @@ namespace Booble.UI
             _pauseButton.gameObject.SetActive(value);
         }
 
-        public void UpdateAlerts(bool add)
+        public void UpdateAlerts(List<CardData> newCards, bool showAddedText, bool showAlertIcons)
         {
-            List<CardData> newCards = DeckManager.Instance.GetNewCards();
-            _cardMenu.UpdateExtraCards(newCards);
+            _cardMenu.UpdateExtraCards(newCards, showAlertIcons);
 
-            _pauseButton.ShowAlert(newCards.Count > 0);
-            _cardMenuButton.ShowAlert(newCards.Count > 0);
+            _pauseButton.ShowAlert(showAlertIcons && newCards.Count > 0);
+            _cardMenuButton.ShowAlert(showAlertIcons && newCards.Count > 0);
 
-            if (add) ShowCardObtainedText();
+            if (showAddedText) ShowCardObtainedText();
         }
 
         #endregion
@@ -149,7 +148,7 @@ namespace Booble.UI
         public void ShowCardObtainedText()
         {
             float initialX = _cardObtainedText.transform.position.x;
-            
+
             Sequence sequence = DOTween.Sequence();
             sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 0.5f));
             sequence.Append(_cardObtainedText.transform.DOMoveX(0, 1f));
@@ -157,13 +156,6 @@ namespace Booble.UI
             sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 1f));
 
             sequence.Play();
-        }
-
-
-        [ContextMenu("Lose")]
-        public void Lose()
-        {
-            CardGameManager.Instance.player.ReceiveDamage(50);
         }
     }
 }

@@ -36,8 +36,7 @@ namespace Booble.UI
             }
             else
             {
-                _imageComponent.sprite = cardBack;
-                _imageComponent.color = Color.white;
+                SetBack(cardBack);
             }
         }
 
@@ -57,6 +56,21 @@ namespace Booble.UI
             _front = true;
         }
 
+        private void SetBack(Sprite cardBack)
+        {
+            nameText.text = "";
+            descriptionText.text = "";
+
+            if (_data.type == CardType.ARGUMENT)
+            {
+                strengthText.text = "";
+                defenseText.text = "";
+            }
+
+            _imageComponent.sprite = cardBack;
+            _imageComponent.color = Color.white;
+            _front = false;
+        }
 
         public void OnPointerEnter()
         {

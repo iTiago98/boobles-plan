@@ -117,7 +117,7 @@ namespace Booble.CardGame.Managers
 
         public void InitializeDecks()
         {
-            Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(), DeckManager.Instance.GetOpponentCards());
+            Board.Instance.InitializeDecks(DeckManager.Instance.GetPlayerCards(playingStoryMode), DeckManager.Instance.GetOpponentCards());
         }
 
         private void InitializeContenders()
