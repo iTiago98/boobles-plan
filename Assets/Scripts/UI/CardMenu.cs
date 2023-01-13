@@ -37,7 +37,12 @@ namespace Booble.UI
         public void SetCardsMenu()
         {
             if (!_initialized) Initialize();
-            //SetButtonsAvailable();
+            SetButtonsAvailable();
+        }
+
+        public void Refresh()
+        {
+            SetButtonsAvailable();
         }
 
         #region Initialize
@@ -125,12 +130,11 @@ namespace Booble.UI
 
         private void SetButtonsAvailable()
         {
-            bool flag0, flag1, flag2, flag3;
+            bool flag1, flag2, flag3;
 
-            flag0 = FlagManager.Instance.GetFlag(Flag.Reference.Car0);
-            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Car1);
-            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Car2);
-            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Car3);
+            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Day1);
+            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Day2);
+            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Day3);
 
             foreach (ContenderInfo contenderInfo in _contendersInfo)
             {
@@ -138,7 +142,7 @@ namespace Booble.UI
                 switch (contenderInfo.name)
                 {
                     case Opponent_Name.Tutorial:
-                        flag = flag0;
+                        flag = true;
                         break;
                     case Opponent_Name.Citriano:
                         flag = flag1;

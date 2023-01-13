@@ -86,6 +86,7 @@ namespace Booble.UI
         {
             _mainMenuPanel.SetActive(false);
             _cardMenu.gameObject.SetActive(true);
+            _cardMenu.Refresh();
         }
 
         public void OnCardsBackButtonClick()

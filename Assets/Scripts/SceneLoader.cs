@@ -45,8 +45,10 @@ namespace Booble.Managers
                 var async = SceneManager.LoadSceneAsync(scene);
                 async.completed += OnSceneLoaded;
 
-                if (InMainMenu || InCar || InHome)
+                if (InMainMenu)
                     async.completed += OnMainMenuSceneLoaded;
+                else if (InCar || InHome)
+                    async.completed += OnHybridSceneLoaded;
                 else if (InExploration)
                     async.completed += OnExplorationSceneLoaded;
             });
@@ -223,6 +225,12 @@ namespace Booble.Managers
         private void OnMainMenuSceneLoaded(AsyncOperation op)
         {
             PauseMenu.Instance.ShowPauseButton(false);
+            MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+        }
+
+        private void OnHybridSceneLoaded(AsyncOperation op)
+        {
+            PauseMenu.Instance.ShowPauseButton(true);
             MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
         }
 
