@@ -8659,7 +8659,31 @@ MonoBehaviour:
   _ppBrosBackground: {fileID: 21300000, guid: d4d7bcb6d3d80dd40a49b076ad7bd435, type: 3}
   _secretaryBackground: {fileID: 21300000, guid: 0e4c0f06c87fbc745bbc580074ae3401, type: 3}
   _bossBackground: {fileID: 21300000, guid: 33dd460145821e342b1ef4541260982b, type: 3}
-  _checkPoints: []
+  _checkPoints:
+  - <Scene>k__BackingField: Car0
+    <FlagRef>k__BackingField: 44
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: Canteen0
+    <FlagRef>k__BackingField: 74
+    <Music>k__BackingField: 0
+  - <Scene>k__BackingField: Car0
+    <FlagRef>k__BackingField: 37
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: Home1
+    <FlagRef>k__BackingField: 75
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: Car0
+    <FlagRef>k__BackingField: 71
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: Home2
+    <FlagRef>k__BackingField: 76
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: Car0
+    <FlagRef>k__BackingField: 72
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: Home3
+    <FlagRef>k__BackingField: 77
+    <Music>k__BackingField: 2
 --- !u!4 &1585770350
 Transform:
   m_ObjectHideFlags: 0
