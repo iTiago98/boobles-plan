@@ -773,6 +773,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7735595120511531236, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
+      propertyPath: _animIdentifiers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735595120511531236, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
+      propertyPath: _animIdentifiers.Array.data[1]._animator
+      value: 
+      objectReference: {fileID: 228963883}
+    - target: {fileID: 7735595120511531236, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
+      propertyPath: _animIdentifiers.Array.data[1]._identifier
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
 --- !u!4 &578280893 stripped
