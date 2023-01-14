@@ -86,5 +86,3 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "En realidad, \xA1parece m\xE1s bien una carta!"
     _closeUp: 1
-  - _content: '*Consigues "Nueva cepa del escorbuto"*'
-    _closeUp: 0

@@ -27,5 +27,3 @@ MonoBehaviour:
     _closeUp: 2
   - _content: "\xA1Otra carta!"
     _closeUp: 1
-  - _content: '*Consigues "Exprimir la verdad"*'
-    _closeUp: 0
