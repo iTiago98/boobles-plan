@@ -543,7 +543,7 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 55000000
     _dialogueOption: {fileID: 1674669756}
-  - _optionText: Traigo el anexo 13G, el que me has pedido.
+  - _optionText: Traigo el anexo G13, el que me has pedido.
     _trueFlags: 55000000
     _falseFlags: 56000000
     _dialogueOption: {fileID: 959627506}

@@ -15,7 +15,7 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "Vas por el buen camino, peque\xF1o saltamontes, pero no cantes victoria.
-      Me he acordado que sin el anexo 24R no puedes hacer mucho."
+      Me he acordado que sin el anexo R24 no puedes hacer mucho."
     _closeUp: 13
   - _content: "\xBFY no pod\xEDas haberme dicho todos de una vez?"
     _closeUp: 1
