@@ -30,6 +30,11 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadLoungeScene2();
     }
+
+    public void LoadLounge3()
+    {
+        SceneLoader.Instance.LoadLoungeScene3();
+    }
     
     public void LoadLowerHall1()
     {

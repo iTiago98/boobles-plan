@@ -302,7 +302,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 127598156, guid: a44eae401ed15e046b2dac11b3d5deb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -439,14 +439,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 3a3432881cd8c304fad9178122c418cb, type: 2}
-  _onEnd: 1
+  _dialogue: {fileID: 11400000, guid: 7c9017a6df300c54c9414d5299b776bb, type: 2}
+  _onEnd: 3
   _callbackEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 787064143}
         m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
-        m_MethodName: LoadLounge2
+        m_MethodName: LoadLounge3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

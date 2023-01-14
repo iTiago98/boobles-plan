@@ -11,6 +11,7 @@ namespace Booble
         public static string LOUNGE_0 = "Lounge0";
         public static string LOUNGE_1 = "Lounge1";
         public static string LOUNGE_2 = "Lounge2";
+        public static string LOUNGE_3 = "Lounge3";
         public static string NELA_OFFICE_DAY_START = "NelaOfficeDayStart";
         public static string NELA_OFFICE_0 = "NelaOffice0";
         public static string NELA_OFFICE_1 = "NelaOffice1";

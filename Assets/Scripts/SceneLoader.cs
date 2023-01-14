@@ -151,6 +151,11 @@ namespace Booble.Managers
             LoadScene(Scenes.LOUNGE_2);
         }
 
+        public void LoadLoungeScene3()
+        {
+            LoadScene(Scenes.LOUNGE_3);
+        }
+        
         public void LoadPPBOffice()
         {
             LoadScene(Scenes.PPB_OFFICE);
