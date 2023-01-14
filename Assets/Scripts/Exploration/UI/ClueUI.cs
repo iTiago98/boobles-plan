@@ -65,16 +65,19 @@ namespace Booble.UI
 
         public void SetCluesPanel()
         {
-            _currentClues.panel.SetActive(false);
+            if (_currentClues.panel != null) _currentClues.panel.SetActive(false);
 
-            if (FlagManager.Instance.GetFlag(Flag.Reference.Home0))
-                _currentClues = clues[0];
+            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3 };
 
-            else if (FlagManager.Instance.GetFlag(Flag.Reference.Home1))
-                _currentClues = clues[1];
-
-            else if (FlagManager.Instance.GetFlag(Flag.Reference.Home2))
-                _currentClues = clues[2];
+            for (int i = 0; i < flags.Count; i++)
+            {
+                Flag.Reference flag = flags[i];
+                if (!FlagManager.Instance.GetFlag(flag))
+                {
+                    _currentClues = clues[i];
+                    break;
+                }
+            }
 
             _currentClues.panel.SetActive(true);
         }
