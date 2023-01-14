@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 617849373}
   - component: {fileID: 617849372}
   m_Layer: 0
-  m_Name: Z441
+  m_Name: W441
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,7 +1051,7 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1149650390}
-  - _optionText: Despacho del jefe (Planta Z441)
+  - _optionText: Despacho del jefe (Planta W441)
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 617849373}

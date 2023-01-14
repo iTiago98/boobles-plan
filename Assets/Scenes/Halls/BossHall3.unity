@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _unclickable: 0
-  _interactDistance: 1.5
+  _interactDistance: 1.6
   _clickDialogues:
   - _dialogue: {fileID: 11400000, guid: 8fe756598b177854c973c3e39a7c65b1, type: 2}
     _trueFlags: 
@@ -852,6 +852,7 @@ GameObject:
   m_Component:
   - component: {fileID: 789576931}
   - component: {fileID: 789576932}
+  - component: {fileID: 789576933}
   m_Layer: 0
   m_Name: Seguir Investigando
   m_TagString: Untagged
@@ -886,6 +887,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &789576933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789576930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 216241358}
+        m_TargetAssemblyTypeName: Booble.Interactables.Interactable, Assembly-CSharp
+        m_MethodName: EndInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &959627503
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,7 +1884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754362698}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: -3.67, z: 0}
+  m_LocalPosition: {x: 2.6, y: -3.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1873,6 +1901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2001237324}
   - component: {fileID: 2001237326}
+  - component: {fileID: 2001237327}
   m_Layer: 0
   m_Name: Seguir Investigando
   m_TagString: Untagged
@@ -1907,6 +1936,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2001237327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2001237323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 216241358}
+        m_TargetAssemblyTypeName: Booble.Interactables.Interactable, Assembly-CSharp
+        m_MethodName: EndInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &4361470647376896237
 PrefabInstance:
   m_ObjectHideFlags: 0
