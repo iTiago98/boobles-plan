@@ -32,7 +32,6 @@ namespace Booble.CardGame.UI
 
         public void SetTurnAnimation(Turn turn)
         {
-            Debug.Log(turn);
             TurnManager.Instance.StopFlow();
 
             Sprite sprite = null;
