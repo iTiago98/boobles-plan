@@ -17,7 +17,7 @@ MonoBehaviour:
   - _content: "Perfecto, d\xE9jame rellenarlo... "
     _closeUp: 13
   - _content: "Vaya, pero si falta el anexo Q19. Normalmente viene adjunto a \xE9ste."
-    _closeUp: 1
+    _closeUp: 13
   - _content: "\xBFTengo que volver a mi despacho a cogerlo?"
     _closeUp: 1
   - _content: Eso parece.
