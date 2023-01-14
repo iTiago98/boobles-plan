@@ -3061,7 +3061,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1655589808}
         m_TargetAssemblyTypeName: Booble.Interactables.Events.SetFlags, Assembly-CSharp
-        m_MethodName: StartInteraction
+        m_MethodName: Execute
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
