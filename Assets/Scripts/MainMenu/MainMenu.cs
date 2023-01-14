@@ -1,3 +1,4 @@
+using System;
 using Booble.Flags;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -53,6 +54,21 @@ namespace Booble.MainMenu
         private void Start()
         {
             _continueButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida));
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                FlagManager.Instance.ResetFlags();
+                StartDay1();
+            }
+            
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                FlagManager.Instance.ResetFlags();
+                StartDay2();
+            }
         }
 
         #region Play
