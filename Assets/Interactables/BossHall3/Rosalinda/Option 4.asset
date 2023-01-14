@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 4
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFDonde va', calama'? Ya has entregado todos los anexos, pero a\xFAn
+      te falta un afid\xE1vit."
+    _closeUp: 13
+  - _content: "\xA1\xBFOtra cosa m\xE1s?! \xBFUn afiqu\xE9?"
+    _closeUp: 1
+  - _content: "Un afid\xE1vit, una declaraci\xF3n jurada."
+    _closeUp: 13
+  - _content: "El testimonio de alg\xFAn o algunos compa\xF1eros de mismo rango en
+      la empresa para justificar su despido."
+    _closeUp: 13
+  - _content: "Me est\xE1s empezando a sacar de quicio, Rosalinda. Hablar\xE9 con
+      Queca, que es a quien conozco de la directiva."
+    _closeUp: 1
+  - _content: "\xBFEsa arp\xEDa?"
+    _closeUp: 13
+  - _content: "\xBFPerdona?"
+    _closeUp: 1
+  - _content: "Qu\xE9 gran t\xEDa, digo. Muy querida por todos."
+    _closeUp: 13

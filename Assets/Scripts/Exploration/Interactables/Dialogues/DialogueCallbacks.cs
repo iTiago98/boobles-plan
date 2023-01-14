@@ -140,4 +140,24 @@ public class DialogueCallbacks : MonoBehaviour
     {
         DeckManager.Instance.AddVictoriaPorDesgaste();
     }
+
+    public void AddAnexosCorrespondientes()
+    {
+        DeckManager.Instance.AddTraigoLosAnexosCorrespondientes();
+    }
+
+    public void AddAfidavit()
+    {
+        DeckManager.Instance.AddAfidavit();
+    }
+
+    public void AddResaltarContradicción()
+    {
+        DeckManager.Instance.AddResaltarUnaContradiccion();
+    }
+
+    public void AddPerderPapeles()
+    {
+        DeckManager.Instance.AddHaPerdidoUsteLosPapele();
+    }
 }

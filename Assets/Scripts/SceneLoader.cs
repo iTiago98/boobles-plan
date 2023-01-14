@@ -66,6 +66,11 @@ namespace Booble.Managers
             LoadScene(Scenes.CAR_0);
         }
 
+        public void LoadNelaOfficeDayStart()
+        {
+            LoadScene(Scenes.NELA_OFFICE_DAY_START);
+        }
+
         public void LoadLoungeScene0()
         {
             LoadScene(Scenes.LOUNGE_0);

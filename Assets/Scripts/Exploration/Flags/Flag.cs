@@ -89,7 +89,20 @@ namespace Booble.Flags
             Home1,
             Home2,
             Home3,
-            HabemusPartida
+            HabemusPartida,
+            RosalindaIntro,
+            ResaltarUnaContradiccionObtenida,
+            AnexosCorrespondientesObtenida,
+            AfidavitObtenida,
+            PerderLosPapelesObtenida,
+            PapelesDestruidos,
+            Anexo13G,
+            Anexo59H,
+            Anexo24R,
+            Anexo13GBuscable,
+            Anexo59HBuscable,
+            Anexo24RBuscable,
+            AfidavitBuscable
         }
 
         [SerializeField] private Reference _flagReference;
