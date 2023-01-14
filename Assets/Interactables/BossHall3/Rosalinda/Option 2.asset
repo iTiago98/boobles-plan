@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Perfecto, d\xE9jame rellenarlo\u2026 Vaya, pero si falta el anexo
-      Q19, normalmente viene adjunto a \xE9ste."
+  - _content: "Perfecto, d\xE9jame rellenarlo... "
     _closeUp: 13
+  - _content: "Vaya, pero si falta el anexo Q19. Normalmente viene adjunto a \xE9ste."
+    _closeUp: 1
   - _content: "\xBFTengo que volver a mi despacho a cogerlo?"
     _closeUp: 1
   - _content: Eso parece.

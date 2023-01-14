@@ -55,5 +55,6 @@ MonoBehaviour:
   - _content: "Y que lo digas, es uno de los coches m\xE1s lujosos del mundo, \xA1y
       seguros! Dicen que Putin Jr. Jr. no sale de su fortaleza si no es en uno."
     _closeUp: 1
-  - _content: "Bueno Nela, ya hemos llegado, \xA1que tengas un muy buen primer d\xEDa!"
+  - _content: "Bueno, Nella, ya hemos llegado. \xA1Que tengas un muy buen primer
+      d\xEDa!"
     _closeUp: 9

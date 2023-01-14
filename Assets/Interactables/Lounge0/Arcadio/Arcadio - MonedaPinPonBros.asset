@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Toma, anda. La he cogido del bolsillo de Pineda. Est\xE1 tan concentrado
+  - _content: "Toma, anda. La he cogido del bolsillo de Pinar. Est\xE1 tan concentrado
       que ni se ha enterado."
     _closeUp: 1

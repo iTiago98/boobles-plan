@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: Buenas Rosalinda, con las prisas te dejaste la bufanda en mi casa.
+  - _content: Buenas, Rosalinda. Con las prisas te dejaste la bufanda en mi casa.
     _closeUp: 1
   - _content: "\xBFEn tu casa? Pero si yo nunca he estado en tu casa."
     _closeUp: 13
@@ -32,7 +32,7 @@ MonoBehaviour:
   - _content: "No s\xE9, pero vamos, nunca me pondr\xEDa una bufanda de un color
       tan estridente. \xBFQu\xE9 deseas, Nella?"
     _closeUp: 13
-  - _content: "Lo que t\xFA digas\u2026 Pues ven\xEDa a hablar con tu jefe, quieren
+  - _content: "Lo que t\xFA digas... Pues ven\xEDa a hablar con tu jefe. Quieren
       despedirlo."
     _closeUp: 1
   - _content: "\xBFDespedirlo? \xA1\xBFA Romu\xE1ldez?! Jajaja, eso s\xED que es

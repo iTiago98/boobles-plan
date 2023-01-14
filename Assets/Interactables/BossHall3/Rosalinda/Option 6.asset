@@ -16,8 +16,8 @@ MonoBehaviour:
   _sentences:
   - _content: Perdona, Nella, que ha sido un descuido.
     _closeUp: 13
-  - _content: "\xA1UN DESCUIDO MI $%&\u201D\xB7* MORENO \xA1AHORA MISMO VAMOS A ENTREVISTARTE
-      A TI! \xA1POR MI HIJA CHICA QUE TE ECHO!"
+  - _content: "\xA1UN DESCUIDO MI $%&\u201D\xB7* MORENO! \xA1AHORA MISMO VAMOS A
+      ENTREVISTARTE A TI! \xA1POR MI HIJA CHICA QUE TE ECHO!"
     _closeUp: 1
   - _content: "Jajaja, pero si no tienes hijos. El  afid\xE1vit cuando se saca es
       pa usarlo, el que lo saca pa ense\xF1arlo es un parguela."

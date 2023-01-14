@@ -22,7 +22,7 @@ MonoBehaviour:
   - _content: "Ahora a ver un rato la tele y a acostarse, que ma\xF1ana es mi primer
       d\xEDa y hay que estar a tope."
     _closeUp: 1
-  - _content: (Buzz Buzz)
+  - _content: (buzz buzz)
     _closeUp: 0
   - _content: "\xA1Anda! \xA1Una llamada de Queca! Voy a cogerlo a ver qu\xE9 quiere."
     _closeUp: 1

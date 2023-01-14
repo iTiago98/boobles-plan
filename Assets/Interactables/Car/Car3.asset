@@ -16,7 +16,7 @@ MonoBehaviour:
   _sentences:
   - _content: "Buen\xEDsimos d\xEDas, Nella. \xBFQu\xE9 aventuras te depara el d\xEDa?"
     _closeUp: 9
-  - _content: "Buenas Anselmo. Pues no parece que vayan a ser tan buenos. \xA1Quieren
+  - _content: "Buenas, Anselmo. Pues no parece que vayan a ser tan buenos. \xA1Quieren
       que despida a un jefe!"
     _closeUp: 1
   - _content: "\xA1Pero bueno si eso es una excelent\xEDsima noticia!"
