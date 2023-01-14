@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Ana - Intro
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Ana, aqu\xED est\xE1s! Tengo que hablar contigo ahora mismo. \xA1Es
+      muy importante!"
+    _closeUp: 1
+  - _content: "Ay, pero tranquil\xEDzate mi amol. Date un respiro y toma el control."
+    _closeUp: 2
+  - _content: "\xA1Llevas viviendo una mentira desde hace a\xF1os! \xA1Est\xE1s casada,
+      y antes eras la mejor ingeniera de la empresa!"
+    _closeUp: 1
+  - _content: "\xBFCasada yo? Este cuerpazo no puede ser de una sola persona. Solo
+      yo soy la que mi body gestiona."
+    _closeUp: 2
+  - _content: "No me entiendes, Ana. \xA1T\xFA ni siquiera hablas as\xED, es todo
+      culpa del Se\xF1or Romu\xE1ldez y su aparato de control mental!"
+    _closeUp: 1
+  - _content: "Tu marido y t\xFA erais los ingenieros jefes del laboratorio de climatolog\xEDa. "
+    _closeUp: 1
+  - _content: "\xBFMi marido? Aqu\xED s\xF3lo estamos las dos. \xBFY qu\xE9 me est\xE1s
+      contando, que el jefe es m\xE1s malo que un final boss?"
+    _closeUp: 2

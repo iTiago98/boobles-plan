@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Ana - Option0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Cuando os ascendieron a t\xED y a Jose, explot\xF3 de celos."
+    _closeUp: 1
+  - _content: "No trago a la gente celosa, no est\xE1 la vida para chusma envidiosa."
+    _closeUp: 2
+  - _content: "Acab\xF3 matando a vuestro verdadero jefe con el aparato de control
+      mental que le ayudasteis a construir."
+    _closeUp: 1
+  - _content: "Y como os negasteis a seguir ayud\xE1ndole, os lav\xF3 el cerebro
+      y os degrad\xF3 de puesto hasta lo m\xE1s bajo."
+    _closeUp: 1
+  - _content: "Venga ya, no digas m\xE1s tonter\xEDas. Yo entr\xE9 aqu\xED hace un
+      a\xF1o para arreglar cables y tuber\xEDas."
+    _closeUp: 2
