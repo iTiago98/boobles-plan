@@ -17,7 +17,7 @@ namespace Booble.UI
         [SerializeField] private TextMeshProUGUI strengthText;
         [SerializeField] private TextMeshProUGUI defenseText;
 
-        [SerializeField] private GameObject alertImage;
+        [SerializeField] private AlertImage alertImage;
 
         private CardsData _data;
         private Image _imageComponent;
@@ -77,7 +77,7 @@ namespace Booble.UI
             if (_front)
             {
                 PauseMenu.Instance.ShowExtendedDescription(_data);
-                if (alertImage.activeSelf)
+                if (alertImage.gameObject.activeSelf)
                 {
                     ShowAlertImage(false);
                     DeckManager.Instance.RemoveNewCard(_data);
@@ -90,9 +90,13 @@ namespace Booble.UI
             if (_front) PauseMenu.Instance.HideExtendedDescription();
         }
 
+        #region Alert
+
         public void ShowAlertImage(bool value)
         {
-            alertImage.SetActive(value);
+            alertImage.gameObject.SetActive(value);
         }
+
+        #endregion
     }
 }

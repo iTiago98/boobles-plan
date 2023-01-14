@@ -8,11 +8,11 @@ namespace Booble.UI
 {
     public class AlertButton : MyButton
     {
-        [SerializeField] private GameObject _newCardAlert;
+        [SerializeField] private AlertImage alertImage;
 
         public void ShowAlert(bool value)
         {
-            _newCardAlert.SetActive(value);
+            alertImage.gameObject.SetActive(value);
         }
 
         public void SetImage(Sprite sprite)
