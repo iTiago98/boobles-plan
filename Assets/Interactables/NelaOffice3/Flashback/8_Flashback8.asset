@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: "El jefe se vol\xF3 la tapa de los sesos en mitad de su despacho."
+    _closeUp: 7
   - _content: "Asustados, intentaron razonar con \xE9l y quitarle el aparato de control
       mental."
     _closeUp: 7

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 686967a2109df4c4699527b35ccaa5d3
+guid: b51b6bfd4788489468b31f83ca26266d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bosss_0
+      name: Boss Censurado_0
       rect:
         serializedVersion: 2
         x: 124
         y: 64
         width: 132
-        height: 400
+        height: 404
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a0912d3e97fb904db1c686be5e2385f
-      internalID: -932538869
+      spriteID: ba2ed8787dcd2ce41895cc5e933bbb71
+      internalID: -1080845316
       vertices: []
       indices: 
       edges: []
@@ -129,14 +129,14 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bosss_0: -932538869
+      Boss Censurado_0: -1080845316
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

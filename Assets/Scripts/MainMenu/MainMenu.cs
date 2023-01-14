@@ -149,6 +149,18 @@ namespace Booble.MainMenu
             StartDay2();
         }
 
+        [ContextMenu("Start Day 4")]
+        public void StartDay4()
+        {
+            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day3);
+            DeckManager.Instance.SetBaseDeck();
+            PauseMenu.Instance.InitializeCardMenu();
+            SceneLoader.Instance.LoadScene(Scenes.NELA_OFFICE_DAY_START);
+        }
+
         [ContextMenu("Add Gomu Gomu No")]
         public void AddNewCard()
         {

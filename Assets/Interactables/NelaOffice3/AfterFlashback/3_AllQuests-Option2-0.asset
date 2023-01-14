@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: "Vale, a ver, cu\xE1l es la primera."
+    _closeUp: 1
   - _content: "La Primera Ley dice que un robot no har\xE1 da\xF1o a un ser humano
       ni, por inacci\xF3n, permitir\xE1 que un ser humano sufra da\xF1o."
     _closeUp: 7

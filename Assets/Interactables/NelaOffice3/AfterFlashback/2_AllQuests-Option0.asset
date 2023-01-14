@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: "La verdad es que esa pija repelente no tiene nada que ver con mi mejor
+      amiga\u2026"
+    _closeUp: 1
   - _content: "Todos los valores que la defin\xEDan los ha ido perdiendo desde que
       entr\xF3 aqu\xED a trabajar."
     _closeUp: 7

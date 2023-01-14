@@ -22,7 +22,6 @@ MonoBehaviour:
   - _content: "En un arrebato de ira, cogi\xF3 el aparato de control mental e hizo
       que el jefe se levantara, fuera a la caja fuerte y cogiera una pistola."
     _closeUp: 7
-  - _content: "Ana y Jose empezaron a gritar y a intentar quitarle la pistola, pero
-      ya era demasiado tarde. El jefe se vol\xF3 la tapa de los sesos en mitad de
-      su despacho."
+  - _content: Ana y Jose empezaron a gritar y a intentar quitarle la pistola, pero
+      ya era demasiado tarde.
     _closeUp: 7

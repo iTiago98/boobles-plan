@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 686967a2109df4c4699527b35ccaa5d3
+guid: 42ccc8cf9e29a0c4aa7f3675b11b9519
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bosss_0
+      name: Boss con Bata_0
       rect:
         serializedVersion: 2
         x: 124
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a0912d3e97fb904db1c686be5e2385f
-      internalID: -932538869
+      spriteID: f90eb6ce14a4df44b89183f53386ddb5
+      internalID: 1509151518
       vertices: []
       indices: 
       edges: []
@@ -136,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bosss_0: -932538869
+      Boss con Bata_0: 1509151518
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

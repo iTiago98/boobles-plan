@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: 5_AllQuests-Option0
+  m_Name: Day4
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Bueno Queca tambi\xE9n era as\xED, por eso antes \xE9ramos inseparables."
+  - _content: "Buff, ya me lo dijo Queca, que despu\xE9s de cada entrevista iba a
+      estar demasiado cansada como para hacer cualquier otra cosa."
     _closeUp: 1
-  - _content: "\xA1Era un sol! Pero ya has visto el ambiente elitista y t\xF3xico
-      de la directiva."
-    _closeUp: 7
-  - _content: "Supongo que al no habernos visto en tanto tiempo, se habr\xE1 juntado
-      con peores influencias."
+  - _content: "Pero tengo que entrevistar al Sr. Romu\xE1ldez antes de que acabe
+      el d\xEDa. A saber si ma\xF1ana revocan la orden y pierdo la oportunidad."
     _closeUp: 1
-  - _content: El poder corrompe, y el poder absoluto corrompe absolutamente.
-    _closeUp: 7
+  - _content: Pero ahora mismo estoy demasiado cansada... voy a sentarme un momentito
+      en la silla primero...
+    _closeUp: 1

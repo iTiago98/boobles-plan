@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: Algo tenemos que hacer con ella.
+    _closeUp: 1
   - _content: "Por eso quiero que tengas \xE9sto, su pulsera de la amistad."
     _closeUp: 7
   - _content: "\xA1Ostras! \xA1No se hab\xEDa perdido! Rosalinda me dijo que la cambi\xF3
@@ -28,4 +30,16 @@ MonoBehaviour:
     _closeUp: 1
   - _content: Decidas lo que decidas, recuerda esta pulsera y todo lo que simboliza
       para vosotras.
+    _closeUp: 7
+  - _content: "La recordar\xE9, e-Mil\xEDn, no te preocupes."
+    _closeUp: 1
+  - _content: Pero antes de confrontar a Queca, voy a pasar por el lounge a hablar
+      con Ana antes de que se me olvide.
+    _closeUp: 1
+  - _content: "No puedo consentir que una persona tan pura est\xE9 viviendo en esa
+      ignorancia forzada si puedo hacer algo por evitarlo."
+    _closeUp: 1
+  - _content: "Gracias, e-Mil\xEDn, por todo. Adi\xF3s."
+    _closeUp: 1
+  - _content: "Adi\xF3s, Nella. Y buena suerte."
     _closeUp: 7
