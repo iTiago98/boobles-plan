@@ -18,7 +18,7 @@ namespace Booble.CardGame.Utils
         private Sequence _heartbeatSequence;
         private RectTransform _rt;
         
-        private void Awake()
+        protected void Awake()
         {
             _button = GetComponent<Button>();
 
