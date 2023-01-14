@@ -61,6 +61,11 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadNelaOffice2();
     }
 
+    public void LoadNelaOffice3()
+    {
+        SceneLoader.Instance.LoadNelaOffice3();
+    }
+
     public void LoadUpperHall1()
     {
         SceneLoader.Instance.LoadUpperHall1();

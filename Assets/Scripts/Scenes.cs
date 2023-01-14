@@ -15,6 +15,7 @@ namespace Booble
         public static string NELA_OFFICE_0 = "NelaOffice0";
         public static string NELA_OFFICE_1 = "NelaOffice1";
         public static string NELA_OFFICE_2 = "NelaOffice2";
+        public static string NELA_OFFICE_3 = "NelaOffice3";
         public static string CAR_0 = "Car0";
         public static string CAR_1 = "Car1";
         public static string LOWER_HALL_1 = "LowerHall1";

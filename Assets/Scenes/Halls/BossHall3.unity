@@ -1136,7 +1136,7 @@ MonoBehaviour:
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1335817239}
-  - _optionText: Despacho del jefe (Planta X21)
+  - _optionText: Despachos (Planta X21)
     _trueFlags: 
     _falseFlags: 
     _dialogueOption: {fileID: 1541373397}

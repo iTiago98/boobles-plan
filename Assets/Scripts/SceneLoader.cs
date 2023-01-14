@@ -91,6 +91,11 @@ namespace Booble.Managers
             LoadScene(Scenes.NELA_OFFICE_2);
         }
 
+        public void LoadNelaOffice3()
+        {
+            LoadScene(Scenes.NELA_OFFICE_3);
+        }
+
         public void LoadUpperHall1()
         {
             LoadScene(Scenes.UPPER_HALL_1);
