@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "La pobre mujer... \xA1Si solo est\xE1 haciendo su trabajo!"
+    _closeUp: 6
+  - _content: "Mira, Queca, no me vaciles, que ya suficientemente alterada me tiene
+      Rosalinda. \xBFT\xFA me puedes dar un afid\xE1vit de esos o no?"
+    _closeUp: 1
+  - _content: "Jijiji, s\xED, s\xED. Tranquila, mujer, que solo me estaba metiendo
+      un poco contigo. Creo que tengo uno de esos en la carpeta."
+    _closeUp: 6
+  - _content: "\xA1Aqu\xED est\xE1! Toma, el anexo 24R."
+    _closeUp: 6
+  - _content: "No, no. Te he pedido un afid\xE1vit. El anexo 24R ya se lo he dado
+      antes, que tambi\xE9n me lo hab\xEDa pedido."
+    _closeUp: 1
+  - _content: "Pero si el afid\xE1vit es el anexo 24R, \xBFno lo sab\xEDas?"
+    _closeUp: 6
+  - _content: "Qu\xE9 me est\xE1s contando. \xA1Me est\xE1 mareando la muy...!"
+    _closeUp: 1
+  - _content: "Jijiji, qu\xE9 mona te pones cuando te enfadas."
+    _closeUp: 6
+  - _content: "\xA1Me va a o\xEDr esa chupatintas!"
+    _closeUp: 1

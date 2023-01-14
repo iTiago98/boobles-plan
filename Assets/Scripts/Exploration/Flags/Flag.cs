@@ -102,7 +102,8 @@ namespace Booble.Flags
             Anexo13GBuscable,
             Anexo59HBuscable,
             Anexo24RBuscable,
-            AfidavitBuscable
+            AfidavitBuscable,
+            Queca3Intro
         }
 
         [SerializeField] private Reference _flagReference;

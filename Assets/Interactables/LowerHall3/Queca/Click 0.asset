@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Click 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Queca! \xBFQu\xE9 haces en mi pasillo? \xBFYa han acabado los
+      operarios con los naranjos del despacho de Citriano?"
+    _closeUp: 1
+  - _content: "\xBFQue si han acabado? Comenzaron anoche su \xFAltima incursi\xF3n
+      en el despacho, acompa\xF1ados por tres o cuatro agentes del GEO."
+    _closeUp: 6
+  - _content: "\xBFHan venido hasta los geos? \xBFPero qu\xE9 est\xE1 pasando ah\xED
+      dentro?"
+    _closeUp: 1
+  - _content: "Ni idea, la verdad. Detr\xE1s del grupo de incursi\xF3n ven\xEDan
+      los nacionales, acordonando toda la planta."
+    _closeUp: 6
+  - _content: "\xBFLa polic\xEDa? Madre m\xEDa... Entonces, \xBFno se puede ir a
+      la planta Y21?"
+    _closeUp: 1
+  - _content: "Han deshabilitado el bot\xF3n del ascensor y todo. Como no quieras
+      coger las escaleras de emergencia que van por fuera del edificio..."
+    _closeUp: 6
+  - _content: "\xA1C\xF3mo est\xE1 el patio!"
+    _closeUp: 1
+  - _content: "\xBFY t\xFA qu\xE9? \xBFAlgo interesante que tengas que hacer?"
+    _closeUp: 6
+  - _content: "Y tan interesante... \xA1Me han ordenado despedir al Sr. Romu\xE1ldez!"
+    _closeUp: 1
+  - _content: "\xBFNo me digas? \xA1Ya era hora! Ese pichavieja ya no le aporta nada
+      a esta empresa desde hace a\xF1os. Solo se dedica a chupar del bote."
+    _closeUp: 6

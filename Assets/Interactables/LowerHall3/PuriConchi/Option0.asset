@@ -13,4 +13,16 @@ MonoBehaviour:
   m_Name: Option0
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: "Tan bajito est\xE1n hablando que apenas puedo entender palabras sueltas...
+      A ver si pegando bien bien la oreja..."
+    _closeUp: 1
+  - _content: ".............. acordonada entera .............. los picoletos ..............
+      \xBFlos nacionales? .............."
+    _closeUp: 0
+  - _content: ".............. monstruo-bola .............. \xA1EL XILOCERONTE! Shhhhhhhhhhhhh
+      .............. tomar por locas .............. el xiloceronte .............."
+    _closeUp: 0
+  - _content: "Una ha gritado lo de \"el xiloceronte\" y la otra la ha mandado a
+      callar inmediatamente... \xBFQu\xE9 narices ser\xE1 un xiloceronte?"
+    _closeUp: 1
