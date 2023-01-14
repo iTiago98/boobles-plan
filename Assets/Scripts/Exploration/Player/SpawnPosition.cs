@@ -21,7 +21,6 @@ namespace Booble.Player
 
             if (i < _spawnPositions.Count)
             {
-                Debug.Log(_spawnPositions[i].PreviousScene + " ->" + _spawnPositions[i].CurrentScene);
                 _controller.transform.position = _spawnPositions[i].SpawnPosition;
                 _controller.StopMovement();
             }

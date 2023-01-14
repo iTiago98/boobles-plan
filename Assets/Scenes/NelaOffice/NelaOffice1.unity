@@ -1227,6 +1227,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1386118727}
+        m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
+        m_MethodName: AddEscorbuto
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1282262458008004104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,7 +1252,6 @@ GameObject:
   - component: {fileID: 1282262458008004103}
   - component: {fileID: 1282262458008004100}
   - component: {fileID: 1282262458008004101}
-  - component: {fileID: 1282262458008004106}
   m_Layer: 0
   m_Name: PaginasAmarillas
   m_TagString: Untagged
@@ -1263,33 +1274,6 @@ Transform:
   m_Father: {fileID: 1282262456399842500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1282262458008004106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1282262458008004104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _callback:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1386118727}
-        m_TargetAssemblyTypeName: DialogueCallbacks, Assembly-CSharp
-        m_MethodName: AddEscorbuto
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1671692863270641001
 PrefabInstance:
   m_ObjectHideFlags: 0

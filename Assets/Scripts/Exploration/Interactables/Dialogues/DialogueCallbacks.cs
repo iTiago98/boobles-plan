@@ -30,6 +30,11 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadLoungeScene2();
     }
+
+    public void LoadLounge3()
+    {
+        SceneLoader.Instance.LoadLoungeScene3();
+    }
     
     public void LoadLowerHall1()
     {
@@ -41,6 +46,16 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadLowerHall2();
     }
 
+    public void LoadLowerHall3()
+    {
+        SceneLoader.Instance.LoadLowerHall3();
+    }
+
+    public void LoadBossHall3()
+    {
+        SceneLoader.Instance.LoadBossHall3();
+    }
+    
     public void LoadNelaOffice1()
     {
         SceneLoader.Instance.LoadNelaOffice1();
@@ -51,6 +66,11 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadNelaOffice2();
     }
 
+    public void LoadNelaOffice3()
+    {
+        SceneLoader.Instance.LoadNelaOffice3();
+    }
+
     public void LoadUpperHall1()
     {
         SceneLoader.Instance.LoadUpperHall1();
@@ -59,6 +79,11 @@ public class DialogueCallbacks : MonoBehaviour
     public void LoadUpperHall2()
     {
         SceneLoader.Instance.LoadUpperHall2();
+    }
+
+    public void LoadUpperHall3()
+    {
+        SceneLoader.Instance.LoadUpperHall3();
     }
     
     public void LoadComedor2()
@@ -124,5 +149,25 @@ public class DialogueCallbacks : MonoBehaviour
     public void AddVictoriaPorDesgaste()
     {
         DeckManager.Instance.AddVictoriaPorDesgaste();
+    }
+
+    public void AddAnexosCorrespondientes()
+    {
+        DeckManager.Instance.AddTraigoLosAnexosCorrespondientes();
+    }
+
+    public void AddAfidavit()
+    {
+        DeckManager.Instance.AddAfidavit();
+    }
+
+    public void AddResaltarContradicción()
+    {
+        DeckManager.Instance.AddResaltarUnaContradiccion();
+    }
+
+    public void AddPerderPapeles()
+    {
+        DeckManager.Instance.AddHaPerdidoUsteLosPapele();
     }
 }

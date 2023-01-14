@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 5
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Ay pero si es verdad! Qu\xE9 cabecita la m\xEDa. Perdona. Entonces
+      ya tengo aqu\xED el afid\xE1vit, s\xED."
+    _closeUp: 13
+  - _content: "No estar\xE1s intentando hacerme perder tiempo, \xBFverdad, Rosalinda?"
+    _closeUp: 1
+  - _content: No, mujer, de ninguna de las maneras...
+    _closeUp: 13
+  - _content: "Pues ya tienes, todos los documentos que me pediste, \xBFno?"
+    _closeUp: 1
+  - _content: "S\xED, ya est\xE1 todo. Ahora me vas a tener que dar unos minutos
+      para que rellene todo este papeleo. Vete a tomar un caf\xE9 o algo."
+    _closeUp: 13
+  - _content: "Qu\xE9 remedio..."
+    _closeUp: 1

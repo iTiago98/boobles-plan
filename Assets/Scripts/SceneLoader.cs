@@ -16,7 +16,7 @@ namespace Booble.Managers
         public bool InCar => InScene(new List<string>() { Scenes.CAR_0, Scenes.CAR_1 });
         public bool InHome => InScene(new List<string>() { Scenes.HOME_0, Scenes.HOME_1, Scenes.HOME_2 });
         public bool InExploration => InScene(new List<string>() { Scenes.LOUNGE_0, Scenes.LOUNGE_1, Scenes.LOUNGE_2, Scenes.NELA_OFFICE_0, Scenes.NELA_OFFICE_1,
-            Scenes.NELA_OFFICE_2, Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.BOSS_HALL_1, Scenes.CANTEEN_0,
+            Scenes.NELA_OFFICE_2, Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.BOSS_HALL_3, Scenes.CANTEEN_0,
             Scenes.CANTEEN_2, Scenes.PPB_OFFICE});
 
         public string CurrentScene { get; private set; }
@@ -66,6 +66,11 @@ namespace Booble.Managers
             LoadScene(Scenes.CAR_0);
         }
 
+        public void LoadNelaOfficeDayStart()
+        {
+            LoadScene(Scenes.NELA_OFFICE_DAY_START);
+        }
+
         public void LoadLoungeScene0()
         {
             LoadScene(Scenes.LOUNGE_0);
@@ -86,6 +91,11 @@ namespace Booble.Managers
             LoadScene(Scenes.NELA_OFFICE_2);
         }
 
+        public void LoadNelaOffice3()
+        {
+            LoadScene(Scenes.NELA_OFFICE_3);
+        }
+
         public void LoadUpperHall1()
         {
             LoadScene(Scenes.UPPER_HALL_1);
@@ -96,6 +106,11 @@ namespace Booble.Managers
             LoadScene(Scenes.UPPER_HALL_2);
         }
 
+        public void LoadUpperHall3()
+        {
+            LoadScene(Scenes.UPPER_HALL_3);
+        }
+        
         public void LoadCanteenScene0()
         {
             LoadScene(Scenes.CANTEEN_0);
@@ -116,6 +131,16 @@ namespace Booble.Managers
             LoadScene(Scenes.LOWER_HALL_2);
         }
 
+        public void LoadLowerHall3()
+        {
+            LoadScene(Scenes.LOWER_HALL_3);
+        }
+
+        public void LoadBossHall3()
+        {
+            LoadScene(Scenes.BOSS_HALL_3);
+        }
+        
         public void LoadLoungeScene1()
         {
             LoadScene(Scenes.LOUNGE_1);
@@ -126,6 +151,11 @@ namespace Booble.Managers
             LoadScene(Scenes.LOUNGE_2);
         }
 
+        public void LoadLoungeScene3()
+        {
+            LoadScene(Scenes.LOUNGE_3);
+        }
+        
         public void LoadPPBOffice()
         {
             LoadScene(Scenes.PPB_OFFICE);

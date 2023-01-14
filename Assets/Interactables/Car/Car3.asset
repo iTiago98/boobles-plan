@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Car3
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Buen\xEDsimos d\xEDas, Nella. \xBFQu\xE9 aventuras te depara el d\xEDa?"
+    _closeUp: 9
+  - _content: "Buenas Anselmo. Pues no parece que vayan a ser tan buenos. \xA1Quieren
+      que despida a un jefe!"
+    _closeUp: 1
+  - _content: "\xA1Pero bueno si eso es una excelent\xEDsima noticia!"
+    _closeUp: 9
+  - _content: "Por fin est\xE1n rodando cabezas importantes, \xA1esto parece la Toma
+      de la Bastilla, comienza la Revoluci\xF3n!"
+    _closeUp: 9
+  - _content: "No s\xE9, Anselmo. Me da la sensaci\xF3n de que aqu\xED hay algo m\xE1s
+      que se me escapa."
+    _closeUp: 1
+  - _content: "Como qui\xE9n ha dado la orden en ese departamento, si \xE9l es el
+      mayor puesto que hay."
+    _closeUp: 1
+  - _content: "Pues ahora que lo dices, s\xED que es raro, s\xED."
+    _closeUp: 9
+  - _content: "En Booble todos los departamentos son iguales, por lo que todos los
+      jefes tambi\xE9n lo son, \xBFno?"
+    _closeUp: 9
+  - _content: "As\xED es. El Consejo de Administraci\xF3n est\xE1 compuesto exclusivamente
+      por los jefes de departamento en igualdad de condiciones."
+    _closeUp: 1
+  - _content: "Por lo que no hay nadie superior a Romu\xE1ldez\u2026"
+    _closeUp: 1
+  - _content: "M\xE1s que una revoluci\xF3n francesa, esto huele a traici\xF3n siciliana\u2026"
+    _closeUp: 9
+  - _content: "Pues eso es por lo que no me f\xEDo de que este despido sea hasta
+      legal\u2026"
+    _closeUp: 1

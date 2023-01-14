@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Click 3
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Bueno, \xBFqu\xE9? \xBFYa has rellenado todos los documentos?"
+    _closeUp: 1
+  - _content: "Pues te vas a re\xEDr, Nella, pero desgraciadamente no."
+    _closeUp: 13
+  - _content: "\xBFY a qu\xE9 est\xE1s esperando?"
+    _closeUp: 1
+  - _content: "Pues resulta que ya ten\xEDa todos los documentos rellenos y listos."
+    _closeUp: 13
+  - _content: Pero tardabas tanto que los fui a guardar para seguir con otras cosas.
+    _closeUp: 13
+  - _content: "Para cuando me di cuenta, ya era demasiado tarde, pero por equivocaci\xF3n,
+      \xA1met\xED los papeles en la trituradora en vez del caj\xF3n!"
+    _closeUp: 13
+  - _content: "\xA1Qu\xE9 torpe por mi parte! Parece que vas a tener que traerme
+      todos esos papeles de nuevo."
+    _closeUp: 13
+  - _content: ...
+    _closeUp: 1
+  - _content: "\xBFNella?"
+    _closeUp: 13
