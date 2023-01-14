@@ -59,7 +59,7 @@ namespace Booble.CardGame.Managers
         public void ContinueTutorial() => GetTutorial()?.GetTutorialAnimation().Continue();
         public TutorialDialogue GetTutorial()
         {
-            if(_interviewDialogue != null && _interviewDialogue is TutorialDialogue)
+            if (_interviewDialogue != null && _interviewDialogue is TutorialDialogue)
             {
                 return (TutorialDialogue)_interviewDialogue;
             }
@@ -205,6 +205,7 @@ namespace Booble.CardGame.Managers
 
         public bool CheckDialogue(Card cardPlayed)
         {
+            if (!playingStoryMode) return false;
             if (_interviewDialogue == null) return false;
             return _interviewDialogue.CheckDialogue(cardPlayed);
         }
@@ -265,7 +266,7 @@ namespace Booble.CardGame.Managers
             playingCard = value;
 
             if (tutorial) return;
-            
+
             if (playingCard) UIManager.Instance.SetEndTurnButtonInteractable(false);
             else UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
 

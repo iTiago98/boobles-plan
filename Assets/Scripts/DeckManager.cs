@@ -23,7 +23,6 @@ namespace Booble.Managers
         private List<CardsData> _playerDeck;
         private List<CardsData> _opponentDeck;
         private Opponent_Name _opponentName;
-        private Opponent_Name _previousOpponent;
 
         private List<CardsData> _playerAuxDeck;
 
@@ -75,7 +74,6 @@ namespace Booble.Managers
         public Opponent_Name GetOpponentName() => _opponentName;
         public void SetOpponent(Opponent_Name opponentName)
         {
-            _previousOpponent = _opponentName;
             _opponentName = opponentName;
         }
 
@@ -165,8 +163,6 @@ namespace Booble.Managers
 
         public void AddCitrianoCards()
         {
-            if (_previousOpponent == Opponent_Name.Citriano) return;
-
             AddHipervitaminado(true);
             AddNuevaCepaDelEscorbuto(true);
             AddExprimirLaVerdad(true);
@@ -199,8 +195,6 @@ namespace Booble.Managers
 
         public void AddPPBrosCards()
         {
-            if (_previousOpponent == Opponent_Name.PPBros) return;
-
             AddVictoriaPorDesgaste(true);
             AddPared(true);
             AddPalaDeNocobich(true);
@@ -240,8 +234,6 @@ namespace Booble.Managers
 
         public void AddSecretaryCards()
         {
-            if (_previousOpponent == Opponent_Name.Secretary) return;
-
             AddHaPerdidoUsteLosPapele(true);
             AddTraigoLosAnexosCorrespondientes(true);
             AddAfidavit(true);
@@ -274,8 +266,6 @@ namespace Booble.Managers
 
         public void AddBossCards()
         {
-            if (_previousOpponent == Opponent_Name.Boss) return;
-
             AddHipervitaminadoPlus(true);
             AddVictoriaPorDesgastePlus(true);
             AddHaPerdidoUsteLosPapelePlus(true);
