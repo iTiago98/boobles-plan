@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 3_AllQuests-Option2-1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "La Segunda Ley dice que un robot debe cumplir las \xF3rdenes dadas
+      por los seres humanos."
+    _closeUp: 7
+  - _content: "A excepci\xF3n de aquellas que entren en conflicto con la primera
+      ley."
+    _closeUp: 7
+  - _content: "Desde hace a\xF1os, la mayor\xEDa de \xF3rdenes de Queca son en su
+      propio perjuicio."
+    _closeUp: 7
+  - _content: "Cada vez est\xE1 m\xE1s aislada en una vida de fiestas, drogas y reuniones
+      de empresa al d\xEDa siguiente."
+    _closeUp: 7
+  - _content: "\xA1Est\xE1 envejeciendo a pasos agigantados! Aunque lo intenta compensar
+      con todo tipo de operaciones y remedios."
+    _closeUp: 7
+  - _content: Bueno, ella siempre ha sido muy de potingues, la verdad.
+    _closeUp: 1

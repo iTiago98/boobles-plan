@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 1_Flashback1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Hasta su nombre es una mentira! Agapito Flaccidente era un simple
+      meteor\xF3logo y hombre del tiempo frustrado."
+    _closeUp: 7
+  - _content: "Intent\xF3 trabajar en varias cadenas de televisi\xF3n, pero siempre
+      le rechazaban."
+    _closeUp: 7
+  - _content: "Dec\xEDan que su cara no era lo bastante fotog\xE9nica para que le
+      recordara la audiencia."
+    _closeUp: 7

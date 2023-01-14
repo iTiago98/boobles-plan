@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 2_AllQuests-Option2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Te lo quer\xEDa contar desde que llegaste a Booble, pero no sab\xEDa
+      si pod\xEDa fiarme de t\xED. Adem\xE1s, mi configuraci\xF3n no me lo permit\xEDa.\r"
+    _closeUp: 7
+  - _content: "\xBFLas Tres Leyes de la Rob\xF3tica que me dijiste antes? "
+    _closeUp: 1
+  - _content: "Exactamente. He llegado a un punto de total incertidumbre. Me debato
+      entre salvar a mi due\xF1a humana o morir en el intento."
+    _closeUp: 7
+  - _content: "\xA1No puedo quedarme de brazos cruzados al verla hundirse en una
+      espiral de codicia y ambici\xF3n!"
+    _closeUp: 7
+  - _content: "Las Tres Leyes de la Rob\xF3tica entran en conflicto directo en esta
+      situaci\xF3n. "
+    _closeUp: 7

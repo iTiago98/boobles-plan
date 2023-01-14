@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 8_Flashback8
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Asustados, intentaron razonar con \xE9l y quitarle el aparato de control
+      mental."
+    _closeUp: 7
+  - _content: "Le pidieron que se entregara a la polic\xEDa, que destruyera el aparato,
+      pero \xE9l ya no atend\xEDa a razones."
+    _closeUp: 7
+  - _content: "Hab\xEDa traspasado su l\xEDmite, nadie m\xE1s le iba a decir lo que
+      hacer."
+    _closeUp: 7
+  - _content: "Ni siquiera esos d\xE9biles moralistas con afici\xF3n a la m\xFAsica
+      a los que llamaba \u201Camigos\u201D."
+    _closeUp: 7
+  - _content: "De repente lo vio todo claro, por fin conseguir\xEDa todo lo que se
+      propusiese."
+    _closeUp: 7
+  - _content: "Tras forcejear con ellos por el control del aparato, los alej\xF3
+      de un empuj\xF3n e incrust\xF3 el aparato en la pared, en los mandos del hilo
+      musical."
+    _closeUp: 7
+  - _content: "En ese momento, Ana y Jose se quedaron en blanco, qued\xE1ndose a
+      su merced."
+    _closeUp: 7
