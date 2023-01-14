@@ -29,6 +29,8 @@ namespace Booble.MainMenu
 
         [Header("Play")]
         [SerializeField] private GameObject _continueButton;
+        [SerializeField] private GameObject _mainPlayMenu;
+        [SerializeField] private GameObject _confirmMenu;
 
         [Header("Options")]
         [SerializeField] private Slider _generalMusicSlider;
@@ -43,8 +45,8 @@ namespace Booble.MainMenu
         [SerializeField] private Sprite _secretaryBackground;
         [SerializeField] private Sprite _bossBackground;
 
-        [Header("SceneLoad")] [SerializeField] private List<Triplet> _checkPoints;
-        
+        [Header("SceneLoad")][SerializeField] private List<Triplet> _checkPoints;
+
         private bool _onTween;
 
         private void Start()
@@ -74,7 +76,7 @@ namespace Booble.MainMenu
             //{
             //    Debug.Log("Completed the game!");
             //}
-            
+
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
             DeckManager.Instance.CheckExtraCards();
@@ -87,12 +89,31 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
 
+            if (_continueButton.activeSelf)
+            {
+                _mainPlayMenu.SetActive(false);
+                _confirmMenu.SetActive(true);
+            }
+            else NewGame();
+        }
+
+        private void NewGame()
+        {
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
-
             FlagManager.Instance.ResetFlags();
-
             SceneLoader.Instance.LoadCar0();
+        }
+
+        public void ConfirmNewGameButton()
+        {
+            NewGame();
+        }
+
+        public void CancelNewGameButton()
+        {
+            _mainPlayMenu.SetActive(true);
+            _confirmMenu.SetActive(false);
         }
 
         #endregion
@@ -111,7 +132,7 @@ namespace Booble.MainMenu
             FlagManager.Instance.SetFlag(Flag.Reference.Car0);
             StartDay0();
         }
-        
+
         [ContextMenu("Start Day 2")]
         public void StartDay2()
         {
@@ -119,7 +140,7 @@ namespace Booble.MainMenu
             FlagManager.Instance.SetFlag(Flag.Reference.Day1);
             StartDay1();
         }
-        
+
         [ContextMenu("Start Day 3")]
         public void StartDay3()
         {
@@ -127,7 +148,7 @@ namespace Booble.MainMenu
             FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             StartDay2();
         }
-        
+
         [ContextMenu("Add Gomu Gomu No")]
         public void AddNewCard()
         {
@@ -278,13 +299,13 @@ namespace Booble.MainMenu
             {
                 return FlagManager.Instance.GetFlag(FlagRef);
             }
-            
+
             set
             {
                 FlagManager.Instance.SetFlag(FlagRef, value);
             }
         }
-        
+
         [field: SerializeField] public string Scene { get; private set; }
         [field: SerializeField] public Flag.Reference FlagRef { get; private set; }
         [field: SerializeField] public MusicReference Music { get; private set; }
