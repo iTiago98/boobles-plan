@@ -40,5 +40,3 @@ MonoBehaviour:
   - _content: "\xA1Lo sab\xEDa! Es de la marca Jugosol, \xBFves? Anda, \xBFy esta
       carta?"
     _closeUp: 1
-  - _content: "*Consigues \"La m\xE1quina de zumo de los supermercados\"*"
-    _closeUp: 0

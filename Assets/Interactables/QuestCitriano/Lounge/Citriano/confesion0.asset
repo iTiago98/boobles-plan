@@ -66,8 +66,6 @@ MonoBehaviour:
     _closeUp: 2
   - _content: "\xA1Brindo por vosotros dos, los reyes de la vitamina! "
     _closeUp: 1
-  - _content: '*Consigues "Hipervitaminado"*'
-    _closeUp: 0
   - _content: "Qu\xE9 raro, \xBFpor qu\xE9 aparecen tantas cartas cuando celebro
       algo?"
     _closeUp: 1

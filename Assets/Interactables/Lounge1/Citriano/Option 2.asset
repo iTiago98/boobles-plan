@@ -56,6 +56,5 @@ MonoBehaviour:
     _closeUp: 3
   - _content: "A lo mejor el motivo no es la m\xE1quina, si no otra cosa distinta..."
     _closeUp: 1
-  - _content: "\xA1Anda! \xA1Hab\xEDa una carta detr\xE1s de la m\xE1quina! \"M\xE1quina
-      de zumos del supermercado\"."
+  - _content: "\xA1Anda! \xA1Hab\xEDa una carta detr\xE1s de la m\xE1quina!"
     _closeUp: 1
