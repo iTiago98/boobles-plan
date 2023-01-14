@@ -380,7 +380,7 @@ MonoBehaviour:
   - _optionText: "Lo \xFAltimo que me ha dicho es que le deje un momento para rellenar
       los documentos."
     _trueFlags: 50000000
-    _falseFlags: 
+    _falseFlags: 54000000
     _dialogueOption: {fileID: 475206586}
 --- !u!1 &397683822
 GameObject:

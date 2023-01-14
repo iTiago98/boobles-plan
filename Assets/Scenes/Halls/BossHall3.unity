@@ -455,6 +455,7 @@ Transform:
   - {fileID: 959627504}
   - {fileID: 594325337}
   - {fileID: 981859497}
+  - {fileID: 1268833656}
   - {fileID: 247103601}
   - {fileID: 1123751910}
   - {fileID: 1282006173}
@@ -553,16 +554,21 @@ MonoBehaviour:
   - _optionText: "Vale, ya he tra\xEDdo los anexos correspondientes. Voy a entrar
       a ver a tu jefe."
     _trueFlags: 57000000
-    _falseFlags: 52000000
+    _falseFlags: 51000000
     _dialogueOption: {fileID: 981859499}
-  - _optionText: "Vengo de hablar con Queca, y me ha dicho que el anexo 24R, el que
-      ya te he entregado antes, es el afid\xE1vit."
+  - _optionText: "Vale, ya he tra\xEDdo los anexos correspondientes. Voy a entrar
+      a ver a tu jefe."
+    _trueFlags: 51000000
+    _falseFlags: 52000000
+    _dialogueOption: {fileID: 1268833660}
+  - _optionText: " He hablado con Queca, y me ha dicho que el anexo R24 es el afid\xE1vit.
+      Te lo he dado antes."
     _trueFlags: 52000000
     _falseFlags: 50000000
     _dialogueOption: {fileID: 247103603}
   - _optionText: "\xA1BUENO YA EST\xC1 BIEN DE HACERSE LA TONTA! \xA1ESTO NO TIENE
       NINGUNA GRACIA!"
-    _trueFlags: 50000000
+    _trueFlags: 54000000
     _falseFlags: 53000000
     _dialogueOption: {fileID: 1123751912}
   - _optionText: Comenzar la entrevista con Rosalinda.
@@ -602,7 +608,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 216241355}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &247103602
 MonoBehaviour:
@@ -1104,6 +1110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1019743686}
   - component: {fileID: 1019743685}
+  - component: {fileID: 1019743687}
   - component: {fileID: 1019743684}
   m_Layer: 0
   m_Name: Elevator
@@ -1188,6 +1195,18 @@ Transform:
   m_Father: {fileID: 1679629140}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1019743687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019743683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8c85109a2d17f49abc82e3ce9699bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1108241345
 GameObject:
   m_ObjectHideFlags: 0
@@ -1252,7 +1271,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 216241355}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1123751911
 MonoBehaviour:
@@ -1267,7 +1286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialogue: {fileID: 11400000, guid: 3515e60721f3cad488368e762b98dbb4, type: 2}
-  _onEnd: 2
+  _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1367,6 +1386,68 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1268833655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268833656}
+  - component: {fileID: 1268833660}
+  - component: {fileID: 1268833659}
+  m_Layer: 0
+  m_Name: Option (4.2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1268833656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268833655}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 216241355}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1268833659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268833655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: a09d9795a8f5f3241aba8f17a800577f, type: 2}
+  _onEnd: 2
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1268833660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268833655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1282006172
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +1482,7 @@ Transform:
   - {fileID: 542390945}
   - {fileID: 789576931}
   m_Father: {fileID: 216241355}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1282006174
 MonoBehaviour:
@@ -1472,6 +1553,7 @@ GameObject:
   - component: {fileID: 1335817241}
   - component: {fileID: 1335817239}
   - component: {fileID: 1335817240}
+  - component: {fileID: 1335817242}
   m_Layer: 0
   m_Name: Lounge
   m_TagString: Untagged
@@ -1523,6 +1605,33 @@ Transform:
   m_Father: {fileID: 1019743686}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335817242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335817238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1019743687}
+        m_TargetAssemblyTypeName: DestroyPapers, Assembly-CSharp
+        m_MethodName: CheckDestroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1472429052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,6 +1703,7 @@ GameObject:
   - component: {fileID: 1541373399}
   - component: {fileID: 1541373397}
   - component: {fileID: 1541373398}
+  - component: {fileID: 1541373400}
   m_Layer: 0
   m_Name: X21
   m_TagString: Untagged
@@ -1657,6 +1767,33 @@ Transform:
   m_Father: {fileID: 1019743686}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541373400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541373396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd65f8381836cc4b825d12697c3fbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1019743687}
+        m_TargetAssemblyTypeName: DestroyPapers, Assembly-CSharp
+        m_MethodName: CheckDestroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1674669753
 GameObject:
   m_ObjectHideFlags: 0
