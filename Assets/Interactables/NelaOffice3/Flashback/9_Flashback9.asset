@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 9_Flashback9
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Decidi\xF3 que  no iba a compartir la gloria con nadie, que no se
+      lo merec\xEDan tanto como \xE9l."
+    _closeUp: 7
+  - _content: "Les hizo olvidar todo lo ocurrido en ese despacho y los ech\xF3 de
+      la empresa."
+    _closeUp: 7
+  - _content: "No los quer\xEDa cerca, no quer\xEDa que nadie supiera qui\xE9n era
+      \xE9l en realidad."
+    _closeUp: 7
+  - _content: "Desde ese d\xEDa, \xE9l simplemente ser\xEDa Eusebio Romu\xE1ldez
+      (un nombre rimbombante que ley\xF3 en un anuncio de la ciberteletienda)."
+    _closeUp: 7
+  - _content: "El jefe de toda la vida del Departamento de Climatolog\xEDa, y nadie
+      recordar\xEDa otra historia distinta."
+    _closeUp: 7

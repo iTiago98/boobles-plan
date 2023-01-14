@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 4_Flashback4
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Sin embargo, acab\xF3 igual de frustrado al no permit\xEDrsele ascender
+      fuera del laboratorio durante a\xF1os."
+    _closeUp: 7
+  - _content: "Fue entonces cuando decidi\xF3 enfocar sus estudios en el control
+      de otro tipo de clima o ambiente."
+    _closeUp: 7
+  - _content: "Acab\xF3 ideando un dispositivo de control mental por medio de las
+      ondas sonoras y las luces."
+    _closeUp: 7
+  - _content: "Al final consigui\xF3 controlar las mentes de todo su laboratorio."
+    _closeUp: 7
+  - _content: "Ana y Jose no quisieron participar en las \xFAltimas fases del experimento."
+    _closeUp: 7
+  - _content: "De hecho le pidieron muchas veces que dejase la investigaci\xF3n,
+      pues les parec\xEDa inmoral \u201Cjugar a ser Dios\u201D."
+    _closeUp: 7
+  - _content: "Tras esto, el jefe del departamento le llam\xF3 a su despacho. "
+    _closeUp: 7

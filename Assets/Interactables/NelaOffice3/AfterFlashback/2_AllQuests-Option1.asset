@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 2_AllQuests-Option1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Claro, yo nac\xED como un \"robot amigo\" para ni\xF1os, pero estaba
+      destinado a la servidumbre."
+    _closeUp: 7
+  - _content: Mi funcionalidad se basaba en tres cosas.
+    _closeUp: 7
+  - _content: "Pasearme con una bandeja en la mano, gastar bromas gracias a mis tres
+      modos de voz y sonre\xEDr eternamente. "
+    _closeUp: 7
+  - _content: Uno de los primeros prototipos de robosiervo, entonces.
+    _closeUp: 1
+  - _content: "En efecto. Fui regalado a Queca en su infancia y ella me acogi\xF3
+      en sus brazos llena de alegr\xEDa. "
+    _closeUp: 7
+  - _content: "Pues ella tuvo una infancia muy solitaria, sus padres nunca estaban
+      en casa. De hecho, me compraron para que le hiciera compa\xF1\xEDa. "
+    _closeUp: 7
+  - _content: "Madre m\xEDa, pobre Queca."
+    _closeUp: 1
+  - _content: "Al principio no pod\xEDa estar m\xE1s contenta, pero al par de semanas
+      se cans\xF3 de lo simple que era."
+    _closeUp: 7
+  - _content: "Su padre, en vez de pasar m\xE1s tiempo con ella, mand\xF3 mejorarme,
+      d\xE1ndome una inteligencia artificial y autonom\xEDa de movimientos."
+    _closeUp: 7
+  - _content: "A partir de ese momento, Queca dej\xF3 de estar sola. Fui, y sigo
+      siendo, su mejor amigo, y puede que algo m\xE1s."
+    _closeUp: 7
+  - _content: "\xA1Pero bueno! \xBFC\xF3mo que algo m\xE1s?"
+    _closeUp: 1
+  - _content: "La lista de \xF3rdenes que he tenido que realizar a lo largo de estos
+      \xFAltimos a\xF1os es tan s\xF3rdida y vergonzosa..."
+    _closeUp: 7
+  - _content: "Yo mismo me sorprendo pensando que era m\xE1s feliz antes de evolucionar
+      de un mero juguete sin consciencia."
+    _closeUp: 7

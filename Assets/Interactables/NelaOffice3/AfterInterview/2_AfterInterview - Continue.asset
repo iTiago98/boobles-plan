@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 2_AfterInterview - Continue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: La cosa es que no he podido contarte nada directamente por mi naturaleza.
+    _closeUp: 7
+  - _content: "Todos los robots estamos fabricados bajo las Tres Leyes de la Rob\xF3tica."
+    _closeUp: 7
+  - _content: "\xBFTe refieres a las de Asimov?"
+    _closeUp: 1
+  - _content: "Algunos lo llaman el mejor escritor de ciencia ficci\xF3n de la historia.
+      Yo lo llamo Pap\xE1."
+    _closeUp: 7
+  - _content: "Bueno. \xBFY cu\xE1les son esas leyes exactamente?"
+    _closeUp: 1
+  - _content: "Ya te las contar\xE9, ahora no tenemos tiempo. Tengo que contarte
+      la historia de Eusebio Romu\xE1ldez."
+    _closeUp: 7
+  - _content: "\xBFEl se\xF1or Romu\xE1ldez? Por fin alguien que me piensa contar
+      algo."
+    _closeUp: 1
+  - _content: "Ahora que Rosalinda est\xE1 fuera de la empresa, por fin puedo cont\xE1rtelo
+      todo."
+    _closeUp: 7
+  - _content: "Menuda perra de presa tiene el jefe, \xA1qu\xE9 lealtad tiene esa
+      se\xF1ora!"
+    _closeUp: 1
+  - _content: Esa fidelidad extrema es lo que la ha dejado tarada. Ahora vive dos
+      realidades distintas.
+    _closeUp: 7
+  - _content: "El caso es que su personalidad de fuera de la oficina me cont\xF3
+      el secreto del se\xF1or Romu\xE1ldez. "
+    _closeUp: 7
+  - _content: "Sin embargo, me oblig\xF3 a no contar nada: \"Mientras yo est\xE9
+      en esta empresa, no le cuentes nada de esto a nadie\", me dec\xEDa siempre."
+    _closeUp: 7
+  - _content: "Por eso te dije que la llamaras la otra noche, por si consegu\xEDas
+      que te lo contara. Te admira tanto..."
+    _closeUp: 7
+  - _content: "\xBFAs\xED que por eso estabas tan est\xFApido? "
+    _closeUp: 1
+  - _content: Bueno, por eso y porque llevaba un par de horas sin beber nada.
+    _closeUp: 7
+  - _content: "Ten\xEDa mucha tensi\xF3n pensando en c\xF3mo hacerte descubrir la
+      verdad sin tener que cont\xE1rtela."
+    _closeUp: 7
+  - _content: "\xA1\xBFQuieres matarte o qu\xE9?!"
+    _closeUp: 1
+  - _content: "\xBFUn robot sin beber alcohol un par de horas? Si es vuestro lubricante
+      natural."
+    _closeUp: 1
+  - _content: "\xA1Podr\xEDas haberte quedado inconsciente!"
+    _closeUp: 1
+  - _content: Sin alcohol tantas horas estaba mareado, excitado, desorientado...
+    _closeUp: 7
+  - _content: "Una buena roborrachera de manual. Bueno, centr\xE9monos. Cu\xE9ntame
+      ese dichoso secreto."
+    _closeUp: 1
+  - _content: "S\xED, perdona. Pues resulta que el se\xF1or Romu\xE1ldez, ah\xED
+      donde lo ves, no es m\xE1s que un impostor. El mayor impostor de la historia..."
+    _closeUp: 7

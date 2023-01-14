@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 5_AllQuests-Option1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Por eso quiero que tengas \xE9sto, su pulsera de la amistad."
+    _closeUp: 7
+  - _content: "\xA1Ostras! \xA1No se hab\xEDa perdido! Rosalinda me dijo que la cambi\xF3
+      por la pulsera de Booble.\r"
+    _closeUp: 1
+  - _content: "\xA1Claro, ahora todo encaja! Por eso ella no est\xE1 bajo el control
+      mental y por eso sabe el secreto del Se\xF1or Romu\xE1ldez."
+    _closeUp: 7
+  - _content: "\xA1Esa pulsera solo la llevan ella y el jefe!"
+    _closeUp: 7
+  - _content: "\xA1Es verdad! Tengo que hablar con ella en cuanto pueda."
+    _closeUp: 1
+  - _content: Decidas lo que decidas, recuerda esta pulsera y todo lo que simboliza
+      para vosotras.
+    _closeUp: 7

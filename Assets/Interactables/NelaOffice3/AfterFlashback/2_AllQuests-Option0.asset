@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: 2_AllQuests-Option0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Todos los valores que la defin\xEDan los ha ido perdiendo desde que
+      entr\xF3 aqu\xED a trabajar."
+    _closeUp: 7
+  - _content: "Pues s\xED, est\xE1 irreconocible. La mosquita muerta que conoc\xED
+      en el sindicato estudiantil ahora es una dominatrix laboral."
+    _closeUp: 1
+  - _content: Se le nota que disfruta ejerciendo su poder sobre sus subordinados.
+    _closeUp: 7
+  - _content: "Antes s\xF3lo viv\xEDa para proteger a los desfavorecidos de las injusticias
+      del sistema. "
+    _closeUp: 7
+  - _content: Parece que ahora se ha convertido en una pieza afilada y contundente
+      de ese sistema.
+    _closeUp: 1
+  - _content: "Llevo a\xF1os intentando hacerla entrar en raz\xF3n, pero ella evita
+      cualquier conversaci\xF3n que no le guste desactiv\xE1ndome."
+    _closeUp: 7
+  - _content: "\xA1En los \xFAltimos a\xF1os incluso me amenaza con mandarme al desguace! "
+    _closeUp: 7
