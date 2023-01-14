@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 686967a2109df4c4699527b35ccaa5d3
+guid: af7ee4b4effafd0408e4db200fda233d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bosss_0
+      name: Citriano con Bata_0
       rect:
         serializedVersion: 2
-        x: 124
-        y: 64
-        width: 132
-        height: 400
+        x: 108
+        y: 72
+        width: 152
+        height: 404
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a0912d3e97fb904db1c686be5e2385f
-      internalID: -932538869
+      spriteID: 8b0958b504a7ae64ab5dc1ab49a6a3d5
+      internalID: -735780850
       vertices: []
       indices: 
       edges: []
@@ -136,7 +136,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bosss_0: -932538869
+      Citriano con Bata_0: -735780850
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

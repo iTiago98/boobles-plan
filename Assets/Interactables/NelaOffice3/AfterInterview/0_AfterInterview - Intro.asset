@@ -14,5 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "\xBFC\xF3mo andamios?"
+  - _content: "\xA1Nella! \xA1Nella! \xA1Despierta!"
+    _closeUp: 7
+  - _content: "\xA1e-Mil\xEDn! \xBFDe d\xF3nde sales t\xFA? Pfff, parece que me he
+      quedado dormida."
+    _closeUp: 1
+  - _content: "\xBFQue de d\xF3nde salgo? Pues de la trampilla secreta que tienes
+      detr\xE1s del escritorio. \xBFDe d\xF3nde va a ser?"
+    _closeUp: 7
+  - _content: "\xBFTrampilla secreta? \xBFDesde cuando hay una tram...? \xA1Oye!
+      \xA1Pero si est\xE1 atardeciendo! \xBFCu\xE1nto tiempo me he tirado dormida?"
+    _closeUp: 1
+  - _content: "M\xE1s del que deber\xEDas, te estaba esperando en la planta W441,
+      pero cuando he visto que no ven\xEDas, te he venido a buscar aqu\xED."
     _closeUp: 7

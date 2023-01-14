@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: "\xBFLa segunda qu\xE9 dice?"
+    _closeUp: 1
   - _content: "La Segunda Ley dice que un robot debe cumplir las \xF3rdenes dadas
       por los seres humanos."
     _closeUp: 7

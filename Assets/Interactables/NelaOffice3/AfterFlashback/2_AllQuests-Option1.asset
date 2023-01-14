@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
+  - _content: "Porque encima t\xFA la conoc\xEDas desde chica, \xBFno? Supongo que
+      desde que te encendieron."
+    _closeUp: 1
   - _content: "Claro, yo nac\xED como un \"robot amigo\" para ni\xF1os, pero estaba
       destinado a la servidumbre."
     _closeUp: 7
