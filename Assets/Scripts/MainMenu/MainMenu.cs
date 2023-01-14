@@ -100,6 +100,8 @@ namespace Booble.MainMenu
         [ContextMenu("Start Day 0")]
         public void StartDay0()
         {
+            DeckManager.Instance.SetBaseDeck();
+            PauseMenu.Instance.InitializeCardMenu();
             SceneLoader.Instance.LoadScene(Scenes.CAR_0);
         }
 

@@ -36,8 +36,9 @@ public class StartInterview : DialogueEvent
         SceneLoader.Instance.LoadInterviewScene();
         yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
         yield return new WaitUntil(() => _cam.gameObject.activeSelf);
-        
-        _rosalinda.gameObject.SetActive(false);
+
+        _rosalinda.GetComponent<Collider2D>().enabled = false;
+        _rosalinda.GetComponent<SpriteRenderer>().enabled = false;
         FlagManager.Instance.SetFlag(Flag.Reference.Day3);
         yield return new WaitForSeconds(_fade.FadeDuration);
         
