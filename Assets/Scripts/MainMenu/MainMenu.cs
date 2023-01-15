@@ -173,10 +173,17 @@ namespace Booble.MainMenu
             SceneLoader.Instance.LoadScene(Scenes.BOSS_HALL_4);
         }
 
-        [ContextMenu("Start Post-Credits")]
-        public void StartPostCredits()
+        [ContextMenu("Credits Good Ending")]
+        public void CreditsGoodEnding()
         {
-            SceneLoader.Instance.LoadScene(Scenes.HOME_ENDING);
+            FlagManager.Instance.SetFlag(Flag.Reference.FinalBueno);
+            CreditsNeutralEnding();
+        }
+        
+        [ContextMenu("Credits Neutral Ending")]
+        public void CreditsNeutralEnding()
+        {
+            SceneLoader.Instance.LoadScene(Scenes.CREDITS);
         }
         
         [ContextMenu("Get Alternate Win Cons")]

@@ -98,4 +98,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Endings/HomeEnding.unity
     guid: 04d8c5198bb136941a42c2d3789ed821
+  - enabled: 1
+    path: Assets/Scenes/Endings/Credits.unity
+    guid: ef71386ed3aa8094d9c56066a2f87524
   m_configObjects: {}
