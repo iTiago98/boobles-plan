@@ -135,7 +135,7 @@ namespace Booble.UI
 
         private void SetButtonsAvailable()
         {
-            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Car0, Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3, Flag.Reference.Day3 };
+            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Car0, Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3, Flag.Reference.Day4 };
 
             bool available = true;
             for (int i = 0; i < flags.Count; i++)

@@ -12,7 +12,7 @@ namespace Booble.Interactables
 {
 	public class Interactable : MonoBehaviour
 	{
-        public static bool BlockActions => _mouseOverInteractable || _interactionOnGoing  || CluesOpen;
+        public static bool BlockActions => _mouseOverInteractable || _interactionOnGoing;
         public static bool CluesOpen { get; set; }
         
         private static bool _interactionOnGoing;

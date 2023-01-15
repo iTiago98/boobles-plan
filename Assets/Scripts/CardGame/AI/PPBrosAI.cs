@@ -19,7 +19,7 @@ namespace Booble.CardGame.AI
                     return _contender.hand.numCards > 1;
 
                 case "Apurando la línea":
-                    return player.hand.numCards - _contender.hand.numCards > 2;
+                    return player.hand.numCards > _contender.hand.numCards;
 
                 case "Dejadita":
                     return Board.Instance.NumCardsOnTable(player) >= 2;

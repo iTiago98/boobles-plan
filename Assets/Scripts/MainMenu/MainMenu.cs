@@ -191,31 +191,36 @@ namespace Booble.MainMenu
 
         public void TutorialCardsButton()
         {
-            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Tutorial);
+            DeckManager.Instance.SetOpponent(Opponent_Name.Tutorial);
+            DeckManager.Instance.InitializeAuxDeck(false);
             LoadInterview();
         }
 
         public void CitrianoCardsButton()
         {
-            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Citriano);
+            DeckManager.Instance.SetOpponent(Opponent_Name.Citriano);
+            DeckManager.Instance.InitializeAuxDeck(false); 
             LoadInterview();
         }
 
         public void PingPongBrosCardsButton()
         {
-            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.PPBros);
+            DeckManager.Instance.SetOpponent(Opponent_Name.PPBros);
+            DeckManager.Instance.InitializeAuxDeck(false); 
             LoadInterview();
         }
 
         public void SecretaryCardsButton()
         {
-            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Secretary);
+            DeckManager.Instance.SetOpponent(Opponent_Name.Secretary);
+            DeckManager.Instance.InitializeAuxDeck(false); 
             LoadInterview();
         }
 
         public void BossCardsButton()
         {
-            DeckManager.Instance.InitializeAuxDeck(Opponent_Name.Boss);
+            DeckManager.Instance.SetOpponent(Opponent_Name.Boss);
+            DeckManager.Instance.InitializeAuxDeck(false); 
             LoadInterview();
         }
 

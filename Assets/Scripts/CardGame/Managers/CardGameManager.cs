@@ -2,6 +2,7 @@ using Booble.CardGame.AI;
 using Booble.CardGame.Cards;
 using Booble.CardGame.Dialogues;
 using Booble.CardGame.Level;
+using Booble.Interactables.Dialogues;
 using Booble.Managers;
 using Booble.UI;
 using DG.Tweening;
@@ -46,12 +47,7 @@ namespace Booble.CardGame.Managers
 
         #endregion
 
-        public bool gamePaused { private set; get; }
-        public bool playingCard { private set; get; }
-
-        private bool _initialized;
-        private bool _playingStoryMode;
-        public bool playingStoryMode => _playingStoryMode;
+        #region Tutorial
 
         public bool tutorial { private set; get; }
         public void StartTutorial() => tutorial = true;
@@ -66,8 +62,29 @@ namespace Booble.CardGame.Managers
             return null;
         }
 
+        #endregion
+
+        #region Mouse Controller
+
         public void EnableMouseController() => MouseController.Instance.enabled = true;
         public void DisableMouseController() => MouseController.Instance.enabled = false;
+
+        #endregion
+
+        #region Win Repeat Dialogue
+
+        [SerializeField] private Dialogue _winRepeatDialogue;
+        [SerializeField] private List<Option> _winRepeatOptions;
+
+        #endregion
+
+        public bool gamePaused { private set; get; }
+        public bool playingCard { private set; get; }
+
+        private bool _initialized;
+
+        private bool _playingStoryMode;
+        public bool playingStoryMode => _playingStoryMode;
 
         public bool dialogueEnd => (_interviewDialogue != null) ? _interviewDialogue.GetDialogueEnd() : false;
 
@@ -80,7 +97,7 @@ namespace Booble.CardGame.Managers
         {
             if (Input.GetKeyDown(KeyCode.S))
             {
-                SceneLoader.Instance.UnloadInterviewScene();
+                UnloadInterview();
             }
         }
 
@@ -203,6 +220,11 @@ namespace Booble.CardGame.Managers
             _interviewDialogue.ThrowEndDialogue(_playerWin, GetOnEndAction());
         }
 
+        public void ThrowRepeatDialogue()
+        {
+            _interviewDialogue.ThrowDialogue(_winRepeatDialogue, null, _winRepeatOptions, hideBackOption: true);
+        }
+
         public bool CheckDialogue(Card cardPlayed)
         {
             if (!playingStoryMode) return false;
@@ -240,8 +262,20 @@ namespace Booble.CardGame.Managers
 
         private Action GetOnEndAction()
         {
-            return (alternateWinCondition || _playerWin) ? SceneLoader.Instance.UnloadInterviewScene : UIManager.Instance.ShowLoseMenu;
+            if (alternateWinCondition) return UnloadInterview;
+            else if (_playerWin)
+            {
+                if (DeckManager.Instance.HasAlternateWinConditionCard())
+                {
+                    return ThrowRepeatDialogue;
+                }
+            }
+
+            return UIManager.Instance.ShowLoseMenu;
         }
+
+        public void RetryInterview() { SceneLoader.Instance.ReloadInterview(); }
+        public void UnloadInterview() { SceneLoader.Instance.UnloadInterviewScene(); }
 
         #endregion
 

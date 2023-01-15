@@ -74,6 +74,11 @@ namespace Booble.Managers
             _currentInstance.release();
         }
 
+        public void StopMusic()
+        {
+            _currentInstance.stop(STOP_MODE.IMMEDIATE);
+        }
+
         public void PlaySound(SFXReference reference)
         {
             EventReference eventReference;

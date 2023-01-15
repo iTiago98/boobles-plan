@@ -41,32 +41,33 @@ public class BossOfficeAnimation : MonoBehaviour
         _controller.enabled = false;
         Interactable.ManualInteractionActivation();
         yield return new WaitForSeconds(_fade.FadeDuration);
-        
-       ThrowDialogue(_dialogue0);
-       yield return new WaitUntil(() => _dialogueEnd);
-       _dialogueEnd = false;
-       
-       DeckManager.Instance.SetOpponent(Opponent_Name.Boss);
-       SceneLoader.Instance.LoadInterviewScene();
-       yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
-       yield return new WaitUntil(() => _cam.gameObject.activeSelf);
-       
-       ThrowDialogue(_dialogue1);
-       yield return new WaitUntil(() => _dialogueEnd);
-       _dialogueEnd = false;
 
-       _machine.position = _finalMachinePos.position;
-       _machine.rotation = _finalMachinePos.rotation;
-       _cam.transform.DOShakePosition(2, 1, 10, 90, false)
-           .OnComplete(() => _dialogueEnd = true);
-       yield return new WaitUntil(() => _dialogueEnd);
-       _dialogueEnd = false;
-        
-       ThrowDialogue(_dialogue2);
-       yield return new WaitUntil(() => _dialogueEnd);
-       _dialogueEnd = false;
-       
-       SceneLoader.Instance.LoadCanteenScene2();
+        ThrowDialogue(_dialogue0);
+        yield return new WaitUntil(() => _dialogueEnd);
+        _dialogueEnd = false;
+
+        DeckManager.Instance.SetOpponent(Opponent_Name.Boss);
+        SceneLoader.Instance.LoadInterviewScene();
+        yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
+        yield return new WaitUntil(() => _cam.gameObject.activeSelf);
+
+        ThrowDialogue(_dialogue1);
+        yield return new WaitUntil(() => _dialogueEnd);
+        _dialogueEnd = false;
+
+        MusicManager.Instance.StopMusic();
+        _machine.position = _finalMachinePos.position;
+        _machine.rotation = _finalMachinePos.rotation;
+        _cam.transform.DOShakePosition(2, 1, 10, 90, false)
+            .OnComplete(() => _dialogueEnd = true);
+        yield return new WaitUntil(() => _dialogueEnd);
+        _dialogueEnd = false;
+
+        ThrowDialogue(_dialogue2);
+        yield return new WaitUntil(() => _dialogueEnd);
+        _dialogueEnd = false;
+
+        SceneLoader.Instance.LoadCanteenScene2();
     }
 
     private void ThrowDialogue(Dialogue diag, List<Option> options = null)

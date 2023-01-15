@@ -26,20 +26,18 @@ namespace Booble.Managers
 
         private List<CardsData> _playerAuxDeck;
 
-        public List<CardsData> GetPlayerCards(bool playingStoryMode) => playingStoryMode ? _playerDeck : _playerAuxDeck;
-
-        private void AddCard(CardsData cardsData, Opponent_Name opponentName, bool aux = false, bool showAddedText = true, bool showAlertIcons = true)
+        public List<CardsData> GetPlayerCards(bool playingStoryMode)
         {
-            if (aux)
-            {
-                _playerAuxDeck.Add(cardsData);
-            }
-            else
-            {
-                _playerDeck.Add(cardsData);
-                AddNewCard(cardsData, opponentName, showAddedText, showAlertIcons);
-            }
+            InitializeAuxDeck(playingStoryMode);
+            return _playerAuxDeck;
         }
+
+        private void AddCard(CardsData cardsData, Opponent_Name opponentName, bool showAddedText = true, bool showAlertIcons = true)
+        {
+            _playerDeck.Add(cardsData);
+            AddNewCard(cardsData, opponentName, showAddedText, showAlertIcons);
+        }
+
         private void SetDeck(List<CardsData> source, ref List<CardsData> dest)
         {
             dest = new List<CardsData>();
@@ -86,23 +84,36 @@ namespace Booble.Managers
 
         #endregion
 
-        public void InitializeAuxDeck(Opponent_Name name)
+
+
+        #region Extra Cards
+
+        public void InitializeAuxDeck(bool playingStoryMode)
         {
             SetDeck(playerDeckBase.cards, ref _playerAuxDeck);
-            SetOpponent(name);
-            AddExtraCards(name);
+
+            if (playingStoryMode)
+            {
+                List<CardsData> extraCards = GetExtraCards(Opponent_Name.Tutorial);
+
+                if (_opponentName != Opponent_Name.Tutorial) extraCards.AddRange(GetExtraCards(_opponentName));
+
+                foreach (CardsData card in extraCards)
+                {
+                    if (_playerDeck.Contains(card) && !_playerAuxDeck.Contains(card))
+                        _playerAuxDeck.Add(card);
+                }
+            }
+            else
+            {
+                AddExtraCards(_opponentName);
+            }
         }
 
-        private void AddExtraCards(Opponent_Name name)
+        public bool HasAlternateWinConditionCard()
         {
-            switch (name)
-            {
-                case Opponent_Name.Tutorial: break;
-                case Opponent_Name.Citriano: AddCitrianoCards(); break;
-                case Opponent_Name.PPBros: AddPPBrosCards(); break;
-                case Opponent_Name.Secretary: AddSecretaryCards(); break;
-                case Opponent_Name.Boss: AddBossCards(); break;
-            }
+            if (_opponentName == Opponent_Name.Tutorial) return false;
+            return _playerDeck.Contains(GetExtraCards(_opponentName)[0]);
         }
 
         #region New Cards
@@ -149,141 +160,84 @@ namespace Booble.Managers
 
         #region Add Extra Cards
 
-        #region Tutorial Cards
+        #region Quick Access
 
+        public void AddGranFinal() { AddCard(playerExtraCards[0], Opponent_Name.Tutorial); }
 
-        public void AddGranFinal(bool aux = false)
-        {
-            AddCard(playerExtraCards[0], Opponent_Name.Tutorial, aux);
-        }
+        public void AddHipervitaminado() { AddCard(citrianoExtraCards[0], Opponent_Name.Citriano); }
+        public void AddNuevaCepaDelEscorbuto() { AddCard(citrianoExtraCards[1], Opponent_Name.Citriano); }
+        public void AddExprimirLaVerdad() { AddCard(citrianoExtraCards[2], Opponent_Name.Citriano); }
+        public void AddMaquinaDeZumo() { AddCard(citrianoExtraCards[3], Opponent_Name.Citriano); }
+
+        public void AddVictoriaPorDesgaste() { AddCard(ppBrosExtraCards[0], Opponent_Name.PPBros); }
+        public void AddPared() { AddCard(ppBrosExtraCards[1], Opponent_Name.PPBros); }
+        public void AddPalaDeNocobich() { AddCard(ppBrosExtraCards[2], Opponent_Name.PPBros); }
+        public void AddGomuGomuNo() { AddCard(ppBrosExtraCards[3], Opponent_Name.PPBros); }
+        public void AddPelotaBomba() { AddCard(ppBrosExtraCards[4], Opponent_Name.PPBros); }
+
+        public void AddHaPerdidoUsteLosPapele() { AddCard(secretaryExtraCards[0], Opponent_Name.Secretary); }
+        public void AddTraigoLosAnexosCorrespondientes() { AddCard(secretaryExtraCards[1], Opponent_Name.Secretary); }
+        public void AddAfidavit() { AddCard(secretaryExtraCards[2], Opponent_Name.Secretary); }
+        public void AddResaltarUnaContradiccion() { AddCard(secretaryExtraCards[3], Opponent_Name.Secretary); }
+
+        public void AddHipervitaminadoPlus() { AddCard(bossExtraCards[0], Opponent_Name.Boss); }
+        public void AddVictoriaPorDesgastePlus() { AddCard(bossExtraCards[1], Opponent_Name.Boss); }
+        public void AddHaPerdidoUsteLosPapelePlus() { AddCard(bossExtraCards[2], Opponent_Name.Boss); }
 
         #endregion
 
-        #region Citriano Cards
+        #region Game Mode
+
+        private void AddExtraCards(Opponent_Name name)
+        {
+            switch (name)
+            {
+                case Opponent_Name.Tutorial: AddTutorialCards(); break;
+                case Opponent_Name.Citriano: AddCitrianoCards(); break;
+                case Opponent_Name.PPBros: AddPPBrosCards(); break;
+                case Opponent_Name.Secretary: AddSecretaryCards(); break;
+                case Opponent_Name.Boss: AddBossCards(); break;
+            }
+        }
+
+        public void AddTutorialCards()
+        {
+            foreach (CardsData card in playerExtraCards)
+            {
+                _playerAuxDeck.Add(card);
+            }
+        }
 
         public void AddCitrianoCards()
         {
-            AddHipervitaminado(true);
-            AddNuevaCepaDelEscorbuto(true);
-            AddExprimirLaVerdad(true);
-            AddMaquinaDeZumo(true);
+            foreach (CardsData card in citrianoExtraCards)
+            {
+                _playerAuxDeck.Add(card);
+            }
         }
-
-        public void AddHipervitaminado(bool aux = false)
-        {
-            AddCard(citrianoExtraCards[0], Opponent_Name.Citriano, aux);
-        }
-
-        public void AddNuevaCepaDelEscorbuto(bool aux = false)
-        {
-            AddCard(citrianoExtraCards[1], Opponent_Name.Citriano, aux);
-        }
-
-        public void AddExprimirLaVerdad(bool aux = false)
-        {
-            AddCard(citrianoExtraCards[2], Opponent_Name.Citriano, aux);
-        }
-
-        public void AddMaquinaDeZumo(bool aux = false)
-        {
-            AddCard(citrianoExtraCards[3], Opponent_Name.Citriano, aux);
-        }
-
-        #endregion
-
-        #region PPBros Cards
 
         public void AddPPBrosCards()
         {
-            AddVictoriaPorDesgaste(true);
-            AddPared(true);
-            AddPalaDeNocobich(true);
-            AddGomuGomuNo(true);
-            AddPelotaBomba(true);
+            foreach (CardsData card in ppBrosExtraCards)
+            {
+                _playerAuxDeck.Add(card);
+            }
         }
-
-        public void AddVictoriaPorDesgaste(bool aux = false)
-        {
-            AddCard(ppBrosExtraCards[0], Opponent_Name.PPBros, aux);
-        }
-
-        public void AddPared(bool aux = false)
-        {
-            AddCard(ppBrosExtraCards[1], Opponent_Name.PPBros, aux);
-        }
-
-        public void AddPalaDeNocobich(bool aux = false)
-        {
-            AddCard(ppBrosExtraCards[2], Opponent_Name.PPBros, aux);
-        }
-
-        public void AddGomuGomuNo(bool aux = false)
-        {
-            FlagManager.Instance.SetFlag(Flag.Reference.GomuGomuNoObtenida);
-            AddCard(ppBrosExtraCards[3], Opponent_Name.PPBros, aux);
-        }
-
-        public void AddPelotaBomba(bool aux = false)
-        {
-            AddCard(ppBrosExtraCards[4], Opponent_Name.PPBros, aux);
-        }
-
-        #endregion
-
-        #region Secretary Cards
 
         public void AddSecretaryCards()
         {
-            AddHaPerdidoUsteLosPapele(true);
-            AddTraigoLosAnexosCorrespondientes(true);
-            AddAfidavit(true);
-            AddResaltarUnaContradiccion(true);
+            foreach (CardsData card in secretaryExtraCards)
+            {
+                _playerAuxDeck.Add(card);
+            }
         }
-
-        public void AddHaPerdidoUsteLosPapele(bool aux = false)
-        {
-            AddCard(secretaryExtraCards[0], Opponent_Name.Secretary, aux);
-        }
-
-        public void AddTraigoLosAnexosCorrespondientes(bool aux = false)
-        {
-            AddCard(secretaryExtraCards[1], Opponent_Name.Secretary, aux);
-        }
-
-        public void AddAfidavit(bool aux = false)
-        {
-            AddCard(secretaryExtraCards[2], Opponent_Name.Secretary, aux);
-        }
-
-        public void AddResaltarUnaContradiccion(bool aux = false)
-        {
-            AddCard(secretaryExtraCards[3], Opponent_Name.Secretary, aux);
-        }
-
-        #endregion
-
-        #region Boss Extra Cards
 
         public void AddBossCards()
         {
-            AddHipervitaminadoPlus(true);
-            AddVictoriaPorDesgastePlus(true);
-            AddHaPerdidoUsteLosPapelePlus(true);
-        }
-
-        public void AddHipervitaminadoPlus(bool aux = false)
-        {
-            AddCard(bossExtraCards[0], Opponent_Name.Boss, aux);
-        }
-
-        public void AddVictoriaPorDesgastePlus(bool aux = false)
-        {
-            AddCard(bossExtraCards[1], Opponent_Name.Boss, aux);
-        }
-
-        public void AddHaPerdidoUsteLosPapelePlus(bool aux = false)
-        {
-            AddCard(bossExtraCards[2], Opponent_Name.Boss, aux);
+            foreach (CardsData card in bossExtraCards)
+            {
+                _playerAuxDeck.Add(card);
+            }
         }
 
         #endregion
@@ -295,19 +249,30 @@ namespace Booble.Managers
         public void CheckExtraCards()
         {
             List<Reference> flags = new List<Reference>() { Reference.GranFinalObtenida };
-            List<CardsData> extraCards = GetPlayerExtraCards();
+            SetExtraCards(flags, playerExtraCards, Opponent_Name.Tutorial);
 
-            SetExtraCards(flags, extraCards, Opponent_Name.Tutorial);
+            flags = new List<Reference>() { Reference.HipervitaminadoObtenida, Reference.EscorbutoObtenida,
+                Reference.ExprimirObtenida, Reference.MaquinaZumosObtenida };
 
-            flags = new List<Reference>() { Reference.HipervitaminadoObtenida, Reference.EscorbutoObtenida, Reference.ExprimirObtenida, Reference.MaquinaZumosObtenida };
-            extraCards = GetCitrianoExtraCards();
+            SetExtraCards(flags, citrianoExtraCards, Opponent_Name.Citriano);
 
-            SetExtraCards(flags, extraCards, Opponent_Name.Citriano);
+            flags = new List<Reference>() { Reference.VictoriaPorDesgasteObtenida, Reference.ParedObtenida,
+                Reference.LaPalaDeNocobichObtenida, Reference.GomuGomuNoObtenida, Reference.PelotaBombaObtenida };
 
-            flags = new List<Reference>() { Reference.VictoriaPorDesgasteObtenida, Reference.ParedObtenida, Reference.LaPalaDeNocobichObtenida, Reference.GomuGomuNoObtenida, Reference.PelotaBombaObtenida };
-            extraCards = GetPPBrosExtraCards();
+            SetExtraCards(flags, ppBrosExtraCards, Opponent_Name.PPBros);
 
-            SetExtraCards(flags, extraCards, Opponent_Name.PPBros);
+            flags = new List<Reference>() { Reference.PerderLosPapelesObtenida, Reference.AnexosCorrespondientesObtenida,
+                Reference.AfidavitObtenida, Reference.ResaltarUnaContradiccionObtenida };
+
+            SetExtraCards(flags, secretaryExtraCards, Opponent_Name.Secretary);
+
+            if (FlagManager.Instance.GetFlag(Reference.BossHall4))
+            {
+                flags = new List<Reference>() { Reference.CitrianoVictoriaAlternativa, Reference.PPBVictoriaAlternativa,
+                Reference.SecretaryVictoriaAlternativa };
+
+                SetExtraCards(flags, bossExtraCards, Opponent_Name.Boss);
+            }
         }
 
         private void SetExtraCards(List<Reference> flags, List<CardsData> extraCards, Opponent_Name opponentName)
@@ -317,7 +282,7 @@ namespace Booble.Managers
                 Reference flag = flags[i];
                 CardsData card = extraCards[i];
 
-                if (FlagManager.Instance.GetFlag(flag)) AddCard(card, opponentName, aux: false, showAddedText: false, showAlertIcons: false);
+                if (FlagManager.Instance.GetFlag(flag)) AddCard(card, opponentName, showAddedText: false, showAlertIcons: false);
             }
         }
 
@@ -334,22 +299,18 @@ namespace Booble.Managers
         {
             switch (name)
             {
-                case Opponent_Name.Tutorial: return GetPlayerExtraCards();
-                case Opponent_Name.Citriano: return GetCitrianoExtraCards();
-                case Opponent_Name.PPBros: return GetPPBrosExtraCards();
-                case Opponent_Name.Secretary: return GetSecretaryExtraCards();
-                case Opponent_Name.Boss: return GetBossExtraCards();
+                case Opponent_Name.Tutorial: return playerExtraCards;
+                case Opponent_Name.Citriano: return citrianoExtraCards;
+                case Opponent_Name.PPBros: return ppBrosExtraCards;
+                case Opponent_Name.Secretary: return secretaryExtraCards;
+                case Opponent_Name.Boss: return bossExtraCards;
 
                 default:
                     return null;
             }
         }
 
-        private List<CardsData> GetPlayerExtraCards() => playerExtraCards;
-        private List<CardsData> GetCitrianoExtraCards() => citrianoExtraCards;
-        private List<CardsData> GetPPBrosExtraCards() => ppBrosExtraCards;
-        private List<CardsData> GetSecretaryExtraCards() => secretaryExtraCards;
-        private List<CardsData> GetBossExtraCards() => bossExtraCards;
+        #endregion
 
         #endregion
     }

@@ -365,6 +365,9 @@ namespace Booble.CardGame.Dialogues
         {
             _player.InitializeStats();
             _opponent.InitializeStats();
+
+            UIManager.Instance.SetShownMana(4);
+
             UIManager.Instance.UpdateUIStats(hideEmptyCristals: true);
 
             CardGameManager.Instance.InitializeDecks();

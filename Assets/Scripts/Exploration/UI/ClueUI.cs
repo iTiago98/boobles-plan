@@ -36,31 +36,24 @@ namespace Booble.UI
             if (Interactable.BlockActions && !Interactable.CluesOpen)
                 return;
 
-            if (!Input.GetKey(_openCluesKey))
-                return;
-
-            if (_state == ClueState.Transition)
+            if (!Input.GetKeyDown(_openCluesKey))
                 return;
 
             switch (_state)
             {
                 case ClueState.Open:
-                    _panel.DOAnchorPosX(_closedX, _transitionDuration)
-                        .OnComplete(() =>
-                        {
-                            Interactable.CluesOpen = false;
-                            _state = ClueState.Closed;
-                        });
+                    _panel.DOAnchorPosX(_closedX, _transitionDuration);
+                    Interactable.CluesOpen = false;
+                    _state = ClueState.Closed;
                     break;
+
                 case ClueState.Closed:
                     UpdateClues();
+                    _panel.DOAnchorPosX(_openX, _transitionDuration);
                     Interactable.CluesOpen = true;
-                    _panel.DOAnchorPosX(_openX, _transitionDuration)
-                        .OnComplete(() => _state = ClueState.Open);
+                    _state = ClueState.Open;
                     break;
             }
-
-            _state = ClueState.Transition;
         }
 
         public void SetCluesPanel()
@@ -101,7 +94,6 @@ namespace Booble.UI
 
     public enum ClueState
     {
-        Transition,
         Open,
         Closed
     }

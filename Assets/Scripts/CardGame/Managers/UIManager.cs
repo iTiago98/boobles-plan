@@ -123,6 +123,7 @@ namespace Booble.CardGame.Managers
         public bool statsUpdated => _statsUI.statsUpdated;
         public void UpdateUIStats(bool hideEmptyCristals = false) { _statsUI.UpdateUIStats(hideEmptyCristals); }
         public void UpdateMaxMana(Contender contender, int mana) { _statsUI.UpdateMaxMana(contender, mana); }
+        public void SetShownMana(int mana) { _statsUI.SetShownMana(mana); }
 
         #endregion
 
