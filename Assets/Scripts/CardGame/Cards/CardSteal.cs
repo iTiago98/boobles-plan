@@ -22,8 +22,6 @@ namespace Booble.CardGame.Cards
         [SerializeField] private Color _unselectedHoverColor;
 
         private CardsData _data;
-        private CardType _type;
-        private List<CardEffect> _effects;
         private int _index;
 
         private bool _selected;
@@ -40,7 +38,7 @@ namespace Booble.CardGame.Cards
 
             nameText.text = data.name;
 
-            if (_type == CardType.ARGUMENT)
+            if (data.type == CardType.ARGUMENT)
             {
                 strengthText.text = data.strength.ToString();
                 defenseText.text = data.defense.ToString();
