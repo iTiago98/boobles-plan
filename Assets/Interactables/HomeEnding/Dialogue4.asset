@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue4
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "Menos mal que al final aceptaste venir conmigo, \xBFeh?"
+    _closeUp: 1
+  - _content: "\xBFC\xF3mo?"
+    _closeUp: 6
+  - _content: "Antes, en el comedor, cuando te invit\xE9 a venir a mi casa."
+    _closeUp: 1
+  - _content: "Podr\xEDas haber dicho que no, y haberte tenido que quedar escuchando
+      a Arcadio darte la brasa sobre Cadillacs & Dinosaurs."
+    _closeUp: 1
+  - _content: "Ah, jajaja, s\xED..."
+    _closeUp: 6
+  - _content: "No para el t\xEDo, est\xE1 siempre con el jueguecito."
+    _closeUp: 6
+  - _content: "Y encima es mal\xEDsimo. Ni sab\xEDa lo que era un megaburst. \xA1Se
+      lo tuve que explicar yo!"
+    _closeUp: 1
+  - _content: Jajajajajaja
+    _closeUp: 6
+  - _content: "\xBFTanta gracia te ha hecho?"
+    _closeUp: 1
+  - _content: "No, es m\xE1s bien que no me he enterado de nada. Pero me hace mucha
+      gracia cuando te pones en modo friki."
+    _closeUp: 6
+  - _content: "O sea que te est\xE1s riendo de m\xED..."
+    _closeUp: 1
+  - _content: "\xA1No tonti! Jajajajajajaja no me estoy riendo de ti, me estoy riendo
+      contigo."
+    _closeUp: 6
+  - _content: "Jajajajajajaja ya lo s\xE9 Quequita, me estaba quedando contigo."
+    _closeUp: 1
+  - _content: Jajajajajajaja
+    _closeUp: 6
+  - _content: Jajajajajajaja
+    _closeUp: 1
+  - _content: "Ay Nellititina, pero qu\xE9 contenta estoy de que volvamos a estar
+      juntas."
+    _closeUp: 6
+  - _content: "\xA1BFFitas! \xBFNo dijiste eso? Madre m\xEDa qu\xE9 cursi suena,
+      jajaja."
+    _closeUp: 1
+  - _content: "\xBFCursi? \xA1T\xFA s\xED que eres cursi! \xA1Ven aqu\xED!"
+    _closeUp: 6
+  - _content: "\xA1Ay, ah\xED no que tengo muchas cosquillas jajajajja!"
+    _closeUp: 1

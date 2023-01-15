@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Queca1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFSabes qu\xE9? Creo que todav\xEDa me queda un poquito de energ\xEDa.
+      \xBFTe quieres venir a mi casa a que veamos una peli o algo?"
+    _closeUp: 1
+  - _content: Como en los viejos tiempos... juntas y con nuestras pulseras...
+    _closeUp: 1
+  - _content: "\xBFLo dices en serio? Bueno, Nella... Yo... No s\xE9 qu\xE9 decir...
+      Me da un poco de corte... Y tampoco quiero molestar..."
+    _closeUp: 6
+  - _content: Nada, nada. No digas pamplinadas. Si te he invitado es porque no molestas.
+      Venga, que tengo ya hasta la peli pensada y todo.
+    _closeUp: 1
+  - _content: "Bueno, venga, que no se diga. \xA1Acepto tu invitaci\xF3n!"
+    _closeUp: 6
+  - _content: "Pues venga, v\xE1monos ya, que Anselmo nos lleva a casa."
+    _closeUp: 1
+  - _content: "\xA1Uy! \xA1Con ch\xF3fer y todo! \xA1Pero qu\xE9 lujo!"
+    _closeUp: 6

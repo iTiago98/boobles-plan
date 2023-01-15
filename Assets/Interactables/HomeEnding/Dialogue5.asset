@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue5
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Anda! \xBFY aqu\xED? \xBFPor aqu\xED abajo tambi\xE9n tienes cosquillas?"
+    _closeUp: 6
+  - _content: "Uy, uy, \xA1uy! Queca, \xA1pero qu\xE9 manos tienes!"
+    _closeUp: 1
+  - _content: "\xA1Y lo que no son las manos! Me parece que vamos a necesitar ayuda
+      en este claro caso de cosquillitis aguda."
+    _closeUp: 6
+  - _content: "\xA1Ay Queca! \xA1Ay que me viene!"
+    _closeUp: 1
+  - _content: "(Sonido de compuerta oculta abri\xE9ndose)"
+    _closeUp: 0
+  - _content: "\xA1Uy! \xBFHas o\xEDdo eso?"
+    _closeUp: 1
+  - _content: "\xA1\xBFAlguien ha pedido un unicornio?!"
+    _closeUp: 7

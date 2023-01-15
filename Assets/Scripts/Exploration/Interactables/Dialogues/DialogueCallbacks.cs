@@ -111,6 +111,11 @@ public class DialogueCallbacks : MonoBehaviour
         SceneLoader.Instance.LoadHome0();
     }
 
+    public void LoadCredits()
+    {
+        SceneLoader.Instance.LoadCredits();
+    }
+    
     public void AddGranFinal()
     {
         DeckManager.Instance.AddGranFinal();

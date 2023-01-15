@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue 3
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Se lo han llevado... Por fin se ha acabado toda esta locura...
+    _closeUp: 1
+  - _content: "\xA1Y todo gracias a ti!"
+    _closeUp: 7
+  - _content: "\xA1La virgen! \xA1e-Mil\xEDn! \xA1Qu\xE9 susto! \xBFC\xF3mo te las
+      apa\xF1as siempre para estar en todos sitios?"
+    _closeUp: 1
+  - _content: "En todos sitios hay compuertas, yo qu\xE9 quieres que le haga."
+    _closeUp: 7
+  - _content: "\xBFIncluso en el despacho del jefe?"
+    _closeUp: 1
+  - _content: "Incluso aqu\xED, s\xED."
+    _closeUp: 7
+  - _content: "Bueno, yo me voy a ir a mi casa. Dos entrevistas en el mismo d\xEDa,
+      \xA1y una de ellas a un jefe! Eso agota a cualquiera."
+    _closeUp: 1
+  - _content: Pues vas a tardar un rato. Entre los nacionales, la guardia civil y
+      los geos, tienen todo el edificio acordonado.
+    _closeUp: 7
+  - _content: "Est\xE1n parando los ascensores para hacer controles y todo."
+    _closeUp: 7
+  - _content: "No me digas... no s\xE9 si tengo el cuerpo ahora para un control..."
+    _closeUp: 1
+  - _content: "Tranqui, papito e-Milio te saca las casta\xF1as del fuego. Puedo colarte
+      por una de mis compuertas para llegar al comedor."
+    _closeUp: 7
+  - _content: "El ascensor desde el comedor hasta el garaje no est\xE1 acordonado
+      por las fuerzas de la ley, as\xED que podr\xE1s salir tranquilamente."
+    _closeUp: 7
+  - _content: "\xBFEn serio? Much\xEDsimas gracias, e-Mil\xEDn"
+    _closeUp: 1
+  - _content: "Nada, mujer, para eso estamos. Venga, s\xEDgueme."
+    _closeUp: 7

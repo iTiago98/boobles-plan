@@ -192,6 +192,26 @@ namespace Booble.Managers
             LoadScene(Scenes.HOME_2);
         }
 
+        public void LoadBossOfficeEnding()
+        {
+            LoadScene(Scenes.BOSS_OFFICE_ENDING);
+        }
+
+        public void LoadCanteenEnding()
+        {
+            LoadScene(Scenes.CANTEEN_ENDING);
+        }
+
+        public void LoadHomeEnding()
+        {
+            LoadScene(Scenes.HOME_ENDING);
+        }
+
+        public void LoadCredits()
+        {
+            LoadScene(Scenes.CREDITS);
+        }
+        
         #endregion
 
         #region Interview

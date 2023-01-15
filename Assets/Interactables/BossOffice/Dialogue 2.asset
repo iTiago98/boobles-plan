@@ -18,9 +18,10 @@ MonoBehaviour:
       la empresa y las vidas de sus millones de empleados!"
     _closeUp: 12
   - _content: "Jajajaja, \xBFpero t\xFA tambi\xE9n te crees la patra\xF1a neoliberal
-      de que hay que cuidar a los empresarios? El empleo no es un privilegio, \xA1es
-      un derecho! Y desde ahora me ocupar\xE9 de que se hagan las cosas mejor, \xE9tica
-      y moralmente."
+      de que hay que cuidar a los empresarios?"
+    _closeUp: 1
+  - _content: "El empleo no es un privilegio, \xA1es un derecho! Y desde ahora me
+      ocupar\xE9 de que se hagan las cosas mejor, \xE9tica y moralmente."
     _closeUp: 1
   - _content: "No me hagas re\xEDr, hippie de mi*rda. \xA1Sin los empresarios estar\xEDais
       muertos de hambre!"
