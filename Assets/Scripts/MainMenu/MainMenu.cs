@@ -69,6 +69,24 @@ namespace Booble.MainMenu
                 FlagManager.Instance.ResetFlags();
                 StartDay2();
             }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                FlagManager.Instance.ResetFlags();
+                StartDay3();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                FlagManager.Instance.ResetFlags();
+                StartDay4();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                FlagManager.Instance.ResetFlags();
+                StartBossHall4();
+            }
         }
 
         #region Play
