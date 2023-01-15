@@ -623,12 +623,17 @@ MonoBehaviour:
   - <FlagRef>k__BackingField: 37
     <Content>k__BackingField: {fileID: 11400000, guid: f4938c876dcf0ef40956607f0ad25bb9, type: 2}
     <Scene>k__BackingField: LowerHall1
+    <Title>k__BackingField: "Cap\xEDtulo 1:\nCitriano"
   - <FlagRef>k__BackingField: 71
     <Content>k__BackingField: {fileID: 11400000, guid: 45e05d05ba534aa47a1584fbb1f87e88, type: 2}
     <Scene>k__BackingField: LowerHall2
+    <Title>k__BackingField: "Cap\xEDtulo 2:\nLos Ping Pong Bros"
   - <FlagRef>k__BackingField: 72
     <Content>k__BackingField: {fileID: 11400000, guid: c14aa8c0b76bb744680b2093c1f28489, type: 2}
     <Scene>k__BackingField: LowerHall3
+    <Title>k__BackingField: "Cap\xEDtulo 3:\nEl Sr. Romu\xE1ldez"
   - <FlagRef>k__BackingField: 93
     <Content>k__BackingField: {fileID: 11400000, guid: 35b47d1fc9a6edf488ab1f0d95b2ac20, type: 2}
     <Scene>k__BackingField: NelaOffice4
+    <Title>k__BackingField: 
+  _car: 0
