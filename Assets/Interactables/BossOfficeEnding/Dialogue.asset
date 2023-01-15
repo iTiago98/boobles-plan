@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Por fin! \xA1Mi plan ha salido a la perfecci\xF3n! \xA1Juntas
+      gobernaremos el mundo!"
+    _closeUp: 6
+  - _content: "Es parad\xF3jico que la \xFAnica manera de arreglar al mundo, sea
+      gobern\xE1ndolo. Hicimos bien en restaurar la m\xE1quina."
+    _closeUp: 1
+  - _content: "\xA1Ahora la usaremos para hacer el bien! Aunque es triste pensar
+      que la \xFAnica manera de salvar a la gente sea lav\xE1ndoles el cerebro."
+    _closeUp: 1
+  - _content: "Bueno, ya habr\xE1 tiempo de salvar el mundo. Primero nos cargamos
+      Thesla, Mamazon y Aqqle; \xA1y nos apropiamos de todo el mercado!"
+    _closeUp: 6
+  - _content: "Es la \xFAnica manera, s\xED..."
+    _closeUp: 1
+  - _content: "Habr\xE1 que cambiar este cuadro tan feo de Agapito."
+    _closeUp: 1
+  - _content: "\xBFCrees que quedar\xE1 bien un retrato m\xEDo?"
+    _closeUp: 1
+  - _content: Sin ninguna duda, jefa.
+    _closeUp: 6

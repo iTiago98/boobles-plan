@@ -11,15 +11,11 @@ using Booble.UI;
 using DG.Tweening;
 using UnityEngine;
 
-public class BossOfficeAnimation : MonoBehaviour
+public class BossOfficeEndingAnimation : MonoBehaviour
 {
     [SerializeField] private Controller _controller;
     [SerializeField] private Fader _fade;
-    [SerializeField] private Dialogue _dialogue0;
-    [SerializeField] private Dialogue _dialogue1;
-    [SerializeField] private Transform _machine;
-    [SerializeField] private Transform _finalMachinePos;
-    [SerializeField] private Dialogue _dialogue2;
+    [SerializeField] private Dialogue _dialogue;
 
     private Camera _cam;
     private bool _dialogueEnd;
@@ -41,39 +37,12 @@ public class BossOfficeAnimation : MonoBehaviour
         _controller.enabled = false;
         Interactable.ManualInteractionActivation();
         yield return new WaitForSeconds(_fade.FadeDuration);
-
-        ThrowDialogue(_dialogue0);
-        yield return new WaitUntil(() => _dialogueEnd);
-        _dialogueEnd = false;
-
-        DeckManager.Instance.SetOpponent(Opponent_Name.Boss);
-        SceneLoader.Instance.LoadInterviewScene();
-        yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
-        yield return new WaitUntil(() => _cam.gameObject.activeSelf);
-
-        ThrowDialogue(_dialogue1);
-        yield return new WaitUntil(() => _dialogueEnd);
-        _dialogueEnd = false;
         
-        MusicManager.Instance.StopMusic();
-       _machine.position = _finalMachinePos.position;
-       _machine.rotation = _finalMachinePos.rotation;
-       _cam.transform.DOShakePosition(2, 1, 10, 90, false)
-           .OnComplete(() => _dialogueEnd = true);
-       yield return new WaitUntil(() => _dialogueEnd);
-       _dialogueEnd = false;
-        
-       ThrowDialogue(_dialogue2);
+       ThrowDialogue(_dialogue);
        yield return new WaitUntil(() => _dialogueEnd);
        _dialogueEnd = false;
 
-       if (FlagManager.Instance.GetFlag(Flag.Reference.FinalMalo))
-       {
-           SceneLoader.Instance.LoadBossOfficeEnding();
-           yield break;
-       }
-       
-       SceneLoader.Instance.LoadCanteenEnding();
+       SceneLoader.Instance.LoadCredits();
     }
 
     private void ThrowDialogue(Dialogue diag, List<Option> options = null)

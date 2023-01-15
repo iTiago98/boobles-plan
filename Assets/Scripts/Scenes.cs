@@ -36,5 +36,9 @@ namespace Booble
         public static string HOME_0 = "Home0";
         public static string HOME_1 = "Home1";
         public static string HOME_2 = "Home2";
+        public static string BOSS_OFFICE_ENDING = "BossOfficeEnding";
+        public static string CANTEEN_ENDING = "CanteenEnding";
+        public static string HOME_ENDING = "HomeEnding";
+        public static string CREDITS = "Credits";
     }
 }
