@@ -222,7 +222,7 @@ namespace Booble.CardGame.Managers
 
         public void ThrowRepeatDialogue()
         {
-            _interviewDialogue.ThrowDialogue(_winRepeatDialogue, null, _winRepeatOptions);
+            _interviewDialogue.ThrowDialogue(_winRepeatDialogue, null, _winRepeatOptions, hideBackOption: true);
         }
 
         public bool CheckDialogue(Card cardPlayed)
