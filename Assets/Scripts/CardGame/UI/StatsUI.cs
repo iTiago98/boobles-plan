@@ -145,6 +145,10 @@ namespace Booble.CardGame.UI
             manaList[newMaxMana - 1].sprite = emptyManaCristal;
         }
 
-
+        public void SetShownMana(int mana)
+        {
+            _shownPlayerMana = mana;
+            _shownOpponentMana = mana;
+        }
     }
 }
