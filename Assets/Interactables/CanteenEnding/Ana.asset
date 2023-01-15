@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Ana
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Nella! \xA1Por fin te encuentro! S\xF3lo quer\xEDa darte las gracias
+      por todo."
+    _closeUp: 2
+  - _content: "De no haber sido por ti seguir\xEDa viviendo una mentira en el trabajo."
+    _closeUp: 2
+  - _content: Bueno, no ha sido suficiente. No he podido salvar a tu marido.
+    _closeUp: 1
+  - _content: "Si no hubieras venido seguir\xEDamos sin saber nada de todo esto.
+      As\xED que no sean tan dura contigo misma."
+    _closeUp: 2
+  - _content: "Si al menos hubiera sabido qui\xE9n era Citriano en realidad..."
+    _closeUp: 1
+  - _content: "No te culpes de nada, cari\xF1o. Nadie sab\xEDamos nada. Demasiado
+      has hecho ya, todos los que estamos aqu\xED te debemos mucho."
+    _closeUp: 2
+  - _content: Eres lo mejor que me ha pasado en mucho tiempo. Gracias por ser mi
+      amiga.
+    _closeUp: 2

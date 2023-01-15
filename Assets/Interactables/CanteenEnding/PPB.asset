@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: PPB
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFPero c\xF3mo pod\xE9is seguir jugando? \xA1Con la que hab\xE9is
+      liado!"
+    _closeUp: 1
+  - _content: "Pepazo cu\xE9ntale a este pimpollo lo bien que estamos."
+    _closeUp: 10
+  - _content: "Claro que s\xED Perote. Mira chatina el cuerpazo que se nos ha quedao
+      cuando nos dio el telele."
+    _closeUp: 11
+  - _content: "\xA1Ser\xEDa una pena desaprovechar tantos fans en BooTube!"
+    _closeUp: 11
+  - _content: "\xBFY qu\xE9 hace Dennis con vosotros? Que yo recuerde deber\xEDa
+      estar en la c\xE1rcel."
+    _closeUp: 1
+  - _content: Si es que el pobre nos dio penilla. Tantos meses esperando a jugar
+      vuelven loco a cualquiera.
+    _closeUp: 11
+  - _content: Si es que el pobre nos dio penilla. Tantos meses esperando a jugar
+      vuelven loco a cualquiera.
+    _closeUp: 11
+  - _content: "\xA1Pero si est\xE1 esperando otra vez a que termin\xE9is!"
+    _closeUp: 1
+  - _content: Tranquila, el problema es que son muy buenos, si ya me han ganado 21
+      veces en este rato.
+    _closeUp: 4
+  - _content: "Bueno, chata, que aqu\xED es que se est\xE1 agust\xEDsimo. \xA1Si
+      no hubiera sido por ti, no podr\xEDamos haber disfrutado de todo esto!"
+    _closeUp: 10
+  - _content: "Ya ves Pedrito, si hasta nuestras mujeres est\xE1n encantadas ahora
+      con nosotros. Muchas gracias por todo, crack."
+    _closeUp: 11
+  - _content: "\xA1Eres la hostia en vinagre!"
+    _closeUp: 11
