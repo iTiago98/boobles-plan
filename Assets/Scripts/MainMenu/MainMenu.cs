@@ -172,6 +172,12 @@ namespace Booble.MainMenu
             PauseMenu.Instance.InitializeCardMenu();
             SceneLoader.Instance.LoadScene(Scenes.BOSS_HALL_4);
         }
+
+        [ContextMenu("Start Post-Credits")]
+        public void StartPostCredits()
+        {
+            SceneLoader.Instance.LoadScene(Scenes.HOME_ENDING);
+        }
         
         [ContextMenu("Get Alternate Win Cons")]
         public void GetAlternateWinCons()

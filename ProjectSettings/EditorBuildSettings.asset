@@ -95,4 +95,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Endings/CanteenEnding.unity
     guid: 4f065138efc84dd4c850e699973bcd93
+  - enabled: 1
+    path: Assets/Scenes/Endings/HomeEnding.unity
+    guid: 04d8c5198bb136941a42c2d3789ed821
   m_configObjects: {}
