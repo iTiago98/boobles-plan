@@ -40,7 +40,7 @@ namespace Booble.CardGame.Dialogues
             ThrowDialogue(dialogue, onEndAction);
         }
 
-        protected void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null, bool hideBackOption = false)
+        public void ThrowDialogue(Dialogue diag, Action onEndDialogue = null, List<Option> options = null, bool hideBackOption = false)
         {
             if (diag == null || _dialogueManager == null)
             {

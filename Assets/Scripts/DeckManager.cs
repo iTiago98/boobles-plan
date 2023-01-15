@@ -84,6 +84,10 @@ namespace Booble.Managers
 
         #endregion
 
+
+
+        #region Extra Cards
+
         public void InitializeAuxDeck(bool playingStoryMode)
         {
             SetDeck(playerDeckBase.cards, ref _playerAuxDeck);
@@ -96,7 +100,7 @@ namespace Booble.Managers
 
                 foreach (CardsData card in extraCards)
                 {
-                    if (_playerDeck.Contains(card))
+                    if (_playerDeck.Contains(card) && !_playerAuxDeck.Contains(card))
                         _playerAuxDeck.Add(card);
                 }
             }
@@ -106,6 +110,11 @@ namespace Booble.Managers
             }
         }
 
+        public bool HasAlternateWinConditionCard()
+        {
+            if (_opponentName == Opponent_Name.Tutorial) return false;
+            return _playerDeck.Contains(GetExtraCards(_opponentName)[0]);
+        }
 
         #region New Cards
 
@@ -300,6 +309,8 @@ namespace Booble.Managers
                     return null;
             }
         }
+
+        #endregion
 
         #endregion
     }
