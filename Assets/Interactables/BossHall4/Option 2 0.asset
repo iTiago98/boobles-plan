@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 2 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Siempre hay esperanza, Queca. Y esta pulsera lo simboliza. Toma, lo
+      haremos juntas.
+    _closeUp: 1
+  - _content: "No s\xE9, Nella. Tengo miedo. Desde que te fuiste he estado sola,
+      indefensa ante este mundo injusto y cruel."
+    _closeUp: 6
+  - _content: "S\xF3lo he sabido hacer esto durante demasiado tiempo."
+    _closeUp: 6
+  - _content: "No has estado sola, solamente rodeada de v\xEDboras. Pero tranquila,
+      que no solo estamos t\xFA y yo en esto."
+    _closeUp: 1
+  - _content: He hecho varios amigos en la empresa...
+    _closeUp: 1
+  - _content: Ana
+    _closeUp: 2
+  - _content: "Jos\xE9 Citriano"
+    _closeUp: 3
+  - _content: Pepe Pinar
+    _closeUp: 11
+  - _content: Pedro Ponzano
+    _closeUp: 10
+  - _content: Rosalinda
+    _closeUp: 13
+  - _content: "Todos ellos estar\xE1n dispuestos a perdonarte si yo te he perdonado."
+    _closeUp: 1
+  - _content: "\xBFDe verdad lo crees?"
+    _closeUp: 6
+  - _content: "De verdad que lo creo. Pero ahora se tiene que acabar la ch\xE1chara,
+      porque tenemos un jefe al que enfrentarnos."
+    _closeUp: 1
+  - _content: "De acuerdo, Nella. Conf\xEDo en ti. Vamos all\xE1."
+    _closeUp: 6

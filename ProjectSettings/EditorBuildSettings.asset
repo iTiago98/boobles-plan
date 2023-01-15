@@ -83,4 +83,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Lounge/Lounge4.unity
     guid: 6be71cc2bb8d935409d3baf4a9bf2b35
+  - enabled: 1
+    path: Assets/Scenes/Halls/BossHall4.unity
+    guid: 7cfa07d608116cb48ac53fc0b5c28c3b
+  - enabled: 1
+    path: Assets/Scenes/BossOffice.unity
+    guid: ca93394164dcde844a6573be65d41fb7
   m_configObjects: {}

@@ -109,7 +109,11 @@ namespace Booble.Flags
             Lounge4Marido,
             CitrianoVictoriaAlternativa,
             PPBVictoriaAlternativa,
-            SecretaryVictoriaAlternativa
+            SecretaryVictoriaAlternativa,
+            FinalMalo,
+            FinalNeutral,
+            FinalBueno,
+            BossHall4
         }
 
         [SerializeField] private Reference _flagReference;

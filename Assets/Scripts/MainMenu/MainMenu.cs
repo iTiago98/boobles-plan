@@ -45,7 +45,8 @@ namespace Booble.MainMenu
         [SerializeField] private Sprite _secretaryBackground;
         [SerializeField] private Sprite _bossBackground;
 
-        [Header("SceneLoad")][SerializeField] private List<Triplet> _checkPoints;
+        [Header("SceneLoad")]
+        [SerializeField] private List<Triplet> _checkPoints;
 
         private bool _onTween;
 
@@ -61,27 +62,25 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
 
-            //int i = 0;
-            //while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
-            //{
-            //    i++;
-            //}
-
-            //if (i < _checkPoints.Count)
-            //{
-            //    SceneLoader.Instance.LoadScene(_checkPoints[i].Scene);
-            //    MusicManager.Instance.PlayMusic(_checkPoints[i].Music);
-            //}
-            //else
-            //{
-            //    Debug.Log("Completed the game!");
-            //}
-
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
             DeckManager.Instance.CheckExtraCards();
 
-            SceneLoader.Instance.LoadCar0();
+            int i = 0;
+            while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
+            {
+                i++;
+            }
+
+            if (i < _checkPoints.Count)
+            {
+                SceneLoader.Instance.LoadScene(_checkPoints[i].Scene);
+                // MusicManager.Instance.PlayMusic(_checkPoints[i].Music);
+            }
+            else
+            {
+                Debug.Log("Completed the game!");
+            }
         }
 
         public void NewGameButton()
@@ -161,6 +160,19 @@ namespace Booble.MainMenu
             SceneLoader.Instance.LoadScene(Scenes.NELA_OFFICE_DAY_START);
         }
 
+        [ContextMenu("Start Boss Hall 4")]
+        public void StartBossHall4()
+        {
+            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day3);
+            FlagManager.Instance.SetFlag(Flag.Reference.BossHall4);
+            DeckManager.Instance.SetBaseDeck();
+            PauseMenu.Instance.InitializeCardMenu();
+            SceneLoader.Instance.LoadScene(Scenes.BOSS_HALL_4);
+        }
+        
         [ContextMenu("Get Alternate Win Cons")]
         public void GetAlternateWinCons()
         {

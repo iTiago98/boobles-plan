@@ -141,6 +141,16 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.BOSS_HALL_3);
         }
+
+        public void LoadBossHall4()
+        {
+            LoadScene(Scenes.BOSS_HALL_4);
+        }
+
+        public void LoadBossOffice()
+        {
+            LoadScene(Scenes.BOSS_OFFICE);
+        }
         
         public void LoadLoungeScene1()
         {
