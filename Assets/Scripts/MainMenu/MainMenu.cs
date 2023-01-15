@@ -161,6 +161,14 @@ namespace Booble.MainMenu
             SceneLoader.Instance.LoadScene(Scenes.NELA_OFFICE_DAY_START);
         }
 
+        [ContextMenu("Get Alternate Win Cons")]
+        public void GetAlternateWinCons()
+        {
+            FlagManager.Instance.SetFlag(Flag.Reference.CitrianoVictoriaAlternativa);
+            FlagManager.Instance.SetFlag(Flag.Reference.PPBVictoriaAlternativa);
+            FlagManager.Instance.SetFlag(Flag.Reference.SecretaryVictoriaAlternativa);
+        }
+
         [ContextMenu("Add Gomu Gomu No")]
         public void AddNewCard()
         {

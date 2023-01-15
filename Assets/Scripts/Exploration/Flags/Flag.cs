@@ -104,7 +104,12 @@ namespace Booble.Flags
             Anexo24RBuscable,
             AfidavitBuscable,
             Queca3Intro,
-            Day4
+            Day4,
+            Lounge4Agapito,
+            Lounge4Marido,
+            CitrianoVictoriaAlternativa,
+            PPBVictoriaAlternativa,
+            SecretaryVictoriaAlternativa
         }
 
         [SerializeField] private Reference _flagReference;

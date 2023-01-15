@@ -182,11 +182,11 @@ public class NelaOffice4Animation : MonoBehaviour
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
 
-        if (!FlagManager.Instance.GetFlag(Flag.Reference.HipervitaminadoObtenida)
-            || !FlagManager.Instance.GetFlag(Flag.Reference.VictoriaPorDesgasteObtenida)
-            || !FlagManager.Instance.GetFlag(Flag.Reference.PerderLosPapelesObtenida))
+        if (!FlagManager.Instance.GetFlag(Flag.Reference.CitrianoVictoriaAlternativa)
+            || !FlagManager.Instance.GetFlag(Flag.Reference.PPBVictoriaAlternativa)
+            || !FlagManager.Instance.GetFlag(Flag.Reference.SecretaryVictoriaAlternativa))
         {
-            SceneLoader.Instance.LoadLoungeScene3();
+            SceneLoader.Instance.LoadLoungeScene4();
             yield break;
         }
         
@@ -221,7 +221,7 @@ public class NelaOffice4Animation : MonoBehaviour
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
         
-        SceneLoader.Instance.LoadLoungeScene3();
+        SceneLoader.Instance.LoadLoungeScene4();
     }
 
     private void ThrowDialogue(Dialogue diag, List<Option> options = null)
