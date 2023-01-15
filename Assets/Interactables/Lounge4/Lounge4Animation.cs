@@ -94,7 +94,8 @@ public class Lounge4Animation : MonoBehaviour
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
         
-        SceneLoader.Instance.LoadBossHall3();
+        FlagManager.Instance.SetFlag(Flag.Reference.BossHall4);
+        SceneLoader.Instance.LoadBossHall4();
     }
 
     private void ThrowDialogue(Dialogue diag, List<Option> options = null)

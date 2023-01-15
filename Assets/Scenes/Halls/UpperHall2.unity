@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 8607204b7103ca240a359cc78216c756, type: 2}
+  _dialogue: {fileID: 11400000, guid: d9d2b4d541c442dba7c9a1e6370b2cfd, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:
@@ -1107,7 +1107,7 @@ MonoBehaviour:
   _unclickable: 0
   _interactDistance: 1.5
   _clickDialogues:
-  - _dialogue: {fileID: 11400000, guid: 3c60a67e545f55d45a667344e68397e2, type: 2}
+  - _dialogue: {fileID: 11400000, guid: a319694b1d904993806ffc1a6778545b, type: 2}
     _trueFlags: 
     _falseFlags: 
     _setFlags: 
@@ -1733,7 +1733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dialogue: {fileID: 11400000, guid: 0bc8caf4adf29ef4a8be92f2e6470416, type: 2}
+  _dialogue: {fileID: 11400000, guid: f26e858ad3624f73b83916592cc0827b, type: 2}
   _onEnd: 1
   _callbackEvent:
     m_PersistentCalls:

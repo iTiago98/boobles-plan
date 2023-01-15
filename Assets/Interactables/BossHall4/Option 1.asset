@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Deja de hacerte la pija tonta, que lo haces demasiado bien.
+    _closeUp: 1
+  - _content: "\xBFDetenerme, con qu\xE9 cargos? Yo no he hecho nada, cari\xF1o."
+    _closeUp: 6
+  - _content: "A m\xED no me enga\xF1as, lo s\xE9 todo. S\xE9 que has vendido tu
+      alma a Booble. Que s\xF3lo quieres poder y m\xE1s poder."
+    _closeUp: 1
+  - _content: "\xBFPoder? \xBFQui\xE9n quiere poder teniendo un buen Luisvi?"
+    _closeUp: 6
+  - _content: "De hecho est\xE1s echando a las principales v\xEDctimas de la m\xE1quina
+      de control mental."
+    _closeUp: 1
+  - _content: "As\xED nadie sospechar\xE1 nunca que lo que pasa en Booble, se queda
+      en Booble literalmente."
+    _closeUp: 1
+  - _content: "As\xED podr\xE1s seguir manipulando a todos a tu antojo."
+    _closeUp: 1
+  - _content: "Pero Nellitina, \xA1\xBFno ves que todo esto es tambi\xE9n para ti?!"
+    _closeUp: 6
+  - _content: "\xBFPara m\xED?"
+    _closeUp: 1
+  - _content: "As\xED es, querida, si te unes a m\xED, \xA1ser\xE1s incluso m\xE1s
+      poderosa que yo!"
+    _closeUp: 6
+  - _content: Con que ese es ahora tu plan. Tentarme.
+    _closeUp: 1

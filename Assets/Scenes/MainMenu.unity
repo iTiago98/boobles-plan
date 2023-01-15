@@ -997,7 +997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59843755, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 771.0002, y: 0}
+  m_AnchoredPosition: {x: 771, y: 0}
   m_SizeDelta: {x: -0.000030517578, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172151444
@@ -1076,7 +1076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59843755, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 770.99994, y: 0.5}
+  m_AnchoredPosition: {x: 770.99976, y: 0.5}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &235099450
@@ -1710,7 +1710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59843755, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 770.99994, y: 0.5}
+  m_AnchoredPosition: {x: 770.99976, y: 0.5}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &315226792
@@ -2365,7 +2365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.59843755, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 770.99994, y: 0.5}
+  m_AnchoredPosition: {x: 770.99976, y: 0.5}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &390264418
@@ -9291,8 +9291,11 @@ MonoBehaviour:
   - <Scene>k__BackingField: NelaOfficeDayStart
     <FlagRef>k__BackingField: 72
     <Music>k__BackingField: 2
-  - <Scene>k__BackingField: Home3
-    <FlagRef>k__BackingField: 77
+  - <Scene>k__BackingField: NelaOfficeDayStart
+    <FlagRef>k__BackingField: 102
+    <Music>k__BackingField: 2
+  - <Scene>k__BackingField: BossHall4
+    <FlagRef>k__BackingField: 93
     <Music>k__BackingField: 2
 --- !u!4 &1585770350
 Transform:

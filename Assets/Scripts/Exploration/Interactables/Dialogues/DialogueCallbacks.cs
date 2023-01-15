@@ -55,6 +55,16 @@ public class DialogueCallbacks : MonoBehaviour
     {
         SceneLoader.Instance.LoadBossHall3();
     }
+
+    public void LoadBossHall4()
+    {
+        SceneLoader.Instance.LoadBossHall4();
+    }
+
+    public void LoadBossOffice()
+    {
+        SceneLoader.Instance.LoadBossOffice();
+    }
     
     public void LoadNelaOffice1()
     {

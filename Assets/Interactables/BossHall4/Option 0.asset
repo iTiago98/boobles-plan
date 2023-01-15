@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Me siento impotente contra esta empresa, necesito poder para mejorar
+      las cosas.
+    _closeUp: 1
+  - _content: "\xA1Aaaah eso! No te preocupes chiqui, \xBFo acaso crees que te voy
+      a hacer echar al jefe para nada? \xA1Quiero que t\xFA seas la jefa!"
+    _closeUp: 6
+  - _content: "\xBFYo? Pensaba que todo esto lo hac\xEDas para seguir escalando en
+      la empresa."
+    _closeUp: 1
+  - _content: "\xBFEscalar? \xBFM\xE1s? \xA1Qu\xE9 va! Yo ya tengo todo el poder
+      que necesito."
+    _closeUp: 6
+  - _content: "S\xF3lo quiero quitarme de encima a Romu\xE1ldez para no tener a nadie
+      que me diga lo que tengo que hacer. "
+    _closeUp: 6
+  - _content: "\xBFY lo del puesto que te deb\xEDa?"
+    _closeUp: 1
+  - _content: "\xC9so era una artima\xF1a que se me ocurri\xF3 para descentrarlo
+      y que me diera una excusa para poder echarlo."
+    _closeUp: 6
+  - _content: "\xBFQu\xE9 me dices entonces? \xBFQuieres convertirte en jefa de Booble
+      y tener a toda la plebe a tus pies?"
+    _closeUp: 6

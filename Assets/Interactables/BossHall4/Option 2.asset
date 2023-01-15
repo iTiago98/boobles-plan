@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Option 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFMi pulsera? Pero si la llevo puesta, \xBFno lo ves?"
+    _closeUp: 6
+  - _content: "No me refiero a la pulsera anticontrol mental. Antes no la necesitabas.
+      Antes s\xF3lo ten\xEDamos \xE9sta y derroc\xE1bamos imperios."
+    _closeUp: 1
+  - _content: "\xBFQu\xE9 es eso? \xBFDe d\xF3nde la has sacado?"
+    _closeUp: 6
+  - _content: "\xBFEs que no recuerdas nuestras pulseras de la amistad? Yo todav\xEDa
+      la llevo."
+    _closeUp: 1
+  - _content: Me recuerda nuestros inicios luchando contra las injusticias.
+    _closeUp: 1
+  - _content: "\xBFInjusticias? Siempre hay injusticias. \xA1Son inevitables! S\xF3lo
+      podemos aprender y sacar beneficio de ellas."
+    _closeUp: 6
+  - _content: "Creo que estos d\xEDas te estoy demostrando que eso es pura palabrer\xEDa
+      neoliberal."
+    _closeUp: 1
+  - _content: He salvado a toda esa gente y pienso salvarte a ti.
+    _closeUp: 1
+  - _content: "\xBFSalvarme a m\xED? Ay Nelly, pero qu\xE9 inocente eres. \xA1Yo
+      te he salvado a ti de morirte de hambre al contratarte!"
+    _closeUp: 6
+  - _content: "\xA1D\xE9jate de gilipo**eces! \xA1T\xFA no eres as\xED! \xA1Sabes
+      que no, a\xFAn hay tiempo de arreglar todo este embrollo!"
+    _closeUp: 1
+  - _content: "\xBFPero t\xFA has visto la que he liado? \xA1Estamos con la mierda
+      al cuello! Estamos solas en este mundo asqueroso."
+    _closeUp: 6
+  - _content: "\xA1Nunca hubo ninguna esperanza!"
+    _closeUp: 6

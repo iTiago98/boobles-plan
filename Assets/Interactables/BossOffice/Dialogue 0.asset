@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue 0
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xBFPero qu\xE9? \xBFQui\xE9n es usted? \xA1\xBFC\xF3mo ha entrado
+      aqu\xED?!"
+    _closeUp: 12
+  - _content: "Soy la nueva jefa de RRHH, Daniella Laphant, y estoy aqu\xED para
+      despedirlo."
+    _closeUp: 1
+  - _content: "Jajajajajajaja pero bueno, \xBFqui\xE9n ha tra\xEDdo al circo? V\xE1yase
+      antes de que llame a seguridad."
+    _closeUp: 12
+  - _content: "Tranquilo, los de seguridad est\xE1n ya avisados. Vendr\xE1n en cuanto
+      terminemos la entrevista."
+    _closeUp: 1
+  - _content: "\xBFPero t\xFA qui\xE9n te has cre\xEDdo que eres? \xBFLa Madre Teresa
+      de Calcuta?"
+    _closeUp: 12
+  - _content: "S\xF3lo alguien que ha descubierto la verdad sobre usted y sobre el
+      control desproporcionado que tiene sobre sus empleados."
+    _closeUp: 1
+  - _content: "\xBFQu\xE9 control ni qu\xE9 ni\xF1o muerto?"
+    _closeUp: 12
+  - _content: Comenzamos la entrevista.
+    _closeUp: 1

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Dialogue 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1NOOOOO! \xA1Insensata! \xA1Qu\xE9 has hecho! \xA1Acabas de destruir
+      la empresa y las vidas de sus millones de empleados!"
+    _closeUp: 12
+  - _content: "Jajajaja, \xBFpero t\xFA tambi\xE9n te crees la patra\xF1a neoliberal
+      de que hay que cuidar a los empresarios? El empleo no es un privilegio, \xA1es
+      un derecho! Y desde ahora me ocupar\xE9 de que se hagan las cosas mejor, \xE9tica
+      y moralmente."
+    _closeUp: 1
+  - _content: "No me hagas re\xEDr, hippie de mi*rda. \xA1Sin los empresarios estar\xEDais
+      muertos de hambre!"
+    _closeUp: 12
+  - _content: "\xBFS\xED? Vamos a comprobarlo ahora mismo quit\xE1ndonos a uno de
+      encima. \xA1Seguridad!"
+    _closeUp: 1
