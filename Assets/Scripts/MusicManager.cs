@@ -77,6 +77,7 @@ namespace Booble.Managers
         public void StopMusic()
         {
             _currentInstance.stop(STOP_MODE.IMMEDIATE);
+            _currentReference = MusicReference.None;
         }
 
         public void PlaySound(SFXReference reference)
@@ -146,7 +147,8 @@ namespace Booble.Managers
     {
         Lounge,
         Interview,
-        MainMenu
+        MainMenu,
+        None
     }
 
     public enum SFXReference

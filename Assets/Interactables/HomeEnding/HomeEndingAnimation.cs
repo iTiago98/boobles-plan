@@ -53,59 +53,62 @@ public class HomeEndingAnimation : MonoBehaviour
     
     private IEnumerator Animation()
     {
-        yield return new WaitForSeconds(_fader.FadeDuration);
-
-        yield return new WaitForSeconds(PAUSE_DURATION);
-        
-        _mask.SetActive(false);
-        yield return new WaitForSeconds(PAUSE_DURATION);
-
-        DialogueManager.Instance.StartDialogue(_dialogue0);
-        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
-        yield return new WaitUntil(() => _continue);
-        _continue = false;
-        yield return new WaitForSeconds(PAUSE_DURATION);
-        
-        DialogueManager.Instance.StartDialogue(_dialogue1);
-        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
-        yield return new WaitUntil(() => _continue);
-        _continue = false;
-        yield return new WaitForSeconds(PAUSE_DURATION);
-        
-        DialogueManager.Instance.StartDialogue(_dialogue2);
-        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
-        yield return new WaitUntil(() => _continue);
-        _continue = false;
-        yield return new WaitForSeconds(PAUSE_DURATION);
-        
-        do
+        if (FlagManager.Instance.GetFlag(Flag.Reference.FinalBueno))
         {
-            _clicked = false;
-            yield return new WaitUntil(() => _clicked);
+            yield return new WaitForSeconds(_fader.FadeDuration);
 
-            DialogueManager.Instance.StartDialogue(_dialogue3, _options);
+            yield return new WaitForSeconds(PAUSE_DURATION);
+            
+            _mask.SetActive(false);
+            yield return new WaitForSeconds(PAUSE_DURATION);
+
+            DialogueManager.Instance.StartDialogue(_dialogue0);
             DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
             DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
-
             yield return new WaitUntil(() => _continue);
             _continue = false;
-        } while (!_endScene);
+            yield return new WaitForSeconds(PAUSE_DURATION);
+            
+            DialogueManager.Instance.StartDialogue(_dialogue1);
+            DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+            DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+            yield return new WaitUntil(() => _continue);
+            _continue = false;
+            yield return new WaitForSeconds(PAUSE_DURATION);
+            
+            DialogueManager.Instance.StartDialogue(_dialogue2);
+            DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+            DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+            yield return new WaitUntil(() => _continue);
+            _continue = false;
+            yield return new WaitForSeconds(PAUSE_DURATION);
+            
+            do
+            {
+                _clicked = false;
+                yield return new WaitUntil(() => _clicked);
 
-        DialogueManager.Instance.StartDialogue(_dialogue4);
-        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
-        yield return new WaitUntil(() => _continue);
-        _continue = false;
+                DialogueManager.Instance.StartDialogue(_dialogue3, _options);
+                DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+                DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
 
-        _censurao.DOColor(Color.black, 10);
-        DialogueManager.Instance.StartDialogue(_dialogue5);
-        DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
-        DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
-        yield return new WaitUntil(() => _continue);
-        _continue = false;
+                yield return new WaitUntil(() => _continue);
+                _continue = false;
+            } while (!_endScene);
+
+            DialogueManager.Instance.StartDialogue(_dialogue4);
+            DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+            DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+            yield return new WaitUntil(() => _continue);
+            _continue = false;
+
+            _censurao.DOColor(Color.black, 10);
+            DialogueManager.Instance.StartDialogue(_dialogue5);
+            DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+            DialogueManager.Instance.OnEndDialogue.AddListener(Continue);
+            yield return new WaitUntil(() => _continue);
+            _continue = false;
+        }
         
         _fin.SetActive(true);
         yield return new WaitForSeconds(PAUSE_DURATION);
