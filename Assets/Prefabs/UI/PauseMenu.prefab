@@ -1753,9 +1753,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Booble.Managers.MusicManager, Assembly-CSharp
-        m_MethodName: ChangeBackgroundMusicVolume
+      - m_Target: {fileID: 6875685448627445515}
+        m_TargetAssemblyTypeName: Booble.UI.OptionsMenu, Assembly-CSharp
+        m_MethodName: OnBackgroundMusicSliderValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4133,9 +4133,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Booble.Managers.MusicManager, Assembly-CSharp
-        m_MethodName: ChangeGeneralMusicVolume
+      - m_Target: {fileID: 6875685448627445515}
+        m_TargetAssemblyTypeName: Booble.UI.OptionsMenu, Assembly-CSharp
+        m_MethodName: OnGeneralMusicValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4447,9 +4447,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Booble.Managers.MusicManager, Assembly-CSharp
-        m_MethodName: ChangeSFXVolume
+      - m_Target: {fileID: 6875685448627445515}
+        m_TargetAssemblyTypeName: Booble.UI.OptionsMenu, Assembly-CSharp
+        m_MethodName: OnSFXMusicSliderValueChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
