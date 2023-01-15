@@ -29,7 +29,7 @@ namespace Booble.UI
         [Header("Sprites")]
         [SerializeField] private Sprite _buttonNotAvailableSprite;
 
-        private GameObject _currentMenu;
+        private ContenderInfo _currentMenu;
 
         private List<CardsData> _playerBaseCards;
 
@@ -96,7 +96,7 @@ namespace Booble.UI
                 contenderInfo.cardMenu.SetActive(false);
             }
             _contendersInfo[0].cardMenu.SetActive(true);
-            _currentMenu = _contendersInfo[0].cardMenu;
+            _currentMenu = _contendersInfo[0];
         }
 
         #endregion
@@ -135,55 +135,38 @@ namespace Booble.UI
 
         private void SetButtonsAvailable()
         {
-            bool flag0, flag1, flag2, flag3;
+            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Car0, Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3, Flag.Reference.Day3 };
 
-            flag0 = FlagManager.Instance.GetFlag(Flag.Reference.Home0);
-            flag1 = FlagManager.Instance.GetFlag(Flag.Reference.Home1);
-            flag2 = FlagManager.Instance.GetFlag(Flag.Reference.Home2);
-            flag3 = FlagManager.Instance.GetFlag(Flag.Reference.Home3);
-
-            foreach (ContenderInfo contenderInfo in _contendersInfo)
+            bool available = true;
+            for (int i = 0; i < flags.Count; i++)
             {
-                bool flag = false;
-                switch (contenderInfo.name)
-                {
-                    case Opponent_Name.Tutorial:
-                        flag = true;
-                        break;
-                    case Opponent_Name.Citriano:
-                        flag = flag0;
-                        break;
-                    case Opponent_Name.PPBros:
-                        flag = flag1;
-                        break;
-                    case Opponent_Name.Secretary:
-                        flag = flag2;
-                        break;
-                    case Opponent_Name.Boss:
-                        flag = flag3;
-                        break;
-                }
+                Flag.Reference flag = flags[i];
+                ContenderInfo contenderInfo = _contendersInfo[i];
 
-                SetAvailable(contenderInfo.cardButton, flag, GetInteractable(contenderInfo.cardMenu), contenderInfo.buttonSprite);
+                SetAvailable(contenderInfo, available);
+                if (!FlagManager.Instance.GetFlag(flag))
+                {
+                    available = false;
+                }
             }
         }
 
         private bool GetInteractable(GameObject menu)
         {
-            return _currentMenu != menu;
+            return _currentMenu.cardMenu != menu;
         }
 
-        private void SetAvailable(AlertButton button, bool available, bool interactable, Sprite sprite)
+        private void SetAvailable(ContenderInfo contenderInfo, bool available)
         {
             if (available)
             {
-                button.SetImage(sprite);
-                button.SetInteractable(interactable);
+                contenderInfo.cardButton.SetImage(contenderInfo.buttonSprite);
+                contenderInfo.cardButton.SetInteractable(GetInteractable(contenderInfo.cardMenu));
             }
             else
             {
-                button.SetImage(_buttonNotAvailableSprite);
-                button.SetInteractable(false);
+                contenderInfo.cardButton.SetImage(_buttonNotAvailableSprite);
+                contenderInfo.cardButton.SetInteractable(false);
             }
         }
 
@@ -191,11 +174,14 @@ namespace Booble.UI
 
         private void OnButtonClick(int contender)
         {
+            _currentMenu.cardMenu.SetActive(false);
+            _currentMenu.cardButton.SetInteractable(true);
+
             ContenderInfo contenderInfo = _contendersInfo[contender];
 
-            _currentMenu.SetActive(false);
             contenderInfo.cardMenu.SetActive(true);
-            _currentMenu = contenderInfo.cardMenu;
+            contenderInfo.cardButton.SetInteractable(false);
+            _currentMenu = contenderInfo;
         }
 
         public void OnPlayerButtonClick() { OnButtonClick(0); }
