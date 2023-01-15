@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: StartDialogue
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Como medida de emergencia, y sin que sirva de precedente, comenzamos
+      la entrevista en otro despacho.
+    _closeUp: 1
+  - _content: "Estamos en el despacho de Eusebio Romu\xE1ldez, o as\xED dice que
+      se llama..."
+    _closeUp: 1
+  - _content: "\xBFPues c\xF3mo me voy a llamar si no?"
+    _closeUp: 12
+  - _content: "Agapito Flaccidez. Usted s\xF3lo es un meteor\xF3logo frustrado que
+      se aprovech\xF3 de un gran poder."
+    _closeUp: 1
+  - _content: "S\xED, vamos, un gran poder conlleva una gran responsabilidad, \xBFno?
+      Gracias T\xEDo Ben, jajaja."
+    _closeUp: 12
+  - _content: "Se enfrenta a los cargos de abuso de autoridad y maltrato laboral,
+      y a los delitos de manipulaci\xF3n psicol\xF3gica y asesinato."
+    _closeUp: 1
+  - _content: "S\xED, claro. Y tambi\xE9n rob\xE9 la Gioconda, no te jode."
+    _closeUp: 12
+  - _content: Comenzamos la entrevista.
+    _closeUp: 1
