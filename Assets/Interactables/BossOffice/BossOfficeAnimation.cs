@@ -20,6 +20,9 @@ public class BossOfficeAnimation : MonoBehaviour
     [SerializeField] private Transform _machine;
     [SerializeField] private Transform _finalMachinePos;
     [SerializeField] private Dialogue _dialogue2;
+    [SerializeField] private GameObject _emilin;
+    [SerializeField] private GameObject _boss;
+    [SerializeField] private Dialogue _dialogue3;
 
     private Camera _cam;
     private bool _dialogueEnd;
@@ -72,6 +75,18 @@ public class BossOfficeAnimation : MonoBehaviour
            SceneLoader.Instance.LoadBossOfficeEnding();
            yield break;
        }
+       
+       _fade.FadeOut();
+       yield return new WaitForSeconds(_fade.FadeDuration);
+
+       _emilin.SetActive(true);
+       _boss.SetActive(false);
+       _fade.FadeIn();
+       yield return new WaitForSeconds(_fade.FadeDuration);
+       
+       ThrowDialogue(_dialogue3);
+       yield return new WaitUntil(() => _dialogueEnd);
+       _dialogueEnd = false;
        
        SceneLoader.Instance.LoadCanteenEnding();
     }
