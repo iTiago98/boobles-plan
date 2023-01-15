@@ -95,10 +95,10 @@ namespace Booble.CardGame.Managers
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                UnloadInterview();
-            }
+            // if (Input.GetKeyDown(KeyCode.S))
+            // {
+            //     UnloadInterview();
+            // }
         }
 
         #region Initialize
