@@ -10,10 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: Arcadio - MonedaPinPonBros
+  m_Name: LoseDialogue
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Toma, anda. La he cogido del bolsillo de Pinar. Est\xE1 tan concentrado
-      que ni se ha enterado."
+  - _content: "\xA1No, no puede ser! \xA1Esto es imposible!"
     _closeUp: 1
+  - _content: "\xBFQu\xE9 te cre\xEDas, que echar al jefe iba a ser f\xE1cil? T\xFA
+      has visto muchas pel\xEDculas..."
+    _closeUp: 12
+  - _content: "Esto me viene grande, sin ayuda no voy a ning\xFAn lado."
+    _closeUp: 1
+  - _content: "\xA1A donde vas a ir es a la pu*a calle! \xA1Seguridad!"
+    _closeUp: 12

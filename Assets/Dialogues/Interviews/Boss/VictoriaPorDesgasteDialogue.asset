@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: Arcadio - MonedaPinPonBros
+  m_Name: VictoriaPorDesgasteDialogue
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
-  - _content: "Toma, anda. La he cogido del bolsillo de Pinar. Est\xE1 tan concentrado
-      que ni se ha enterado."
+  - _content: "Parafraseando a un infante prep\xFAber: \u201C\xA1Rebota, rebota y
+      en tu culo explota!\u201D"
     _closeUp: 1

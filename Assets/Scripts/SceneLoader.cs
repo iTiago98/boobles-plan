@@ -15,9 +15,10 @@ namespace Booble.Managers
         public bool InInterview => InScene(new List<string>() { Scenes.INTERVIEW });
         public bool InCar => InScene(new List<string>() { Scenes.CAR_0, Scenes.CAR_1 });
         public bool InHome => InScene(new List<string>() { Scenes.HOME_0, Scenes.HOME_1, Scenes.HOME_2 });
-        public bool InExploration => InScene(new List<string>() { Scenes.LOUNGE_0, Scenes.LOUNGE_1, Scenes.LOUNGE_2, Scenes.NELA_OFFICE_0, Scenes.NELA_OFFICE_1,
-            Scenes.NELA_OFFICE_2, Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.BOSS_HALL_3, Scenes.CANTEEN_0,
-            Scenes.CANTEEN_2, Scenes.PPB_OFFICE});
+        public bool InExploration => InScene(new List<string>() { Scenes.LOUNGE_0, Scenes.LOUNGE_1, Scenes.LOUNGE_2, Scenes.LOUNGE_3, 
+            Scenes.NELA_OFFICE_0, Scenes.NELA_OFFICE_1, Scenes.NELA_OFFICE_2, Scenes.NELA_OFFICE_3, 
+            Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.LOWER_HALL_3, Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.UPPER_HALL_3,
+            Scenes.BOSS_HALL_3, Scenes.CANTEEN_0, Scenes.CANTEEN_2, Scenes.PPB_OFFICE});
 
         public string CurrentScene { get; private set; }
         public string PreviousScene { get; private set; }
@@ -45,12 +46,12 @@ namespace Booble.Managers
                 var async = SceneManager.LoadSceneAsync(scene);
                 async.completed += OnSceneLoaded;
 
-                if (InMainMenu)
+                if (InMainMenu || InCar || InHome)
                     async.completed += OnMainMenuSceneLoaded;
-                else if (InCar || InHome)
-                    async.completed += OnHybridSceneLoaded;
                 else if (InExploration)
                     async.completed += OnExplorationSceneLoaded;
+                else if (CurrentScene == Scenes.NELA_OFFICE_DAY_START)
+                    async.completed += OnHybridSceneLoaded;
             });
         }
 
@@ -260,8 +261,8 @@ namespace Booble.Managers
 
         private void OnHybridSceneLoaded(AsyncOperation op)
         {
-            PauseMenu.Instance.ShowPauseButton(true);
-            MusicManager.Instance.PlayMusic(MusicReference.MainMenu);
+            PauseMenu.Instance.ShowPauseButton(false);
+            MusicManager.Instance.PlayMusic(MusicReference.Lounge);
         }
 
         private void OnExplorationSceneLoaded(AsyncOperation op)

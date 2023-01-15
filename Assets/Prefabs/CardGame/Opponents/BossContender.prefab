@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 604664961735874499}
   - component: {fileID: 604664961735874498}
   - component: {fileID: 7914258352863479063}
+  - component: {fileID: 7980583409596941753}
   m_Layer: 0
   m_Name: BossContender
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
   _cardBack: {fileID: 21300000, guid: 2e6ac4eb5952d6e47b54aa473aee0fbf, type: 3}
   _interviewBanner: {fileID: 21300000, guid: d289df9f737b9ac4eaacdd47f7c17e20, type: 3}
   _interviewBackground: {fileID: 21300000, guid: 62bf37875325d234ea8f0fcc2131b4b1, type: 3}
-  _interviewDialogue: {fileID: 0}
+  _interviewDialogue: {fileID: 7980583409596941753}
   _aIScript: {fileID: 7914258352863479063}
   stolenCards: 0
 --- !u!114 &7914258352863479063
@@ -65,3 +66,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f27d360473715f4cbca59264612f327, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7980583409596941753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604664961735874496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d56044c0da3914598c34fdb5b78b4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDialogue: {fileID: 11400000, guid: 0b7eb51903e2c904a8b7988a5d3b52cf, type: 2}
+  _winDialogue: {fileID: 11400000, guid: 6472d77c112765348b7dd3a05c46d3bc, type: 2}
+  _alternateWinDialogue: {fileID: 0}
+  _loseDialogue: {fileID: 11400000, guid: 2fbd0ef8d99398f40a75f5bdd3838bcf, type: 2}
+  _llevarseElMeritoCardDialogue: {fileID: 11400000, guid: 912122619a07e594290ad0d08ac34fbe, type: 2}
+  _hipervitaminadoCardDialogue: {fileID: 11400000, guid: 5cdc22268a11a1d4aa7c7ed00993fbaf, type: 2}
+  _victoriaPorDesgasteCardDialogue: {fileID: 11400000, guid: 9375004719f505d4aa8fe44e3126f473, type: 2}
+  _haPerdidoUsteLosPapeleCardDialogue: {fileID: 11400000, guid: 3b08a79b7f4331049ad2363f4c1c1eab, type: 2}

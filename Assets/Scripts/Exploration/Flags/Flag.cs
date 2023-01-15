@@ -40,7 +40,7 @@ namespace Booble.Flags
             MachineFixed,
             ZumoIntro,
             GranFinalObtenida,
-            PistaHortensia,
+            PistaPurita,
             PistaEufrasio,
             PistaJugosol,
             PistaModificacion,

@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
-  m_Name: Arcadio - MonedaPinPonBros
+  m_Name: HaPerdidoUsteLosPapeleDialogue
   m_EditorClassIdentifier: 
-  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _characters: {fileID: 0}
   _sentences:
-  - _content: "Toma, anda. La he cogido del bolsillo de Pinar. Est\xE1 tan concentrado
-      que ni se ha enterado."
+  - _content: "\xA1Uy, pero qu\xE9 cartas m\xE1s monas que tiene usted! \xBFA ver?"
     _closeUp: 1
+  - _content: "\xA1Quita tus sucias manos proletarias de mis cartas, sindicalista!"
+    _closeUp: 12
