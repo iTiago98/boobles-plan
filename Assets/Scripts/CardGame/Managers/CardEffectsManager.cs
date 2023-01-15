@@ -723,7 +723,8 @@ namespace Booble.CardGame.Managers
             else
                 opponent.deck.DrawCards(opponentNumCards);
 
-            yield return new WaitUntil(() => !player.hand.busy && !opponent.hand.busy);
+            yield return new WaitUntil(() => player.hand.numCards == playerNumCards && opponent.hand.numCards == opponentNumCards);
+            yield return new WaitWhile(() => player.hand.busy || opponent.hand.busy);
 
             effect.SetEffectApplied();
         }
