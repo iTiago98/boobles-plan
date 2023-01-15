@@ -18,6 +18,7 @@ namespace Booble
         public static string NELA_OFFICE_1 = "NelaOffice1";
         public static string NELA_OFFICE_2 = "NelaOffice2";
         public static string NELA_OFFICE_3 = "NelaOffice3";
+        public static string NELA_OFFICE_4 = "NelaOffice4";
         public static string CAR_0 = "Car0";
         public static string CAR_1 = "Car1";
         public static string LOWER_HALL_1 = "LowerHall1";
@@ -36,9 +37,9 @@ namespace Booble
         public static string HOME_0 = "Home0";
         public static string HOME_1 = "Home1";
         public static string HOME_2 = "Home2";
-        public static string BOSS_OFFICE_ENDING = "BossOfficeEnding";
-        public static string CANTEEN_ENDING = "CanteenEnding";
-        public static string HOME_ENDING = "HomeEnding";
-        public static string CREDITS = "Credits";
+        public static string BOSS_OFFICE_ENDING = "BossOfficeEnding"; 
+        public static string CANTEEN_ENDING = "CanteenEnding"; 
+        public static string HOME_ENDING = "HomeEnding"; 
+        public static string CREDITS = "Credits"; 
     }
 }

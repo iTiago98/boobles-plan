@@ -21,7 +21,7 @@ namespace Booble.Managers
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (SceneLoader.Instance != null && SceneLoader.Instance.InMainMenu) return;
+                if (SceneLoader.Instance != null && (SceneLoader.Instance.InMainMenu || SceneLoader.Instance.InCredits)) return;
                 if (UIManager.Instance != null && UIManager.Instance.loseMenuActive) return;
                 SwitchPauseMenu();
             }

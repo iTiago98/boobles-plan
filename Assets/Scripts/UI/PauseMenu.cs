@@ -53,7 +53,7 @@ namespace Booble.UI
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
                 _pauseMenu.SetActive(false);
-                if (SceneLoader.Instance.InExploration || SceneLoader.Instance.InCar || SceneLoader.Instance.InHome) ShowPauseButton(true);
+                if (SceneLoader.Instance.InExploration) ShowPauseButton(true);
             }
         }
 

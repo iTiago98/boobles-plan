@@ -11,14 +11,26 @@ namespace Booble.Managers
     {
         [SerializeField] private Fader _fadeScreen;
 
-        public bool InMainMenu => InScene(new List<string>() { Scenes.MAIN_MENU });
-        public bool InInterview => InScene(new List<string>() { Scenes.INTERVIEW });
-        public bool InCar => InScene(new List<string>() { Scenes.CAR_0, Scenes.CAR_1 });
-        public bool InHome => InScene(new List<string>() { Scenes.HOME_0, Scenes.HOME_1, Scenes.HOME_2 });
-        public bool InExploration => InScene(new List<string>() { Scenes.LOUNGE_0, Scenes.LOUNGE_1, Scenes.LOUNGE_2, Scenes.LOUNGE_3, 
-            Scenes.NELA_OFFICE_0, Scenes.NELA_OFFICE_1, Scenes.NELA_OFFICE_2, Scenes.NELA_OFFICE_3, 
-            Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.LOWER_HALL_3, Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.UPPER_HALL_3,
-            Scenes.BOSS_HALL_3, Scenes.CANTEEN_0, Scenes.CANTEEN_2, Scenes.PPB_OFFICE});
+        public bool InMainMenu => InScene(Scenes.MAIN_MENU);
+        public bool InExploration => InScene(new List<string>() {
+            Scenes.LOUNGE_0, Scenes.LOUNGE_1, Scenes.LOUNGE_2, Scenes.LOUNGE_3, Scenes.LOUNGE_4,
+            Scenes.NELA_OFFICE_0, Scenes.NELA_OFFICE_1, Scenes.NELA_OFFICE_2, Scenes.NELA_OFFICE_3,
+            Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.LOWER_HALL_3,
+            Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.UPPER_HALL_3,
+            Scenes.BOSS_HALL_3, Scenes.BOSS_HALL_4, Scenes.BOSS_OFFICE,
+            Scenes.CANTEEN_0, Scenes.CANTEEN_2, Scenes.PPB_OFFICE
+        });
+        public bool InInterview => InScene(Scenes.INTERVIEW);
+        public bool InCredits => InScene(Scenes.CREDITS);
+
+        private bool InCar => InScene(new List<string>() { Scenes.CAR_0, Scenes.CAR_1 });
+        private bool InHome => InScene(new List<string>() { Scenes.HOME_0, Scenes.HOME_1, Scenes.HOME_2 });
+
+        public bool InMainMenuBehaviour => InMainMenu || InCar || InHome || InCredits
+            || InScene(new List<string>() { Scenes.NELA_OFFICE_4, Scenes.CANTEEN_ENDING, Scenes.HOME_ENDING });
+
+        public bool InExplorationBehaviour => InExploration;
+        public bool InHybridBehaviour => InScene(new List<string>() { Scenes.NELA_OFFICE_DAY_START, Scenes.BOSS_OFFICE_ENDING });
 
         public string CurrentScene { get; private set; }
         public string PreviousScene { get; private set; }
@@ -31,6 +43,10 @@ namespace Booble.Managers
             _disabledObjects = new List<GameObject>();
         }
 
+        private bool InScene(string scene)
+        {
+            return InScene(new List<string>() { scene });
+        }
         private bool InScene(List<string> scenes)
         {
             return scenes.Contains(CurrentScene);
@@ -46,12 +62,9 @@ namespace Booble.Managers
                 var async = SceneManager.LoadSceneAsync(scene);
                 async.completed += OnSceneLoaded;
 
-                if (InMainMenu || InCar || InHome)
-                    async.completed += OnMainMenuSceneLoaded;
-                else if (InExploration)
-                    async.completed += OnExplorationSceneLoaded;
-                else if (CurrentScene == Scenes.NELA_OFFICE_DAY_START)
-                    async.completed += OnHybridSceneLoaded;
+                if (InMainMenuBehaviour) async.completed += OnMainMenuSceneLoaded;
+                else if (InExplorationBehaviour) async.completed += OnExplorationSceneLoaded;
+                else if (InHybridBehaviour) async.completed += OnHybridSceneLoaded;
             });
         }
 
@@ -111,7 +124,7 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.UPPER_HALL_3);
         }
-        
+
         public void LoadCanteenScene0()
         {
             LoadScene(Scenes.CANTEEN_0);
@@ -151,7 +164,7 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.BOSS_OFFICE);
         }
-        
+
         public void LoadLoungeScene1()
         {
             LoadScene(Scenes.LOUNGE_1);
@@ -171,7 +184,7 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.LOUNGE_4);
         }
-        
+
         public void LoadPPBOffice()
         {
             LoadScene(Scenes.PPB_OFFICE);
@@ -211,7 +224,7 @@ namespace Booble.Managers
         {
             LoadScene(Scenes.CREDITS);
         }
-        
+
         #endregion
 
         #region Interview
@@ -252,10 +265,8 @@ namespace Booble.Managers
                 var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
                 async.completed += OnSceneLoaded;
 
-                if (InMainMenu)
-                    async.completed += OnMainMenuSceneLoaded;
-                else if (InExploration)
-                    async.completed += OnExplorationSceneLoaded;
+                if (InMainMenu) async.completed += OnMainMenuSceneLoaded;
+                else if (InExploration) async.completed += OnExplorationSceneLoaded;
             });
         }
 
