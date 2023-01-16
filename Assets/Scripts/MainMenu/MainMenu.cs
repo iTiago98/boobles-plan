@@ -122,7 +122,7 @@ namespace Booble.MainMenu
         {
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
-            SceneLoader.Instance.LoadCar0();
+            SceneLoader.Instance.LoadNelaOfficeDayStart();
         }
 
         [ContextMenu("Start Day 1")]
