@@ -94,7 +94,6 @@ public class Lounge4Animation : MonoBehaviour
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
         
-        FlagManager.Instance.SetFlag(Flag.Reference.BossHall4);
         SceneLoader.Instance.LoadBossHall4();
     }
 
