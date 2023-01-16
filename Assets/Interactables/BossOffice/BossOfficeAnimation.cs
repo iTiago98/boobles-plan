@@ -22,6 +22,7 @@ public class BossOfficeAnimation : MonoBehaviour
     [SerializeField] private Dialogue _dialogue2;
     [SerializeField] private GameObject _emilin;
     [SerializeField] private GameObject _boss;
+    [SerializeField] private GameObject _bossUncensored;
     [SerializeField] private Dialogue _dialogue3;
 
     private Camera _cam;
@@ -52,6 +53,9 @@ public class BossOfficeAnimation : MonoBehaviour
         DeckManager.Instance.SetOpponent(Opponent_Name.Boss);
         SceneLoader.Instance.LoadInterviewScene();
         yield return new WaitUntil(() => !_cam.gameObject.activeSelf);
+        
+        _boss.SetActive(false);
+        _bossUncensored.SetActive(true);
         yield return new WaitUntil(() => _cam.gameObject.activeSelf);
 
         ThrowDialogue(_dialogue1);
@@ -80,7 +84,7 @@ public class BossOfficeAnimation : MonoBehaviour
        yield return new WaitForSeconds(_fade.FadeDuration);
 
        _emilin.SetActive(true);
-       _boss.SetActive(false);
+       _bossUncensored.SetActive(false);
        _fade.FadeIn();
        yield return new WaitForSeconds(_fade.FadeDuration);
        

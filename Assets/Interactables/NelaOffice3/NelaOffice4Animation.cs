@@ -111,7 +111,7 @@ public class NelaOffice4Animation : MonoBehaviour
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
 
-        _censoredRomu.DOFade(1, 5);
+        _romu.DOFade(1, 5);
         ThrowDialogue(_flashback1);
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
