@@ -64,9 +64,9 @@ public class NelaOffice2Animation : MonoBehaviour
             FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             yield return new WaitForSeconds(_fade.FadeDuration);
             
-            DialogueManager.Instance.StartDialogue(_postInterviewDialogue);
-            DialogueManager.Instance.OnEndDialogue.RemoveAllListeners();
+            ThrowDialogue(_postInterviewDialogue);
             yield return new WaitUntil(() => _dialogueEnd);
+            _dialogueEnd = false;
             
             SceneLoader.Instance.LoadHome2();
         }
