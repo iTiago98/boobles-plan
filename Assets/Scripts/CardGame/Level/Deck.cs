@@ -188,12 +188,22 @@ namespace Booble.CardGame.Level
             busy = true;
             int numCardsStart = numCards;
 
-            for (int i = 0; i < numCardsToDiscard; i++)
+            List<int> indexList = new List<int>();
+            for(int j = 0; j < numCards; j++) indexList.Add(j);
+
+            if (HasAlternateWinConditionCard())
+            {
+                indexList.Remove(GetAlternateWinConditionCardIndex());
+            }
+
+            int number = numCardsToDiscard <= indexList.Count ? numCardsToDiscard : indexList.Count;
+
+            for (int i = 0; i < number; i++)
             {
                 if (numCards > 0)
                 {
                     // Take data from scriptable
-                    int index = Random.Range(0, numCards);
+                    int index = indexList[Random.Range(0, indexList.Count)];
                     CardsData data = _deckCards[index];
                     _deckCards.RemoveAt(index);
 
@@ -213,6 +223,7 @@ namespace Booble.CardGame.Level
                     else
                     {
                         _listToDiscard.Add(card);
+                        indexList.Remove(index);
                     }
                 }
             }
@@ -350,6 +361,31 @@ namespace Booble.CardGame.Level
         {
             if (type == CardType.ARGUMENT) return argumentCardPrefab;
             else return actionCardPrefab;
+        }
+
+        public bool HasAlternateWinConditionCard()
+        {
+            foreach (CardsData card in _deckCards)
+            {
+                if (IsAlternateWinConditionCard(card)) return true;
+            }
+
+            return false;
+        }
+
+        private int GetAlternateWinConditionCardIndex()
+        {
+            foreach (CardsData card in _deckCards)
+            {
+                if (IsAlternateWinConditionCard(card)) return _deckCards.IndexOf(card);
+            }
+
+            return -1;
+        }
+
+        private bool IsAlternateWinConditionCard(CardsData data)
+        {
+            return data.type == CardType.ACTION && data.effects.Count > 0 && data.effects[0].type == EffectType.ALTERNATE_WIN_CONDITION;
         }
     }
 }

@@ -29,21 +29,24 @@ namespace Booble.CardGame.Level
         {
             busy = true;
 
-            int number = (cardNumber <= numCards) ? cardNumber : numCards;
-            System.Random random = new System.Random();
+            List<int> indexList = new List<int>();
+            for (int i = 0; i < numCards; i++) indexList.Add(i);
+
+            if (HasAlternateWinConditionCard())
+            {
+                indexList.Remove(GetAlternateWinConditionCardIndex());
+            }
+
+            int number = cardNumber <= indexList.Count ? cardNumber : indexList.Count;
+
             for (int i = 0; i < number; i++)
             {
-                int index = random.Next(0, numCards);
+                int index = indexList[Random.Range(0, indexList.Count)];
+
                 Card card = cards[index].GetComponent<Card>();
 
-                if (_listToDiscard.Contains(card)
-                    || card.IsAlternateWinConditionCard())
-                {
-                    i--;
-                    continue;
-                }
-
                 _listToDiscard.Add(card);
+                indexList.Remove(index);
             }
 
             StartCoroutine(DiscardCoroutine(wheelEffect: false));
@@ -73,10 +76,12 @@ namespace Booble.CardGame.Level
                 Card card = _listToDiscard[0];
                 card.DestroyCard();
 
-                if (!wheelEffect) yield return new WaitUntil(() => card.destroyed);
+                //if (!wheelEffect) yield return new WaitUntil(() => card.destroyed);
 
                 _listToDiscard.RemoveAt(0);
             }
+
+            yield return new WaitUntil(() => cardsAtPosition);
 
             _listToDiscard.Clear();
             busy = false;
@@ -180,12 +185,23 @@ namespace Booble.CardGame.Level
             return false;
         }
 
-        public Card GetCard(string name)
+        private int GetAlternateWinConditionCardIndex()
         {
-            foreach(GameObject cardObj in cards)
+            foreach (GameObject cardObj in cards)
             {
                 Card card = cardObj.GetComponent<Card>();
-                if(card.data.name == name)
+                if (card.IsAlternateWinConditionCard()) return cards.IndexOf(cardObj);
+            }
+
+            return -1;
+        }
+
+        public Card GetCard(string name)
+        {
+            foreach (GameObject cardObj in cards)
+            {
+                Card card = cardObj.GetComponent<Card>();
+                if (card.data.name == name)
                 {
                     return card;
                 }

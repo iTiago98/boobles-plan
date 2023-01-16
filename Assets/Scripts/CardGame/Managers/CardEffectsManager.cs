@@ -658,9 +658,11 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator DiscardCardCoroutine(CardEffect effect, int value, Contender contender)
         {
-            contender.hand.DiscardCards(value);
-
-            yield return new WaitWhile(() => contender.hand.busy);
+            if (contender.hand.numCards > 0)
+            {
+                contender.hand.DiscardCards(value);
+                yield return new WaitWhile(() => contender.hand.busy);
+            }
 
             effect.SetEffectApplied();
         }
@@ -830,12 +832,15 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator DiscardCardFromDeckCoroutine(CardEffect effect, object target, int value, Contender contender)
         {
-            int number = value;
-            if (target != null) number = ((Card)target).Stats.manaCost;
+            if (contender.deck.numCards > 0)
+            {
+                int number = value;
+                if (target != null) number = ((Card)target).Stats.manaCost;
 
-            contender.deck.DiscardCards(number);
+                contender.deck.DiscardCards(number);
 
-            yield return new WaitWhile(() => contender.deck.busy);
+                yield return new WaitWhile(() => contender.deck.busy);
+            }
 
             effect.SetEffectApplied();
         }
@@ -938,7 +943,7 @@ namespace Booble.CardGame.Managers
 
             _stealCardsFromDeckObj.transform.DOScale(1, 0.5f);
             yield return new WaitForSeconds(0.5f);
-            
+
             List<CardsData> deckCards = deck.GetDeckCards();
 
             foreach (CardsData cardData in deckCards)
