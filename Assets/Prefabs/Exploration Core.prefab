@@ -9321,6 +9321,7 @@ GameObject:
   - component: {fileID: 7735595120574130565}
   - component: {fileID: 7735595120574130587}
   - component: {fileID: 7735595120574130564}
+  - component: {fileID: 3573237135766861753}
   m_Layer: 5
   m_Name: Dialogue Box
   m_TagString: Untagged
@@ -9388,6 +9389,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!223 &3573237135766861753
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7735595120574130566}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &7735595120576307434
 GameObject:
   m_ObjectHideFlags: 0
