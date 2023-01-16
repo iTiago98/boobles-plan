@@ -44,6 +44,11 @@ public class StartInterview : DialogueEvent
         
         ThrowDialogue(_postInterview);
         yield return new WaitUntil(() => _dialogueEnd);
+        _dialogueEnd = false;
+        
+        PauseMenu.Instance.ShowSavedDataText(() => _dialogueEnd = true);
+        yield return new WaitUntil(() => _dialogueEnd);
+        _dialogueEnd = false;
         
         SceneLoader.Instance.LoadNelaOfficeDayStart();
     }
