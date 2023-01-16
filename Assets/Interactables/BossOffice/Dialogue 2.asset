@@ -16,7 +16,7 @@ MonoBehaviour:
   _sentences:
   - _content: "\xA1NOOOOO! \xA1Insensata! \xA1Qu\xE9 has hecho! \xA1Acabas de destruir
       la empresa y las vidas de sus millones de empleados!"
-    _closeUp: 12
+    _closeUp: 14
   - _content: "Jajajaja, \xBFpero t\xFA tambi\xE9n te crees la patra\xF1a neoliberal
       de que hay que cuidar a los empresarios?"
     _closeUp: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
     _closeUp: 1
   - _content: "No me hagas re\xEDr, hippie de mi*rda. \xA1Sin los empresarios estar\xEDais
       muertos de hambre!"
-    _closeUp: 12
+    _closeUp: 14
   - _content: "\xBFS\xED? Vamos a comprobarlo ahora mismo quit\xE1ndonos a uno de
       encima. \xA1Seguridad!"
     _closeUp: 1

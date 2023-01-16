@@ -17,15 +17,15 @@ MonoBehaviour:
   - _content: "Vaya, parece que al todopoderoso Romu\xE1ldez le ha dado Flaccidez."
     _closeUp: 1
   - _content: "\xA1\xBFC\xF3mo sabes mi apellido?!"
-    _closeUp: 12
+    _closeUp: 14
   - _content: "A ver, Don Agapito Flaccidez, acepta que est\xE1s acabado de una vez
       y termina con esta triste pantomima."
     _closeUp: 1
   - _content: "De ninguna de las maneras. No s\xE9 c\xF3mo est\xE1s siendo capaz
       de resistirte al control mental sin una de las pulseras."
-    _closeUp: 12
+    _closeUp: 14
   - _content: "\xA1Pero no creo que puedas resistirte si le subo el volumen a la
       m\xFAsica con este mando a distancia! MUAJAJAJAJAJAJA"
-    _closeUp: 12
+    _closeUp: 14
   - _content: "Con que esas tenemos, \xBFeh? Vas a ver lo que es bueno."
     _closeUp: 1

@@ -21,7 +21,8 @@ namespace Booble.Characters
 			Pedro,
 			Pablo,
 			Romualdez,
-			Rosalinda
+			Rosalinda,
+			RomualdezExplicito
         }
 		
 		[System.Serializable]
