@@ -122,55 +122,63 @@ namespace Booble.MainMenu
         {
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
-            SceneLoader.Instance.LoadScene(Scenes.CAR_0);
+            SceneLoader.Instance.LoadCar0();
         }
 
         [ContextMenu("Start Day 1")]
         public void StartDay1()
         {
             FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home0);
             StartDay0();
         }
 
         [ContextMenu("Start Day 2")]
         public void StartDay2()
         {
-            // FlagManager.Instance.SetFlag(Flag.Reference.Car1);
             FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home1);
             StartDay1();
         }
 
         [ContextMenu("Start Day 3")]
         public void StartDay3()
         {
-            // FlagManager.Instance.SetFlag(Flag.Reference.Car2);
             FlagManager.Instance.SetFlag(Flag.Reference.Day2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home2);
             StartDay2();
         }
 
-        [ContextMenu("Start Day 4")]
-        public void StartDay4()
+        [ContextMenu("Start Flashback")]
+        public void StartFlashback()
         {
-            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
-            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
-            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             FlagManager.Instance.SetFlag(Flag.Reference.Day3);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home0);
+            FlagManager.Instance.SetFlag(Flag.Reference.HabemusPartida);
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
-            SceneLoader.Instance.LoadScene(Scenes.NELA_OFFICE_DAY_START);
+            SceneLoader.Instance.LoadNelaOfficeDayStart();
         }
 
-        [ContextMenu("Start Boss Hall 4")]
+        [ContextMenu("Start Ending Selection")]
         public void StartBossHall4()
         {
-            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
-            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
-            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             FlagManager.Instance.SetFlag(Flag.Reference.Day3);
-            FlagManager.Instance.SetFlag(Flag.Reference.BossHall4);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Car0);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home0);
+            FlagManager.Instance.SetFlag(Flag.Reference.HabemusPartida);
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
-            SceneLoader.Instance.LoadScene(Scenes.BOSS_HALL_4);
+            SceneLoader.Instance.LoadBossHall4();
         }
 
         [ContextMenu("Credits Good Ending")]
