@@ -451,7 +451,13 @@ namespace Booble.CardGame.Managers
                     break;
             }
 
-            if (aux != null) yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
+            if (aux != null)
+            {
+                yield return new WaitWhile(() => aux.CardUI.IsPlayingAnimation);
+
+                if (aux.Stats.defense <= 0) yield return new WaitUntil(() => aux.destroyed);
+            }
+
 
             effect.SetEffectApplied();
         }
