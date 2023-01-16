@@ -256,7 +256,7 @@ namespace Booble.CardGame.Managers
 
         private void OnInterviewEnd()
         {
-            if (_interviewDialogue != null) UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
+            if (playingStoryMode) UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
             else UIManager.Instance.InterviewEndAnimation(_playerWin, GetOnEndAction());
         }
 
@@ -265,9 +265,13 @@ namespace Booble.CardGame.Managers
             if (alternateWinCondition) return UnloadInterview;
             else if (_playerWin)
             {
-                if (DeckManager.Instance.HasAlternateWinConditionCard())
+                if (DeckManager.Instance.HasAlternateWinConditionCard() && playingStoryMode)
                 {
                     return ThrowRepeatDialogue;
+                }
+                else
+                {
+                    return UnloadInterview;
                 }
             }
 
