@@ -1,3 +1,4 @@
+using Booble.Interactables.Dialogues;
 using Booble.Managers;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,11 @@ namespace Booble.UI
         public void OnSFXMusicSliderValueChanged(System.Single value)
         {
             MusicManager.Instance.ChangeSFXVolume(value);
+        }
+
+        public void OnTextSpeedSliderValueChanged(System.Single value)
+        {
+            DialogueManager.Instance.ChangeTextSpeed(value);
         }
     }
 }

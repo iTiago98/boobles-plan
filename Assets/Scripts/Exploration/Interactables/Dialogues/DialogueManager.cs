@@ -23,7 +23,8 @@ namespace Booble.Interactables.Dialogues
         public bool HideBackOption { get; private set; }
 
         [SerializeField] private KeyCode _nextKey;
-        [SerializeField] private float _characterDelay;
+        [SerializeField] private float _characterDelayDefault;
+        [SerializeField] private float _characterDelayMin;
         [SerializeField] private EventReference _characterSoundEmitter;
         [SerializeField] private GameObject _dialogueBox;
         [SerializeField] private Image _closeUp;
@@ -38,10 +39,12 @@ namespace Booble.Interactables.Dialogues
         private bool _dialogueRunning;
         private bool _typing;
         private bool _staggered;
+        private float _characterDelay;
 
         private void Awake()
         {
             OnEndDialogue = new UnityEvent();
+            _characterDelay = _characterDelayDefault;
         }
 
         public void StartDialogue(Dialogue dialogue, List<Option> options = null, bool hideBackOption = false)
@@ -87,17 +90,17 @@ namespace Booble.Interactables.Dialogues
             _dialogueText.text = "";
 
             char[] s = sentence.ToCharArray();
-            for(int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 char letter = s[i];
 
-                if(letter == SEPARATOR)
+                if (letter == SEPARATOR)
                 {
                     var ai = _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier);
                     ai.Animator.SetTrigger(ExtractTrigger(s, ref i));
                     letter = s[i];
                 }
-                
+
                 _dialogueText.text += letter;
                 RuntimeManager.PlayOneShot(_characterSoundEmitter);
                 yield return new WaitForSecondsRealtime(_characterDelay);
@@ -112,7 +115,7 @@ namespace Booble.Interactables.Dialogues
             string trigger = "";
 
             char letter = s[++i];
-            while(letter != SEPARATOR)
+            while (letter != SEPARATOR)
             {
                 trigger += letter;
                 letter = s[++i];
@@ -152,9 +155,9 @@ namespace Booble.Interactables.Dialogues
 
         private void InputUpdate()
         {
-            if(GameManager.Instance.gamePaused)
+            if (GameManager.Instance.gamePaused)
                 return;
-            
+
             if (!_staggered)
             {
                 _staggered = true;
@@ -163,7 +166,7 @@ namespace Booble.Interactables.Dialogues
 
             if (!_dialogueRunning)
                 return;
-            
+
             // if (Input.GetKeyDown(KeyCode.S))
             // {
             //     DisplayLastSentence();
@@ -182,10 +185,10 @@ namespace Booble.Interactables.Dialogues
 
                 _dialogueText.text = "";
                 char[] s = _currentSentence.ToCharArray();
-                for(int i = 0; i < s.Length; i++)
+                for (int i = 0; i < s.Length; i++)
                 {
                     char letter = s[i];
-                    if(letter == SEPARATOR)
+                    if (letter == SEPARATOR)
                     {
                         var ai = _animIdentifiers.Find(ai => ai.Identifier == _currentCharacter.Identifier);
                         ai.Animator.SetTrigger(ExtractTrigger(s, ref i));
@@ -193,7 +196,7 @@ namespace Booble.Interactables.Dialogues
                     }
                     _dialogueText.text += letter;
                 }
-                
+
                 _typing = false;
             }
             else
@@ -211,7 +214,7 @@ namespace Booble.Interactables.Dialogues
             {
                 // if(ai.Identifier == CharacterList.Name.Nela)
                 //     continue;
-                
+
                 ai.Animator.SetBool("Speaking", _typing && ai.Identifier == _currentCharacter.Identifier);
             }
         }
@@ -233,7 +236,7 @@ namespace Booble.Interactables.Dialogues
                 if (!_options[i].FlagsSatisfied())
                     continue;
 
-                InitializeOption(_options[i], _optionsBox.transform.GetChild(i+1));
+                InitializeOption(_options[i], _optionsBox.transform.GetChild(i + 1));
             }
         }
 
@@ -268,6 +271,12 @@ namespace Booble.Interactables.Dialogues
                 _dialogueRunning = false;
                 option.DialogueOption.OnSelect();
             });
+        }
+
+        public void ChangeTextSpeed(float value)
+        {
+            _characterDelay = _characterDelayDefault / value;
+            if (_characterDelay < _characterDelayMin) _characterDelay = _characterDelayMin;
         }
     }
 

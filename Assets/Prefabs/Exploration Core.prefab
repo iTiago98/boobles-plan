@@ -9072,7 +9072,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextKey: 323
-  _characterDelay: 0.05
+  _characterDelayDefault: 0.01
+  _characterDelayMin: 0.001
   _characterSoundEmitter:
     Guid:
       Data1: -1654249305
