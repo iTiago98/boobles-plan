@@ -56,10 +56,10 @@ namespace Booble.Animations
                     _fade.FadeIn(_fade.DisableText);
                 }
             }
-            
-            _fade.DisableText();
 
             yield return new WaitForSeconds(_fade.FadeDuration);
+            
+            _fade.DisableText();
 
             ThrowDialogue(dialogue);
             yield return new WaitUntil(() => _dialogueEnd);
