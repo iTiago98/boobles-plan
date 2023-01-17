@@ -13,8 +13,7 @@ namespace Booble.CardGame.AI
             switch (argument.name)
             {
                 case "Y por ende":
-                    return _contender.currentMana == _contender.currentMaxMana
-                        && _contender.hand.numCards <= CardGameManager.Instance.settings.handCapacity - argument.effect.intParameter1;
+                    return _contender.hand.numCards <= CardGameManager.Instance.settings.handCapacity - argument.effect.intParameter1 + 1;
 
                 case "Lo siguiente que vas a decir es":
                     return player.hand.numCards >= argument.effect.intParameter1;

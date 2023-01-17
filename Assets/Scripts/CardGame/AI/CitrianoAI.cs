@@ -11,8 +11,7 @@ namespace Booble.CardGame.AI
             switch (argument.name)
             {
                 case "Antiestreñimiento":
-                    return _contender.currentMana == _contender.currentMaxMana
-                        && _contender.hand.numCards <= CardGameManager.Instance.settings.handCapacity - argument.effect.intParameter1;
+                    return _contender.hand.numCards <= CardGameManager.Instance.settings.handCapacity - argument.effect.intParameter1 + 1;
 
                 case "Antioxidante":
                 case "Antiarrugas":

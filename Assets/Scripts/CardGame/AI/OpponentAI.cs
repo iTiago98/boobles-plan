@@ -58,8 +58,8 @@ namespace Booble.CardGame.AI
                 else
                 {
                     if (playableCards.Count > 0
-                        && _contender.currentMana == _contender.currentMaxMana
-                        && _contender.hand.numCards > CardGameManager.Instance.settings.handCapacity)
+                        && (_contender.currentMana == _contender.currentMaxMana
+                        || _contender.hand.numCards > CardGameManager.Instance.settings.handCapacity))
                     {
                         PlayCard(playableCards, emptyCardZone);
                     }
@@ -106,6 +106,8 @@ namespace Booble.CardGame.AI
 
         private void PlayCard(List<Card> cards, CardZone emptyCardZone)
         {
+            CheckCards(ref cards);
+
             int index = Random.Range(0, cards.Count);
             Card card = cards[index];
             CardZone cardZone = null;
@@ -123,6 +125,42 @@ namespace Booble.CardGame.AI
             }
 
             PlayCard(card, cardZone);
+        }
+
+        private void CheckCards(ref List<Card> cards)
+        {
+            List<int> indexToRemove = new List<int>();
+
+            bool hasDestroyCard = false;
+
+            for (int i = 0; i < cards.Count; i++)
+            {
+                Card card = cards[i];
+
+                if (card.IsAction)
+                {
+                    switch (card.effect.subType)
+                    {
+                        case SubType.DESTROY_CARD:
+                            hasDestroyCard = true; break;
+
+                        case SubType.DEAL_DAMAGE:
+                        case SubType.RETURN_CARD:
+                        case SubType.SWAP_POSITION:
+                            if (hasDestroyCard) indexToRemove.Add(i); break;
+
+                        case SubType.STEAL_REWARD:
+                            if (_contender.stolenCards == 0) indexToRemove.Add(i); break;
+                    }
+                }
+            }
+
+            indexToRemove.Sort();
+            indexToRemove.Reverse();
+            for (int i = 0; i < indexToRemove.Count; i++)
+            {
+                cards.RemoveAt(i);
+            }
         }
 
         private void PlayCard(Card card, CardZone cardZone)
@@ -236,7 +274,7 @@ namespace Booble.CardGame.AI
         {
             if (oppositeCard != null)
             {
-                bool lowerStrength = oppositeCard.Stats.strength < ((bestOppositeCard != null) ? bestOppositeCard.Stats.strength : 0);
+                bool lowerStrength = GetStrength(oppositeCard) < GetStrength(bestOppositeCard);
                 return lowerStrength && oppositeCard.Stats.strength <= 1;
             }
             return false;
@@ -248,48 +286,48 @@ namespace Booble.CardGame.AI
 
         public Card GetBestTarget(CardEffect effect, List<Card> possibleTargets)
         {
-            Card bestTarget = possibleTargets[new System.Random().Next(0, possibleTargets.Count)];
-
+            Card bestTarget = null;
             int bestStats = 0;
-            foreach (Card card in possibleTargets)
+
+            switch (effect.subType)
             {
-                switch (effect.subType)
-                {
-                    case SubType.DESTROY_CARD:
+                case SubType.DESTROY_CARD:
+                    {
+                        foreach (Card card in possibleTargets)
                         {
                             if (!card.IsPlayerCard) continue;
+                            if (card.IsField) return card;
 
-                            if (card.IsField)
-                                return card;
-                            else
-                            {
-                                Card oppositeCard = Board.Instance.GetOppositeCard(card);
-                                int temp = (oppositeCard != null) ? -3 : 0;
-                                GetBestStats(card, temp, ref bestTarget, ref bestStats);
-                            }
+                            Card oppositeCard = Board.Instance.GetOppositeCard(card);
+                            int temp = (oppositeCard != null) ? -3 : 0;
+
+                            GetBestStats(card, ref bestTarget, ref bestStats, temp);
                         }
                         break;
+                    }
 
-                    case SubType.DEAL_DAMAGE:
+                case SubType.DEAL_DAMAGE:
+                    {
+                        foreach (Card card in possibleTargets)
                         {
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
 
-                            if (card != null)
-                            {
-                                int temp = GetStats(card);
-                                int damage = effect.intParameter1;
-                                if (oppositeCard != null) damage += oppositeCard.Stats.strength;
+                            int temp = GetStats(card);
+                            int damage = effect.intParameter1;
+                            if (oppositeCard != null) damage += oppositeCard.Stats.strength;
 
-                                if ((card.Stats.defense <= damage) && (temp > bestStats))
-                                {
-                                    bestStats = temp;
-                                    bestTarget = card;
-                                };
+                            if ((card.Stats.defense <= damage) && (temp > bestStats))
+                            {
+                                bestStats = temp;
+                                bestTarget = card;
                             }
                         }
                         break;
+                    }
 
-                    case SubType.RETURN_CARD:
+                case SubType.RETURN_CARD:
+                    {
+                        foreach (Card card in possibleTargets)
                         {
                             int temp = 0;
                             if (card.Stats.IsBoosted())
@@ -304,47 +342,69 @@ namespace Booble.CardGame.AI
                             }
 
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
-                            if (oppositeCard != null) temp -= 3;
+                            if (oppositeCard != null && card.IsPlayerCard) temp -= 3;
 
-                            GetBestStats(card, temp, ref bestTarget, ref bestStats);
+                            GetBestStats(card, ref bestTarget, ref bestStats, temp);
+                        }
+
+                        break;
+                    }
+
+                case SubType.STEAL_CARD:
+                case SubType.DUPLICATE_CARD:
+                    {
+                        foreach (Card card in possibleTargets)
+                        {
+                            GetBestStats(card, ref bestTarget, ref bestStats);
                         }
                         break;
+                    }
 
-                    case SubType.STEAL_CARD:
-                    case SubType.DUPLICATE_CARD:
-                        GetBestStats(card, ref bestTarget, ref bestStats); break;
+                case SubType.SWAP_POSITION:
+                    {
+                        foreach (Card card in possibleTargets)
+                        {
+                            GetSwapPositionTarget(card, ref bestTarget, ref bestStats);
+                        }
+                        break;
+                    }
 
-                    case SubType.SWAP_POSITION:
-                        GetSwapPositionTarget(card, ref bestTarget, ref bestStats); break;
-
-                    case SubType.STAT_BOOST:
+                case SubType.STAT_BOOST:
+                    {
+                        foreach (Card card in possibleTargets)
                         {
                             Card oppositeCard = Board.Instance.GetOppositeCard(card);
+                            if (oppositeCard == null) continue;
 
-                            if (oppositeCard != null)
+                            CardStats cardStats = card.Stats;
+                            CardStats oppositeStats = oppositeCard.Stats;
+
+                            bool savedCard = cardStats.defense <= oppositeStats.strength && (cardStats.defense + effect.intParameter2) > oppositeStats.strength;
+                            bool killedCard = cardStats.strength < oppositeStats.defense && (cardStats.strength + effect.intParameter1) >= oppositeStats.defense;
+
+                            int cardStatsSum = GetStats(card);
+                            int oppositeCardStatsSum = GetStats(oppositeCard);
+
+                            if (killedCard && oppositeCardStatsSum > bestStats)
                             {
-                                CardStats cardStats = card.Stats;
-                                CardStats oppositeStats = oppositeCard.Stats;
-
-                                bool savedCard = cardStats.defense <= oppositeStats.strength && (cardStats.defense + effect.intParameter2) > oppositeStats.strength;
-                                bool killedCard = cardStats.strength < oppositeStats.defense && (cardStats.strength + effect.intParameter1) >= oppositeStats.defense;
-
-                                int cardStatsSum = GetStats(card);
-                                int oppositeCardStatsSum = GetStats(oppositeCard);
-
-                                if (killedCard && oppositeCardStatsSum > bestStats)
-                                {
-                                    bestTarget = card;
-                                    bestStats = oppositeCardStatsSum;
-                                }
-                                else if (savedCard && cardStatsSum > bestStats)
-                                {
-                                    bestTarget = card;
-                                    bestStats = cardStatsSum;
-                                }
+                                bestTarget = card;
+                                bestStats = oppositeCardStatsSum;
+                            }
+                            else if (savedCard && cardStatsSum > bestStats)
+                            {
+                                bestTarget = card;
+                                bestStats = cardStatsSum;
                             }
                         }
                         break;
+                    }
+            }
+
+            if (bestTarget == null)
+            {
+                foreach (Card card in possibleTargets)
+                {
+                    GetBestStats(card, ref bestTarget, ref bestStats);
                 }
             }
 
@@ -540,12 +600,7 @@ namespace Booble.CardGame.AI
 
         #endregion
 
-        private void GetBestStats(Card card, ref Card bestTarget, ref int bestStats)
-        {
-            GetBestStats(card, 0, ref bestTarget, ref bestStats);
-        }
-
-        private void GetBestStats(Card card, int baseStats, ref Card bestTarget, ref int bestStats)
+        private void GetBestStats(Card card, ref Card bestTarget, ref int bestStats, int baseStats = 0)
         {
             int temp = baseStats + GetStats(card);
             if (temp > bestStats)
@@ -558,6 +613,12 @@ namespace Booble.CardGame.AI
         protected int GetStats(Card card)
         {
             if (card != null) return card.Stats.strength + card.Stats.defense;
+            else return 0;
+        }
+
+        private int GetStrength(Card card)
+        {
+            if (card != null) return card.Stats.strength;
             else return 0;
         }
 

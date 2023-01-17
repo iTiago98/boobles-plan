@@ -16,7 +16,8 @@ namespace Booble.CardGame.AI
                     return Board.Instance.NumCardsOnTable(player) > 0;
 
                 case "Firme aquí":
-                    return Board.Instance.NumCardsOnTable(player) < player.cardZones.Count - 1;
+                    return Board.Instance.NumCardsOnTable(player) < player.cardZones.Count - 1
+                        && Board.Instance.NumCardsOnTable(player) >= 2;
 
                 case "Solo se aceptan firmas en tinta negra":
                     return player.fieldCardZone.isNotEmpty;
