@@ -2,7 +2,9 @@ using Booble.CardGame.Managers;
 using Booble.UI;
 using System.Collections;
 using System.Collections.Generic;
+using Booble.Interactables;
 using UnityEngine;
+using Cursor = Booble.UI.Cursor;
 
 namespace Booble.Managers
 {
@@ -42,6 +44,12 @@ namespace Booble.Managers
             PauseMenu.Instance.ShowPauseMenu(false);
 
             if (CardGameManager.Instance != null) CardGameManager.Instance.ResumeGame();
+            
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.collider != null && hit.collider.GetComponent<Interactable>())
+            {
+                Cursor.Instance.ShowActionText(true);
+            }
         }
 
         private void PauseGame()

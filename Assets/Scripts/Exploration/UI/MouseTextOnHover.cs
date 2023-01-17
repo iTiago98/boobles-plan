@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Booble.Interactables;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Cursor = Booble.UI.Cursor;
@@ -22,6 +23,14 @@ public class MouseTextOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Cursor.Instance.ShowActionText(false);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (hit.collider != null && hit.collider.GetComponent<Interactable>())
+        {
+            Cursor.Instance.ShowActionText(true);
+        }
+        else
+        {
+            Cursor.Instance.ShowActionText(false);
+        }
     }
 }
