@@ -1526,7 +1526,7 @@ GameObject:
   - component: {fileID: 891167129311928892}
   - component: {fileID: 5623140972545725587}
   - component: {fileID: 6587457936969166542}
-  - component: {fileID: 3242004785308026192}
+  - component: {fileID: 2361304195450184186}
   m_Layer: 5
   m_Name: Clues Button
   m_TagString: Untagged
@@ -1547,7 +1547,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7735595120235522882}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -1648,7 +1648,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3242004785308026192
+--- !u!114 &2361304195450184186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1657,11 +1657,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3158722014754234535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c21d41d8f80ce847b5eca27c10d813b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
-  m_VerticalFit: 0
+  _text: 4
 --- !u!1 &3346722732732109500
 GameObject:
   m_ObjectHideFlags: 0
@@ -8073,7 +8072,7 @@ RectTransform:
   m_Children:
   - {fileID: 2067750032191663794}
   m_Father: {fileID: 7735595120235522882}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8290,10 +8289,10 @@ RectTransform:
   m_Children:
   - {fileID: 7735595120574130565}
   - {fileID: 7735595119643250813}
-  - {fileID: 7735595120049275732}
   - {fileID: 7735595120576307433}
   - {fileID: 7735595120286650864}
   - {fileID: 9024124733403491517}
+  - {fileID: 7735595120049275732}
   m_Father: {fileID: 7735595119079195285}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8533,7 +8532,7 @@ RectTransform:
   m_Children:
   - {fileID: 7735595119580783550}
   m_Father: {fileID: 7735595120235522882}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -9786,7 +9785,7 @@ RectTransform:
   m_Children:
   - {fileID: 9130100790465238119}
   m_Father: {fileID: 7735595120235522882}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
