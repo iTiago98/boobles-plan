@@ -32,6 +32,15 @@ namespace Booble.Managers
         public bool InExplorationBehaviour => InExploration;
         public bool InHybridBehaviour => InScene(new List<string>() { Scenes.NELA_OFFICE_DAY_START, Scenes.BOSS_OFFICE_ENDING });
 
+        public bool InCluesScene => InScene(new List<string>()
+        {
+            Scenes.LOUNGE_0, Scenes.LOUNGE_1, Scenes.LOUNGE_2, Scenes.LOUNGE_3,
+            // Scenes.NELA_OFFICE_1, Scenes.NELA_OFFICE_2, Scenes.NELA_OFFICE_3,
+            Scenes.LOWER_HALL_1, Scenes.LOWER_HALL_2, Scenes.LOWER_HALL_3,
+            Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.BOSS_HALL_3,
+            Scenes.CANTEEN_2, Scenes.PPB_OFFICE
+        });
+        
         public string CurrentScene { get; private set; }
         public string PreviousScene { get; private set; }
 
@@ -321,6 +330,7 @@ namespace Booble.Managers
         private void OnInterviewLoaded(AsyncOperation op)
         {
             PauseMenu.Instance.ShowPauseButton(false);
+            ClueUI.Instance.DisableCluesButton();
             MusicManager.Instance.PlayMusic(MusicReference.Interview);
             CardGameManager.Instance.Initialize(PreviousScene != Scenes.MAIN_MENU);
         }

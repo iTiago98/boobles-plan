@@ -9457,6 +9457,7 @@ MonoBehaviour:
   _openX: 0
   _transitionDuration: 0.5
   _openCluesKey: 99
+  _cluesButton: {fileID: 3158722014754234535}
   clues:
   - name: Intro
     panel: {fileID: 5129329850525360179}
