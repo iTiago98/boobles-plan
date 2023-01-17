@@ -73,6 +73,9 @@ namespace Booble.Interactables
         {
             _mouseOverThisInteractable = true;
 
+            if (EventSystem.current.IsPointerOverGameObject())
+                return;
+            
             if (_interactionOnGoing)
                 return;
 
