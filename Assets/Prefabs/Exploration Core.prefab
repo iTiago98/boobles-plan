@@ -7573,6 +7573,7 @@ GameObject:
   - component: {fileID: 7735595119580783550}
   - component: {fileID: 7735595119580783548}
   - component: {fileID: 7735595119580783549}
+  - component: {fileID: 8384320603980514972}
   m_Layer: 5
   m_Name: Clues
   m_TagString: Untagged
@@ -7640,6 +7641,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8384320603980514972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7735595119580783551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c21d41d8f80ce847b5eca27c10d813b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text: 0
 --- !u!1 &7735595119643250814
 GameObject:
   m_ObjectHideFlags: 0

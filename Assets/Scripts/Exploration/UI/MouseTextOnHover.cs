@@ -10,6 +10,12 @@ public class MouseTextOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExi
     
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (_text == Cursor.CursorText.None)
+        {
+            Cursor.Instance.ShowActionText(false);
+            return;
+        }
+        
         Cursor.Instance.ShowActionText(true);
         Cursor.Instance.SetText(_text);
     }

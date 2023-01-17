@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Booble.Interactables.Dialogues;
 using Booble.Flags;
 using Booble.Characters;
+using Booble.UI;
 using Unity.VisualScripting;
 using UnityEngine.EventSystems;
 
@@ -98,15 +99,16 @@ namespace Booble.Interactables
         {
             if(EventSystem.current.IsPointerOverGameObject())
                 return;
-            
-            if(CluesOpen)
-                return;
-            
+
             if (_interactionOnGoing)
                 return;
 
             if (_xDistanceToPlayer <= _interactDistance)
             {
+                if (CluesOpen)
+                {
+                    ClueUI.Instance.ToggleClues();
+                }
                 StartInteraction();
             }
             else
