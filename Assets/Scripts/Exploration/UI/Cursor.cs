@@ -11,10 +11,12 @@ namespace Booble.UI
 {
 	public class Cursor : Singleton<Cursor>
 	{
-		private enum CursorText { None, Approach, Interact }
+		public enum CursorText { None, Approach, Interact, Menu, Clues }
 
 		private static string _approachString = "Acercarse";
 		private static string _interactString = "Interactuar";
+		private static string _menuString = "Menú";
+		private static string _cluesString = "Pistas";
 
 		[SerializeField] private RectTransform _cursorT;
 		[SerializeField] private RectTransform _backgroundT;
@@ -72,14 +74,45 @@ namespace Booble.UI
         }
 
 		public void SetInteractText()
-        {
+		{
 			if(_currentCursorText != CursorText.Interact)
-            {
+			{
 				_actionText.text = _interactString;
 				_currentCursorText = CursorText.Interact;
-            }
-        }
+			}
+		}
+		
+		
+		public void SetMenuText()
+		{
+			if(_currentCursorText != CursorText.Menu)
+			{
+				_actionText.text = _menuString;
+				_currentCursorText = CursorText.Menu;
+			}
+		}
+		
+		
+		public void SetCluesText()
+		{
+			if(_currentCursorText != CursorText.Clues)
+			{
+				_actionText.text = _cluesString;
+				_currentCursorText = CursorText.Clues;
+			}
+		}
 
+		public void SetText(CursorText text)
+		{
+			switch (text)
+			{
+				case CursorText.Approach: SetApproachText(); break;
+				case CursorText.Interact: SetInteractText(); break;
+				case CursorText.Menu: SetMenuText(); break;
+				case CursorText.Clues: SetCluesText(); break;
+			}
+		}
+		
 		public void ShowActionText(bool isShown)
         {
 	        _backgroundT.gameObject.SetActive(isShown);

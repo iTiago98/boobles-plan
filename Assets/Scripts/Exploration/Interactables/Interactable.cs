@@ -105,34 +105,6 @@ namespace Booble.Interactables
             if (_xDistanceToPlayer <= _interactDistance)
             {
                 StartInteraction();
-                // _interactionOnGoing = true;
-                //
-                // _player.StopMovement();
-                // _cursor.ShowActionText(false);
-                //
-                // bool found = false;
-                // int i = 0;
-                // while(!found && i < _clickDialogues.Count)
-                // {
-                //     ClickDialogue clickDialogue = _clickDialogues[i];
-                //     if(clickDialogue.FlagsSatisfied)
-                //     {
-                //         found = true;
-                //         _dialogue = clickDialogue.Dialogue;
-                //         clickDialogue.SetFlags();
-                //     }
-                //     i++;
-                // }
-                // if(!found)
-                // {
-                //     Debug.LogError("No Click Dialogue with a satisfied Flag List!");
-                // }
-                // _diagManager.StartDialogue(_dialogue, _options);
-                //
-                // _returnDialogue = _dialogue;
-                // _returnOptions = _options;
-                // _diagManager.OnEndDialogue.RemoveAllListeners();
-                // _diagManager.OnEndDialogue.AddListener(() => EndInteraction());
             }
             else
             {
