@@ -4,20 +4,23 @@ using System.Collections.Generic;
 using System.Security;
 using Booble.Flags;
 using Booble.Interactables;
+using Booble.Managers;
 using DG.Tweening;
+using Santi.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Booble.UI
 {
-    public class ClueUI : MonoBehaviour
+    public class ClueUI : Singleton<ClueUI>
     {
         [SerializeField] private RectTransform _panel;
         [SerializeField] private float _closedX;
         [SerializeField] private float _openX;
         [SerializeField] private float _transitionDuration;
         [SerializeField] private KeyCode _openCluesKey;
+        [SerializeField] private GameObject _cluesButton;
         [SerializeField] private List<ClueList> clues;
 
         [Serializable]
@@ -31,12 +34,28 @@ namespace Booble.UI
         private ClueList _currentClues;
         private ClueState _state = ClueState.Closed;
 
+        private void Awake()
+        {
+            if(SceneLoader.Instance.InCluesScene)
+                return;
+            
+            _cluesButton.SetActive(false);
+        }
+        
         private void Update()
         {
             if (!Input.GetKeyDown(_openCluesKey))
                 return;
 
+            if(!SceneLoader.Instance.InCluesScene)
+                return;
+         
             ToggleClues();
+        }
+
+        public void DisableCluesButton()
+        {
+            _cluesButton.SetActive(false);
         }
 
         public void ToggleClues()
