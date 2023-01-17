@@ -7,6 +7,7 @@ using Booble.Interactables;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Booble.UI
 {
@@ -17,7 +18,6 @@ namespace Booble.UI
         [SerializeField] private float _openX;
         [SerializeField] private float _transitionDuration;
         [SerializeField] private KeyCode _openCluesKey;
-        [SerializeField] private List<ClueFlag> _clueFlags;
         [SerializeField] private List<ClueList> clues;
 
         [Serializable]
@@ -33,12 +33,17 @@ namespace Booble.UI
 
         private void Update()
         {
-            if (Interactable.BlockActions && !Interactable.CluesOpen)
-                return;
-
             if (!Input.GetKeyDown(_openCluesKey))
                 return;
 
+            ToggleClues();
+        }
+
+        public void ToggleClues()
+        {
+            if (Interactable.BlockActions && !Interactable.CluesOpen)
+                return;
+            
             switch (_state)
             {
                 case ClueState.Open:
@@ -60,7 +65,7 @@ namespace Booble.UI
         {
             if (_currentClues.panel != null) _currentClues.panel.SetActive(false);
 
-            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3 };
+            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Car0, Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3 };
 
             for (int i = 0; i < flags.Count; i++)
             {
