@@ -94,7 +94,7 @@ namespace Booble.Managers
 
             if (playingStoryMode)
             {
-                List<CardsData> extraCards = GetExtraCards(Opponent_Name.Tutorial);
+                List<CardsData> extraCards = new List<CardsData>(GetExtraCards(Opponent_Name.Tutorial));
 
                 if (_opponentName != Opponent_Name.Tutorial) extraCards.AddRange(GetExtraCards(_opponentName));
 
