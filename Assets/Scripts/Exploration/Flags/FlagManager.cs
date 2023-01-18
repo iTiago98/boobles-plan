@@ -5,6 +5,8 @@ using Santi.Utils;
 using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using Booble.Managers;
+using Booble.Interactables.Dialogues;
 
 namespace Booble.Flags
 {
