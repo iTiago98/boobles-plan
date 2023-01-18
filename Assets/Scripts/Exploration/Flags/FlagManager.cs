@@ -5,6 +5,8 @@ using Santi.Utils;
 using System.IO;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
+using Booble.Managers;
+using Booble.Interactables.Dialogues;
 
 namespace Booble.Flags
 {
@@ -27,6 +29,7 @@ namespace Booble.Flags
         {
 	        Debug.Log("RESET FLAGS"); 
 	        PlayerPrefs.DeleteAll();
+			PlayerConfig.SetPlayerPrefs();
         }
 
 		public bool GetFlag(Flag.Reference flagRef)

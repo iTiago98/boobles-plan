@@ -37,7 +37,10 @@ namespace Booble.UI
 
         public void OnTextSpeedSliderValueChanged(System.Single value)
         {
-            DialogueManager.Instance.ChangeTextSpeed(value);
+            if (DialogueManager.Instance != null)
+                DialogueManager.Instance.ChangeTextSpeed(value);
+            else
+                PlayerConfig.SetCharacterDelay(value);
         }
     }
 }

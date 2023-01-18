@@ -25,26 +25,28 @@ namespace Booble.Managers
         private Bus _bgmBus;
         private Bus _sfxBus;
 
+        private const string MasterBusPath = "bus:/";
+        private const string BGMBusPath = "bus:/BGM";
+        private const string SFXBusPath = "bus:/SFX";
+
         private EventInstance _currentInstance;
         private MusicReference _currentReference;
 
         private void Start()
         {
-            // FlagManager.Instance.ResetFlags();
             PlayMusic(MusicReference.MainMenu);
             InitializeBuses();
         }
 
         private void InitializeBuses()
         {
-            string masterBusPath = "bus:/";
-            _masterBus = RuntimeManager.GetBus(masterBusPath);
+            _masterBus = RuntimeManager.GetBus(MasterBusPath);
+            _bgmBus = RuntimeManager.GetBus(BGMBusPath);
+            _sfxBus = RuntimeManager.GetBus(SFXBusPath);
 
-            string bgmBusPath = "bus:/BGM";
-            _bgmBus = RuntimeManager.GetBus(bgmBusPath);
-
-            string sfxBusPath = "bus:/SFX";
-            _sfxBus = RuntimeManager.GetBus(sfxBusPath);
+            _masterBus.setVolume(PlayerConfig.GetMasterVolume());
+            _bgmBus.setVolume(PlayerConfig.GetBGMVolume());
+            _sfxBus.setVolume(PlayerConfig.GetSFXVolume());
         }
 
         public void PlayMusic(MusicReference reference)
@@ -109,35 +111,34 @@ namespace Booble.Managers
 
         public float GetGeneralMusicVolume()
         {
-            float volume;
-            _masterBus.getVolume(out volume);
-            return volume;
+            return PlayerConfig.GetMasterVolume();
         }
+
         public void ChangeGeneralMusicVolume(float value)
         {
             _masterBus.setVolume(value);
+            PlayerConfig.SetMasterVolume(value);
         }
 
         public float GetBackgroundMusicVolume()
         {
-            float volume;
-            _bgmBus.getVolume(out volume);
-            return volume;
+            return PlayerConfig.GetBGMVolume();
         }
         public void ChangeBackgroundMusicVolume(float value)
         {
             _bgmBus.setVolume(value);
+            PlayerConfig.SetBGMVolume(value);
         }
 
         public float GetSFXMusicVolume()
         {
-            float volume;
-            _sfxBus.getVolume(out volume);
-            return volume;
+            return PlayerConfig.GetSFXVolume();
         }
+
         public void ChangeSFXVolume(float value)
         {
             _sfxBus.setVolume(value);
+            PlayerConfig.SetSFXVolume(value);
         }
 
         #endregion
