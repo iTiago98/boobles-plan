@@ -47,17 +47,23 @@ namespace Booble.Player
         {
             if (_endInteractionStagger != Interactable.BlockActions)
             {
-                _endInteractionStagger = Interactable.BlockActions;
+                if (Input.GetKeyUp(_moveKey))
+                {
+                    _endInteractionStagger = Interactable.BlockActions;
+                }
                 return;
             }
 
             if(EventSystem.current.IsPointerOverGameObject())
                 return;
             
-            if(Interactable.BlockActions)
+            if(Interactable.InteractionOnGoing)
                 return;
 
-            if (Input.GetKeyDown(_moveKey))
+            if (Input.GetKeyDown(_moveKey) && Interactable.MouseOverInteractable)
+                return;
+
+            if (Input.GetKey(_moveKey))
             {
                 SetDestination(_cam.ScreenToWorldPoint(Input.mousePosition).x);
             }

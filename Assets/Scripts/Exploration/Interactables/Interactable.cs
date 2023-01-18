@@ -13,17 +13,17 @@ namespace Booble.Interactables
 {
 	public class Interactable : MonoBehaviour
 	{
-        public static bool BlockActions => _mouseOverInteractable || _interactionOnGoing;
+        public static bool BlockActions => MouseOverInteractable || InteractionOnGoing;
+        public static bool InteractionOnGoing { get; private set; }
+        public static bool MouseOverInteractable { get; private set; }
         public static bool CluesOpen { get; set; }
         
-        private static bool _interactionOnGoing;
         private static Dialogue _returnDialogue;
         private static List<Option> _returnOptions;
-        private static bool _mouseOverInteractable;
 
         public static void ManualInteractionActivation()
         {
-            _interactionOnGoing = true;
+            InteractionOnGoing = true;
             UI.Cursor.Instance.ShowActionText(false);
         }
         
@@ -37,8 +37,8 @@ namespace Booble.Interactables
 
         public static void EndInteraction()
         {
-            _interactionOnGoing = false;
-            _mouseOverInteractable = false;
+            InteractionOnGoing = false;
+            MouseOverInteractable = false;
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null && hit.collider.GetComponent<Interactable>())
             {
@@ -77,10 +77,10 @@ namespace Booble.Interactables
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
             
-            if (_interactionOnGoing)
+            if (InteractionOnGoing)
                 return;
 
-            _mouseOverInteractable = true;
+            MouseOverInteractable = true;
             _cursor.ShowActionText(true);
         }
 
@@ -88,10 +88,10 @@ namespace Booble.Interactables
         {
             _mouseOverThisInteractable = false;
 
-            if (_interactionOnGoing)
+            if (InteractionOnGoing)
                 return;
 
-            _mouseOverInteractable = false;
+            MouseOverInteractable = false;
             _cursor.ShowActionText(false);
         }
 
@@ -100,7 +100,7 @@ namespace Booble.Interactables
             if(EventSystem.current.IsPointerOverGameObject())
                 return;
 
-            if (_interactionOnGoing)
+            if (InteractionOnGoing)
                 return;
 
             if (_xDistanceToPlayer <= _interactDistance)
@@ -122,7 +122,7 @@ namespace Booble.Interactables
             if (_unclickable)
                 return;
             
-            if (_interactionOnGoing || !_mouseOverThisInteractable)
+            if (InteractionOnGoing || !_mouseOverThisInteractable)
                 return;
 
             if(_xDistanceToPlayer <= _interactDistance)
@@ -137,7 +137,7 @@ namespace Booble.Interactables
         
         public void StartInteraction(bool hideBackOption = false)
         {
-            _interactionOnGoing = true;
+            InteractionOnGoing = true;
 
             _player.StopMovement();
             _cursor.ShowActionText(false);
