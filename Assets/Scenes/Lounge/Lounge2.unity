@@ -4321,7 +4321,6 @@ GameObject:
   - component: {fileID: 1794732976}
   - component: {fileID: 1794732979}
   - component: {fileID: 1794732975}
-  - component: {fileID: 1794732978}
   - component: {fileID: 1794732973}
   - component: {fileID: 1794732977}
   m_Layer: 0
@@ -4533,22 +4532,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.051066756, y: 1.8937294}
   m_Size: {x: 2.3378665, y: 3.787459}
   m_Direction: 0
---- !u!114 &1794732978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794732971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40db5a7b29e70a944b64d143938dd7ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _arcadeCollider: {fileID: 0}
-  _anim: {fileID: 1794732973}
-  _arcadioPartida: 19
-  _coins: 0f0000001100000010000000
 --- !u!114 &1794732979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5513,6 +5496,10 @@ PrefabInstance:
     - target: {fileID: 7735595119568338096, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735595120049275732, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7735595120456563715, guid: 39ddb94a0522f3c4e816ec577417bf8d, type: 3}
       propertyPath: m_AnchorMax.y
