@@ -23,7 +23,8 @@ namespace Booble.Characters
 			Romualdez,
 			Rosalinda,
 			RomualdezExplicito,
-			EmilinExplicito
+			EmilinExplicito,
+			quest
         }
 		
 		[System.Serializable]

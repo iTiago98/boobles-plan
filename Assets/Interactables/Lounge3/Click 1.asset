@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: Click 1
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: "\xA1Uy! \xBFY esta puerta aqu\xED al final del Lounge? "
+    _closeUp: 1
+  - _content: "Qu\xE9 sitio m\xE1s raro para poner una puerta... \xBFA d\xF3nde llevar\xE1?"
+    _closeUp: 1
+  - _content: (Intenta abrirla)
+    _closeUp: 1
+  - _content: "Vaya, parece que est\xE1 cerrada. Lo que me extra\xF1a es que no tiene
+      lector de tarjetas magn\xE9ticas..."
+    _closeUp: 1
+  - _content: "Si no que tiene una cerradura. De esas antiguas que todav\xEDa tienen
+      algunas abuelas en sus casas."
+    _closeUp: 1

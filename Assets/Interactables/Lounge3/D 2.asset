@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
+  m_Name: D 2
+  m_EditorClassIdentifier: 
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
+  _sentences:
+  - _content: Pues no, no parece que haya nadie...
+    _closeUp: 1
+  - _content: emmm
+    _closeUp: 16
+  - _content: "\xA1Ay! \xA1Qu\xE9 susto! \xA1Que s\xED que hay alguien aqu\xED!"
+    _closeUp: 1
+  - _content: sobre eso
+    _closeUp: 16
+  - _content: "\xBFQu\xE9 haces aqu\xED tan a oscuras? \xBFQui\xE9n eres?"
+    _closeUp: 1
+  - _content: el pensamiento no eucliniano y la posicion kantra tiende a ser infinita
+      y diversa
+    _closeUp: 16
+  - _content: "\xBFC\xF3mo dices?"
+    _closeUp: 1
+  - _content: la naturaleza dual es siempre ciclica
+    _closeUp: 16
+  - _content: y la atrapada es bucleica
+    _closeUp: 16
+  - _content: "Mira, ni te veo, ni s\xE9 qui\xE9n eres, ni s\xE9 qu\xE9 haces aqu\xED
+      a oscuras, pero me est\xE1s dando mucho mal rollo."
+    _closeUp: 1
+  - _content: los juegos bien hechos son ciclos
+    _closeUp: 16
+  - _content: "\xBFLos juegos? \xBFQu\xE9 juegos?"
+    _closeUp: 1
+  - _content: los malos son bucles
+    _closeUp: 16
+  - _content: La realidad y el aprendizaje humano? Es anti-bucleica, es decir Irracional
+    _closeUp: 16
+  - _content: "aunque no sigue el si-no\r"
+    _closeUp: 16
+  - _content: "si no el Si-Pero\r"
+    _closeUp: 16
+  - _content: "Esc\xFAchame bien, quien quiera que seas, dime ahora mismo qu\xE9
+      est\xE1s haciendo aqu\xED."
+    _closeUp: 1
+  - _content: En resumen un bucle nunca termina porque algo es imperfecto y sin final
+    _closeUp: 16
+  - _content: Un ciclo termina para empezar otro
+    _closeUp: 16
+  - _content: "Voy a llamar a seguridad, te lo advierto. Todo esto me est\xE1 empezando
+      a dar mucho miedo."
+    _closeUp: 1
+  - _content: y la Realidad consiste en todas las opciones, incluyendo al bucle al
+      ciclo y a una 3 que siempre acaba siendo 4+Infinito
+    _closeUp: 16
+  - _content: "\xA1Por favor! \xA1Para de una vez!"
+    _closeUp: 1
+  - _content: La Realidad es Kantra
+    _closeUp: 16
+  - _content: "\xA1No entiendo nada de lo que est\xE1s diciendo!"
+    _closeUp: 1
+  - _content: Todo lo Posible es Imposible, Y lo Imposible es posible
+    _closeUp: 16
+  - _content: "\xA1Para!"
+    _closeUp: 1
+  - _content: simple
+    _closeUp: 16
+  - _content: "\xA1PARA!"
+    _closeUp: 1
+  - _content: Una linea
+    _closeUp: 16
+  - _content: "\xA1TE LO RUEGO!"
+    _closeUp: 1
+  - _content: es un ciclo
+    _closeUp: 16
+  - _content: "Tengo que salir de aqu\xED."
+    _closeUp: 1
+  - _content: empieza
+    _closeUp: 16
+  - _content: "\xBFD\xF3nde demonios est\xE1 la puerta? \xA1No la encuentro!"
+    _closeUp: 1
+  - _content: y termina
+    _closeUp: 16
+  - _content: "\xA1NO ENCUENTRO LA MALDITA PUERTA!"
+    _closeUp: 1
+  - _content: Un Bucle
+    _closeUp: 16
+  - _content: "\xA1ME HE QUEDADO ENCERRADA!"
+    _closeUp: 1
+  - _content: esta atrapado siempre en lo mismo
+    _closeUp: 16
+  - _content: "\xA1AYUDA! \xA1POR FAVOR! \xA1AYUDA!"
+    _closeUp: 1
+  - _content: un ciclo empeiza y termina
+    _closeUp: 16
+  - _content: "\xA1SACADME DE AQU\xCD! \xA1NO QUIERO MORIR!"
+    _closeUp: 1
+  - _content: claro
+    _closeUp: 16
+  - _content: "\xA1AYUDA! \xA1POR FAVOR!"
+    _closeUp: 1
+  - _content: "\xA1TENGO MUCHO MIEDO!"
+    _closeUp: 1
+  - _content: "\xA1AYUDA!"
+    _closeUp: 1
+  - _content: Ayuda...
+    _closeUp: 1
+  - _content: Ayuda...
+    _closeUp: 1

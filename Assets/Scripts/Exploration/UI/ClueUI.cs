@@ -15,6 +15,8 @@ namespace Booble.UI
 {
     public class ClueUI : Singleton<ClueUI>
     {
+        private static List<bool> Clues;
+
         [SerializeField] private RectTransform _panel;
         [SerializeField] private float _closedX;
         [SerializeField] private float _openX;
@@ -22,7 +24,11 @@ namespace Booble.UI
         [SerializeField] private KeyCode _openCluesKey;
         [SerializeField] private GameObject _cluesButton;
         [SerializeField] private List<ClueList> clues;
-
+        
+        [Header("Notices")]
+        [SerializeField] private GameObject _buttonNotice;
+        [SerializeField] private List<GameObject> _clueNotices;
+            
         [Serializable]
         private struct ClueList
         {
@@ -36,20 +42,44 @@ namespace Booble.UI
 
         private void Awake()
         {
-            if(SceneLoader.Instance.InCluesScene)
+            if (!SceneLoader.Instance.InCluesScene)
+            {
+                _cluesButton.SetActive(false);
                 return;
+            }
             
-            _cluesButton.SetActive(false);
+            SetCluesPanel();
+            InvokeRepeating(nameof(UpdateClues), 0, 5);
+
+            if (Clues == null)
+            {
+                Clues = new List<bool>();
+                for (int i = 0; i < _clueNotices.Count; i++)
+                {
+                    Clues.Add(true);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < Clues.Count; i++)
+                {
+                    _clueNotices[i].SetActive(Clues[i]);
+                }
+            }
         }
         
         private void Update()
         {
+            Debug.Log(_cluesButton.activeInHierarchy);
+            if(!_cluesButton.activeInHierarchy)
+                return;
+            
+            bool active = _clueNotices.Exists(ai => ai.gameObject.activeInHierarchy);
+            _buttonNotice.gameObject.SetActive(active);
+
             if (!Input.GetKeyDown(_openCluesKey))
                 return;
 
-            if(!SceneLoader.Instance.InCluesScene)
-                return;
-         
             ToggleClues();
         }
 
@@ -66,6 +96,7 @@ namespace Booble.UI
             switch (_state)
             {
                 case ClueState.Open:
+                    UpdateCluesNotification();
                     _panel.DOAnchorPosX(_closedX, _transitionDuration);
                     Interactable.CluesOpen = false;
                     _state = ClueState.Closed;
@@ -80,6 +111,14 @@ namespace Booble.UI
             }
         }
 
+        private void UpdateCluesNotification()
+        {
+            for (int i = 0; i < Clues.Count; i++)
+            {
+                Clues[i] = _clueNotices[i].activeSelf;
+            }
+        }
+        
         public void SetCluesPanel()
         {
             if (_currentClues.panel != null) _currentClues.panel.SetActive(false);
@@ -101,8 +140,6 @@ namespace Booble.UI
 
         public void UpdateClues()
         {
-            SetCluesPanel();
-
             foreach (ClueFlag clueFlag in _currentClues.clues)
             {
                 bool flagStart = FlagManager.Instance.GetFlag(clueFlag.FlagReferenceStart);
