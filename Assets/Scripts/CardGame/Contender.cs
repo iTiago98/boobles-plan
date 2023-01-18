@@ -126,6 +126,12 @@ namespace Booble.CardGame
             UIManager.Instance.UpdateUIStats();
         }
 
+        public void RemoveMana()
+        {
+            currentMana = 0;
+            UIManager.Instance.UpdateUIStats();
+        }
+
         public void SubstractMana(int cost)
         {
             SubstractMana(cost, false);

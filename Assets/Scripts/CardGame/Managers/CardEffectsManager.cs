@@ -220,9 +220,14 @@ namespace Booble.CardGame.Managers
         private IEnumerator DecreaseManaCoroutine(CardEffect effect, Card source, int value)
         {
             Contender contender = CardGameManager.Instance.GetOtherContender(source.contender);
-            if (value == 0) value = contender.currentMana;
-
-            contender.SubstractMana(value);
+            if (value == 0)
+            {
+                contender.RemoveMana();
+            }
+            else
+            {
+                contender.SubstractMana(value);
+            }
 
             yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
 
