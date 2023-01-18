@@ -310,5 +310,11 @@ namespace Booble.CardGame.Managers
 
             if (TurnManager.Instance.IsOpponentTurn) _opponentAI.enabled = !value;
         }
+
+        [ContextMenu("Skip interview")]
+        public void SkipInterview()
+        {
+            UnloadInterview();
+        }
     }
 }
