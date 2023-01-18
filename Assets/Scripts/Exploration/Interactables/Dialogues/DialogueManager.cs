@@ -44,7 +44,11 @@ namespace Booble.Interactables.Dialogues
         private void Awake()
         {
             OnEndDialogue = new UnityEvent();
-            _characterDelay = _characterDelayDefault;
+        }
+
+        private void Start()
+        {
+            _characterDelay = PlayerConfig.GetCharacterDelay();
         }
 
         public void StartDialogue(Dialogue dialogue, List<Option> options = null, bool hideBackOption = false)
@@ -277,6 +281,7 @@ namespace Booble.Interactables.Dialogues
         {
             _characterDelay = _characterDelayDefault / value;
             if (_characterDelay < _characterDelayMin) _characterDelay = _characterDelayMin;
+            PlayerConfig.SetCharacterDelay(_characterDelay);
         }
     }
 

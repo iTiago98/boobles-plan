@@ -29,6 +29,7 @@ namespace Booble.Flags
         {
 	        Debug.Log("RESET FLAGS"); 
 	        PlayerPrefs.DeleteAll();
+			PlayerConfig.SetPlayerPrefs();
         }
 
 		public bool GetFlag(Flag.Reference flagRef)

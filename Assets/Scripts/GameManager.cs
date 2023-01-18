@@ -14,6 +14,12 @@ namespace Booble.Managers
 
         private float _defaultTimeScale;
 
+        private void Awake()
+        {
+            base.Awake();
+            PlayerConfig.InitializeValues();
+        }
+
         private void Update()
         {
             CheckPauseMenu();
