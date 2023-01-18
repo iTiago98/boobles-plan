@@ -73,7 +73,7 @@ namespace Booble.Managers
             _currentInstance.start();
             _currentInstance.release();
         }
-
+        
         public void StopMusic()
         {
             _currentInstance.stop(STOP_MODE.IMMEDIATE);
