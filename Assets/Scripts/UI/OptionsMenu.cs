@@ -13,6 +13,9 @@ namespace Booble.UI
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
 
+        [SerializeField] private float _characterDelayDefault;
+        [SerializeField] private float _characterDelayMin;
+
         public void SetSliderValue()
         {
             _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
@@ -37,10 +40,13 @@ namespace Booble.UI
 
         public void OnTextSpeedSliderValueChanged(System.Single value)
         {
+            float characterDelay = _characterDelayDefault / value;
+            if (characterDelay < _characterDelayMin) characterDelay = _characterDelayMin;
+
             if (DialogueManager.Instance != null)
-                DialogueManager.Instance.ChangeTextSpeed(value);
+                DialogueManager.Instance.ChangeTextSpeed(characterDelay);
             else
-                PlayerConfig.SetCharacterDelay(value);
+                PlayerConfig.SetCharacterDelay(characterDelay);
         }
     }
 }

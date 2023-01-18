@@ -19,7 +19,7 @@ namespace Booble
         private const float MasterBusVolumeDefaultValue = 1;
         private const float BGMBusVolumeDefaultValue = 1;
         private const float SFXBusVolumeDefaultValue = 1;
-        private const float CharacterDelayDefaultValue = 0.1f;
+        private const float CharacterDelayDefaultValue = 0.01f;
 
         private const string MasterBusVolumeKey = "MasterBusVolume";
         private const string BGMBusVolumeKey = "BGMBusVolume";
