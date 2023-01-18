@@ -26,6 +26,7 @@ namespace Booble.UI
         [SerializeField] private List<ClueList> clues;
         
         [Header("Notices")]
+        [SerializeField] private Toggle _toggle;
         [SerializeField] private GameObject _buttonNotice;
         [SerializeField] private List<GameObject> _clueNotices;
             
@@ -47,6 +48,13 @@ namespace Booble.UI
                 _cluesButton.SetActive(false);
                 return;
             }
+
+            if (!PlayerPrefs.HasKey("Clues"))
+            {
+                PlayerPrefs.SetInt("Clues", 1);
+            }
+            _toggle.isOn = PlayerPrefs.GetInt("Clues") == 1;
+            _toggle.onValueChanged.AddListener((value) => PlayerPrefs.SetInt("Clues", value ? 1 : 0));
             
             SetCluesPanel();
             InvokeRepeating(nameof(UpdateClues), 0, 5);
@@ -70,12 +78,19 @@ namespace Booble.UI
         
         private void Update()
         {
-            Debug.Log(_cluesButton.activeInHierarchy);
             if(!_cluesButton.activeInHierarchy)
                 return;
+
+            if (!_toggle.isOn)
+            {
+                _buttonNotice.SetActive(false);
+            }
+            else
+            {
+                bool active = _clueNotices.Exists(ai => ai.gameObject.activeInHierarchy);
+                _buttonNotice.gameObject.SetActive(active);
+            }
             
-            bool active = _clueNotices.Exists(ai => ai.gameObject.activeInHierarchy);
-            _buttonNotice.gameObject.SetActive(active);
 
             if (!Input.GetKeyDown(_openCluesKey))
                 return;
