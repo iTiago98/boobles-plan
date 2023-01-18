@@ -330,7 +330,7 @@ namespace Booble.Managers
         private void OnInterviewLoaded(AsyncOperation op)
         {
             PauseMenu.Instance.ShowPauseButton(false);
-            ClueUI.Instance.DisableCluesButton();
+            if(ClueUI.Instance != null) ClueUI.Instance.DisableCluesButton();
             MusicManager.Instance.PlayMusic(MusicReference.Interview);
             CardGameManager.Instance.Initialize(PreviousScene != Scenes.MAIN_MENU);
         }
