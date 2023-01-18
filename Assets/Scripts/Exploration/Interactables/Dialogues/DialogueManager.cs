@@ -23,8 +23,6 @@ namespace Booble.Interactables.Dialogues
         public bool HideBackOption { get; private set; }
 
         [SerializeField] private KeyCode _nextKey;
-        [SerializeField] private float _characterDelayDefault;
-        [SerializeField] private float _characterDelayMin;
         [SerializeField] private EventReference _characterSoundEmitter;
         [SerializeField] private GameObject _dialogueBox;
         [SerializeField] private Image _closeUp;
@@ -279,8 +277,7 @@ namespace Booble.Interactables.Dialogues
 
         public void ChangeTextSpeed(float value)
         {
-            _characterDelay = _characterDelayDefault / value;
-            if (_characterDelay < _characterDelayMin) _characterDelay = _characterDelayMin;
+            _characterDelay = value;
             PlayerConfig.SetCharacterDelay(_characterDelay);
         }
     }

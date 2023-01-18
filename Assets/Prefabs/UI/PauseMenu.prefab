@@ -992,6 +992,8 @@ MonoBehaviour:
   _generalMusicSlider: {fileID: 1509870803323077148}
   _backgroundMusicSlider: {fileID: 1509870802054270704}
   _sfxMusicSlider: {fileID: 1509870803400008611}
+  _characterDelayDefault: 0.01
+  _characterDelayMin: 0.001
 --- !u!1 &1509870801578939849
 GameObject:
   m_ObjectHideFlags: 0

@@ -6234,6 +6234,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6875685448627445515, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
+      propertyPath: _characterDelayMin
+      value: 0.001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875685448627445515, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
+      propertyPath: _characterDelayDefault
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 6976012273276153697, guid: bdd14cb56a1a3754eb4eb292c8de0106, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
