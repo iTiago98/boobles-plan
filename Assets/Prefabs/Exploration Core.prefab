@@ -3654,7 +3654,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Este es el apartado de pistas.\n\nSi en alg\xFAn momento te qudas atrancado
+  m_text: "Este es el apartado de pistas.\n\nSi en alg\xFAn momento te quedas atrancado
     y no tienes muy claro c\xF3mo seguir avanzando, echarle un vistazo a este apartado
     podr\xEDa sacarte del embrollo.\n\nPuedes utilizar la tecla C para abrir y cerrar
     el apartado de pistas.\n\nSi no quieres recibir notificaciones sobre nuevas pistas
