@@ -169,12 +169,14 @@ namespace Booble.Interactables.Dialogues
             if (!_dialogueRunning)
                 return;
 
-            // if (Input.GetKeyDown(KeyCode.S))
-            // {
-            //     DisplayLastSentence();
-            //     return;
-            // }
-
+#if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                DisplayLastSentence();
+                return;
+            }
+#endif
+            
             if (EventSystem.current.IsPointerOverGameObject())
                 return;
 
