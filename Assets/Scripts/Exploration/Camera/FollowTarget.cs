@@ -15,14 +15,19 @@ namespace Booble.MyCamera
 
         private void Awake()
         {
-            float newX = Mathf.Clamp(_target.position.x, _leftLimit, _rightLimit);
-            transform.SetXPosition(newX);
+            SetPosition();            
         }
-
+        
         private void Update()
         {
             float newX = Mathf.Lerp(transform.position.x, _target.position.x, _lerpFactor);
             newX = Mathf.Clamp(newX, _leftLimit, _rightLimit);
+            transform.SetXPosition(newX);
+        }
+
+        public void SetPosition()
+        {
+            float newX = Mathf.Clamp(_target.position.x, _leftLimit, _rightLimit);
             transform.SetXPosition(newX);
         }
 
