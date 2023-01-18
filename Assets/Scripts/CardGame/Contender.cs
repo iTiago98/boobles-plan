@@ -160,6 +160,7 @@ namespace Booble.CardGame
         public void ReceiveDamage(int strength)
         {
             life -= strength;
+            if (life < 0) life = 0;
             //if (eloquence < 0) eloquence = 0;
             UIManager.Instance.UpdateUIStats();
             TurnManager.Instance.CheckEndMidTurn();
