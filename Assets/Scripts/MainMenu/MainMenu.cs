@@ -63,8 +63,8 @@ namespace Booble.MainMenu
                 return;
 
             DeckManager.Instance.SetBaseDeck();
-            PauseMenu.Instance.InitializeCardMenu();
             DeckManager.Instance.CheckExtraCards();
+            PauseMenu.Instance.InitializeCardMenu();
 
             int i = 0;
             while (i < _checkPoints.Count && _checkPoints[i].Satisfied)

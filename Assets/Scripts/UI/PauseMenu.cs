@@ -64,14 +64,22 @@ namespace Booble.UI
             _pauseButton.gameObject.SetActive(value);
         }
 
-        public void UpdateAlerts(List<CardData> newCards, bool showAddedText, bool showAlertIcons)
+        public void AddNewCard(CardData card)
         {
-            _cardMenu.UpdateExtraCards(newCards, showAlertIcons);
+            _cardMenu.AddNewCard(card);
 
-            _pauseButton.ShowAlert(showAlertIcons && newCards.Count > 0);
-            _cardMenuButton.ShowAlert(showAlertIcons && newCards.Count > 0);
+            _pauseButton.ShowAlert(true);
+            _cardMenuButton.ShowAlert(true);
 
-            if (showAddedText) ShowCardObtainedText();
+            ShowCardObtainedText();
+        }
+
+        public void RemoveAlert(CardData card, int newCards)
+        {
+            _cardMenu.RemoveAlert(card);
+
+            _pauseButton.ShowAlert(newCards > 0);
+            _cardMenuButton.ShowAlert(newCards > 0);
         }
 
         #endregion

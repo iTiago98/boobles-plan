@@ -103,28 +103,35 @@ namespace Booble.UI
 
         #region Update Cards
 
-        public void UpdateExtraCards(List<CardData> newCards, bool showAlertIcons)
+        public void AddNewCard(CardData card)
         {
-            foreach (ContenderInfo contenderInfo in _contendersInfo)
+            ContenderInfo contenderInfo = _contendersInfo[(int)card.opponent];
+
+            contenderInfo.cardButton.ShowAlert(true);
+
+            foreach (Transform transform in contenderInfo.cardList.transform)
             {
-                contenderInfo.cardButton.ShowAlert(false);
-            }
-
-            foreach (CardData newCard in newCards)
-            {
-                ContenderInfo contenderInfo = _contendersInfo[(int)newCard.opponent];
-
-                AlertButton button = contenderInfo.cardButton;
-                button.ShowAlert(showAlertIcons);
-
-                foreach (Transform transform in contenderInfo.cardList.transform)
+                CardUI cardUI = transform.GetComponent<CardUI>();
+                if (cardUI.GetName() == card.data.name)
                 {
-                    CardUI card = transform.GetComponent<CardUI>();
-                    if (card.GetName() == newCard.data.name)
-                    {
-                        card.SetFront();
-                        card.ShowAlertImage(showAlertIcons);
-                    }
+                    cardUI.SetFront();
+                    cardUI.ShowAlertImage(true);
+                }
+            }
+        }
+
+        public void RemoveAlert(CardData card)
+        {
+            ContenderInfo contenderInfo = _contendersInfo[(int)card.opponent];
+
+            contenderInfo.cardButton.ShowAlert(DeckManager.Instance.GetNewCardsCountFromOpponent(card.opponent) - 1 > 0);
+
+            foreach(Transform transform in contenderInfo.cardList.transform)
+            {
+                CardUI cardUI = transform.GetComponent<CardUI>();
+                if(cardUI.GetName() == card.data.name)
+                {
+                    cardUI.ShowAlertImage(false);
                 }
             }
         }

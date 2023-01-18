@@ -32,10 +32,10 @@ namespace Booble.Managers
             return _playerAuxDeck;
         }
 
-        private void AddCard(CardsData cardsData, Opponent_Name opponentName, bool showAddedText = true, bool showAlertIcons = true)
+        private void AddCard(CardsData cardsData, Opponent_Name opponentName, bool newCard = true)
         {
             _playerDeck.Add(cardsData);
-            AddNewCard(cardsData, opponentName, showAddedText, showAlertIcons);
+            if (newCard) AddNewCard(cardsData, opponentName);
         }
 
         private void SetDeck(List<CardsData> source, ref List<CardsData> dest)
@@ -127,14 +127,14 @@ namespace Booble.Managers
         private List<CardData> _newCards = new List<CardData>();
         public List<CardData> GetNewCards() => _newCards;
 
-        public void AddNewCard(CardsData data, Opponent_Name name, bool showAddedText, bool showAlertIcons)
+        public void AddNewCard(CardsData data, Opponent_Name name)
         {
             CardData temp = new CardData();
             temp.data = data;
             temp.opponent = name;
             _newCards.Add(temp);
 
-            PauseMenu.Instance.UpdateAlerts(_newCards, showAddedText, showAlertIcons);
+            PauseMenu.Instance.AddNewCard(temp);
         }
 
         public void RemoveNewCard(CardsData data)
@@ -151,9 +151,19 @@ namespace Booble.Managers
 
             if (indexToRemove != -1)
             {
+                PauseMenu.Instance.RemoveAlert(_newCards[indexToRemove], _newCards.Count - 1);
                 _newCards.RemoveAt(indexToRemove);
-                PauseMenu.Instance.UpdateAlerts(_newCards, showAddedText: false, showAlertIcons: false);
             }
+        }
+
+        public int GetNewCardsCountFromOpponent(Opponent_Name opponentName)
+        {
+            int count = 0;
+            foreach (CardData card in _newCards)
+            {
+                if (card.opponent == opponentName) count++;
+            }
+            return count;
         }
 
         #endregion
@@ -282,7 +292,7 @@ namespace Booble.Managers
                 Reference flag = flags[i];
                 CardsData card = extraCards[i];
 
-                if (FlagManager.Instance.GetFlag(flag)) AddCard(card, opponentName, showAddedText: false, showAlertIcons: false);
+                if (FlagManager.Instance.GetFlag(flag)) AddCard(card, opponentName, newCard: false);
             }
         }
 
