@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Booble.Managers;
+using Booble.MyCamera;
 using UnityEngine;
 
 namespace Booble.Player
@@ -23,6 +24,7 @@ namespace Booble.Player
             {
                 _controller.transform.position = _spawnPositions[i].SpawnPosition;
                 _controller.StopMovement();
+                Camera.main.GetComponent<FollowTarget>().SetPosition();
             }
         }
     }
