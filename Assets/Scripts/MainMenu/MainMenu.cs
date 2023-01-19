@@ -39,6 +39,7 @@ namespace Booble.MainMenu
         [Header("Buttons")]
         [SerializeField] private GameObject _continueButton;
         [SerializeField] private GameObject _newGameButton;
+        [SerializeField] private GameObject _confirmButton;
         [SerializeField] private GameObject _tutorialCardsButton;
         [SerializeField] private GameObject _citrianoCardsButton;
         [SerializeField] private GameObject _ppBrosCardsButton;
@@ -66,13 +67,14 @@ namespace Booble.MainMenu
 
         private void OnEnable()
         {
-            EnableButtons(true);
+            EnableButtons();
         }
 
-        private void EnableButtons(bool enable)
+        private void EnableButtons(bool enable = true)
         {
             _continueButton.GetComponent<Button>().interactable = enable;
             _newGameButton.GetComponent<Button>().interactable = enable;
+            _confirmButton.GetComponent<Button>().interactable = enable;
 
             _tutorialCardsButton.GetComponent<Button>().interactable = enable;
             _citrianoCardsButton.GetComponent<Button>().interactable = enable;
