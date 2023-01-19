@@ -1466,7 +1466,7 @@ MonoBehaviour:
   _unclickable: 0
   _interactDistance: 2
   _clickDialogues:
-  - _dialogue: {fileID: 0}
+  - _dialogue: {fileID: 11400000, guid: 07ddd5f40ac44c24ba8ee1d41790e1a0, type: 2}
     _trueFlags: 
     _falseFlags: 
     _setFlags: 
