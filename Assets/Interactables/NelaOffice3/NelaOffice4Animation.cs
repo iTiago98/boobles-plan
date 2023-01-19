@@ -183,7 +183,8 @@ public class NelaOffice4Animation : MonoBehaviour
 
         if (!FlagManager.Instance.GetFlag(Flag.Reference.CitrianoVictoriaAlternativa)
             || !FlagManager.Instance.GetFlag(Flag.Reference.PPBVictoriaAlternativa)
-            || !FlagManager.Instance.GetFlag(Flag.Reference.SecretaryVictoriaAlternativa))
+            || !FlagManager.Instance.GetFlag(Flag.Reference.SecretaryVictoriaAlternativa)
+            || !FlagManager.Instance.GetFlag(Flag.Reference.GranFinalObtenida))
         {
             SceneLoader.Instance.LoadLoungeScene4();
             yield break;

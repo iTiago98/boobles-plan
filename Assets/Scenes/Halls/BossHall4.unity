@@ -677,7 +677,7 @@ MonoBehaviour:
     _setFlags: 
   _options:
   - _optionText: "\xBFArteaga? S\xF3lo vengo a devolverte tu pulsera."
-    _trueFlags: 600000006100000062000000
+    _trueFlags: 6000000061000000620000001c000000
     _falseFlags: 
     _dialogueOption: {fileID: 558194616}
   - _optionText: "\xBFMadariaga? \xBFPero qu\xE9 co*o? Vengo a detenerte."
