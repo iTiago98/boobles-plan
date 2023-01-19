@@ -9,6 +9,7 @@ using DG.Tweening;
 using Santi.Utils;
 using System;
 using System.Collections.Generic;
+using Booble.Flags;
 using UnityEngine;
 
 namespace Booble.CardGame.Managers
@@ -258,6 +259,16 @@ namespace Booble.CardGame.Managers
 
         private void OnInterviewEnd()
         {
+            if (alternateWinCondition)
+            {
+                switch (DeckManager.Instance.GetOpponentName())
+                {
+                    case Opponent_Name.Citriano: FlagManager.Instance.SetFlag(Flag.Reference.CitrianoVictoriaAlternativa); break;
+                    case Opponent_Name.PPBros: FlagManager.Instance.SetFlag(Flag.Reference.PPBVictoriaAlternativa); break;
+                    case Opponent_Name.Secretary: FlagManager.Instance.SetFlag(Flag.Reference.SecretaryVictoriaAlternativa); break;
+                }
+            }
+            
             if (playingStoryMode) UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
             else UIManager.Instance.InterviewEndAnimation(_playerWin, GetOnEndAction());
         }
