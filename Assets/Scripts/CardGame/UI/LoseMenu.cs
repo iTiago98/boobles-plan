@@ -51,7 +51,7 @@ namespace Booble.CardGame.UI
                     scene = Scenes.LOWER_HALL_2; break;
 
                 case Opponent_Name.Secretary:
-                    break;
+                    scene = Scenes.LOWER_HALL_3; break;
 
                 case Opponent_Name.Boss:
                     break;
