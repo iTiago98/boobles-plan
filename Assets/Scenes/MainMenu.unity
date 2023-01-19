@@ -9933,12 +9933,19 @@ MonoBehaviour:
   _options: {fileID: 235099448}
   _cardGameMenu: {fileID: 172151442}
   _duration: 0.5
-  _continueButton: {fileID: 1094690381}
   _mainPlayMenu: {fileID: 1299832761}
   _confirmMenu: {fileID: 414838031}
   _generalMusicSlider: {fileID: 1069240840}
   _backgroundMusicSlider: {fileID: 902660359}
   _sfxMusicSlider: {fileID: 1479633290}
+  _continueButton: {fileID: 1094690381}
+  _newGameButton: {fileID: 659448424}
+  _confirmButton: {fileID: 1200188375}
+  _tutorialCardsButton: {fileID: 1666985591}
+  _citrianoCardsButton: {fileID: 308107664}
+  _ppBrosCardsButton: {fileID: 993119188}
+  _secretaryCardsButton: {fileID: 1162028909}
+  _bossCardsButton: {fileID: 1552396825}
   _cardGameMenuBackground: {fileID: 36715551}
   _tutorialBackground: {fileID: 21300000, guid: 1a447d63c879aed4083cde411e137cd5, type: 3}
   _citrianoBackground: {fileID: 21300000, guid: 1537c20f245e3bd49b15a41bae2ba59c, type: 3}
