@@ -114,7 +114,8 @@ namespace Booble.Flags
             FinalNeutral,
             FinalBueno,
             BossHall4,
-            Cerrar
+            Cerrar,
+            BossDerrotado
         }
 
         [SerializeField] private Reference _flagReference;

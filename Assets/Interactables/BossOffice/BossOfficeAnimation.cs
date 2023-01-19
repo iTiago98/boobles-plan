@@ -58,6 +58,7 @@ public class BossOfficeAnimation : MonoBehaviour
         _bossUncensored.SetActive(true);
         yield return new WaitUntil(() => _cam.gameObject.activeSelf);
 
+        FlagManager.Instance.SetFlag(Flag.Reference.BossDerrotado);
         ThrowDialogue(_dialogue1);
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
