@@ -30,6 +30,7 @@ namespace Booble.MainMenu
         [Header("Play")]
         [SerializeField] private GameObject _mainPlayMenu;
         [SerializeField] private GameObject _confirmMenu;
+        [SerializeField] private GameObject _repeatMenu;
 
         [Header("Options")]
         [SerializeField] private Slider _generalMusicSlider;
@@ -38,6 +39,7 @@ namespace Booble.MainMenu
 
         [Header("Buttons")]
         [SerializeField] private GameObject _continueButton;
+        [SerializeField] private GameObject _repeatButton;
         [SerializeField] private GameObject _newGameButton;
         [SerializeField] private GameObject _confirmButton;
         [SerializeField] private GameObject _tutorialCardsButton;
@@ -62,7 +64,9 @@ namespace Booble.MainMenu
 
         private void Start()
         {
-            _continueButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida));
+            _continueButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida)
+                                      && !FlagManager.Instance.GetFlag(Flag.Reference.BossDerrotado));
+            _repeatButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.BossDerrotado));
         }
 
         private void OnEnable()
@@ -73,6 +77,7 @@ namespace Booble.MainMenu
         private void EnableButtons(bool enable = true)
         {
             _continueButton.GetComponent<Button>().interactable = enable;
+            _repeatButton.GetComponent<Button>().interactable = enable;
             _newGameButton.GetComponent<Button>().interactable = enable;
             _confirmButton.GetComponent<Button>().interactable = enable;
 
@@ -85,6 +90,12 @@ namespace Booble.MainMenu
 
         #region Play
 
+        public void RepeatButton(bool value)
+        {
+            _mainPlayMenu.SetActive(!value);
+            _repeatMenu.SetActive(value);
+        }
+        
         public void ContinueButton()
         {
             if (_onTween)
@@ -118,7 +129,7 @@ namespace Booble.MainMenu
             if (_onTween)
                 return;
 
-            if (_continueButton.activeSelf)
+            if (FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida))
             {
                 _mainPlayMenu.SetActive(false);
                 _confirmMenu.SetActive(true);
