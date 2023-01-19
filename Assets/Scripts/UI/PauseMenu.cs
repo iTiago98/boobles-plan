@@ -155,15 +155,17 @@ namespace Booble.UI
             }
         }
 
+        float cardObtainedTextInitialX = -1;
+
         public void ShowCardObtainedText()
         {
-            float initialX = _cardObtainedText.transform.position.x;
+            if(cardObtainedTextInitialX == -1) cardObtainedTextInitialX = _cardObtainedText.transform.position.x;
 
             Sequence sequence = DOTween.Sequence();
-            sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 0.5f));
+            sequence.Append(_cardObtainedText.transform.DOMoveX(cardObtainedTextInitialX, 0.5f));
             sequence.Append(_cardObtainedText.transform.DOMoveX(0, 1f));
             sequence.AppendInterval(1f);
-            sequence.Append(_cardObtainedText.transform.DOMoveX(initialX, 1f));
+            sequence.Append(_cardObtainedText.transform.DOMoveX(cardObtainedTextInitialX, 1f));
 
             sequence.Play();
         }
