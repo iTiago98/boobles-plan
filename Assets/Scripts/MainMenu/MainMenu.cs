@@ -28,7 +28,6 @@ namespace Booble.MainMenu
         [SerializeField] private float _duration;
 
         [Header("Play")]
-        [SerializeField] private GameObject _continueButton;
         [SerializeField] private GameObject _mainPlayMenu;
         [SerializeField] private GameObject _confirmMenu;
 
@@ -36,6 +35,16 @@ namespace Booble.MainMenu
         [SerializeField] private Slider _generalMusicSlider;
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
+
+        [Header("Buttons")]
+        [SerializeField] private GameObject _continueButton;
+        [SerializeField] private GameObject _newGameButton;
+        [SerializeField] private GameObject _tutorialCardsButton;
+        [SerializeField] private GameObject _citrianoCardsButton;
+        [SerializeField] private GameObject _ppBrosCardsButton;
+        [SerializeField] private GameObject _secretaryCardsButton;
+        [SerializeField] private GameObject _bossCardsButton;
+
 
         [Header("Backgrounds")]
         [SerializeField] private Image _cardGameMenuBackground;
@@ -53,6 +62,23 @@ namespace Booble.MainMenu
         private void Start()
         {
             _continueButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida));
+        }
+
+        private void OnEnable()
+        {
+            EnableButtons(true);
+        }
+
+        private void EnableButtons(bool enable)
+        {
+            _continueButton.GetComponent<Button>().interactable = enable;
+            _newGameButton.GetComponent<Button>().interactable = enable;
+
+            _tutorialCardsButton.GetComponent<Button>().interactable = enable;
+            _citrianoCardsButton.GetComponent<Button>().interactable = enable;
+            _ppBrosCardsButton.GetComponent<Button>().interactable = enable;
+            _secretaryCardsButton.GetComponent<Button>().interactable = enable;
+            _bossCardsButton.GetComponent<Button>().interactable = enable;
         }
 
         #region Play
@@ -81,6 +107,8 @@ namespace Booble.MainMenu
             {
                 Debug.Log("Completed the game!");
             }
+
+            EnableButtons(false);
         }
 
         public void NewGameButton()
@@ -93,7 +121,10 @@ namespace Booble.MainMenu
                 _mainPlayMenu.SetActive(false);
                 _confirmMenu.SetActive(true);
             }
-            else NewGame();
+            else
+            {
+                NewGame();
+            }
         }
 
         private void NewGame()
@@ -102,6 +133,8 @@ namespace Booble.MainMenu
             PauseMenu.Instance.InitializeCardMenu();
             FlagManager.Instance.ResetFlags();
             SceneLoader.Instance.LoadCar0();
+
+            EnableButtons(false);
         }
 
         public void ConfirmNewGameButton()
@@ -252,8 +285,11 @@ namespace Booble.MainMenu
                 Camera.main.gameObject,
                 _canvas,
                 _eventSystem,
-                _background
+                _background,
+                this.gameObject
             });
+
+            EnableButtons(false);
         }
 
         public void SetButtonBackground(string name)
