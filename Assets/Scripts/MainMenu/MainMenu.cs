@@ -232,6 +232,7 @@ namespace Booble.MainMenu
         [ContextMenu("Get Alternate Win Cons")]
         public void GetAlternateWinCons()
         {
+            FlagManager.Instance.SetFlag(Flag.Reference.GranFinalObtenida);
             FlagManager.Instance.SetFlag(Flag.Reference.CitrianoVictoriaAlternativa);
             FlagManager.Instance.SetFlag(Flag.Reference.PPBVictoriaAlternativa);
             FlagManager.Instance.SetFlag(Flag.Reference.SecretaryVictoriaAlternativa);
