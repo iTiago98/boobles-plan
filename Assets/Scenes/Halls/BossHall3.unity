@@ -758,6 +758,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _postInterview: {fileID: 11400000, guid: d2957b9b996ec8d4a82ada7648470159, type: 2}
+  _postInterviewWinCon: {fileID: 11400000, guid: 599051e9104121649acb8758822a7ddc, type: 2}
   _fade: {fileID: 118461265}
   _rosalinda: {fileID: 216241353}
 --- !u!114 &542390947
@@ -1702,6 +1703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _postInterview: {fileID: 11400000, guid: d2957b9b996ec8d4a82ada7648470159, type: 2}
+  _postInterviewWinCon: {fileID: 11400000, guid: 599051e9104121649acb8758822a7ddc, type: 2}
   _fade: {fileID: 118461265}
   _rosalinda: {fileID: 216241353}
 --- !u!1 &1541373396

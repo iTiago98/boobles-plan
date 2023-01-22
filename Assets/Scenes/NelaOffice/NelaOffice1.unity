@@ -1023,6 +1023,7 @@ MonoBehaviour:
   _image: {fileID: 1066474336}
   _dialogue: {fileID: 11400000, guid: 274ac245c5d673148bbe7b6f10de34d5, type: 2}
   _postInterview: {fileID: 11400000, guid: de5a5e4ed78ac474b810b0ebd270b674, type: 2}
+  _postInterviewWinCon: {fileID: 11400000, guid: d5239c4ee72a6874ba2d45194a1d2c62, type: 2}
   _dataSaved: {fileID: 11400000, guid: c4af6dc503276b54686e094c7815540e, type: 2}
   _day1: 37
   _officeDialogue: {fileID: 11400000, guid: 138becfebdb38a345a19c944e1e1340e, type: 2}

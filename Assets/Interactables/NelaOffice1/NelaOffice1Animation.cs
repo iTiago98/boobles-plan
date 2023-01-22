@@ -20,6 +20,7 @@ public class NelaOffice1Animation : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private Dialogue _dialogue;
     [SerializeField] private Dialogue _postInterview;
+    [SerializeField] private Dialogue _postInterviewWinCon;
     [SerializeField] private Dialogue _dataSaved;
     [SerializeField] private Flag.Reference _day1;
     [SerializeField] private Dialogue _officeDialogue;
@@ -39,15 +40,8 @@ public class NelaOffice1Animation : MonoBehaviour
     
     private void Start()
     {
-        // if (!FlagManager.Instance.GetFlag(_day1))
-        // {
-        //     FlagManager.Instance.SetFlag(_day1);
-        //     StartCoroutine(Day1AnimationCoroutine());
-        // }
-        // else
-        // {
-            StartCoroutine(OfficeDialogueCoroutine());
-        // }
+
+        StartCoroutine(OfficeDialogueCoroutine());
     }
 
     private IEnumerator Day1AnimationCoroutine()
@@ -96,8 +90,15 @@ public class NelaOffice1Animation : MonoBehaviour
 
             FlagManager.Instance.SetFlag(Flag.Reference.Day1);
             yield return new WaitForSeconds(_fade.FadeDuration);
-            
-            ThrowDialogue(_postInterview);
+
+            if (FlagManager.Instance.GetFlag(Flag.Reference.CitrianoVictoriaAlternativa))
+            {
+                ThrowDialogue(_postInterviewWinCon);
+            }
+            else
+            {
+                ThrowDialogue(_postInterview);
+            }
             yield return new WaitUntil(() => _dialogueEnd);
 
             _fade.FadeOut(SceneLoader.Instance.LoadHome1);

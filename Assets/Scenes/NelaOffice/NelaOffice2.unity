@@ -1687,6 +1687,7 @@ MonoBehaviour:
   _fade: {fileID: 2063433066}
   _officeDialogue: {fileID: 11400000, guid: 138becfebdb38a345a19c944e1e1340e, type: 2}
   _postInterviewDialogue: {fileID: 11400000, guid: 70c0b7dec4072354d87801a6f4cb24b1, type: 2}
+  _postInterviewWinCon: {fileID: 11400000, guid: 140892db05d3338429a76fa780e741c8, type: 2}
   _dataSaved: {fileID: 11400000, guid: c4af6dc503276b54686e094c7815540e, type: 2}
   _options:
   - _optionText: Empezar la entrevista con los PinPonBros.

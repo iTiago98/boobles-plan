@@ -15,6 +15,7 @@ public class NelaOffice2Animation : MonoBehaviour
     [SerializeField] private Fader _fade;
     [SerializeField] private Dialogue _officeDialogue;
     [SerializeField] private Dialogue _postInterviewDialogue;
+    [SerializeField] private Dialogue _postInterviewWinCon;
     [SerializeField] private Dialogue _dataSaved;
     [SerializeField] private List<Option> _options;
     
@@ -64,7 +65,14 @@ public class NelaOffice2Animation : MonoBehaviour
             FlagManager.Instance.SetFlag(Flag.Reference.Day2);
             yield return new WaitForSeconds(_fade.FadeDuration);
             
-            ThrowDialogue(_postInterviewDialogue);
+            if (FlagManager.Instance.GetFlag(Flag.Reference.PPBVictoriaAlternativa))
+            {
+                ThrowDialogue(_postInterviewWinCon);
+            }
+            else
+            {
+                ThrowDialogue(_postInterviewDialogue);
+            }
             yield return new WaitUntil(() => _dialogueEnd);
             _dialogueEnd = false;
             

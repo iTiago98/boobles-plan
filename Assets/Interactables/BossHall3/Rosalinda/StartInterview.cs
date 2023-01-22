@@ -12,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class StartInterview : DialogueEvent
 {
     [SerializeField] private Dialogue _postInterview;
+    [SerializeField] private Dialogue _postInterviewWinCon;
     [SerializeField] private Fader _fade;
     [SerializeField] private GameObject _rosalinda;
     
@@ -41,8 +42,16 @@ public class StartInterview : DialogueEvent
         _rosalinda.GetComponent<SpriteRenderer>().enabled = false;
         FlagManager.Instance.SetFlag(Flag.Reference.Day3);
         yield return new WaitForSeconds(_fade.FadeDuration);
+
+        if (FlagManager.Instance.GetFlag(Flag.Reference.SecretaryVictoriaAlternativa))
+        {
+            ThrowDialogue(_postInterviewWinCon);
+        }
+        else
+        {
+            ThrowDialogue(_postInterview);
+        }
         
-        ThrowDialogue(_postInterview);
         yield return new WaitUntil(() => _dialogueEnd);
         _dialogueEnd = false;
         
