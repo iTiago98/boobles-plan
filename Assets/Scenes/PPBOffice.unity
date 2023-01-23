@@ -280,6 +280,68 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &267389851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 267389852}
+  - component: {fileID: 267389855}
+  - component: {fileID: 267389854}
+  m_Layer: 0
+  m_Name: Option 0 0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &267389852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267389851}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1073125716}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &267389854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267389851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a693203d12d98749a520908171c2468, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dialogue: {fileID: 11400000, guid: 8f5ac50b634a83541aac2bc5bfe07c0b, type: 2}
+  _onEnd: 2
+  _callbackEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &267389855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267389851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25382dd38b5a02649a76e93447168530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &296909978
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,6 +795,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 495966977}
+  - {fileID: 267389852}
   m_Father: {fileID: 2022376628}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -759,8 +822,13 @@ MonoBehaviour:
   - _optionText: "Detr\xE1s de estas fotos parece haber otras tantas. Deber\xEDa
       echarles un vistazo."
     _trueFlags: 
-    _falseFlags: 
+    _falseFlags: 3c000000
     _dialogueOption: {fileID: 495966978}
+  - _optionText: "Detr\xE1s de estas fotos parece haber otras tantas. Deber\xEDa
+      echarles un vistazo."
+    _trueFlags: 3c000000
+    _falseFlags: 
+    _dialogueOption: {fileID: 267389855}
 --- !u!61 &1073125718
 BoxCollider2D:
   m_ObjectHideFlags: 0
