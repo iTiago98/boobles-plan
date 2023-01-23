@@ -113,6 +113,8 @@ namespace Booble.Managers
         public bool HasAlternateWinConditionCard()
         {
             if (_opponentName == Opponent_Name.Tutorial) return false;
+            if (_opponentName == Opponent_Name.Boss) return false;
+            
             return _playerAuxDeck.Contains(GetExtraCards(_opponentName)[0]);
         }
 
