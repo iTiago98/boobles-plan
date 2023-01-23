@@ -22,17 +22,22 @@ namespace Booble.Managers
 
         private void Update()
         {
-            CheckPauseMenu();
+            if (Input.GetKeyDown(KeyCode.Escape)) CheckPauseMenu();
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            if (!focus && !gamePaused)
+            {
+                CheckPauseMenu();
+            }
         }
 
         private void CheckPauseMenu()
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                if (SceneLoader.Instance != null && (SceneLoader.Instance.InMainMenu || SceneLoader.Instance.InCredits)) return;
-                if (UIManager.Instance != null && UIManager.Instance.loseMenuActive) return;
-                SwitchPauseMenu();
-            }
+            if (SceneLoader.Instance != null && (SceneLoader.Instance.InMainMenu || SceneLoader.Instance.InCredits)) return;
+            if (UIManager.Instance != null && UIManager.Instance.loseMenuActive) return;
+            SwitchPauseMenu();
         }
 
         public void SwitchPauseMenu()
@@ -50,7 +55,7 @@ namespace Booble.Managers
             PauseMenu.Instance.ShowPauseMenu(false);
 
             if (CardGameManager.Instance != null) CardGameManager.Instance.ResumeGame();
-            
+
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.collider != null && hit.collider.GetComponent<Interactable>())
             {
