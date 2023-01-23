@@ -278,7 +278,7 @@ namespace Booble.CardGame.Managers
             if (alternateWinCondition) return UnloadInterview;
             else if (_playerWin)
             {
-                if (DeckManager.Instance.HasAlternateWinConditionCard() && playingStoryMode)
+                if (playingStoryMode && DeckManager.Instance.HasAlternateWinConditionCard())
                 {
                     return ThrowRepeatDialogue;
                 }
