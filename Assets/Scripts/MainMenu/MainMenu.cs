@@ -142,6 +142,7 @@ namespace Booble.MainMenu
 
         private void NewGame()
         {
+            ClueUI.ResetClues();
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
             FlagManager.Instance.ResetFlags();

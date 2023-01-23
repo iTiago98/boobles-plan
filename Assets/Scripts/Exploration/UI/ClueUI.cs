@@ -17,6 +17,11 @@ namespace Booble.UI
     {
         private static List<bool> Clues;
 
+        public static void ResetClues()
+        {
+            Clues = null;
+        }
+
         [SerializeField] private RectTransform _panel;
         [SerializeField] private float _closedX;
         [SerializeField] private float _openX;
