@@ -417,7 +417,8 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
                         case Target.ENEMY:
                         case Target.AENEMY:
-                            if (subType == SubType.SWAP_POSITION || subType == SubType.STEAL_CARD || subType == SubType.DUPLICATE_CARD)
+                            if (subType == SubType.SWAP_POSITION || subType == SubType.STEAL_CARD
+                                || subType == SubType.DUPLICATE_CARD || subType == SubType.DEAL_DAMAGE)
                                 return otherContenderHasCards;
                             else
                                 return otherContenderHasCards || otherContender.fieldCardZone.isNotEmpty;
