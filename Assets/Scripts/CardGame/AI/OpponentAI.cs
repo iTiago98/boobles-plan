@@ -54,14 +54,14 @@ namespace Booble.CardGame.AI
                 GetCards(ref playableCards, ref goodCards, emptyCardZone, fieldCardZone);
 
                 if (goodCards.Count > 0)
-                    PlayCard(goodCards, emptyCardZone);
+                    PlayCard(goodCards, emptyCardZone, goodCards: true);
                 else
                 {
                     if (playableCards.Count > 0
                         && (_contender.currentMana == _contender.currentMaxMana
                         || _contender.hand.numCards > CardGameManager.Instance.settings.handCapacity))
                     {
-                        PlayCard(playableCards, emptyCardZone);
+                        PlayCard(playableCards, emptyCardZone, goodCards: false);
                     }
                     else SkipTurn();
                 }
@@ -104,9 +104,9 @@ namespace Booble.CardGame.AI
             }
         }
 
-        private void PlayCard(List<Card> cards, CardZone emptyCardZone)
+        private void PlayCard(List<Card> cards, CardZone emptyCardZone, bool goodCards)
         {
-            CheckCards(ref cards);
+            CheckCards(ref cards, goodCards);
 
             int index = Random.Range(0, cards.Count);
             Card card = cards[index];
@@ -127,7 +127,7 @@ namespace Booble.CardGame.AI
             PlayCard(card, cardZone);
         }
 
-        private void CheckCards(ref List<Card> cards)
+        private void CheckCards(ref List<Card> cards, bool goodCards)
         {
             List<int> indexToRemove = new List<int>();
 
@@ -142,7 +142,9 @@ namespace Booble.CardGame.AI
                     switch (card.effect.subType)
                     {
                         case SubType.DESTROY_CARD:
-                            hasDestroyCard = true; break;
+                            hasDestroyCard = true; 
+                            if(!goodCards) indexToRemove.Add(i);
+                            break;
 
                         case SubType.DEAL_DAMAGE:
                         case SubType.RETURN_CARD:
@@ -150,7 +152,7 @@ namespace Booble.CardGame.AI
                             if (hasDestroyCard) indexToRemove.Add(i); break;
 
                         case SubType.STEAL_REWARD:
-                            if (_contender.stolenCards == 0) indexToRemove.Add(i); break;
+                            if (!goodCards) indexToRemove.Add(i); break;
                     }
                 }
             }
