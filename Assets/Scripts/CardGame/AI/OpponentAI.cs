@@ -54,7 +54,9 @@ namespace Booble.CardGame.AI
                 GetCards(ref playableCards, ref goodCards, emptyCardZone, fieldCardZone);
 
                 if (goodCards.Count > 0)
+                {
                     PlayCard(goodCards, emptyCardZone, goodCards: true);
+                }
                 else
                 {
                     if (playableCards.Count > 0
@@ -107,6 +109,8 @@ namespace Booble.CardGame.AI
         private void PlayCard(List<Card> cards, CardZone emptyCardZone, bool goodCards)
         {
             CheckCards(ref cards, goodCards);
+
+            if (cards.Count <= 0) return;
 
             int index = Random.Range(0, cards.Count);
             Card card = cards[index];
