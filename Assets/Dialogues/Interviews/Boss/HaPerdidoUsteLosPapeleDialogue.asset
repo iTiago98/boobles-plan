@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2123c1b70a2532f4080021301eda3f54, type: 3}
   m_Name: HaPerdidoUsteLosPapeleDialogue
   m_EditorClassIdentifier: 
-  _characters: {fileID: 0}
+  _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "\xA1Uy, pero qu\xE9 cartas m\xE1s monas que tiene usted! \xBFA ver?"
     _closeUp: 1
