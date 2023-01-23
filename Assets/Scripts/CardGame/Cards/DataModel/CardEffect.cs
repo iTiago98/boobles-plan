@@ -703,7 +703,12 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                 case SubType.CREATE_CARD:
                     s += "invoca el argumento " + cardParameter.name + " en una zona libre."; break;
                 case SubType.SWAP_POSITION:
-                    s += "mueve el argumento objetivo a una zona adyacente. Si ya hay un argumento, se intercambian."; break;
+                    switch (targetType)
+                    {
+                        case Target.CARD: s += "mueve el argumento objetivo a una zona adyacente aleatoriamente. Si ya hay un argumento, se intercambian."; break;
+                        case Target.AENEMY: s += "intercambia el contenido de dos zonas de cartas del oponente."; break;
+                    }
+                    break;
                 case SubType.SWAP_CONTENDER:
                     s += "la carta pasa al control del oponente."; break;
                 case SubType.DRAW_CARD:
