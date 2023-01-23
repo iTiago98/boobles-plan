@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: PostEntrevistaWinCon
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: "No me creo que est\xE9 as\xED por partimenpori\u2026 \xBFC\xF3mo lo
+      ha dicho, parlamentimentar, compartiralizar, compartimentalizar?"
+    _closeUp: 1
+  - _content: "Sea lo que sea no me lo creo, esta pobre mujer tiene que ser otra
+      v\xEDctima del aparato ese. \xA1Tengo que encontrarlo como sea!"
+    _closeUp: 1
+  - _content: "Creo que hay un plano del edificio en mi despacho\u2026"
+    _closeUp: 1

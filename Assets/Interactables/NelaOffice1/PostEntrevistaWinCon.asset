@@ -13,4 +13,22 @@ MonoBehaviour:
   m_Name: PostEntrevistaWinCon
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: La verdad es que voy a necesitar ayuda interna para descubrir los secretos
+      de  esta empresa.
+    _closeUp: 1
+  - _content: "Aunque con este anormal, a saber si llego a alg\xFAn lado\u2026 Con
+      ese jersey hecho de hilillos blancos de mandarina\u2026 \xA1puaj!"
+    _closeUp: 1
+  - _content: "Me recuerda a El Pobre De La Manta que rondaba por mi barrio. S\xF3lo
+      llevaba una manta zarrapastrosa como prenda de ropa."
+    _closeUp: 1
+  - _content: Algunos dicen que llevaba un tanga de leopardo debajo, otros que iba
+      con la manguera colgando.
+    _closeUp: 1
+  - _content: "Y luego est\xE1 la teor\xEDa de que era el mejor neurocirujano de
+      la ciudad pero mat\xF3 a su hijo en una operaci\xF3n fallida."
+    _closeUp: 1
+  - _content: "Desde ese momento se convirti\xF3 a s\xED mismo en un paria sin derecho
+      a nada. \xBFQu\xE9 habr\xE1 hecho este Citriano? \xBFAplastar una mandarina?"
+    _closeUp: 1

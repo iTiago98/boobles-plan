@@ -13,4 +13,17 @@ MonoBehaviour:
   m_Name: PostEntrevistaWinCon
   m_EditorClassIdentifier: 
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
-  _sentences: []
+  _sentences:
+  - _content: "Aqu\xED est\xE1 pasando algo gordo. Tengo que investigar m\xE1s sobre
+      esa famosa maquinita. Parece que vuelven a la gente loca o algo."
+    _closeUp: 1
+  - _content: Me recuerda a la pandemia de los celulares del 25.
+    _closeUp: 1
+  - _content: "Esa en la que todos los ni\xF1os pegados a un m\xF3vil acabaron lobotomizados
+      en el barrio de Salamanca."
+    _closeUp: 1
+  - _content: "Creo recordar que encontraron una especie de emisor de interferencias
+      5G en la antena m\xE1s alta de la zona."
+    _closeUp: 1
+  - _content: "\xBFEstar\xE1 esa m\xE1quina en el piso m\xE1s alto del edificio?"
+    _closeUp: 1
