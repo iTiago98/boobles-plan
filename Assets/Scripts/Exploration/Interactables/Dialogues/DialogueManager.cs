@@ -277,7 +277,7 @@ namespace Booble.Interactables.Dialogues
             });
         }
 
-        public void ChangeTextSpeed(float value)
+        public void ChangeCharacterDelay(float value)
         {
             _characterDelay = value;
             PlayerConfig.SetCharacterDelay(_characterDelay);

@@ -32,10 +32,13 @@ namespace Booble.MainMenu
         [SerializeField] private GameObject _confirmMenu;
         [SerializeField] private GameObject _repeatMenu;
 
+        [Header("CardGame")]
+        [SerializeField] private GameObject _cardGameWarning;
+        [SerializeField] private GameObject _cardGameButtons;
+        [SerializeField] private GameObject _cardGameContinueButton;
+
         [Header("Options")]
-        [SerializeField] private Slider _generalMusicSlider;
-        [SerializeField] private Slider _backgroundMusicSlider;
-        [SerializeField] private Slider _sfxMusicSlider;
+        [SerializeField] private OptionsMenu _optionsMenu;
 
         [Header("Buttons")]
         [SerializeField] private GameObject _continueButton;
@@ -67,6 +70,18 @@ namespace Booble.MainMenu
             _continueButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.HabemusPartida)
                                       && !FlagManager.Instance.GetFlag(Flag.Reference.BossDerrotado));
             _repeatButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.BossDerrotado));
+
+            if (PlayerConfig.GetShowCardGameWarning())
+            {
+                _cardGameWarning.SetActive(true);
+                _cardGameContinueButton.SetActive(true);
+            }
+            else
+            {
+                _cardGameButtons.SetActive(true);
+            }
+
+            _optionsMenu.SetSliderValue();
         }
 
         private void OnEnable()
@@ -258,6 +273,15 @@ namespace Booble.MainMenu
 
         #region Card Game
 
+        public void OnCardGameContinueButton()
+        {
+            _cardGameContinueButton.SetActive(false);
+            _cardGameWarning.SetActive(false);
+            _cardGameButtons.SetActive(true);
+
+            PlayerConfig.SetShowCardGameWarning(false);
+        }
+
         public void TutorialCardsButton()
         {
             DeckManager.Instance.SetOpponent(Opponent_Name.Tutorial);
@@ -378,10 +402,6 @@ namespace Booble.MainMenu
             _onTween = true;
             _mainMenu.DOMoveX(_options.position.x, _duration);
             _options.DOMoveX(_mainMenu.position.x, _duration).OnComplete(() => _onTween = false);
-
-            _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
-            _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
-            _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
         }
 
         public void QuitButton()

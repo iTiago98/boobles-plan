@@ -54,12 +54,8 @@ namespace Booble.UI
                 return;
             }
 
-            if (!PlayerPrefs.HasKey("Clues"))
-            {
-                PlayerPrefs.SetInt("Clues", 1);
-            }
-            _toggle.isOn = PlayerPrefs.GetInt("Clues") == 1;
-            _toggle.onValueChanged.AddListener((value) => PlayerPrefs.SetInt("Clues", value ? 1 : 0));
+            _toggle.isOn = PlayerConfig.GetShowCluesAlerts();
+            _toggle.onValueChanged.AddListener((value) => PlayerConfig.SetShowCluesAlerts(value));
             
             SetCluesPanel();
             InvokeRepeating(nameof(UpdateClues), 0, 5);
