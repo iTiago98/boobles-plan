@@ -16,19 +16,19 @@ MonoBehaviour:
   _sentences:
   - _content: "\xA1Nella! \xA1Por fin te encuentro! S\xF3lo quer\xEDa darte las gracias
       por todo."
-    _closeUp: 2
+    _closeUp: 17
   - _content: "De no haber sido por ti seguir\xEDa viviendo una mentira en el trabajo."
-    _closeUp: 2
+    _closeUp: 17
   - _content: Bueno, no ha sido suficiente. No he podido salvar a tu marido.
     _closeUp: 1
   - _content: "Si no hubieras venido seguir\xEDamos sin saber nada de todo esto.
       As\xED que no sean tan dura contigo misma."
-    _closeUp: 2
+    _closeUp: 17
   - _content: "Si al menos hubiera sabido qui\xE9n era Citriano en realidad..."
     _closeUp: 1
   - _content: "No te culpes de nada, cari\xF1o. Nadie sab\xEDamos nada. Demasiado
       has hecho ya, todos los que estamos aqu\xED te debemos mucho."
-    _closeUp: 2
+    _closeUp: 17
   - _content: Eres lo mejor que me ha pasado en mucho tiempo. Gracias por ser mi
       amiga.
-    _closeUp: 2
+    _closeUp: 17
