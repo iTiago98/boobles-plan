@@ -15,6 +15,7 @@ namespace Booble.UI
         [SerializeField] private Slider _textSpeedSlider;
 
         [SerializeField] private float _textSpeedMin;
+        [SerializeField] private float _textSpeedMax;
 
         public void SetSliderValue()
         {
@@ -52,6 +53,7 @@ namespace Booble.UI
         private float CharacterDelaySliderToValue(float value)
         {
             float characterDelay = _textSpeedMin / value;
+            if (characterDelay > _textSpeedMax) characterDelay = _textSpeedMax;
             return characterDelay;
         }
          
