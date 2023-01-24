@@ -64,3 +64,9 @@ MonoBehaviour:
   - _name: Quest
     _identifier: 16
     _closeUp: {fileID: 21300000, guid: 9247a4030bf7d3e4fb1e0c7660588255, type: 3}
+  - _name: Ana Bata
+    _identifier: 17
+    _closeUp: {fileID: 21300000, guid: 266e8fd11e2c3bf499776052cd9dacaa, type: 3}
+  - _name: Jose Bata
+    _identifier: 18
+    _closeUp: {fileID: 21300000, guid: e27968079ea89974583a38a20cf43c4b, type: 3}

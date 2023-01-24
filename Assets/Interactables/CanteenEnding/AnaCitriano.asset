@@ -15,18 +15,18 @@ MonoBehaviour:
   _characters: {fileID: 11400000, guid: edafd26f3a255d3499f4ae9f56941e4f, type: 2}
   _sentences:
   - _content: "Hombre Nella, \xA1qu\xE9 alegr\xEDa verte!"
-    _closeUp: 3
+    _closeUp: 18
   - _content: "\xA1Nella! \xA1Justo a tiempo! Mira quiero presentarte a mi marido,
       Jose."
-    _closeUp: 2
+    _closeUp: 17
   - _content: "\xA1Hombre Citr\u2026 digo Jose! Se me hace raro veros ahora tan cambiados,
       jeje."
     _closeUp: 1
   - _content: "Y todo gracias a ti. \xA1Por fin tir\xF3 su jersey de pellejos de
       naranja!"
-    _closeUp: 2
+    _closeUp: 17
   - _content: "Hombre, en cuanto recuper\xE9 la consciencia y empec\xE9 a notar ese
       olor a fruta podrida\u2026 \xA1No he podido quit\xE1rmelo de la cabeza!"
-    _closeUp: 3
+    _closeUp: 18
   - _content: "Gracias de coraz\xF3n, Nella. Me has devuelto la dignidad."
-    _closeUp: 3
+    _closeUp: 18
