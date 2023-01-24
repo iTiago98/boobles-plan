@@ -142,7 +142,8 @@ namespace Booble.UI
 
         private void SetButtonsAvailable()
         {
-            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.Car0, Flag.Reference.Day1, Flag.Reference.Day2, Flag.Reference.Day3, Flag.Reference.Day4 };
+            List<Flag.Reference> flags = new List<Flag.Reference>() { Flag.Reference.HabemusPartida, Flag.Reference.Home0, 
+                Flag.Reference.Home1, Flag.Reference.RosalindaIntro, Flag.Reference.Day3 };
 
             bool available = true;
             for (int i = 0; i < flags.Count; i++)
@@ -150,11 +151,12 @@ namespace Booble.UI
                 Flag.Reference flag = flags[i];
                 ContenderInfo contenderInfo = _contendersInfo[i];
 
-                SetAvailable(contenderInfo, available);
                 if (!FlagManager.Instance.GetFlag(flag))
                 {
                     available = false;
                 }
+
+                SetAvailable(contenderInfo, available);
             }
         }
 

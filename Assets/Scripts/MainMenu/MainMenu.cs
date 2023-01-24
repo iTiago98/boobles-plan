@@ -199,14 +199,14 @@ namespace Booble.MainMenu
         [ContextMenu("Start Flashback")]
         public void StartFlashback()
         {
-            FlagManager.Instance.SetFlag(Flag.Reference.Day3);
-            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
-            FlagManager.Instance.SetFlag(Flag.Reference.Home2);
-            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
-            FlagManager.Instance.SetFlag(Flag.Reference.Home1);
+            FlagManager.Instance.SetFlag(Flag.Reference.HabemusPartida);
             FlagManager.Instance.SetFlag(Flag.Reference.Car0);
             FlagManager.Instance.SetFlag(Flag.Reference.Home0);
-            FlagManager.Instance.SetFlag(Flag.Reference.HabemusPartida);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home1);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Home2);
+            FlagManager.Instance.SetFlag(Flag.Reference.Day3);
             DeckManager.Instance.SetBaseDeck();
             PauseMenu.Instance.InitializeCardMenu();
             SceneLoader.Instance.LoadNelaOfficeDayStart();
