@@ -54,8 +54,8 @@ namespace Booble.UI
                 return;
             }
 
-            _toggle.isOn = PlayerConfig.GetShowCluesAlerts();
-            _toggle.onValueChanged.AddListener((value) => PlayerConfig.SetShowCluesAlerts(value));
+            _toggle.isOn = PlayerConfig.ShowCluesAlerts.Value;
+            _toggle.onValueChanged.AddListener((value) => PlayerConfig.ShowCluesAlerts.SetValue(value));
             
             SetCluesPanel();
             InvokeRepeating(nameof(UpdateClues), 0, 5);

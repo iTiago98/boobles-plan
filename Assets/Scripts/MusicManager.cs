@@ -44,9 +44,9 @@ namespace Booble.Managers
             _bgmBus = RuntimeManager.GetBus(BGMBusPath);
             _sfxBus = RuntimeManager.GetBus(SFXBusPath);
 
-            _masterBus.setVolume(PlayerConfig.GetMasterVolume());
-            _bgmBus.setVolume(PlayerConfig.GetBGMVolume());
-            _sfxBus.setVolume(PlayerConfig.GetSFXVolume());
+            _masterBus.setVolume(GetGeneralMusicVolume());
+            _bgmBus.setVolume(GetBackgroundMusicVolume());
+            _sfxBus.setVolume(GetSFXMusicVolume());
         }
 
         public void PlayMusic(MusicReference reference)
@@ -111,34 +111,34 @@ namespace Booble.Managers
 
         public float GetGeneralMusicVolume()
         {
-            return PlayerConfig.GetMasterVolume();
+            return PlayerConfig.MasterVolume.Value;
         }
 
         public void ChangeGeneralMusicVolume(float value)
         {
             _masterBus.setVolume(value);
-            PlayerConfig.SetMasterVolume(value);
+            PlayerConfig.MasterVolume.SetValue(value);
         }
 
         public float GetBackgroundMusicVolume()
         {
-            return PlayerConfig.GetBGMVolume();
+            return PlayerConfig.BGMVolume.Value;
         }
         public void ChangeBackgroundMusicVolume(float value)
         {
             _bgmBus.setVolume(value);
-            PlayerConfig.SetBGMVolume(value);
+            PlayerConfig.BGMVolume.SetValue(value);
         }
 
         public float GetSFXMusicVolume()
         {
-            return PlayerConfig.GetSFXVolume();
+            return PlayerConfig.SFXVolume.Value;
         }
 
         public void ChangeSFXVolume(float value)
         {
             _sfxBus.setVolume(value);
-            PlayerConfig.SetSFXVolume(value);
+            PlayerConfig.SFXVolume.SetValue(value);
         }
 
         #endregion

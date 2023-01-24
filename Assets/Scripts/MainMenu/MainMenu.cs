@@ -71,7 +71,7 @@ namespace Booble.MainMenu
                                       && !FlagManager.Instance.GetFlag(Flag.Reference.BossDerrotado));
             _repeatButton.SetActive(FlagManager.Instance.GetFlag(Flag.Reference.BossDerrotado));
 
-            if (PlayerConfig.GetShowCardGameWarning())
+            if (PlayerConfig.ShowCardGameWarning.Value)
             {
                 _cardGameWarning.SetActive(true);
                 _cardGameContinueButton.SetActive(true);
@@ -279,7 +279,7 @@ namespace Booble.MainMenu
             _cardGameWarning.SetActive(false);
             _cardGameButtons.SetActive(true);
 
-            PlayerConfig.SetShowCardGameWarning(false);
+            PlayerConfig.ShowCardGameWarning.SetValue(false);
         }
 
         public void TutorialCardsButton()

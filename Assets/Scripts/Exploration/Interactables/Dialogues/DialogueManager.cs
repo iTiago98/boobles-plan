@@ -46,7 +46,7 @@ namespace Booble.Interactables.Dialogues
 
         private void Start()
         {
-            _characterDelay = PlayerConfig.GetCharacterDelay();
+            _characterDelay = PlayerConfig.CharacterDelay.Value;
         }
 
         public void StartDialogue(Dialogue dialogue, List<Option> options = null, bool hideBackOption = false)
@@ -280,7 +280,7 @@ namespace Booble.Interactables.Dialogues
         public void ChangeCharacterDelay(float value)
         {
             _characterDelay = value;
-            PlayerConfig.SetCharacterDelay(_characterDelay);
+            PlayerConfig.CharacterDelay.SetValue(_characterDelay);
         }
     }
 
