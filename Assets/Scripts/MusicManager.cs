@@ -51,7 +51,7 @@ namespace Booble.Managers
 
         public void PlayMusic(MusicReference reference)
         {
-            if (reference == _currentReference) return;
+            if (_currentReference != MusicReference.Interview && reference == _currentReference) return;
 
             _currentReference = reference;
 
