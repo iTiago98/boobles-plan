@@ -291,7 +291,6 @@ namespace Booble.CardGame.Managers
             return UIManager.Instance.ShowLoseMenu;
         }
 
-        public void RetryInterview() { SceneLoader.Instance.ReloadInterview(); }
         public void UnloadInterview() { SceneLoader.Instance.UnloadInterviewScene(); }
 
         #endregion
