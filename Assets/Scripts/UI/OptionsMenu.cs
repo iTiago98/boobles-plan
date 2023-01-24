@@ -12,15 +12,17 @@ namespace Booble.UI
         [SerializeField] private Slider _generalMusicSlider;
         [SerializeField] private Slider _backgroundMusicSlider;
         [SerializeField] private Slider _sfxMusicSlider;
+        [SerializeField] private Slider _textSpeedSlider;
 
-        [SerializeField] private float _characterDelayDefault;
         [SerializeField] private float _characterDelayMin;
+        [SerializeField] private float _characterDelayMax;
 
         public void SetSliderValue()
         {
             _generalMusicSlider.value = MusicManager.Instance.GetGeneralMusicVolume();
             _backgroundMusicSlider.value = MusicManager.Instance.GetBackgroundMusicVolume();
             _sfxMusicSlider.value = MusicManager.Instance.GetSFXMusicVolume();
+            _textSpeedSlider.value = CharacterDelayValueToSlider(PlayerConfig.CharacterDelay.Value);
         }
 
         public void OnGeneralMusicValueChanged(System.Single value)
@@ -40,13 +42,43 @@ namespace Booble.UI
 
         public void OnTextSpeedSliderValueChanged(System.Single value)
         {
-            float characterDelay = _characterDelayDefault / value;
-            if (characterDelay < _characterDelayMin) characterDelay = _characterDelayMin;
+            float characterDelay = CharacterDelaySliderToValue(value);
 
             if (DialogueManager.Instance != null)
-                DialogueManager.Instance.ChangeTextSpeed(characterDelay);
+                DialogueManager.Instance.ChangeCharacterDelay(characterDelay);
             else
-                PlayerConfig.SetCharacterDelay(characterDelay);
+                PlayerConfig.CharacterDelay.SetValue(characterDelay);
+        }
+
+        private float CharacterDelaySliderToValue(float value)
+        {
+            float characterDelay;
+            if (value == 0)
+            {
+                characterDelay = _characterDelayMax;
+            }
+            else
+            {
+                characterDelay = _characterDelayMin / value;
+                if (characterDelay > _characterDelayMax) characterDelay = _characterDelayMax;
+            }
+            return characterDelay;
+        }
+
+        private float CharacterDelayValueToSlider(float value)
+        {
+            float sliderValue;
+            if (value == 0)
+            {
+                sliderValue = 0;
+            }
+            else
+            {
+                sliderValue = _characterDelayMin / value;
+                if (sliderValue < 0) sliderValue = 0;
+                else if (sliderValue > 1) sliderValue = 1;
+            }
+            return sliderValue;
         }
     }
 }

@@ -7,115 +7,146 @@ namespace Booble
 {
     public static class PlayerConfig
     {
-        private static float MasterVolume;
-        private static float BGMVolume;
-        private static float SFXVolume;
+        #region Settings
 
-        private static float CharacterDelay;
+        public static PlayerSettingFloat MasterVolume;
+        public static PlayerSettingFloat BGMVolume;
+        public static PlayerSettingFloat SFXVolume;
+        public static PlayerSettingFloat CharacterDelay;
 
-        private static bool ShowCluesAlerts;
+        public static PlayerSettingBool ShowCluesAlerts;
+        public static PlayerSettingBool ShowCardGameWarning;
 
+        private static List<PlayerSetting> settings;
+
+        #endregion
+
+        #region Default Values
 
         private const float MasterBusVolumeDefaultValue = 1;
         private const float BGMBusVolumeDefaultValue = 1;
         private const float SFXBusVolumeDefaultValue = 1;
         private const float CharacterDelayDefaultValue = 0.01f;
+        private const bool ShowCluesAlertsDefaultValue = true;
+        private const bool ShowCardGameWarningDefaultValue = true;
+
+        #endregion
+
+        #region Keys
 
         private const string MasterBusVolumeKey = "MasterBusVolume";
         private const string BGMBusVolumeKey = "BGMBusVolume";
         private const string SFXBusVolumeKey = "SFXBusVolume";
         private const string CharacterDelayValueKey = "CharacterDelayValue";
+        private const string ShowCluesAlertsKey = "ShowCluesAlerts";
+        private const string ShowCardGameWarningKey = "ShowCardGameWarning";
+
+        #endregion
 
         public static void InitializeValues()
         {
-            if (PlayerPrefs.HasKey(MasterBusVolumeKey))
-            {
-                MasterVolume = PlayerPrefs.GetFloat(MasterBusVolumeKey);
-            }
-            else
-            {
-                MasterVolume = MasterBusVolumeDefaultValue;
-            }
+            MasterVolume = new PlayerSettingFloat(MasterBusVolumeKey, MasterBusVolumeDefaultValue);
+            BGMVolume = new PlayerSettingFloat(BGMBusVolumeKey, BGMBusVolumeDefaultValue);
+            SFXVolume = new PlayerSettingFloat(SFXBusVolumeKey, SFXBusVolumeDefaultValue);
+            CharacterDelay = new PlayerSettingFloat(CharacterDelayValueKey, CharacterDelayDefaultValue);
+            ShowCluesAlerts = new PlayerSettingBool(ShowCluesAlertsKey, ShowCluesAlertsDefaultValue);
+            ShowCardGameWarning = new PlayerSettingBool(ShowCardGameWarningKey, ShowCardGameWarningDefaultValue);
 
-            if (PlayerPrefs.HasKey(BGMBusVolumeKey))
+            settings = new List<PlayerSetting>()
             {
-                BGMVolume = PlayerPrefs.GetFloat(BGMBusVolumeKey);
-            }
-            else
-            {
-                BGMVolume = BGMBusVolumeDefaultValue;
-            }
-
-            if (PlayerPrefs.HasKey(SFXBusVolumeKey))
-            {
-                SFXVolume = PlayerPrefs.GetFloat(SFXBusVolumeKey);
-            }
-            else
-            {
-                SFXVolume = SFXBusVolumeDefaultValue;
-            }
-
-            if (PlayerPrefs.HasKey(CharacterDelayValueKey))
-            {
-                CharacterDelay = PlayerPrefs.GetFloat(CharacterDelayValueKey);
-            }
-            else
-            {
-                CharacterDelay = CharacterDelayDefaultValue;
-            }
-
-            //if (PlayerPrefs.HasKey(CharacterDelayValueKey))
-            //    CharacterDelay = PlayerPrefs.GetFloat(CharacterDelayValueKey);
+                MasterVolume, BGMVolume, SFXVolume, CharacterDelay, ShowCluesAlerts, ShowCardGameWarning
+            };
         }
 
         public static void SetPlayerPrefs()
         {
-            PlayerPrefs.SetFloat(MasterBusVolumeKey, MasterVolume);
-            PlayerPrefs.SetFloat(BGMBusVolumeKey, BGMVolume);
-            PlayerPrefs.SetFloat(SFXBusVolumeKey, SFXVolume);
-            PlayerPrefs.SetFloat(CharacterDelayValueKey, CharacterDelay);
+            foreach(PlayerSetting setting in settings)
+            {
+                setting.SetValue();
+            }
         }
 
-        #region Setters
+        #region Classes
 
-        public static void SetMasterVolume(float value)
+        public abstract class PlayerSetting
         {
-            MasterVolume = value;
-            PlayerPrefs.SetFloat(MasterBusVolumeKey, value);
+            protected string key;
+
+            public PlayerSetting(string key)
+            {
+                this.key = key;
+            }
+
+            public abstract void SetValue();
+
         }
 
-        public static void SetBGMVolume(float value)
+        public class PlayerSettingFloat : PlayerSetting
         {
-            BGMVolume = value;
-            PlayerPrefs.SetFloat(BGMBusVolumeKey, value);
+            public float Value { private set; get; }
+
+            public PlayerSettingFloat(string key, float defaultValue) : base(key)
+            {
+                if (PlayerPrefs.HasKey(key))
+                {
+                    Value = PlayerPrefs.GetFloat(key);
+                }
+                else
+                {
+                    Value = defaultValue;
+                }
+            }
+
+            public override void SetValue()
+            {
+                PlayerPrefs.SetFloat(key, Value);
+            }
+
+            public void SetValue(float value)
+            {
+                Value = value;
+                PlayerPrefs.SetFloat(key, value);
+            }
+
         }
 
-        public static void SetSFXVolume(float value)
+        public class PlayerSettingBool : PlayerSetting
         {
-            SFXVolume = value;
-            PlayerPrefs.SetFloat(SFXBusVolumeKey, value);
+            public bool Value { private set; get; }
+
+            public PlayerSettingBool(string key, bool defaultValue) : base(key)
+            {
+                if (PlayerPrefs.HasKey(key))
+                {
+                    Value = IntToBool(PlayerPrefs.GetInt(key));
+                }
+                else
+                {
+                    SetValue(defaultValue);
+                }
+            }
+
+            public override void SetValue()
+            {
+                PlayerPrefs.SetInt(key, BoolToInt(Value));
+            }
+
+            public void SetValue(bool value)
+            {
+                Value = value;
+                PlayerPrefs.SetInt(key, BoolToInt(value));
+            }
+
+            private static int BoolToInt(bool value)
+            {
+                return value ? 1 : 0;
+            }
+
+            private static bool IntToBool(int value)
+            {
+                return value == 1;
+            }
         }
-
-        public static void SetCharacterDelay(float value)
-        {
-            CharacterDelay = value;
-            PlayerPrefs.SetFloat(CharacterDelayValueKey, value);
-        }
-
-        //public static void SetShowCluesAlerts(bool value)
-        //{
-        //    ShowCluesAlerts = value;
-        //    PlayerPrefs.SetBool(MasterBusVolumeKey, value);
-        //}
-
-        #endregion
-
-        #region Getters
-
-        public static float GetMasterVolume() { return MasterVolume; }
-        public static float GetBGMVolume() { return BGMVolume; }
-        public static float GetSFXVolume() { return SFXVolume; }
-        public static float GetCharacterDelay() { return CharacterDelay; }
 
         #endregion
     }

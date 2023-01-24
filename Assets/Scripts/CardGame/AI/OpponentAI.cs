@@ -155,6 +155,7 @@ namespace Booble.CardGame.AI
                         case SubType.SWAP_POSITION:
                             if (hasDestroyCard) indexToRemove.Add(i); break;
 
+                        case SubType.SKIP_COMBAT:
                         case SubType.STEAL_REWARD:
                             if (!goodCards) indexToRemove.Add(i); break;
                     }
