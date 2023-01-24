@@ -239,6 +239,7 @@ namespace Booble.CardGame.Level
             {
                 Card card = _listToDiscard[0];
                 card.gameObject.SetActive(true);
+                yield return new WaitForSeconds(0.5f);
                 card.DestroyCard();
 
                 UpdateRemainingCards(--numCardsStart);
@@ -278,7 +279,7 @@ namespace Booble.CardGame.Level
                 sequence.Append(card.transform.DOScale(0, 0.5f));
                 sequence.Play();
 
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1f);
 
                 _deckCards.Add(card.data);
                 card.DestroyCard();
