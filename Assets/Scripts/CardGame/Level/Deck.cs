@@ -79,7 +79,7 @@ namespace Booble.CardGame.Level
             busy = true;
             int numCardsStart = numCards;
 
-            foreach(string name in names)
+            foreach (string name in names)
             {
                 int index = GetIndexFromName(name);
                 CardsData data = _deckCards[index];
@@ -165,7 +165,6 @@ namespace Booble.CardGame.Level
                 CardEffectsManager.Instance.ApplyDrawCardEffects();
 
                 UpdateRemainingCards(--numCardsStart);
-                CheckDeckSprite();
 
                 yield return new WaitUntil(() => hand.cardsAtPosition);
 
@@ -188,47 +187,64 @@ namespace Booble.CardGame.Level
             busy = true;
             int numCardsStart = numCards;
 
+            List<int> indexList = GetIndexList();
+
+            int number = Mathf.Min(numCardsToDiscard, indexList.Count);
+
+            for (int i = 0; i < number; i++)
+            {
+                // Take data from scriptable
+                int index = indexList[Random.Range(0, indexList.Count)];
+                CardsData data = _deckCards[index];
+                _deckCards.RemoveAt(index);
+
+                Vector3 position = transform.position + new Vector3(0, 0, -0.1f);
+                GameObject cardPrefab = GetCardPrefab(data.type);
+                GameObject cardObj = Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
+
+                Card card = cardObj.GetComponent<Card>();
+                card.Initialize(_contender, data, cardRevealed: true);
+                card.gameObject.SetActive(false);
+
+                if (card.Effects.HasEffect(SubType.INCOMPARTMENTABLE))
+                {
+                    _listToAdd.Add(card);
+                    break;
+                }
+                else
+                {
+                    _listToDiscard.Add(card);
+                    int indexPosition = indexList.IndexOf(index);
+                    indexList.Remove(index);
+                    UpdateIndexList(ref indexList, indexPosition);
+                }
+            }
+
+            StartCoroutine(DiscardCardsCoroutine(numCardsStart));
+        }
+
+        private List<int> GetIndexList()
+        {
             List<int> indexList = new List<int>();
-            for(int j = 0; j < numCards; j++) indexList.Add(j);
+            for (int j = 0; j < numCards; j++) indexList.Add(j);
 
             if (HasAlternateWinConditionCard())
             {
                 indexList.Remove(GetAlternateWinConditionCardIndex());
             }
 
-            int number = numCardsToDiscard <= indexList.Count ? numCardsToDiscard : indexList.Count;
+            return indexList;
+        }
 
-            for (int i = 0; i < number; i++)
+        private void UpdateIndexList(ref List<int> indexList, int indexRemoved)
+        {
+            for (int i = 0; i < indexList.Count; i++)
             {
-                if (numCards > 0)
+                if(i >= indexRemoved)
                 {
-                    // Take data from scriptable
-                    int index = indexList[Random.Range(0, indexList.Count)];
-                    CardsData data = _deckCards[index];
-                    _deckCards.RemoveAt(index);
-
-                    Vector3 position = transform.position + new Vector3(0, 0, -0.1f);
-                    GameObject cardPrefab = GetCardPrefab(data.type);
-                    GameObject cardObj = Instantiate(cardPrefab, position, cardPrefab.transform.rotation);
-
-                    Card card = cardObj.GetComponent<Card>();
-                    card.Initialize(_contender, data, cardRevealed: true);
-                    card.gameObject.SetActive(false);
-
-                    if (card.Effects.HasEffect(SubType.INCOMPARTMENTABLE))
-                    {
-                        _listToAdd.Add(card);
-                        break;
-                    }
-                    else
-                    {
-                        _listToDiscard.Add(card);
-                        indexList.Remove(index);
-                    }
+                    indexList[i]--;
                 }
             }
-
-            StartCoroutine(DiscardCardsCoroutine(numCardsStart));
         }
 
         private IEnumerator DiscardCardsCoroutine(int numCardsStart)
@@ -243,7 +259,6 @@ namespace Booble.CardGame.Level
                 card.DestroyCard();
 
                 UpdateRemainingCards(--numCardsStart);
-                CheckDeckSprite();
 
                 yield return new WaitUntil(() => card.destroyed);
 
@@ -303,7 +318,7 @@ namespace Booble.CardGame.Level
 
             Contender otherContender = CardGameManager.Instance.GetOtherContender(_contender);
             List<Card> cardsToAdd = new List<Card>();
-            
+
             cardsToSteal.Sort();
             cardsToSteal.Reverse();
             for (int i = 0; i < cardsToSteal.Count; i++)
@@ -353,6 +368,7 @@ namespace Booble.CardGame.Level
         private void UpdateRemainingCards(int numCards)
         {
             UIManager.Instance.UpdateRemainingCards(numCards, _maxCardNumber, _contender);
+            CheckDeckSprite();
         }
 
         #endregion
