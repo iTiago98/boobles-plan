@@ -53,17 +53,19 @@ namespace Booble.CardGame.AI
 
                 GetCards(ref playableCards, ref goodCards, emptyCardZone, fieldCardZone);
 
+                CheckCards(ref goodCards, goodCards: true);
                 if (goodCards.Count > 0)
                 {
-                    PlayCard(goodCards, emptyCardZone, goodCards: true);
+                    PlayCard(goodCards, emptyCardZone);
                 }
                 else
                 {
+                    CheckCards(ref playableCards, goodCards: false);
                     if (playableCards.Count > 0
                         && (_contender.currentMana == _contender.currentMaxMana
                         || _contender.hand.numCards > CardGameManager.Instance.settings.handCapacity))
                     {
-                        PlayCard(playableCards, emptyCardZone, goodCards: false);
+                        PlayCard(playableCards, emptyCardZone);
                     }
                     else SkipTurn();
                 }
@@ -106,12 +108,8 @@ namespace Booble.CardGame.AI
             }
         }
 
-        private void PlayCard(List<Card> cards, CardZone emptyCardZone, bool goodCards)
+        private void PlayCard(List<Card> cards, CardZone emptyCardZone)
         {
-            CheckCards(ref cards, goodCards);
-
-            if (cards.Count <= 0) return;
-
             int index = Random.Range(0, cards.Count);
             Card card = cards[index];
             CardZone cardZone = null;
@@ -133,6 +131,8 @@ namespace Booble.CardGame.AI
 
         private void CheckCards(ref List<Card> cards, bool goodCards)
         {
+            if(cards.Count == 0) return;
+
             List<int> indexToRemove = new List<int>();
 
             bool hasDestroyCard = false;
@@ -166,7 +166,8 @@ namespace Booble.CardGame.AI
             indexToRemove.Reverse();
             for (int i = 0; i < indexToRemove.Count; i++)
             {
-                cards.RemoveAt(i);
+                int index = indexToRemove[i];
+                cards.RemoveAt(index);
             }
         }
 
