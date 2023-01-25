@@ -493,7 +493,9 @@ namespace Booble.CardGame.Cards.DataModel.Effects
 
         private void CheckAddFieldCard(SubType subType, List<Card> possibleTargets, Contender contender)
         {
-            if (subType == SubType.DESTROY_CARD || subType == SubType.RETURN_CARD)
+            List<SubType> subTypes = new List<SubType>() { SubType.DESTROY_CARD, SubType.RETURN_CARD, SubType.DISCARD_CARD_FROM_DECK };
+
+            if (subTypes.Contains(subType))
             {
                 if (contender.fieldCardZone.isNotEmpty)
                     possibleTargets.Add(contender.fieldCardZone.GetCard());
