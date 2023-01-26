@@ -338,19 +338,24 @@ namespace Booble.CardGame.AI
                         foreach (Card card in possibleTargets)
                         {
                             int temp = 0;
-                            if (card.Stats.IsBoosted())
-                            {
-                                if (card.IsPlayerCard) temp += card.Stats.GetBoost();
-                                else temp -= card.Stats.GetBoost();
-                            }
-                            if (card.Stats.IsDamaged())
-                            {
-                                if (card.IsPlayerCard) temp -= card.Stats.GetDamage();
-                                else temp += card.Stats.GetDamage();
-                            }
 
-                            Card oppositeCard = Board.Instance.GetOppositeCard(card);
-                            if (oppositeCard != null && card.IsPlayerCard) temp -= 3;
+                            if (card.IsPlayerCard)
+                            {
+                                if (card.Stats.IsBoosted()) temp += card.Stats.GetBoost();
+                                if (card.Stats.IsDamaged()) temp -= card.Stats.GetDamage();
+
+                                Card oppositeCard = Board.Instance.GetOppositeCard(card);
+                                if (oppositeCard != null) temp -= 3;
+                            }
+                            else
+                            {
+                                if (card.Stats.IsDamaged())
+                                {
+                                    temp += card.Stats.GetDamage();
+                                    if (card.Stats.IsBoosted()) temp -= card.Stats.GetBoost();
+                                }
+                                else continue;
+                            }
 
                             GetBestStats(card, ref bestTarget, ref bestStats, temp);
                         }
