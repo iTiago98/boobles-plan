@@ -198,7 +198,7 @@ namespace Booble.CardGame.AI
 
         private void SkipTurn()
         {
-            TurnManager.Instance.FinishTurn();
+            TurnManager.Instance.ChangeTurn();
         }
 
         private CardZone GetFieldCardZone()

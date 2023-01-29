@@ -93,11 +93,6 @@ namespace Booble.CardGame.Managers
                 UIManager.Instance.SetEndTurnButtonInteractable();
         }
 
-        public void FinishTurn()
-        {
-            ChangeTurn();
-        }
-
         private void StartClash()
         {
             if (skipCombat)
@@ -152,20 +147,38 @@ namespace Booble.CardGame.Managers
                 case Turn.OPPONENT:
                     SetTurn(Turn.PLAYER);
                     CardGameManager.Instance.DisableOpponentAI();
-                    CardGameManager.Instance.opponent.hand.CheckDiscarding();
+
+                    Hand opponentHand = CardGameManager.Instance.opponent.hand;
+                    if (opponentHand.CheckStartDiscarding())
+                    {
+                        opponentHand.EndDiscarding();
+                    }
+                    else
+                    {
+                        StartTurn();
+                    }
                     break;
 
                 case Turn.PLAYER:
+                    Hand playerHand = CardGameManager.Instance.player.hand;
+
                     SetTurn(Turn.DISCARDING);
-                    if (!CardGameManager.Instance.player.hand.CheckStartDiscarding())
+                    if (!playerHand.CheckStartDiscarding())
                     {
                         ChangeTurn();
                     }
                     break;
 
                 case Turn.DISCARDING:
-                    SetTurn(Turn.CLASH);
-                    StartClash();
+                    if (CardGameManager.Instance.player.hand.isDiscarding)
+                    {
+                        CardGameManager.Instance.player.hand.EndDiscarding();
+                    }
+                    else
+                    {
+                        SetTurn(Turn.CLASH);
+                        StartClash();
+                    }
                     break;
 
                 case Turn.CLASH:
