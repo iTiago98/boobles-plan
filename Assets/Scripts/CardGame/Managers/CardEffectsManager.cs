@@ -1189,14 +1189,13 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator ApplyDrawCardEffectsCoroutine()
         {
-            bool previousState = UIManager.Instance.IsEndTurnButtonInteractable();
             UIManager.Instance.SetEndTurnButtonInteractable(false);
             effectsApplied = false;
 
             StartCoroutine(ApplyPermanentEffectsCoroutine(_drawCardEffects, _drawCardEffectsToAdd, _drawCardEffectsToRemove));
             yield return new WaitUntil(() => effectsApplied);
 
-            UIManager.Instance.SetEndTurnButtonInteractable(previousState);
+            UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
         }
 
         #endregion

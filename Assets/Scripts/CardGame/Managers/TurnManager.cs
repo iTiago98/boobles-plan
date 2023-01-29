@@ -87,10 +87,10 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitUntil(() => GetContinueFlow());
 
-            if (turn == Turn.OPPONENT)
-                CardGameManager.Instance.EnableOpponentAI();
-            else
+            if (IsPlayerTurn)
                 UIManager.Instance.SetEndTurnButtonInteractable();
+            else
+                CardGameManager.Instance.EnableOpponentAI();
         }
 
         private void StartClash()
