@@ -28,6 +28,9 @@ namespace Booble.UI
         [Header("Options Menu")]
         [SerializeField] private OptionsMenu _optionsMenu;
 
+        [Header("Return Menu")]
+        [SerializeField] private GameObject _returnToMenu;
+        
         [Header("Pause Button")]
         [SerializeField] private PauseButton _pauseButton;
 
@@ -57,6 +60,7 @@ namespace Booble.UI
             {
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
+                OnConfirmBackButton();
                 _pauseMenu.SetActive(false);
                 if (SceneLoader.Instance.InExploration) ShowPauseButton(true);
             }
@@ -138,10 +142,25 @@ namespace Booble.UI
         }
 
         #endregion
+        
+        #region Return To Menu
+
+        public void OnReturnClick()
+        {
+            _mainMenuPanel.SetActive(false);
+            _returnToMenu.SetActive(true);
+        }
+        
+        public void OnConfirmBackButton()
+        {
+            _mainMenuPanel.SetActive(true);
+            _returnToMenu.SetActive(false);
+        }
 
         public void OnReturnToMenuButtonClick()
         {
             GameManager.Instance.ResumeGame();
+            _returnToMenu.SetActive(false);
 
             if (SceneLoader.Instance.InInterview)
             {
@@ -160,6 +179,8 @@ namespace Booble.UI
             }
         }
 
+        #endregion
+        
         float cardObtainedTextInitialX = -1;
 
         public void ShowCardObtainedText()
