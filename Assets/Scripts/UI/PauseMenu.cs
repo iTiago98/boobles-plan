@@ -60,7 +60,7 @@ namespace Booble.UI
             {
                 OnOptionsBackButtonClick();
                 OnCardsBackButtonClick();
-                OnConfirmBackButton();
+                OnConfirmBackButtonClick();
                 _pauseMenu.SetActive(false);
                 if (SceneLoader.Instance.InExploration) ShowPauseButton(true);
             }
@@ -151,12 +151,17 @@ namespace Booble.UI
             _returnToMenu.SetActive(true);
         }
         
-        public void OnConfirmBackButton()
+        public void OnConfirmBackButtonClick()
         {
             _mainMenuPanel.SetActive(true);
             _returnToMenu.SetActive(false);
         }
 
+        public void OnReportBugButtonClick()
+        {
+            Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfE8YhMeTyWyeNwKKGdaAvwRhgYC0SzD5hs4ZukR_1JuMOKBQ/viewform?usp=sf_link");
+        }
+        
         public void OnReturnToMenuButtonClick()
         {
             GameManager.Instance.ResumeGame();
