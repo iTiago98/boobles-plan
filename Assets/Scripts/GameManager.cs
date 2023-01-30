@@ -27,11 +27,7 @@ namespace Booble.Managers
 
         private void OnApplicationFocus(bool focus)
         {
-            if (focus)
-            {
-                if(gamePaused && PauseMenu.Instance.IsActive()) ResumeGame();
-            }
-            else if (!gamePaused)
+            if (!focus && !gamePaused)
             {
                 CheckPauseMenu();
             }
@@ -39,7 +35,7 @@ namespace Booble.Managers
 
         private void CheckPauseMenu()
         {
-            if (SceneLoader.Instance != null && (SceneLoader.Instance.InMainMenu || SceneLoader.Instance.InCredits)) return;
+            if (SceneLoader.Instance != null && (SceneLoader.Instance.InMainMenu || SceneLoader.Instance.InCredits || SceneLoader.Instance.IsBetweenScenes)) return;
             if (UIManager.Instance != null && UIManager.Instance.loseMenuActive) return;
             SwitchPauseMenu();
         }

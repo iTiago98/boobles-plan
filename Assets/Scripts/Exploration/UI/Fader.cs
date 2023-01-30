@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
+using Booble.Managers;
 
 namespace Booble.UI
 {
@@ -13,14 +14,24 @@ namespace Booble.UI
         [SerializeField] private Image _fadeScreen;
         [SerializeField] private TextMeshProUGUI _fadeText;
 
+        private SceneLoader _sceneLoader;
+        public void SetSceneLoader(SceneLoader sceneLoader)
+        {
+            _sceneLoader = sceneLoader;
+        }
+
         public void FadeIn()
         {
-            _fadeScreen.DOFade(0, FadeDuration).OnComplete(null);
+            FadeIn(null);
         }
 
         public void FadeIn(TweenCallback callback)
         {
-            _fadeScreen.DOFade(0, FadeDuration).OnComplete(callback);
+            Sequence sequence = DOTween.Sequence();
+            sequence.Append(_fadeScreen.DOFade(0, FadeDuration));
+            sequence.AppendCallback(callback);
+            sequence.AppendCallback(() => _sceneLoader.SetFading(false));
+            sequence.Play();
         }
 
         public void FadeOut()
@@ -30,7 +41,11 @@ namespace Booble.UI
 
         public void FadeOut(TweenCallback callback)
         {
-            _fadeScreen.DOFade(1, FadeDuration).OnComplete(callback);
+            Sequence sequence = DOTween.Sequence();
+            sequence.AppendCallback(() => _sceneLoader.SetFading(true));
+            sequence.Append(_fadeScreen.DOFade(1, FadeDuration));
+            sequence.AppendCallback(callback);
+            sequence.Play();
         }
 
         public void SetVisible(bool value)
