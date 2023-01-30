@@ -1158,6 +1158,7 @@ namespace Booble.CardGame.Managers
 
         public void ApplyPlayArgumentEffects()
         {
+            if (_playArgumentEffects.Count == 0) return;
             StartCoroutine(ApplyPlayArgumentEffectsCoroutine());
         }
 
@@ -1184,18 +1185,16 @@ namespace Booble.CardGame.Managers
 
         public void ApplyDrawCardEffects()
         {
+            if (_drawCardEffects.Count == 0) return;
             StartCoroutine(ApplyDrawCardEffectsCoroutine());
         }
 
         private IEnumerator ApplyDrawCardEffectsCoroutine()
         {
-            UIManager.Instance.SetEndTurnButtonInteractable(false);
             effectsApplied = false;
 
             StartCoroutine(ApplyPermanentEffectsCoroutine(_drawCardEffects, _drawCardEffectsToAdd, _drawCardEffectsToRemove));
             yield return new WaitUntil(() => effectsApplied);
-
-            UIManager.Instance.SetEndTurnButtonInteractable(TurnManager.Instance.IsPlayerTurn);
         }
 
         #endregion

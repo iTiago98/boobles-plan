@@ -130,7 +130,13 @@ namespace Booble.CardGame.Managers
         #region End Turn Button
 
         public void SetEndTurnButtonText(Turn turn) { _endTurnButton.SetEndTurnButtonText(turn); }
-        public void SetEndTurnButtonInteractable(bool value = true) { _endTurnButton.SetEndTurnButtonInteractable(value); }
+        public void SetEndTurnButtonInteractable(bool value = true)
+        {
+            if (_endTurnButton.IsEndTurnButtonInteractable() != value)
+            {
+                _endTurnButton.SetEndTurnButtonInteractable(value);
+            }
+        }
         public bool IsEndTurnButtonInteractable() => _endTurnButton.IsEndTurnButtonInteractable();
 
         #endregion

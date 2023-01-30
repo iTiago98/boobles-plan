@@ -40,7 +40,7 @@ namespace Booble.Managers
             Scenes.UPPER_HALL_1, Scenes.UPPER_HALL_2, Scenes.BOSS_HALL_3,
             Scenes.CANTEEN_2, Scenes.PPB_OFFICE
         });
-        
+
         public string CurrentScene { get; private set; }
         public string PreviousScene { get; private set; }
 
@@ -63,13 +63,13 @@ namespace Booble.Managers
 
         public void LoadScene(string scene)
         {
-            PreviousScene = CurrentScene;
-            CurrentScene = scene;
-
             _fadeScreen.FadeOut(() =>
             {
                 var async = SceneManager.LoadSceneAsync(scene);
                 async.completed += OnSceneLoaded;
+
+                PreviousScene = CurrentScene;
+                CurrentScene = scene;
 
                 if (InMainMenuBehaviour) async.completed += OnMainMenuSceneLoaded;
                 else if (InExplorationBehaviour) async.completed += OnExplorationSceneLoaded;
@@ -245,15 +245,15 @@ namespace Booble.Managers
 
         public void LoadInterviewScene(List<GameObject> objects, bool updateCurrentScene = true)
         {
-            if (updateCurrentScene)
-            {
-                PreviousScene = CurrentScene;
-                CurrentScene = Scenes.INTERVIEW;
-                _disabledObjects = objects;
-            }
-
             _fadeScreen.FadeOut(() =>
             {
+                if (updateCurrentScene)
+                {
+                    PreviousScene = CurrentScene;
+                    CurrentScene = Scenes.INTERVIEW;
+                    _disabledObjects = objects;
+                }
+
                 EnableObjects(objects, false);
                 if (PreviousScene != Scenes.MAIN_MENU) Controller.Instance.enabled = false;
 
@@ -265,10 +265,10 @@ namespace Booble.Managers
 
         public void UnloadInterviewScene()
         {
-            CurrentScene = PreviousScene;
-
             _fadeScreen.FadeOut(() =>
             {
+                CurrentScene = PreviousScene;
+
                 EnableObjects(_disabledObjects, true);
 
                 var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
@@ -281,10 +281,11 @@ namespace Booble.Managers
 
         public void UnloadInterviewAndLoadScene(string scene)
         {
-            CurrentScene = scene;
-
             _fadeScreen.FadeOut(() =>
             {
+                PreviousScene = CurrentScene;
+                CurrentScene = scene;
+
                 var async = SceneManager.UnloadSceneAsync(Scenes.INTERVIEW);
                 async.completed += OnInterviewUnloaded;
             });
@@ -330,7 +331,7 @@ namespace Booble.Managers
         private void OnInterviewLoaded(AsyncOperation op)
         {
             PauseMenu.Instance.ShowPauseButton(false);
-            if(ClueUI.Instance != null) ClueUI.Instance.DisableCluesButton();
+            if (ClueUI.Instance != null) ClueUI.Instance.DisableCluesButton();
             MusicManager.Instance.PlayMusic(MusicReference.Interview);
             CardGameManager.Instance.Initialize(PreviousScene != Scenes.MAIN_MENU);
         }

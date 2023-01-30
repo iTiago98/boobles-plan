@@ -36,6 +36,7 @@ namespace Booble.CardGame.UI
 
         public void SetEndTurnButtonInteractable(bool interactable)
         {
+            Debug.Log("Botón " + interactable);
             endTurnButton.SetInteractable(interactable);
         }
 

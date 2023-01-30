@@ -27,7 +27,11 @@ namespace Booble.Managers
 
         private void OnApplicationFocus(bool focus)
         {
-            if (!focus && !gamePaused)
+            if (focus)
+            {
+                if(gamePaused && PauseMenu.Instance.IsActive()) ResumeGame();
+            }
+            else if (!gamePaused)
             {
                 CheckPauseMenu();
             }
