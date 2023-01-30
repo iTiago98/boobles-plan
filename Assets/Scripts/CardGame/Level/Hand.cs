@@ -107,50 +107,77 @@ namespace Booble.CardGame.Level
         #region Check Discarding
 
         private int _discardingNumber;
+        private List<Card> _discardingCards = new List<Card>();
 
         private void SetDiscardingNumber(int number)
         {
             _discardingNumber = number;
         }
 
-        public void SubstractDiscarding()
+        public void AddDiscarding(Card card)
         {
-            _discardingNumber--;
+            if (_discardingCards.Count >= _discardingNumber) return;
+
+            card.CardUI.ShowHighlight(true);
+            _discardingCards.Add(card);
+
+            if (_discardingCards.Count >= _discardingNumber)
+            {
+                UIManager.Instance.SetEndTurnButtonInteractable(true);
+            }
+        }
+
+        public void SubstractDiscarding(Card card)
+        {
+            card.CardUI.ShowHighlight(false);
+            _discardingCards.Remove(card);
+
+            UIManager.Instance.SetEndTurnButtonInteractable(false);
         }
 
         public bool CheckStartDiscarding()
         {
-            SetDiscardingNumber(numCards);
+            int cardsToDiscard = numCards - _handCapacity;
 
-            if (_discardingNumber > _handCapacity)
+            if (cardsToDiscard > 0 && contender.isPlayer)
             {
+                SetDiscardingNumber(cardsToDiscard);
                 isDiscarding = true;
                 ChangeScale(CardGameManager.Instance.settings.highlightScale);
                 UIManager.Instance.SetEndTurnButtonInteractable(false);
+                UIManager.Instance.SetEndTurnButtonText(TurnManager.Turn.DISCARDING);
             }
 
             return isDiscarding;
         }
 
-        public void CheckDiscarding(Card card = null)
+        public void EndDiscarding()
         {
-            StartCoroutine(CheckDiscardingCoroutine(card));
+            StartCoroutine(EndDiscardingCoroutine());
         }
 
-        private IEnumerator CheckDiscardingCoroutine(Card card)
+        private IEnumerator EndDiscardingCoroutine()
         {
             if (contender.isPlayer)
             {
-                if (_discardingNumber == _handCapacity && isDiscarding)
+                UIManager.Instance.SetEndTurnButtonInteractable(false);
+
+                isDiscarding = false;
+                ChangeScale(CardGameManager.Instance.settings.defaultScale);
+
+                Card aux = _discardingCards[0];
+
+                foreach (Card card in _discardingCards)
                 {
-                    isDiscarding = false;
-                    ChangeScale(CardGameManager.Instance.settings.defaultScale);
-
-                    yield return new WaitUntil(() => card.destroyed);
-                    yield return new WaitUntil(() => cardsAtPosition);
-
-                    TurnManager.Instance.ChangeTurn();
+                    card.DestroyCard();
                 }
+
+                yield return new WaitUntil(() => aux.destroyed);
+                yield return new WaitUntil(() => cardsAtPosition);
+
+                _discardingCards.Clear();
+
+                TurnManager.Instance.ChangeTurn();
             }
             else
             {

@@ -40,6 +40,11 @@ namespace Booble.UI
             _pauseMenu.SetActive(false);
         }
 
+        public bool IsActive()
+        {
+            return _pauseMenu.activeSelf;
+        }
+
         public void ShowPauseMenu(bool value)
         {
             if (value)

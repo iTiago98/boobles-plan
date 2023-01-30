@@ -82,12 +82,15 @@ namespace Booble.CardGame.Managers
         public bool gamePaused { private set; get; }
         public bool playingCard { private set; get; }
 
-        private bool _initialized;
 
         private bool _playingStoryMode;
         public bool playingStoryMode => _playingStoryMode;
 
         public bool dialogueEnd => (_interviewDialogue != null) ? _interviewDialogue.GetDialogueEnd() : false;
+
+        private bool _initialized;
+        private bool _gameEnded;
+
 
         private void Start()
         {
@@ -246,8 +249,9 @@ namespace Booble.CardGame.Managers
 
         public bool CheckEnd()
         {
-            if (player.life <= 0 || opponent.life <= 0 || alternateWinCondition)
+            if (!_gameEnded && (player.life <= 0 || opponent.life <= 0 || alternateWinCondition))
             {
+                _gameEnded = true;
                 DisableMouseController();
 
                 _playerWin = alternateWinCondition || (player.life > 0 && opponent.life <= 0);
@@ -268,7 +272,7 @@ namespace Booble.CardGame.Managers
                     case Opponent_Name.Secretary: FlagManager.Instance.SetFlag(Flag.Reference.SecretaryVictoriaAlternativa); break;
                 }
             }
-            
+
             if (playingStoryMode) UIManager.Instance.InterviewEndAnimation(_playerWin, ThrowEndDialogue);
             else UIManager.Instance.InterviewEndAnimation(_playerWin, GetOnEndAction());
         }

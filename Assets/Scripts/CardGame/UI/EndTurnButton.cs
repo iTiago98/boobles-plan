@@ -18,7 +18,7 @@ namespace Booble.CardGame.UI
         private const string OPPONENTW_TURN_BUTTON_TEXT = "Turno de la entrevistada";
         private const string PLAYER_TURN_CLASH_BUTTON_TEXT = "Batirse";
         private const string PLAYER_TURN_SKIP_BUTTON_TEXT = "Pasar turno";
-        private const string DISCARDING_BUTTON_TEXT = "Descartando";
+        private const string DISCARDING_BUTTON_TEXT = "Descartar";
         private const string CLASH_BUTTON_TEXT = "Combate";
         private const string END_BUTTON_TEXT = "Fin de la ronda";
 
@@ -31,11 +31,12 @@ namespace Booble.CardGame.UI
                 CardGameManager.Instance.ContinueTutorial();
             }
             else
-                TurnManager.Instance.FinishTurn();
+                TurnManager.Instance.ChangeTurn();
         }
 
         public void SetEndTurnButtonInteractable(bool interactable)
         {
+            Debug.Log("Botón " + interactable);
             endTurnButton.SetInteractable(interactable);
         }
 
