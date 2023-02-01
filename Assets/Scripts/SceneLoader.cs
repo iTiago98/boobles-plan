@@ -49,8 +49,12 @@ namespace Booble.Managers
         public void SetFading(bool value) { _fading = value;}
         public bool IsBetweenScenes => _fading;
 
+        private bool _initialized;
+        public bool IsInitialized => _initialized;
+
         private void Start()
         {
+            _initialized = true;
             CurrentScene = Scenes.MAIN_MENU;
             _disabledObjects = new List<GameObject>();
             _fadeScreen.SetSceneLoader(this);
