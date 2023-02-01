@@ -161,8 +161,8 @@ namespace Booble.CardGame.Level
                 card.gameObject.SetActive(true);
                 hand.AddCard(card.gameObject);
 
-                // Apply end round effects
-                CardEffectsManager.Instance.ApplyDrawCardEffects();
+                if (CardEffectsManager.Instance.HasDrawCardEffects)
+                    CardEffectsManager.Instance.ApplyDrawCardEffects();
 
                 UpdateRemainingCards(--numCardsStart);
 
@@ -240,7 +240,7 @@ namespace Booble.CardGame.Level
         {
             for (int i = 0; i < indexList.Count; i++)
             {
-                if(i >= indexRemoved)
+                if (i >= indexRemoved)
                 {
                     indexList[i]--;
                 }

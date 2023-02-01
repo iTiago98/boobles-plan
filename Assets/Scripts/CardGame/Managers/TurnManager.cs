@@ -127,7 +127,13 @@ namespace Booble.CardGame.Managers
 
             yield return new WaitUntil(() => GetContinueFlow());
 
-            CardEffectsManager.Instance.ApplyEndTurnEffects();
+            if (CardEffectsManager.Instance.HasEndTurnEffects)
+            {
+                CardEffectsManager.Instance.ApplyEndTurnEffects();
+                yield return new WaitUntil(() => CardEffectsManager.Instance.effectsApplied);
+            }
+
+            ChangeTurn();
         }
 
         public void ChangeTurn()

@@ -1129,22 +1129,12 @@ namespace Booble.CardGame.Managers
         private List<PermanentEffect> _endTurnEffectsToAdd = new List<PermanentEffect>();
         private List<int> _endTurnEffectsToRemove = new List<int>();
 
-        public void ApplyEndTurnEffects(bool changeTurn = true)
+        public bool HasEndTurnEffects => _endTurnEffects.Count > 0;
+
+        public void ApplyEndTurnEffects()
         {
-            StartCoroutine(ApplyEndTurnEffectsCoroutine(changeTurn));
-        }
-
-        private IEnumerator ApplyEndTurnEffectsCoroutine(bool changeTurn)
-        {
-            if (_endTurnEffects.Count > 0)
-            {
-                effectsApplied = false;
-
-                StartCoroutine(ApplyPermanentEffectsCoroutine(_endTurnEffects, _endTurnEffectsToAdd, _endTurnEffectsToRemove));
-                yield return new WaitUntil(() => effectsApplied);
-            }
-
-            if (changeTurn) TurnManager.Instance.ChangeTurn();
+            effectsApplied = false;
+            StartCoroutine(ApplyPermanentEffectsCoroutine(_endTurnEffects, _endTurnEffectsToAdd, _endTurnEffectsToRemove));
         }
 
         #endregion
@@ -1156,9 +1146,10 @@ namespace Booble.CardGame.Managers
         private List<PermanentEffect> _playArgumentEffectsToAdd = new List<PermanentEffect>();
         private List<int> _playArgumentEffectsToRemove = new List<int>();
 
+        public bool HasPlayArgumentEffects => _playArgumentEffects.Count > 0;
+
         public void ApplyPlayArgumentEffects()
         {
-            if (_playArgumentEffects.Count == 0) return;
             StartCoroutine(ApplyPlayArgumentEffectsCoroutine());
         }
 
@@ -1183,18 +1174,12 @@ namespace Booble.CardGame.Managers
         private List<PermanentEffect> _drawCardEffectsToAdd = new List<PermanentEffect>();
         private List<int> _drawCardEffectsToRemove = new List<int>();
 
+        public bool HasDrawCardEffects => _drawCardEffects.Count > 0;
+
         public void ApplyDrawCardEffects()
         {
-            if (_drawCardEffects.Count == 0) return;
-            StartCoroutine(ApplyDrawCardEffectsCoroutine());
-        }
-
-        private IEnumerator ApplyDrawCardEffectsCoroutine()
-        {
             effectsApplied = false;
-
             StartCoroutine(ApplyPermanentEffectsCoroutine(_drawCardEffects, _drawCardEffectsToAdd, _drawCardEffectsToRemove));
-            yield return new WaitUntil(() => effectsApplied);
         }
 
         #endregion

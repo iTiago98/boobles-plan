@@ -218,7 +218,7 @@ namespace Booble.CardGame.Cards
                 yield return new WaitWhile(() => Effects.applyingEffects);
             }
 
-            if (IsArgument)
+            if (IsArgument && CardEffectsManager.Instance.HasPlayArgumentEffects)
             {
                 CardEffectsManager.Instance.ApplyPlayArgumentEffects();
                 yield return new WaitUntil(() => CardEffectsManager.Instance.effectsApplied);

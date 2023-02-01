@@ -337,8 +337,11 @@ namespace Booble.CardGame.Dialogues
             UIManager.Instance.TurnAnimation(TurnManager.Turn.ROUND_END);
             yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
 
-            CardEffectsManager.Instance.ApplyEndTurnEffects(changeTurn: false);
-            yield return new WaitUntil(() => CardEffectsManager.Instance.effectsApplied);
+            if (CardEffectsManager.Instance.HasEndTurnEffects)
+            {
+                CardEffectsManager.Instance.ApplyEndTurnEffects();
+                yield return new WaitUntil(() => CardEffectsManager.Instance.effectsApplied);
+            }
 
             if (dialogueAfterRound != null)
             {
@@ -373,7 +376,7 @@ namespace Booble.CardGame.Dialogues
             CardGameManager.Instance.InitializeDecks();
 
             Card aux = Board.Instance.DestroyCards();
-            
+
             _player.hand.DiscardAll();
             _opponent.hand.DiscardAll();
 
