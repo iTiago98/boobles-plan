@@ -4,7 +4,6 @@ using TMPro;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 using Booble.Managers;
 
 namespace Booble.CardGame.Utils

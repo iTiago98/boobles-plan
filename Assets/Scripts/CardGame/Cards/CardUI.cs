@@ -156,9 +156,9 @@ namespace Booble.CardGame.Cards
             transform.DOScale(_hoverScale, 0.2f);
         }
 
-        public void HoverOff(Hand hand)
+        public void HoverOff(Hand hand, TweenCallback onEndCallback = null)
         {
-            transform.DOLocalMoveY(0f, 0.2f);
+            transform.DOLocalMoveY(0f, 0.2f).OnComplete(onEndCallback);
             if (hand.isDiscarding) transform.DOScale(_highlightScale, 0.2f);
             else transform.DOScale(defaultScale, 0.2f);
         }
@@ -204,6 +204,33 @@ namespace Booble.CardGame.Cards
             yield return new WaitForSeconds(length);
 
             _playingAnimation = false;
+        }
+
+        #endregion
+
+        #region Heartbeat
+
+        private Sequence _heartbeatSequence;
+        public bool HasHeartbeat => _heartbeatSequence != null;
+
+        private void InitializeHeartbeat()
+        {
+            _heartbeatSequence = DOTween.Sequence();
+            _heartbeatSequence.Append(transform.DOScale(0.1f * Vector2.one, 0.2f).SetRelative());
+            _heartbeatSequence.Append(transform.DOScale(-0.1f * Vector2.one, 0.2f).SetRelative());
+            _heartbeatSequence.Append(transform.DOScale(0.1f * Vector2.one, 0.2f).SetRelative());
+            _heartbeatSequence.Append(transform.DOScale(-0.1f * Vector2.one, 0.2f).SetRelative());
+            _heartbeatSequence.AppendInterval(1f);
+            _heartbeatSequence.SetLoops(-1);
+            _heartbeatSequence.Pause();
+        }
+
+        public void SetHeartbeat(bool set)
+        {
+            if (_heartbeatSequence == null) InitializeHeartbeat();
+
+            if (set) _heartbeatSequence.Restart();
+            else _heartbeatSequence.Pause();
         }
 
         #endregion

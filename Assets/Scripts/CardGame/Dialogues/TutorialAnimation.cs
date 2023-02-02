@@ -251,7 +251,7 @@ namespace Booble.CardGame.Dialogues
                 MouseController.Instance.SetTutorialCard(cardPlayed);
                 CardGameManager.Instance.EnableMouseController();
 
-                card.transform.DOScale(0.5f, 0.5f);
+                card.CardUI.SetHeartbeat(true);
 
                 yield return new WaitUntil(() => card.IsInWaitingSpot);
 

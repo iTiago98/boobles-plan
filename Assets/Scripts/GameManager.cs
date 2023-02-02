@@ -14,7 +14,7 @@ namespace Booble.Managers
 
         private float _defaultTimeScale;
 
-        private void Awake()
+        protected override void Awake()
         {
             base.Awake();
             PlayerConfig.InitializeValues();
