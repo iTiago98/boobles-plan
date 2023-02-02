@@ -323,7 +323,6 @@ namespace Booble.MainMenu
             {
                 Camera.main.gameObject,
                 _canvas,
-                _eventSystem,
                 _background,
                 this.gameObject
             });
