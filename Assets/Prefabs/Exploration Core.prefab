@@ -3135,7 +3135,7 @@ MonoBehaviour:
   _target: {fileID: 1921504878}
   _leftLimit: 0
   _rightLimit: 0
-  _lerpFactor: 0.01
+  _lerpFactor: 0.05
 --- !u!1 &4164371401346454127
 GameObject:
   m_ObjectHideFlags: 0
@@ -10198,8 +10198,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextKey: 323
-  _characterDelayDefault: 0.01
-  _characterDelayMin: 0.001
   _characterSoundEmitter:
     Guid:
       Data1: -1654249305

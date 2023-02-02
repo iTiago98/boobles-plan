@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,10 +64,14 @@ namespace Booble.Player
             if (Input.GetKeyDown(_moveKey) && Interactable.MouseOverInteractable)
                 return;
 
-            if (Input.GetKey(_moveKey))
-            {
-                SetDestination(_cam.ScreenToWorldPoint(Input.mousePosition).x);
-            }
+            if (!Input.GetKey(_moveKey))
+                return;
+
+            float destination = _cam.ScreenToWorldPoint(Input.mousePosition).x;
+            if(Math.Abs(destination-transform.position.x) < 0.5f)
+                return;
+            
+            SetDestination(destination);
         }
 
         private void MoveUpdate()
