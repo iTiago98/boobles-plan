@@ -13737,6 +13737,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3421280074872218032}
     m_Modifications:
+    - target: {fileID: 306720985948879980, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 257.20102
+      objectReference: {fileID: 0}
+    - target: {fileID: 306720985948879980, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 128.60051
+      objectReference: {fileID: 0}
+    - target: {fileID: 306720985948879980, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -36.41595
+      objectReference: {fileID: 0}
     - target: {fileID: 1568042135285538453, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13821,85 +13833,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1568042135285538454, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: _image
-      value: 
-      objectReference: {fileID: 7928603043856444298}
     - target: {fileID: 1568042135285538458, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
       propertyPath: m_Name
       value: ExtendedDescriptionPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 1568042135285538458, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 3886299057668614942, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 257.20102
       objectReference: {fileID: 0}
-    - target: {fileID: 1568042136016794879, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136016794879, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136016794879, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+    - target: {fileID: 3886299057668614942, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 106.42
+      value: 128.60051
       objectReference: {fileID: 0}
-    - target: {fileID: 1568042136016794879, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+    - target: {fileID: 3886299057668614942, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -70.815
+      value: -126.7619
       objectReference: {fileID: 0}
-    - target: {fileID: 1568042136018743189, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+    - target: {fileID: 6145339637101256526, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 339.3281
+      value: -194.022
       objectReference: {fileID: 0}
-    - target: {fileID: 1568042136018743189, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136018743189, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 137.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136018743189, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
+    - target: {fileID: 6145339637101256526, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -199.03906
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136149916184, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136149916184, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136149916184, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 245.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136149916184, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 106.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136149916184, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -216.435
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136181611541, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136181611541, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136181611541, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 106.42
-      objectReference: {fileID: 0}
-    - target: {fileID: 1568042136181611541, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -24.045
+      value: -67.836105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
@@ -13912,17 +13868,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c0eb3ceea76e0048a50680cc590efc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7928603043856444298 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1568042135285538452, guid: ce227e9033aa2f9428a575a3b9386f43, type: 3}
-  m_PrefabInstance: {fileID: 8920153626487223582}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &7928603043856444299 stripped

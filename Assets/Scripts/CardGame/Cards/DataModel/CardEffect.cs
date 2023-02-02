@@ -660,7 +660,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     else s += "reduce el maná del oponente en " + intParameter1 + " puntos."; break;
 
                 case SubType.LIFELINK:
-                    s += "el jugador recupera el daño infligido por el argumento enemigo."; break;
+                    s += "el jugador recupera el daño infligido por este argumento."; break;
                 case SubType.REBOUND:
                     s += "el daño recibido es infligido al argumento enemigo."; break;
                 case SubType.TRAMPLE:
