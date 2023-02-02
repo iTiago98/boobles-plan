@@ -100,14 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8ef8e8c8d045e4794e5e747658ed89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameText: {fileID: 3434461425723286842}
-  descriptionText: {fileID: 1896924632871242647}
-  strengthText: {fileID: 4583088024639747997}
-  defenseText: {fileID: 795541855709781874}
-  altColor: {r: 0.6226415, g: 0.30664304, b: 0.1262905, a: 1}
-  highlight: {fileID: 1671532448065763131}
-  container: {fileID: 0}
-  contender: {fileID: 0}
+  storedTarget: {fileID: 0}
 --- !u!65 &8687193210750069689
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -248,7 +241,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.25
+  m_fontSize: 2.35
   m_fontSizeBase: 3
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -258,8 +251,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: -4
+  m_wordSpacing: 10
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -514,8 +507,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: -4
+  m_wordSpacing: 10
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -686,8 +679,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: -4
+  m_wordSpacing: 10
   m_lineSpacing: 0
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
@@ -893,8 +886,8 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
+  m_characterSpacing: -4
+  m_wordSpacing: 10
   m_lineSpacing: -35
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
