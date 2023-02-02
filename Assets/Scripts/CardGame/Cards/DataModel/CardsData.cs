@@ -57,7 +57,7 @@ namespace Booble.CardGame.Cards.DataModel
 
         public string GetTypeText()
         {
-            string s = "Tipo: ";
+            string s = "";
             switch (type)
             {
                 case CardType.ARGUMENT: 
