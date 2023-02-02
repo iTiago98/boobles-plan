@@ -7,7 +7,7 @@ public class DontDestroyOnLoad<T> : MonoBehaviour where T : MonoBehaviour
     public static T Instance;
 
 
-    protected void Awake()
+    virtual protected void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
 
