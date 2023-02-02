@@ -146,6 +146,7 @@ namespace Booble.CardGame.Cards
         public void OnMouseHoverEnter()
         {
             if (!_clickable || contender == null) return;
+            if (CardGameManager.Instance.tutorial && CardUI.HasHeartbeat) CardUI.SetHeartbeat(false);
 
             if (IsInHand && IsPlayerCard)
             {
@@ -161,7 +162,10 @@ namespace Booble.CardGame.Cards
 
             if (this != null && gameObject != null && IsInHand && IsPlayerCard)
             {
-                CardUI.HoverOff(_hand);
+                if (CardGameManager.Instance.tutorial && CardUI.HasHeartbeat)
+                    CardUI.HoverOff(_hand, () => CardUI.SetHeartbeat(true));
+                else
+                    CardUI.HoverOff(_hand);
             }
 
             HideExtendedDescription();
