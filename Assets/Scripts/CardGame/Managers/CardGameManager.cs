@@ -296,7 +296,7 @@ namespace Booble.CardGame.Managers
         }
 
         public void UnloadInterview() { SceneLoader.Instance.UnloadInterviewScene(); }
-
+        public void RetryInterview() { SceneLoader.Instance.ReloadInterview(); }
         #endregion
 
         #region Getters 
