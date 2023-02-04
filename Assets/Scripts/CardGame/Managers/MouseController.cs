@@ -70,6 +70,15 @@ namespace Booble.CardGame.Managers
             return clickableObject;
         }
 
+        private void OnDisable()
+        {
+            if (_hovering != null)
+            {
+                _hovering.OnMouseHoverExit();
+                _hovering = null;
+            }
+        }
+
         #region Hovering 
 
         private void CheckHovering(IClickable clickableObject)
