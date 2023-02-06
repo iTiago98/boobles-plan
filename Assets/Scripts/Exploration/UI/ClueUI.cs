@@ -58,7 +58,8 @@ namespace Booble.UI
             _toggle.onValueChanged.AddListener((value) => PlayerConfig.ShowCluesAlerts.SetValue(value));
             
             SetCluesPanel();
-            InvokeRepeating(nameof(UpdateClues), 0, 5);
+            UpdateClues();
+            // InvokeRepeating(nameof(UpdateClues), 0, 5);
 
             if (Clues == null)
             {
@@ -119,7 +120,7 @@ namespace Booble.UI
                     break;
 
                 case ClueState.Closed:
-                    UpdateClues();
+                    // UpdateClues();
                     _panel.DOAnchorPosX(_openX, _transitionDuration);
                     Interactable.CluesOpen = true;
                     _state = ClueState.Open;
@@ -156,6 +157,9 @@ namespace Booble.UI
 
         public void UpdateClues()
         {
+            if(_currentClues.clues == null) 
+                return;
+            
             foreach (ClueFlag clueFlag in _currentClues.clues)
             {
                 bool flagStart = FlagManager.Instance.GetFlag(clueFlag.FlagReferenceStart);
