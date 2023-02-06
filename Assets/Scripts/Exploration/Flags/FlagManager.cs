@@ -7,6 +7,7 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using Booble.Managers;
 using Booble.Interactables.Dialogues;
+using Booble.UI;
 
 namespace Booble.Flags
 {
@@ -47,6 +48,7 @@ namespace Booble.Flags
 			if(toTrue)
 			{
 				PlayerPrefs.SetInt(flagRef.ToString(), (int)Flag.State.True);
+				ClueUI.Instance.UpdateClues();
 			}
 			else
 			{
