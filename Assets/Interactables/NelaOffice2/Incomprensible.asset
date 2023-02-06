@@ -29,3 +29,11 @@ MonoBehaviour:
   - _content: "\xA1Si hasta dejan una copia de la tarjeta magn\xE9tica de su despacho
       al lado de la puerta por si se les ha olvidado!"
     _closeUp: 0
+  - _content: "\xBFHay una copia de la tarjeta de acceso junto a la puerta de su
+      despacho?"
+    _closeUp: 1
+  - _content: "S\xED, hija, s\xED. Detr\xE1s de la placa de los nombres la tienen.
+      Te lo habr\xEDa dicho \xE9l mismo adem\xE1s, pero claro..."
+    _closeUp: 0
+  - _content: "Estando como est\xE1n, m\xE1s valdr\xEDa hablarle a una pared."
+    _closeUp: 0
