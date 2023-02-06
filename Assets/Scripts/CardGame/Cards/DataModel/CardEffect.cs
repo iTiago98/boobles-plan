@@ -519,7 +519,8 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     return "Incrementar maná máximo (" + intParameter1 + ")";
 
                 case SubType.DESTROY_CARD:
-                    return "Destruir carta";
+                    if (targetType == Target.ACARD) return "Destruir todo";
+                    else return "Destruir carta";
                 case SubType.DEAL_DAMAGE:
                     return "Infligir daño (" + intParameter1 + ")";
                 case SubType.DECREASE_MANA:
