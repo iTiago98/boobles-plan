@@ -28,8 +28,16 @@ MonoBehaviour:
   - _content: "\xA1Ostras, pero si es Dennis, con su impaciente levantamiento de
       pie tan caracter\xEDstico!"
     _closeUp: 1
-  - _content: "Pero, si ya los conoc\xEDa, \xBFpor qu\xE9 no me ha dicho nada? \xC9sto
-      cada vez tiene menos sentido..."
+  - _content: "Adem\xE1s, aqu\xED al lado est\xE1 la famosa pala que \xD1ocobich
+      regal\xF3 a tres recogepelotas al retirarse."
+    _closeUp: 1
+  - _content: "\xA1Se la regal\xF3 a los PinPonBros! \xA1Eran ellos esos recogepelotas!"
+    _closeUp: 1
+  - _content: "Y el tercero seguro que era Dennis, por eso sale tambi\xE9n en la
+      foto."
+    _closeUp: 1
+  - _content: "Pero, si Dennis ya conoc\xEDa a Pedro y a Pepe, \xBFpor qu\xE9 no
+      me ha dicho nada? \xC9sto cada vez tiene menos sentido..."
     _closeUp: 1
   - _content: "Creo que Dennis sabe m\xE1s de lo que parece."
     _closeUp: 1
