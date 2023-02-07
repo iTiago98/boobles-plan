@@ -292,7 +292,7 @@ namespace Booble.CardGame.Managers
 
             if (source.Effects.HasEffect(SubType.LIFELINK))
             {
-                lifeValue = Mathf.Min(source.Stats.strength, target.Stats.defense);
+                lifeValue = source.Stats.strength;
             }
 
             if (source.Effects.HasEffect(SubType.REBOUND))
