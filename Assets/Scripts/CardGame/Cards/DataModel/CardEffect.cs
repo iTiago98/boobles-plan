@@ -386,7 +386,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                             return target != null && source.Stats.strength > target.Stats.defense;
 
                         case SubType.COMPARTMENTALIZE:
-                            return target == null;
+                            return targetObj is Contender && ((Contender)targetObj).deck.numCards > 0;
 
                         case SubType.STEAL_CARD:
                             return target != null;

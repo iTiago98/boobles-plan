@@ -336,16 +336,8 @@ namespace Booble.CardGame.Managers
             {
                 Contender contender = (Contender)target;
 
-                if (contender.deck.numCards == 0)
-                {
-                    contender.ReceiveDamage(source.Stats.strength);
-                    yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
-                }
-                else
-                {
-                    contender.deck.DiscardCards(source.Stats.strength);
-                    yield return new WaitWhile(() => contender.deck.busy);
-                }
+                contender.deck.DiscardCards(source.Stats.strength);
+                yield return new WaitWhile(() => contender.deck.busy);
             }
 
             effect.SetEffectApplied();
