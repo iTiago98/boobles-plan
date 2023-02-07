@@ -297,7 +297,7 @@ namespace Booble.CardGame.Managers
 
             if (source.Effects.HasEffect(SubType.REBOUND))
             {
-                reboundValue = Mathf.Min(source.Stats.defense, target.Stats.strength);
+                reboundValue = target.Stats.strength;
                 if (source.IsPlayerCard) CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
             }
 
