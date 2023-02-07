@@ -49,7 +49,7 @@ namespace Booble.CardGame.Level
                 indexList.Remove(index);
             }
 
-            StartCoroutine(DiscardCoroutine(wheelEffect: false));
+            StartCoroutine(DiscardCoroutine());
         }
 
         public void DiscardAll()
@@ -65,18 +65,16 @@ namespace Booble.CardGame.Level
                 _listToDiscard.Add(card);
             }
 
-            StartCoroutine(DiscardCoroutine(wheelEffect: true));
+            StartCoroutine(DiscardCoroutine());
         }
 
-        private IEnumerator DiscardCoroutine(bool wheelEffect)
+        private IEnumerator DiscardCoroutine()
         {
             int loops = _listToDiscard.Count;
             for (int i = 0; i < loops; i++)
             {
                 Card card = _listToDiscard[0];
                 card.DestroyCard();
-
-                //if (!wheelEffect) yield return new WaitUntil(() => card.destroyed);
 
                 _listToDiscard.RemoveAt(0);
             }
