@@ -291,6 +291,7 @@ namespace Booble.CardGame.Level
 
                 Sequence sequence = DOTween.Sequence();
                 sequence.Append(card.transform.DOMove(transform.position + new Vector3(0, 0, -0.2f), 0.5f));
+                sequence.AppendInterval(0.5f);
                 sequence.Append(card.transform.DOScale(0, 0.5f));
                 sequence.Play();
 
