@@ -7980,9 +7980,6 @@ MonoBehaviour:
   selectingLayerMask:
     serializedVersion: 2
     m_Bits: 960
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
   stealingLayerMask:
     serializedVersion: 2
     m_Bits: 2048

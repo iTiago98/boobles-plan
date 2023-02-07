@@ -23,7 +23,7 @@ namespace Booble.CardGame.Level
             cards = new List<GameObject>();
         }
 
-        public void AddCard(GameObject cardObj)
+        virtual public void AddCard(GameObject cardObj)
         {
             cardsAtPosition = false;
             cardObj.transform.parent = transform;
@@ -35,7 +35,7 @@ namespace Booble.CardGame.Level
             UpdateCardsPosition();
         }
 
-        public void RemoveCard(GameObject card)
+        virtual public void RemoveCard(GameObject card)
         {
             cardsAtPosition = false;
             cards.Remove(card);

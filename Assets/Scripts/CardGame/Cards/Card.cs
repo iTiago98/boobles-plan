@@ -93,8 +93,6 @@ namespace Booble.CardGame.Cards
         public void OnMouseLeftClickUp(MouseController mouseController)
         {
             if (!_clickable) return;
-            if (CardGameManager.Instance.playingCard) return;
-            if (!TurnManager.Instance.continueFlow) return;
 
             bool isTutorial = CardGameManager.Instance.tutorial;
             if (isTutorial && data.name != mouseController.GetTutorialCard()) return;
@@ -103,24 +101,19 @@ namespace Booble.CardGame.Cards
             {
                 if (_hand.isDiscarding)
                 {
-                    if (CardUI.IsHighlighted)
-                    {
-                        _hand.SubstractDiscarding(this);
-                    }
-                    else
-                    {
-                        _hand.AddDiscarding(this);
-                    }
+                    if (CardUI.IsHighlighted) _hand.SubstractDiscarding(this);
+                    else _hand.AddDiscarding(this);
+                    return;
                 }
-                else if (TurnManager.Instance.IsPlayerTurn || isTutorial)
+
+                if (TurnManager.Instance.IsPlayerTurn || isTutorial)
                 {
-                    if (mouseController.IsHoldingCard) return;
                     if (!IsPlayerCard) return;
                     if (IsAction && !effect.IsAppliable(this)) return;
 
                     if (EnoughMana())
                     {
-                        // Deattach from parent
+                        if (mouseController.IsHoldingCard) UIManager.Instance.OnCancelPlayButtonClick();
                         MoveToWaitingSpot();
 
                         if (IsArgument || IsField)
@@ -313,7 +306,7 @@ namespace Booble.CardGame.Cards
             RemoveFromContainer();
 
             Transform dest = Board.Instance.waitingSpot;
-            MouseController.Instance.SetHolding(this);
+            MouseController.Instance.SetMoving();
             UIManager.Instance.SetEndTurnButtonInteractable(false);
 
             DOTween.Kill(transform);
@@ -322,6 +315,7 @@ namespace Booble.CardGame.Cards
 
             sequence.Append(transform.DOMove(dest.position, 0.5f));
             sequence.Join(transform.DOScale(CardUI.defaultScale, 0.5f));
+            sequence.OnComplete(() => MouseController.Instance.SetHolding(this));
 
             sequence.Play();
         }

@@ -14,7 +14,6 @@ namespace Booble.CardGame.Managers
 
         [Header("Layer Masks")]
         [SerializeField] private LayerMask selectingLayerMask;
-        [SerializeField] private LayerMask targetLayerMask;
         [SerializeField] private LayerMask stealingLayerMask;
 
         private LayerMask _currentMask;
@@ -109,23 +108,31 @@ namespace Booble.CardGame.Managers
 
         private void CheckClick(IClickable clickableObject)
         {
+            if (!TurnManager.Instance.continueFlow) return;
+            if (CardGameManager.Instance.playingCard) return;
+            if (movingToWaitingSpot) return;
+
             bool leftClickUp = Input.GetMouseButtonUp(0);
 
             if (leftClickUp)
             {
-                if (IsApplyingEffect)
+                if (clickableObject != null)
                 {
-                    ApplyEffectToTarget(clickableObject);
-                }
-                else
-                {
-                    if (clickableObject != null)
+                    if (clickableObject is Card)
+                    {
+                        Card card = (Card)clickableObject;
+                        if (card.IsInHand)
+                        {
+                            card.OnMouseLeftClickUp(this);
+                        }
+                        else if (IsApplyingEffect)
+                        {
+                            ApplyEffectToTarget(card);
+                        }
+                    }
+                    else
                     {
                         clickableObject.OnMouseLeftClickUp(this);
-                    }
-                    else if (holdingCard != null)
-                    {
-                        holdingCard.OnMouseLeftClickUp(this);
                     }
                 }
             }
@@ -138,15 +145,11 @@ namespace Booble.CardGame.Managers
         public void SetApplyingEffect(Card card)
         {
             _effectCard = card;
-            SetMask(GetTargetMask(card.effect));
         }
 
-        private void ApplyEffectToTarget(IClickable clickableObject)
+        private void ApplyEffectToTarget(Card targetCard)
         {
-            Card targetCard = (Card)clickableObject;
-            if (targetCard == null
-                || targetCard.IsInHand
-                || !targetCard.CardUI.IsHighlighted)
+            if (!targetCard.CardUI.IsHighlighted)
                 return;
 
             _effectCard.ContinueAction(targetCard);
@@ -163,9 +166,16 @@ namespace Booble.CardGame.Managers
 
         #region Layers 
 
+        private bool movingToWaitingSpot;
+
+        public void SetMoving()
+        {
+            movingToWaitingSpot = true;
+        }
         public void SetHolding(Card card)
         {
             holdingCard = card;
+            movingToWaitingSpot = false;
         }
 
         public void SetStealing()
@@ -176,28 +186,6 @@ namespace Booble.CardGame.Managers
         public void SetSelecting()
         {
             SetMask(selectingLayerMask);
-        }
-
-        private LayerMask GetTargetMask(CardEffect effect)
-        {
-            LayerMask layerMask;
-            switch (effect.targetType)
-            {
-                case Target.NONE:
-                    layerMask = selectingLayerMask;
-                    break;
-
-                case Target.ALLY:
-                case Target.ENEMY:
-                case Target.CARD:
-                    layerMask = targetLayerMask;
-                    break;
-
-                default:
-                    layerMask = selectingLayerMask;
-                    break;
-            }
-            return layerMask;
         }
 
         private void SetMask(LayerMask layerMask)
