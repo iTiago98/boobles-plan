@@ -315,7 +315,7 @@ namespace Booble.CardGame.Managers
         private void ApplyEffectValues(Card source, Card target)
         {
             source.Effects.ApplyEffectValues(target);
-            target.Effects.ApplyEffectValues(source, source.Effects.singleHit);
+            target.Effects.ApplyEffectValues(source);
         }
 
         private void ResetEffectStoredValues()

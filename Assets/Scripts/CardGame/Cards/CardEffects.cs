@@ -65,11 +65,13 @@ namespace Booble.CardGame.Cards
 
         private StoredValues storedValues;
 
-        private bool _zeroStoredValues => storedValues.lifeValue == 0 && storedValues.reboundValue == 0
-            && storedValues.trampleValue == 0 && storedValues.spongeValue == 0;
+        private bool _zeroStoredValues => storedValues.lifeValue <= 0 && storedValues.reboundValue <= 0
+            && storedValues.trampleValue <= 0 && storedValues.spongeValue <= 0;
 
         public void GetEffectValues(Card target)
         {
+            if (!hasManagedCombatEffects) return;
+
             storedValues = new StoredValues();
             Card source = _card;
 
@@ -77,7 +79,7 @@ namespace Booble.CardGame.Cards
                 ref storedValues.trampleValue, ref storedValues.spongeValue);
         }
 
-        public void ApplyEffectValues(Card target, bool receiveSingleHit = false)
+        public void ApplyEffectValues(Card target)
         {
             if (storedValues.lifeValue > 0) _card.contender.RestoreLife(storedValues.lifeValue);
 
@@ -90,19 +92,14 @@ namespace Booble.CardGame.Cards
 
         public bool hasManagedCombatEffects { private set; get; }
         public bool hasAppliableManagedCombatEffects { private set; get; }
-        public bool singleHit { private set; get; }
 
-        private void SetSingleHit(bool value, object target)
+        public void SetSingleHit(object target)
         {
-            if (value)
-            {
-                storedValues.reboundValue = 0;
-                storedValues.spongeValue = 0;
+            storedValues.reboundValue = 0;
+            storedValues.spongeValue = 0;
 
+            if (target is Card)
                 ((Card)target).Effects.SetReceiveSingleHit();
-            }
-
-            singleHit = value;
         }
 
         public void SetReceiveSingleHit()
@@ -128,6 +125,14 @@ namespace Booble.CardGame.Cards
                 effect.SetEffectApplied();
         }
 
+        public void ApplyStealEffect(object target)
+        {
+            foreach (CardEffect effect in _combatEffects)
+            {
+                if (effect.subType == SubType.STEAL_CARD) ApplyEffect(effect, target);
+            }
+        }
+
         public void ApplyEnterEffects()
         {
             ApplyEffects(_enterEffects, null);
@@ -135,8 +140,6 @@ namespace Booble.CardGame.Cards
 
         public void ApplyCombatEffects(object target, bool singleHit = false)
         {
-            SetSingleHit(singleHit, target);
-
             hasAppliableManagedCombatEffects = false;
             ApplyEffects(_combatEffects, target);
         }
@@ -156,6 +159,8 @@ namespace Booble.CardGame.Cards
         {
             foreach (CardEffect effect in effects)
             {
+                if (effect.subType == SubType.STEAL_CARD) continue;
+
                 if (effect.IsAppliable(_card, target))
                 {
                     if (effect.IsManagedCombatEffect())
@@ -260,7 +265,7 @@ namespace Booble.CardGame.Cards
                         case ApplyTime.END:
                         case ApplyTime.DRAW_CARD:
                         case ApplyTime.PLAY_ARGUMENT:
-                            CardEffectsManager.Instance.RemovePermanentEffect(_card, effect.applyTime); 
+                            CardEffectsManager.Instance.RemovePermanentEffect(_card, effect.applyTime);
                             break;
 
                         case ApplyTime.PERSISTENT:

@@ -16,12 +16,7 @@ namespace Booble.CardGame.Managers
             public Card targetCard;
             public bool targetIsGuardCard;
 
-            public bool cardDestroy;
-            public bool targetDestroy;
-
             public bool hasCardWithStrength => card != null && card.Stats.strength > 0;
-            public bool playingAnimation => card != null && card.CardUI.IsPlayingAnimation;
-            public bool applyingEffects => card != null && card.Effects.applyingEffects || targetIsGuardCard && targetCard.Effects.applyingEffects;
 
             public Sequence GetHitSequence(bool combatActionsApplied)
             {
@@ -59,19 +54,7 @@ namespace Booble.CardGame.Managers
                 if (card != null)
                 {
                     card.Hit(target);
-                    //if (targetCard) targetCard.CardUI.SetPlayingAnimation();
                 }
-            }
-
-            public void GetCardDestroy()
-            {
-                cardDestroy = card && card.CheckDestroy();
-                targetDestroy = targetCard && targetCard.CheckDestroy();
-            }
-
-            public bool GetCardDestroying()
-            {
-                return cardDestroy && !card.destroyed || targetDestroy && !targetCard.destroyed;
             }
         }
 
@@ -87,12 +70,18 @@ namespace Booble.CardGame.Managers
 
         private bool _hitSequence, _combatActions;
 
-        private bool _firstHit, _playerFirstHit, _secondHit;
-
         private ClashInfo _playerClashInfo, _opponentClashInfo;
 
         private Card _playerCard, _opponentCard;
         private bool _playerCardDestroy, _opponentCardDestroy;
+
+        List<Card> cardsToClash = new List<Card>();
+        HitType hitType;
+
+        private enum HitType
+        {
+            NONE, PLAYER, OPPONENT, BOTH
+        }
 
         public void Clash(bool changeTurn = true)
         {
@@ -140,9 +129,11 @@ namespace Booble.CardGame.Managers
 
                 yield return new WaitWhile(DestroyingCards);
 
+                yield return new WaitUntil(() => TurnManager.Instance.continueFlow);
+
                 combat = false;
 
-                if (!_firstHit) index++;
+                if (cardsToClash.Count == 0) index++;
             }
 
             clash = false;
@@ -164,78 +155,87 @@ namespace Booble.CardGame.Managers
 
             _combatActionsApplied = false;
 
-            if (!_firstHit)
+            if (cardsToClash.Count == 0)
             {
-                _secondHit = false;
+                hitType = HitType.NONE;
 
                 if (_playerClashInfo.targetIsGuardCard)
-                {
-                    sequence.Join(_playerClashInfo.GetHitSequence(_combatActionsApplied));
+                    AddCombatCard(_playerClashInfo.card);
 
-                    SetFirstHit(_opponentClashInfo, true);
-                    SetCombatCards(_playerClashInfo.card, _playerClashInfo.targetCard);
-                }
-                else if (_opponentClashInfo.targetIsGuardCard)
-                {
-                    sequence.Join(_opponentClashInfo.GetHitSequence(_combatActionsApplied));
+                if (_opponentClashInfo.targetIsGuardCard)
+                    AddCombatCard(_opponentClashInfo.card);
 
-                    SetFirstHit(_playerClashInfo, false);
-                    SetCombatCards(_opponentClashInfo.targetCard, _opponentClashInfo.card);
-                }
-                else
-                {
-                    if (_playerClashInfo.card)
-                    {
-                        sequence.Join(_playerClashInfo.GetHitSequence(_combatActionsApplied));
-                    }
-                    if (_opponentClashInfo.card)
-                    {
-                        sequence.Join(_opponentClashInfo.GetHitSequence(_combatActionsApplied));
-                    }
+                if (_playerClashInfo.card && !cardsToClash.Contains(_playerClashInfo.card))
+                    AddCombatCard(_playerClashInfo.card);
 
-                    SetCombatCards(_playerClashInfo.card, _opponentClashInfo.card);
-                }
+                if (_opponentClashInfo.card && !cardsToClash.Contains(_opponentClashInfo.card))
+                    AddCombatCard(_opponentClashInfo.card);
+            }
+
+            Card firstCard = cardsToClash[0];
+
+            ClashInfo clashInfo = (firstCard.IsPlayerCard) ? _playerClashInfo : _opponentClashInfo;
+            ClashInfo oppositeClashInfo = (firstCard.IsPlayerCard) ? _opponentClashInfo : _playerClashInfo;
+
+            sequence.Join(clashInfo.GetHitSequence(_combatActionsApplied));
+
+            if (clashInfo.targetIsGuardCard)
+            {
+                SetHitType(firstCard.IsPlayerCard);
+                SetCombatCards(clashInfo.card, clashInfo.targetCard);
             }
             else
             {
-                _firstHit = false;
-                _secondHit = true;
-
-                if (_playerFirstHit)
+                if (cardsToClash.Count > 1)
                 {
-                    if (_opponentClashInfo.card)
-                    {
-                        sequence.Join(_opponentClashInfo.GetHitSequence(_combatActionsApplied));
-
-                        SetCombatCards(_opponentClashInfo.targetCard, _opponentClashInfo.card);
-                    }
+                    Card secondCard = cardsToClash[1];
+                    sequence.Join(oppositeClashInfo.GetHitSequence(_combatActionsApplied));
+                    SetCombatCards(firstCard, secondCard);
+                    SetHitType(HitType.BOTH);
+                    cardsToClash.RemoveAt(1);
                 }
-                else if (_playerClashInfo.card)
+                else
                 {
-                    sequence.Join(_playerClashInfo.GetHitSequence(_combatActionsApplied));
-
-                    SetCombatCards(_playerClashInfo.card, _playerClashInfo.targetCard);
+                    SetCombatCards(firstCard, oppositeClashInfo.card);
+                    SetHitType(firstCard.IsPlayerCard);
                 }
             }
+
+            cardsToClash.RemoveAt(0);
 
             sequence.AppendCallback(() => _hitSequence = false);
 
             return sequence;
         }
 
-        private void SetFirstHit(ClashInfo clashInfo, bool playerFirstHit)
+        private void AddCombatCard(Card card)
         {
-            if (clashInfo.card)
+            if (card.Stats.strength > 0)
             {
-                _firstHit = true;
-                _playerFirstHit = playerFirstHit;
+                cardsToClash.Add(card);
             }
         }
 
-        private void SetCombatCards(Card player, Card opponent)
+        private void SetHitType(bool playerHit)
         {
-            _playerCard = player;
-            _opponentCard = opponent;
+            if (playerHit) SetHitType(HitType.PLAYER);
+            else SetHitType(HitType.OPPONENT);
+        }
+
+        private void SetHitType(HitType hitType) { this.hitType = hitType; }
+
+        private void SetCombatCards(Card card1, Card card2)
+        {
+            if (card1 && card1.IsPlayerCard)
+            {
+                _playerCard = card1;
+                _opponentCard = card2;
+            }
+            else
+            {
+                _playerCard = card2;
+                _opponentCard = card1;
+            }
         }
 
         private bool DestroyingCards()
@@ -268,27 +268,36 @@ namespace Booble.CardGame.Managers
         {
             if (_playerCard && _opponentCard)
             {
-                if (_playerCard.Effects.hasManagedCombatEffects) _playerCard.Effects.GetEffectValues(_opponentCard);
-                if (_opponentCard.Effects.hasManagedCombatEffects) _opponentCard.Effects.GetEffectValues(_playerCard);
+                _playerCard.Effects.GetEffectValues(_opponentCard);
+                _opponentCard.Effects.GetEffectValues(_playerCard);
+
+                if (hitType == HitType.PLAYER) _playerCard.Effects.SetSingleHit(_opponentCard);
+                else if (hitType == HitType.OPPONENT) _opponentCard.Effects.SetSingleHit(_playerCard);
             }
         }
 
         private void Hit()
         {
-            if ((_firstHit && _playerFirstHit) || (_secondHit && !_playerFirstHit))
+            switch (hitType)
             {
-                object target = _opponentCard ? _opponentCard : _playerClashInfo.target;
-                _playerCard.Hit(target);
-            }
-            else if ((_firstHit && !_playerFirstHit) || (_secondHit && _playerFirstHit))
-            {
-                object target = _playerCard ? _playerCard : _opponentClashInfo.target;
-                _opponentCard.Hit(target);
-            }
-            else
-            {
-                _playerClashInfo.Hit();
-                _opponentClashInfo.Hit();
+                case HitType.PLAYER:
+                    {
+                        object target = _opponentCard ? _opponentCard : _playerClashInfo.target;
+                        _playerCard.Hit(target);
+                    }
+                    break;
+                case HitType.OPPONENT:
+                    {
+                        object target = _playerCard ? _playerCard : _opponentClashInfo.target;
+                        _opponentCard.Hit(target);
+                    }
+                    break;
+                case HitType.BOTH:
+                    {
+                        _playerClashInfo.Hit();
+                        _opponentClashInfo.Hit();
+                    }
+                    break;
             }
         }
 
@@ -296,44 +305,21 @@ namespace Booble.CardGame.Managers
 
         private IEnumerator ApplyCombatEffects()
         {
-            bool playerCardHasCombatEffects = _playerCard && _playerCard.Effects.hasCombatEffects;
-            bool opponentCardHasCombatEffects = _opponentCard && _opponentCard.Effects.hasCombatEffects;
+            if (_playerCard && _playerCard.Effects.hasCombatEffects)
+                ApplyCombatEffects(_playerCard);
 
-            bool playerCardHasStealCard = _playerCard && _playerCard.Effects.HasEffect(SubType.STEAL_CARD);
-            bool opponentCardHasStealCard = _opponentCard && _opponentCard.Effects.HasEffect(SubType.STEAL_CARD);
+            if (_opponentCard && _opponentCard.Effects.hasCombatEffects)
+                ApplyCombatEffects(_opponentCard);
 
-            if (playerCardHasStealCard)
+            yield return new WaitWhile(ApplyingEffects);
+
+            if (_playerCard && _playerCard.Effects.HasEffect(SubType.STEAL_CARD))
             {
-                if (opponentCardHasCombatEffects)
-                {
-                    ApplyCombatEffects(_opponentCard);
-                    yield return new WaitWhile(ApplyingEffects);
-                }
-                if (playerCardHasCombatEffects)
-                {
-                    ApplyCombatEffects(_playerCard);
-                    yield return new WaitWhile(ApplyingEffects);
-                }
+                _playerCard.Effects.ApplyStealEffect(_opponentCard);
             }
-            else if (opponentCardHasStealCard)
+            else if (_opponentCard && _opponentCard.Effects.HasEffect(SubType.STEAL_CARD))
             {
-                if (playerCardHasCombatEffects)
-                {
-                    ApplyCombatEffects(_playerCard);
-                    yield return new WaitWhile(ApplyingEffects);
-                }
-                if (opponentCardHasCombatEffects)
-                {
-                    ApplyCombatEffects(_opponentCard);
-                    yield return new WaitWhile(ApplyingEffects);
-                }
-            }
-            else
-            {
-                if (playerCardHasCombatEffects) ApplyCombatEffects(_playerCard);
-                if (opponentCardHasCombatEffects) ApplyCombatEffects(_opponentCard);
-
-                yield return new WaitWhile(ApplyingEffects);
+                _opponentCard.Effects.ApplyStealEffect(_playerCard);
             }
 
             _applyingCombatEffects = false;
@@ -345,15 +331,9 @@ namespace Booble.CardGame.Managers
 
             Card oppositeCard = isPlayer ? _opponentCard : _playerCard;
             ClashInfo clashInfo = isPlayer ? _playerClashInfo : _opponentClashInfo;
-            ClashInfo oppositeClashInfo = isPlayer ? _opponentClashInfo : _playerClashInfo;
 
-            bool hit = isPlayer
-                ? (_playerFirstHit && _firstHit) || (!_playerFirstHit && _secondHit)
-                : (_playerFirstHit && _secondHit) || (!_playerFirstHit && _firstHit);
-
-            bool singleHit = (oppositeCard != oppositeClashInfo.card) || hit;
             object target = oppositeCard ? oppositeCard : clashInfo.target;
-            card.Effects.ApplyCombatEffects(target, singleHit);
+            card.Effects.ApplyCombatEffects(target);
         }
 
         private bool IsPlayingAnimation()
