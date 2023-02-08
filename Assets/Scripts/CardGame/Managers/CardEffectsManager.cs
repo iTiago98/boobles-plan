@@ -292,12 +292,12 @@ namespace Booble.CardGame.Managers
 
             if (source.Effects.HasEffect(SubType.LIFELINK))
             {
-                lifeValue = Mathf.Min(source.Stats.strength, target.Stats.defense);
+                lifeValue = source.Stats.strength;
             }
 
             if (source.Effects.HasEffect(SubType.REBOUND))
             {
-                reboundValue = Mathf.Min(source.Stats.defense, target.Stats.strength);
+                reboundValue = target.Stats.strength;
                 if (source.IsPlayerCard) CardGameManager.Instance.alternateWinConditionParameter += reboundValue;
             }
 
@@ -315,7 +315,7 @@ namespace Booble.CardGame.Managers
         private void ApplyEffectValues(Card source, Card target)
         {
             source.Effects.ApplyEffectValues(target);
-            target.Effects.ApplyEffectValues(source, source.Effects.singleHit);
+            target.Effects.ApplyEffectValues(source);
         }
 
         private void ResetEffectStoredValues()
@@ -336,16 +336,8 @@ namespace Booble.CardGame.Managers
             {
                 Contender contender = (Contender)target;
 
-                if (contender.deck.numCards == 0)
-                {
-                    contender.ReceiveDamage(source.Stats.strength);
-                    yield return new WaitUntil(() => UIManager.Instance.statsUpdated);
-                }
-                else
-                {
-                    contender.deck.DiscardCards(source.Stats.strength);
-                    yield return new WaitWhile(() => contender.deck.busy);
-                }
+                contender.deck.DiscardCards(source.Stats.strength);
+                yield return new WaitWhile(() => contender.deck.busy);
             }
 
             effect.SetEffectApplied();

@@ -37,17 +37,23 @@ namespace Booble.CardGame.Level
             }
         }
 
-        public void OnMouseHoverEnter()
-        {
-            if (isNotEmpty) GetCard().ShowExtendedDescription();
-        }
+        public void OnMouseHoverEnter() { }
 
-        public void OnMouseHoverExit()
-        {
-            if (isNotEmpty) GetCard().HideExtendedDescription();
-        }
+        public void OnMouseHoverExit() { }
 
         #endregion
+
+        public override void AddCard(GameObject cardObj)
+        {
+            base.AddCard(cardObj);
+            GetComponent<BoxCollider>().enabled = false;
+        }
+
+        public override void RemoveCard(GameObject card)
+        {
+            base.RemoveCard(card);
+            GetComponent<BoxCollider>().enabled = true;
+        }
 
         public Card GetCard()
         {

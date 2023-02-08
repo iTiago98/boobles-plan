@@ -46,8 +46,9 @@ namespace Booble.CardGame.Managers
             yield return new WaitUntil(() => GetContinueFlow());
 
             DrawCards(CardGameManager.Instance.settings.initialCardNumber);
+            UIManager.Instance.UpdateUIStats();
 
-            yield return new WaitUntil(() => GetContinueFlow());
+            yield return new WaitUntil(() => UIManager.Instance.statsUpdated && GetContinueFlow());
 
             ChangeTurn();
         }

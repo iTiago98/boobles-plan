@@ -386,7 +386,7 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                             return target != null && source.Stats.strength > target.Stats.defense;
 
                         case SubType.COMPARTMENTALIZE:
-                            return target == null;
+                            return targetObj is Contender && ((Contender)targetObj).deck.numCards > 0;
 
                         case SubType.STEAL_CARD:
                             return target != null;
@@ -407,22 +407,28 @@ namespace Booble.CardGame.Cards.DataModel.Effects
                     {
                         case Target.ALLY:
                         case Target.AALLY:
-                            CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(contender);
-                            if (subType == SubType.DUPLICATE_CARD)
-                                return emptyCardZone != null && contenderHasCards;
-                            else if (subType == SubType.CREATE_CARD)
-                                return emptyCardZone;
-                            else
-                                return contenderHasCards;
-
+                            {
+                                CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(contender);
+                                if (subType == SubType.DUPLICATE_CARD)
+                                    return emptyCardZone != null && contenderHasCards;
+                                else if (subType == SubType.CREATE_CARD)
+                                    return emptyCardZone;
+                                else
+                                    return contenderHasCards;
+                            }
                         case Target.ENEMY:
                         case Target.AENEMY:
-                            if (subType == SubType.SWAP_POSITION || subType == SubType.STEAL_CARD
-                                || subType == SubType.DUPLICATE_CARD || subType == SubType.DEAL_DAMAGE)
-                                return otherContenderHasCards;
-                            else
-                                return otherContenderHasCards || otherContender.fieldCardZone.isNotEmpty;
-
+                            {
+                                if (subType == SubType.SWAP_POSITION || subType == SubType.DEAL_DAMAGE)
+                                    return otherContenderHasCards;
+                                else if (subType == SubType.STEAL_CARD || subType == SubType.DUPLICATE_CARD)
+                                {
+                                    CardZone emptyCardZone = Board.Instance.GetEmptyCardZone(contender);
+                                    return emptyCardZone && otherContenderHasCards;
+                                }
+                                else
+                                    return otherContenderHasCards || otherContender.fieldCardZone.isNotEmpty;
+                            }
                         case Target.CARD:
                         case Target.ACARD:
                             return contenderHasCards || otherContenderHasCards
