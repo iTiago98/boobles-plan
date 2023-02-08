@@ -120,6 +120,13 @@ namespace Booble.MainMenu
             DeckManager.Instance.CheckExtraCards();
             PauseMenu.Instance.InitializeCardMenu();
 
+            if (!FlagManager.Instance.GetFlag(Flag.Reference.BossHall4))
+            {
+                FlagManager.Instance.SetFlag(Flag.Reference.FinalBueno, false);
+                FlagManager.Instance.SetFlag(Flag.Reference.FinalMalo, false);
+                FlagManager.Instance.SetFlag(Flag.Reference.FinalNeutral, false);
+            }
+                
             int i = 0;
             while (i < _checkPoints.Count && _checkPoints[i].Satisfied)
             {
