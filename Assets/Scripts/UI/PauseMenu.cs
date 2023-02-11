@@ -19,7 +19,9 @@ namespace Booble.UI
         [SerializeField] private GameObject _mainMenuPanel;
         [SerializeField] private GameObject _cardObtainedText;
         [SerializeField] private GameObject _savedDataText;
-        
+
+        [SerializeField] private GameObject _retryInterviewButton;
+
         [Header("Cards Menu")]
         [SerializeField] private AlertButton _cardMenuButton;
         [SerializeField] private CardMenu _cardMenu;
@@ -30,7 +32,7 @@ namespace Booble.UI
 
         [Header("Return Menu")]
         [SerializeField] private GameObject _returnToMenu;
-        
+
         [Header("Pause Button")]
         [SerializeField] private PauseButton _pauseButton;
 
@@ -53,7 +55,8 @@ namespace Booble.UI
             if (value)
             {
                 _pauseMenu.SetActive(true);
-                _cardMenuButton.SetInteractable(SceneLoader.Instance.InExploration);
+                _retryInterviewButton.gameObject.SetActive(SceneLoader.Instance.InInterview);
+                _cardMenuButton.gameObject.SetActive(SceneLoader.Instance.InExploration);
                 ShowPauseButton(false);
             }
             else
@@ -96,6 +99,15 @@ namespace Booble.UI
         public void OnResumeButtonClick()
         {
             GameManager.Instance.ResumeGame();
+        }
+
+        public void OnRetryInterviewButtonClick()
+        {
+            if (CardGameManager.Instance != null)
+            {
+                GameManager.Instance.ResumeGame();
+                CardGameManager.Instance.RetryInterview();
+            }
         }
 
         #region Cards Menu
@@ -142,7 +154,7 @@ namespace Booble.UI
         }
 
         #endregion
-        
+
         #region Return To Menu
 
         public void OnReturnClick()
@@ -150,7 +162,7 @@ namespace Booble.UI
             _mainMenuPanel.SetActive(false);
             _returnToMenu.SetActive(true);
         }
-        
+
         public void OnConfirmBackButtonClick()
         {
             _mainMenuPanel.SetActive(true);
@@ -161,7 +173,7 @@ namespace Booble.UI
         {
             Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfE8YhMeTyWyeNwKKGdaAvwRhgYC0SzD5hs4ZukR_1JuMOKBQ/viewform?usp=sf_link");
         }
-        
+
         public void OnReturnToMenuButtonClick()
         {
             GameManager.Instance.ResumeGame();
@@ -185,12 +197,12 @@ namespace Booble.UI
         }
 
         #endregion
-        
+
         float cardObtainedTextInitialX = -1;
 
         public void ShowCardObtainedText()
         {
-            if(cardObtainedTextInitialX == -1) cardObtainedTextInitialX = _cardObtainedText.transform.position.x;
+            if (cardObtainedTextInitialX == -1) cardObtainedTextInitialX = _cardObtainedText.transform.position.x;
 
             Sequence sequence = DOTween.Sequence();
             sequence.Append(_cardObtainedText.transform.DOMoveX(cardObtainedTextInitialX, 0.5f));
@@ -203,9 +215,9 @@ namespace Booble.UI
 
         public void ShowSavedDataText()
         {
-            ShowSavedDataText(() => {});
+            ShowSavedDataText(() => { });
         }
-        
+
         public void ShowSavedDataText(TweenCallback callback)
         {
             float initialX = _savedDataText.transform.position.x;
@@ -216,7 +228,7 @@ namespace Booble.UI
             sequence.AppendInterval(1f);
             sequence.AppendCallback(callback);
             sequence.Append(_savedDataText.transform.DOMoveX(initialX, 1f));
-                
+
             sequence.Play();
         }
     }
